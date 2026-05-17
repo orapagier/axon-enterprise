@@ -7,6 +7,7 @@ import { StoreRegion } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
+import Hexagon from "@modules/common/icons/hexagon"
 
 export default async function Nav() {
   const [regions, locales, currentLocale] = await Promise.all([
@@ -19,22 +20,52 @@ export default async function Nav() {
     <div className="sticky top-0 inset-x-0 z-50 group">
       <header className="relative h-16 mx-auto border-b duration-200 bg-white border-ui-border-base">
         <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular">
+          {/* Left: Brand */}
           <div className="flex-1 basis-0 h-full flex items-center">
-            <div className="h-full">
-              <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
-            </div>
-          </div>
-
-          <div className="flex items-center h-full">
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
+              className="flex items-center gap-x-2 hover:text-ui-fg-base"
               data-testid="nav-store-link"
             >
-              Medusa Store
+              <Hexagon size="20" color="#16a34a" />
+              <span className="txt-compact-xlarge-plus font-semibold text-grey-80 hidden xsmall:inline">
+                Mindanao Fresh Hub
+              </span>
+              <span className="txt-compact-large-plus font-semibold text-grey-80 inline xsmall:hidden">
+                Fresh Hub
+              </span>
             </LocalizedClientLink>
           </div>
 
+          {/* Center: Desktop Nav Links */}
+          <div className="hidden small:flex items-center gap-x-8 h-full">
+            <LocalizedClientLink
+              href="/store"
+              className="txt-compact-small-plus hover:text-ui-fg-base transition-colors"
+            >
+              Shop
+            </LocalizedClientLink>
+            <LocalizedClientLink
+              href="/how-it-works"
+              className="txt-compact-small-plus hover:text-ui-fg-base transition-colors"
+            >
+              How It Works
+            </LocalizedClientLink>
+            <LocalizedClientLink
+              href="/farmers"
+              className="txt-compact-small-plus hover:text-ui-fg-base transition-colors"
+            >
+              For Farmers
+            </LocalizedClientLink>
+            <LocalizedClientLink
+              href="/about"
+              className="txt-compact-small-plus hover:text-ui-fg-base transition-colors"
+            >
+              About Us
+            </LocalizedClientLink>
+          </div>
+
+          {/* Right: Account, Cart, Mobile Menu */}
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
             <div className="hidden small:flex items-center gap-x-6 h-full">
               <LocalizedClientLink
@@ -58,6 +89,10 @@ export default async function Nav() {
             >
               <CartButton />
             </Suspense>
+            {/* Mobile hamburger menu */}
+            <div className="small:hidden h-full">
+              <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+            </div>
           </div>
         </nav>
       </header>

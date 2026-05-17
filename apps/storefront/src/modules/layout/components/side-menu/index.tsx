@@ -13,8 +13,10 @@ import { Locale } from "@lib/data/locales"
 
 
 const SideMenuItems = {
-  Home: "/",
-  Store: "/store",
+  Shop: "/store",
+  "How It Works": "/how-it-works",
+  "For Farmers": "/farmers",
+  "About Us": "/about",
   Account: "/account",
   Cart: "/cart",
 }
@@ -39,8 +41,23 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                 <Popover.Button
                   data-testid="nav-menu-button"
                   className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base"
+                  aria-label="Open menu"
                 >
-                  Menu
+                  {/* Hamburger icon */}
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                  </svg>
                 </Popover.Button>
               </div>
 
@@ -80,7 +97,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                               href={href}
                               className="text-3xl leading-10 hover:text-ui-fg-disabled"
                               onClick={close}
-                              data-testid={`${name.toLowerCase()}-link`}
+                              data-testid={`${name.toLowerCase().replace(/\s+/g, "-")}-link`}
                             >
                               {name}
                             </LocalizedClientLink>
@@ -127,8 +144,8 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                         />
                       </div>
                       <Text className="flex justify-between txt-compact-small">
-                        © {new Date().getFullYear()} Medusa Store. All rights
-                        reserved.
+                        © {new Date().getFullYear()} Mindanao Fresh Hub
+                        Corporation. All rights reserved.
                       </Text>
                     </div>
                   </div>
