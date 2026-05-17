@@ -80,12 +80,24 @@ const CartDropdown = ({
       onMouseLeave={close}
     >
       <Popover className="relative h-full">
-        <PopoverButton className="h-full">
+        <PopoverButton className="h-full flex items-center">
           <LocalizedClientLink
-            className="hover:text-ui-fg-base"
+            className="flex items-center justify-center w-10 h-10 rounded-full text-grey-50 hover:text-grey-80 hover:bg-grey-5 transition-all duration-200 relative"
             href="/cart"
             data-testid="nav-cart-link"
-          >{`Cart (${totalItems})`}</LocalizedClientLink>
+            aria-label="Cart"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            {totalItems > 0 && (
+              <span className="absolute top-0 right-0 w-[18px] h-[18px] flex items-center justify-center bg-brand-green-600 text-white text-[10px] font-bold rounded-full ring-2 ring-white">
+                {totalItems}
+              </span>
+            )}
+          </LocalizedClientLink>
         </PopoverButton>
         <Transition
           show={cartDropdownOpen}
@@ -99,7 +111,7 @@ const CartDropdown = ({
         >
           <PopoverPanel
             static
-            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[420px] text-ui-fg-base"
+            className="hidden small:block absolute top-[calc(100%+8px)] right-0 bg-white rounded-2xl shadow-large border border-grey-10 w-[420px] text-ui-fg-base overflow-hidden"
             data-testid="nav-cart-dropdown"
           >
             <div className="p-4 flex items-center justify-center">

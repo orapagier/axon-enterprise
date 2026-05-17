@@ -1,6 +1,6 @@
 import { getBaseURL } from "@lib/util/env"
 import { Metadata } from "next"
-import { Inter, Playfair_Display } from "next/font/google"
+import { Inter, Playfair_Display, DM_Serif_Display } from "next/font/google"
 import "styles/globals.css"
 
 const inter = Inter({
@@ -15,13 +15,20 @@ const playfair = Playfair_Display({
   display: "swap",
 })
 
+const dmSerif = DM_Serif_Display({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-dm-serif",
+  display: "swap",
+})
+
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
 }
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-mode="light" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" data-mode="light" className={`${inter.variable} ${playfair.variable} ${dmSerif.variable}`}>
       <body>
         <main className="relative">{props.children}</main>
       </body>

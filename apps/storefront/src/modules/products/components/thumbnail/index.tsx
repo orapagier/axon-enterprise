@@ -1,4 +1,4 @@
-import { Container, clx } from "@modules/common/components/ui"
+import { clx } from "@modules/common/components/ui"
 import Image from "next/image"
 import React from "react"
 
@@ -24,14 +24,12 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   const initialImage = thumbnail || images?.[0]?.url
 
   return (
-    <Container
+    <div
       className={clx(
-        "relative w-full overflow-hidden p-4 bg-ui-bg-subtle shadow-elevation-card-rest rounded-large group-hover:shadow-elevation-card-hover transition-shadow ease-in-out duration-150",
+        "relative w-full overflow-hidden bg-grey-5 rounded-t-2xl",
         className,
         {
-          "aspect-[11/14]": isFeatured,
-          "aspect-[9/16]": !isFeatured && size !== "square",
-          "aspect-[1/1]": size === "square",
+          "aspect-square": true,
           "w-[180px]": size === "small",
           "w-[290px]": size === "medium",
           "w-[440px]": size === "large",
@@ -41,7 +39,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
       data-testid={dataTestid}
     >
       <ImageOrPlaceholder image={initialImage} size={size} />
-    </Container>
+    </div>
   )
 }
 
@@ -53,14 +51,14 @@ const ImageOrPlaceholder = ({
     <Image
       src={image}
       alt="Thumbnail"
-      className="absolute inset-0 object-cover object-center"
+      className="absolute inset-0 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
       draggable={false}
       quality={50}
       sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
       fill
     />
   ) : (
-    <div className="w-full h-full absolute inset-0 flex items-center justify-center">
+    <div className="w-full h-full absolute inset-0 flex items-center justify-center bg-grey-5">
       <PlaceholderImage size={size === "small" ? 16 : 24} />
     </div>
   )
