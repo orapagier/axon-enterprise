@@ -158,14 +158,15 @@ export async function completeOnboarding(
     profile_completed_at: new Date().toISOString(),
   }
 
-  // Pick the city we'll use to seed a default-shipping address. For buyers
+  // Pick the city we'll use for the default-shipping address. For buyers
   // that's their stated delivery city; for sellers it's their primary hub
   // (the city their farm/business operates out of). This is what
-  // getDeliveryHub() reads on subsequent visits — without an address the
-  // resolver falls back to Tagum.
+  // getDeliveryHub() reads on subsequent visits.
   const seedCity = isSeller
     ? String(formData.get("primary_hub") ?? "").trim()
     : String(formData.get("default_city") ?? "").trim()
+
+  const countryCode = String(formData.get("countryCode") ?? "ph")
 
   try {
     const headers = { ...(await getAuthHeaders()) }
@@ -175,46 +176,48 @@ export async function completeOnboarding(
       headers
     )
 
-    // Best-effort: persist a default shipping address with the chosen city
-    // so dynamic hub-detection works for future sessions. Only create one
-    // if the customer doesn't already have a default-shipping address —
-    // we don't want to clobber a real address they may have set later.
-    if (seedCity) {
-      const hasDefaultShipping = (customer.addresses ?? []).some(
-        (a) => a.is_default_shipping
-      )
-      if (!hasDefaultShipping) {
-        const nameParts =
-          updateBody.first_name || updateBody.last_name
-            ? {
-                first_name: updateBody.first_name ?? customer.first_name ?? "",
-                last_name: updateBody.last_name ?? customer.last_name ?? "",
-              }
-            : {
-                first_name: customer.first_name ?? "",
-                last_name: customer.last_name ?? "",
-              }
-        await sdk.store.customer
-          .createAddress(
-            {
-              ...nameParts,
-              phone: updateBody.phone ?? customer.phone ?? undefined,
-              company: isSeller
-                ? (updateBody.company_name ?? customer.company_name ?? "")
-                : "",
-              address_1: "",
-              city: seedCity,
-              country_code: String(formData.get("countryCode") ?? "ph"),
-              is_default_shipping: true,
-              is_default_billing: false,
-            },
-            {},
-            headers
-          )
-          .catch(() => {
-            /* address creation is best-effort; don't fail onboarding */
-          })
+    // Persist the address fields against the customer's default-shipping
+    // address so getDeliveryHub() resolves the right city and so checkout
+    // pre-fills correctly. We UPSERT — update an existing default-shipping
+    // address if one exists (re-onboarding edge case) and create one
+    // otherwise. Best-effort: failures don't block onboarding completion.
+    const existingDefault =
+      (customer.addresses ?? []).find((a) => a.is_default_shipping) ??
+      (customer.addresses ?? [])[0] ??
+      null
+
+    const nameParts = {
+      first_name: updateBody.first_name ?? customer.first_name ?? "",
+      last_name: updateBody.last_name ?? customer.last_name ?? "",
+    }
+    const addressPayload = {
+      ...nameParts,
+      phone: updateBody.phone ?? customer.phone ?? undefined,
+      company: isSeller
+        ? (updateBody.company_name ?? customer.company_name ?? "")
+        : "",
+      address_1,
+      city: seedCity,
+      province,
+      postal_code: postal_code || undefined,
+      country_code: countryCode,
+      is_default_shipping: true,
+      is_default_billing: !existingDefault, // default-billing too if no other address exists
+    }
+
+    try {
+      if (existingDefault) {
+        await sdk.store.customer.updateAddress(
+          existingDefault.id,
+          addressPayload,
+          {},
+          headers
+        )
+      } else {
+        await sdk.store.customer.createAddress(addressPayload, {}, headers)
       }
+    } catch {
+      /* address upsert is best-effort; don't fail onboarding overall */
     }
 
     const customerCacheTag = await getCacheTag("customers")
