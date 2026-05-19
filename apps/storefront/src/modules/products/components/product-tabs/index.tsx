@@ -6,7 +6,10 @@ import Refresh from "@modules/common/icons/refresh"
 
 import Accordion from "./accordion"
 import { HttpTypes } from "@medusajs/types"
-import type { DeliveryHub } from "@lib/util/delivery-hub-types"
+import {
+  DEFAULT_OFF_PEAK_DELIVERY_FEE_PHP,
+  type DeliveryHub,
+} from "@lib/util/delivery-hub-types"
 
 type ProductTabsProps = {
   product: HttpTypes.StoreProduct
