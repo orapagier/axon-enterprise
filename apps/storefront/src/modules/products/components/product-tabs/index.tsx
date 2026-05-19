@@ -6,12 +6,15 @@ import Refresh from "@modules/common/icons/refresh"
 
 import Accordion from "./accordion"
 import { HttpTypes } from "@medusajs/types"
+import type { DeliveryHub } from "@lib/util/delivery-hub-types"
 
 type ProductTabsProps = {
   product: HttpTypes.StoreProduct
+  /** Resolved from the customer's saved address — tailors the shipping copy. */
+  hub?: DeliveryHub
 }
 
-const ProductTabs = ({ product }: ProductTabsProps) => {
+const ProductTabs = ({ product, hub }: ProductTabsProps) => {
   const tabs = [
     {
       label: "Product Details",
@@ -23,7 +26,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
     },
     {
       label: "Delivery Info",
-      component: <ShippingInfoTab />,
+      component: <ShippingInfoTab hub={hub} />,
     },
   ]
 
