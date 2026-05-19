@@ -102,7 +102,8 @@ const FreshnessTab = () => {
   )
 }
 
-const ShippingInfoTab = () => {
+const ShippingInfoTab = ({ hub }: { hub?: DeliveryHub }) => {
+  const noHub = hub && !hub.isHubCity
   return (
     <div className="text-body-sm py-6 space-y-4">
       <div className="flex items-start gap-x-3">
@@ -110,11 +111,29 @@ const ShippingInfoTab = () => {
           <FastDelivery size="16" color="#16a34a" />
         </div>
         <div>
-          <span className="font-medium text-grey-80">Free delivery</span>
-          <p className="text-grey-50 mt-0.5">
-            Free within our hub city. Order before 12 PM for that day&apos;s
-            4 PM dispatch — outside that window, a delivery fee applies.
-          </p>
+          {noHub ? (
+            <>
+              <span className="font-medium text-grey-80">
+                No hub in {hub!.city} yet
+              </span>
+              <p className="text-grey-50 mt-0.5">
+                We&apos;re expanding city by city. If you&apos;d like to bring
+                the Hub to {hub!.city}, we&apos;d love to talk about a
+                partnership — drop us a note from the For Farmers page.
+              </p>
+            </>
+          ) : (
+            <>
+              <span className="font-medium text-grey-80">
+                Free delivery in {hub?.city ?? "your hub city"}
+              </span>
+              <p className="text-grey-50 mt-0.5">
+                Order before 12 PM for that day&apos;s 4 PM dispatch. After
+                cut-off, a small delivery fee applies — roughly the one-way
+                fare from your address to our hub. Shown at checkout.
+              </p>
+            </>
+          )}
         </div>
       </div>
       <div className="flex items-start gap-x-3">
