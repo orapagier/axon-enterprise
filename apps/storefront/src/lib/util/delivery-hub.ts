@@ -1,5 +1,8 @@
 import "server-only"
 import { retrieveCustomer } from "@lib/data/customer"
+import type { DeliveryHub } from "./delivery-hub-types"
+
+export type { DeliveryHub } from "./delivery-hub-types"
 
 const DEFAULT_HUB_CITY = "Tagum City"
 
@@ -7,15 +10,6 @@ const DEFAULT_HUB_CITY = "Tagum City"
 const HUB_CITIES = new Set(
   ["Tagum City", "Tagum"].map((s) => s.toLowerCase())
 )
-
-export type DeliveryHub = {
-  /** The user's city — from their default shipping address, or the default hub. */
-  city: string
-  /** True if the city is one of our active delivery hubs (eligible for free delivery). */
-  isHubCity: boolean
-  /** True when the city came from the customer's saved address; false when we fell back. */
-  resolvedFromAddress: boolean
-}
 
 /**
  * Resolve which city to show the visitor for delivery messaging.
