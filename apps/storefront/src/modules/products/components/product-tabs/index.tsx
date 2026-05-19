@@ -109,7 +109,8 @@ const ShippingInfoTab = () => {
         <div>
           <span className="font-medium text-grey-80">Free delivery</span>
           <p className="text-grey-50 mt-0.5">
-            Free delivery within hub cities across Mindanao. Orders placed before 2 PM are delivered next day.
+            Free within our hub city. Order before 12 PM for that day&apos;s
+            4 PM dispatch — outside that window, a delivery fee applies.
           </p>
         </div>
       </div>
