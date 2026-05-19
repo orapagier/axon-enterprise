@@ -37,7 +37,8 @@ export default function HowItWorksPage() {
             <span className="text-4xl">🚚</span>
             <h3 className="text-large-semi">Free Delivery</h3>
             <p className="text-small-regular text-ui-fg-subtle">
-              We deliver free within hub cities across Mindanao.
+              Free within our hub city — order by 12 PM for that day&apos;s
+              4 PM dispatch.
             </p>
           </div>
         </div>
