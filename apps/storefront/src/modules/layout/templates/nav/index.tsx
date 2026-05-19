@@ -39,16 +39,29 @@ export default async function Nav() {
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand-gold-400" />
             </span>
             <span className="font-medium tracking-[0.06em]">
-              <span className="text-white/90">Complimentary delivery</span>
-              <span className="text-white/40"> across Mindanao on orders over </span>
-              <span className="text-brand-gold-300 font-semibold tabular-nums">₱1,500</span>
+              {hub.isHubCity ? (
+                <>
+                  <span className="text-white/90">Free delivery in</span>
+                  <span className="text-brand-gold-300 font-semibold ml-1">
+                    {hub.city}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="text-white/90">We deliver to</span>
+                  <span className="text-brand-gold-300 font-semibold ml-1">
+                    {hub.city}
+                  </span>
+                  <span className="text-white/40 ml-1">· delivery fee applies</span>
+                </>
+              )}
             </span>
             <span className="hidden small:inline-flex items-center gap-x-2 ml-3 pl-3 border-l border-white/15 text-white/50">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <polyline points="12 6 12 12 16 14" />
               </svg>
-              <span>Same-day cut-off at 10AM</span>
+              <span>Order by 12 PM · dispatched daily at 4 PM</span>
             </span>
           </div>
           <div className="hidden small:flex items-center gap-x-5 text-white/55 text-[10.5px] tracking-[0.08em] uppercase">
