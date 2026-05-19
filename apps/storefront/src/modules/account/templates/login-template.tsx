@@ -97,7 +97,7 @@ const LoginTemplate = () => {
                 </span>
               ))}
             </div>
-            <span>Trusted by farmers & buyers across Mindanao.</span>
+            <span>Built for farmers, cooks and home kitchens across Mindanao.</span>
           </div>
         </aside>
 
