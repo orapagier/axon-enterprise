@@ -62,7 +62,7 @@ const ProductTemplate = async ({
                 <ProductActionsWrapper id={product.id} region={region} />
               </Suspense>
 
-              <ProductTabs product={product} />
+              <ProductTabs product={product} hub={hub} />
             </div>
           </div>
         </div>
