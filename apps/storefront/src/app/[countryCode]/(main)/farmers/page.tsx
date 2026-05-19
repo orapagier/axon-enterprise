@@ -571,10 +571,10 @@ export default function FarmersPage() {
               <div className="pt-4 border-t border-grey-20/70 mt-2 text-caption text-grey-50">
                 Prefer to talk first? Call{" "}
                 <a
-                  href="tel:+639171234567"
+                  href="tel:+639100895288"
                   className="text-brand-green-700 font-semibold hover:underline"
                 >
-                  +63 917 123 4567
+                  0910 089 5288
                 </a>{" "}
                 — Mon to Sat, 7am–6pm.
               </div>
