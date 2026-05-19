@@ -19,13 +19,13 @@ type RefinementListProps = {
 }
 
 const categories = [
-  { label: "All Products", value: "all", count: 248, icon: "🛒" },
-  { label: "Vegetables", value: "vegetables", count: 86, icon: "🥬" },
-  { label: "Fruits", value: "fruits", count: 64, icon: "🥭" },
-  { label: "Herbs", value: "herbs", count: 22, icon: "🌿" },
-  { label: "Root Crops", value: "root-crops", count: 31, icon: "🥔" },
-  { label: "Leafy Greens", value: "leafy-greens", count: 28, icon: "🥗" },
-  { label: "Fish", value: "fish", count: 17, icon: "🐟" },
+  { label: "All Products", value: "all", icon: "🛒" },
+  { label: "Vegetables", value: "vegetables", icon: "🥬" },
+  { label: "Fruits", value: "fruits", icon: "🥭" },
+  { label: "Herbs", value: "herbs", icon: "🌿" },
+  { label: "Root Crops", value: "root-crops", icon: "🥔" },
+  { label: "Leafy Greens", value: "leafy-greens", icon: "🥗" },
+  { label: "Fish", value: "fish", icon: "🐟" },
 ]
 
 const origins = [
