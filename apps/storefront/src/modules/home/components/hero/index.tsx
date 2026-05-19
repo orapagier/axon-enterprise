@@ -54,7 +54,7 @@ const Hero = () => {
             {/* Subheading */}
             <p className="text-body text-white/75 max-w-lg leading-relaxed">
               Premium produce and fair prices, delivered to your door — straight
-              from 50+ partner farms across Mindanao.
+              from Mindanao&apos;s farming families to your kitchen.
             </p>
 
             {/* CTA row */}
