@@ -35,7 +35,7 @@ export default async function CollectionTemplate({
       </div>
 
       <div className="flex flex-col small:flex-row small:items-start gap-8">
-        <RefinementList sortBy={sort} />
+        <RefinementList sortBy={sort} hub={hub} />
         <div className="w-full">
           <Suspense
             fallback={
