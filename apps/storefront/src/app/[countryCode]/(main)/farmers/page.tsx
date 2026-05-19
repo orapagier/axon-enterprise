@@ -209,28 +209,28 @@ export default function FarmersPage() {
               <div className="flex flex-wrap items-stretch gap-x-6 gap-y-3 pt-6 border-t border-grey-20/70 mt-3">
                 <div className="flex items-center gap-x-3">
                   <span className="font-heading italic text-[32px] text-brand-green-700 leading-none">
-                    ₱85<span className="text-h2 align-top">M</span>
+                    0
                   </span>
                   <span className="flex flex-col leading-tight">
                     <span className="text-[10px] text-grey-50 uppercase tracking-widest">
-                      Paid to farmers
+                      Middlemen
                     </span>
                     <span className="text-body-sm font-semibold text-grey-90">
-                      in the last 12 months
+                      between you and the buyer
                     </span>
                   </span>
                 </div>
                 <span className="hidden xsmall:block w-px self-stretch bg-grey-20" />
                 <div className="flex items-center gap-x-3">
                   <span className="font-heading italic text-[32px] text-grey-90 leading-none">
-                    18<span className="text-h2 align-top">%</span>
+                    Premium
                   </span>
                   <span className="flex flex-col leading-tight">
                     <span className="text-[10px] text-grey-50 uppercase tracking-widest">
-                      Above market
+                      Farmgate rate
                     </span>
                     <span className="text-body-sm font-semibold text-grey-90">
-                      average farmgate rate
+                      benchmarked above wet-market reference
                     </span>
                   </span>
                 </div>
