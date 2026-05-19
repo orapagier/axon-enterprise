@@ -4,11 +4,15 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
 import SortProducts, { SortOptions } from "./sort-products"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import type { DeliveryHub } from "@lib/util/delivery-hub-types"
 
 type RefinementListProps = {
   sortBy: SortOptions
   search?: boolean
   'data-testid'?: string
+  /** Resolved from the customer's saved address — used to tailor the promo card. */
+  hub?: DeliveryHub
 }
 
 const categories = [
