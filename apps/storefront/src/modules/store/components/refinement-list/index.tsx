@@ -582,8 +582,8 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId, hub }: RefinementLi
             </p>
             <p className="text-caption text-white/70 leading-relaxed">
               Order by 12 PM to make today&apos;s dispatch. After cut-off, a
-              small delivery fee applies — roughly the one-way fare from your
-              address to our hub. Shown at checkout.
+              flat ₱{DEFAULT_OFF_PEAK_DELIVERY_FEE_PHP} delivery fee applies —
+              roughly the one-way fare from your address to our hub.
             </p>
           </div>
         </div>
