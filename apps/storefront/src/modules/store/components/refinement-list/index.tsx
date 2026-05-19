@@ -555,7 +555,7 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId, hub }: RefinementLi
               Hub to {hub.city}, we&apos;d love to talk about partnership.
             </p>
             <LocalizedClientLink
-              href="/farmers"
+              href="/partner-hub"
               className="inline-flex items-center gap-x-1.5 text-caption font-semibold text-brand-gold-300 hover:text-brand-gold-200 underline-offset-4 hover:underline"
             >
               Become a partner hub
