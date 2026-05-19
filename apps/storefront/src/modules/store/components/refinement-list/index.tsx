@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 
 import SortProducts, { SortOptions } from "./sort-products"
 
@@ -12,13 +12,13 @@ type RefinementListProps = {
 }
 
 const categories = [
-  { label: "All Products", value: "all" },
-  { label: "Vegetables", value: "vegetables" },
-  { label: "Fruits", value: "fruits" },
-  { label: "Herbs", value: "herbs" },
-  { label: "Root Crops", value: "root-crops" },
-  { label: "Leafy Greens", value: "leafy-greens" },
-  { label: "Fish", value: "fish" },
+  { label: "All Products", value: "all", count: 248, icon: "🛒" },
+  { label: "Vegetables", value: "vegetables", count: 86, icon: "🥬" },
+  { label: "Fruits", value: "fruits", count: 64, icon: "🥭" },
+  { label: "Herbs", value: "herbs", count: 22, icon: "🌿" },
+  { label: "Root Crops", value: "root-crops", count: 31, icon: "🥔" },
+  { label: "Leafy Greens", value: "leafy-greens", count: 28, icon: "🥗" },
+  { label: "Fish", value: "fish", count: 17, icon: "🐟" },
 ]
 
 const origins = [
@@ -29,118 +29,555 @@ const origins = [
   { label: "Zamboanga", value: "zamboanga" },
 ]
 
+const PRICE_FLOOR = 0
+const PRICE_CEILING = 2000
+
 const RefinementList = ({ sortBy, 'data-testid': dataTestId }: RefinementListProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [activeCategory, setActiveCategory] = useState("all")
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const urlQuery = searchParams.get("q") ?? ""
+  const urlCategory = searchParams.get("category") ?? "all"
+  const urlOriginRaw = searchParams.get("origin") ?? ""
+  const urlOrigins = useMemo(
+    () => urlOriginRaw.split(",").map((s) => s.trim()).filter(Boolean),
+    [urlOriginRaw]
+  )
+  const urlMin = searchParams.get("min")
+  const urlMax = searchParams.get("max")
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
+  const [searchInput, setSearchInput] = useState(urlQuery)
+  const [minInput, setMinInput] = useState<string>(urlMin ?? "")
+  const [maxInput, setMaxInput] = useState<string>(urlMax ?? "")
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>({
+    categories: true,
+    sort: true,
+    price: true,
+    origin: true,
+  })
+
+  // Sync local input if URL changes from elsewhere (e.g. browser back/forward)
+  useEffect(() => {
+    setSearchInput(urlQuery)
+  }, [urlQuery])
+  useEffect(() => {
+    setMinInput(urlMin ?? "")
+  }, [urlMin])
+  useEffect(() => {
+    setMaxInput(urlMax ?? "")
+  }, [urlMax])
+
+  const pushParams = useCallback(
+    (mutate: (p: URLSearchParams) => void) => {
       const params = new URLSearchParams(searchParams)
-      params.set(name, value)
-      return params.toString()
+      mutate(params)
+      // Any filter change resets pagination
+      params.delete("page")
+      const qs = params.toString()
+      router.push(qs ? `${pathname}?${qs}` : pathname, { scroll: false })
     },
-    [searchParams]
+    [pathname, router, searchParams]
   )
 
   const setQueryParams = (name: string, value: string) => {
-    const query = createQueryString(name, value)
-    router.push(`${pathname}?${query}`)
+    pushParams((p) => p.set(name, value))
   }
 
+  const applySearch = useCallback(
+    (value: string) => {
+      pushParams((p) => {
+        const next = value.trim()
+        if (next) p.set("q", next)
+        else p.delete("q")
+      })
+    },
+    [pushParams]
+  )
+
+  // Debounce URL updates as the user types
+  useEffect(() => {
+    if (searchInput === urlQuery) return
+    const t = setTimeout(() => applySearch(searchInput), 350)
+    return () => clearTimeout(t)
+  }, [searchInput, urlQuery, applySearch])
+
+  const setCategory = (value: string) => {
+    pushParams((p) => {
+      if (!value || value === "all") p.delete("category")
+      else p.set("category", value)
+    })
+  }
+
+  const toggleOrigin = (value: string) => {
+    const next = urlOrigins.includes(value)
+      ? urlOrigins.filter((v) => v !== value)
+      : [...urlOrigins, value]
+    pushParams((p) => {
+      if (next.length === 0) p.delete("origin")
+      else p.set("origin", next.join(","))
+    })
+  }
+
+  const applyPriceRange = useCallback(
+    (rawMin: string, rawMax: string) => {
+      const minNum = rawMin === "" ? null : Number(rawMin)
+      const maxNum = rawMax === "" ? null : Number(rawMax)
+      pushParams((p) => {
+        if (minNum !== null && !Number.isNaN(minNum) && minNum > PRICE_FLOOR) {
+          p.set("min", String(minNum))
+        } else {
+          p.delete("min")
+        }
+        if (
+          maxNum !== null &&
+          !Number.isNaN(maxNum) &&
+          maxNum < PRICE_CEILING
+        ) {
+          p.set("max", String(maxNum))
+        } else {
+          p.delete("max")
+        }
+      })
+    },
+    [pushParams]
+  )
+
+  // Debounce price commit
+  useEffect(() => {
+    if ((minInput || "") === (urlMin ?? "") && (maxInput || "") === (urlMax ?? "")) {
+      return
+    }
+    const t = setTimeout(() => applyPriceRange(minInput, maxInput), 450)
+    return () => clearTimeout(t)
+  }, [minInput, maxInput, urlMin, urlMax, applyPriceRange])
+
+  const toggleSection = (key: string) => {
+    setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }))
+  }
+
+  const activeFilters = useMemo(() => {
+    const chips: { key: string; label: string; onRemove: () => void }[] = []
+    if (urlCategory !== "all") {
+      const cat = categories.find((c) => c.value === urlCategory)
+      if (cat)
+        chips.push({
+          key: `cat-${cat.value}`,
+          label: cat.label,
+          onRemove: () => setCategory("all"),
+        })
+    }
+    urlOrigins.forEach((o) => {
+      const origin = origins.find((or) => or.value === o)
+      if (origin)
+        chips.push({
+          key: `origin-${origin.value}`,
+          label: origin.label,
+          onRemove: () => toggleOrigin(origin.value),
+        })
+    })
+    if (urlMin || urlMax) {
+      const minLabel = urlMin ? `₱${urlMin}` : `₱${PRICE_FLOOR}`
+      const maxLabel = urlMax ? `₱${urlMax}` : `₱${PRICE_CEILING}+`
+      chips.push({
+        key: "price",
+        label: `${minLabel} – ${maxLabel}`,
+        onRemove: () => {
+          setMinInput("")
+          setMaxInput("")
+          applyPriceRange("", "")
+        },
+      })
+    }
+    return chips
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [urlCategory, urlOrigins, urlMin, urlMax])
+
+  const clearAll = () => {
+    setMinInput("")
+    setMaxInput("")
+    pushParams((p) => {
+      p.delete("category")
+      p.delete("origin")
+      p.delete("min")
+      p.delete("max")
+    })
+  }
+
+  // Derived values for the price slider visual
+  const sliderMin = urlMin ? Number(urlMin) : PRICE_FLOOR
+  const sliderMax = urlMax ? Number(urlMax) : PRICE_CEILING
+  const leftPct = Math.max(
+    0,
+    Math.min(100, ((sliderMin - PRICE_FLOOR) / (PRICE_CEILING - PRICE_FLOOR)) * 100)
+  )
+  const rightPct = Math.max(
+    0,
+    Math.min(
+      100,
+      100 -
+        ((sliderMax - PRICE_FLOOR) / (PRICE_CEILING - PRICE_FLOOR)) * 100
+    )
+  )
+
+  const SectionHeader = ({
+    title,
+    sectionKey,
+  }: {
+    title: string
+    sectionKey: string
+  }) => (
+    <button
+      onClick={() => toggleSection(sectionKey)}
+      className="w-full flex items-center justify-between mb-3 group"
+    >
+      <span className="text-caption font-semibold text-grey-50 uppercase tracking-[0.08em]">
+        {title}
+      </span>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={`text-grey-40 group-hover:text-grey-60 transition-transform duration-200 ${
+          openSections[sectionKey] ? "rotate-180" : ""
+        }`}
+      >
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </button>
+  )
+
   const sidebarContent = (
-    <div className="flex flex-col gap-y-8">
+    <div className="flex flex-col gap-y-7">
+      {/* Search */}
+      <div>
+        <label
+          htmlFor="sidebar-search"
+          className="text-caption font-semibold text-grey-50 uppercase tracking-[0.08em] mb-2 block"
+        >
+          Search
+        </label>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            applySearch(searchInput)
+          }}
+          className="relative"
+          role="search"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-grey-40 pointer-events-none"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input
+            id="sidebar-search"
+            type="search"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Mango, kangkong, tilapia…"
+            autoComplete="off"
+            className="w-full pl-9 pr-9 py-2.5 bg-grey-5 border border-grey-10 rounded-lg text-body-sm text-grey-80 placeholder:text-grey-40 focus:outline-none focus:border-brand-green-300 focus:ring-2 focus:ring-brand-green-100 focus:bg-white transition-all [&::-webkit-search-cancel-button]:hidden"
+          />
+          {searchInput && (
+            <button
+              type="button"
+              aria-label="Clear search"
+              onClick={() => {
+                setSearchInput("")
+                applySearch("")
+              }}
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center rounded-full text-grey-40 hover:text-grey-80 hover:bg-grey-10 transition-colors"
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          )}
+        </form>
+      </div>
+
+      {/* Active filters */}
+      {activeFilters.length > 0 && (
+        <div>
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-caption font-semibold text-grey-50 uppercase tracking-[0.08em]">
+              Active filters
+            </span>
+            <button
+              onClick={clearAll}
+              className="text-caption font-medium text-brand-green-700 hover:text-brand-green-800 transition-colors"
+            >
+              Clear all
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {activeFilters.map((chip) => (
+              <button
+                key={chip.key}
+                onClick={chip.onRemove}
+                className="inline-flex items-center gap-x-1.5 pl-3 pr-2 py-1 rounded-full bg-brand-green-50 text-brand-green-700 text-caption font-medium border border-brand-green-100 hover:bg-brand-green-100 transition-colors"
+              >
+                {chip.label}
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Categories */}
       <div>
-        <h3 className="text-caption font-semibold text-grey-40 uppercase tracking-wider mb-3 px-1">
-          Categories
-        </h3>
-        <ul className="flex flex-col gap-y-1">
-          {categories.map((cat) => (
-            <li key={cat.value}>
-              <button
-                onClick={() => setActiveCategory(cat.value)}
-                className={`w-full text-left px-3 py-2 rounded-lg text-body-sm transition-colors duration-150 ${
-                  activeCategory === cat.value
-                    ? "bg-brand-green-50 text-brand-green-700 font-medium"
-                    : "text-grey-60 hover:text-grey-80 hover:bg-grey-5"
-                }`}
-              >
-                {cat.label}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <SectionHeader title="Categories" sectionKey="categories" />
+        {openSections.categories && (
+          <ul className="flex flex-col gap-y-0.5">
+            {categories.map((cat) => {
+              const active = urlCategory === cat.value
+              return (
+                <li key={cat.value}>
+                  <button
+                    onClick={() => setCategory(cat.value)}
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-body-sm transition-all duration-150 ${
+                      active
+                        ? "bg-brand-green-50 text-brand-green-700 font-semibold"
+                        : "text-grey-60 hover:text-grey-90 hover:bg-grey-5"
+                    }`}
+                  >
+                    <span className="flex items-center gap-x-2.5">
+                      <span className="text-base leading-none">{cat.icon}</span>
+                      {cat.label}
+                    </span>
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        )}
       </div>
+
+      <div className="h-px bg-grey-10" />
 
       {/* Sort */}
       <div>
-        <h3 className="text-caption font-semibold text-grey-40 uppercase tracking-wider mb-3 px-1">
-          Sort by
-        </h3>
-        <SortProducts sortBy={sortBy} setQueryParams={setQueryParams} data-testid={dataTestId} />
+        <SectionHeader title="Sort by" sectionKey="sort" />
+        {openSections.sort && (
+          <SortProducts
+            sortBy={sortBy}
+            setQueryParams={setQueryParams}
+            data-testid={dataTestId}
+          />
+        )}
       </div>
 
-      {/* Price Range (visual only) */}
-      <div>
-        <h3 className="text-caption font-semibold text-grey-40 uppercase tracking-wider mb-3 px-1">
-          Price Range
-        </h3>
-        <div className="px-1">
-          <div className="flex items-center justify-between text-caption text-grey-50 mb-2">
-            <span>₱0</span>
-            <span>₱2,000</span>
-          </div>
-          <div className="relative h-1.5 bg-grey-10 rounded-full">
-            <div className="absolute left-[10%] right-[30%] h-full bg-brand-green-500 rounded-full" />
-            <div className="absolute left-[10%] top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-white border-2 border-brand-green-500 rounded-full shadow-soft" />
-            <div className="absolute right-[30%] top-1/2 -translate-y-1/2 w-3.5 h-3.5 bg-white border-2 border-brand-green-500 rounded-full shadow-soft" />
-          </div>
-          <div className="flex items-center justify-between text-body-sm text-grey-70 mt-3 font-medium">
-            <span>₱100</span>
-            <span>₱1,400</span>
-          </div>
-        </div>
-      </div>
+      <div className="h-px bg-grey-10" />
 
-      {/* Origin (visual only) */}
+      {/* Price Range */}
       <div>
-        <h3 className="text-caption font-semibold text-grey-40 uppercase tracking-wider mb-3 px-1">
-          Origin
-        </h3>
-        <ul className="flex flex-col gap-y-2 px-1">
-          {origins.map((origin) => (
-            <li key={origin.value}>
-              <label className="flex items-center gap-x-3 cursor-pointer group">
-                <div className="w-4.5 h-4.5 w-[18px] h-[18px] rounded border border-grey-30 group-hover:border-brand-green-500 transition-colors flex items-center justify-center">
-                </div>
-                <span className="text-body-sm text-grey-60 group-hover:text-grey-80 transition-colors">
-                  {origin.label}
+        <SectionHeader title="Price range" sectionKey="price" />
+        {openSections.price && (
+          <div className="px-1 pt-1">
+            <div className="flex items-center justify-between text-caption text-grey-50 mb-2">
+              <span>₱{PRICE_FLOOR.toLocaleString()}</span>
+              <span>₱{PRICE_CEILING.toLocaleString()}+</span>
+            </div>
+            <div className="relative h-1.5 bg-grey-10 rounded-full">
+              <div
+                className="absolute h-full bg-gradient-to-r from-brand-green-500 to-brand-green-600 rounded-full"
+                style={{ left: `${leftPct}%`, right: `${rightPct}%` }}
+              />
+              <div
+                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-brand-green-600 rounded-full shadow-medium"
+                style={{ left: `${leftPct}%` }}
+              />
+              <div
+                className="absolute top-1/2 translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-brand-green-600 rounded-full shadow-medium"
+                style={{ right: `${rightPct}%` }}
+              />
+            </div>
+            <div className="flex items-center justify-between gap-2 mt-4">
+              <label className="flex-1 rounded-lg border border-grey-20 px-2.5 py-1.5 focus-within:border-brand-green-400 focus-within:ring-2 focus-within:ring-brand-green-100 transition-all">
+                <span className="text-[10px] uppercase tracking-wider text-grey-40 font-semibold block">
+                  Min
                 </span>
+                <div className="flex items-baseline gap-x-0.5">
+                  <span className="text-body-sm text-grey-50">₱</span>
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    min={PRICE_FLOOR}
+                    max={PRICE_CEILING}
+                    placeholder={String(PRICE_FLOOR)}
+                    value={minInput}
+                    onChange={(e) => setMinInput(e.target.value)}
+                    className="w-full text-body-sm font-semibold text-grey-80 tabular-nums bg-transparent focus:outline-none placeholder:text-grey-30 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  />
+                </div>
               </label>
-            </li>
-          ))}
-        </ul>
+              <label className="flex-1 rounded-lg border border-grey-20 px-2.5 py-1.5 focus-within:border-brand-green-400 focus-within:ring-2 focus-within:ring-brand-green-100 transition-all">
+                <span className="text-[10px] uppercase tracking-wider text-grey-40 font-semibold block">
+                  Max
+                </span>
+                <div className="flex items-baseline gap-x-0.5">
+                  <span className="text-body-sm text-grey-50">₱</span>
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    min={PRICE_FLOOR}
+                    max={PRICE_CEILING}
+                    placeholder={String(PRICE_CEILING)}
+                    value={maxInput}
+                    onChange={(e) => setMaxInput(e.target.value)}
+                    className="w-full text-body-sm font-semibold text-grey-80 tabular-nums bg-transparent focus:outline-none placeholder:text-grey-30 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  />
+                </div>
+              </label>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="h-px bg-grey-10" />
+
+      {/* Origin */}
+      <div>
+        <SectionHeader title="Origin" sectionKey="origin" />
+        {openSections.origin && (
+          <ul className="flex flex-col gap-y-1 px-1">
+            {origins.map((origin) => {
+              const checked = urlOrigins.includes(origin.value)
+              return (
+                <li key={origin.value}>
+                  <label className="flex items-center gap-x-3 cursor-pointer group py-1.5 px-1 rounded-md hover:bg-grey-5 transition-colors">
+                    <span
+                      className={`relative w-[18px] h-[18px] rounded-md border-2 flex items-center justify-center transition-all duration-150 ${
+                        checked
+                          ? "border-brand-green-600 bg-brand-green-600"
+                          : "border-grey-30 group-hover:border-brand-green-400 bg-white"
+                      }`}
+                    >
+                      {checked && (
+                        <svg
+                          width="11"
+                          height="11"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="white"
+                          strokeWidth="3.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      )}
+                    </span>
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={() => toggleOrigin(origin.value)}
+                      className="sr-only"
+                    />
+                    <span
+                      className={`text-body-sm transition-colors ${
+                        checked
+                          ? "text-grey-90 font-medium"
+                          : "text-grey-60 group-hover:text-grey-80"
+                      }`}
+                    >
+                      {origin.label}
+                    </span>
+                  </label>
+                </li>
+              )
+            })}
+          </ul>
+        )}
+      </div>
+
+      {/* Promo card */}
+      <div className="rounded-xl bg-gradient-to-br from-brand-green-700 to-brand-green-900 p-5 text-white relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute -top-8 -right-8 w-28 h-28 rounded-full bg-brand-gold-400/20 blur-2xl"
+        />
+        <div className="relative">
+          <div className="inline-flex items-center gap-x-1.5 px-2 py-0.5 rounded-full bg-brand-gold-400 text-grey-90 text-[10px] font-bold uppercase tracking-wider mb-3">
+            Free Delivery
+          </div>
+          <p className="text-body-sm font-semibold leading-snug mb-2">
+            Orders over ₱1,500 ship free across Mindanao.
+          </p>
+          <p className="text-caption text-white/70 leading-relaxed">
+            Same-day cut-off at 10AM for next-day arrival.
+          </p>
+        </div>
       </div>
     </div>
   )
 
   return (
     <>
-      {/* Mobile filter button */}
-      <div className="small:hidden mb-4">
+      {/* Mobile filter bar */}
+      <div className="small:hidden flex items-center justify-between mb-4">
         <button
           onClick={() => setMobileOpen(true)}
-          className="flex items-center gap-x-2 px-4 py-2.5 bg-white rounded-xl shadow-soft border border-grey-10 text-body-sm font-medium text-grey-70 hover:shadow-medium transition-shadow"
+          className="flex items-center gap-x-2 px-4 py-2.5 bg-white rounded-xl shadow-soft border border-grey-10 text-body-sm font-medium text-grey-80 hover:shadow-medium transition-shadow"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <line x1="4" y1="6" x2="20" y2="6" />
             <line x1="8" y1="12" x2="20" y2="12" />
             <line x1="12" y1="18" x2="20" y2="18" />
           </svg>
           Filters
+          {activeFilters.length > 0 && (
+            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-brand-green-600 text-white text-[10px] font-bold">
+              {activeFilters.length}
+            </span>
+          )}
         </button>
       </div>
 
@@ -148,35 +585,45 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId }: RefinementListPro
       {mobileOpen && (
         <div className="fixed inset-0 z-[100] small:hidden">
           <div
-            className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="absolute inset-y-0 right-0 w-full xsmall:w-80 bg-white shadow-xl animate-slide-in-right">
+          <div className="absolute inset-y-0 right-0 w-full xsmall:w-96 bg-white shadow-xl animate-slide-in-right">
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between p-6 border-b border-grey-10">
-                <h2 className="text-h3 text-grey-90">Filters</h2>
+                <h2 className="font-heading text-h2 text-grey-90">Sort & Filter</h2>
                 <button
                   onClick={() => setMobileOpen(false)}
                   className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-grey-5"
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <line x1="18" y1="6" x2="6" y2="18" />
                     <line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
                 </button>
               </div>
-              <div className="flex-1 overflow-y-auto p-6">
-                {sidebarContent}
-              </div>
-              <div className="p-6 border-t border-grey-10 flex gap-3">
-                <button className="flex-1 py-3 rounded-xl border border-grey-20 text-body-sm font-medium text-grey-60 hover:bg-grey-5 transition-colors">
+              <div className="flex-1 overflow-y-auto p-6">{sidebarContent}</div>
+              <div className="p-6 border-t border-grey-10 flex gap-3 bg-grey-5">
+                <button
+                  onClick={clearAll}
+                  className="flex-1 py-3 rounded-xl border border-grey-20 bg-white text-body-sm font-medium text-grey-70 hover:bg-grey-10 transition-colors"
+                >
                   Clear all
                 </button>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="flex-1 py-3 rounded-xl bg-brand-green-600 text-white text-body-sm font-medium hover:bg-brand-green-700 transition-colors"
+                  className="flex-[2] py-3 rounded-xl bg-brand-green-600 text-white text-body-sm font-semibold hover:bg-brand-green-700 transition-colors shadow-soft"
                 >
-                  Apply
+                  Show results
                 </button>
               </div>
             </div>
@@ -185,11 +632,42 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId }: RefinementListPro
       )}
 
       {/* Desktop sidebar */}
-      <div className="hidden small:block small:min-w-[280px] small:max-w-[280px] small:sticky small:top-26 small:self-start">
-        <div className="bg-white rounded-2xl shadow-soft p-6 border border-grey-10/50">
+      <aside className="hidden small:block small:min-w-[280px] small:max-w-[280px] small:sticky small:top-28 small:self-start">
+        <div className="bg-white rounded-2xl shadow-soft p-5 border border-grey-10/60">
+          <div className="flex items-center justify-between mb-5 pb-4 border-b border-grey-10">
+            <div className="flex items-center gap-x-2.5">
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-brand-green-50 border border-brand-green-100">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#15803d"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                </svg>
+              </span>
+              <div className="flex flex-col leading-none">
+                <span className="font-heading font-bold text-body text-grey-90 tracking-[-0.005em]">
+                  Sort &amp; Filter
+                </span>
+                <span className="text-[9px] uppercase tracking-[0.18em] text-brand-gold-700/70 font-semibold mt-1">
+                  Curate your basket
+                </span>
+              </div>
+            </div>
+            {activeFilters.length > 0 && (
+              <span className="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-brand-green-700 text-white text-[10px] font-bold">
+                {activeFilters.length}
+              </span>
+            )}
+          </div>
           {sidebarContent}
         </div>
-      </div>
+      </aside>
     </>
   )
 }

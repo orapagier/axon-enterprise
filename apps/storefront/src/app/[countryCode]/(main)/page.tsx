@@ -38,11 +38,7 @@ export default async function Home(props: {
       <FarmStory />
 
       {/* Featured Products / Today's Fresh Picks */}
-      <section className="bg-white">
-        <ul className="flex flex-col">
-          <FeaturedProducts collections={collections} region={region} />
-        </ul>
-      </section>
+      <FeaturedProducts collections={collections} region={region} />
 
       <CategoryShowcase />
 

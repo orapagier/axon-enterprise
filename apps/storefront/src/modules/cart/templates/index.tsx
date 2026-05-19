@@ -3,6 +3,7 @@ import Summary from "./summary"
 import EmptyCartMessage from "../components/empty-cart-message"
 import SignInPrompt from "../components/sign-in-prompt"
 import Divider from "@modules/common/components/divider"
+import { isMember as checkIsMember } from "@lib/util/membership"
 import { HttpTypes } from "@medusajs/types"
 
 const CartTemplate = ({
@@ -12,6 +13,7 @@ const CartTemplate = ({
   cart: HttpTypes.StoreCart | null
   customer: HttpTypes.StoreCustomer | null
 }) => {
+  const isMember = checkIsMember(customer)
   return (
     <div className="py-12">
       <div className="content-container" data-testid="cart-container">
@@ -31,7 +33,7 @@ const CartTemplate = ({
                 {cart && cart.region && (
                   <>
                     <div className="bg-white py-6">
-                      <Summary cart={cart} />
+                      <Summary cart={cart} isMember={isMember} />
                     </div>
                   </>
                 )}

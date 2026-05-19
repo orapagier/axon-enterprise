@@ -13,14 +13,17 @@ import DeleteButton from "@modules/common/components/delete-button"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import MembershipUpsellStrip from "@modules/common/components/membership-upsell-strip"
 import Thumbnail from "@modules/products/components/thumbnail"
 import { usePathname } from "next/navigation"
 import { Fragment, useEffect, useRef, useState } from "react"
 
 const CartDropdown = ({
   cart: cartState,
+  isMember = false,
 }: {
   cart?: HttpTypes.StoreCart | null
+  isMember?: boolean
 }) => {
   const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(
     undefined
@@ -82,20 +85,23 @@ const CartDropdown = ({
       <Popover className="relative h-full">
         <PopoverButton className="h-full flex items-center">
           <LocalizedClientLink
-            className="flex items-center justify-center w-10 h-10 rounded-full text-grey-50 hover:text-grey-80 hover:bg-grey-5 transition-all duration-200 relative"
+            className="group relative inline-flex items-center gap-x-2 pl-3 pr-4 py-2 rounded-full bg-brand-green-700 text-white hover:bg-brand-green-800 transition-all shadow-soft ring-1 ring-brand-green-800/40"
             href="/cart"
             data-testid="nav-cart-link"
             aria-label="Cart"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand-gold-300">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
               <line x1="3" y1="6" x2="21" y2="6" />
               <path d="M16 10a4 4 0 0 1-8 0" />
             </svg>
+            <span className="text-body-sm font-semibold tracking-wide">Bag</span>
+            <span className="w-px h-3.5 bg-white/20" />
+            <span className="text-body-sm font-bold tabular-nums text-brand-gold-300">
+              {totalItems}
+            </span>
             {totalItems > 0 && (
-              <span className="absolute top-0 right-0 w-[18px] h-[18px] flex items-center justify-center bg-brand-green-600 text-white text-[10px] font-bold rounded-full ring-2 ring-white">
-                {totalItems}
-              </span>
+              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-brand-gold-400 ring-2 ring-[#fdfcf8]" />
             )}
           </LocalizedClientLink>
         </PopoverButton>
@@ -187,6 +193,14 @@ const CartDropdown = ({
                     ))}
                 </div>
                 <div className="p-4 flex flex-col gap-y-4 text-small-regular">
+                  {!isMember && (
+                    <MembershipUpsellStrip
+                      subtotal={subtotal}
+                      currencyCode={cartState.currency_code}
+                      onClick={close}
+                      variant="compact"
+                    />
+                  )}
                   <div className="flex items-center justify-between">
                     <span className="text-ui-fg-base font-semibold">
                       Subtotal{" "}

@@ -1,8 +1,7 @@
 import React from "react"
 
-import UnderlineLink from "@modules/common/components/interactive-link"
-
 import AccountNav from "../components/account-nav"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
 
 interface AccountLayoutProps {
@@ -14,26 +13,129 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
   customer,
   children,
 }) => {
+  // When unauthenticated, render the login template full-bleed (it owns its own chrome).
+  if (!customer) {
+    return <div className="flex-1" data-testid="account-page">{children}</div>
+  }
+
+  const accountType =
+    (customer.metadata?.account_type as "buyer" | "seller" | undefined) ??
+    "buyer"
+  const profileCompleted = Boolean(customer.metadata?.profile_completed)
+  const displayName =
+    customer.first_name ||
+    (customer.email ? customer.email.split("@")[0] : "there")
+
   return (
-    <div className="flex-1 small:py-12" data-testid="account-page">
-      <div className="flex-1 content-container h-full max-w-5xl mx-auto bg-white flex flex-col">
-        <div className="grid grid-cols-1  small:grid-cols-[240px_1fr] py-12">
-          <div>{customer && <AccountNav customer={customer} />}</div>
-          <div className="flex-1">{children}</div>
+    <div
+      className="flex-1 bg-grey-5 min-h-[calc(100vh-100px)]"
+      data-testid="account-page"
+    >
+      <div className="content-container py-8 small:py-12">
+        {/* Header card */}
+        <div className="bg-white rounded-2xl shadow-soft border border-grey-10/60 p-6 small:p-8 mb-6">
+          <div className="flex flex-col small:flex-row small:items-center small:justify-between gap-5">
+            <div className="flex items-center gap-x-4">
+              <div className="w-14 h-14 small:w-16 small:h-16 rounded-2xl bg-gradient-to-br from-brand-green-500 to-brand-green-700 text-white flex items-center justify-center text-2xl shrink-0">
+                {accountType === "seller" ? "🌾" : "🧺"}
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-x-2 flex-wrap">
+                  <span className="text-caption font-semibold text-grey-50 uppercase tracking-wider">
+                    {accountType === "seller" ? "Seller" : "Buyer"} account
+                  </span>
+                  {profileCompleted ? (
+                    <span className="inline-flex items-center gap-x-1 px-2 py-0.5 rounded-full bg-brand-green-50 border border-brand-green-100 text-[10px] font-bold text-brand-green-700 uppercase tracking-wider">
+                      <svg
+                        width="9"
+                        height="9"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      Verified
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-brand-gold-50 border border-brand-gold-200 text-[10px] font-bold text-brand-gold-800 uppercase tracking-wider">
+                      Profile incomplete
+                    </span>
+                  )}
+                </div>
+                <h1
+                  className="font-heading text-2xl small:text-3xl text-grey-90 mt-1 truncate"
+                  data-testid="welcome-message"
+                >
+                  Hello, {displayName}
+                </h1>
+                <p className="text-caption text-grey-50 mt-0.5 truncate">
+                  {customer.email}
+                </p>
+              </div>
+            </div>
+
+            {!profileCompleted && (
+              <LocalizedClientLink
+                href="/onboarding"
+                className="inline-flex items-center justify-center gap-x-1.5 px-4 py-2.5 rounded-xl bg-grey-90 hover:bg-brand-green-700 text-white text-body-sm font-semibold shadow-soft hover:shadow-medium transition-all whitespace-nowrap"
+              >
+                Complete profile
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </LocalizedClientLink>
+            )}
+          </div>
         </div>
-        <div className="flex flex-col small:flex-row items-end justify-between small:border-t border-gray-200 py-12 gap-8">
+
+        {/* Main: sidebar + content */}
+        <div className="grid grid-cols-1 small:grid-cols-[260px_1fr] gap-6">
+          <AccountNav customer={customer} />
+          <div className="min-w-0">{children}</div>
+        </div>
+
+        {/* Help footer */}
+        <div className="mt-10 bg-white rounded-2xl border border-grey-10/60 px-6 small:px-8 py-6 flex flex-col small:flex-row small:items-center small:justify-between gap-4">
           <div>
-            <h3 className="text-xl-semi mb-4">Got questions?</h3>
-            <span className="txt-medium">
-              You can find frequently asked questions and answers on our
-              customer service page.
-            </span>
+            <h3 className="font-heading text-h3 text-grey-90">
+              Need a hand?
+            </h3>
+            <p className="text-body-sm text-grey-50 mt-1">
+              Our team is around 6 days a week to help with orders and listings.
+            </p>
           </div>
-          <div>
-            <UnderlineLink href="/customer-service">
-              Customer Service
-            </UnderlineLink>
-          </div>
+          <LocalizedClientLink
+            href="/customer-service"
+            className="inline-flex items-center gap-x-1.5 px-4 py-2.5 rounded-xl border border-grey-20 bg-white text-body-sm font-medium text-grey-80 hover:border-brand-green-300 hover:text-brand-green-700 hover:bg-brand-green-50 transition-colors whitespace-nowrap self-start"
+          >
+            Contact support
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </LocalizedClientLink>
         </div>
       </div>
     </div>

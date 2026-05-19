@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from "next/server"
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL
 const PUBLISHABLE_API_KEY = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
-const DEFAULT_REGION = process.env.NEXT_PUBLIC_DEFAULT_REGION || "dk"
+const DEFAULT_REGION = process.env.NEXT_PUBLIC_DEFAULT_REGION || "ph"
+const REGION_COOKIE = "_mfh_country"
+const REGION_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
 
 const regionMapCache = {
   regionMap: new Map<string, HttpTypes.StoreRegion>(),
@@ -23,7 +25,6 @@ async function getRegionMap(cacheId: string) {
     !regionMap.keys().next().value ||
     regionMapUpdated < Date.now() - 3600 * 1000
   ) {
-    // Fetch regions from Medusa. We can't use the JS client here because middleware is running on Edge and the client needs a Node environment.
     const response = await fetch(`${BACKEND_URL}/store/regions`, {
       method: "GET",
       headers: {
@@ -40,21 +41,19 @@ async function getRegionMap(cacheId: string) {
       throw new Error(`Backend returned ${response.status}`)
     }
 
-    const json = await response.json()
-
-    const { regions } = json
+    const { regions } = await response.json()
 
     if (!regions?.length) {
       return new Map<string, HttpTypes.StoreRegion>()
     }
 
-    // Create a map of country codes to regions.
+    // Reset before rebuilding so removed regions don't linger
+    regionMapCache.regionMap.clear()
     regions.forEach((region: HttpTypes.StoreRegion) => {
       region.countries?.forEach((c) => {
         regionMapCache.regionMap.set(c.iso_2 ?? "", region)
       })
     })
-
     regionMapCache.regionMapUpdated = Date.now()
   }
 
@@ -62,44 +61,56 @@ async function getRegionMap(cacheId: string) {
 }
 
 /**
- * Fetches regions from Medusa and sets the region cookie.
- * @param request
- * @param response
+ * Best country guess in priority order:
+ *   1. User-chosen cookie (set when the user manually picks a country)
+ *   2. Cloudflare / Vercel geo header (production infra)
+ *   3. Accept-Language header (e.g. "en-PH")
+ *   4. Configured DEFAULT_REGION
+ *   5. URL slug (only as a last resort)
+ *   6. First available region
+ *
+ * Note: URL is intentionally NOT preferred over detection — otherwise visiting
+ * /dk in PH would stick to Denmark forever.
  */
-async function getCountryCode(
+function getCountryCode(
   request: NextRequest,
   regionMap: Map<string, HttpTypes.StoreRegion | number>
-) {
-  let countryCode
-
-  const urlCountryCode = request.nextUrl.pathname.split("/")[1]?.toLowerCase()
-
-  // Cloudflare Workers provides country via request.cf.country
-  const cloudflareCountryCode = (request as { cf?: { country?: string } }).cf?.country?.toLowerCase()
-
-  // Vercel provides x-vercel-ip-country header
-  const vercelCountryCode = request.headers
-    .get("x-vercel-ip-country")
+): string | undefined {
+  const urlCountryCode = request.nextUrl.pathname
+    .split("/")[1]
     ?.toLowerCase()
 
-  if (urlCountryCode && regionMap.has(urlCountryCode)) {
-    countryCode = urlCountryCode
-  } else if (cloudflareCountryCode && regionMap.has(cloudflareCountryCode)) {
-    countryCode = cloudflareCountryCode
-  } else if (vercelCountryCode && regionMap.has(vercelCountryCode)) {
-    countryCode = vercelCountryCode
-  } else if (regionMap.has(DEFAULT_REGION)) {
-    countryCode = DEFAULT_REGION
-  } else if (regionMap.keys().next().value) {
-    countryCode = regionMap.keys().next().value
-  }
+  // 1. cookie
+  const cookieCountry = request.cookies
+    .get(REGION_COOKIE)
+    ?.value?.toLowerCase()
+  if (cookieCountry && regionMap.has(cookieCountry)) return cookieCountry
 
-  return countryCode
+  // 2. infra detection
+  const cf = (request as { cf?: { country?: string } }).cf?.country?.toLowerCase()
+  if (cf && regionMap.has(cf)) return cf
+  const vercel = request.headers
+    .get("x-vercel-ip-country")
+    ?.toLowerCase()
+  if (vercel && regionMap.has(vercel)) return vercel
+
+  // 3. accept-language sniff (e.g. "en-PH,en;q=0.9")
+  const accept = request.headers.get("accept-language") ?? ""
+  const langMatch = accept.match(/[a-z]{2}-([A-Z]{2})/i)
+  const langCountry = langMatch?.[1]?.toLowerCase()
+  if (langCountry && regionMap.has(langCountry)) return langCountry
+
+  // 4. configured default
+  if (regionMap.has(DEFAULT_REGION)) return DEFAULT_REGION
+
+  // 5. URL fallback
+  if (urlCountryCode && regionMap.has(urlCountryCode)) return urlCountryCode
+
+  // 6. first region available
+  const firstKey = regionMap.keys().next().value
+  return typeof firstKey === "string" ? firstKey : undefined
 }
 
-/**
- * Middleware to handle region selection and onboarding status.
- */
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.includes(".")) {
     return NextResponse.next()
@@ -109,31 +120,47 @@ export async function middleware(request: NextRequest) {
   const cacheId = cacheIdCookie?.value || crypto.randomUUID()
 
   const regionMap = await getRegionMap(cacheId)
-  const countryCode = await getCountryCode(request, regionMap)
+  const countryCode = getCountryCode(request, regionMap) || DEFAULT_REGION
 
-  // if the country code is available, use it, otherwise use the default region
-  const country = countryCode || DEFAULT_REGION
-  const firstPathSegment = request.nextUrl.pathname.split("/")[1]?.toLowerCase()
-  const urlHasCountry = firstPathSegment === country.toLowerCase()
+  const firstPathSegment = request.nextUrl.pathname
+    .split("/")[1]
+    ?.toLowerCase()
+  const urlHasCountry = firstPathSegment === countryCode.toLowerCase()
 
   if (urlHasCountry) {
+    const response = NextResponse.next()
     if (!cacheIdCookie) {
-      const response = NextResponse.next()
       response.cookies.set("_medusa_cache_id", cacheId, {
         maxAge: 60 * 60 * 24,
       })
-      return response
     }
-    return NextResponse.next()
+    // Persist the resolved country so subsequent requests are deterministic.
+    response.cookies.set(REGION_COOKIE, countryCode, {
+      maxAge: REGION_COOKIE_MAX_AGE,
+      sameSite: "lax",
+      path: "/",
+    })
+    return response
   }
 
-  // if the url doesn't have the country, redirect to it
+  // Redirect to the correct country (handles /dk → /ph in PH, /                 → /ph, etc.)
   const redirectPath =
     request.nextUrl.pathname === "/" ? "" : request.nextUrl.pathname
   const queryString = request.nextUrl.search || ""
-  const redirectUrl = `${request.nextUrl.origin}/${country}${redirectPath}${queryString}`
+  const redirectUrl = `${request.nextUrl.origin}/${countryCode}${redirectPath}${queryString}`
 
-  return NextResponse.redirect(redirectUrl, 307)
+  const response = NextResponse.redirect(redirectUrl, 307)
+  response.cookies.set(REGION_COOKIE, countryCode, {
+    maxAge: REGION_COOKIE_MAX_AGE,
+    sameSite: "lax",
+    path: "/",
+  })
+  if (!cacheIdCookie) {
+    response.cookies.set("_medusa_cache_id", cacheId, {
+      maxAge: 60 * 60 * 24,
+    })
+  }
+  return response
 }
 
 export const config = {

@@ -17,6 +17,7 @@ type ProductActionsProps = {
   product: HttpTypes.StoreProduct
   region: HttpTypes.StoreRegion
   disabled?: boolean
+  isMember?: boolean
 }
 
 const optionsAsKeymap = (
@@ -31,6 +32,7 @@ const optionsAsKeymap = (
 export default function ProductActions({
   product,
   disabled,
+  isMember = false,
 }: ProductActionsProps) {
   const router = useRouter()
   const pathname = usePathname()
@@ -160,7 +162,11 @@ export default function ProductActions({
           )}
         </div>
 
-        <ProductPrice product={product} variant={selectedVariant} />
+        <ProductPrice
+          product={product}
+          variant={selectedVariant}
+          isMember={isMember}
+        />
 
         <Button
           onClick={handleAddToCart}
@@ -192,6 +198,7 @@ export default function ProductActions({
           isAdding={isAdding}
           show={!inView}
           optionsDisabled={!!disabled || isAdding}
+          isMember={isMember}
         />
       </div>
     </>

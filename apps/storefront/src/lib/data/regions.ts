@@ -32,28 +32,23 @@ export const retrieveRegion = async (id: string) => {
     .then(({ region }) => region)
 }
 
-const regionMap = new Map<string, HttpTypes.StoreRegion>()
-
 export const getRegion = async (countryCode: string) => {
-  if (regionMap.has(countryCode)) {
-    return regionMap.get(countryCode)
-  }
-
   const regions = await listRegions()
 
-  if (!regions) {
+  if (!regions?.length) {
     return null
   }
 
+  // Build a fresh map every call so newly added regions surface immediately.
+  // (The underlying listRegions call is cached by Next.js with tag invalidation,
+  // so this is effectively a cache lookup — no extra network cost.)
+  const regionMap = new Map<string, HttpTypes.StoreRegion>()
   regions.forEach((region) => {
     region.countries?.forEach((c) => {
-      regionMap.set(c?.iso_2 ?? "", region)
+      regionMap.set((c?.iso_2 ?? "").toLowerCase(), region)
     })
   })
 
-  const region = countryCode
-    ? regionMap.get(countryCode)
-    : regionMap.get("us")
-
-  return region
+  const lookup = (countryCode ?? "").toLowerCase()
+  return regionMap.get(lookup) ?? regionMap.values().next().value ?? null
 }

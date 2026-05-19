@@ -143,4 +143,39 @@
   .nav-pill {
     @apply px-5 py-2 rounded-full text-[13px] font-semibold text-grey-50 hover:text-brand-green-700 hover:bg-white hover:shadow-soft transition-all duration-200 tracking-wide uppercase;
   }
+
+  /* Minimalist nav links (premium, no chrome) */
+  .nav-link {
+    @apply px-3.5 py-2 rounded-full text-[13.5px] font-medium text-grey-70 hover:text-grey-90 hover:bg-grey-5 transition-all duration-200 tracking-tight;
+  }
+
+  /* Premium nav link with animated underline */
+  .nav-link-premium {
+    @apply relative px-4 py-2 text-[13.5px] font-medium text-grey-70 hover:text-grey-90 transition-colors duration-200 tracking-[0.005em];
+  }
+  .nav-link-premium::after {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.25rem;
+    height: 1px;
+    background: linear-gradient(90deg, #ca8a04 0%, #eab308 50%, #ca8a04 100%);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .nav-link-premium:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Tightened section spacing */
+  .section-tight {
+    @apply py-10 small:py-14;
+  }
+
+  /* Full-viewport section (subtracts sticky header: 36 announcement + 68 main = 104px) */
+  .section-viewport {
+    @apply py-10 small:py-0 small:min-h-[calc(100vh-104px)] small:flex small:items-center;
+  }
 }

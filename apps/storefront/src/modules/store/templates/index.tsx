@@ -9,37 +9,69 @@ import PaginatedProducts from "./paginated-products"
 const StoreTemplate = ({
   sortBy,
   page,
+  q,
+  category,
+  origin,
+  min,
+  max,
   countryCode,
 }: {
   sortBy?: SortOptions
   page?: string
+  q?: string
+  category?: string
+  origin?: string
+  min?: string
+  max?: string
   countryCode: string
 }) => {
   const pageNumber = page ? parseInt(page) : 1
   const sort = sortBy || "created_at"
 
   return (
-    <div className="content-container section-padding" data-testid="category-container">
-      {/* Page header */}
-      <div className="mb-10">
-        <h1 className="text-display font-heading text-grey-90" data-testid="store-page-title">
-          Fresh Produce
-        </h1>
-        <p className="text-body text-grey-50 mt-2">
-          Handpicked from Mindanao&apos;s finest farms
-        </p>
-      </div>
+    <div data-testid="category-container" className="bg-grey-5 min-h-screen">
+      {/* Editorial header */}
+      <header className="relative bg-white border-b border-grey-10">
+        {/* Hairline gold accent on top */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-gold-400/40 to-transparent" />
 
-      <div className="flex flex-col small:flex-row small:items-start gap-8">
-        <RefinementList sortBy={sort} />
-        <div className="w-full">
-          <Suspense fallback={<SkeletonProductGrid />}>
-            <PaginatedProducts
-              sortBy={sort}
-              page={pageNumber}
-              countryCode={countryCode}
-            />
-          </Suspense>
+        <div className="content-container pt-10 pb-8 small:pt-14 small:pb-12 text-center">
+          <h1 className="font-heading font-bold text-[34px] leading-[1.04] xsmall:text-[44px] small:text-[60px] small:leading-[1] text-grey-90 tracking-[-0.028em]">
+            The <span className="italic text-brand-green-700">market</span>,
+            in every basket
+            <span className="text-brand-gold-500">.</span>
+          </h1>
+          <p className="mt-4 max-w-xl mx-auto text-body-sm text-grey-50 leading-relaxed">
+            Hundreds of in-season picks from across Mindanao, curated for your
+            weekly table.
+          </p>
+        </div>
+
+        {/* Bottom hairline */}
+        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-grey-20 to-transparent" />
+      </header>
+
+      {/* Main grid */}
+      <div className="content-container pt-8 small:pt-10 pb-20 relative">
+        <div className="flex flex-col small:flex-row small:items-start gap-6 small:gap-8">
+          <RefinementList sortBy={sort} />
+          <div className="w-full min-w-0">
+            <Suspense
+              key={`${sort}-${pageNumber}-${q ?? ""}-${category ?? ""}-${origin ?? ""}-${min ?? ""}-${max ?? ""}`}
+              fallback={<SkeletonProductGrid />}
+            >
+              <PaginatedProducts
+                sortBy={sort}
+                page={pageNumber}
+                q={q}
+                category={category}
+                origin={origin}
+                min={min}
+                max={max}
+                countryCode={countryCode}
+              />
+            </Suspense>
+          </div>
         </div>
       </div>
     </div>

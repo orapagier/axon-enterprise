@@ -6,10 +6,12 @@ import CartTotals from "@modules/common/components/cart-totals"
 import Divider from "@modules/common/components/divider"
 import DiscountCode from "@modules/checkout/components/discount-code"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import MembershipUpsellStrip from "@modules/common/components/membership-upsell-strip"
 import { HttpTypes } from "@medusajs/types"
 
 type SummaryProps = {
   cart: HttpTypes.StoreCart
+  isMember?: boolean
 }
 
 function getCheckoutStep(cart: HttpTypes.StoreCart) {
@@ -22,7 +24,7 @@ function getCheckoutStep(cart: HttpTypes.StoreCart) {
   }
 }
 
-const Summary = ({ cart }: SummaryProps) => {
+const Summary = ({ cart, isMember = false }: SummaryProps) => {
   const step = getCheckoutStep(cart)
 
   return (
@@ -33,6 +35,12 @@ const Summary = ({ cart }: SummaryProps) => {
       <DiscountCode cart={cart} />
       <Divider />
       <CartTotals totals={cart} />
+      {!isMember && (
+        <MembershipUpsellStrip
+          subtotal={cart.subtotal ?? 0}
+          currencyCode={cart.currency_code}
+        />
+      )}
       <LocalizedClientLink
         href={"/checkout?step=" + step}
         data-testid="checkout-button"

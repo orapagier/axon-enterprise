@@ -4,6 +4,7 @@ import { sdk } from "@lib/config"
 import medusaError from "@lib/util/medusa-error"
 import { HttpTypes } from "@medusajs/types"
 import { revalidateTag } from "next/cache"
+import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import {
   getAuthHeaders,
@@ -449,6 +450,14 @@ export async function updateRegion(countryCode: string, currentPath: string) {
 
   const productsCacheTag = await getCacheTag("products")
   revalidateTag(productsCacheTag)
+
+  // Persist explicit user choice so middleware respects it on subsequent requests.
+  const cookieStore = await cookies()
+  cookieStore.set("_mfh_country", countryCode.toLowerCase(), {
+    maxAge: 60 * 60 * 24 * 365,
+    sameSite: "lax",
+    path: "/",
+  })
 
   redirect(`/${countryCode}${currentPath}`)
 }
