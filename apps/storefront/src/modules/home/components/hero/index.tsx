@@ -72,7 +72,7 @@ const Hero = () => {
                 </span>
               </LocalizedClientLink>
 
-              {/* Fresh today chip — beside the CTA */}
+              {/* Now open chip — beside the CTA */}
               <div className="inline-flex items-center gap-x-2.5 pl-2 pr-4 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md">
                 <span className="relative inline-flex items-center justify-center w-6 h-6 rounded-full bg-brand-green-500/25">
                   <span className="absolute inset-0 rounded-full bg-brand-green-400/40 animate-ping" />
@@ -80,10 +80,10 @@ const Hero = () => {
                 </span>
                 <span className="flex flex-col leading-tight">
                   <span className="text-[9px] uppercase tracking-[0.16em] text-white/60 font-semibold">
-                    Fresh today
+                    Now open
                   </span>
                   <span className="text-[13px] font-semibold text-white">
-                    24 new arrivals
+                    Tagum City · May 2026
                   </span>
                 </span>
               </div>
