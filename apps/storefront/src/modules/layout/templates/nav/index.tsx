@@ -8,12 +8,14 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import CartButton from "@modules/layout/components/cart-button"
 import NavSearch from "@modules/layout/components/nav-search"
 import SideMenu from "@modules/layout/components/side-menu"
+import { getDeliveryHub } from "@lib/util/delivery-hub"
 
 export default async function Nav() {
-  const [regions, locales, currentLocale] = await Promise.all([
+  const [regions, locales, currentLocale, hub] = await Promise.all([
     listRegions().then((regions: StoreRegion[]) => regions),
     listLocales(),
     getLocale(),
+    getDeliveryHub(),
   ])
 
   return (
