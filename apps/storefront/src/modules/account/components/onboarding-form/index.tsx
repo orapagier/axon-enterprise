@@ -327,7 +327,7 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
               <label
                 key={f.name}
                 className={`block ${
-                  f.type === "textarea" ? "small:col-span-2" : ""
+                  f.type === "textarea" || f.full ? "small:col-span-2" : ""
                 }`}
               >
                 <span className="flex items-center justify-between text-caption font-semibold text-grey-70 uppercase tracking-[0.06em] mb-2">
