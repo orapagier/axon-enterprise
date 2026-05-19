@@ -36,22 +36,43 @@ export default async function OnboardingPage({ params }: Props) {
 
   const isSeller = accountType === "seller"
 
-  // Prefill anything we already know about the customer.
+  // Prefill anything we already know about the customer. On re-onboarding,
+  // an existing default-shipping address is the most authoritative source
+  // for the address fields; metadata is the fallback.
   const meta = (customer.metadata ?? {}) as Record<string, string | undefined>
   const fullName =
     [customer.first_name, customer.last_name].filter(Boolean).join(" ").trim()
+  const existingAddress =
+    (customer.addresses ?? []).find((a) => a.is_default_shipping) ??
+    (customer.addresses ?? [])[0] ??
+    null
+
   const defaults: Partial<Record<string, string>> = isSeller
     ? {
         business_name: meta.business_name ?? customer.company_name ?? "",
-        primary_hub: meta.primary_hub ?? "",
+        primary_hub:
+          existingAddress?.city ?? meta.primary_hub ?? "",
         contact_phone: customer.phone ?? "",
         products_offered: meta.products_offered ?? "",
+        address_1:
+          existingAddress?.address_1 ?? meta.farm_address_1 ?? "",
+        province:
+          existingAddress?.province ?? meta.farm_province ?? "",
+        postal_code:
+          existingAddress?.postal_code ?? meta.farm_postal_code ?? "",
       }
     : {
         display_name: meta.display_name ?? fullName,
         phone: customer.phone ?? "",
-        default_city: meta.default_city ?? "",
+        default_city:
+          existingAddress?.city ?? meta.default_city ?? "",
         buyer_bio: meta.buyer_bio ?? "",
+        address_1:
+          existingAddress?.address_1 ?? meta.default_address_1 ?? "",
+        province:
+          existingAddress?.province ?? meta.default_province ?? "",
+        postal_code:
+          existingAddress?.postal_code ?? meta.default_postal_code ?? "",
       }
 
   return (
