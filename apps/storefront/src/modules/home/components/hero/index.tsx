@@ -89,12 +89,12 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Trust strip */}
+            {/* Trust strip — Day-1 framing, no invented operational numbers */}
             <div className="flex flex-wrap items-center gap-x-7 gap-y-2 pt-4 mt-1 border-t border-white/10">
               {[
-                { num: "50+", label: "Partner farms" },
-                { num: "24h", label: "Field to door" },
-                { num: "₱1,500", label: "Free delivery" },
+                { num: "0", label: "Middlemen" },
+                { num: "24h", label: "Field-to-door goal" },
+                { num: "Day 1", label: "Of the journey" },
               ].map((stat) => (
                 <div key={stat.label} className="flex items-baseline gap-x-2">
                   <span className="font-heading text-h3 text-brand-gold-300 leading-none">
