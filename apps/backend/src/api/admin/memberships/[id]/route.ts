@@ -124,42 +124,22 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   // `hub-members` group; mirroring metadata into the group keeps Medusa's
   // price-list machinery in step. Failures here don't block the approval —
   // metadata is the source of truth the storefront reads.
-  if (body.action === "approve") {
-    try {
-      const groups = await customerModule.listCustomerGroups(
-        { name: HUB_MEMBER_GROUP },
-        { take: 1 }
-      )
-      const group = groups?.[0]
-      if (group?.id) {
-        await customerModule.createCustomerGroupCustomers([
-          { customer_id: customerId, customer_group_id: group.id },
-        ])
+  try {
+    const groups = await customerModule.listCustomerGroups(
+      { name: HUB_MEMBER_GROUP },
+      { take: 1 }
+    )
+    const group = groups?.[0]
+    if (group?.id) {
+      const pair = { customer_id: customerId, customer_group_id: group.id }
+      if (body.action === "approve") {
+        await customerModule.addCustomerToGroup(pair)
+      } else {
+        await customerModule.removeCustomerFromGroup(pair)
       }
-    } catch {
-      /* group missing or already-assigned — ignore */
     }
-  } else {
-    try {
-      const groups = await customerModule.listCustomerGroups(
-        { name: HUB_MEMBER_GROUP },
-        { take: 1 }
-      )
-      const group = groups?.[0]
-      if (group?.id) {
-        // The customer module's group-remove API varies across Medusa
-        // versions; best-effort.
-        const linkApi = customerModule as unknown as {
-          removeCustomerFromGroup?: (
-            customerId: string,
-            groupId: string
-          ) => Promise<unknown>
-        }
-        await linkApi.removeCustomerFromGroup?.(customerId, group.id)
-      }
-    } catch {
-      /* ignore */
-    }
+  } catch {
+    /* group missing, already-assigned, or already-removed — ignore */
   }
 
   res.json({
