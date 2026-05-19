@@ -454,7 +454,7 @@ export default function FarmersPage() {
         </div>
       </section>
 
-      {/* ──────────────────────────── TESTIMONIAL ──────────────────────────── */}
+      {/* ──────────────────────────── FOUNDER'S NOTE ──────────────────────────── */}
       <section className="bg-brand-cream-50 section-viewport w-full">
         <div className="content-container w-full">
           <div className="relative overflow-hidden rounded-3xl bg-grey-90 p-8 xsmall:p-12 small:p-16">
@@ -473,37 +473,27 @@ export default function FarmersPage() {
 
             <div className="relative grid grid-cols-1 small:grid-cols-12 gap-8 items-center">
               <div className="small:col-span-8">
-                <svg
-                  width="36"
-                  height="28"
-                  viewBox="0 0 36 28"
-                  fill="none"
-                  className="text-brand-gold-400 mb-5"
-                >
-                  <path
-                    d="M0 28V16C0 7.16 5.16 1.5 13 0v7c-3.5 1-5 3.83-5 8.5h5V28H0zm22 0V16c0-8.84 5.16-14.5 13-16v7c-3.5 1-5 3.83-5 8.5h5V28H22z"
-                    fill="currentColor"
-                  />
-                </svg>
+                <span className="inline-flex items-center gap-x-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 backdrop-blur text-[10px] font-bold uppercase tracking-[0.18em] text-white/80 mb-5">
+                  A note from the founder
+                </span>
                 <blockquote className="font-heading text-[22px] leading-[1.25] xsmall:text-[28px] xsmall:leading-[1.2] small:text-[34px] small:leading-[1.15] text-white tracking-[-0.01em]">
-                  Before Fresh Hub I&apos;d sell my mangoes to the first buyer
-                  who showed up at the gate.{" "}
+                  Mindanao&apos;s farmers grow some of the best produce in the
+                  country and rarely capture the value.{" "}
                   <span className="italic text-brand-gold-300">
-                    Now I plant knowing what I&apos;ll be paid before I harvest.
+                    Fresh Hub exists to close that gap — fair price, weekly payout,
+                    no middlemen.
                   </span>
                 </blockquote>
                 <div className="mt-6 flex items-center gap-x-4">
-                  <img
-                    src="https://images.unsplash.com/photo-1559548331-f9cb98001426?w=120&h=120&fit=crop&crop=faces"
-                    alt=""
-                    className="w-12 h-12 rounded-full ring-2 ring-brand-gold-400 object-cover"
-                  />
+                  <span className="w-12 h-12 rounded-full bg-brand-gold-400 text-grey-90 ring-2 ring-brand-gold-400 flex items-center justify-center font-heading italic text-body-lg font-bold">
+                    CT
+                  </span>
                   <div>
                     <div className="text-body-sm font-semibold text-white">
-                      Mang Rolando Dela Peña
+                      Cham P. Tonog
                     </div>
                     <div className="text-caption text-white/60">
-                      2.1 ha mango farm · Bukidnon · Partner since 2024
+                      Founder &amp; CEO · Tagum City
                     </div>
                   </div>
                 </div>
@@ -512,10 +502,10 @@ export default function FarmersPage() {
               <div className="small:col-span-4 grid grid-cols-2 small:grid-cols-1 gap-3">
                 <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
                   <div className="font-heading italic text-[32px] text-brand-gold-300 leading-none">
-                    3.2×
+                    Day 1
                   </div>
                   <div className="text-caption text-white/60 mt-1">
-                    Income vs. selling to the wet market
+                    Of the journey — Tagum City, May 2026
                   </div>
                 </div>
                 <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
@@ -523,7 +513,7 @@ export default function FarmersPage() {
                     0
                   </div>
                   <div className="text-caption text-white/60 mt-1">
-                    Days waiting for payment
+                    Days waiting for payment — paid every Friday
                   </div>
                 </div>
               </div>
