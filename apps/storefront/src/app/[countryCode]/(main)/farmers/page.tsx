@@ -361,8 +361,8 @@ export default function FarmersPage() {
               </h2>
             </div>
             <p className="small:col-span-7 text-body-sm small:text-body text-grey-60 leading-relaxed max-w-xl small:self-end">
-              We&apos;ve kept the joining process deliberately short. Most
-              partners are onboarded within two weeks of first contact, with
+              We&apos;ve kept the joining process deliberately short. Our aim is
+              to onboard new partners within two weeks of first contact and run
               their first pickup the following Saturday.
             </p>
           </div>
