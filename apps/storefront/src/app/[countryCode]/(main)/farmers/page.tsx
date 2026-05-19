@@ -260,26 +260,27 @@ export default function FarmersPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-grey-90/45 via-transparent to-transparent" />
 
-                {/* Floating price card */}
+                {/* Floating policy card — what we promise, not a fabricated price */}
                 <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/95 backdrop-blur p-4 shadow-large">
-                  <div className="flex items-center justify-between">
-                    <div>
+                  <div className="flex items-center justify-between gap-x-3">
+                    <div className="min-w-0">
                       <div className="text-[10px] uppercase tracking-widest text-grey-50 font-bold">
-                        This week · Mango (Carabao)
+                        Weekly price sheet
                       </div>
-                      <div className="font-heading italic text-[24px] text-grey-90 leading-tight mt-0.5">
-                        ₱72<span className="text-body-sm not-italic">/kg</span>
+                      <div className="font-heading italic text-[20px] text-grey-90 leading-tight mt-0.5">
+                        Published every Monday
                       </div>
                     </div>
-                    <span className="inline-flex items-center gap-x-1 px-2.5 py-1 rounded-full bg-brand-green-50 text-brand-green-700 text-[10px] font-bold uppercase tracking-wider">
+                    <span className="inline-flex items-center gap-x-1 px-2.5 py-1 rounded-full bg-brand-green-50 text-brand-green-700 text-[10px] font-bold uppercase tracking-wider shrink-0">
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="18 15 12 9 6 15" />
+                        <polyline points="20 6 9 17 4 12" />
                       </svg>
-                      +18%
+                      Transparent
                     </span>
                   </div>
                   <div className="mt-2 text-[11px] text-grey-50">
-                    Bankerohan reference: ₱61/kg
+                    Benchmarked against Bankerohan &amp; NFA references — you see
+                    the rate before you harvest.
                   </div>
                 </div>
               </div>
