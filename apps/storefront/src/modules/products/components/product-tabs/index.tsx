@@ -132,8 +132,9 @@ const ShippingInfoTab = ({ hub }: { hub?: DeliveryHub }) => {
               </span>
               <p className="text-grey-50 mt-0.5">
                 Order before 12 PM for that day&apos;s 4 PM dispatch. After
-                cut-off, a small delivery fee applies — roughly the one-way
-                fare from your address to our hub. Shown at checkout.
+                cut-off, a flat ₱{DEFAULT_OFF_PEAK_DELIVERY_FEE_PHP} delivery
+                fee applies — roughly the one-way fare from your address to
+                our hub.
               </p>
             </>
           )}
