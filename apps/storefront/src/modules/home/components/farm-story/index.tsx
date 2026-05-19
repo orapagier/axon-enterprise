@@ -127,32 +127,32 @@ const FarmStory = () => {
               ))}
             </div>
 
-            {/* Stats row — replaces the farmer CTA */}
+            {/* Founding principles — Day-1 framing, not fabricated metrics */}
             <div className="flex flex-wrap items-stretch gap-x-5 gap-y-3 pt-3 border-t border-grey-20/60">
               <div className="flex items-center gap-x-3">
                 <span className="font-heading italic text-[32px] text-brand-green-700 leading-none">
-                  50<span className="text-h2 align-top">+</span>
+                  0
                 </span>
                 <span className="flex flex-col leading-tight">
                   <span className="text-[10px] text-grey-50 uppercase tracking-widest">
-                    Farming families
+                    Middlemen
                   </span>
                   <span className="text-body-sm font-semibold text-grey-90">
-                    partnered with us
+                    between plot and plate
                   </span>
                 </span>
               </div>
               <span className="hidden xsmall:block w-px self-stretch bg-grey-20" />
               <div className="flex items-center gap-x-3">
                 <span className="font-heading italic text-[32px] text-grey-90 leading-none">
-                  12
+                  Fri
                 </span>
                 <span className="flex flex-col leading-tight">
                   <span className="text-[10px] text-grey-50 uppercase tracking-widest">
-                    Provinces
+                    Payout day
                   </span>
                   <span className="text-body-sm font-semibold text-grey-90">
-                    sourced from
+                    for every partner farm
                   </span>
                 </span>
               </div>
@@ -166,7 +166,7 @@ const FarmStory = () => {
                     Field-to-door
                   </span>
                   <span className="text-body-sm font-semibold text-grey-90">
-                    average time
+                    delivery goal
                   </span>
                 </span>
               </div>
