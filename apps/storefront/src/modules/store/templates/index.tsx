@@ -42,8 +42,8 @@ const StoreTemplate = ({
             <span className="text-brand-gold-500">.</span>
           </h1>
           <p className="mt-4 max-w-xl mx-auto text-body-sm text-grey-50 leading-relaxed">
-            Hundreds of in-season picks from across Mindanao, curated for your
-            weekly table.
+            In-season picks sourced direct from Mindanao&apos;s farms, curated
+            for your weekly table.
           </p>
         </div>
 
