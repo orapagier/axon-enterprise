@@ -6,10 +6,30 @@ export type { DeliveryHub } from "./delivery-hub-types"
 
 const DEFAULT_HUB_CITY = "Tagum City"
 
-// Day-1 launch covers Tagum only. Extend this set as new hubs come online.
-const HUB_CITIES = new Set(
-  ["Tagum City", "Tagum"].map((s) => s.toLowerCase())
-)
+/**
+ * Default fee charged for orders that miss the daily 12 PM cut-off (or
+ * otherwise sit outside the free-delivery batch). The intent is to mirror
+ * roughly the one-way fare from the customer's address to the hub. ₱15
+ * is the typical minimum tricycle fare within Tagum City and acts as a
+ * sensible Day-1 default until zone-based pricing is set up in Medusa.
+ */
+export const DEFAULT_OFF_PEAK_DELIVERY_FEE_PHP = 15
+
+// Day-1 launch covers Tagum only. Add new hubs by listing any common
+// variant a customer might type — the normalizer below makes the actual
+// match tolerant (case, "City" suffix, comma-separated province, etc.).
+const HUB_CITY_VARIANTS = ["Tagum City", "Tagum"]
+
+const normalizeCityName = (raw: string): string =>
+  raw
+    .split(",")[0] // "Tagum, Davao del Norte" → "Tagum"
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, " ") // collapse internal whitespace
+    .replace(/\s*city$/i, "") // "tagum city" → "tagum"
+    .trim()
+
+const HUB_CITIES = new Set(HUB_CITY_VARIANTS.map(normalizeCityName))
 
 /**
  * Resolve which city to show the visitor for delivery messaging.
@@ -29,7 +49,7 @@ export async function getDeliveryHub(): Promise<DeliveryHub> {
     if (city) {
       return {
         city,
-        isHubCity: HUB_CITIES.has(city.toLowerCase()),
+        isHubCity: HUB_CITIES.has(normalizeCityName(city)),
         resolvedFromAddress: true,
       }
     }
