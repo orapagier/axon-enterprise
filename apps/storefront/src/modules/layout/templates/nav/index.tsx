@@ -48,11 +48,11 @@ export default async function Nav() {
                 </>
               ) : (
                 <>
-                  <span className="text-white/90">We deliver to</span>
+                  <span className="text-white/90">No hub in</span>
                   <span className="text-brand-gold-300 font-semibold ml-1">
                     {hub.city}
                   </span>
-                  <span className="text-white/40 ml-1">· delivery fee applies</span>
+                  <span className="text-white/40 ml-1">yet · coming soon</span>
                 </>
               )}
             </span>
