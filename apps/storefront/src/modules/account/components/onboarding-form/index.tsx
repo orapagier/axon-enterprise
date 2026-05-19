@@ -24,7 +24,27 @@ type FieldDef = {
   required?: boolean
   helper?: string
   suggestions?: string[]
+  /** Span both columns on small+ screens (good for street address). */
+  full?: boolean
 }
+
+const MINDANAO_CITY_SUGGESTIONS = [
+  "Tagum City",
+  "Davao City",
+  "Panabo City",
+  "Cagayan de Oro",
+  "General Santos",
+  "Butuan City",
+]
+
+const MINDANAO_PROVINCE_SUGGESTIONS = [
+  "Davao del Norte",
+  "Davao del Sur",
+  "Davao de Oro",
+  "Bukidnon",
+  "Misamis Oriental",
+  "South Cotabato",
+]
 
 const BUYER_FIELDS: FieldDef[] = [
   {
@@ -38,19 +58,44 @@ const BUYER_FIELDS: FieldDef[] = [
   {
     name: "phone",
     label: "Phone number",
-    placeholder: "+63 917 555 0144",
+    placeholder: "0917 555 0144",
     icon: "📞",
     type: "tel",
     required: true,
     helper: "We'll only contact you about deliveries.",
   },
   {
+    name: "address_1",
+    label: "Street address",
+    placeholder: "House #, street, sitio, barangay",
+    icon: "🏠",
+    required: true,
+    full: true,
+    helper:
+      "Used as your default delivery address. You can add more addresses later.",
+  },
+  {
     name: "default_city",
-    label: "Default delivery city",
-    placeholder: "Davao City",
+    label: "City / municipality",
+    placeholder: "Tagum City",
+    icon: "🏙️",
+    required: true,
+    suggestions: MINDANAO_CITY_SUGGESTIONS,
+  },
+  {
+    name: "province",
+    label: "Province",
+    placeholder: "Davao del Norte",
     icon: "📍",
     required: true,
-    suggestions: ["Davao City", "Cagayan de Oro", "Bukidnon", "General Santos", "Zamboanga"],
+    suggestions: MINDANAO_PROVINCE_SUGGESTIONS,
+  },
+  {
+    name: "postal_code",
+    label: "Postal code",
+    placeholder: "8100",
+    icon: "📮",
+    helper: "Optional — speeds up delivery dispatch when known.",
   },
   {
     name: "buyer_bio",
@@ -70,20 +115,44 @@ const SELLER_FIELDS: FieldDef[] = [
     required: true,
   },
   {
-    name: "primary_hub",
-    label: "Primary hub",
-    placeholder: "Bukidnon",
-    icon: "📍",
-    required: true,
-    suggestions: ["Bukidnon", "Davao", "Cagayan de Oro", "General Santos", "Zamboanga"],
-  },
-  {
     name: "contact_phone",
     label: "Contact phone",
-    placeholder: "+63 917 555 0144",
+    placeholder: "0917 555 0144",
     icon: "📞",
     type: "tel",
     required: true,
+  },
+  {
+    name: "address_1",
+    label: "Farm / business address",
+    placeholder: "Sitio, barangay, landmark, road name",
+    icon: "🏡",
+    required: true,
+    full: true,
+    helper: "Where our team can visit for verification.",
+  },
+  {
+    name: "primary_hub",
+    label: "City / municipality",
+    placeholder: "Tagum City",
+    icon: "🏙️",
+    required: true,
+    suggestions: MINDANAO_CITY_SUGGESTIONS,
+  },
+  {
+    name: "province",
+    label: "Province",
+    placeholder: "Davao del Norte",
+    icon: "📍",
+    required: true,
+    suggestions: MINDANAO_PROVINCE_SUGGESTIONS,
+  },
+  {
+    name: "postal_code",
+    label: "Postal code",
+    placeholder: "8100",
+    icon: "📮",
+    helper: "Optional — helps us route pickups efficiently.",
   },
   {
     name: "products_offered",
