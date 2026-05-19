@@ -120,16 +120,33 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     metadata: updatedMetadata,
   })
 
-  // Best-effort group sync. Member-pricing rules are usually scoped to the
-  // `hub-members` group; mirroring metadata into the group keeps Medusa's
-  // price-list machinery in step. Failures here don't block the approval —
-  // metadata is the source of truth the storefront reads.
+  // Group sync. Member-pricing rules are usually scoped to the `hub-members`
+  // customer group; mirroring metadata into the group keeps Medusa's
+  // price-list machinery in step. We lazily create the group on the first
+  // approval so a separate migration step isn't required. Failures here
+  // don't block the approval — metadata is the source of truth the
+  // storefront reads.
   try {
-    const groups = await customerModule.listCustomerGroups(
-      { name: HUB_MEMBER_GROUP },
-      { take: 1 }
-    )
-    const group = groups?.[0]
+    let group = (
+      await customerModule.listCustomerGroups(
+        { name: HUB_MEMBER_GROUP },
+        { take: 1 }
+      )
+    )?.[0]
+
+    // Create on first approval; never auto-create on reject/cancel — no
+    // point conjuring an empty group just to remove someone from it.
+    if (!group && body.action === "approve") {
+      group = await customerModule.createCustomerGroups({
+        name: HUB_MEMBER_GROUP,
+        metadata: {
+          source: "hub-members-auto-created",
+          purpose:
+            "Members of Mindanao Fresh Hub. Member-pricing price lists are scoped to this group.",
+        },
+      })
+    }
+
     if (group?.id) {
       const pair = { customer_id: customerId, customer_group_id: group.id }
       if (body.action === "approve") {
@@ -139,7 +156,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       }
     }
   } catch {
-    /* group missing, already-assigned, or already-removed — ignore */
+    /* group lookup/create/assign/remove failed — ignore, metadata wins */
   }
 
   res.json({
