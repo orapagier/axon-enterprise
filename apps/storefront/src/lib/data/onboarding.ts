@@ -230,7 +230,6 @@ export async function completeOnboarding(
     }
   }
 
-  const countryCode = String(formData.get("countryCode") ?? "ph")
   // Sellers land on their dashboard so they can immediately see verification
   // status and start drafting listings. Buyers go to the account overview.
   redirect(`/${countryCode}/account${isSeller ? "/seller" : ""}`)
