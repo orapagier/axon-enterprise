@@ -1,16 +1,16 @@
 # Graph Report - storefront  (2026-05-20)
 
 ## Corpus Check
-- 235 files · ~77,481 words
+- 236 files · ~79,406 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 878 nodes · 1203 edges · 118 communities (88 shown, 30 thin omitted)
+- 887 nodes · 1212 edges · 116 communities (86 shown, 30 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `316fb24c`
+- Built from commit: `ca37f0ad`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -79,10 +79,8 @@
 - [[_COMMUNITY_Community 108|Community 108]]
 - [[_COMMUNITY_Community 109|Community 109]]
 - [[_COMMUNITY_Community 110|Community 110]]
-- [[_COMMUNITY_Community 111|Community 111]]
 - [[_COMMUNITY_Community 113|Community 113]]
 - [[_COMMUNITY_Community 114|Community 114]]
-- [[_COMMUNITY_Community 117|Community 117]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `getAuthHeaders()` - 45 edges
@@ -97,30 +95,30 @@
 10. `sdk` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `AddAddress()` --calls--> `useToggleState()`  [INFERRED]
-  src/modules/account/components/address-card/add-address.tsx → src/lib/hooks/use-toggle-state.tsx
-- `EditAddress()` --calls--> `useToggleState()`  [INFERRED]
-  src/modules/account/components/address-card/edit-address-modal.tsx → src/lib/hooks/use-toggle-state.tsx
 - `getProductPrice()` --calls--> `VariantPrice`  [INFERRED]
   src/lib/util/get-product-price.ts → src/types/global.ts
+- `AddAddress()` --calls--> `useToggleState()`  [INFERRED]
+  src/modules/account/components/address-card/add-address.tsx → src/lib/hooks/use-toggle-state.tsx
+- `AccountInfo()` --calls--> `useToggleState()`  [INFERRED]
+  src/modules/account/components/account-info/index.tsx → src/lib/hooks/use-toggle-state.tsx
 - `SkeletonProductGrid()` --calls--> `repeat()`  [INFERRED]
   src/modules/skeletons/templates/skeleton-product-grid/index.tsx → src/lib/util/repeat.ts
 - `SkeletonRelatedProducts()` --calls--> `repeat()`  [INFERRED]
   src/modules/skeletons/templates/skeleton-related-products/index.tsx → src/lib/util/repeat.ts
 
-## Communities (118 total, 30 thin omitted)
+## Communities (116 total, 30 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.07
-Nodes (41): TransferPage(), Cart(), metadata, CheckoutForm(), applyPromotions(), deleteLineItem(), getOrSetCart(), listCartOptions() (+33 more)
+Cohesion: 0.08
+Nodes (41): CheckoutForm(), addToCart(), applyPromotions(), deleteLineItem(), getOrSetCart(), initiatePaymentSession(), listCartOptions(), placeOrder() (+33 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.06
-Nodes (36): AccountPageLayout(), CartButton(), Checkout(), metadata, metadata, OverviewTemplate(), retrieveCustomer(), completeOnboarding() (+28 more)
+Cohesion: 0.1
+Nodes (21): AccountPageLayout(), CartButton(), Cart(), metadata, Checkout(), metadata, metadata, OverviewTemplate() (+13 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.06
-Nodes (46): NAV_ITEMS, NavItem, SELLER_NAV_ITEM, ROLE_COPY, Step, getCacheTag(), removeAuthToken(), setAuthToken() (+38 more)
+Cohesion: 0.05
+Nodes (39): AccountInfo(), AccountInfoProps, AddressBookProps, AddAddress(), EditAddressProps, ROLE_COPY, Step, removeAuthToken() (+31 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.06
@@ -131,16 +129,16 @@ Cohesion: 0.1
 Nodes (24): formatDate(), MembershipPage(), MemberView(), metadata, PendingView(), PERKS, FormState, INITIAL (+16 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.15
-Nodes (4): AddressSelectProps, CountrySelect(), DiscountCodeProps, SubmitButton()
+Cohesion: 0.06
+Nodes (18): EditAddress(), AddressSelectProps, Addresses(), CountryOption, CountrySelect(), CountrySelectProps, Locale, DiscountCodeProps (+10 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.05
 Nodes (38): Badge, BadgeProps, Button, ButtonProps, Checkbox, CheckboxProps, Container, ContainerProps (+30 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.08
-Nodes (16): initiatePaymentSession(), isManual(), isStripeLike(), noDivisionCurrencies, paymentInfoMap, PaymentButton(), PaymentButtonProps, PaymentContainer() (+8 more)
+Cohesion: 0.09
+Nodes (15): isManual(), isStripeLike(), noDivisionCurrencies, paymentInfoMap, PaymentButton(), PaymentButtonProps, PaymentContainer(), PaymentContainerProps (+7 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.08
@@ -159,40 +157,40 @@ Cohesion: 0.11
 Nodes (18): devDependencies, ansi-colors, autoprefixer, @babel/core, babel-loader, eslint, eslint-config-next, @medusajs/types (+10 more)
 
 ### Community 12 - "Community 12"
-Cohesion: 0.12
-Nodes (13): CartDropdown(), CartTotals(), CartTotalsProps, setShippingMethod(), FreeShippingInline(), FreeShippingPopup(), LineItemUnitPrice(), LineItemUnitPriceProps (+5 more)
+Cohesion: 0.11
+Nodes (13): CartDropdown(), CartTotals(), CartTotalsProps, FreeShippingInline(), FreeShippingPopup(), LineItemUnitPrice(), LineItemUnitPriceProps, OrderSummaryProps (+5 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.15
-Nodes (12): getLocale(), listLocales(), newHeaders, originalFetch, Nav(), CategoryTemplate(), CollectionTemplate(), ProductTemplate() (+4 more)
+Cohesion: 0.09
+Nodes (24): baseHeaders(), createListing(), deleteListing(), getMyListing(), ListingFormState, listMyListings(), parseListing(), SellerListing (+16 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.2
 Nodes (6): ModalContext, ModalProvider(), ModalProviderProps, useModal(), ModalProps, Title()
 
 ### Community 15 - "Community 15"
-Cohesion: 0.08
-Nodes (11): AccordionItemProps, AccordionProps, ProductTabsProps, categories, origins, RefinementListProps, SortOptions, SortProductsProps (+3 more)
+Cohesion: 0.06
+Nodes (21): listLocales(), Nav(), AccordionItemProps, AccordionProps, ProductTabsProps, categories, origins, RefinementListProps (+13 more)
 
 ### Community 16 - "Community 16"
-Cohesion: 0.2
-Nodes (6): ProductPreview(), ThumbnailProps, FeaturedProduct, StoreFreeShippingPrice, VariantPrice, getProductPrice()
+Cohesion: 0.5
+Nodes (3): FeaturedProduct, StoreFreeShippingPrice, VariantPrice
 
 ### Community 17 - "Community 17"
-Cohesion: 0.17
-Nodes (4): AccountInfoProps, MyInformationProps, MyInformationProps, MyInformationProps
+Cohesion: 0.2
+Nodes (8): OnboardingState, AccountType, BUYER_FIELDS, FieldDef, initialState, Props, ROLE_COPY, SELLER_FIELDS
 
 ### Community 18 - "Community 18"
 Cohesion: 0.31
 Nodes (7): metadata, OrderConfirmedPage(), Props, retrieveOrder(), generateMetadata(), OrderDetailPage(), Props
 
 ### Community 19 - "Community 19"
-Cohesion: 0.18
-Nodes (6): Locale, DEFAULT_OPTION, LanguageOption, LanguageSelectProps, SideMenuItems, SideMenuProps
+Cohesion: 0.28
+Nodes (5): TransferPage(), acceptTransferRequest(), declineTransferRequest(), TransferPage(), TransferStatus
 
 ### Community 20 - "Community 20"
 Cohesion: 0.25
-Nodes (5): EditAddress(), EditAddressProps, deleteCustomerAddress(), updateCustomerAddress(), MyInformationProps
+Nodes (4): NAV_ITEMS, NavItem, SELLER_NAV_ITEM, AccountLayoutProps
 
 ### Community 21 - "Community 21"
 Cohesion: 0.25
@@ -211,12 +209,12 @@ Cohesion: 0.36
 Nodes (5): LineItemPrice(), LineItemPriceProps, getPercentageDiff(), getPricesForVariant(), VariantWithPrice
 
 ### Community 25 - "Community 25"
-Cohesion: 0.36
-Nodes (5): MembershipUpsellStrip(), Props, PreviewPrice(), ProductPrice(), getMemberPrice()
+Cohesion: 0.22
+Nodes (5): InteractiveLinkProps, MembershipUpsellStrip(), Props, ProductPrice(), getMemberPrice()
 
 ### Community 26 - "Community 26"
-Cohesion: 0.29
-Nodes (4): MobileActions(), MobileActionsProps, OptionSelectProps, isSimpleProduct()
+Cohesion: 0.24
+Nodes (6): MobileActions(), MobileActionsProps, OptionSelectProps, ProductPreview(), getProductPrice(), isSimpleProduct()
 
 ### Community 27 - "Community 27"
 Cohesion: 0.29
@@ -235,16 +233,16 @@ Cohesion: 0.47
 Nodes (5): config, getCountryCode(), getRegionMap(), middleware(), regionMapCache
 
 ### Community 32 - "Community 32"
-Cohesion: 0.2
-Nodes (5): addToCart(), useIntersection(), ProductActions(), ProductActionsProps, QuickAddProps
+Cohesion: 0.4
+Nodes (3): useIntersection(), ProductActions(), ProductActionsProps
 
 ### Community 33 - "Community 33"
 Cohesion: 0.53
 Nodes (4): isArray(), isEmpty(), isObject(), ConvertToLocaleParams
 
-### Community 36 - "Community 36"
-Cohesion: 0.33
-Nodes (5): AccountInfo(), Addresses(), useToggleState(), SideMenu(), compareAddresses()
+### Community 34 - "Community 34"
+Cohesion: 0.29
+Nodes (5): FIT, metadata, ROLE, WE_PROVIDE, YOU_BRING
 
 ### Community 37 - "Community 37"
 Cohesion: 0.5
@@ -254,33 +252,25 @@ Nodes (3): extends, rules, @typescript-eslint/no-unused-vars
 Cohesion: 0.67
 Nodes (3): getProfileCompletion(), Overview(), OverviewProps
 
-### Community 110 - "Community 110"
-Cohesion: 0.33
-Nodes (3): AddressBookProps, AddAddress(), addCustomerAddress()
-
-### Community 111 - "Community 111"
-Cohesion: 0.4
-Nodes (3): CountryOption, CountrySelectProps, StateType
-
 ## Knowledge Gaps
-- **274 isolated node(s):** `excludedPaths`, `name`, `version`, `private`, `author` (+269 more)
+- **280 isolated node(s):** `excludedPaths`, `name`, `version`, `private`, `author` (+275 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **30 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `retrieveCustomer()` connect `Community 1` to `Community 0`, `Community 2`, `Community 3`, `Community 4`, `Community 13`, `Community 15`, `Community 25`?**
-  _High betweenness centrality (0.144) - this node is a cross-community bridge._
-- **Why does `getAuthHeaders()` connect `Community 0` to `Community 32`, `Community 1`, `Community 2`, `Community 3`, `Community 7`, `Community 12`, `Community 110`, `Community 18`, `Community 20`?**
-  _High betweenness centrality (0.110) - this node is a cross-community bridge._
-- **Why does `convertToLocale()` connect `Community 12` to `Community 33`, `Community 35`, `Community 5`, `Community 7`, `Community 40`, `Community 24`, `Community 25`, `Community 26`, `Community 60`?**
-  _High betweenness centrality (0.077) - this node is a cross-community bridge._
+- **Why does `retrieveCustomer()` connect `Community 1` to `Community 0`, `Community 2`, `Community 3`, `Community 4`, `Community 13`, `Community 15`?**
+  _High betweenness centrality (0.143) - this node is a cross-community bridge._
+- **Why does `getAuthHeaders()` connect `Community 0` to `Community 1`, `Community 2`, `Community 3`, `Community 13`, `Community 18`, `Community 19`?**
+  _High betweenness centrality (0.109) - this node is a cross-community bridge._
+- **Why does `convertToLocale()` connect `Community 12` to `Community 1`, `Community 33`, `Community 35`, `Community 5`, `Community 7`, `Community 40`, `Community 24`, `Community 25`, `Community 26`?**
+  _High betweenness centrality (0.076) - this node is a cross-community bridge._
 - **What connects `excludedPaths`, `name`, `version` to the rest of the system?**
-  _274 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _280 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.07 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.06 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.06 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05 - nodes in this community are weakly interconnected._
