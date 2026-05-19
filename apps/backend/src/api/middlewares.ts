@@ -38,5 +38,10 @@ export default defineMiddlewares({
       method: ["GET", "POST", "PATCH", "DELETE"],
       middlewares: [authenticate("user", ["session", "bearer"])],
     },
+    {
+      matcher: "/admin/memberships*",
+      method: ["GET", "POST", "PATCH", "DELETE"],
+      middlewares: [authenticate("user", ["session", "bearer"])],
+    },
   ],
 })
