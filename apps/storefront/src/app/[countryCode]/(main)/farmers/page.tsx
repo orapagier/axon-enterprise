@@ -581,7 +581,7 @@ export default function FarmersPage() {
             </div>
 
             <form
-              action="mailto:farmers@mindanaofreshhub.com"
+              action="mailto:mindanaofreshhub@gmail.com"
               method="post"
               encType="text/plain"
               className="small:col-span-7 p-6 xsmall:p-8 rounded-3xl bg-brand-cream-50 border border-grey-10 shadow-soft"
