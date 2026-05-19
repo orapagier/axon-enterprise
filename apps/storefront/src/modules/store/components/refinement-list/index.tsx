@@ -540,10 +540,11 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId }: RefinementListPro
             Free Delivery
           </div>
           <p className="text-body-sm font-semibold leading-snug mb-2">
-            Orders over ₱1,500 ship free across Mindanao.
+            Free delivery in your hub city — one batch a day at 4 PM.
           </p>
           <p className="text-caption text-white/70 leading-relaxed">
-            Same-day cut-off at 10AM for next-day arrival.
+            Order by 12 PM to make today&apos;s dispatch. After cut-off, a
+            delivery fee applies.
           </p>
         </div>
       </div>
