@@ -30,7 +30,7 @@ const formatDate = (ms: number | null): string | null =>
 const PERKS = [
   {
     title: "Member-only pricing",
-    desc: "Lower prices on hundreds of items, applied automatically at checkout.",
+    desc: "Member-only rates on eligible items, applied automatically at checkout.",
     icon: (
       <>
         <path d="M20 12V8H4a2 2 0 0 1 0-4h12.5a2.5 2.5 0 0 1 0 5H6a2 2 0 0 0 0 4h13a2 2 0 0 1 0 4H8a2 2 0 0 0 0 4h12v-4" />
