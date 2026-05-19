@@ -121,8 +121,14 @@ const ShippingInfoTab = ({ hub }: { hub?: DeliveryHub }) => {
               </span>
               <p className="text-grey-50 mt-0.5">
                 We&apos;re expanding city by city. If you&apos;d like to bring
-                the Hub to {hub!.city}, we&apos;d love to talk about a
-                partnership — drop us a note from the For Farmers page.
+                the Hub to {hub!.city}, we&apos;d love to talk —{" "}
+                <a
+                  href={`/partner-hub`}
+                  className="text-brand-green-700 font-medium underline-offset-2 hover:underline"
+                >
+                  become a partner hub
+                </a>
+                .
               </p>
             </>
           ) : (
