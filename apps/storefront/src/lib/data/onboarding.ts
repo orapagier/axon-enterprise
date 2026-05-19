@@ -71,9 +71,15 @@ export async function completeOnboarding(
   let updateBody: HttpTypes.StoreUpdateCustomer
   let metadataPatch: Record<string, unknown>
 
+  // Address fields are required for both roles — getDeliveryHub() and the
+  // checkout flow both depend on a real saved address.
+  const address_1 = required("address_1", "Street address")
+  const province = required("province", "Province")
+  const postal_code = String(formData.get("postal_code") ?? "").trim()
+
   if (isSeller) {
     const business_name = required("business_name", "Business or farm name")
-    const primary_hub = required("primary_hub", "Primary hub")
+    const primary_hub = required("primary_hub", "City / municipality")
     const contact_phone = required("contact_phone", "Contact phone")
     const products_offered = required(
       "products_offered",
@@ -103,11 +109,14 @@ export async function completeOnboarding(
       business_name,
       primary_hub,
       products_offered,
+      farm_address_1: address_1,
+      farm_province: province,
+      farm_postal_code: postal_code || null,
     }
   } else {
     const display_name = required("display_name", "Display name")
     const phone = required("phone", "Phone number")
-    const default_city = required("default_city", "Default delivery city")
+    const default_city = required("default_city", "City / municipality")
     const buyer_bio = String(formData.get("buyer_bio") ?? "").trim()
 
     if (phone && !isValidPhone(phone)) {
@@ -135,6 +144,9 @@ export async function completeOnboarding(
       display_name,
       default_city,
       buyer_bio,
+      default_address_1: address_1,
+      default_province: province,
+      default_postal_code: postal_code || null,
     }
   }
 
