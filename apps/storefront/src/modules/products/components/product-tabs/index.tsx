@@ -6,6 +6,7 @@ import Refresh from "@modules/common/icons/refresh"
 
 import Accordion from "./accordion"
 import { HttpTypes } from "@medusajs/types"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import {
   DEFAULT_OFF_PEAK_DELIVERY_FEE_PHP,
   type DeliveryHub,
