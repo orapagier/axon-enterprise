@@ -19,10 +19,10 @@ export default async function verifySeller({ container, args }: ExecArgs) {
     { take: 500 }
   )
 
-  const targets = customers.filter(
-    (c) =>
-      (c.metadata as Record<string, unknown> | null)?.account_type === "seller"
-  )
+  const targets = customers.filter((c) => {
+    const t = (c.metadata as Record<string, unknown> | null)?.account_type
+    return t === "producer" || t === "seller"
+  })
 
   if (!targets.length) {
     console.log(
