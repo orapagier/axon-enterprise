@@ -52,10 +52,19 @@ export async function completeOnboarding(
     return { ok: false, error: "You need to be signed in to continue." }
   }
 
-  const role =
-    (customer.metadata?.account_type as "buyer" | "seller" | undefined) ??
-    "buyer"
-  const isSeller = role === "seller"
+  // Read the stored account type and migrate legacy values on the fly so
+  // dev accounts created before the CPT rename still work.
+  type RoleStored = "consumer" | "producer" | "trader" | "buyer" | "seller"
+  const rawRole = customer.metadata?.account_type as RoleStored | undefined
+  const role: "consumer" | "producer" | "trader" =
+    rawRole === "seller"
+      ? "producer"
+      : rawRole === "buyer"
+        ? "consumer"
+        : (rawRole ?? "consumer")
+  const isProducer = role === "producer"
+  const isTrader = role === "trader"
+  const isConsumer = role === "consumer"
   const countryCode = String(formData.get("countryCode") ?? "ph")
   const fieldErrors: Record<string, string> = {}
 
