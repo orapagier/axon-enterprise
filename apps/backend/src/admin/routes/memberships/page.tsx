@@ -90,6 +90,28 @@ const formatPaymentMethod = (
   return "—"
 }
 
+const formatDateTime = (ms: number | null): string => {
+  if (!ms || !Number.isFinite(ms)) return "—"
+  return new Date(ms).toLocaleString("en-PH", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  })
+}
+
+const ACTION_VERB: Record<MembershipEvent["action"], string> = {
+  approve: "approved",
+  reject: "rejected",
+  cancel: "cancelled",
+}
+
+const shortenActorId = (id: string | null): string => {
+  if (!id) return "system"
+  return id.length > 12 ? `${id.slice(0, 8)}…${id.slice(-3)}` : id
+}
+
 const displayName = (c: Membership["customer"]): string => {
   const name = [c.first_name, c.last_name].filter(Boolean).join(" ").trim()
   return name || c.email
