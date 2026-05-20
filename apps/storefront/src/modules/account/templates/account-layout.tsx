@@ -68,7 +68,7 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
               <div className="min-w-0">
                 <div className="flex items-center gap-x-2 flex-wrap">
                   <span className="text-caption font-semibold text-grey-50 uppercase tracking-wider">
-                    {accountType === "seller" ? "Seller" : "Buyer"} account
+                    {roleLabel} account
                   </span>
                   {profileCompleted ? (
                     <span className="inline-flex items-center gap-x-1 px-2 py-0.5 rounded-full bg-brand-green-50 border border-brand-green-100 text-[10px] font-bold text-brand-green-700 uppercase tracking-wider">
