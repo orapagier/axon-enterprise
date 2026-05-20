@@ -453,16 +453,7 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
       </div>
 
       {/* Footer actions */}
-      <div className="flex flex-col xsmall:flex-row xsmall:items-center xsmall:justify-between gap-3 px-7 small:px-12 py-5 bg-grey-5/70 border-t border-grey-10">
-        <button
-          type="button"
-          disabled={deferPending}
-          onClick={() => startDefer(() => deferOnboarding(countryCode))}
-          className="text-body-sm font-medium text-grey-60 hover:text-grey-90 transition-colors disabled:opacity-50 text-left"
-        >
-          {deferPending ? "Skipping…" : "I'll do this later"}
-        </button>
-
+      <div className="flex flex-col xsmall:flex-row xsmall:items-center xsmall:justify-end gap-3 px-7 small:px-12 py-5 bg-grey-5/70 border-t border-grey-10">
         <button
           type="submit"
           disabled={pending || !allRequiredFilled}
