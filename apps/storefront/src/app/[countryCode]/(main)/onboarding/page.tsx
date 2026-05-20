@@ -215,9 +215,11 @@ export default async function OnboardingPage({ params }: Props) {
           {/* Footnote */}
           <p className="text-caption text-grey-50 text-center mt-6 max-w-lg mx-auto leading-relaxed">
             We&rsquo;ll never share your details with third parties.{" "}
-            {isSeller
-              ? "Seller profiles are reviewed by Mindanao Fresh Hub admins, not buyers."
-              : "You can change any of this later from your account settings."}
+            {isProducer
+              ? "Producer profiles are reviewed by Mindanao Fresh Hub admins, not buyers."
+              : isTrader
+                ? "Trader business details are reviewed by Mindanao Fresh Hub admins before bulk pricing activates."
+                : "You can change any of this later from your account settings."}
           </p>
         </div>
       </div>
