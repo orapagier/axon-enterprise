@@ -558,8 +558,9 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
           })}
         </div>
 
-        {/* Seller-only callout */}
-        {isSeller && (
+        {/* Verification callout — both Producers and Traders need admin OK
+            before their account fully unlocks. Copy adapts per role. */}
+        {needsAdminVerification && (
           <div className="mt-6 p-4 rounded-xl bg-brand-cream-50 border border-brand-gold-200">
             <div className="flex items-start gap-x-3">
               <svg
@@ -580,9 +581,9 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
                   Next: documents &amp; verification
                 </div>
                 <div className="text-caption text-brand-gold-800 mt-0.5 leading-relaxed">
-                  Once you save these basics, we&apos;ll ask for a valid ID,
-                  your farm address, and any organic / quality certifications
-                  you hold.
+                  {isProducer
+                    ? "Once you save these basics, we'll ask for a valid ID, your farm address, and any organic / quality certifications you hold."
+                    : "Once you save these basics, we'll ask for proof of business (DTI / SEC / Mayor's permit) so we can activate bulk pricing on your account."}
                 </div>
               </div>
             </div>
