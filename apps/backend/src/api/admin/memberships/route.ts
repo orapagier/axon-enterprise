@@ -73,6 +73,11 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         requestedAt: meta[MEMBERSHIP_META.requestedAt] ?? null,
         paymentMethod: meta[MEMBERSHIP_META.paymentMethod] ?? null,
         paymentReference: meta[MEMBERSHIP_META.paymentReference] ?? null,
+        // Include only the most-recent event for the list view — the full
+        // trail is fetched via GET /admin/memberships/:id when needed.
+        lastEvent: Array.isArray(meta[MEMBERSHIP_META.events])
+          ? ((meta[MEMBERSHIP_META.events] as Array<unknown>)[0] ?? null)
+          : null,
       },
     }
   })
