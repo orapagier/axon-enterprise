@@ -56,7 +56,7 @@ export async function completeOnboarding(
     (customer.metadata?.account_type as "buyer" | "seller" | undefined) ??
     "buyer"
   const isSeller = role === "seller"
-  const onboardingCountry = String(formData.get("countryCode") ?? "ph")
+  const countryCode = String(formData.get("countryCode") ?? "ph")
   const fieldErrors: Record<string, string> = {}
 
   const required = (key: string, label: string): string => {
