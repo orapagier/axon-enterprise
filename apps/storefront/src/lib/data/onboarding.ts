@@ -64,7 +64,6 @@ export async function completeOnboarding(
         : (rawRole ?? "consumer")
   const isProducer = role === "producer"
   const isTrader = role === "trader"
-  const isConsumer = role === "consumer"
   const countryCode = String(formData.get("countryCode") ?? "ph")
   const fieldErrors: Record<string, string> = {}
 
