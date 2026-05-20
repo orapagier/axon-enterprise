@@ -33,8 +33,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
   const meta = (customer.metadata as Record<string, unknown> | null) ?? {}
-  if (meta.account_type !== "seller") {
-    res.status(403).json({ error: "Seller account required" })
+  if (meta.account_type !== "producer" && meta.account_type !== "seller") {
+    res.status(403).json({ error: "Producer account required" })
     return
   }
 
