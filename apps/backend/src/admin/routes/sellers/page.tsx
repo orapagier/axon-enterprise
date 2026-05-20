@@ -124,9 +124,9 @@ const SellersPage = () => {
   return (
     <Container className="p-0">
       <div className="px-6 py-5 border-b">
-        <Heading level="h1">Seller verification</Heading>
+        <Heading level="h1">Producer verification</Heading>
         <Text size="small" className="text-ui-fg-subtle mt-1">
-          Review seller account submissions. Verifying a seller lets them
+          Review producer account submissions. Verifying a producer lets them
           submit listings for review on the storefront. Un-verifying removes
           that ability without deleting their account.
         </Text>
