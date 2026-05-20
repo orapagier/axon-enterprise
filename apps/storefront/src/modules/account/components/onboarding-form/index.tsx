@@ -41,7 +41,7 @@ const MINDANAO_PROVINCE_SUGGESTIONS = [
   "South Cotabato",
 ]
 
-const BUYER_FIELDS: FieldDef[] = [
+const CONSUMER_FIELDS: FieldDef[] = [
   {
     name: "display_name",
     label: "Display name",
