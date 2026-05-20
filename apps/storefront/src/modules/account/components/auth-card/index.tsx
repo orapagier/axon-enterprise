@@ -382,12 +382,21 @@ const AuthCard = () => {
             </button>
           </form>
 
-          {mode === "signup" && role === "seller" && (
+          {mode === "signup" && role === "producer" && (
             <div className="mt-5 px-4 py-3 rounded-xl bg-brand-cream-100 border border-brand-gold-200">
               <p className="text-caption text-brand-gold-800 leading-relaxed">
-                <span className="font-bold">Seller accounts</span> need admin
-                verification before listing. Your seller profile stays private
-                from buyers until approved.
+                <span className="font-bold">Producer accounts</span> need admin
+                verification before listing. Your producer profile stays
+                private from buyers until approved.
+              </p>
+            </div>
+          )}
+          {mode === "signup" && role === "trader" && (
+            <div className="mt-5 px-4 py-3 rounded-xl bg-brand-cream-100 border border-brand-gold-200">
+              <p className="text-caption text-brand-gold-800 leading-relaxed">
+                <span className="font-bold">Trader accounts</span> unlock bulk
+                pricing and standing weekly orders once we&apos;ve confirmed
+                your business details.
               </p>
             </div>
           )}
