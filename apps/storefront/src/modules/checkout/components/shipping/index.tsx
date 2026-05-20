@@ -117,6 +117,21 @@ const Shipping: React.FC<ShippingProps> = ({
     if (_pickupMethods?.find((m) => m.id === shippingMethodId)) {
       setShowPickupOptions(PICKUP_OPTION_ON)
     }
+
+    if (
+      !shippingMethodId &&
+      !cart.shipping_methods?.length &&
+      _shippingMethods?.length
+    ) {
+      const matching = _shippingMethods.find((sm) =>
+        deliveryType === "scheduled"
+          ? isScheduledMethod(sm)
+          : !isScheduledMethod(sm)
+      )
+      if (matching) {
+        handleSetShippingMethod(matching.id, "shipping")
+      }
+    }
   }, [availableShippingMethods])
 
   const handleEdit = () => {
