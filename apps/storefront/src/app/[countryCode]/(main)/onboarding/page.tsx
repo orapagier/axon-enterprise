@@ -21,20 +21,37 @@ export default async function OnboardingPage({ params }: Props) {
     redirect(`/${countryCode}/account`)
   }
 
-  const accountType =
-    (customer.metadata?.account_type as "buyer" | "seller" | undefined) ??
-    "buyer"
+  // Read the stored account type with legacy aliasing — dev accounts created
+  // before the CPT rename still carry "buyer"/"seller" in metadata.
+  type RoleStored =
+    | "consumer"
+    | "producer"
+    | "trader"
+    | "buyer"
+    | "seller"
+  const rawRole = customer.metadata?.account_type as RoleStored | undefined
+  const accountType: "consumer" | "producer" | "trader" =
+    rawRole === "seller"
+      ? "producer"
+      : rawRole === "buyer"
+        ? "consumer"
+        : (rawRole ?? "consumer")
   const profileCompleted = Boolean(customer.metadata?.profile_completed)
 
   if (profileCompleted) {
     redirect(`/${countryCode}/account`)
   }
 
-  if (accountType !== "buyer" && accountType !== "seller") {
+  if (
+    accountType !== "consumer" &&
+    accountType !== "producer" &&
+    accountType !== "trader"
+  ) {
     notFound()
   }
 
-  const isSeller = accountType === "seller"
+  const isProducer = accountType === "producer"
+  const isTrader = accountType === "trader"
 
   // Prefill anything we already know about the customer. On re-onboarding,
   // an existing default-shipping address is the most authoritative source
@@ -47,33 +64,48 @@ export default async function OnboardingPage({ params }: Props) {
     (customer.addresses ?? [])[0] ??
     null
 
-  const defaults: Partial<Record<string, string>> = isSeller
-    ? {
-        business_name: meta.business_name ?? customer.company_name ?? "",
-        primary_hub:
-          existingAddress?.city ?? meta.primary_hub ?? "",
-        contact_phone: customer.phone ?? "",
-        products_offered: meta.products_offered ?? "",
-        address_1:
-          existingAddress?.address_1 ?? meta.farm_address_1 ?? "",
-        province:
-          existingAddress?.province ?? meta.farm_province ?? "",
-        postal_code:
-          existingAddress?.postal_code ?? meta.farm_postal_code ?? "",
-      }
-    : {
-        display_name: meta.display_name ?? fullName,
-        phone: customer.phone ?? "",
-        default_city:
-          existingAddress?.city ?? meta.default_city ?? "",
-        buyer_bio: meta.buyer_bio ?? "",
-        address_1:
-          existingAddress?.address_1 ?? meta.default_address_1 ?? "",
-        province:
-          existingAddress?.province ?? meta.default_province ?? "",
-        postal_code:
-          existingAddress?.postal_code ?? meta.default_postal_code ?? "",
-      }
+  let defaults: Partial<Record<string, string>>
+  if (isProducer) {
+    defaults = {
+      business_name: meta.business_name ?? customer.company_name ?? "",
+      primary_hub: existingAddress?.city ?? meta.primary_hub ?? "",
+      contact_phone: customer.phone ?? "",
+      products_offered: meta.products_offered ?? "",
+      address_1:
+        existingAddress?.address_1 ?? meta.farm_address_1 ?? "",
+      province: existingAddress?.province ?? meta.farm_province ?? "",
+      postal_code:
+        existingAddress?.postal_code ?? meta.farm_postal_code ?? "",
+    }
+  } else if (isTrader) {
+    defaults = {
+      business_name: meta.business_name ?? customer.company_name ?? "",
+      business_type: meta.business_type ?? "",
+      contact_phone: customer.phone ?? "",
+      default_city: existingAddress?.city ?? meta.default_city ?? "",
+      address_1:
+        existingAddress?.address_1 ?? meta.default_address_1 ?? "",
+      province:
+        existingAddress?.province ?? meta.default_province ?? "",
+      postal_code:
+        existingAddress?.postal_code ?? meta.default_postal_code ?? "",
+      estimated_monthly_volume: meta.estimated_monthly_volume ?? "",
+    }
+  } else {
+    // Consumer
+    defaults = {
+      display_name: meta.display_name ?? fullName,
+      phone: customer.phone ?? "",
+      default_city: existingAddress?.city ?? meta.default_city ?? "",
+      buyer_bio: meta.buyer_bio ?? "",
+      address_1:
+        existingAddress?.address_1 ?? meta.default_address_1 ?? "",
+      province:
+        existingAddress?.province ?? meta.default_province ?? "",
+      postal_code:
+        existingAddress?.postal_code ?? meta.default_postal_code ?? "",
+    }
+  }
 
   return (
     <div className="relative bg-grey-5 min-h-[calc(100vh-104px)] overflow-hidden">
