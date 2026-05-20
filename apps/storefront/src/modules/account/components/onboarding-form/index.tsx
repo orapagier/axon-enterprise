@@ -2,16 +2,10 @@
 
 import {
   completeOnboarding,
-  deferOnboarding,
   type OnboardingState,
 } from "@lib/data/onboarding"
 import { useParams } from "next/navigation"
-import {
-  useActionState,
-  useMemo,
-  useState,
-  useTransition,
-} from "react"
+import { useActionState, useMemo, useState } from "react"
 
 type AccountType = "buyer" | "seller"
 
