@@ -16,6 +16,7 @@ const MEMBERSHIP_META = {
   requestedAt: "membership_requested_at",
   paymentMethod: "membership_payment_method",
   paymentReference: "membership_payment_reference",
+  events: "membership_events",
 } as const
 
 const VALID_STATUSES = new Set(["pending", "active", "cancelled"])
