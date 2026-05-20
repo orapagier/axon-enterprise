@@ -43,11 +43,6 @@ const splitDisplayName = (
   }
 }
 
-const isValidPhone = (raw: string): boolean => {
-  const digits = raw.replace(/[^\d+]/g, "")
-  return /^\+?\d{7,15}$/.test(digits)
-}
-
 export async function completeOnboarding(
   _prev: OnboardingState | null,
   formData: FormData
@@ -61,12 +56,31 @@ export async function completeOnboarding(
     (customer.metadata?.account_type as "buyer" | "seller" | undefined) ??
     "buyer"
   const isSeller = role === "seller"
+  const onboardingCountry = String(formData.get("countryCode") ?? "ph")
   const fieldErrors: Record<string, string> = {}
 
   const required = (key: string, label: string): string => {
     const v = String(formData.get(key) ?? "").trim()
     if (!v) fieldErrors[key] = `${label} is required.`
     return v
+  }
+
+  // Country-aware phone validation. The country comes from the URL slug
+  // (`/ph`, `/dk`, etc.) and drives libphonenumber-js — we only require the
+  // national-format input. Numbers in international (+...) format are also
+  // accepted regardless of the slug.
+  const checkPhone = (
+    fieldName: string,
+    label: string
+  ): string => {
+    const raw = required(fieldName, label)
+    if (!raw) return ""
+    const result = validatePhone(raw, onboardingCountry)
+    if (!result.ok) {
+      fieldErrors[fieldName] = result.reason
+      return raw
+    }
+    return result.e164
   }
 
   let updateBody: HttpTypes.StoreUpdateCustomer
