@@ -187,7 +187,7 @@ export default function SellerDashboard({
                   Verification in progress
                 </div>
                 <div className="text-caption text-brand-gold-800 mt-0.5 leading-relaxed">
-                  Our team is reviewing your seller account. You can draft
+                  Our team is reviewing your producer account. You can draft
                   listings now and submit them for review — they&apos;ll be
                   published as soon as both checks pass.
                 </div>
