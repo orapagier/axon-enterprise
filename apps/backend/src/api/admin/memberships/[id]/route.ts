@@ -94,8 +94,25 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
   const existing = (customer.metadata as Record<string, unknown> | null) ?? {}
   const now = Date.now()
+  const prevStatus =
+    typeof existing[MEMBERSHIP_META.status] === "string"
+      ? (existing[MEMBERSHIP_META.status] as string)
+      : null
+
+  // The admin's user id (whoever is signed into the dashboard). Audit-trail
+  // attribution. The Medusa framework populates this on authenticated admin
+  // requests; we cast since the type isn't exported as a stable surface.
+  const actorId =
+    (req as unknown as { auth_context?: { actor_id?: string } }).auth_context
+      ?.actor_id ?? null
 
   let updatedMetadata: Record<string, unknown>
+  const event: MembershipEvent = {
+    ts: now,
+    action: body.action,
+    actor_id: actorId,
+    prev_status: prevStatus,
+  }
 
   if (body.action === "approve") {
     const durationDays =
@@ -106,6 +123,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       typeof body.tier === "string" && body.tier.trim().length > 0
         ? body.tier.trim()
         : DEFAULT_TIER
+    event.tier = tier
+    event.duration_days = durationDays
 
     updatedMetadata = {
       ...existing,
@@ -122,6 +141,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       [MEMBERSHIP_META.requestedAt]: null,
       [MEMBERSHIP_META.paymentMethod]: null,
       [MEMBERSHIP_META.paymentReference]: null,
+      [MEMBERSHIP_META.events]: appendEvent(existing, event),
     }
   } else if (body.action === "reject") {
     updatedMetadata = {
@@ -130,6 +150,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       [MEMBERSHIP_META.requestedAt]: null,
       [MEMBERSHIP_META.paymentMethod]: null,
       [MEMBERSHIP_META.paymentReference]: null,
+      [MEMBERSHIP_META.events]: appendEvent(existing, event),
     }
   } else {
     // cancel
@@ -137,6 +158,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       ...existing,
       [MEMBERSHIP_META.status]: "cancelled",
       [MEMBERSHIP_META.expiresAt]: now,
+      [MEMBERSHIP_META.events]: appendEvent(existing, event),
     }
   }
 
