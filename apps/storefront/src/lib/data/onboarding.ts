@@ -95,15 +95,12 @@ export async function completeOnboarding(
   if (isSeller) {
     const business_name = required("business_name", "Business or farm name")
     const primary_hub = required("primary_hub", "City / municipality")
-    const contact_phone = required("contact_phone", "Contact phone")
+    const contact_phone = checkPhone("contact_phone", "Contact phone")
     const products_offered = required(
       "products_offered",
       "What you grow / catch"
     )
 
-    if (contact_phone && !isValidPhone(contact_phone)) {
-      fieldErrors.contact_phone = "Enter a valid phone number."
-    }
     if (business_name && business_name.length < 2) {
       fieldErrors.business_name = "Business name is too short."
     }
