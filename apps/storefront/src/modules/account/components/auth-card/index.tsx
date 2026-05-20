@@ -209,49 +209,51 @@ const AuthCard = () => {
               <span className="text-caption font-semibold text-grey-60 uppercase tracking-wider mb-2.5 block">
                 I want to
               </span>
-              <div className="grid grid-cols-2 gap-3">
-                {(["buyer", "seller"] as AccountType[]).map((r) => {
-                  const active = role === r
-                  const copy = ROLE_COPY[r]
-                  return (
-                    <button
-                      key={r}
-                      type="button"
-                      onClick={() => setRole(r)}
-                      className={`relative p-4 rounded-2xl border text-left transition-all ${
-                        active
-                          ? "border-brand-green-600 bg-brand-green-50 shadow-soft ring-4 ring-brand-green-100"
-                          : "border-grey-10 hover:border-grey-30 bg-white"
-                      }`}
-                    >
-                      <span className="text-2xl leading-none block">
-                        {copy.icon}
-                      </span>
-                      <div className="text-body-sm font-bold text-grey-90 mt-2">
-                        {copy.title}
-                      </div>
-                      <div className="text-caption text-grey-50 mt-1 leading-snug">
-                        {copy.description}
-                      </div>
-                      {active && (
-                        <span className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-brand-green-600 flex items-center justify-center shadow-soft">
-                          <svg
-                            width="11"
-                            height="11"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="white"
-                            strokeWidth="3.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <polyline points="20 6 9 17 4 12" />
-                          </svg>
+              <div className="grid grid-cols-1 xsmall:grid-cols-3 gap-3">
+                {(["consumer", "producer", "trader"] as AccountType[]).map(
+                  (r) => {
+                    const active = role === r
+                    const copy = ROLE_COPY[r]
+                    return (
+                      <button
+                        key={r}
+                        type="button"
+                        onClick={() => setRole(r)}
+                        className={`relative p-3.5 rounded-2xl border text-left transition-all ${
+                          active
+                            ? "border-brand-green-600 bg-brand-green-50 shadow-soft ring-4 ring-brand-green-100"
+                            : "border-grey-10 hover:border-grey-30 bg-white"
+                        }`}
+                      >
+                        <span className="text-xl leading-none block">
+                          {copy.icon}
                         </span>
-                      )}
-                    </button>
-                  )
-                })}
+                        <div className="text-body-sm font-bold text-grey-90 mt-2">
+                          {copy.title}
+                        </div>
+                        <div className="text-[11px] text-grey-50 mt-1 leading-snug">
+                          {copy.description}
+                        </div>
+                        {active && (
+                          <span className="absolute top-2 right-2 w-5 h-5 rounded-full bg-brand-green-600 flex items-center justify-center shadow-soft">
+                            <svg
+                              width="11"
+                              height="11"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="white"
+                              strokeWidth="3.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                          </span>
+                        )}
+                      </button>
+                    )
+                  }
+                )}
               </div>
             </div>
           )}
