@@ -21,8 +21,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
   const meta = (customer.metadata as Record<string, unknown> | null) ?? {}
-  if (meta.account_type !== "seller") {
-    res.status(400).json({ error: "Customer is not a seller" })
+  if (meta.account_type !== "producer" && meta.account_type !== "seller") {
+    res.status(400).json({ error: "Customer is not a producer" })
     return
   }
 
