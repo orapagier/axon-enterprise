@@ -213,6 +213,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       tier: updatedMetadata[MEMBERSHIP_META.tier] ?? null,
       joinedAt: updatedMetadata[MEMBERSHIP_META.joinedAt] ?? null,
       expiresAt: updatedMetadata[MEMBERSHIP_META.expiresAt] ?? null,
+      events: updatedMetadata[MEMBERSHIP_META.events] ?? [],
     },
   })
 }
