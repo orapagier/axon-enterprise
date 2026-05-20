@@ -138,9 +138,11 @@ export default async function OnboardingPage({ params }: Props) {
               <span className="text-brand-gold-500">.</span>
             </h1>
             <p className="text-body-sm text-grey-50 mt-3 max-w-md leading-relaxed">
-              {isSeller
+              {isProducer
                 ? "A few quick details so our admins can verify your farm."
-                : "A few quick details so sellers know who they're shipping to."}
+                : isTrader
+                  ? "A few quick details so we can activate your trader account."
+                  : "A few quick details so producers know who they're shipping to."}
             </p>
 
             {/* Progress steps */}
@@ -149,7 +151,10 @@ export default async function OnboardingPage({ params }: Props) {
                 { label: "Verify email", done: true },
                 { label: "Complete profile", active: true },
                 {
-                  label: isSeller ? "Admin review" : "Start shopping",
+                  label:
+                    isProducer || isTrader
+                      ? "Admin review"
+                      : "Start shopping",
                 },
               ].map((s, i, arr) => (
                 <li key={s.label} className="flex items-center">
