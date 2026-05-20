@@ -18,13 +18,39 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
     return <div className="flex-1" data-testid="account-page">{children}</div>
   }
 
-  const accountType =
-    (customer.metadata?.account_type as "buyer" | "seller" | undefined) ??
-    "buyer"
+  // Read account type with legacy aliasing. Dev accounts created before the
+  // CPT rename can still carry "buyer"/"seller" in metadata; treat those as
+  // their new equivalents for display purposes.
+  type RoleStored =
+    | "consumer"
+    | "producer"
+    | "trader"
+    | "buyer"
+    | "seller"
+  const rawAccountType = customer.metadata?.account_type as
+    | RoleStored
+    | undefined
+  const accountType: "consumer" | "producer" | "trader" =
+    rawAccountType === "seller"
+      ? "producer"
+      : rawAccountType === "buyer"
+        ? "consumer"
+        : (rawAccountType ?? "consumer")
   const profileCompleted = Boolean(customer.metadata?.profile_completed)
   const displayName =
     customer.first_name ||
     (customer.email ? customer.email.split("@")[0] : "there")
+
+  const roleLabel = {
+    consumer: "Consumer",
+    producer: "Producer",
+    trader: "Trader",
+  }[accountType]
+  const roleIcon = {
+    consumer: "🧺",
+    producer: "🌾",
+    trader: "🤝",
+  }[accountType]
 
   return (
     <div
