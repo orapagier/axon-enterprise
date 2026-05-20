@@ -212,6 +212,31 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
     )
   )
 
+  // Track which fields the user has blurred at least once. We only show
+  // client-side validation errors after a field is touched so users aren't
+  // shown errors before they've finished typing.
+  const [touched, setTouched] = useState<Record<string, boolean>>({})
+
+  // Live phone validation. Runs against libphonenumber-js using the URL
+  // country slug (/ph, /dk, etc.) — so a PH-shaped number under /dk would
+  // fail here the same way the server would reject it.
+  const phoneFields = useMemo(
+    () => fields.filter((f) => f.type === "tel").map((f) => f.name),
+    [fields]
+  )
+
+  const clientErrors = useMemo<Record<string, string>>(() => {
+    const out: Record<string, string> = {}
+    for (const name of phoneFields) {
+      if (!touched[name]) continue
+      const raw = (values[name] ?? "").trim()
+      if (!raw) continue // empty handled by required-check on submit
+      const result = validatePhone(raw, countryCode)
+      if (!result.ok) out[name] = result.reason
+    }
+    return out
+  }, [phoneFields, touched, values, countryCode])
+
   // Live progress bar
   const progressPct = useMemo(() => {
     const required = fields.filter((f) => f.required)
