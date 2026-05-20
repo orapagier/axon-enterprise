@@ -138,6 +138,20 @@ const Shipping: React.FC<ShippingProps> = ({
     router.push(pathname + "?step=delivery", { scroll: false })
   }
 
+  const handleSelectDeliveryType = (value: "scheduled" | "standard") => {
+    setDeliveryType(value)
+    const matching = _shippingMethods?.find((sm) =>
+      value === "scheduled" ? isScheduledMethod(sm) : !isScheduledMethod(sm)
+    )
+    if (matching) {
+      if (matching.id !== shippingMethodId) {
+        handleSetShippingMethod(matching.id, "shipping")
+      }
+    } else if (shippingMethodId) {
+      setShippingMethodId(null)
+    }
+  }
+
   const handleSubmit = () => {
     router.push(pathname + "?step=payment", { scroll: false })
   }
