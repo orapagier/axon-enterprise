@@ -63,7 +63,7 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
           <div className="flex flex-col small:flex-row small:items-center small:justify-between gap-5">
             <div className="flex items-center gap-x-4">
               <div className="w-14 h-14 small:w-16 small:h-16 rounded-2xl bg-gradient-to-br from-brand-green-500 to-brand-green-700 text-white flex items-center justify-center text-2xl shrink-0">
-                {accountType === "seller" ? "🌾" : "🧺"}
+                {roleIcon}
               </div>
               <div className="min-w-0">
                 <div className="flex items-center gap-x-2 flex-wrap">
