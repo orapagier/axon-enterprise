@@ -48,7 +48,7 @@ const CONSUMER_FIELDS: FieldDef[] = [
     placeholder: "Jelmar Orapa",
     icon: "👤",
     required: true,
-    helper: "Shown to sellers when you place orders.",
+    helper: "Shown to producers when you place orders.",
   },
   {
     name: "phone",
