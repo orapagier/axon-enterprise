@@ -211,8 +211,6 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
     )
   )
 
-  const [deferPending, startDefer] = useTransition()
-
   // Live progress bar
   const progressPct = useMemo(() => {
     const required = fields.filter((f) => f.required)
