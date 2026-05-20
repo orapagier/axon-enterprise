@@ -26,15 +26,20 @@ const ROLE_COPY: Record<
   AccountType,
   { title: string; description: string; icon: string }
 > = {
-  buyer: {
-    title: "I'm a Buyer",
+  consumer: {
+    title: "I'm a Consumer",
     description: "Order fresh produce from Mindanao's growers.",
     icon: "🧺",
   },
-  seller: {
-    title: "I'm a Seller",
+  producer: {
+    title: "I'm a Producer",
     description: "List harvests and reach buyers nationwide.",
     icon: "🌾",
+  },
+  trader: {
+    title: "I'm a Trader",
+    description: "Source in bulk for my restaurant, café, or retail business.",
+    icon: "🤝",
   },
 }
 
@@ -44,7 +49,7 @@ const AuthCard = () => {
   const countryCode = (params?.countryCode as string) || "ph"
 
   const [mode, setMode] = useState<AuthMode>("signin")
-  const [role, setRole] = useState<AccountType>("buyer")
+  const [role, setRole] = useState<AccountType>("consumer")
   const [step, setStep] = useState<Step>("method")
   const [email, setEmail] = useState("")
   const [code, setCode] = useState<string[]>(["", "", "", "", "", ""])
