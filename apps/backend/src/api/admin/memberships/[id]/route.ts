@@ -37,12 +37,36 @@ const MEMBERSHIP_META = {
   requestedAt: "membership_requested_at",
   paymentMethod: "membership_payment_method",
   paymentReference: "membership_payment_reference",
+  events: "membership_events",
 } as const
 
 const DAY_MS = 24 * 60 * 60 * 1000
 const DEFAULT_DURATION_DAYS = 365
 const DEFAULT_TIER = "harvest-01"
 const HUB_MEMBER_GROUP = "hub-members"
+const MAX_EVENTS = 20
+
+/** One row of the audit trail kept on customer.metadata.membership_events. */
+type MembershipEvent = {
+  ts: number
+  action: Action
+  actor_id: string | null
+  prev_status: string | null
+  tier?: string | null
+  duration_days?: number | null
+}
+
+const appendEvent = (
+  existing: Record<string, unknown>,
+  event: MembershipEvent
+): MembershipEvent[] => {
+  const prior = Array.isArray(existing[MEMBERSHIP_META.events])
+    ? (existing[MEMBERSHIP_META.events] as MembershipEvent[])
+    : []
+  // Newest first; keep only the last N so customer metadata doesn't bloat
+  // unboundedly over the years.
+  return [event, ...prior].slice(0, MAX_EVENTS)
+}
 
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const customerId = req.params.id

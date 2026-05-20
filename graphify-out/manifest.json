@@ -25,8 +25,8 @@
     "semantic_hash": "87f0d903477984d0587a02f8fe185263"
   },
   "/home/ramlej/MFH/freshhub/.claude/settings.local.json": {
-    "mtime": 1779228057.2386482,
-    "ast_hash": "cd474e7167905a136577ddc7f50952c9",
+    "mtime": 1779255566.694066,
+    "ast_hash": "7ea04c685737f90ee8720b03e3cbba3e",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/next-sitemap.js": {
@@ -35,9 +35,9 @@
     "semantic_hash": "07b11cfce9024ffaa9aa58bcb0de39c5"
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/package.json": {
-    "mtime": 1779007605.5604722,
-    "ast_hash": "877c95fcc17a2d640c55c143b0a4ba65",
-    "semantic_hash": "877c95fcc17a2d640c55c143b0a4ba65"
+    "mtime": 1779246558.7189894,
+    "ast_hash": "c5d4a9c0b42452c23926d97ae17cb1a6",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/tailwind.config.js": {
     "mtime": 1779028582.3490849,
@@ -220,8 +220,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/account/components/onboarding-form/index.tsx": {
-    "mtime": 1779230162.897594,
-    "ast_hash": "2079dfedaf447c746114366a199c4c3d",
+    "mtime": 1779245744.60612,
+    "ast_hash": "fd05dd8fd0c419b9339a3ef230fc3bf3",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/account/components/profile-name/index.tsx": {
@@ -1100,8 +1100,8 @@
     "semantic_hash": "75bbbfd7f64cc030848d2a7ffa9d895c"
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/lib/data/onboarding.ts": {
-    "mtime": 1779230211.187402,
-    "ast_hash": "07253277a0ef8652248506ccc6a1a5a3",
+    "mtime": 1779246835.7269201,
+    "ast_hash": "52e43c16f2848da5258eb8780a187110",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/lib/data/collections.ts": {
@@ -1183,6 +1183,11 @@
     "mtime": 1779007605.5284722,
     "ast_hash": "4e96158086b539ae749020b74d3fe8b9",
     "semantic_hash": "4e96158086b539ae749020b74d3fe8b9"
+  },
+  "/home/ramlej/MFH/freshhub/apps/storefront/src/lib/util/phone.ts": {
+    "mtime": 1779246765.8641012,
+    "ast_hash": "cf9e46ed85adffdf7b2cc39ffff1f8fc",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/lib/util/membership.ts": {
     "mtime": 1779187629.8555858,
@@ -1303,6 +1308,11 @@
     "mtime": 1779007605.5084722,
     "ast_hash": "a10b4978dbbf03e8bab090cc9cabd934",
     "semantic_hash": "a10b4978dbbf03e8bab090cc9cabd934"
+  },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/admin/routes/memberships/page.tsx": {
+    "mtime": 1779248238.3171773,
+    "ast_hash": "019e4ed9cd518bbf572be3d84eb775e4",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/verify-seller.ts": {
     "mtime": 1779132728.54793,
