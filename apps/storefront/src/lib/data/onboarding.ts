@@ -175,8 +175,6 @@ export async function completeOnboarding(
     ? String(formData.get("primary_hub") ?? "").trim()
     : String(formData.get("default_city") ?? "").trim()
 
-  const countryCode = String(formData.get("countryCode") ?? "ph")
-
   try {
     const headers = { ...(await getAuthHeaders()) }
     await sdk.store.customer.update(
