@@ -234,7 +234,7 @@ export async function verifyEmailCode(
         {
           email: pending.email,
           metadata: {
-            account_type: pending.role ?? "buyer",
+            account_type: pending.role ?? "consumer",
             profile_completed: false,
             auth_method: "email_otp",
             // The derived password lets us re-issue sessions for this user
