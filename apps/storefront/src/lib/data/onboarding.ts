@@ -75,7 +75,7 @@ export async function completeOnboarding(
   ): string => {
     const raw = required(fieldName, label)
     if (!raw) return ""
-    const result = validatePhone(raw, onboardingCountry)
+    const result = validatePhone(raw, countryCode)
     if (!result.ok) {
       fieldErrors[fieldName] = result.reason
       return raw
