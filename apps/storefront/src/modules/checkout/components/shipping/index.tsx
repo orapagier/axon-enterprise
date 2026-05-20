@@ -262,7 +262,7 @@ const Shipping: React.FC<ShippingProps> = ({
                     <button
                       key={opt.value}
                       type="button"
-                      onClick={() => setDeliveryType(opt.value)}
+                      onClick={() => handleSelectDeliveryType(opt.value)}
                       className={`relative flex items-start gap-x-3 p-4 rounded-xl border-2 text-left transition-all ${
                         active
                           ? "border-ui-border-interactive bg-ui-bg-interactive shadow-soft"
