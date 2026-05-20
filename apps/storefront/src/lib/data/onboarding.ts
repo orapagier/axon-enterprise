@@ -211,11 +211,11 @@ export async function completeOnboarding(
     profile_completed_at: new Date().toISOString(),
   }
 
-  // Pick the city we'll use for the default-shipping address. For buyers
-  // that's their stated delivery city; for sellers it's their primary hub
-  // (the city their farm/business operates out of). This is what
-  // getDeliveryHub() reads on subsequent visits.
-  const seedCity = isSeller
+  // Pick the city we'll use for the default-shipping address.
+  //   Producer → primary_hub (their farm / business city).
+  //   Consumer / Trader → default_city (the delivery destination).
+  // This is what getDeliveryHub() reads on subsequent visits.
+  const seedCity = isProducer
     ? String(formData.get("primary_hub") ?? "").trim()
     : String(formData.get("default_city") ?? "").trim()
 
