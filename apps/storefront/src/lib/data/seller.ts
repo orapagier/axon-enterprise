@@ -165,7 +165,7 @@ export async function createListing(
   if (tag) revalidateTag(tag)
 
   const countryCode = String(formData.get("countryCode") ?? "ph")
-  redirect(`/${countryCode}/account/seller`)
+  redirect(`/${countryCode}/account/producer`)
 }
 
 export async function updateListing(
@@ -203,7 +203,7 @@ export async function updateListing(
   if (tag) revalidateTag(tag)
 
   const countryCode = String(formData.get("countryCode") ?? "ph")
-  redirect(`/${countryCode}/account/seller`)
+  redirect(`/${countryCode}/account/producer`)
 }
 
 export type UploadResult = {
@@ -265,5 +265,5 @@ export async function deleteListing(id: string, countryCode: string) {
   }
   const tag = await getCacheTag("seller-listings")
   if (tag) revalidateTag(tag)
-  redirect(`/${countryCode}/account/seller`)
+  redirect(`/${countryCode}/account/producer`)
 }
