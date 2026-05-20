@@ -110,7 +110,7 @@ const SellersPage = () => {
     },
     onSuccess: (_result, vars) => {
       toast.success(
-        vars.verify ? "Seller verified." : "Seller un-verified."
+        vars.verify ? "Producer verified." : "Producer un-verified."
       )
       queryClient.invalidateQueries({ queryKey: ["sellers"] })
     },
