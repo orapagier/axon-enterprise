@@ -5,7 +5,7 @@ import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 
 export const metadata: Metadata = {
-  title: "Seller dashboard",
+  title: "Producer dashboard",
   description: "Manage your produce listings on Mindanao Fresh Hub.",
 }
 
@@ -13,7 +13,7 @@ type Props = {
   params: Promise<{ countryCode: string }>
 }
 
-export default async function SellerDashboardPage({ params }: Props) {
+export default async function ProducerDashboardPage({ params }: Props) {
   const { countryCode } = await params
   const customer = await retrieveCustomer()
 
@@ -22,7 +22,9 @@ export default async function SellerDashboardPage({ params }: Props) {
   }
 
   const meta = (customer.metadata ?? {}) as Record<string, unknown>
-  if (meta.account_type !== "seller") {
+  // Accept legacy "seller" value for dev accounts created before the
+  // Consumer/Producer/Trader rename.
+  if (meta.account_type !== "producer" && meta.account_type !== "seller") {
     notFound()
   }
 
