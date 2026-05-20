@@ -142,7 +142,7 @@ export async function requestEmailCode(
   const mode = (String(formData.get("mode") ?? "signin") as AuthMode)
   const role =
     mode === "signup"
-      ? ((String(formData.get("role") ?? "buyer") as AccountType))
+      ? ((String(formData.get("role") ?? "consumer") as AccountType))
       : undefined
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
