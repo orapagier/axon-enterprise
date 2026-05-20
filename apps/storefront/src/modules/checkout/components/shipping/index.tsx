@@ -366,7 +366,14 @@ const Shipping: React.FC<ShippingProps> = ({
                     }
                   }}
                 >
-                  {_shippingMethods?.map((option) => {
+                  {_displayedShippingMethods?.length === 0 && (
+                    <div className="py-4 text-ui-fg-muted text-small-regular">
+                      {deliveryType === "scheduled"
+                        ? "No scheduled delivery options available for this address yet."
+                        : "No rider delivery options available for this address yet."}
+                    </div>
+                  )}
+                  {_displayedShippingMethods?.map((option) => {
                     const isDisabled =
                       option.price_type === "calculated" &&
                       !isLoadingPrices &&
