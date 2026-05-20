@@ -78,10 +78,10 @@ export default function SellerDashboard({
           <span className="text-3xl">📝</span>
           <div>
             <h2 className="font-heading font-bold text-h2 text-grey-90 tracking-[-0.015em]">
-              Finish your seller profile first
+              Finish your producer profile first
             </h2>
             <p className="text-body-sm text-grey-60 mt-2 leading-relaxed">
-              You need to complete your seller profile before we can review
+              You need to complete your producer profile before we can review
               your listings.
             </p>
             <LocalizedClientLink
