@@ -238,19 +238,26 @@ const ROLE_COPY: Record<
   AccountType,
   { eyebrow: string; title: string; subtitle: string; icon: string }
 > = {
-  buyer: {
-    eyebrow: "Buyer profile",
+  consumer: {
+    eyebrow: "Consumer profile",
     title: "Tell us a bit about yourself",
     subtitle:
-      "Your buyer profile is visible to the Hub so sellers can confirm who they're shipping to.",
+      "Your consumer profile is visible to the Hub so producers can confirm who they're shipping to.",
     icon: "🧺",
   },
-  seller: {
-    eyebrow: "Seller profile",
+  producer: {
+    eyebrow: "Producer profile",
     title: "Tell us about your farm",
     subtitle:
-      "We'll review your details and notify you once your seller account is verified. Your profile stays private until then.",
+      "We'll review your details and notify you once your producer account is verified. Your profile stays private until then.",
     icon: "🌾",
+  },
+  trader: {
+    eyebrow: "Trader profile",
+    title: "Tell us about your business",
+    subtitle:
+      "Trader accounts unlock bulk pricing and standing weekly orders. We'll confirm your business details before activating.",
+    icon: "🤝",
   },
 }
 
