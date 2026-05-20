@@ -14,10 +14,12 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     { take: 500, select: ["id", "email", "first_name", "last_name", "company_name", "phone", "metadata", "created_at"] }
   )
 
-  const sellers = customers.filter(
-    (c) =>
-      (c.metadata as Record<string, unknown> | null)?.account_type === "seller"
-  )
+  // Accept "producer" (new) and legacy "seller" so dev accounts created
+  // before the CPT rename still surface in the admin queue.
+  const sellers = customers.filter((c) => {
+    const t = (c.metadata as Record<string, unknown> | null)?.account_type
+    return t === "producer" || t === "seller"
+  })
 
   const filtered =
     verified === "true"
