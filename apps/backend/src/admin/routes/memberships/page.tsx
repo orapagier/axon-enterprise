@@ -250,10 +250,36 @@ const MembershipsPage = () => {
                               <span className="text-ui-fg-subtle text-xs">
                                 Renews {formatDate(row.membership.expiresAt)}
                               </span>
+                              {row.membership.lastEvent && (
+                                <span
+                                  className="text-ui-fg-muted text-xs mt-1"
+                                  title={`Actor ID: ${row.membership.lastEvent.actor_id ?? "system"}`}
+                                >
+                                  {ACTION_VERB[row.membership.lastEvent.action]} by{" "}
+                                  <code className="font-mono">
+                                    {shortenActorId(row.membership.lastEvent.actor_id)}
+                                  </code>{" "}
+                                  · {formatDateTime(row.membership.lastEvent.ts)}
+                                </span>
+                              )}
                             </div>
                           )}
                           {s === "cancelled" && (
-                            <Badge color="red">Cancelled</Badge>
+                            <div className="flex flex-col gap-y-1">
+                              <Badge color="red">Cancelled</Badge>
+                              {row.membership.lastEvent && (
+                                <span
+                                  className="text-ui-fg-muted text-xs"
+                                  title={`Actor ID: ${row.membership.lastEvent.actor_id ?? "system"}`}
+                                >
+                                  {ACTION_VERB[row.membership.lastEvent.action]} by{" "}
+                                  <code className="font-mono">
+                                    {shortenActorId(row.membership.lastEvent.actor_id)}
+                                  </code>{" "}
+                                  · {formatDateTime(row.membership.lastEvent.ts)}
+                                </span>
+                              )}
+                            </div>
                           )}
                         </Table.Cell>
                         <Table.Cell>
