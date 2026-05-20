@@ -7,6 +7,7 @@ import { sdk } from "@lib/config"
 import { HttpTypes } from "@medusajs/types"
 import { getAuthHeaders, getCacheTag } from "./cookies"
 import { retrieveCustomer } from "./customer"
+import { validatePhone } from "@lib/util/phone"
 
 /**
  * Admin onboarding state reset (Medusa demo helper).
