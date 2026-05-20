@@ -118,10 +118,10 @@ const NAV_ITEMS: NavItem[] = [
   },
 ]
 
-const SELLER_NAV_ITEM: NavItem = {
-  href: "/account/seller",
+const PRODUCER_NAV_ITEM: NavItem = {
+  href: "/account/producer",
   label: "My Listings",
-  testId: "seller-link",
+  testId: "producer-link",
   icon: (
     <svg
       width="16"
