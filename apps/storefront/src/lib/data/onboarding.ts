@@ -244,9 +244,11 @@ export async function completeOnboarding(
     const addressPayload = {
       ...nameParts,
       phone: updateBody.phone ?? customer.phone ?? undefined,
-      company: isSeller
-        ? (updateBody.company_name ?? customer.company_name ?? "")
-        : "",
+      // Producers and Traders both have a business; stamp the company name.
+      company:
+        isProducer || isTrader
+          ? (updateBody.company_name ?? customer.company_name ?? "")
+          : "",
       address_1,
       city: seedCity,
       province,
