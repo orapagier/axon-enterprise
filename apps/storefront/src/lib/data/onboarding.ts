@@ -101,7 +101,7 @@ export async function completeOnboarding(
   const province = required("province", "Province")
   const postal_code = String(formData.get("postal_code") ?? "").trim()
 
-  if (isSeller) {
+  if (isProducer) {
     const business_name = required("business_name", "Business or farm name")
     const primary_hub = required("primary_hub", "City / municipality")
     const contact_phone = checkPhone("contact_phone", "Contact phone")
@@ -134,7 +134,42 @@ export async function completeOnboarding(
       farm_province: province,
       farm_postal_code: postal_code || null,
     }
+  } else if (isTrader) {
+    const business_name = required("business_name", "Business name")
+    const business_type = required("business_type", "Business type")
+    const default_city = required("default_city", "City / municipality")
+    const contact_phone = checkPhone("contact_phone", "Contact phone")
+    const estimated_monthly_volume = String(
+      formData.get("estimated_monthly_volume") ?? ""
+    ).trim()
+
+    if (business_name && business_name.length < 2) {
+      fieldErrors.business_name = "Business name is too short."
+    }
+
+    if (Object.keys(fieldErrors).length > 0) {
+      return {
+        ok: false,
+        fieldErrors,
+        error: "Please complete the highlighted fields.",
+      }
+    }
+
+    updateBody = {
+      company_name: business_name,
+      phone: contact_phone,
+    }
+    metadataPatch = {
+      business_name,
+      business_type,
+      default_city,
+      estimated_monthly_volume,
+      default_address_1: address_1,
+      default_province: province,
+      default_postal_code: postal_code || null,
+    }
   } else {
+    // Consumer (default)
     const display_name = required("display_name", "Display name")
     const phone = checkPhone("phone", "Phone number")
     const default_city = required("default_city", "City / municipality")
