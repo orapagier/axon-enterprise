@@ -498,7 +498,7 @@ export default function SellerListingForm({ mode, existing }: Props) {
       {/* Footer */}
       <div className="flex flex-col xsmall:flex-row xsmall:items-center xsmall:justify-between gap-3 px-7 small:px-12 py-5 bg-grey-5/70 border-t border-grey-10">
         <LocalizedClientLink
-          href="/account/seller"
+          href="/account/producer"
           className="text-body-sm font-medium text-grey-60 hover:text-grey-90 transition-colors text-left"
         >
           Cancel
