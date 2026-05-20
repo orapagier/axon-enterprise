@@ -243,6 +243,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       requestedAt: meta[MEMBERSHIP_META.requestedAt] ?? null,
       paymentMethod: meta[MEMBERSHIP_META.paymentMethod] ?? null,
       paymentReference: meta[MEMBERSHIP_META.paymentReference] ?? null,
+      events: meta[MEMBERSHIP_META.events] ?? [],
     },
   })
 }
