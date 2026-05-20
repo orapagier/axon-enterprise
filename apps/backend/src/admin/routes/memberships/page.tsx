@@ -222,8 +222,12 @@ const MembershipsPage = () => {
                     return (
                       <Table.Row key={id}>
                         <Table.Cell>
-                          <div className="flex flex-col">
-                            <span className="font-medium">
+                          <a
+                            href={`/app/customers/${id}`}
+                            className="flex flex-col hover:bg-ui-bg-base-hover rounded-md -mx-2 px-2 py-1 transition-colors"
+                            title="Open customer in Medusa admin"
+                          >
+                            <span className="font-medium text-ui-fg-interactive">
                               {displayName(row.customer)}
                             </span>
                             <span className="text-ui-fg-subtle text-xs">
@@ -234,7 +238,7 @@ const MembershipsPage = () => {
                                 {row.customer.company_name}
                               </span>
                             )}
-                          </div>
+                          </a>
                         </Table.Cell>
                         <Table.Cell>
                           {s === "pending" && (
