@@ -8,7 +8,7 @@ import { validatePhone } from "@lib/util/phone"
 import { useParams } from "next/navigation"
 import { useActionState, useMemo, useState } from "react"
 
-type AccountType = "buyer" | "seller"
+type AccountType = "consumer" | "producer" | "trader"
 
 type FieldDef = {
   name: string
