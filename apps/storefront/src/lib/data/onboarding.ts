@@ -127,13 +127,10 @@ export async function completeOnboarding(
     }
   } else {
     const display_name = required("display_name", "Display name")
-    const phone = required("phone", "Phone number")
+    const phone = checkPhone("phone", "Phone number")
     const default_city = required("default_city", "City / municipality")
     const buyer_bio = String(formData.get("buyer_bio") ?? "").trim()
 
-    if (phone && !isValidPhone(phone)) {
-      fieldErrors.phone = "Enter a valid phone number."
-    }
     if (display_name && display_name.length < 2) {
       fieldErrors.display_name = "Display name is too short."
     }
