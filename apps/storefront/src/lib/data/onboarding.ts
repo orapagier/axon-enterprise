@@ -283,7 +283,8 @@ export async function completeOnboarding(
     }
   }
 
-  // Sellers land on their dashboard so they can immediately see verification
-  // status and start drafting listings. Buyers go to the account overview.
-  redirect(`/${countryCode}/account${isSeller ? "/seller" : ""}`)
+  // Producers land on their dashboard so they can immediately see
+  // verification status and start drafting listings. Everyone else
+  // lands on the account overview.
+  redirect(`/${countryCode}/account${isProducer ? "/producer" : ""}`)
 }
