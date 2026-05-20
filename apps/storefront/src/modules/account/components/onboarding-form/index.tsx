@@ -407,11 +407,7 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
         {/* Progress bar */}
         <div className="mt-5 h-1 rounded-full bg-white/60 overflow-hidden">
           <div
-            className={`h-full rounded-full transition-all duration-500 ease-out ${
-              isSeller
-                ? "bg-gradient-to-r from-brand-gold-400 to-brand-gold-600"
-                : "bg-gradient-to-r from-brand-green-500 to-brand-green-700"
-            }`}
+            className={`h-full rounded-full transition-all duration-500 ease-out ${palette.bar}`}
             style={{ width: `${progressPct}%` }}
           />
         </div>
