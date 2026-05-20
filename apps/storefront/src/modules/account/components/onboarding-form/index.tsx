@@ -4,6 +4,7 @@ import {
   completeOnboarding,
   type OnboardingState,
 } from "@lib/data/onboarding"
+import { validatePhone } from "@lib/util/phone"
 import { useParams } from "next/navigation"
 import { useActionState, useMemo, useState } from "react"
 
