@@ -234,28 +234,3 @@ export async function completeOnboarding(
   // status and start drafting listings. Buyers go to the account overview.
   redirect(`/${countryCode}/account${isSeller ? "/seller" : ""}`)
 }
-
-export async function deferOnboarding(countryCode: string) {
-  const customer = await retrieveCustomer()
-  if (!customer) {
-    redirect(`/${countryCode}/account`)
-  }
-  try {
-    const headers = { ...(await getAuthHeaders()) }
-    await sdk.store.customer.update(
-      {
-        metadata: {
-          ...(customer!.metadata ?? {}),
-          onboarding_deferred_at: new Date().toISOString(),
-        },
-      },
-      {},
-      headers
-    )
-    const customerCacheTag = await getCacheTag("customers")
-    revalidateTag(customerCacheTag)
-  } catch {
-    /* best-effort — still redirect */
-  }
-  redirect(`/${countryCode}/account`)
-}
