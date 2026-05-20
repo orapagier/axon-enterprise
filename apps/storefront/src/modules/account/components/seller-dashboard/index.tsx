@@ -130,7 +130,7 @@ export default function SellerDashboard({
             <p className="text-body-sm text-grey-50 mt-2 leading-relaxed">
               {isVerified
                 ? "Manage your produce listings, edit prices, and remove drafts."
-                : "We're reviewing your seller account. You can still draft listings — they'll go live once you're verified."}
+                : "We're reviewing your producer account. You can still draft listings — they'll go live once you're verified."}
             </p>
           </div>
           <LocalizedClientLink
