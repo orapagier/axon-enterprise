@@ -280,7 +280,7 @@ const SellersPage = () => {
 }
 
 export const config = defineRouteConfig({
-  label: "Sellers",
+  label: "Producers",
   icon: UserGroup,
 })
 
