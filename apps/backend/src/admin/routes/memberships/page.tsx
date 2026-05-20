@@ -23,6 +23,15 @@ import { useState } from "react"
 
 type Status = "pending" | "active" | "cancelled"
 
+type MembershipEvent = {
+  ts: number
+  action: "approve" | "reject" | "cancel"
+  actor_id: string | null
+  prev_status: string | null
+  tier?: string | null
+  duration_days?: number | null
+}
+
 type Membership = {
   customer: {
     id: string
@@ -41,6 +50,7 @@ type Membership = {
     requestedAt: number | null
     paymentMethod: "gcash" | "bank" | null
     paymentReference: string | null
+    lastEvent: MembershipEvent | null
   }
 }
 
