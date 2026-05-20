@@ -148,12 +148,14 @@ const AccountNav = ({
   const route = usePathname() ?? ""
   const { countryCode } = useParams() as { countryCode: string }
 
-  const isSeller =
-    (customer?.metadata as Record<string, unknown> | null)?.account_type ===
-    "seller"
+  // Producers get a "My Listings" entry between Overview and Membership.
+  // Legacy "seller" value in metadata is treated as Producer.
+  const storedRole = (customer?.metadata as Record<string, unknown> | null)
+    ?.account_type
+  const isProducer = storedRole === "producer" || storedRole === "seller"
 
-  const navItems = isSeller
-    ? [NAV_ITEMS[0], SELLER_NAV_ITEM, ...NAV_ITEMS.slice(1)]
+  const navItems = isProducer
+    ? [NAV_ITEMS[0], PRODUCER_NAV_ITEM, ...NAV_ITEMS.slice(1)]
     : NAV_ITEMS
 
   const handleLogout = async () => {
