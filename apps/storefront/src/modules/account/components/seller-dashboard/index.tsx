@@ -108,7 +108,7 @@ export default function SellerDashboard({
           <div>
             <div className="flex items-center gap-x-2.5 mb-2">
               <span className="text-[10px] font-bold text-grey-50 uppercase tracking-[0.18em]">
-                Seller dashboard
+                Producer dashboard
               </span>
               {isVerified ? (
                 <span className="inline-flex items-center gap-x-1 px-2 py-0.5 rounded-full bg-brand-green-50 text-brand-green-700 text-[10px] font-bold uppercase tracking-wider border border-brand-green-100">
