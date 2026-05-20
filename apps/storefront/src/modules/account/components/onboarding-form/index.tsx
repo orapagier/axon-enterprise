@@ -367,13 +367,7 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
       <input type="hidden" name="countryCode" value={countryCode} />
 
       {/* Banner */}
-      <div
-        className={`relative px-7 small:px-12 py-8 ${
-          isSeller
-            ? "bg-gradient-to-br from-brand-gold-100 via-brand-cream-100 to-white"
-            : "bg-gradient-to-br from-brand-green-50 via-white to-white"
-        }`}
-      >
+      <div className={`relative px-7 small:px-12 py-8 ${palette.banner}`}>
         <div className="flex items-start gap-x-4">
           <span className="text-4xl leading-none drop-shadow-sm">
             {copy.icon}
