@@ -120,6 +120,8 @@ function parseListing(formData: FormData): {
       unit,
       price,
       currency_code: "php",
+      selling_mode: get("selling_mode") || "direct",
+      harvest_date: get("harvest_date") || undefined,
     },
     fieldErrors,
   }

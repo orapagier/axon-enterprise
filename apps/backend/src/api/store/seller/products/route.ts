@@ -109,6 +109,33 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     price?: number
     currency_code?: string
     inventory_quantity?: number
+    selling_mode?: string
+    harvest_date?: string
+  }
+
+  // Validate harvest date for hub-bound listings.
+  const sellingMode = body.selling_mode ?? "direct"
+  if (sellingMode === "hub") {
+    const harvestRaw = body.harvest_date?.trim()
+    if (!harvestRaw) {
+      res.status(400).json({ error: "Harvest date is required when selling to FreshHub." })
+      return
+    }
+    const harvestDate = new Date(harvestRaw)
+    if (isNaN(harvestDate.getTime())) {
+      res.status(400).json({ error: "Invalid harvest date." })
+      return
+    }
+    // Must be at least 7 days from now (FreshHub collects once a week).
+    const cutoff = new Date()
+    cutoff.setHours(0, 0, 0, 0)
+    cutoff.setDate(cutoff.getDate() + 7)
+    if (harvestDate < cutoff) {
+      res.status(400).json({
+        error: "Harvest date must be at least 7 days from today. FreshHub collects in your area once a week — we need lead time to schedule pickup.",
+      })
+      return
+    }
   }
 
   if (!body.title || body.title.trim().length < 2) {
@@ -165,6 +192,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
           ],
           metadata: {
             seller_customer_id: customer.id,
+            selling_mode: sellingMode,
+            harvest_date: body.harvest_date?.trim() || null,
             unit: body.unit ?? "kg",
             category: body.category ?? null,
             submitted_at: new Date().toISOString(),

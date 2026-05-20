@@ -27,10 +27,11 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
     | "trader"
     | "buyer"
     | "seller"
+    | "rider"
   const rawAccountType = customer.metadata?.account_type as
     | RoleStored
     | undefined
-  const accountType: "consumer" | "producer" | "trader" =
+  const accountType: "consumer" | "producer" | "trader" | "rider" =
     rawAccountType === "seller"
       ? "producer"
       : rawAccountType === "buyer"
@@ -45,11 +46,13 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
     consumer: "Consumer",
     producer: "Producer",
     trader: "Trader",
+    rider: "Rider",
   }[accountType]
   const roleIcon = {
     consumer: "🧺",
     producer: "🌾",
     trader: "🤝",
+    rider: "🛵",
   }[accountType]
 
   return (

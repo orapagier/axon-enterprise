@@ -22,7 +22,8 @@ import { MEMBERSHIP_META } from "@lib/util/membership"
 //   Consumer — household buyers ordering for their own kitchen.
 //   Producer — farmers and fishers listing their harvest.
 //   Trader   — B2B buyers (restaurants, cafés, retailers, distributors).
-export type AccountType = "consumer" | "producer" | "trader"
+//   Rider    — delivery riders who earn from delivering hub orders.
+export type AccountType = "consumer" | "producer" | "trader" | "rider"
 export type AuthMode = "signin" | "signup"
 
 const PENDING_AUTH_COOKIE = "_mfh_pending_auth"
@@ -235,7 +236,8 @@ export async function verifyEmailCode(
           email: pending.email,
           metadata: {
             account_type: pending.role ?? "consumer",
-            profile_completed: false,
+            profile_completed: pending.role === "rider" ? true : false,
+            rider_available: pending.role === "rider" ? true : undefined,
             auth_method: "email_otp",
             // The derived password lets us re-issue sessions for this user
             // without ever exposing a real password to the customer.

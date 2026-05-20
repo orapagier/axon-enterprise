@@ -41,6 +41,11 @@ const ROLE_COPY: Record<
     description: "Source in bulk for my restaurant, café, or retail business.",
     icon: "🤝",
   },
+  rider: {
+    title: "I'm a Delivery Rider",
+    description: "Earn by delivering FreshHub orders in your area.",
+    icon: "🛵",
+  },
 }
 
 const AuthCard = () => {
@@ -209,8 +214,8 @@ const AuthCard = () => {
               <span className="text-caption font-semibold text-grey-60 uppercase tracking-wider mb-2.5 block">
                 I want to
               </span>
-              <div className="grid grid-cols-1 xsmall:grid-cols-3 gap-3">
-                {(["consumer", "producer", "trader"] as AccountType[]).map(
+              <div className="grid grid-cols-1 xsmall:grid-cols-2 gap-3">
+                {(["consumer", "producer", "trader", "rider"] as AccountType[]).map(
                   (r) => {
                     const active = role === r
                     const copy = ROLE_COPY[r]
@@ -397,6 +402,16 @@ const AuthCard = () => {
                 <span className="font-bold">Trader accounts</span> unlock bulk
                 pricing and standing weekly orders once we&apos;ve confirmed
                 your business details.
+              </p>
+            </div>
+          )}
+          {mode === "signup" && role === "rider" && (
+            <div className="mt-5 px-4 py-3 rounded-xl bg-brand-green-50 border border-brand-green-200">
+              <p className="text-caption text-brand-green-800 leading-relaxed">
+                <span className="font-bold">Rider accounts</span> let you earn
+                from delivering FreshHub orders. You keep 100% of the delivery
+                fee — no cut taken. Your account also works as a consumer so you
+                can shop the Hub.
               </p>
             </div>
           )}

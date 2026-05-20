@@ -118,6 +118,29 @@ const NAV_ITEMS: NavItem[] = [
   },
 ]
 
+const RIDER_NAV_ITEM: NavItem = {
+  href: "/account/rider",
+  label: "Deliveries",
+  testId: "rider-link",
+  icon: (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="1" y="3" width="15" height="13" />
+      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+      <circle cx="5.5" cy="18.5" r="2.5" />
+      <circle cx="18.5" cy="18.5" r="2.5" />
+    </svg>
+  ),
+}
+
 const PRODUCER_NAV_ITEM: NavItem = {
   href: "/account/producer",
   label: "My Listings",
@@ -153,10 +176,13 @@ const AccountNav = ({
   const storedRole = (customer?.metadata as Record<string, unknown> | null)
     ?.account_type
   const isProducer = storedRole === "producer" || storedRole === "seller"
+  const isRider = storedRole === "rider"
 
   const navItems = isProducer
     ? [NAV_ITEMS[0], PRODUCER_NAV_ITEM, ...NAV_ITEMS.slice(1)]
-    : NAV_ITEMS
+    : isRider
+      ? [NAV_ITEMS[0], RIDER_NAV_ITEM, ...NAV_ITEMS.slice(1)]
+      : NAV_ITEMS
 
   const handleLogout = async () => {
     await signout(countryCode)

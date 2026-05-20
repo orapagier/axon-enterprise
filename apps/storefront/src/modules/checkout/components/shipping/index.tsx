@@ -10,7 +10,7 @@ import Divider from "@modules/common/components/divider"
 import MedusaRadio from "@modules/common/components/radio"
 import { Button, clx, Heading, Text } from "@modules/common/components/ui"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 const PICKUP_OPTION_ON = "__PICKUP_ON"
 const PICKUP_OPTION_OFF = "__PICKUP_OFF"
@@ -62,6 +62,9 @@ const Shipping: React.FC<ShippingProps> = ({
   const [shippingMethodId, setShippingMethodId] = useState<string | null>(
     cart.shipping_methods?.at(-1)?.shipping_option_id || null
   )
+  const [deliveryType, setDeliveryType] = useState<"scheduled" | "standard">(
+    "scheduled"
+  )
 
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -78,6 +81,13 @@ const Shipping: React.FC<ShippingProps> = ({
   )
 
   const hasPickupOptions = !!_pickupMethods?.length
+
+  const isScheduledMethod = (sm: HttpTypes.StoreCartShippingOption) =>
+    sm.price_type === "flat" && (sm.amount ?? 0) === 0
+
+  const _displayedShippingMethods = _shippingMethods?.filter((sm) =>
+    deliveryType === "scheduled" ? isScheduledMethod(sm) : !isScheduledMethod(sm)
+  )
 
   useEffect(() => {
     setIsLoadingPrices(true)
@@ -192,9 +202,93 @@ const Shipping: React.FC<ShippingProps> = ({
                 Shipping method
               </span>
               <span className="mb-4 text-ui-fg-muted txt-medium">
-                How would you like you order delivered
+                How would you like your order delivered
               </span>
             </div>
+
+            {/* Delivery type: scheduled vs standard */}
+            <div className="flex flex-col mb-6">
+              <span className="font-medium txt-medium text-ui-fg-base mb-3">
+                Delivery type
+              </span>
+              <div className="grid grid-cols-1 xsmall:grid-cols-2 gap-3">
+                {([
+                  {
+                    value: "scheduled" as const,
+                    icon: "📦",
+                    label: "Scheduled delivery",
+                    desc: "Free — delivered on the next scheduled pickup day in your area. FreshHub collects once a week.",
+                    price: "Free",
+                  },
+                  {
+                    value: "standard" as const,
+                    icon: "🛵",
+                    label: "Standard delivery",
+                    desc: "A nearby rider delivers to you. Fee based on distance and local transport rates. Delivery time ranges from minutes to a few hours.",
+                    price: "From ₱49",
+                  },
+                ]).map((opt) => {
+                  const active = deliveryType === opt.value
+                  return (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => setDeliveryType(opt.value)}
+                      className={`relative flex items-start gap-x-3 p-4 rounded-xl border-2 text-left transition-all ${
+                        active
+                          ? "border-ui-border-interactive bg-ui-bg-interactive shadow-soft"
+                          : "border-grey-20 bg-white hover:border-grey-30"
+                      }`}
+                    >
+                      <span className="text-xl leading-none shrink-0 mt-0.5">
+                        {opt.icon}
+                      </span>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-x-2">
+                          <span className="text-small-regular font-semibold text-ui-fg-base">
+                            {opt.label}
+                          </span>
+                          <span
+                            className={`text-caption font-bold tabular-nums ${
+                              active
+                                ? "text-ui-fg-interactive"
+                                : "text-ui-fg-muted"
+                            }`}
+                          >
+                            {opt.price}
+                          </span>
+                        </div>
+                        <p className="text-caption text-ui-fg-muted mt-1 leading-relaxed">
+                          {opt.desc}
+                        </p>
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+
+              {deliveryType === "scheduled" && (
+                <div className="mt-3 px-4 py-2.5 rounded-lg bg-brand-cream-50 border border-brand-gold-200">
+                  <p className="text-caption text-brand-gold-800 leading-relaxed">
+                    <span className="font-semibold">Scheduled delivery</span>{" "}
+                    is free for all FreshHub orders. Your order will arrive on
+                    the next collection day in your area — usually within 7
+                    days.
+                  </p>
+                </div>
+              )}
+
+              {deliveryType === "standard" && (
+                <div className="mt-3 px-4 py-2.5 rounded-lg bg-brand-green-50 border border-brand-green-200">
+                  <p className="text-caption text-brand-green-800 leading-relaxed">
+                    <span className="font-semibold">Standard delivery</span>{" "}
+                    connects you with a nearby rider. You&apos;ll see the exact
+                    delivery fee at the next step. Riders keep 100% of the fee.
+                  </p>
+                </div>
+              )}
+            </div>
+
             <div data-testid="delivery-options-container">
               <div className="pb-8 md:pt-0 pt-2">
                 {hasPickupOptions && (
@@ -376,7 +470,7 @@ const Shipping: React.FC<ShippingProps> = ({
               className="mt"
               onClick={handleSubmit}
               isLoading={isLoading}
-              disabled={!cart.shipping_methods?.[0]}
+              disabled={!cart.shipping_methods?.[0] && !shippingMethodId}
               data-testid="submit-delivery-option-button"
             >
               Continue to payment

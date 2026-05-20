@@ -105,12 +105,16 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     unit?: string
     price?: number
     currency_code?: string
+    selling_mode?: string
+    harvest_date?: string
   }
 
   const mergedMeta = {
     ...((product.metadata as Record<string, unknown> | null) ?? {}),
     ...(body.unit !== undefined ? { unit: body.unit } : {}),
     ...(body.category !== undefined ? { category: body.category } : {}),
+    ...(body.selling_mode !== undefined ? { selling_mode: body.selling_mode } : {}),
+    ...(body.harvest_date !== undefined ? { harvest_date: body.harvest_date?.trim() || null } : {}),
     ...(body.price !== undefined
       ? { pending_price_change: Math.round(Number(body.price)) }
       : {}),

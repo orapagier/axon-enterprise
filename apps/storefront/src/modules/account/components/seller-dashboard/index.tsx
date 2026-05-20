@@ -13,6 +13,15 @@ type Props = {
   errorMessage?: string
 }
 
+const SELLING_MODE_BADGE: Record<
+  string,
+  { label: string; cls: string }
+> = {
+  direct: { label: "Direct", cls: "bg-blue-500 text-white" },
+  hub: { label: "Hub", cls: "bg-brand-gold-500 text-grey-90" },
+  __: { label: "Direct", cls: "bg-blue-500 text-white" },
+}
+
 const STATUS_CHIP: Record<
   SellerListing["status"],
   { label: string; cls: string }
@@ -241,6 +250,20 @@ export default function SellerDashboard({
                   >
                     {chip.label}
                   </span>
+                  {(() => {
+                    const mode = String(
+                      (l.metadata?.selling_mode as string) ?? "direct"
+                    )
+                    const sb =
+                      SELLING_MODE_BADGE[mode] ?? SELLING_MODE_BADGE["__"]
+                    return (
+                      <span
+                        className={`absolute top-3 right-3 inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-[0.14em] shadow-medium ${sb.cls}`}
+                      >
+                        {sb.label}
+                      </span>
+                    )
+                  })()}
                 </div>
 
                 <div className="flex flex-col flex-1 p-4">
