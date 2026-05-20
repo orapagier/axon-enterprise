@@ -16,7 +16,7 @@ export default async function EditListingPage({ params }: Props) {
   if (!customer) redirect(`/${countryCode}/account`)
 
   const meta = (customer.metadata ?? {}) as Record<string, unknown>
-  if (meta.account_type !== "seller") notFound()
+  if (meta.account_type !== "producer" && meta.account_type !== "seller") notFound()
   if (!meta.profile_completed) redirect(`/${countryCode}/onboarding`)
 
   const listing = await getMyListing(id)
