@@ -18,7 +18,11 @@ import {
 } from "./cookies"
 import { MEMBERSHIP_META } from "@lib/util/membership"
 
-export type AccountType = "buyer" | "seller"
+// Naming follows the founder's initials, "CPT":
+//   Consumer — household buyers ordering for their own kitchen.
+//   Producer — farmers and fishers listing their harvest.
+//   Trader   — B2B buyers (restaurants, cafés, retailers, distributors).
+export type AccountType = "consumer" | "producer" | "trader"
 export type AuthMode = "signin" | "signup"
 
 const PENDING_AUTH_COOKIE = "_mfh_pending_auth"
