@@ -153,8 +153,8 @@ const SellersPage = () => {
               <div className="py-12 text-center">
                 <Text className="text-ui-fg-subtle">
                   {t === "pending"
-                    ? "No sellers awaiting verification."
-                    : "No verified sellers yet."}
+                    ? "No producers awaiting verification."
+                    : "No verified producers yet."}
                 </Text>
               </div>
             ) : (
