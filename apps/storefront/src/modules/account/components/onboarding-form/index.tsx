@@ -338,9 +338,18 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
 
         <div className="grid grid-cols-1 small:grid-cols-2 gap-5">
           {fields.map((f) => {
-            const err = state?.fieldErrors?.[f.name]
+            // Server errors (after submit) win over client errors so the user
+            // always sees the authoritative reason.
+            const serverErr = state?.fieldErrors?.[f.name]
+            const clientErr = clientErrors[f.name]
+            const err = serverErr ?? clientErr
             const value = values[f.name] ?? ""
             const isFilled = value.trim().length > 0
+            const isPhone = f.type === "tel"
+            const isValidPhone =
+              isPhone && isFilled && !clientErr && !serverErr
+            const onBlur = () =>
+              setTouched((t) => (t[f.name] ? t : { ...t, [f.name]: true }))
             return (
               <label
                 key={f.name}
@@ -361,7 +370,7 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
-                      Saved as you go
+                      {isValidPhone ? "Looks good" : "Saved as you go"}
                     </span>
                   )}
                 </span>
@@ -390,8 +399,10 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
                     onChange={(e) =>
                       setValues((v) => ({ ...v, [f.name]: e.target.value }))
                     }
+                    onBlur={onBlur}
                     list={f.suggestions ? `${f.name}-suggestions` : undefined}
                     autoComplete="off"
+                    inputMode={isPhone ? "tel" : undefined}
                     className={`w-full px-4 py-3 bg-grey-5 border rounded-xl text-body-sm text-grey-90 placeholder:text-grey-40 focus:outline-none focus:ring-2 focus:bg-white transition-all ${
                       err
                         ? "border-red-300 focus:border-red-400 focus:ring-red-100"
