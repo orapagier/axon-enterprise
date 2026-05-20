@@ -273,12 +273,42 @@ type Props = {
   defaults?: Partial<Record<string, string>>
 }
 
+const FIELDS_BY_ROLE: Record<AccountType, FieldDef[]> = {
+  consumer: CONSUMER_FIELDS,
+  producer: PRODUCER_FIELDS,
+  trader: TRADER_FIELDS,
+}
+
+// Banner / progress-bar palette per role. Producer + Trader use the gold/cream
+// tone (gated by admin verification); Consumer gets the green tone (open
+// signup, immediate use).
+const ROLE_PALETTE: Record<
+  AccountType,
+  { banner: string; bar: string }
+> = {
+  consumer: {
+    banner: "bg-gradient-to-br from-brand-green-50 via-white to-white",
+    bar: "bg-gradient-to-r from-brand-green-500 to-brand-green-700",
+  },
+  producer: {
+    banner: "bg-gradient-to-br from-brand-gold-100 via-brand-cream-100 to-white",
+    bar: "bg-gradient-to-r from-brand-gold-400 to-brand-gold-600",
+  },
+  trader: {
+    banner: "bg-gradient-to-br from-brand-gold-100 via-brand-cream-100 to-white",
+    bar: "bg-gradient-to-r from-brand-gold-400 to-brand-gold-600",
+  },
+}
+
 export default function OnboardingForm({ accountType, defaults = {} }: Props) {
   const params = useParams()
   const countryCode = (params?.countryCode as string) ?? "ph"
-  const isSeller = accountType === "seller"
-  const fields = isSeller ? SELLER_FIELDS : BUYER_FIELDS
+  const isProducer = accountType === "producer"
+  const isTrader = accountType === "trader"
+  const needsAdminVerification = isProducer || isTrader
+  const fields = FIELDS_BY_ROLE[accountType]
   const copy = ROLE_COPY[accountType]
+  const palette = ROLE_PALETTE[accountType]
 
   const [state, formAction, pending] = useActionState<
     OnboardingState,
