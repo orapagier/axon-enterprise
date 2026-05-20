@@ -240,7 +240,7 @@ const SellersPage = () => {
                                 disabled={busy || !profileDone}
                                 title={
                                   !profileDone
-                                    ? "Seller hasn't completed onboarding yet — can't verify."
+                                    ? "Producer hasn't completed onboarding yet — can't verify."
                                     : undefined
                                 }
                                 onClick={() =>
