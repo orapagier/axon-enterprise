@@ -29,7 +29,7 @@ export default async function Profile() {
           Profile
         </h2>
         <p className="text-body-sm text-grey-50 mt-1.5 leading-relaxed max-w-xl">
-          Manage how you appear to sellers and how we reach you about orders.
+          Manage how you appear to producers and how we reach you about orders.
         </p>
       </div>
 
