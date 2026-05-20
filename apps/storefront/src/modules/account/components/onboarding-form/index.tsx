@@ -101,7 +101,7 @@ const BUYER_FIELDS: FieldDef[] = [
   },
 ]
 
-const SELLER_FIELDS: FieldDef[] = [
+const PRODUCER_FIELDS: FieldDef[] = [
   {
     name: "business_name",
     label: "Business / Farm name",
@@ -157,6 +157,80 @@ const SELLER_FIELDS: FieldDef[] = [
     type: "textarea",
     required: true,
     helper: "Used to recommend you to relevant buyers.",
+  },
+]
+
+const TRADER_FIELDS: FieldDef[] = [
+  {
+    name: "business_name",
+    label: "Business name",
+    placeholder: "Café Aroma, Mindanao Bistro…",
+    icon: "🏪",
+    required: true,
+  },
+  {
+    name: "business_type",
+    label: "Business type",
+    placeholder: "Restaurant, café, retail…",
+    icon: "🤝",
+    required: true,
+    suggestions: [
+      "Restaurant",
+      "Café",
+      "Retail store",
+      "Distributor",
+      "Hotel",
+      "Catering",
+    ],
+  },
+  {
+    name: "contact_phone",
+    label: "Contact phone",
+    placeholder: "0917 555 0144",
+    icon: "📞",
+    type: "tel",
+    required: true,
+  },
+  {
+    name: "address_1",
+    label: "Delivery address",
+    placeholder: "Building, street, barangay",
+    icon: "🏢",
+    required: true,
+    full: true,
+    helper: "Where we'll deliver your standing orders.",
+  },
+  {
+    name: "default_city",
+    label: "City / municipality",
+    placeholder: "Tagum City",
+    icon: "🏙️",
+    required: true,
+    suggestions: MINDANAO_CITY_SUGGESTIONS,
+  },
+  {
+    name: "province",
+    label: "Province",
+    placeholder: "Davao del Norte",
+    icon: "📍",
+    required: true,
+    suggestions: MINDANAO_PROVINCE_SUGGESTIONS,
+  },
+  {
+    name: "postal_code",
+    label: "Postal code",
+    placeholder: "8100",
+    icon: "📮",
+    helper: "Optional — helps us route deliveries efficiently.",
+  },
+  {
+    name: "estimated_monthly_volume",
+    label: "Estimated monthly volume",
+    placeholder: "e.g. 200 kg of vegetables, 50 kg of fruit",
+    icon: "📦",
+    type: "textarea",
+    helper:
+      "Optional — helps us match you with the right producers and pricing.",
   },
 ]
 
