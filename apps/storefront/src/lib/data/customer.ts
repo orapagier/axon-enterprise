@@ -149,7 +149,11 @@ export async function requestEmailCode(
     return { ok: false, error: "Please enter a valid email address." }
   }
 
-  if (mode === "signup" && role && !["buyer", "seller"].includes(role)) {
+  if (
+    mode === "signup" &&
+    role &&
+    !["consumer", "producer", "trader"].includes(role)
+  ) {
     return { ok: false, error: "Please choose an account type." }
   }
 
