@@ -17,5 +17,8 @@ module.exports = defineConfig({
     {
       resolve: "./src/modules/hub",
     },
+    {
+      resolve: "./src/modules/listing",
+    },
   ],
 })

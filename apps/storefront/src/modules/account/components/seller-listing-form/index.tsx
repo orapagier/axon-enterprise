@@ -8,6 +8,8 @@ import {
   type SellerListing,
 } from "@lib/data/seller"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ListingTypeField from "@modules/producer/components/listing-type-field"
+import HarvestDateField from "@modules/producer/components/harvest-date-field"
 import { useParams } from "next/navigation"
 import {
   useActionState,
@@ -115,6 +117,14 @@ export default function SellerListingForm({ mode, existing }: Props) {
     seed.price = firstPrice ? String(firstPrice) : ""
     seed.selling_mode = typeof meta.selling_mode === "string" ? meta.selling_mode : "direct"
     seed.harvest_date = typeof meta.harvest_date === "string" ? meta.harvest_date : ""
+    seed.listing_type = typeof meta.selling_mode === "string"
+      ? (meta.selling_mode === "direct" || meta.selling_mode === "direct_to_consumer"
+        ? "direct_to_consumer"
+        : "sell_to_freshhub")
+      : "direct_to_consumer"
+    // Use listing row status from the listing payload
+    const listing = (existing as unknown as { listing?: Record<string, unknown> }).listing
+    seed.listing_status = typeof listing?.status === "string" ? listing.status : "draft"
     return seed
   }, [existing])
 
@@ -124,7 +134,9 @@ export default function SellerListingForm({ mode, existing }: Props) {
       seed[f.name] = defaults[f.name] ?? ""
     })
     seed.selling_mode = (defaults.selling_mode as string) ?? "direct"
+    seed.listing_type = (defaults.listing_type as string) ?? "direct_to_consumer"
     seed.harvest_date = (defaults.harvest_date as string) ?? ""
+    seed.listing_status = (defaults.listing_status as string) ?? "draft"
     return seed
   })
 
@@ -177,6 +189,9 @@ export default function SellerListingForm({ mode, existing }: Props) {
   }, [values])
   const ready = progressPct === 100
 
+  const isDraft = values.listing_status === "draft"
+  const isSellToHub = values.listing_type === "sell_to_freshhub"
+
   return (
     <form
       action={formAction}
@@ -185,6 +200,7 @@ export default function SellerListingForm({ mode, existing }: Props) {
     >
       <input type="hidden" name="countryCode" value={countryCode} />
       <input type="hidden" name="thumbnail" value={photoUrl} />
+      <input type="hidden" name="listing_type" value={values.listing_type} />
       {existing && <input type="hidden" name="id" value={existing.id} />}
 
       {/* Banner */}
@@ -233,150 +249,157 @@ export default function SellerListingForm({ mode, existing }: Props) {
         </div>
       </div>
 
-      {/* Selling mode */}
-      <div className="px-7 small:px-12 py-5 border-b border-grey-10 bg-grey-5/30">
-        <span className="inline-block text-caption font-semibold text-grey-70 uppercase tracking-[0.06em] mb-3">
-          Selling mode
+      {/* Listing type — using dedicated component */}
+      <ListingTypeField
+        value={values.listing_type}
+        onChange={(val) =>
+          setValues((v) => ({
+            ...v,
+            listing_type: val,
+            // Reset harvest date when switching types
+            harvest_date: val === "direct_to_consumer" ? "" : v.harvest_date,
+          }))
+        }
+        disabled={!isDraft}
+      />
+
+      {/* Harvest date — shown only for sell_to_freshhub */}
+      <HarvestDateField
+        value={values.harvest_date}
+        onChange={(val) => setValues((v) => ({ ...v, harvest_date: val }))}
+        visible={isSellToHub}
+        disabled={!isDraft}
+        error={state.fieldErrors?.harvest_date ?? null}
+      />
+
+      {/* Legacy hidden fields for backward compat */}
+      <input type="hidden" name="selling_mode" value={values.listing_type} />
+
+      {/* Product fields */}
+      <div className="px-7 small:px-12 py-6">
+        <span className="inline-block text-caption font-semibold text-grey-70 uppercase tracking-[0.06em] mb-4">
+          Product details
         </span>
-        <div className="grid grid-cols-1 xsmall:grid-cols-2 gap-3">
-          {([
-            { value: "direct", icon: "🛒", label: "Direct to consumer", desc: "List on the marketplace — consumers buy directly from you." },
-            { value: "hub", icon: "🏭", label: "Sell to FreshHub", desc: "Sell your harvest in bulk to FreshHub at wholesale rates." },
-          ] as const).map((opt) => {
-            const active = (values.selling_mode ?? "direct") === opt.value
-            return (
-              <label
-                key={opt.value}
-                className={`relative flex items-start gap-x-3 p-4 rounded-xl border-2 cursor-pointer transition-all select-none ${
-                  active
-                    ? "border-brand-green-500 bg-brand-green-50/30 shadow-soft"
-                    : "border-grey-10 bg-white hover:border-grey-20"
-                }`}
-              >
-                <input
-                  type="radio"
-                  name="selling_mode"
-                  value={opt.value}
-                  checked={active}
-                  onChange={(e) =>
-                    setValues((v) => ({ ...v, selling_mode: e.target.value }))
-                  }
-                  className="sr-only"
-                />
-                <span className="shrink-0 text-xl mt-0.5">{opt.icon}</span>
-                <div>
-                  <div className="text-body-sm font-semibold text-grey-90">
-                    {opt.label}
-                    {active && (
-                      <span className="ml-2 inline-flex items-center px-1.5 py-0.5 rounded-full bg-brand-green-700 text-[10px] font-bold text-white uppercase tracking-wider">
-                        Selected
-                      </span>
-                    )}
-                  </div>
-                  <div className="text-caption text-grey-50 mt-1 leading-relaxed">
-                    {opt.desc}
-                  </div>
-                </div>
-              </label>
-            )
-          })}
-        </div>
-      </div>
 
-      {/* Harvest date — hub-only */}
-      {(values.selling_mode ?? "direct") === "hub" && (
-        <div className="px-7 small:px-12 py-5 border-b border-grey-10 bg-brand-cream-50/40">
-          <div className="flex items-start gap-x-3 mb-3">
-            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-brand-gold-100 border border-brand-gold-200 text-brand-gold-700 text-sm shrink-0">
-              📅
-            </span>
-            <div>
-              <span className="block text-caption font-semibold text-grey-70 uppercase tracking-[0.06em]">
-                Harvest date <span className="text-brand-green-600">*</span>
-              </span>
-              <p className="text-[11px] text-grey-50 mt-0.5 leading-relaxed">
-                FreshHub collects from your area once a week — we need at
-                least 7 days&apos; notice to schedule pickup. Set the date
-                your harvest will be ready.
-              </p>
-            </div>
-          </div>
-          <div className="max-w-xs">
-            <div
-              className={`relative flex items-center bg-white border rounded-xl transition-all overflow-hidden ${
-                state?.fieldErrors?.harvest_date
-                  ? "border-red-300 focus-within:ring-2 focus-within:ring-red-100"
-                  : "border-grey-20 focus-within:border-brand-green-300 focus-within:ring-2 focus-within:ring-brand-green-100"
-              }`}
-            >
-              <input
-                type="date"
-                name="harvest_date"
-                min={(() => {
-                  const d = new Date()
-                  d.setDate(d.getDate() + 7)
-                  return d.toISOString().slice(0, 10)
-                })()}
-                value={values.harvest_date ?? ""}
-                onChange={(e) =>
-                  setValues((v) => ({ ...v, harvest_date: e.target.value }))
-                }
-                className="w-full px-4 py-3 bg-transparent text-body-sm text-grey-90 placeholder:text-grey-40 focus:outline-none cursor-pointer"
-              />
-              <span className="pr-4 text-grey-30 pointer-events-none">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                  <line x1="16" y1="2" x2="16" y2="6" />
-                  <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-              </span>
-            </div>
-            {state?.fieldErrors?.harvest_date ? (
-              <div className="mt-1.5 text-[11px] text-red-600 font-medium">
-                {state.fieldErrors.harvest_date}
-              </div>
-            ) : (
-              <div className="mt-1.5 text-[11px] text-grey-50">
-                Must be at least 7 days from today.
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Body */}
-      <div className="px-7 small:px-12 py-7">
-        {state?.error && !pending && (
-          <div className="flex items-start gap-x-2.5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 mb-5">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="12" y1="8" x2="12" y2="12" />
-              <line x1="12" y1="16" x2="12.01" y2="16" />
-            </svg>
-            <div className="text-body-sm font-medium">{state.error}</div>
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 small:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
           {FIELDS.map((f) => {
-            const err = state?.fieldErrors?.[f.name]
             const value = values[f.name] ?? ""
             const isFilled = value.trim().length > 0
+            const err = f.required
+              ? state.fieldErrors?.[f.name] ?? null
+              : null
+
+            if (f.full) {
+              return (
+                <label
+                  key={f.name}
+                  className="sm:col-span-2 flex flex-col"
+                >
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-caption font-semibold text-grey-70 uppercase tracking-[0.06em]">
+                      {f.label}{f.required ? " *" : ""}
+                    </span>
+                    {isFilled && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-green-500" />
+                    )}
+                  </div>
+                  <div
+                    className={`flex items-center rounded-xl border-2 bg-white transition-all ${
+                      err
+                        ? "border-red-300 focus-within:ring-2 focus-within:ring-red-100"
+                        : "border-grey-10 focus-within:border-brand-green-300 focus-within:ring-2 focus-within:ring-brand-green-100 focus-within:bg-white"
+                    }`}
+                  >
+                    {f.prefix && (
+                      <span className="pl-4 pr-1 text-grey-50 font-semibold">
+                        {f.prefix}
+                      </span>
+                    )}
+                    {f.type === "textarea" ? (
+                      <textarea
+                        name={f.name}
+                        placeholder={f.placeholder}
+                        value={value}
+                        onChange={(e) =>
+                          setValues((v) => ({ ...v, [f.name]: e.target.value }))
+                        }
+                        rows={4}
+                        className="w-full px-4 py-3 bg-transparent text-body-sm text-grey-90 placeholder:text-grey-40 focus:outline-none resize-none"
+                      />
+                    ) : (
+                      <input
+                        type={f.type ?? "text"}
+                        name={f.name}
+                        placeholder={f.placeholder}
+                        value={value}
+                        onChange={(e) =>
+                          setValues((v) => ({ ...v, [f.name]: e.target.value }))
+                        }
+                        list={f.suggestions ? `${f.name}-suggestions` : undefined}
+                        inputMode={f.type === "number" ? "numeric" : undefined}
+                        autoComplete="off"
+                        className={`w-full py-3 bg-transparent text-body-sm text-grey-90 placeholder:text-grey-40 focus:outline-none ${
+                          f.prefix ? "pl-0 pr-4" : "px-4"
+                        }`}
+                      />
+                    )}
+                    {f.suffix && (
+                      <span className="pr-4 pl-1 text-grey-50 font-semibold">
+                        {f.suffix}
+                      </span>
+                    )}
+                    {f.suggestions && (
+                      <datalist id={`${f.name}-suggestions`}>
+                        {f.suggestions.map((s) => (
+                          <option key={s} value={s} />
+                        ))}
+                      </datalist>
+                    )}
+                  </div>
+
+                  {f.suggestions && !isFilled && (
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {f.suggestions.slice(0, 5).map((s) => (
+                        <button
+                          key={s}
+                          type="button"
+                          onClick={() =>
+                            setValues((v) => ({ ...v, [f.name]: s }))
+                          }
+                          className="px-2.5 py-1 rounded-full bg-grey-5 hover:bg-brand-green-50 border border-grey-10 hover:border-brand-green-200 text-[11px] text-grey-70 hover:text-brand-green-700 transition-colors"
+                        >
+                          {s}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  {err ? (
+                    <div className="mt-1.5 text-[11px] text-red-600 font-medium">
+                      {err}
+                    </div>
+                  ) : f.helper ? (
+                    <div className="mt-1.5 text-[11px] text-grey-50">{f.helper}</div>
+                  ) : null}
+                </label>
+              )
+            }
+
             return (
               <label
                 key={f.name}
-                className={`block ${f.full ? "small:col-span-2" : ""}`}
+                className="flex flex-col"
               >
-                <span className="flex items-center justify-between text-caption font-semibold text-grey-70 uppercase tracking-[0.06em] mb-2">
-                  <span>
-                    {f.label}
-                    {f.required && <span className="text-brand-green-600 ml-1">*</span>}
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-caption font-semibold text-grey-70 uppercase tracking-[0.06em]">
+                    {f.label}{f.required ? " *" : ""}
                   </span>
-                </span>
-
+                  {isFilled && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-green-500" />
+                  )}
+                </div>
                 <div
-                  className={`relative flex items-center bg-grey-5 border rounded-xl transition-all overflow-hidden ${
+                  className={`flex items-center rounded-xl border-2 bg-white transition-all ${
                     err
                       ? "border-red-300 focus-within:ring-2 focus-within:ring-red-100"
                       : "border-grey-10 focus-within:border-brand-green-300 focus-within:ring-2 focus-within:ring-brand-green-100 focus-within:bg-white"

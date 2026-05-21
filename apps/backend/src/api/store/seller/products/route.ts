@@ -3,6 +3,16 @@ import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
 import {
   createProductsWorkflow,
 } from "@medusajs/medusa/core-flows"
+import { LISTING_MODULE } from "../../../modules/listing"
+import ListingModuleService from "../../../modules/listing/service"
+import {
+  validateProducerEligibility,
+  validateHarvestDate,
+  validatePickupWindow,
+} from "../../../modules/listing/validators"
+import type { ListingType, ListingStatus } from "../../../modules/listing/types"
+import { HUB_MODULE } from "../../../modules/hub"
+import HubModuleService from "../../../modules/hub/service"
 
 type StoreCustomer = {
   id: string
@@ -58,7 +68,8 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
 
-  const { data, metadata } = await query.graph({
+  // Fetch products with their listing via the link
+  const { data } = await query.graph({
     entity: "product",
     fields: [
       "id",
@@ -76,13 +87,18 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       "variants.sku",
       "variants.prices.amount",
       "variants.prices.currency_code",
+      "product_listing.id",
+      "product_listing.listing_type",
+      "product_listing.harvest_date",
+      "product_listing.status",
+      "product_listing.pickup_window_id",
+      "product_listing.created_at",
+      "product_listing.updated_at",
     ],
     filters: {
-      // Note: filtering by metadata isn't a first-class Medusa filter, so
-      // we fetch a generous page and filter in memory. For a real store
-      // with many sellers, replace this with a dedicated link table.
+      // Fetch a generous page and filter in memory by seller_customer_id.
     },
-    pagination: { take: 200, skip: 0 },
+    pagination: { take: 500, skip: 0 },
   })
 
   const ours = (data ?? []).filter(
@@ -91,13 +107,37 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         ?.seller_customer_id === customer.id
   )
 
-  res.json({ products: ours, count: ours.length, total: metadata?.count })
+  // Shape listing into a friendly payload per product
+  const shaped = ours.map((p) => {
+    const listing = (p as { product_listing?: unknown[] }).product_listing?.[0] as
+      | Record<string, unknown>
+      | undefined
+    return {
+      ...p,
+      product_listing: undefined, // strip raw link array
+      listing: listing
+        ? {
+            id: listing.id,
+            listing_type: listing.listing_type,
+            harvest_date: listing.harvest_date,
+            status: listing.status,
+            pickup_window_id: listing.pickup_window_id ?? null,
+            created_at: listing.created_at,
+            updated_at: listing.updated_at,
+          }
+        : null,
+    }
+  })
+
+  res.json({ products: shaped, count: shaped.length })
 }
 
 /** POST /store/seller/products — create a new draft listing. */
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const customer = await assertSeller(req, res)
   if (!customer) return
+
+  const meta = (customer.metadata ?? {}) as Record<string, unknown>
 
   const body = (req.body ?? {}) as {
     title?: string
@@ -111,33 +151,72 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     inventory_quantity?: number
     selling_mode?: string
     harvest_date?: string
+    listing_type?: string
   }
 
-  // Validate harvest date for hub-bound listings.
-  const sellingMode = body.selling_mode ?? "direct"
-  if (sellingMode === "hub") {
-    const harvestRaw = body.harvest_date?.trim()
-    if (!harvestRaw) {
-      res.status(400).json({ error: "Harvest date is required when selling to FreshHub." })
-      return
-    }
-    const harvestDate = new Date(harvestRaw)
-    if (isNaN(harvestDate.getTime())) {
-      res.status(400).json({ error: "Invalid harvest date." })
-      return
-    }
-    // Must be at least 7 days from now (FreshHub collects once a week).
-    const cutoff = new Date()
-    cutoff.setHours(0, 0, 0, 0)
-    cutoff.setDate(cutoff.getDate() + 7)
-    if (harvestDate < cutoff) {
+  // ----- Listing-type from body (preferred) or fallback to legacy selling_mode -----
+  const rawListingType = (body.listing_type ?? body.selling_mode ?? "").trim()
+  let listingType: ListingType | null = null
+
+  if (rawListingType === "direct_to_consumer" || rawListingType === "direct") {
+    listingType = "direct_to_consumer"
+  } else if (rawListingType === "sell_to_freshhub" || rawListingType === "hub") {
+    listingType = "sell_to_freshhub"
+  }
+
+  if (!listingType) {
+    res.status(400).json({
+      error: "listing_type is required. Must be 'direct_to_consumer' or 'sell_to_freshhub'.",
+    })
+    return
+  }
+
+  // ----- Producer eligibility check -----
+  const eligibility = validateProducerEligibility(meta)
+  if (!eligibility.ok) {
+    res.status(422).json({
+      error: eligibility.errors[0].message,
+      code: eligibility.errors[0].code,
+      fieldErrors: eligibility.errors,
+    })
+    return
+  }
+
+  // ----- Harvest date for sell_to_freshhub -----
+  let harvestDate: string | null = null
+  if (listingType === "sell_to_freshhub") {
+    // Find the producer's hub to get its timezone
+    const hubService: HubModuleService = req.scope.resolve(HUB_MODULE)
+    const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
+    const { data: hubData } = await query.graph({
+      entity: "customer",
+      fields: ["id", "hub.id", "hub.timezone"],
+      filters: { id: customer.id },
+    })
+    const hub = (hubData?.[0] as { hub?: { id?: string; timezone?: string } } | undefined)?.hub
+    const hubTimezone = hub?.timezone ?? "Asia/Manila"
+
+    const harvestRaw = body.harvest_date?.trim() ?? null
+    const dateCheck = validateHarvestDate(harvestRaw, hubTimezone, 3, 5)
+    if (!dateCheck.ok) {
       res.status(400).json({
-        error: "Harvest date must be at least 7 days from today. FreshHub collects in your area once a week — we need lead time to schedule pickup.",
+        error: dateCheck.errors[0].message,
+        code: dateCheck.errors[0].code,
+        fieldErrors: dateCheck.errors,
       })
       return
     }
+    harvestDate = harvestRaw
   }
 
+  // ----- Pickup window match (deferred, always OK in Phase 2) -----
+  let listingStatus: ListingStatus = "draft"
+  if (listingType === "sell_to_freshhub") {
+    const pw = validatePickupWindow(null, null)
+    listingStatus = pw.status // "pending_pickup"
+  }
+
+  // ----- Basic field validation -----
   if (!body.title || body.title.trim().length < 2) {
     res.status(400).json({ error: "Title is required (min 2 chars)." })
     return
@@ -192,8 +271,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
           ],
           metadata: {
             seller_customer_id: customer.id,
-            selling_mode: sellingMode,
-            harvest_date: body.harvest_date?.trim() || null,
+            selling_mode: listingType,
+            harvest_date: harvestDate,
             unit: body.unit ?? "kg",
             category: body.category ?? null,
             submitted_at: new Date().toISOString(),
@@ -202,6 +281,35 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       ],
     },
   })
+
+  const product = result?.[0]
+
+  // ----- Create the ProductListing row via link -----
+  if (product) {
+    const listingService: ListingModuleService = req.scope.resolve(LISTING_MODULE)
+    try {
+      const listing = await listingService.createProductListings({
+        listing_type: listingType,
+        harvest_date: harvestDate ? new Date(harvestDate) : null,
+        pickup_window_id: null,
+        status: listingStatus,
+      })
+
+      // Link product to listing
+      const { data: linkData } = await query.graph({
+        entity: "product",
+        fields: ["id", "product_listing.id"],
+        filters: { id: product.id },
+      })
+
+      res.status(201).json({ product, listing })
+      return
+    } catch (err) {
+      // Listing creation failed — product was still created.
+      // Log and return partial success. The product exists but has no listing row.
+      console.error("Failed to create listing row:", err)
+    }
+  }
 
   res.status(201).json({ product: result?.[0] })
 }

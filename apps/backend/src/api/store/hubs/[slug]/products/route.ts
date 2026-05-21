@@ -10,6 +10,10 @@ import type HubModuleService from "../../../../../modules/hub/service"
  * a hub-aware wrapper around `/store/products`) so we don't have to touch the
  * core product list route. Returns just IDs — the storefront fetches full
  * product detail through the standard `/store/products` route.
+ *
+ * Query params:
+ *   listing_type — optional; filter products by their listing type
+ *     ("direct_to_consumer" | "sell_to_freshhub")
  */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const hubService: HubModuleService = req.scope.resolve(HUB_MODULE)
@@ -22,7 +26,46 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
+  const listingType = req.query.listing_type as string | undefined
+
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
+
+  // If listing_type is specified, fetch products through the listing link
+  if (listingType && ["direct_to_consumer", "sell_to_freshhub"].includes(listingType)) {
+    const { data } = await query.graph({
+      entity: "hub",
+      fields: [
+        "id",
+        "product.id",
+        "product.product_listing.listing_type",
+      ],
+      filters: { id: hub.id },
+    })
+
+    const hubEntry = data[0] as {
+      product?: Array<{
+        id: string
+        product_listing?: Array<{ listing_type: string }>
+      }>
+    } | undefined
+
+    const products = (hubEntry?.product ?? [])
+      .filter((p) => {
+        const listing = p.product_listing?.[0]
+        return listing?.listing_type === listingType
+      })
+      .map((p) => ({ id: p.id }))
+
+    res.json({
+      hub_id: hub.id,
+      slug: hub.slug,
+      listing_type: listingType,
+      product_ids: products.map((p) => p.id),
+    })
+    return
+  }
+
+  // Default: return all hub-linked product IDs
   const { data } = await query.graph({
     entity: "hub",
     fields: ["id", "product.id"],

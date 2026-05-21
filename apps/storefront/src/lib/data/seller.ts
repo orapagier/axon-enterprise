@@ -26,6 +26,15 @@ export type SellerListing = {
     sku: string | null
     prices: Array<{ amount: number; currency_code: string }>
   }>
+  listing?: {
+    id: string
+    listing_type: string
+    harvest_date: string | null
+    status: string
+    pickup_window_id: string | null
+    created_at: string
+    updated_at: string
+  } | null
 }
 
 const baseHeaders = async () => {
@@ -97,6 +106,8 @@ function parseListing(formData: FormData): {
   const unit = get("unit") || "kg"
   const priceRaw = get("price")
   const price = Number(priceRaw)
+  const listingType = get("listing_type") || get("selling_mode") || "direct_to_consumer"
+  const harvestDate = get("harvest_date")
 
   if (!title || title.length < 2) {
     fieldErrors.title = "Title must be at least 2 characters."
@@ -120,8 +131,9 @@ function parseListing(formData: FormData): {
       unit,
       price,
       currency_code: "php",
-      selling_mode: get("selling_mode") || "direct",
-      harvest_date: get("harvest_date") || undefined,
+      listing_type: listingType,
+      selling_mode: listingType, // backward compat
+      harvest_date: harvestDate || undefined,
     },
     fieldErrors,
   }
@@ -151,15 +163,24 @@ export async function createListing(
     const errBody = (await res.json().catch(() => ({}))) as {
       error?: string
       code?: string
+      fieldErrors?: Array<{ field: string; message: string }>
     }
     if (errBody.code === "PROFILE_INCOMPLETE") {
       const countryCode = String(formData.get("countryCode") ?? "ph")
       redirect(`/${countryCode}/onboarding`)
     }
+    // Map field errors if present
+    const mappedFieldErrors: Record<string, string> = {}
+    if (errBody.fieldErrors) {
+      for (const fe of errBody.fieldErrors) {
+        mappedFieldErrors[fe.field] = fe.message
+      }
+    }
     return {
       ok: false,
       error:
         errBody.error ?? "We couldn't save your listing. Please try again.",
+      fieldErrors: Object.keys(mappedFieldErrors).length ? mappedFieldErrors : fieldErrors,
     }
   }
 
@@ -194,10 +215,20 @@ export async function updateListing(
   })
 
   if (!res.ok) {
-    const errBody = (await res.json().catch(() => ({}))) as { error?: string }
+    const errBody = (await res.json().catch(() => ({}))) as {
+      error?: string
+      fieldErrors?: Array<{ field: string; message: string }>
+    }
+    const mappedFieldErrors: Record<string, string> = {}
+    if (errBody.fieldErrors) {
+      for (const fe of errBody.fieldErrors) {
+        mappedFieldErrors[fe.field] = fe.message
+      }
+    }
     return {
       ok: false,
       error: errBody.error ?? "Couldn't update your listing.",
+      fieldErrors: Object.keys(mappedFieldErrors).length ? mappedFieldErrors : fieldErrors,
     }
   }
 

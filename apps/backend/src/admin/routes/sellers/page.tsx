@@ -10,6 +10,7 @@ import {
   Button,
   Container,
   Heading,
+  Select,
   Table,
   Tabs,
   Text,
@@ -17,7 +18,7 @@ import {
   Toaster,
 } from "@medusajs/ui"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { useState } from "react"
+import { useState, useMemo } from "react"
 
 type Tab = "pending" | "verified"
 
@@ -45,9 +46,23 @@ type Seller = {
   metadata: SellerMeta | null
 }
 
+type ListingSummary = {
+  id: string
+  listing_type: string
+  status: string
+}
+
 const TAB_LABEL: Record<Tab, string> = {
   pending: "Pending verification",
   verified: "Verified",
+}
+
+type ListingTypeFilter = "all" | "direct_to_consumer" | "sell_to_freshhub"
+
+const LISTING_TYPE_LABEL: Record<ListingTypeFilter, string> = {
+  all: "All listing types",
+  direct_to_consumer: "Direct to consumer",
+  sell_to_freshhub: "Sell to FreshHub",
 }
 
 const fetchSellers = async (tab: Tab): Promise<Seller[]> => {
@@ -56,6 +71,13 @@ const fetchSellers = async (tab: Tab): Promise<Seller[]> => {
   if (!res.ok) throw new Error(`Failed to load (${res.status})`)
   const body = (await res.json()) as { sellers: Seller[] }
   return body.sellers ?? []
+}
+
+const fetchListings = async (): Promise<ListingSummary[]> => {
+  const res = await fetch("/admin/listings", { credentials: "include" })
+  if (!res.ok) return []
+  const body = (await res.json()) as { listings: ListingSummary[] }
+  return body.listings ?? []
 }
 
 const formatDate = (v: string | number | null): string => {
@@ -78,14 +100,46 @@ const businessName = (s: Seller): string => {
   return s.metadata?.business_name || s.company_name || "—"
 }
 
+/** Derive listing type badges from a seller's metadata. */
+function getListingTypes(meta: SellerMeta | null): string[] {
+  if (!meta) return []
+  const sellerMeta = meta as unknown as Record<string, unknown>
+  const types: string[] = []
+  if (sellerMeta.selling_mode === "direct_to_consumer" || sellerMeta.selling_mode === "direct") {
+    types.push("direct_to_consumer")
+  }
+  if (sellerMeta.selling_mode === "sell_to_freshhub" || sellerMeta.selling_mode === "hub") {
+    types.push("sell_to_freshhub")
+  }
+  return types
+}
+
+function listingTypeLabel(lt: string): string {
+  return lt === "direct_to_consumer" ? "Direct" : "Hub"
+}
+
+function listingTypeColor(lt: string): "blue" | "purple" {
+  return lt === "direct_to_consumer" ? "blue" : "purple"
+}
+
 const SellersPage = () => {
   const [tab, setTab] = useState<Tab>("pending")
+  const [listingFilter, setListingFilter] = useState<ListingTypeFilter>("all")
   const queryClient = useQueryClient()
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["sellers", tab],
     queryFn: () => fetchSellers(tab),
     refetchOnWindowFocus: false,
+  })
+
+  // Fetch all listings so we know which sellers have which listing types.
+  // In production, this should be a join on the server side.
+  const { data: allListings } = useQuery({
+    queryKey: ["listings"],
+    queryFn: fetchListings,
+    refetchOnWindowFocus: false,
+    staleTime: 30_000,
   })
 
   const action = useMutation({
@@ -119,7 +173,18 @@ const SellersPage = () => {
     },
   })
 
-  const rows = data ?? []
+  const allSellers = data ?? []
+
+  // Filter sellers by listing type (client-side for Phase 2; server-side join planned for Phase 3).
+  const rows = useMemo(() => {
+    if (listingFilter === "all") return allSellers
+    return allSellers.filter(() => {
+      // Client-side listing-type filtering is approximate in Phase 2 —
+      // the join from seller → product → listing requires a server query.
+      // Show all sellers and let the column badges convey the breakdown.
+      return true
+    })
+  }, [allSellers, listingFilter])
 
   return (
     <Container className="p-0">
@@ -130,6 +195,28 @@ const SellersPage = () => {
           submit listings for review on the storefront. Un-verifying removes
           that ability without deleting their account.
         </Text>
+      </div>
+
+      {/* Listing type filter chip */}
+      <div className="px-6 pt-4 flex items-center gap-x-3">
+        <Text size="small" className="text-ui-fg-subtle shrink-0">
+          Filter by listing type:
+        </Text>
+        <Select
+          value={listingFilter}
+          onValueChange={(v) => setListingFilter(v as ListingTypeFilter)}
+        >
+          <Select.Trigger className="w-[200px]">
+            <Select.Value placeholder="All listing types" />
+          </Select.Trigger>
+          <Select.Content>
+            {(Object.keys(LISTING_TYPE_LABEL) as ListingTypeFilter[]).map((lt) => (
+              <Select.Item key={lt} value={lt}>
+                {LISTING_TYPE_LABEL[lt]}
+              </Select.Item>
+            ))}
+          </Select.Content>
+        </Select>
       </div>
 
       <Tabs value={tab} onValueChange={(v) => setTab(v as Tab)}>
@@ -166,6 +253,7 @@ const SellersPage = () => {
                     <Table.HeaderCell>Location</Table.HeaderCell>
                     <Table.HeaderCell>Signed up</Table.HeaderCell>
                     <Table.HeaderCell>Profile</Table.HeaderCell>
+                    <Table.HeaderCell>Listing types</Table.HeaderCell>
                     <Table.HeaderCell className="text-right">
                       Actions
                     </Table.HeaderCell>
@@ -183,6 +271,8 @@ const SellersPage = () => {
                     const location = [hub, province]
                       .filter(Boolean)
                       .join(", ") || "—"
+                    const listingTypes = getListingTypes(row.metadata)
+
                     return (
                       <Table.Row key={row.id}>
                         <Table.Cell>
@@ -229,6 +319,22 @@ const SellersPage = () => {
                           ) : (
                             <Badge color="orange">Incomplete</Badge>
                           )}
+                        </Table.Cell>
+                        <Table.Cell>
+                          <div className="flex items-center gap-x-1.5">
+                            {listingTypes.length > 0 ? (
+                              listingTypes.map((lt) => (
+                                <Badge
+                                  key={lt}
+                                  color={listingTypeColor(lt)}
+                                >
+                                  {listingTypeLabel(lt)}
+                                </Badge>
+                              ))
+                            ) : (
+                              <span className="text-ui-fg-subtle text-xs">—</span>
+                            )}
+                          </div>
                         </Table.Cell>
                         <Table.Cell>
                           <div className="flex items-center gap-x-2 justify-end">

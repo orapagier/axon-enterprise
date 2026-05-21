@@ -4,6 +4,14 @@ import {
   deleteProductsWorkflow,
   updateProductsWorkflow,
 } from "@medusajs/medusa/core-flows"
+import { LISTING_MODULE } from "../../../modules/listing"
+import ListingModuleService from "../../../modules/listing/service"
+import {
+  validateListingTypeLock,
+  validateStatusTransition,
+  validateHarvestDate,
+} from "../../../modules/listing/validators"
+import type { ListingStatus, ListingType } from "../../../modules/listing/types"
 
 type StoreCustomer = {
   id: string
@@ -62,6 +70,13 @@ async function loadOwnedProduct(
       "variants.prices.id",
       "variants.prices.amount",
       "variants.prices.currency_code",
+      "product_listing.id",
+      "product_listing.listing_type",
+      "product_listing.harvest_date",
+      "product_listing.status",
+      "product_listing.pickup_window_id",
+      "product_listing.created_at",
+      "product_listing.updated_at",
     ],
     filters: { id: productId },
   })
@@ -86,7 +101,27 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   if (!customer) return
   const product = await loadOwnedProduct(req, res, customer.id)
   if (!product) return
-  res.json({ product })
+
+  // Shape listing into friendly payload
+  const listingArr = (product as { product_listing?: unknown[] }).product_listing
+  const listing = listingArr?.[0] as Record<string, unknown> | undefined
+  const shaped = {
+    ...product,
+    product_listing: undefined,
+    listing: listing
+      ? {
+          id: listing.id,
+          listing_type: listing.listing_type,
+          harvest_date: listing.harvest_date,
+          status: listing.status,
+          pickup_window_id: listing.pickup_window_id ?? null,
+          created_at: listing.created_at,
+          updated_at: listing.updated_at,
+        }
+      : null,
+  }
+
+  res.json({ product: shaped })
 }
 
 /** PATCH /store/seller/products/:id — update title/description/thumbnail/etc. */
@@ -95,6 +130,12 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
   if (!customer) return
   const product = await loadOwnedProduct(req, res, customer.id)
   if (!product) return
+
+  const existingListing = (
+    (product as { product_listing?: unknown[] }).product_listing?.[0] as
+      | Record<string, unknown>
+      | undefined
+  )
 
   const body = (req.body ?? {}) as {
     title?: string
@@ -107,14 +148,79 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     currency_code?: string
     selling_mode?: string
     harvest_date?: string
+    listing_type?: string
+    status?: string
   }
 
+  // ----- Listing-type changes: validate lock -----
+  const rawListingType = (body.listing_type ?? body.selling_mode ?? "").trim()
+  const currentStatus = (existingListing?.status ?? "draft") as ListingStatus
+
+  if (rawListingType) {
+    const newType: ListingType =
+      rawListingType === "direct_to_consumer" || rawListingType === "direct"
+        ? "direct_to_consumer"
+        : rawListingType === "sell_to_freshhub" || rawListingType === "hub"
+          ? "sell_to_freshhub"
+          : (null as unknown as ListingType)
+
+    if (!newType) {
+      res.status(400).json({
+        error: "listing_type must be 'direct_to_consumer' or 'sell_to_freshhub'.",
+      })
+      return
+    }
+
+    const lockCheck = validateListingTypeLock(currentStatus, "listing_type")
+    if (!lockCheck.ok) {
+      res.status(409).json({
+        error: lockCheck.errors[0].message,
+        code: lockCheck.errors[0].code,
+      })
+      return
+    }
+  }
+
+  // ----- Harvest date changes: validate lock -----
+  if (body.harvest_date !== undefined) {
+    const dateLockCheck = validateListingTypeLock(currentStatus, "harvest_date")
+    if (!dateLockCheck.ok) {
+      res.status(409).json({
+        error: dateLockCheck.errors[0].message,
+        code: dateLockCheck.errors[0].code,
+      })
+      return
+    }
+  }
+
+  // ----- Status transition -----
+  if (body.status) {
+    const newStatus = body.status as ListingStatus
+    if (!["draft", "pending_pickup", "active", "sold_out", "expired", "cancelled"].includes(newStatus)) {
+      res.status(400).json({ error: `Invalid status: ${body.status}` })
+      return
+    }
+    const transitionCheck = validateStatusTransition(currentStatus, newStatus)
+    if (!transitionCheck.ok) {
+      res.status(400).json({
+        error: transitionCheck.errors[0].message,
+        code: transitionCheck.errors[0].code,
+      })
+      return
+    }
+  }
+
+  // ----- Update product -----
   const mergedMeta = {
     ...((product.metadata as Record<string, unknown> | null) ?? {}),
     ...(body.unit !== undefined ? { unit: body.unit } : {}),
     ...(body.category !== undefined ? { category: body.category } : {}),
-    ...(body.selling_mode !== undefined ? { selling_mode: body.selling_mode } : {}),
-    ...(body.harvest_date !== undefined ? { harvest_date: body.harvest_date?.trim() || null } : {}),
+    ...(rawListingType !== undefined
+      ? { selling_mode: rawListingType }
+      : {}),
+    ...(body.harvest_date !== undefined
+      ? { harvest_date: body.harvest_date?.trim() || null }
+      : {}),
     ...(body.price !== undefined
       ? { pending_price_change: Math.round(Number(body.price)) }
       : {}),
@@ -129,7 +235,9 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
         ...(body.description !== undefined
           ? { description: body.description.trim() }
           : {}),
-        ...(body.thumbnail !== undefined ? { thumbnail: body.thumbnail.trim() } : {}),
+        ...(body.thumbnail !== undefined
+          ? { thumbnail: body.thumbnail.trim() }
+          : {}),
         ...(body.origin_country !== undefined
           ? { origin_country: body.origin_country.trim() }
           : {}),
@@ -149,9 +257,9 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
         currency_code: string
       }>) => Promise<unknown>
     }
-    const currency = (body.currency_code ??
-      existingPrice.currency_code ??
-      "php").toLowerCase()
+    const currency = (
+      body.currency_code ?? existingPrice.currency_code ?? "php"
+    ).toLowerCase()
     try {
       await pricingModule.updatePrices([
         {
@@ -166,7 +274,66 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     }
   }
 
-  res.json({ ok: true })
+  // ----- Update listing row -----
+  if (existingListing?.id) {
+    const listingService: ListingModuleService = req.scope.resolve(LISTING_MODULE)
+    const listingUpdates: Record<string, unknown> = {}
+
+    if (rawListingType) {
+      listingUpdates.listing_type = rawListingType === "direct" ? "direct_to_consumer" : rawListingType === "hub" ? "sell_to_freshhub" : rawListingType
+    }
+    if (body.harvest_date !== undefined) {
+      listingUpdates.harvest_date = body.harvest_date?.trim() ? new Date(body.harvest_date.trim()) : null
+    }
+    if (body.status) {
+      listingUpdates.status = body.status
+    }
+
+    if (Object.keys(listingUpdates).length > 0) {
+      try {
+        await listingService.updateProductListings({
+          selector: { id: existingListing.id as string },
+          data: listingUpdates,
+        })
+      } catch (err) {
+        console.error("Failed to update listing row:", err)
+      }
+    }
+  }
+
+  // Fetch updated listing for response
+  const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
+  const { data: updated } = await query.graph({
+    entity: "product",
+    fields: [
+      "id",
+      "product_listing.id",
+      "product_listing.listing_type",
+      "product_listing.harvest_date",
+      "product_listing.status",
+      "product_listing.pickup_window_id",
+    ],
+    filters: { id: product.id },
+  })
+
+  const updatedListing = (
+    (updated?.[0] as { product_listing?: unknown[] } | undefined)?.product_listing?.[0] as
+      | Record<string, unknown>
+      | undefined
+  )
+
+  res.json({
+    ok: true,
+    listing: updatedListing
+      ? {
+          id: updatedListing.id,
+          listing_type: updatedListing.listing_type,
+          harvest_date: updatedListing.harvest_date,
+          status: updatedListing.status,
+          pickup_window_id: updatedListing.pickup_window_id ?? null,
+        }
+      : null,
+  })
 }
 
 /** DELETE /store/seller/products/:id — only allowed while still a draft. */
@@ -182,6 +349,21 @@ export async function DELETE(req: MedusaRequest, res: MedusaResponse) {
         "Published listings can't be deleted — set them to 'out of stock' instead.",
     })
     return
+  }
+
+  // Clean up the listing row if it exists
+  const existingListing = (
+    (product as { product_listing?: unknown[] }).product_listing?.[0] as
+      | Record<string, unknown>
+      | undefined
+  )
+  if (existingListing?.id) {
+    const listingService: ListingModuleService = req.scope.resolve(LISTING_MODULE)
+    try {
+      await listingService.deleteProductListings(existingListing.id as string)
+    } catch (err) {
+      console.error("Failed to delete listing row:", err)
+    }
   }
 
   await deleteProductsWorkflow(req.scope).run({ input: { ids: [product.id] } })

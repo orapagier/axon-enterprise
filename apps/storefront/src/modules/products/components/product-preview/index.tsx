@@ -4,6 +4,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import ProductQuickAdd from "../product-quick-add"
 import Thumbnail from "../thumbnail"
 import PreviewPrice from "./price"
+import ListingBadge from "./listing-badge"
 
 export default async function ProductPreview({
   product,
@@ -23,6 +24,10 @@ export default async function ProductPreview({
   const isFreshToday = product.id
     ? product.id.charCodeAt(product.id.length - 1) % 3 === 0
     : false
+
+  // Listing type from product metadata (set at submission time)
+  const meta = (product.metadata ?? {}) as Record<string, unknown>
+  const listingType = typeof meta.selling_mode === "string" ? meta.selling_mode : null
 
   return (
     <div
@@ -76,27 +81,30 @@ export default async function ProductPreview({
 
       {/* Info */}
       <div className="flex flex-col flex-1 p-4 small:p-5">
-        {/* Origin pill + rating */}
+        {/* Origin pill + listing badge + rating */}
         <div className="flex items-center justify-between gap-x-2 mb-2.5">
-          <span className="inline-flex items-center gap-x-1 px-2 py-0.5 rounded-md bg-brand-green-50 text-brand-green-700 border border-brand-green-100 min-w-0">
-            <svg
-              width="9"
-              height="9"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="shrink-0"
-            >
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-            <span className="text-[9px] uppercase tracking-[0.12em] font-bold truncate">
-              {product.origin_country || "Mindanao"}
+          <div className="flex items-center gap-x-1.5 min-w-0">
+            <span className="inline-flex items-center gap-x-1 px-2 py-0.5 rounded-md bg-brand-green-50 text-brand-green-700 border border-brand-green-100 min-w-0">
+              <svg
+                width="9"
+                height="9"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="shrink-0"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span className="text-[9px] uppercase tracking-[0.12em] font-bold truncate">
+                {product.origin_country || "Mindanao"}
+              </span>
             </span>
-          </span>
+            <ListingBadge listingType={listingType} />
+          </div>
           <span className="inline-flex items-center gap-x-1 flex-shrink-0">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="#eab308" stroke="none">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />

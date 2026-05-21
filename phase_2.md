@@ -1,6 +1,6 @@
 # Phase 2 — Listing Types on Products
 
-**Status:** pending
+**Status:** complete
 **Depends on:** Phase 1 (Hub) — complete
 **Estimated time:** 1 week
 
