@@ -35,7 +35,7 @@ export function validateWindowCreate(params: {
     })
   }
 
-  // date >= today (in Manila TZ)
+  // date >= today (in Manila TZ). All math in UTC so ISO derivation is consistent.
   const parsed = new Date(params.date)
   if (isNaN(parsed.getTime())) {
     errors.push({
@@ -44,19 +44,22 @@ export function validateWindowCreate(params: {
       code: "DATE_INVALID",
     })
   } else {
-    const now = new Date()
-    const tzOffset = 8 * 60 * 60_000 // Asia/Manila
-    const localNow = new Date(now.getTime() + tzOffset)
+    const tzOffset = 8 * 60 * 60_000
+    const manilaNow = new Date(Date.now() + tzOffset)
     const todayStart = new Date(
-      localNow.getUTCFullYear(),
-      localNow.getUTCMonth(),
-      localNow.getUTCDate()
+      Date.UTC(
+        manilaNow.getUTCFullYear(),
+        manilaNow.getUTCMonth(),
+        manilaNow.getUTCDate()
+      )
     )
-    const dateLocal = new Date(parsed.getTime() + tzOffset)
+    const manilaDate = new Date(parsed.getTime() + tzOffset)
     const dateStart = new Date(
-      dateLocal.getUTCFullYear(),
-      dateLocal.getUTCMonth(),
-      dateLocal.getUTCDate()
+      Date.UTC(
+        manilaDate.getUTCFullYear(),
+        manilaDate.getUTCMonth(),
+        manilaDate.getUTCDate()
+      )
     )
     if (dateStart < todayStart) {
       errors.push({
