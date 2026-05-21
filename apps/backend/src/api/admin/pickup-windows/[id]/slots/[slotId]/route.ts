@@ -57,7 +57,7 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
 
     // Auto-set picked_up_at when marking picked_up
     if (body.status === "picked_up") {
-      update.picked_up_at = new Date().toISOString()
+      update.picked_up_at = new Date()
     }
 
     // If transitioning back from full to open (slot cancelled), update window
