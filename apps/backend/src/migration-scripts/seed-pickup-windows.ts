@@ -71,7 +71,7 @@ export default async function seedPickupWindows({ container }: ExecArgs) {
 
   const cursor = new Date(today)
   while (cursor <= endDate) {
-    if (DAYS_OF_WEEK.includes(cursor.getDay())) {
+    if (DAYS_OF_WEEK.includes(cursor.getUTCDay())) {
       const dateStr = cursor.toISOString().slice(0, 10)
 
       if (existingDays.has(dateStr)) {
@@ -92,7 +92,7 @@ export default async function seedPickupWindows({ container }: ExecArgs) {
         logger.info(`Created window: ${dateStr} ${START_TIME}-${END_TIME}`)
       }
     }
-    cursor.setDate(cursor.getDate() + 1)
+    cursor.setUTCDate(cursor.getUTCDate() + 1)
   }
 
   logger.info(
