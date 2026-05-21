@@ -4,14 +4,13 @@ import {
   deleteProductsWorkflow,
   updateProductsWorkflow,
 } from "@medusajs/medusa/core-flows"
-import { LISTING_MODULE } from "../../../modules/listing"
-import ListingModuleService from "../../../modules/listing/service"
+import { LISTING_MODULE } from "../../../../../modules/listing"
+import ListingModuleService from "../../../../../modules/listing/service"
 import {
   validateListingTypeLock,
   validateStatusTransition,
-  validateHarvestDate,
-} from "../../../modules/listing/validators"
-import type { ListingStatus, ListingType } from "../../../modules/listing/types"
+} from "../../../../../modules/listing/validators"
+import type { ListingStatus, ListingType } from "../../../../../modules/listing/types"
 
 type StoreCustomer = {
   id: string
