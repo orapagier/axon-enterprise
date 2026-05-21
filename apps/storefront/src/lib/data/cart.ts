@@ -338,46 +338,73 @@ export async function submitPromotionForm(
 export async function setAddresses(currentState: unknown, formData: FormData) {
   try {
     if (!formData) {
-      throw new Error("No form data found when setting addresses")
+      return "No form data found when setting addresses"
     }
-    const cartId = getCartId()
+    const cartId = await getCartId()
     if (!cartId) {
-      throw new Error("No existing cart found when setting addresses")
+      return "No existing cart found when setting addresses"
     }
 
-    const data = {
+    // ── server-side validation ────────────────────────────────────
+    const { validateAddressForm, sanitizeText, sanitizeCity } =
+      await import("@lib/data/address-validation")
+
+    const validationErrors = validateAddressForm(formData)
+    if (validationErrors) {
+      // Return the first error so the client can display it inline
+      const first = Object.values(validationErrors)[0]
+      return first
+    }
+
+    // ── sanitised address payload ─────────────────────────────────
+    const shippingCity = sanitizeCity(
+      formData.get("shipping_address.city")
+    )
+
+    const data: Record<string, unknown> = {
       shipping_address: {
-        first_name: formData.get("shipping_address.first_name"),
-        last_name: formData.get("shipping_address.last_name"),
-        address_1: formData.get("shipping_address.address_1"),
+        first_name: sanitizeText(formData.get("shipping_address.first_name")),
+        last_name: sanitizeText(formData.get("shipping_address.last_name")),
+        address_1: sanitizeText(formData.get("shipping_address.address_1")),
         address_2: "",
-        company: formData.get("shipping_address.company"),
-        postal_code: formData.get("shipping_address.postal_code"),
-        city: formData.get("shipping_address.city"),
-        country_code: formData.get("shipping_address.country_code"),
-        province: formData.get("shipping_address.province"),
-        phone: formData.get("shipping_address.phone"),
+        company: sanitizeText(formData.get("shipping_address.company")),
+        postal_code: sanitizeText(formData.get("shipping_address.postal_code")),
+        city: shippingCity,
+        country_code: sanitizeText(
+          formData.get("shipping_address.country_code")
+        ),
+        province: sanitizeText(formData.get("shipping_address.province")),
+        phone: sanitizeText(formData.get("shipping_address.phone")),
       },
-      email: formData.get("email"),
-    } as any
+      email: sanitizeText(formData.get("email")),
+    }
 
     const sameAsBilling = formData.get("same_as_billing")
-    if (sameAsBilling === "on") data.billing_address = data.shipping_address
-
-    if (sameAsBilling !== "on")
-      data.billing_address = {
-        first_name: formData.get("billing_address.first_name"),
-        last_name: formData.get("billing_address.last_name"),
-        address_1: formData.get("billing_address.address_1"),
+    if (sameAsBilling === "on") {
+      ;(data as any).billing_address = (data as any).shipping_address
+    } else {
+      const billingCity = sanitizeCity(
+        formData.get("billing_address.city")
+      )
+      ;(data as any).billing_address = {
+        first_name: sanitizeText(formData.get("billing_address.first_name")),
+        last_name: sanitizeText(formData.get("billing_address.last_name")),
+        address_1: sanitizeText(formData.get("billing_address.address_1")),
         address_2: "",
-        company: formData.get("billing_address.company"),
-        postal_code: formData.get("billing_address.postal_code"),
-        city: formData.get("billing_address.city"),
-        country_code: formData.get("billing_address.country_code"),
-        province: formData.get("billing_address.province"),
-        phone: formData.get("billing_address.phone"),
+        company: sanitizeText(formData.get("billing_address.company")),
+        postal_code: sanitizeText(
+          formData.get("billing_address.postal_code")
+        ),
+        city: billingCity,
+        country_code: sanitizeText(
+          formData.get("billing_address.country_code")
+        ),
+        province: sanitizeText(formData.get("billing_address.province")),
+        phone: sanitizeText(formData.get("billing_address.phone")),
       }
-    await updateCart(data)
+    }
+
+    await updateCart(data as any)
   } catch (e: any) {
     return e.message
   }

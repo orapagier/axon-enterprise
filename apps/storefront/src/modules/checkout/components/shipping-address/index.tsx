@@ -1,11 +1,42 @@
+"use client"
+
+import { HUB_CITIES } from "@lib/constants/hub-cities"
+import {
+  validateEmail,
+  validateHubCity,
+  validatePhilippinePostalCode,
+  validateRequired,
+  type AddressErrors,
+} from "@lib/data/address-validation"
 import { HttpTypes } from "@medusajs/types"
 import { Container } from "@modules/common/components/ui"
 import Checkbox from "@modules/common/components/checkbox"
 import Input from "@modules/common/components/input"
 import { mapKeys } from "lodash"
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import AddressSelect from "../address-select"
 import CountrySelect from "../country-select"
+
+type FieldKey =
+  | "shipping_address.first_name"
+  | "shipping_address.last_name"
+  | "shipping_address.address_1"
+  | "shipping_address.company"
+  | "shipping_address.postal_code"
+  | "shipping_address.city"
+  | "shipping_address.country_code"
+  | "shipping_address.province"
+  | "shipping_address.phone"
+  | "email"
+
+const REQUIRED_FIELDS: { key: FieldKey; label: string }[] = [
+  { key: "shipping_address.first_name", label: "First name" },
+  { key: "shipping_address.last_name", label: "Last name" },
+  { key: "shipping_address.address_1", label: "Address" },
+  { key: "shipping_address.postal_code", label: "Postal code" },
+  { key: "shipping_address.city", label: "City" },
+  { key: "shipping_address.country_code", label: "Country" },
+]
 
 const ShippingAddress = ({
   customer,
@@ -31,12 +62,14 @@ const ShippingAddress = ({
     email: cart?.email || "",
   })
 
+  const [errors, setErrors] = useState<AddressErrors>({})
+  const [touched, setTouched] = useState<Set<string>>(new Set())
+
   const countriesInRegion = useMemo(
     () => cart?.region?.countries?.map((c) => c.iso_2),
     [cart?.region]
   )
 
-  // check if customer has saved addresses that are in the current region
   const addressesInRegion = useMemo(
     () =>
       customer?.addresses.filter(
@@ -45,13 +78,55 @@ const ShippingAddress = ({
     [customer?.addresses, countriesInRegion]
   )
 
+  // ── per-field validation ──────────────────────────────────────────
+
+  const validateField = useCallback(
+    (name: FieldKey, value: string): string | null => {
+      switch (name) {
+        case "email":
+          return validateEmail(value)
+        case "shipping_address.city":
+          return validateHubCity(value)
+        case "shipping_address.postal_code":
+          return validatePhilippinePostalCode(value)
+        default: {
+          // required-field check for the known required keys
+          const def = REQUIRED_FIELDS.find((f) => f.key === name)
+          if (def) return validateRequired(value, def.label)
+          return null
+        }
+      }
+    },
+    []
+  )
+
+  const runAllValidations = useCallback((): AddressErrors => {
+    const errs: AddressErrors = {}
+    for (const field of REQUIRED_FIELDS) {
+      const err = validateField(field.key, formData[field.key] ?? "")
+      if (err) errs[field.key] = err
+    }
+    const emailErr = validateField("email", formData.email ?? "")
+    if (emailErr) errs.email = emailErr
+    return errs
+  }, [formData, validateField])
+
+  const isValid =
+    Object.keys(runAllValidations()).length === 0 &&
+    formData["shipping_address.country_code"].trim().length > 0
+
+  // ── handlers ─────────────────────────────────────────────────────
+
   const setFormAddress = (
     address?: HttpTypes.StoreCartAddress,
     email?: string
   ) => {
+    setErrors({})
+    setTouched(new Set())
+
     if (address) {
-      setFormData((prevState: Record<string, string>) => ({
-        ...prevState,
+      setFormData((prev) => ({
+        ...prev,
         "shipping_address.first_name": address?.first_name || "",
         "shipping_address.last_name": address?.last_name || "",
         "shipping_address.address_1": address?.address_1 || "",
@@ -65,34 +140,65 @@ const ShippingAddress = ({
     }
 
     if (email) {
-      setFormData((prevState: Record<string, string>) => ({
-        ...prevState,
-        email: email,
+      setFormData((prev) => ({
+        ...prev,
+        email,
       }))
     }
   }
 
   useEffect(() => {
-    // Ensure cart is not null and has a shipping_address before setting form data
     if (cart && cart.shipping_address) {
       setFormAddress(cart?.shipping_address, cart?.email)
     }
-
     if (cart && !cart.email && customer?.email) {
       setFormAddress(undefined, customer.email)
     }
-  }, [cart]) // Add cart as a dependency
+  }, [cart])
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLInputElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+
+    // Re-validate on every keystroke after first blur
+    if (touched.has(name)) {
+      const err = validateField(name as FieldKey, value)
+      setErrors((prev) => {
+        const next = { ...prev }
+        if (err) {
+          next[name] = err
+        } else {
+          delete next[name]
+        }
+        return next
+      })
+    }
+  }
+
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target
+    setTouched((prev) => new Set(prev).add(name))
+
+    const err = validateField(name as FieldKey, value)
+    setErrors((prev) => {
+      const next = { ...prev }
+      if (err) {
+        next[name] = err
+      } else {
+        delete next[name]
+      }
+      return next
     })
   }
+
+  const fieldError = (name: string): string | undefined =>
+    touched.has(name) ? errors[name] : undefined
+
+  // ── render ───────────────────────────────────────────────────────
 
   return (
     <>
@@ -112,6 +218,7 @@ const ShippingAddress = ({
           />
         </Container>
       )}
+
       <div className="grid grid-cols-2 gap-4">
         <Input
           label="First name"
@@ -119,8 +226,15 @@ const ShippingAddress = ({
           autoComplete="given-name"
           value={formData["shipping_address.first_name"]}
           onChange={handleChange}
+          onBlur={handleBlur}
           required
           data-testid="shipping-first-name-input"
+          {...(fieldError("shipping_address.first_name")
+            ? {
+                className:
+                  "!border-rose-400 focus:!shadow-borders-interactive-with-active",
+              }
+            : {})}
         />
         <Input
           label="Last name"
@@ -128,8 +242,15 @@ const ShippingAddress = ({
           autoComplete="family-name"
           value={formData["shipping_address.last_name"]}
           onChange={handleChange}
+          onBlur={handleBlur}
           required
           data-testid="shipping-last-name-input"
+          {...(fieldError("shipping_address.last_name")
+            ? {
+                className:
+                  "!border-rose-400 focus:!shadow-borders-interactive-with-active",
+              }
+            : {})}
         />
         <Input
           label="Address"
@@ -137,8 +258,15 @@ const ShippingAddress = ({
           autoComplete="address-line1"
           value={formData["shipping_address.address_1"]}
           onChange={handleChange}
+          onBlur={handleBlur}
           required
           data-testid="shipping-address-input"
+          {...(fieldError("shipping_address.address_1")
+            ? {
+                className:
+                  "!border-rose-400 focus:!shadow-borders-interactive-with-active",
+              }
+            : {})}
         />
         <Input
           label="Company"
@@ -148,24 +276,58 @@ const ShippingAddress = ({
           autoComplete="organization"
           data-testid="shipping-company-input"
         />
-        <Input
-          label="Postal code"
-          name="shipping_address.postal_code"
-          autoComplete="postal-code"
-          value={formData["shipping_address.postal_code"]}
-          onChange={handleChange}
-          required
-          data-testid="shipping-postal-code-input"
-        />
-        <Input
-          label="City"
-          name="shipping_address.city"
-          autoComplete="address-level2"
-          value={formData["shipping_address.city"]}
-          onChange={handleChange}
-          required
-          data-testid="shipping-city-input"
-        />
+        <div>
+          <Input
+            label="Postal code"
+            name="shipping_address.postal_code"
+            autoComplete="postal-code"
+            value={formData["shipping_address.postal_code"]}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            required
+            data-testid="shipping-postal-code-input"
+            {...(fieldError("shipping_address.postal_code")
+              ? {
+                  className:
+                    "!border-rose-400 focus:!shadow-borders-interactive-with-active",
+                }
+              : {})}
+          />
+          {fieldError("shipping_address.postal_code") && (
+            <p className="text-rose-500 text-xs mt-1">
+              {fieldError("shipping_address.postal_code")}
+            </p>
+          )}
+        </div>
+        <div>
+          <Input
+            label="City"
+            name="shipping_address.city"
+            autoComplete="address-level2"
+            value={formData["shipping_address.city"]}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            required
+            list="shipping-city-list"
+            data-testid="shipping-city-input"
+            {...(fieldError("shipping_address.city")
+              ? {
+                  className:
+                    "!border-rose-400 focus:!shadow-borders-interactive-with-active",
+                }
+              : {})}
+          />
+          <datalist id="shipping-city-list">
+            {HUB_CITIES.map((city) => (
+              <option key={city} value={city} />
+            ))}
+          </datalist>
+          {fieldError("shipping_address.city") && (
+            <p className="text-rose-500 text-xs mt-1">
+              {fieldError("shipping_address.city")}
+            </p>
+          )}
+        </div>
         <CountrySelect
           name="shipping_address.country_code"
           autoComplete="country"
@@ -194,17 +356,31 @@ const ShippingAddress = ({
         />
       </div>
       <div className="grid grid-cols-2 gap-4 mb-4">
-        <Input
-          label="Email"
-          name="email"
-          type="email"
-          title="Enter a valid email address."
-          autoComplete="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          data-testid="shipping-email-input"
-        />
+        <div>
+          <Input
+            label="Email"
+            name="email"
+            type="email"
+            title="Enter a valid email address."
+            autoComplete="email"
+            value={formData.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            required
+            data-testid="shipping-email-input"
+            {...(fieldError("email")
+              ? {
+                  className:
+                    "!border-rose-400 focus:!shadow-borders-interactive-with-active",
+                }
+              : {})}
+          />
+          {fieldError("email") && (
+            <p className="text-rose-500 text-xs mt-1">
+              {fieldError("email")}
+            </p>
+          )}
+        </div>
         <Input
           label="Phone"
           name="shipping_address.phone"
@@ -214,6 +390,9 @@ const ShippingAddress = ({
           data-testid="shipping-phone-input"
         />
       </div>
+
+      {/* hidden valid-state flag read by the parent's SubmitButton */}
+      <input type="hidden" name="__shipping_valid" value={isValid ? "1" : "0"} />
     </>
   )
 }
