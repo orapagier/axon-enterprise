@@ -114,27 +114,16 @@ export function validateHarvestDate(
 }
 
 // ---------------------------------------------------------------------------
-// Pickup window match (deferred to Phase 3)
-// ---------------------------------------------------------------------------
-
-/**
- * In Phase 2 the PickupWindow table doesn't exist yet.
- * Always returns OK, but sets the listing to `pending_pickup` when no window
- * is assigned. Phase 3 will upgrade this to a real check.
- */
-export function validatePickupWindow(
-  _pickupWindowId: string | null,
-  _hubAreaId: string | null
-): { ok: true; status: "pending_pickup" } {
-  return { ok: true, status: "pending_pickup" }
-}
-
-// ---------------------------------------------------------------------------
 // Status transitions
 // ---------------------------------------------------------------------------
+//
+// `pending_pickup` is retained in the enum for historical Phase 2 data but is
+// no longer produced by any route — Phase 3 now creates `active` directly
+// after a successful pickup slot reservation, and folds `pending_pickup` rows
+// forward through the same transitions as `draft`.
 
 const ALLOWED_TRANSITIONS: Record<ListingStatus, ListingStatus[]> = {
-  draft: ["active", "cancelled", "pending_pickup"],
+  draft: ["active", "cancelled"],
   pending_pickup: ["active", "cancelled", "expired"],
   active: ["sold_out", "cancelled"],
   sold_out: ["active", "cancelled"],
