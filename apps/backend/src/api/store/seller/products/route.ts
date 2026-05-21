@@ -335,60 +335,84 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
   const product = result?.[0]
 
-  // ----- Create the ProductListing row and reserve pickup slot atomically -----
-  if (product) {
-    const listingService: ListingModuleService = req.scope.resolve(LISTING_MODULE)
+  // ----- Create the ProductListing row + link, then reserve pickup slot atomically -----
+  if (!product) {
+    res.status(500).json({ error: "Product creation failed." })
+    return
+  }
+
+  const listingService: ListingModuleService = req.scope.resolve(LISTING_MODULE)
+  const link = req.scope.resolve(ContainerRegistrationKeys.LINK)
+
+  let listing
+  try {
+    listing = await listingService.createProductListings({
+      listing_type: listingType,
+      harvest_date: harvestDate ? new Date(harvestDate) : null,
+      pickup_window_id: body.pickup_window_id ?? null,
+      status: listingStatus,
+    })
+
+    // Without this link the GET graph join (entity:"product", fields:["product_listing.*"])
+    // returns null and the storefront/admin can't see the listing.
+    await link.create({
+      [Modules.PRODUCT]: { product_id: product.id },
+      [LISTING_MODULE]: { product_listing_id: listing.id },
+    })
+  } catch (err) {
+    console.error("Failed to create listing row or link:", err)
+    res.status(500).json({
+      error: "Could not record the listing for this product.",
+      product,
+    })
+    return
+  }
+
+  // sell_to_freshhub: reserve a pickup slot through the workflow so the
+  // slot + capacity bump + window-full flip roll back together on failure.
+  if (
+    listingType === "sell_to_freshhub" &&
+    body.pickup_window_id &&
+    body.estimated_kg &&
+    harvestDate
+  ) {
     try {
-      const listing = await listingService.createProductListings({
-        listing_type: listingType,
-        harvest_date: harvestDate ? new Date(harvestDate) : null,
-        pickup_window_id: body.pickup_window_id ?? null,
-        status: listingStatus,
+      const { result: slot } = await reservePickupSlotWorkflow(req.scope).run({
+        input: {
+          listing_id: listing.id,
+          pickup_window_id: body.pickup_window_id,
+          harvest_date: harvestDate,
+          estimated_kg: body.estimated_kg,
+        },
       })
 
-      // If sell_to_freshhub, create the PickupSlot and bump reserved_kg
-      if (
-        listingType === "sell_to_freshhub" &&
-        body.pickup_window_id &&
-        body.estimated_kg
-      ) {
-        const pickupService: PickupModuleService = req.scope.resolve(PICKUP_MODULE)
-
-        // Create slot
-        await pickupService.createPickupSlots({
-          pickup_window_id: body.pickup_window_id,
-          listing_id: listing.id,
-          estimated_kg: body.estimated_kg,
-          status: "reserved",
+      if (slot?.id) {
+        // Link listing ↔ slot so admin queries can hop between them.
+        await link.create({
+          [LISTING_MODULE]: { product_listing_id: listing.id },
+          [PICKUP_MODULE]: { pickup_slot_id: slot.id },
         })
-
-        // Bump capacity
-        const windows = await pickupService.listPickupWindows(
-          { id: body.pickup_window_id },
-          { take: 1 }
-        )
-        const window = windows[0]
-        if (window) {
-          const newReservedKg = (window.reserved_kg ?? 0) + body.estimated_kg
-          const windowUpdate: Record<string, unknown> = { reserved_kg: newReservedKg }
-          if (window.capacity_kg !== null && newReservedKg >= window.capacity_kg) {
-            windowUpdate.status = "full"
-          }
-          await pickupService.updatePickupWindows({
-            id: window.id,
-            ...windowUpdate,
-          })
-        }
       }
-
-      res.status(201).json({ product, listing })
-      return
     } catch (err) {
-      // Listing creation failed — product was still created.
-      // Log and return partial success. The product exists but has no listing row.
-      console.error("Failed to create listing row:", err)
+      // Workflow already compensated the slot + capacity. Roll back the listing
+      // + link so the producer can retry cleanly.
+      console.error("Pickup slot reservation failed:", err)
+      try {
+        await link.dismiss({
+          [Modules.PRODUCT]: { product_id: product.id },
+          [LISTING_MODULE]: { product_listing_id: listing.id },
+        })
+        await listingService.deleteProductListings(listing.id)
+      } catch {
+        // best-effort cleanup
+      }
+      res.status(400).json({
+        error: err instanceof Error ? err.message : "Pickup slot reservation failed.",
+        code: "PICKUP_RESERVE_FAILED",
+      })
+      return
     }
   }
 
-  res.status(201).json({ product: result?.[0] })
+  res.status(201).json({ product, listing })
 }
