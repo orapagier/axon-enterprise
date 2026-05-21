@@ -108,14 +108,16 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     cursor.setUTCDate(cursor.getUTCDate() + 1)
   }
 
-  // Today in Manila TZ — bulk skips past dates rather than failing.
+  // Today (Manila TZ) as a UTC-midnight Date — matches the seed's convention.
   const nowUtc = new Date()
   const tzOffset = 8 * 60 * 60_000
-  const localNow = new Date(nowUtc.getTime() + tzOffset)
+  const manilaNow = new Date(nowUtc.getTime() + tzOffset)
   const todayStart = new Date(
-    localNow.getUTCFullYear(),
-    localNow.getUTCMonth(),
-    localNow.getUTCDate()
+    Date.UTC(
+      manilaNow.getUTCFullYear(),
+      manilaNow.getUTCMonth(),
+      manilaNow.getUTCDate()
+    )
   )
 
   // Pre-fetch all existing windows in this area + start_time so we can dedup
