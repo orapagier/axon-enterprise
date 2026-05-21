@@ -97,10 +97,15 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
       return
     }
 
+    const winDate = window.date as unknown
+    const dateIso =
+      typeof winDate === "string"
+        ? winDate
+        : (winDate as Date | null | undefined)?.toISOString?.() ?? ""
     const validate = validateWindowCreate({
       start_time: body.start_time ?? window.start_time,
       end_time: body.end_time ?? window.end_time,
-      date: typeof window.date === "string" ? window.date.slice(0, 10) : "",
+      date: dateIso.slice(0, 10),
     })
     if (!validate.ok) {
       res.status(400).json({
