@@ -70,6 +70,8 @@ export default async function Nav() {
             </span>
           </div>
           <div className="hidden small:flex items-center gap-x-5 text-white/55 text-[10.5px] tracking-[0.08em] uppercase">
+            <HubSwitcher hubs={hubs} currentSlug={currentHubSlug} />
+            <span className="text-white/15">·</span>
             <LocalizedClientLink
               href="/account"
               className="hover:text-brand-gold-300 transition-colors flex items-center gap-x-1.5"
