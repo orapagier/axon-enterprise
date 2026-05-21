@@ -15,10 +15,20 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     pickup_day_of_week?: number[] | null
   }
 
-  const area = await hubService.updateHubAreas({
-    id: req.params.areaId,
-    ...body,
-  })
+  const patch: Record<string, unknown> = {}
+  if (typeof body.name === "string") patch.name = body.name
+  if (Array.isArray(body.postal_codes)) patch.postal_codes = body.postal_codes
+  if (Array.isArray(body.barangays)) patch.barangays = body.barangays
+  if (body.pickup_day_of_week !== undefined) {
+    patch.pickup_day_of_week = body.pickup_day_of_week
+  }
+
+  const area = await hubService.updateHubAreas(
+    {
+      selector: { id: req.params.areaId },
+      data: patch,
+    } as unknown as Parameters<typeof hubService.updateHubAreas>[0]
+  )
 
   res.json({ area })
 }
