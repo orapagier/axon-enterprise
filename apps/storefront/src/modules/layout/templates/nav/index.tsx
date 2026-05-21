@@ -9,13 +9,18 @@ import CartButton from "@modules/layout/components/cart-button"
 import NavSearch from "@modules/layout/components/nav-search"
 import SideMenu from "@modules/layout/components/side-menu"
 import { getDeliveryHub } from "@lib/util/delivery-hub"
+import HubSwitcher from "@modules/hub/components/hub-switcher"
+import { listHubs } from "@modules/hub/data/hubs"
+import { getHubCookie } from "@modules/hub/actions/set-hub"
 
 export default async function Nav() {
-  const [regions, locales, currentLocale, hub] = await Promise.all([
+  const [regions, locales, currentLocale, hub, hubs, currentHubSlug] = await Promise.all([
     listRegions().then((regions: StoreRegion[]) => regions),
     listLocales(),
     getLocale(),
     getDeliveryHub(),
+    listHubs(),
+    getHubCookie(),
   ])
 
   return (
