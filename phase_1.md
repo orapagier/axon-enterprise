@@ -55,13 +55,16 @@ Establish the hub geography layer. Every product, producer, and order is bound t
 - `apps/backend/src/modules/hub/service.ts` ✓
 - `apps/backend/src/modules/hub/index.ts` ✓
 
-### Pending
-- Link definitions: `customer-hub.ts`, `product-hub.ts`
-- API routes: `api/admin/hubs/`, `api/store/hubs/`
-- Admin UI: `admin/routes/hubs/page.tsx`
-- Seed script
-- `medusa-config.ts` update
-- Storefront: hub picker, middleware extension, hub context
+### Completed
+- Link definitions: `customer-hub.ts`, `product-hub.ts` ✓
+- API routes: `api/admin/hubs/`, `api/store/hubs/`, `api/store/customers/me/hub/` ✓
+- Admin UI: `admin/routes/hubs/page.tsx` ✓
+- Seed script: `migration-scripts/seed-hubs.ts` ✓
+- `medusa-config.ts` registers the hub module ✓
+- Migration: `modules/hub/migrations/Migration20260521083610.ts` (applied) ✓
+- Storefront: `modules/hub/` (data, actions, components) ✓
+- Hub picker mounted in `(main)/layout.tsx`; switcher in nav; account widget on profile ✓
+- Store template filters products by hub via `/store/hubs/:slug/products` ✓
 
 ---
 
