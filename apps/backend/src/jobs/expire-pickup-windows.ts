@@ -26,12 +26,13 @@ export default async function expirePickupWindows({ container }: ExecArgs) {
   )
 
   // --- Step 1: Close overdue open/full windows ---
-  const staleWindows = await service.listPickupWindows(
-    {
-      status: ["open", "full"],
-    },
-    { take: 500 }
-  )
+  // MikroORM filter with an array on a plain enum field is brittle —
+  // pull both statuses separately and merge.
+  const [openWindows, fullWindows] = await Promise.all([
+    service.listPickupWindows({ status: "open" }, { take: 500 }),
+    service.listPickupWindows({ status: "full" }, { take: 500 }),
+  ])
+  const staleWindows = [...openWindows, ...fullWindows]
 
   let windowsClosed = 0
   for (const w of staleWindows) {
