@@ -101,23 +101,44 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     cursor.setDate(cursor.getDate() + 1)
   }
 
+  // Today in Manila TZ — bulk skips past dates rather than failing.
+  const nowUtc = new Date()
+  const tzOffset = 8 * 60 * 60_000
+  const localNow = new Date(nowUtc.getTime() + tzOffset)
+  const todayStart = new Date(
+    localNow.getUTCFullYear(),
+    localNow.getUTCMonth(),
+    localNow.getUTCDate()
+  )
+
+  // Pre-fetch all existing windows in this area + start_time so we can dedup
+  // in memory (a date-equality filter against the `dateTime` column is
+  // unreliable; cheaper than N round-trips and avoids that gotcha entirely).
+  const existingForArea = await service.listPickupWindows(
+    { hub_area_id: body.hub_area_id, start_time: body.start_time },
+    { take: 1000 }
+  )
+  const existingDays = new Set(
+    existingForArea.map((w) =>
+      (typeof w.date === "string"
+        ? w.date
+        : new Date(w.date).toISOString()
+      ).slice(0, 10)
+    )
+  )
+
   const created: unknown[] = []
   const skipped: { date: string; reason: string }[] = []
 
   for (const date of dates) {
     const dateStr = date.toISOString().slice(0, 10)
 
-    // Check for duplicate
-    const existing = await service.listPickupWindows(
-      {
-        hub_area_id: body.hub_area_id,
-        date: dateStr,
-        start_time: body.start_time,
-      },
-      { take: 1 }
-    )
+    if (date < todayStart) {
+      skipped.push({ date: dateStr, reason: "Past date — skipped." })
+      continue
+    }
 
-    if (existing.length) {
+    if (existingDays.has(dateStr)) {
       skipped.push({ date: dateStr, reason: "Duplicate window already exists." })
       continue
     }
@@ -132,6 +153,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       status: "open",
     })
     created.push(window)
+    existingDays.add(dateStr)
   }
 
   res.status(201).json({ created, skipped })
