@@ -234,7 +234,6 @@ export default function SellerListingForm({ mode, existing }: Props) {
   const ready = progressPct === 100
 
   const isDraft = values.listing_status === "draft"
-  const isSellToHub = values.listing_type === "sell_to_freshhub"
 
   return (
     <form
