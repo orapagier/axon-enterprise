@@ -15,14 +15,16 @@ export default async function expirePickupWindows({ container }: ExecArgs) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const service: PickupModuleService = container.resolve(PICKUP_MODULE)
 
-  // Today in Manila TZ
+  // Today (Manila TZ) at UTC midnight — matches the seed/bulk convention.
   const now = new Date()
-  const tzOffset = 8 * 60 * 60_000 // Asia/Manila
-  const localNow = new Date(now.getTime() + tzOffset)
+  const tzOffset = 8 * 60 * 60_000
+  const manilaNow = new Date(now.getTime() + tzOffset)
   const todayStart = new Date(
-    localNow.getUTCFullYear(),
-    localNow.getUTCMonth(),
-    localNow.getUTCDate()
+    Date.UTC(
+      manilaNow.getUTCFullYear(),
+      manilaNow.getUTCMonth(),
+      manilaNow.getUTCDate()
+    )
   )
 
   // --- Step 1: Close overdue open/full windows ---
