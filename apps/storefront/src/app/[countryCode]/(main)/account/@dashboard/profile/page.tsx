@@ -67,6 +67,14 @@ export default async function Profile() {
         >
           <ProfileBillingAddress customer={customer} regions={regions} />
         </ProfileSection>
+
+        <ProfileSection
+          label="Home hub"
+          description="The FreshHub city your catalog and deliveries are pulled from."
+          icon="📍"
+        >
+          <HomeHubSection hubs={hubs} currentSlug={currentHubSlug} />
+        </ProfileSection>
       </div>
     </div>
   )
