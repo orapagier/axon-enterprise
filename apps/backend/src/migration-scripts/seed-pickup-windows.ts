@@ -29,14 +29,18 @@ export default async function seedPickupWindows({ container }: ExecArgs) {
   }
   const area = areas[0]
 
-  // Today in Manila TZ
+  // Today at UTC midnight matching the Manila calendar day.
+  // We do all date math in UTC so getUTCDay() and toISOString().slice(0,10)
+  // agree — mixing local-time and ISO derivation shifts dates by ±1 day.
   const now = new Date()
-  const tzOffset = 8 * 60 * 60_000
-  const localNow = new Date(now.getTime() + tzOffset)
+  const tzOffsetMs = 8 * 60 * 60_000 // Asia/Manila
+  const manilaNow = new Date(now.getTime() + tzOffsetMs)
   const today = new Date(
-    localNow.getUTCFullYear(),
-    localNow.getUTCMonth(),
-    localNow.getUTCDate()
+    Date.UTC(
+      manilaNow.getUTCFullYear(),
+      manilaNow.getUTCMonth(),
+      manilaNow.getUTCDate()
+    )
   )
 
   const DAYS_OF_WEEK = [2, 5] // Tuesday, Friday — matches Phase 1 seed
@@ -45,7 +49,7 @@ export default async function seedPickupWindows({ container }: ExecArgs) {
   const CAPACITY_KG = 500
   const WEEKS = 4
   const endDate = new Date(today)
-  endDate.setDate(endDate.getDate() + WEEKS * 7)
+  endDate.setUTCDate(endDate.getUTCDate() + WEEKS * 7)
 
   // Pre-load existing windows for this area + slot so dedup happens in memory
   // (date equality against a dateTime column is unreliable in MikroORM).
