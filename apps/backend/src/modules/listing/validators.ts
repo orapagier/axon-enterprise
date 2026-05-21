@@ -74,32 +74,34 @@ export function validateHarvestDate(
     return { ok: false, errors }
   }
 
-  // Evaluate "today" in the hub timezone.
-  const now = new Date()
-  // Approximate — a real impl would use luxon / Intl.DateTimeFormat.
-  // For Asia/Manila (UTC+8), the offset is fixed year-round.
-  const tzOffset = hubTimezone === "Asia/Manila" ? 8 * 60 : 0
-  const localNow = new Date(now.getTime() + tzOffset * 60_000)
+  // All date math runs at UTC midnight on the Manila-equivalent calendar day
+  // so ISO derivation lines up — Asia/Manila is UTC+8 year-round so the
+  // fixed offset is correct for now; if more TZs land here, swap for Intl.
+  const tzOffsetMs =
+    (hubTimezone === "Asia/Manila" ? 8 * 60 : 0) * 60_000
 
-  // Start of today in hub TZ
+  const manilaNow = new Date(Date.now() + tzOffsetMs)
   const todayStart = new Date(
-    localNow.getUTCFullYear(),
-    localNow.getUTCMonth(),
-    localNow.getUTCDate()
+    Date.UTC(
+      manilaNow.getUTCFullYear(),
+      manilaNow.getUTCMonth(),
+      manilaNow.getUTCDate()
+    )
   )
 
   const minDate = new Date(todayStart)
-  minDate.setDate(minDate.getDate() + minDays)
+  minDate.setUTCDate(minDate.getUTCDate() + minDays)
 
   const maxDate = new Date(todayStart)
-  maxDate.setDate(maxDate.getDate() + maxDays)
+  maxDate.setUTCDate(maxDate.getUTCDate() + maxDays)
 
-  // Convert harvest date to hub-local start-of-day for comparison.
-  const harvestLocal = new Date(parsed.getTime() + tzOffset * 60_000)
+  const manilaHarvest = new Date(parsed.getTime() + tzOffsetMs)
   const harvestStart = new Date(
-    harvestLocal.getUTCFullYear(),
-    harvestLocal.getUTCMonth(),
-    harvestLocal.getUTCDate()
+    Date.UTC(
+      manilaHarvest.getUTCFullYear(),
+      manilaHarvest.getUTCMonth(),
+      manilaHarvest.getUTCDate()
+    )
   )
 
   if (harvestStart < minDate || harvestStart > maxDate) {
