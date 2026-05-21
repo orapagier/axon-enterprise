@@ -1,11 +1,11 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
-import { PICKUP_MODULE } from "../../../modules/pickup"
-import PickupModuleService from "../../../modules/pickup/service"
-import { HUB_MODULE } from "../../../modules/hub"
-import HubModuleService from "../../../modules/hub/service"
+import { PICKUP_MODULE } from "../../../../modules/pickup"
+import PickupModuleService from "../../../../modules/pickup/service"
+import { HUB_MODULE } from "../../../../modules/hub"
+import HubModuleService from "../../../../modules/hub/service"
 import {
   validateWindowCreate,
-} from "../../../modules/pickup/validators"
+} from "../../../../modules/pickup/validators"
 
 /**
  * POST /admin/pickup-windows/bulk
