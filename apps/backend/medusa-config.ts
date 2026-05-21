@@ -20,5 +20,8 @@ module.exports = defineConfig({
     {
       resolve: "./src/modules/listing",
     },
+    {
+      resolve: "./src/modules/pickup",
+    },
   ],
 })

@@ -108,6 +108,9 @@ function parseListing(formData: FormData): {
   const price = Number(priceRaw)
   const listingType = get("listing_type") || get("selling_mode") || "direct_to_consumer"
   const harvestDate = get("harvest_date")
+  const pickupWindowId = get("pickup_window_id")
+  const estimatedKgRaw = get("estimated_kg")
+  const estimatedKg = Number(estimatedKgRaw)
 
   if (!title || title.length < 2) {
     fieldErrors.title = "Title must be at least 2 characters."
@@ -134,6 +137,8 @@ function parseListing(formData: FormData): {
       listing_type: listingType,
       selling_mode: listingType, // backward compat
       harvest_date: harvestDate || undefined,
+      pickup_window_id: pickupWindowId || undefined,
+      estimated_kg: estimatedKgRaw ? estimatedKg : undefined,
     },
     fieldErrors,
   }

@@ -7,12 +7,16 @@ import {
   type ListingFormState,
   type SellerListing,
 } from "@lib/data/seller"
+import { listOpenPickupWindows, type PickupWindow } from "@lib/data/pickup"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import ListingTypeField from "@modules/producer/components/listing-type-field"
 import HarvestDateField from "@modules/producer/components/harvest-date-field"
+import PickupWindowSelect from "@modules/producer/components/pickup-window-select"
+import EstimatedKgField from "@modules/producer/components/estimated-kg-field"
 import { useParams } from "next/navigation"
 import {
   useActionState,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -136,9 +140,47 @@ export default function SellerListingForm({ mode, existing }: Props) {
     seed.selling_mode = (defaults.selling_mode as string) ?? "direct"
     seed.listing_type = (defaults.listing_type as string) ?? "direct_to_consumer"
     seed.harvest_date = (defaults.harvest_date as string) ?? ""
+    seed.pickup_window_id = ""
+    seed.estimated_kg = ""
     seed.listing_status = (defaults.listing_status as string) ?? "draft"
     return seed
   })
+
+  // Pickup windows for the producer's hub area
+  const [pickupWindows, setPickupWindows] = useState<PickupWindow[]>([])
+  const [pickupLoading, setPickupLoading] = useState(false)
+  const [pickupError, setPickupError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!isSellToHub || !values.harvest_date) {
+      setPickupWindows([])
+      return
+    }
+
+    let cancelled = false
+    setPickupLoading(true)
+    setPickupError(null)
+
+    listOpenPickupWindows(values.harvest_date, values.harvest_date, 20)
+      .then((result) => {
+        if (cancelled) return
+        setPickupLoading(false)
+        if (result.ok) {
+          setPickupWindows(result.windows)
+        } else {
+          setPickupError(result.error ?? "Failed to load pickup windows.")
+        }
+      })
+      .catch(() => {
+        if (cancelled) return
+        setPickupLoading(false)
+        setPickupError("Couldn't reach the server.")
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [isSellToHub, values.harvest_date])
 
   // Photo upload state
   const [photoUrl, setPhotoUrl] = useState<string>(
@@ -266,10 +308,34 @@ export default function SellerListingForm({ mode, existing }: Props) {
       {/* Harvest date — shown only for sell_to_freshhub */}
       <HarvestDateField
         value={values.harvest_date}
-        onChange={(val) => setValues((v) => ({ ...v, harvest_date: val }))}
+        onChange={(val) => setValues((v) => ({ ...v, harvest_date: val, pickup_window_id: "" }))}
         visible={isSellToHub}
         disabled={!isDraft}
         error={state.fieldErrors?.harvest_date ?? null}
+      />
+
+      {/* Pickup window select — replaced Phase 2 placeholder */}
+      <PickupWindowSelect
+        value={values.pickup_window_id}
+        onChange={(val) =>
+          setValues((v) => ({ ...v, pickup_window_id: val }))
+        }
+        windows={pickupWindows}
+        loading={pickupLoading}
+        error={pickupError}
+        visible={isSellToHub}
+        disabled={!isDraft}
+      />
+
+      {/* Estimated weight — only for sell_to_freshhub */}
+      <EstimatedKgField
+        value={values.estimated_kg}
+        onChange={(val) =>
+          setValues((v) => ({ ...v, estimated_kg: val }))
+        }
+        visible={isSellToHub}
+        disabled={!isDraft}
+        error={state.fieldErrors?.estimated_kg ?? null}
       />
 
       {/* Legacy hidden fields for backward compat */}

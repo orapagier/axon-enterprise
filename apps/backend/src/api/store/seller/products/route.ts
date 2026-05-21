@@ -8,11 +8,13 @@ import ListingModuleService from "../../../modules/listing/service"
 import {
   validateProducerEligibility,
   validateHarvestDate,
-  validatePickupWindow,
 } from "../../../modules/listing/validators"
+import { validateSlotReserve } from "../../../modules/pickup/validators"
 import type { ListingType, ListingStatus } from "../../../modules/listing/types"
 import { HUB_MODULE } from "../../../modules/hub"
 import HubModuleService from "../../../modules/hub/service"
+import { PICKUP_MODULE } from "../../../modules/pickup"
+import PickupModuleService from "../../../modules/pickup/service"
 
 type StoreCustomer = {
   id: string
@@ -152,6 +154,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     selling_mode?: string
     harvest_date?: string
     listing_type?: string
+    pickup_window_id?: string
+    estimated_kg?: number
   }
 
   // ----- Listing-type from body (preferred) or fallback to legacy selling_mode -----
@@ -209,11 +213,56 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     harvestDate = harvestRaw
   }
 
-  // ----- Pickup window match (deferred, always OK in Phase 2) -----
+  // ----- Pickup window + estimated_kg validation (Phase 3) -----
   let listingStatus: ListingStatus = "draft"
+
   if (listingType === "sell_to_freshhub") {
-    const pw = validatePickupWindow(null, null)
-    listingStatus = pw.status // "pending_pickup"
+    if (!body.pickup_window_id || !body.estimated_kg) {
+      res.status(400).json({
+        error:
+          "pickup_window_id and estimated_kg are required for sell_to_freshhub listings.",
+        code: "MISSING_PICKUP_FIELDS",
+      })
+      return
+    }
+
+    const pickupService: PickupModuleService = req.scope.resolve(PICKUP_MODULE)
+    const windows = await pickupService.listPickupWindows(
+      { id: body.pickup_window_id },
+      { take: 1 }
+    )
+    const window = windows[0]
+    if (!window) {
+      res.status(400).json({
+        error: "Pickup window not found.",
+        code: "PICKUP_WINDOW_NOT_FOUND",
+      })
+      return
+    }
+
+    // Validate the reserve
+    const reserveValidation = validateSlotReserve({
+      windowStatus: window.status as "open" | "full" | "closed" | "completed",
+      windowDate:
+        typeof window.date === "string"
+          ? window.date
+          : new Date(window.date).toISOString(),
+      harvestDate: harvestDate!,
+      reserved_kg: window.reserved_kg ?? 0,
+      estimated_kg: body.estimated_kg,
+      capacity_kg: window.capacity_kg ?? null,
+    })
+
+    if (!reserveValidation.ok) {
+      res.status(400).json({
+        error: reserveValidation.errors[0].message,
+        code: reserveValidation.errors[0].code,
+        fieldErrors: reserveValidation.errors,
+      })
+      return
+    }
+
+    listingStatus = "active"
   }
 
   // ----- Basic field validation -----
@@ -284,23 +333,51 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
   const product = result?.[0]
 
-  // ----- Create the ProductListing row via link -----
+  // ----- Create the ProductListing row and reserve pickup slot atomically -----
   if (product) {
     const listingService: ListingModuleService = req.scope.resolve(LISTING_MODULE)
     try {
       const listing = await listingService.createProductListings({
         listing_type: listingType,
         harvest_date: harvestDate ? new Date(harvestDate) : null,
-        pickup_window_id: null,
+        pickup_window_id: body.pickup_window_id ?? null,
         status: listingStatus,
       })
 
-      // Link product to listing
-      const { data: linkData } = await query.graph({
-        entity: "product",
-        fields: ["id", "product_listing.id"],
-        filters: { id: product.id },
-      })
+      // If sell_to_freshhub, create the PickupSlot and bump reserved_kg
+      if (
+        listingType === "sell_to_freshhub" &&
+        body.pickup_window_id &&
+        body.estimated_kg
+      ) {
+        const pickupService: PickupModuleService = req.scope.resolve(PICKUP_MODULE)
+
+        // Create slot
+        await pickupService.createPickupSlots({
+          pickup_window_id: body.pickup_window_id,
+          listing_id: listing.id,
+          estimated_kg: body.estimated_kg,
+          status: "reserved",
+        })
+
+        // Bump capacity
+        const windows = await pickupService.listPickupWindows(
+          { id: body.pickup_window_id },
+          { take: 1 }
+        )
+        const window = windows[0]
+        if (window) {
+          const newReservedKg = (window.reserved_kg ?? 0) + body.estimated_kg
+          const windowUpdate: Record<string, unknown> = { reserved_kg: newReservedKg }
+          if (window.capacity_kg !== null && newReservedKg >= window.capacity_kg) {
+            windowUpdate.status = "full"
+          }
+          await pickupService.updatePickupWindows({
+            id: window.id,
+            ...windowUpdate,
+          })
+        }
+      }
 
       res.status(201).json({ product, listing })
       return
