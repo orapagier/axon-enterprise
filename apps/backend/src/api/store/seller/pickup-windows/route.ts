@@ -62,18 +62,18 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   })
 
   // Filter by date range in memory and limit
+  const isoDay = (d: unknown): string => {
+    if (typeof d === "string") return d.slice(0, 10)
+    if (d instanceof Date) return d.toISOString().slice(0, 10)
+    return new Date(d as string | number | Date).toISOString().slice(0, 10)
+  }
+
   let filtered = windows
   if (from) {
-    filtered = filtered.filter((w) => {
-      const d = typeof w.date === "string" ? w.date.slice(0, 10) : new Date(w.date).toISOString().slice(0, 10)
-      return d >= from
-    })
+    filtered = filtered.filter((w) => isoDay(w.date) >= from)
   }
   if (to) {
-    filtered = filtered.filter((w) => {
-      const d = typeof w.date === "string" ? w.date.slice(0, 10) : new Date(w.date).toISOString().slice(0, 10)
-      return d <= to
-    })
+    filtered = filtered.filter((w) => isoDay(w.date) <= to)
   }
 
   const limit = typeof req.query.limit === "string" ? parseInt(req.query.limit, 10) : 5
