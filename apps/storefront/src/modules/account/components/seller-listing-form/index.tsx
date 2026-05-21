@@ -151,6 +151,8 @@ export default function SellerListingForm({ mode, existing }: Props) {
   const [pickupLoading, setPickupLoading] = useState(false)
   const [pickupError, setPickupError] = useState<string | null>(null)
 
+  const isSellToHub = values.listing_type === "sell_to_freshhub"
+
   useEffect(() => {
     if (!isSellToHub || !values.harvest_date) {
       setPickupWindows([])
