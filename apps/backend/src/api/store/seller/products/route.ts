@@ -191,10 +191,9 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   // ----- Harvest date for sell_to_freshhub -----
   let harvestDate: string | null = null
   if (listingType === "sell_to_freshhub") {
-    // Find the producer's hub to get its timezone
-    const hubService: HubModuleService = req.scope.resolve(HUB_MODULE)
-    const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
-    const { data: hubData } = await query.graph({
+    // Find the producer's hub timezone via the customer↔hub link.
+    const hubQuery = req.scope.resolve(ContainerRegistrationKeys.QUERY)
+    const { data: hubData } = await hubQuery.graph({
       entity: "customer",
       fields: ["id", "hub.id", "hub.timezone"],
       filters: { id: customer.id },
