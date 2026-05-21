@@ -92,13 +92,20 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
   const daysSet = new Set(body.days_of_week)
 
+  // All date math runs in UTC so ISO derivation and getUTCDay() agree —
+  // mixing local-time constructors with toISOString().slice(0,10) shifts dates
+  // by ±1 day on hosts whose system TZ isn't UTC.
+  const utcDay = (d: Date) =>
+    new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()))
+
   const dates: Date[] = []
-  const cursor = new Date(fromDate)
-  while (cursor <= toDate) {
-    if (daysSet.has(cursor.getDay())) {
+  const cursor = utcDay(fromDate)
+  const endCursor = utcDay(toDate)
+  while (cursor <= endCursor) {
+    if (daysSet.has(cursor.getUTCDay())) {
       dates.push(new Date(cursor))
     }
-    cursor.setDate(cursor.getDate() + 1)
+    cursor.setUTCDate(cursor.getUTCDate() + 1)
   }
 
   // Today in Manila TZ — bulk skips past dates rather than failing.
