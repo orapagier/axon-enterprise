@@ -8,6 +8,9 @@ import CartMismatchBanner from "@modules/layout/components/cart-mismatch-banner"
 import Footer from "@modules/layout/templates/footer"
 import Nav from "@modules/layout/templates/nav"
 import FreeShippingPriceNudge from "@modules/shipping/components/free-shipping-price-nudge"
+import HubPickerModal from "@modules/hub/components/hub-picker-modal"
+import { listHubs } from "@modules/hub/data/hubs"
+import { getHubCookie } from "@modules/hub/actions/set-hub"
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
@@ -16,6 +19,8 @@ export const metadata: Metadata = {
 export default async function PageLayout(props: { children: React.ReactNode }) {
   const customer = await retrieveCustomer()
   const cart = await retrieveCart()
+  const hubs = await listHubs()
+  const currentHub = await getHubCookie()
   let shippingOptions: StoreCartShippingOption[] = []
 
   if (cart) {
@@ -39,6 +44,7 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
         />
       )}
       {props.children}
+      <HubPickerModal hubs={hubs} defaultSlug={currentHub} />
       <Footer />
     </>
   )
