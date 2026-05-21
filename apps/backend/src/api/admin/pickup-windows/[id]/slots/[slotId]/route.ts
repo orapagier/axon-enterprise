@@ -1,7 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
-import { PICKUP_MODULE } from "../../../../../modules/pickup"
-import PickupModuleService from "../../../../../modules/pickup/service"
-import { validateSlotStatusTransition } from "../../../../../modules/pickup/validators"
+import { PICKUP_MODULE } from "../../../../../../modules/pickup"
+import PickupModuleService from "../../../../../../modules/pickup/service"
+import { validateSlotStatusTransition } from "../../../../../../modules/pickup/validators"
 
 /**
  * PATCH /admin/pickup-windows/:id/slots/:slotId
