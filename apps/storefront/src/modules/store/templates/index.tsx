@@ -4,6 +4,8 @@ import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-g
 import RefinementList from "@modules/store/components/refinement-list"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import { getDeliveryHub } from "@lib/util/delivery-hub"
+import { getHubCookie } from "@modules/hub/actions/set-hub"
+import { getHubProductIds } from "@modules/hub/data/hubs"
 
 import PaginatedProducts from "./paginated-products"
 
@@ -29,6 +31,11 @@ const StoreTemplate = async ({
   const pageNumber = page ? parseInt(page) : 1
   const sort = sortBy || "created_at"
   const hub = await getDeliveryHub()
+  const hubSlug = await getHubCookie()
+  // Restrict the public storefront to products linked to the visitor's hub.
+  // When no hub cookie is set, fall through with `undefined` so the store
+  // still renders during the picker's first paint.
+  const hubProductIds = hubSlug ? await getHubProductIds(hubSlug) : null
 
   return (
     <div data-testid="category-container" className="bg-grey-5 min-h-screen">
