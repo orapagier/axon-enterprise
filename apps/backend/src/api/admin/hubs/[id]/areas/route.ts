@@ -38,9 +38,9 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const area = await hubService.createHubAreas({
     hub_id: req.params.id,
     name: body.name,
-    postal_codes: body.postal_codes ?? [],
-    barangays: body.barangays ?? [],
-    pickup_day_of_week: body.pickup_day_of_week ?? null,
+    postal_codes: (body.postal_codes ?? []) as unknown as Record<string, unknown>,
+    barangays: (body.barangays ?? []) as unknown as Record<string, unknown>,
+    pickup_day_of_week: (body.pickup_day_of_week ?? null) as unknown as Record<string, unknown> | null,
   })
 
   res.status(201).json({ area })
