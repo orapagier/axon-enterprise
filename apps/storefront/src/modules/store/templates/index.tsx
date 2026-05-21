@@ -65,21 +65,34 @@ const StoreTemplate = async ({
         <div className="flex flex-col small:flex-row small:items-start gap-6 small:gap-8">
           <RefinementList sortBy={sort} hub={hub} />
           <div className="w-full min-w-0">
-            <Suspense
-              key={`${sort}-${pageNumber}-${q ?? ""}-${category ?? ""}-${origin ?? ""}-${min ?? ""}-${max ?? ""}`}
-              fallback={<SkeletonProductGrid />}
-            >
-              <PaginatedProducts
-                sortBy={sort}
-                page={pageNumber}
-                q={q}
-                category={category}
-                origin={origin}
-                min={min}
-                max={max}
-                countryCode={countryCode}
-              />
-            </Suspense>
+            {hubProductIds && hubProductIds.length === 0 ? (
+              <div className="bg-white rounded-3xl border border-grey-10/60 shadow-soft p-10 text-center">
+                <h3 className="font-heading text-h3 text-grey-90 mb-2">
+                  No products in this hub yet
+                </h3>
+                <p className="text-body-sm text-grey-50 max-w-sm mx-auto">
+                  Producers in your hub haven&apos;t listed anything yet.
+                  Switch hubs from the top bar to browse another catalog.
+                </p>
+              </div>
+            ) : (
+              <Suspense
+                key={`${sort}-${pageNumber}-${q ?? ""}-${category ?? ""}-${origin ?? ""}-${min ?? ""}-${max ?? ""}-${hubSlug ?? ""}`}
+                fallback={<SkeletonProductGrid />}
+              >
+                <PaginatedProducts
+                  sortBy={sort}
+                  page={pageNumber}
+                  q={q}
+                  category={category}
+                  origin={origin}
+                  min={min}
+                  max={max}
+                  countryCode={countryCode}
+                  productsIds={hubProductIds ?? undefined}
+                />
+              </Suspense>
+            )}
           </div>
         </div>
       </div>
