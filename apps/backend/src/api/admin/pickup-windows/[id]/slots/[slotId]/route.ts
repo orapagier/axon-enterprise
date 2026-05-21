@@ -74,7 +74,7 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
   }
 
   if (body.picked_up_at !== undefined) {
-    update.picked_up_at = body.picked_up_at
+    update.picked_up_at = body.picked_up_at ? new Date(body.picked_up_at) : null
   }
 
   if (body.notes !== undefined) {
