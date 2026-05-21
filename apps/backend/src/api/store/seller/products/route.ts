@@ -9,12 +9,11 @@ import {
   validateProducerEligibility,
   validateHarvestDate,
 } from "../../../../modules/listing/validators"
-import { validateSlotReserve } from "../../../../modules/pickup/validators"
 import type { ListingType, ListingStatus } from "../../../../modules/listing/types"
 import { HUB_MODULE } from "../../../../modules/hub"
-import HubModuleService from "../../../../modules/hub/service"
 import { PICKUP_MODULE } from "../../../../modules/pickup"
 import PickupModuleService from "../../../../modules/pickup/service"
+import reservePickupSlotWorkflow from "../../../../workflows/reserve-pickup-slot"
 
 type StoreCustomer = {
   id: string
