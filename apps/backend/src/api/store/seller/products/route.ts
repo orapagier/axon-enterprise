@@ -9,6 +9,9 @@ import {
   validateProducerEligibility,
   validateHarvestDate,
 } from "../../../../modules/listing/validators"
+import {
+  validateSlotReserve,
+} from "../../../../modules/pickup/validators"
 import type { ListingType, ListingStatus } from "../../../../modules/listing/types"
 import { HUB_MODULE } from "../../../../modules/hub"
 import { PICKUP_MODULE } from "../../../../modules/pickup"
