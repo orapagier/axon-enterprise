@@ -103,16 +103,25 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // Check for duplicate (same area, date, start_time)
-  const existing = await service.listPickupWindows(
+  // Check for duplicate (same area, date, start_time). MikroORM's date
+  // equality against a string is unreliable since the column is dateTime —
+  // pull windows for the area+start_time and compare YYYY-MM-DD in memory.
+  const sameSlot = await service.listPickupWindows(
     {
       hub_area_id: body.hub_area_id,
-      date: body.date,
       start_time: body.start_time,
     },
-    { take: 1 }
+    { take: 1000 }
   )
-  if (existing.length) {
+  const wanted = body.date.slice(0, 10)
+  const collision = sameSlot.find((w) => {
+    const iso =
+      typeof w.date === "string"
+        ? w.date
+        : new Date(w.date).toISOString()
+    return iso.slice(0, 10) === wanted
+  })
+  if (collision) {
     res.status(409).json({
       error: "A pickup window already exists for this area, date, and start time.",
       code: "DUPLICATE_WINDOW",
