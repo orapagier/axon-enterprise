@@ -40,7 +40,7 @@ export default async function seedHubs({ container }: ExecArgs) {
     await hubService.createHubAreas({
       hub_id: hub.id,
       name: "Tagum Central",
-      postal_codes: ["8100"],
+      postal_codes: ["8100"] as unknown as Record<string, unknown>,
       barangays: [
         "Apokon",
         "Magugpo East",
@@ -49,8 +49,8 @@ export default async function seedHubs({ container }: ExecArgs) {
         "Magugpo South",
         "Magugpo West",
         "Visayan Village",
-      ],
-      pickup_day_of_week: [2, 5], // Tuesday, Friday — placeholder
+      ] as unknown as Record<string, unknown>,
+      pickup_day_of_week: [2, 5] as unknown as Record<string, unknown>, // Tuesday, Friday — placeholder
     })
     logger.info("Created area: Tagum Central")
   } else {
