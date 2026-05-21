@@ -1,17 +1,21 @@
 /**
  * Nightly cron — expire overdue pickup windows and flip orphan slots to no_show.
  *
- * Run with:
+ * Scheduled at 01:00 (server TZ; ~09:00 Manila with the UTC host) so it runs
+ * after the day's pickups conclude. Run on-demand with:
  *   npx medusa exec ./src/jobs/expire-pickup-windows.ts
- *
- * Or register in a scheduler for 0 1 * * * (01:00 local hub TZ).
  */
-import { ExecArgs } from "@medusajs/framework/types"
+import type { MedusaContainer } from "@medusajs/framework/types"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { PICKUP_MODULE } from "../modules/pickup"
 import type PickupModuleService from "../modules/pickup/service"
 
-export default async function expirePickupWindows({ container }: ExecArgs) {
+export const config = {
+  name: "expire-pickup-windows",
+  schedule: "0 1 * * *",
+}
+
+export default async function expirePickupWindows(container: MedusaContainer) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const service: PickupModuleService = container.resolve(PICKUP_MODULE)
 
