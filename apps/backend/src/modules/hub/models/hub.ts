@@ -1,4 +1,5 @@
 import { model } from "@medusajs/framework/utils"
+import HubArea from "./hub-area"
 
 const Hub = model.define("hub", {
   id: model.id().primaryKey(),
@@ -7,13 +8,11 @@ const Hub = model.define("hub", {
   city: model.text(),
   province: model.text(),
   country: model.text().default("ph"),
-  active: model.boolean().default(true),
+  timezone: model.text().default("Asia/Manila"),
   dispatch_cutoff: model.text().default("12:00"),
   dispatch_time: model.text().default("16:00"),
-  timezone: model.text().default("Asia/Manila"),
-  areas: model.hasMany(() => import("./hub-area").then((m) => m.default), {
-    mappedBy: "hub_id",
-  }),
+  active: model.boolean().default(true),
+  areas: model.hasMany(() => HubArea, { mappedBy: "hub" }),
 })
 
 export default Hub
