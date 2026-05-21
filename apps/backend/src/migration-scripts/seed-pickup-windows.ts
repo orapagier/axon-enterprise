@@ -47,6 +47,21 @@ export default async function seedPickupWindows({ container }: ExecArgs) {
   const endDate = new Date(today)
   endDate.setDate(endDate.getDate() + WEEKS * 7)
 
+  // Pre-load existing windows for this area + slot so dedup happens in memory
+  // (date equality against a dateTime column is unreliable in MikroORM).
+  const existingForSlot = await pickupService.listPickupWindows(
+    { hub_area_id: area.id, start_time: START_TIME },
+    { take: 1000 }
+  )
+  const existingDays = new Set(
+    existingForSlot.map((w) =>
+      (typeof w.date === "string"
+        ? w.date
+        : new Date(w.date).toISOString()
+      ).slice(0, 10)
+    )
+  )
+
   let created = 0
   let skipped = 0
 
@@ -55,17 +70,7 @@ export default async function seedPickupWindows({ container }: ExecArgs) {
     if (DAYS_OF_WEEK.includes(cursor.getDay())) {
       const dateStr = cursor.toISOString().slice(0, 10)
 
-      // Check for existing
-      const existing = await pickupService.listPickupWindows(
-        {
-          hub_area_id: area.id,
-          date: dateStr,
-          start_time: START_TIME,
-        },
-        { take: 1 }
-      )
-
-      if (existing.length) {
+      if (existingDays.has(dateStr)) {
         skipped++
         logger.info(`Window ${dateStr} already exists — skipping.`)
       } else {
@@ -78,6 +83,7 @@ export default async function seedPickupWindows({ container }: ExecArgs) {
           capacity_kg: CAPACITY_KG,
           status: "open",
         })
+        existingDays.add(dateStr)
         created++
         logger.info(`Created window: ${dateStr} ${START_TIME}-${END_TIME}`)
       }
