@@ -66,6 +66,10 @@ const Overview = ({ customer, orders }: OverviewProps) => {
               </div>
             </div>
 
+            <div className="mb-6">
+              <DepositSection />
+            </div>
+
             <div className="flex flex-col gap-y-4">
               <div className="flex items-center gap-x-2">
                 <h3 className="text-large-semi">Recent orders</h3>
