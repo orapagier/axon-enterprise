@@ -74,6 +74,21 @@ export default defineMiddlewares({
       middlewares: [authenticate("user", ["session", "bearer"])],
     },
     {
+      matcher: "/admin/dispatch-orders/*/refusal",
+      method: ["POST"],
+      middlewares: [authenticate("user", ["session", "bearer"])],
+    },
+    {
+      matcher: "/admin/disputes*",
+      method: ["GET", "POST"],
+      middlewares: [authenticate("user", ["session", "bearer"])],
+    },
+    {
+      matcher: "/store/customer/disputes*",
+      method: ["GET", "POST"],
+      middlewares: [authenticate("customer", ["session", "bearer"])],
+    },
+    {
       matcher: "/admin/orders/*/cod-collected",
       method: ["POST"],
       middlewares: [authenticate("user", ["session", "bearer"])],
