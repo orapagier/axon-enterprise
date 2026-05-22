@@ -38,6 +38,7 @@ export default async function OrderCompletedTemplate({
             <span>Your order was placed successfully.</span>
           </Heading>
           <OrderDetails order={order} />
+          <DispatchEstimate placedAt={order.created_at} />
           <Heading level="h2" className="flex flex-row text-3xl-regular">
             Summary
           </Heading>
