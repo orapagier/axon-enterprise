@@ -27,10 +27,16 @@ import type {
 } from "@medusajs/framework/types"
 import { COD_LEDGER_MODULE } from "../cod-ledger"
 import type CodLedgerModuleService from "../cod-ledger/service"
+import {
+  ACCOUNTABILITY_MODULE,
+  PREPAY_LOCKED_STATES,
+} from "../accountability"
+import type AccountabilityModuleService from "../accountability/service"
 
 type InjectedDeps = {
   logger: Logger
   [COD_LEDGER_MODULE]?: CodLedgerModuleService
+  [ACCOUNTABILITY_MODULE]?: AccountabilityModuleService
 }
 
 /**
