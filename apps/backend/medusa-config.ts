@@ -1,4 +1,4 @@
-import { loadEnv, defineConfig } from '@medusajs/framework/utils'
+import { loadEnv, defineConfig, Modules } from '@medusajs/framework/utils'
 
 loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 
@@ -25,6 +25,20 @@ module.exports = defineConfig({
     },
     {
       resolve: "./src/modules/dispatch",
+    },
+    {
+      resolve: "./src/modules/cod-ledger",
+    },
+    {
+      resolve: "@medusajs/medusa/payment",
+      options: {
+        providers: [
+          {
+            resolve: "./src/modules/payment-cod",
+            id: "freshhub",
+          },
+        ],
+      },
     },
   ],
 })
