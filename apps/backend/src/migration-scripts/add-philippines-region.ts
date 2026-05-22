@@ -133,12 +133,21 @@ export default async function addPhilippinesRegion({ container }: ExecArgs) {
 
   // 4. Stock location in Mindanao (created if no PH location exists).
   logger.info("Checking for a PH stock location…")
-  const existingLocations = await stockLocationModule.listStockLocations({})
+  const existingLocations = await stockLocationModule.listStockLocations(
+    {},
+    { relations: ["address"] }
+  )
+  // First match by address country_code; fall back to name to catch any rows
+  // whose address relation didn't load (and to deduplicate prior "Mindanao Hub"
+  // stragglers created before this fix landed).
   let phLocation = existingLocations.find(
     (l) =>
       (l.address as { country_code?: string } | null)?.country_code?.toLowerCase() ===
       PH_COUNTRY
   )
+  if (!phLocation) {
+    phLocation = existingLocations.find((l) => l.name === "Mindanao Hub")
+  }
 
   if (!phLocation) {
     const { result } = await createStockLocationsWorkflow(container).run({
