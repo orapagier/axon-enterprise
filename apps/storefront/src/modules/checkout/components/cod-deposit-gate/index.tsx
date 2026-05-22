@@ -73,6 +73,7 @@ export default function CodDepositGate({
         }
       )
       setWallet(body.wallet)
+      onStatusChange?.(body.wallet?.status ?? "pending_verification")
     } catch (e) {
       setError((e as Error).message)
     } finally {
