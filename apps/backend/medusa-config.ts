@@ -30,6 +30,9 @@ module.exports = defineConfig({
       resolve: "./src/modules/cod-ledger",
     },
     {
+      resolve: "./src/modules/accountability",
+    },
+    {
       resolve: "@medusajs/medusa/payment",
       options: {
         providers: [
