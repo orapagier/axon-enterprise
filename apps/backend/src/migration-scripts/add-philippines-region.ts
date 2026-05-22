@@ -92,7 +92,7 @@ export default async function addPhilippinesRegion({ container }: ExecArgs) {
             name: "Philippines",
             currency_code: PH_CURRENCY,
             countries: [PH_COUNTRY],
-            payment_providers: ["pp_system_default"],
+            payment_providers: ["pp_system_default", "pp_cod_freshhub"],
           },
         ],
       },
@@ -101,6 +101,23 @@ export default async function addPhilippinesRegion({ container }: ExecArgs) {
     logger.info(`Created region: Philippines (${phRegion.id}).`)
   } else {
     logger.info("Philippines region already exists; skipping create.")
+  }
+
+  // 2a. Ensure pp_cod_freshhub is attached to the PH region (idempotent).
+  try {
+    await updateRegionsWorkflow(container).run({
+      input: {
+        selector: { id: phRegion.id },
+        update: {
+          payment_providers: ["pp_system_default", "pp_cod_freshhub"],
+        },
+      },
+    })
+    logger.info("Ensured PH region has COD payment provider attached.")
+  } catch (err) {
+    logger.warn(
+      `Could not attach pp_cod_freshhub to PH region: ${String(err)}`
+    )
   }
 
   // 3. Tax region for PH.
