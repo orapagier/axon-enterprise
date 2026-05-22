@@ -59,6 +59,11 @@ export default defineMiddlewares({
       middlewares: [authenticate("user", ["session", "bearer"])],
     },
     {
+      matcher: "/admin/dispatch*",
+      method: ["GET", "POST", "PATCH", "DELETE"],
+      middlewares: [authenticate("user", ["session", "bearer"])],
+    },
+    {
       matcher: "/store/customers/me/hub",
       method: ["POST", "DELETE"],
       middlewares: [authenticate("customer", ["session", "bearer"])],
