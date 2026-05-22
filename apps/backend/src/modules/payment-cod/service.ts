@@ -109,6 +109,24 @@ export default class CodPaymentProviderService extends AbstractPaymentProvider {
       null
 
     if (customerId) {
+      // 1. Prepay-lock check (Phase 6).
+      const accountability = this.container_[ACCOUNTABILITY_MODULE]
+      if (accountability) {
+        const [status] = await accountability.listBuyerAccountStatuses(
+          { customer_id: customerId },
+          { take: 1 }
+        )
+        if (status && PREPAY_LOCKED_STATES.has(status.state)) {
+          throw new MedusaError(
+            MedusaError.Types.NOT_ALLOWED,
+            status.state === "prepay_locked_permanent"
+              ? "Your account is in a permanent prepay-only state. COD is not available."
+              : "Your account is in a 30-day prepay-only period due to a prior refusal."
+          )
+        }
+      }
+
+      // 2. Deposit-verified gate (Phase 5).
       const ledger = this.resolveLedger({
         context: { customer: { id: customerId } },
       })
