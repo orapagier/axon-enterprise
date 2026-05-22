@@ -207,13 +207,18 @@ const Payment = ({
             isLoading={isLoading}
             disabled={
               (isStripeLike(selectedPaymentMethod) && !cardComplete) ||
-              (!selectedPaymentMethod && !paidByGiftcard)
+              (!selectedPaymentMethod && !paidByGiftcard) ||
+              (isCod(selectedPaymentMethod) && codWalletStatus !== "verified")
             }
             data-testid="submit-payment-button"
           >
-            {!activeSession && isStripeLike(selectedPaymentMethod)
-              ? " Enter card details"
-              : "Continue to review"}
+            {isCod(selectedPaymentMethod) && codWalletStatus !== "verified"
+              ? codWalletStatus === "pending_verification"
+                ? "Waiting for deposit verification…"
+                : "Submit deposit to continue"
+              : !activeSession && isStripeLike(selectedPaymentMethod)
+                ? " Enter card details"
+                : "Continue to review"}
           </Button>
         </div>
 
