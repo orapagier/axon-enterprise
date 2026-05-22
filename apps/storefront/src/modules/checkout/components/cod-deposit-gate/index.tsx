@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react"
 import { sdk } from "@lib/config"
 
-type WalletStatus = "none" | "pending_verification" | "verified"
+export type CodWalletStatus = "none" | "pending_verification" | "verified"
 
 type Wallet = {
   customer_id: string
-  status: WalletStatus
+  status: CodWalletStatus
   deposit_balance: number
   payment_reference: string | null
 }
@@ -21,8 +21,15 @@ type Wallet = {
  *
  * The deposit (₱100 refundable) is a one-time gate per buyer. After admin
  * verification the wallet stays verified for all future COD orders.
+ *
+ * `onStatusChange` reports the wallet's current status up to the parent so
+ * the Continue button can be disabled until verification.
  */
-export default function CodDepositGate() {
+export default function CodDepositGate({
+  onStatusChange,
+}: {
+  onStatusChange?: (status: CodWalletStatus) => void
+}) {
   const [wallet, setWallet] = useState<Wallet | null>(null)
   const [loading, setLoading] = useState(true)
   const [reference, setReference] = useState("")
@@ -37,6 +44,7 @@ export default function CodDepositGate() {
         { method: "GET" }
       )
       setWallet(body.wallet)
+      onStatusChange?.(body.wallet?.status ?? "none")
     } catch (e) {
       setError((e as Error).message)
     } finally {
@@ -46,6 +54,7 @@ export default function CodDepositGate() {
 
   useEffect(() => {
     load()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const onSubmit = async () => {
