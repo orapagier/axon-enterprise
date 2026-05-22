@@ -16,6 +16,7 @@ import {
   createShippingOptionsWorkflow,
   createStockLocationsWorkflow,
   createTaxRegionsWorkflow,
+  updateRegionsWorkflow,
   updateStoresWorkflow,
 } from "@medusajs/medusa/core-flows"
 
