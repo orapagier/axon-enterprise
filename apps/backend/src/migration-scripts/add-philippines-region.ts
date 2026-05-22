@@ -143,28 +143,51 @@ export default async function addPhilippinesRegion({ container }: ExecArgs) {
     logger.info("PH stock location already present.")
   }
 
-  await link.create({
-    [Modules.STOCK_LOCATION]: { stock_location_id: phLocation.id },
-    [Modules.FULFILLMENT]: { fulfillment_provider_id: "manual_manual" },
-  })
+  try {
+    await link.create({
+      [Modules.STOCK_LOCATION]: { stock_location_id: phLocation.id },
+      [Modules.FULFILLMENT]: { fulfillment_provider_id: "manual_manual" },
+    })
+  } catch (err) {
+    // Re-runs will hit a duplicate link; treat as no-op.
+    logger.info(
+      `Stock-location ↔ manual_manual provider already linked: ${String(err)}`
+    )
+  }
 
   // 5. Fulfillment set + service zone for PH.
-  logger.info("Creating PH fulfillment set + service zone…")
-  const fulfillmentSet = await fulfillmentModuleService.createFulfillmentSets({
-    name: "Philippines delivery",
-    type: "shipping",
-    service_zones: [
-      {
-        name: "Philippines",
-        geo_zones: [{ country_code: PH_COUNTRY, type: "country" }],
-      },
-    ],
-  })
+  logger.info("Ensuring PH fulfillment set + service zone…")
+  const existingSets = await fulfillmentModuleService.listFulfillmentSets(
+    { name: "Philippines delivery" },
+    { relations: ["service_zones"] }
+  )
+  let fulfillmentSet = existingSets[0]
+  if (!fulfillmentSet) {
+    fulfillmentSet = await fulfillmentModuleService.createFulfillmentSets({
+      name: "Philippines delivery",
+      type: "shipping",
+      service_zones: [
+        {
+          name: "Philippines",
+          geo_zones: [{ country_code: PH_COUNTRY, type: "country" }],
+        },
+      ],
+    })
+    logger.info(`Created fulfillment set: Philippines delivery (${fulfillmentSet.id}).`)
+  } else {
+    logger.info("Philippines delivery fulfillment set already exists; reusing.")
+  }
 
-  await link.create({
-    [Modules.STOCK_LOCATION]: { stock_location_id: phLocation.id },
-    [Modules.FULFILLMENT]: { fulfillment_set_id: fulfillmentSet.id },
-  })
+  try {
+    await link.create({
+      [Modules.STOCK_LOCATION]: { stock_location_id: phLocation.id },
+      [Modules.FULFILLMENT]: { fulfillment_set_id: fulfillmentSet.id },
+    })
+  } catch (err) {
+    logger.info(
+      `Stock-location ↔ fulfillment-set already linked: ${String(err)}`
+    )
+  }
 
   // 6. Shipping option (Standard).
   const { data: shippingProfiles } = await query.graph({
