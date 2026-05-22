@@ -64,6 +64,26 @@ export default defineMiddlewares({
       middlewares: [authenticate("user", ["session", "bearer"])],
     },
     {
+      matcher: "/admin/deposits*",
+      method: ["GET", "POST", "PATCH", "DELETE"],
+      middlewares: [authenticate("user", ["session", "bearer"])],
+    },
+    {
+      matcher: "/admin/orders/*/cod-collected",
+      method: ["POST"],
+      middlewares: [authenticate("user", ["session", "bearer"])],
+    },
+    {
+      matcher: "/admin/orders/*/cod-remitted",
+      method: ["POST"],
+      middlewares: [authenticate("user", ["session", "bearer"])],
+    },
+    {
+      matcher: "/store/customer/deposit*",
+      method: ["GET", "POST"],
+      middlewares: [authenticate("customer", ["session", "bearer"])],
+    },
+    {
       matcher: "/store/customers/me/hub",
       method: ["POST", "DELETE"],
       middlewares: [authenticate("customer", ["session", "bearer"])],
