@@ -197,39 +197,58 @@ export default async function addPhilippinesRegion({ container }: ExecArgs) {
   const shippingProfile = shippingProfiles[0]
 
   if (shippingProfile) {
-    await createShippingOptionsWorkflow(container).run({
-      input: [
-        {
-          name: "Standard Delivery",
-          price_type: "flat",
-          provider_id: "manual_manual",
-          service_zone_id: fulfillmentSet.service_zones[0].id,
-          shipping_profile_id: shippingProfile.id,
-          type: {
-            label: "Standard",
-            description: "Next-day delivery across major Mindanao cities.",
-            code: "standard",
-          },
-          prices: [
-            { currency_code: PH_CURRENCY, amount: 150 },
-            { region_id: phRegion.id, amount: 150 },
-          ],
-          rules: [
+    const serviceZoneId = fulfillmentSet.service_zones?.[0]?.id
+    if (!serviceZoneId) {
+      logger.warn(
+        "Fulfillment set has no service zone — skipped shipping option."
+      )
+    } else {
+      const { data: existingOptions } = await query.graph({
+        entity: "shipping_option",
+        fields: ["id", "name", "service_zone_id"],
+        filters: { service_zone_id: serviceZoneId },
+      })
+      const hasStandard = (existingOptions ?? []).some(
+        (o: { name?: string }) => o.name === "Standard Delivery"
+      )
+      if (hasStandard) {
+        logger.info("Standard Delivery shipping option already exists; skipping.")
+      } else {
+        await createShippingOptionsWorkflow(container).run({
+          input: [
             {
-              attribute: "enabled_in_store",
-              value: "true",
-              operator: "eq",
-            },
-            {
-              attribute: "is_return",
-              value: "false",
-              operator: "eq",
+              name: "Standard Delivery",
+              price_type: "flat",
+              provider_id: "manual_manual",
+              service_zone_id: serviceZoneId,
+              shipping_profile_id: shippingProfile.id,
+              type: {
+                label: "Standard",
+                description: "Next-day delivery across major Mindanao cities.",
+                code: "standard",
+              },
+              prices: [
+                { currency_code: PH_CURRENCY, amount: 150 },
+                { region_id: phRegion.id, amount: 150 },
+              ],
+              rules: [
+                {
+                  attribute: "enabled_in_store",
+                  value: "true",
+                  operator: "eq",
+                },
+                {
+                  attribute: "is_return",
+                  value: "false",
+                  operator: "eq",
+                },
+              ],
             },
           ],
-        },
-      ],
-    })
-    logger.info("Created Standard Delivery shipping option for PH.")
+        })
+        logger.info("Created Standard Delivery shipping option for PH.")
+      }
+    }
   } else {
     logger.warn(
       "No shipping_profile found — skipped shipping option. Run the initial seed first."
