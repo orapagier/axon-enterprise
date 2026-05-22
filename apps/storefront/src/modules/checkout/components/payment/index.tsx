@@ -40,6 +40,8 @@ const Payment = ({
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(
     activeSession?.provider_id ?? ""
   )
+  const [codWalletStatus, setCodWalletStatus] =
+    useState<CodWalletStatus | null>(null)
 
   const searchParams = useSearchParams()
   const router = useRouter()
