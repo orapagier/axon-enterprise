@@ -1,0 +1,84 @@
+/**
+ * Flip locked dispatch batches to in_transit at each hub's dispatch_time
+ * (default 16:00 local). Runs every 15 minutes; for every locked batch whose
+ * hub dispatch_time has been reached on its dispatch_date, transition to
+ * in_transit and stamp dispatched_at.
+ *
+ * Run on-demand with:
+ *   npx medusa exec ./src/jobs/dispatch-batches-in-transit.ts
+ */
+import type { MedusaContainer } from "@medusajs/framework/types"
+import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
+import { DISPATCH_MODULE } from "../modules/dispatch"
+import type DispatchModuleService from "../modules/dispatch/service"
+import { HUB_MODULE } from "../modules/hub"
+import type HubModuleService from "../modules/hub/service"
+
+export const config = {
+  name: "dispatch-batches-in-transit",
+  schedule: "*/15 * * * *",
+}
+
+const MANILA_OFFSET_MS = 8 * 60 * 60_000
+
+function parseHHmm(s: string): { h: number; m: number } {
+  const [h, m] = s.split(":").map((x) => parseInt(x, 10))
+  return { h: h ?? 0, m: m ?? 0 }
+}
+
+export default async function dispatchBatchesInTransit(
+  container: MedusaContainer
+) {
+  const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
+  const dispatchService: DispatchModuleService =
+    container.resolve(DISPATCH_MODULE)
+  const hubService: HubModuleService = container.resolve(HUB_MODULE)
+
+  const now = new Date()
+  const locked = await dispatchService.listDispatchBatches(
+    { status: "locked" },
+    { take: 500 }
+  )
+  if (!locked.length) {
+    logger.info("dispatch-batches-in-transit: no locked batches.")
+    return
+  }
+
+  const hubIds = Array.from(new Set(locked.map((b) => b.hub_id)))
+  const hubs = await hubService.listHubs({ id: hubIds }, { take: hubIds.length })
+  const hubById = new Map(hubs.map((h) => [h.id, h]))
+
+  let transitioned = 0
+  for (const batch of locked) {
+    const hub = hubById.get(batch.hub_id)
+    if (!hub) continue
+    const { h, m } = parseHHmm(hub.dispatch_time ?? "16:00")
+    const date =
+      typeof batch.dispatch_date === "string"
+        ? new Date(batch.dispatch_date)
+        : batch.dispatch_date
+    const dispatchAtUtcMs =
+      Date.UTC(
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getUTCDate(),
+        h,
+        m
+      ) - MANILA_OFFSET_MS
+    if (dispatchAtUtcMs <= now.getTime()) {
+      await dispatchService.updateDispatchBatches({
+        id: batch.id,
+        status: "in_transit",
+        dispatched_at: now,
+      })
+      transitioned++
+      logger.info(
+        `Dispatch batch ${batch.id} (hub ${batch.hub_id}) → in_transit`
+      )
+    }
+  }
+
+  logger.info(
+    `dispatch-batches-in-transit finished: ${transitioned} batches transitioned.`
+  )
+}
