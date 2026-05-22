@@ -69,6 +69,11 @@ export default defineMiddlewares({
       middlewares: [authenticate("user", ["session", "bearer"])],
     },
     {
+      matcher: "/admin/cod-reconcile*",
+      method: ["GET"],
+      middlewares: [authenticate("user", ["session", "bearer"])],
+    },
+    {
       matcher: "/admin/orders/*/cod-collected",
       method: ["POST"],
       middlewares: [authenticate("user", ["session", "bearer"])],
