@@ -2,6 +2,7 @@ import { Container } from "@modules/common/components/ui"
 
 import ChevronDown from "@modules/common/icons/chevron-down"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import DepositSection from "@modules/account/components/deposit-section"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
 
