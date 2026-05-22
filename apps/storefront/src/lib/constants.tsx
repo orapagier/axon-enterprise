@@ -33,6 +33,10 @@ export const paymentInfoMap: Record<
     title: "Manual Payment",
     icon: <CreditCard />,
   },
+  pp_cod_freshhub: {
+    title: "Cash on Delivery",
+    icon: <CreditCard />,
+  },
   // Add more payment providers here
 }
 
