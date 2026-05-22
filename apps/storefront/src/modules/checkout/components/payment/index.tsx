@@ -3,7 +3,9 @@ import { RadioGroup } from "@headlessui/react"
 import { isCod, isStripeLike, paymentInfoMap } from "@lib/constants"
 import { initiatePaymentSession } from "@lib/data/cart"
 import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
-import CodDepositGate from "@modules/checkout/components/cod-deposit-gate"
+import CodDepositGate, {
+  type CodWalletStatus,
+} from "@modules/checkout/components/cod-deposit-gate"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import PaymentContainer, {
   StripeCardContainer,
