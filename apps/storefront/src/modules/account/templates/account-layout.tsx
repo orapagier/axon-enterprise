@@ -60,9 +60,9 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
       className="flex-1 bg-grey-5 min-h-[calc(100vh-100px)]"
       data-testid="account-page"
     >
-      <div className="content-container py-8 small:py-12">
+      <div className="content-container pt-4 pb-8 small:pt-6 small:pb-12">
         {/* Header card */}
-        <div className="bg-white rounded-2xl shadow-soft border border-grey-10/60 p-6 small:p-8 mb-6">
+        <div className="bg-white rounded-2xl shadow-soft border border-grey-10/60 p-4 small:p-6 mb-4 small:mb-6">
           <div className="flex flex-col small:flex-row small:items-center small:justify-between gap-5">
             <div className="flex items-center gap-x-4">
               <div className="w-14 h-14 small:w-16 small:h-16 rounded-2xl bg-gradient-to-br from-brand-green-500 to-brand-green-700 text-white flex items-center justify-center text-2xl shrink-0">
