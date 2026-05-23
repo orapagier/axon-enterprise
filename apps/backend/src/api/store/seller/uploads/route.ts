@@ -1,5 +1,5 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
-import { MedusaError, Modules } from "@medusajs/framework/utils"
+import { Modules } from "@medusajs/framework/utils"
 import { uploadFilesWorkflow } from "@medusajs/medusa/core-flows"
 
 /**
