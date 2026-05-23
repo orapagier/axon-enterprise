@@ -87,15 +87,10 @@ export const retrieveCustomer =
   async (): Promise<HttpTypes.StoreCustomer | null> => {
     const authHeaders = await getAuthHeaders()
 
-    if (!authHeaders) return null
-
-    const headers = {
-      ...authHeaders,
-    }
-
-    const next = {
-      ...(await getCacheOptions("customers")),
-    }
+    // `getAuthHeaders()` returns `{}` (truthy) when no JWT is in the
+    // cookie. Check for the actual bearer field so we don't waste a
+    // round-trip and cache a 401 → null as if the customer exists.
+    if (!("authorization" in authHeaders)) return null
 
     return await sdk.client
       .fetch<{ customer: HttpTypes.StoreCustomer }>(`/store/customers/me`, {
@@ -103,9 +98,12 @@ export const retrieveCustomer =
         query: {
           fields: "*orders",
         },
-        headers,
-        next,
-        cache: "force-cache",
+        headers: { ...authHeaders },
+        // Skip Next.js's data cache — when the JWT expires or the
+        // backend session changes, a cached customer would lie about
+        // auth state and pages would render as logged-in while every
+        // live call 401s.
+        cache: "no-store",
       })
       .then(({ customer }) => customer)
       .catch(() => null)
