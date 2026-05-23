@@ -31,7 +31,7 @@ export function validateRequired(value: unknown, label: string): string | null {
 }
 
 /** Loose email check — catches obvious typos without a full RFC parser. */
-export function validateEmail(value: unknown): string | null {
+export function validateEmail(value: unknown, _label?: string): string | null {
   const s = String(value ?? "").trim()
   if (s.length === 0) return "Email is required."
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s))
