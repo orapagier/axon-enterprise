@@ -96,12 +96,12 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
                   )}
                 </div>
                 <h1
-                  className="font-heading text-2xl small:text-3xl text-grey-90 mt-1 truncate"
+                  className="font-heading text-xl small:text-2xl text-grey-90 mt-0.5 truncate leading-tight"
                   data-testid="welcome-message"
                 >
                   Hello, {displayName}
                 </h1>
-                <p className="text-caption text-grey-50 mt-0.5 truncate">
+                <p className="text-caption text-grey-50 truncate">
                   {customer.email}
                 </p>
               </div>
