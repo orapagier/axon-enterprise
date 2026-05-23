@@ -1,7 +1,7 @@
 // @ts-nocheck — React 19 / @medusajs/ui type drift; see sellers/page.tsx for
 // the explanation. Runtime is fine — Vite bundles the admin app without tsc.
 import { defineRouteConfig } from "@medusajs/admin-sdk"
-import { Truck } from "@medusajs/icons"
+import { TruckFast } from "@medusajs/icons"
 import {
   Badge,
   Button,
@@ -324,7 +324,7 @@ const DispatchPage = () => {
 
 export const config = defineRouteConfig({
   label: "Dispatch",
-  icon: Truck,
+  icon: TruckFast,
 })
 
 export default DispatchPage
