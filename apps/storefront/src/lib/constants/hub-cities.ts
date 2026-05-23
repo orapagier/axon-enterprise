@@ -23,6 +23,22 @@ export const HUB_CITIES = [
 
 export type HubCity = (typeof HUB_CITIES)[number]
 
+/**
+ * Mapping from canonical hub city → backend hub slug. Only cities with an
+ * active hub at launch resolve to a slug; others return null and the buyer
+ * sees a "no hub in your area" message at checkout.
+ */
+const HUB_SLUG_BY_CITY: Partial<Record<HubCity, string>> = {
+  "Tagum City": "tagum",
+}
+
+/** Resolve a hub slug from a city string. Case-insensitive. */
+export function hubSlugForCity(raw: string): string | null {
+  const canon = canonicalHubCity(raw)
+  if (!canon) return null
+  return HUB_SLUG_BY_CITY[canon] ?? null
+}
+
 /** Normalised lowercase set for fast lookup. */
 const HUB_CITY_SET: ReadonlySet<string> = new Set(
   HUB_CITIES.map((c) => c.toLowerCase())
