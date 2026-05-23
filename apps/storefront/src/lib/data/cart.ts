@@ -361,6 +361,8 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
       formData.get("shipping_address.city")
     )
 
+    const barangay = sanitizeText(formData.get("shipping_address.barangay"))
+
     const data: Record<string, unknown> = {
       shipping_address: {
         first_name: sanitizeText(formData.get("shipping_address.first_name")),
@@ -375,6 +377,7 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
         ),
         province: sanitizeText(formData.get("shipping_address.province")),
         phone: sanitizeText(formData.get("shipping_address.phone")),
+        metadata: barangay ? { barangay } : undefined,
       },
       email: sanitizeText(formData.get("email")),
     }
