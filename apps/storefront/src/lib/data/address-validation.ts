@@ -220,7 +220,7 @@ function runValidators(
   for (const field of fields) {
     const raw = formData.get(field.sourceKey)
     for (const validator of field.validators) {
-      const err = validator(raw)
+      const err = validator(raw, field.label)
       if (err) {
         // only keep the first error per field
         if (!errors[field.key]) errors[field.key] = err
