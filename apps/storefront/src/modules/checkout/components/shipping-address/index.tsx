@@ -28,6 +28,7 @@ type FieldKey =
   | "shipping_address.country_code"
   | "shipping_address.province"
   | "shipping_address.phone"
+  | "shipping_address.barangay"
   | "email"
 
 const REQUIRED_FIELDS: { key: FieldKey; label: string }[] = [
@@ -37,6 +38,7 @@ const REQUIRED_FIELDS: { key: FieldKey; label: string }[] = [
   { key: "shipping_address.postal_code", label: "Postal code" },
   { key: "shipping_address.city", label: "City" },
   { key: "shipping_address.country_code", label: "Country" },
+  { key: "shipping_address.barangay", label: "Barangay" },
 ]
 
 const ShippingAddress = ({
