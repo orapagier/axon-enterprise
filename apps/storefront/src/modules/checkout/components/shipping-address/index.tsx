@@ -1,6 +1,6 @@
 "use client"
 
-import { HUB_CITIES } from "@lib/constants/hub-cities"
+import { HUB_CITIES, hubSlugForCity } from "@lib/constants/hub-cities"
 import {
   validateEmail,
   validateHubCity,
@@ -10,6 +10,7 @@ import {
 } from "@lib/data/address-validation"
 import { HttpTypes } from "@medusajs/types"
 import { Container } from "@modules/common/components/ui"
+import BarangayCombobox from "@modules/common/components/barangay-combobox"
 import Checkbox from "@modules/common/components/checkbox"
 import Input from "@modules/common/components/input"
 import { mapKeys } from "lodash"
