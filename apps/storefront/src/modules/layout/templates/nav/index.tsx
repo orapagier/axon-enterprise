@@ -222,6 +222,32 @@ export default async function Nav() {
             <NavSearch />
 
             <div className="flex items-center gap-x-0.5 ml-2">
+              {/* Producer shortcut: post a new listing */}
+              {isProducer && (
+                <LocalizedClientLink
+                  className="hidden small:inline-flex items-center gap-x-1.5 h-9 pl-2.5 pr-3 rounded-full bg-brand-green-50 hover:bg-brand-green-100 text-brand-green-800 border border-brand-green-100 text-[12px] font-semibold transition-all"
+                  href="/account/producer/listings/new"
+                  data-testid="nav-post-listing-link"
+                  aria-label="Post a new listing"
+                  title="Post a new listing"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                  <span>Post listing</span>
+                </LocalizedClientLink>
+              )}
+
               {/* Account */}
               <LocalizedClientLink
                 className="hidden small:flex items-center justify-center w-9 h-9 rounded-full text-grey-60 hover:text-grey-90 hover:bg-grey-5 transition-all"
