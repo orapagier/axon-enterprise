@@ -58,8 +58,15 @@ const FIELDS: FieldDef[] = [
   {
     name: "origin_country",
     label: "Hub / Origin",
-    placeholder: "Bukidnon",
-    suggestions: ["Bukidnon", "Davao", "Cagayan de Oro", "General Santos", "Zamboanga"],
+    placeholder: "Tagum City",
+    suggestions: [
+      "Tagum City",
+      "Davao City",
+      "Bukidnon",
+      "Cagayan de Oro",
+      "General Santos",
+      "Zamboanga",
+    ],
   },
   {
     name: "price",
