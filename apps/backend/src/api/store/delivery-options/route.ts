@@ -1,0 +1,210 @@
+import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
+import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
+import { DELIVERY_FEES_MODULE } from "../../../modules/delivery-fees"
+import type DeliveryFeesModuleService from "../../../modules/delivery-fees/service"
+import { HUB_MODULE } from "../../../modules/hub"
+import type HubModuleService from "../../../modules/hub/service"
+
+type Tier = "free" | "standard" | "special"
+
+type TierOption = {
+  tier: Tier
+  label: string
+  fee_php: number
+  eta_label: string
+  available: boolean
+  reason_if_unavailable: string | null
+}
+
+function getCustomerId(req: MedusaRequest): string | null {
+  const ctx = (req as unknown as { auth_context?: { actor_id?: string } })
+    .auth_context
+  return ctx?.actor_id ?? null
+}
+
+function nowInHubTimezone(timezone: string): { hour: number; minute: number } {
+  const fmt = new Intl.DateTimeFormat("en-US", {
+    timeZone: timezone,
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  })
+  const parts = fmt.formatToParts(new Date())
+  const hour = parseInt(parts.find((p) => p.type === "hour")?.value ?? "0", 10)
+  const minute = parseInt(
+    parts.find((p) => p.type === "minute")?.value ?? "0",
+    10
+  )
+  return { hour, minute: Number.isNaN(minute) ? 0 : minute }
+}
+
+function parseHHMM(s: string): { hour: number; minute: number } {
+  const [h, m] = s.split(":").map((x) => parseInt(x, 10))
+  return { hour: h, minute: m || 0 }
+}
+
+function beforeCutoff(
+  now: { hour: number; minute: number },
+  cutoff: { hour: number; minute: number }
+): boolean {
+  if (now.hour < cutoff.hour) return true
+  if (now.hour > cutoff.hour) return false
+  return now.minute < cutoff.minute
+}
+
+/**
+ * GET /store/delivery-options?cart_id=X
+ *
+ * Returns the 3 delivery tiers (Free / Standard / Special) for the cart's
+ * shipping address. Each tier reports its fee, ETA, availability, and the
+ * reason it's unavailable (if any). The UI renders all 3 always and disables
+ * the unavailable ones with the reason.
+ *
+ * Required: cart must have a shipping_address with metadata.barangay set.
+ * Hub is resolved from cart shipping_address.city for now (Tagum-only launch).
+ */
+export async function GET(req: MedusaRequest, res: MedusaResponse) {
+  const cartId = req.query.cart_id as string | undefined
+  if (!cartId) {
+    res.status(400).json({ error: "cart_id is required" })
+    return
+  }
+
+  const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
+  const hubService: HubModuleService = req.scope.resolve(HUB_MODULE)
+  const feesService: DeliveryFeesModuleService = req.scope.resolve(
+    DELIVERY_FEES_MODULE
+  )
+
+  // 1. Load cart with shipping address.
+  const { data: carts } = await query.graph({
+    entity: "cart",
+    fields: [
+      "id",
+      "customer_id",
+      "shipping_address.city",
+      "shipping_address.province",
+      "shipping_address.metadata",
+    ],
+    filters: { id: cartId },
+  })
+  const cart = carts[0] as
+    | {
+        id: string
+        customer_id: string | null
+        shipping_address: {
+          city: string | null
+          province: string | null
+          metadata: Record<string, unknown> | null
+        } | null
+      }
+    | undefined
+
+  if (!cart) {
+    res.status(404).json({ error: "cart not found" })
+    return
+  }
+
+  const barangay =
+    (cart.shipping_address?.metadata?.barangay as string | undefined)?.trim() ??
+    ""
+  if (!cart.shipping_address || !barangay) {
+    res.status(400).json({
+      error: "shipping_address with metadata.barangay is required",
+      options: [],
+    })
+    return
+  }
+
+  // 2. Resolve hub. MVP: city must match an active hub by name. Tagum at launch.
+  const city = (cart.shipping_address.city ?? "").trim().toLowerCase()
+  const allHubs = await hubService.listHubs({ active: true }, { take: 100 })
+  const hub = allHubs.find(
+    (h) =>
+      h.city.toLowerCase() === city ||
+      `${h.city.toLowerCase()} city` === city ||
+      h.city.toLowerCase() === city.replace(/\s*city$/i, "").trim()
+  )
+  if (!hub) {
+    res.status(404).json({
+      error: "no hub serves this address",
+      hint: "/partner-hub",
+      options: [],
+    })
+    return
+  }
+
+  // 3. Lookup fees for (hub, barangay).
+  const fee = await feesService.retrieveByHubBarangay(hub.id, barangay)
+  if (!fee) {
+    res.status(404).json({
+      error: `delivery to ${barangay} not yet supported by ${hub.name}`,
+      options: [],
+    })
+    return
+  }
+
+  // 4. Member status (from customer metadata).
+  let isMember = false
+  if (cart.customer_id) {
+    const { data: customers } = await query.graph({
+      entity: "customer",
+      fields: ["id", "metadata"],
+      filters: { id: cart.customer_id },
+    })
+    const cust = customers[0] as
+      | { metadata: Record<string, unknown> | null }
+      | undefined
+    isMember = cust?.metadata?.membership_status === "active"
+  }
+
+  // 5. Time of day vs cutoff.
+  const now = nowInHubTimezone(hub.timezone)
+  const cutoff = parseHHMM(hub.dispatch_cutoff)
+  const isBeforeCutoff = beforeCutoff(now, cutoff)
+  const cutoffLabel = hub.dispatch_cutoff
+  const dispatchLabel = hub.dispatch_time
+
+  // 6. Build the 3 tier options.
+  const options: TierOption[] = [
+    {
+      tier: "free",
+      label: "Free delivery",
+      fee_php: 0,
+      eta_label: isBeforeCutoff
+        ? `Today ${dispatchLabel}`
+        : `Tomorrow ${dispatchLabel}`,
+      available: isBeforeCutoff,
+      reason_if_unavailable: isBeforeCutoff
+        ? null
+        : `Order before ${cutoffLabel} for free same-day delivery`,
+    },
+    {
+      tier: "standard",
+      label: "Standard delivery",
+      fee_php: fee.standard_fee_php,
+      eta_label: "Today, anytime",
+      available: true,
+      reason_if_unavailable: null,
+    },
+    {
+      tier: "special",
+      label: "Special delivery",
+      fee_php: fee.special_fee_php,
+      eta_label: "Within 1 hour",
+      available: isMember,
+      reason_if_unavailable: isMember
+        ? null
+        : "Hub Members only — upgrade for ₱500/yr",
+    },
+  ]
+
+  res.json({
+    hub: { id: hub.id, slug: hub.slug, name: hub.name },
+    barangay,
+    is_member: isMember,
+    now: { hour: now.hour, minute: now.minute, timezone: hub.timezone },
+    cutoff: hub.dispatch_cutoff,
+    options,
+  })
+}
