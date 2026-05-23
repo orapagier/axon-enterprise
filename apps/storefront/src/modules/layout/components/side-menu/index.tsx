@@ -53,7 +53,7 @@ const SideMenu = ({ regions, locales, currentLocale, isProducer }: SideMenuProps
   const SideMenuItems = isProducer
     ? [
         {
-          name: "Post Listing",
+          name: "Sell",
           href: "/account/producer/listings/new",
           icon: "plus",
         },
