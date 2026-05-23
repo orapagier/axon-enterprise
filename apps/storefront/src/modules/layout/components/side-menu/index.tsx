@@ -11,7 +11,7 @@ import CountrySelect from "../country-select"
 import LanguageSelect from "../language-select"
 import { Locale } from "@lib/data/locales"
 
-const SideMenuItems = [
+const BaseMenuItems = [
   { name: "Shop", href: "/store", icon: "store" },
   { name: "How It Works", href: "/how-it-works", icon: "info" },
   { name: "For Farmers", href: "/farmers", icon: "leaf" },
@@ -35,6 +35,8 @@ const MenuIcon = ({ type }: { type: string }) => {
       return <svg {...props}><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     case "bag":
       return <svg {...props}><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    case "plus":
+      return <svg {...props} strokeWidth={2}><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
     default:
       return null
   }
@@ -44,9 +46,20 @@ type SideMenuProps = {
   regions: HttpTypes.StoreRegion[] | null
   locales: Locale[] | null
   currentLocale: string | null
+  isProducer?: boolean
 }
 
-const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
+const SideMenu = ({ regions, locales, currentLocale, isProducer }: SideMenuProps) => {
+  const SideMenuItems = isProducer
+    ? [
+        {
+          name: "Post Listing",
+          href: "/account/producer/listings/new",
+          icon: "plus",
+        },
+        ...BaseMenuItems,
+      ]
+    : BaseMenuItems
   const countryToggleState = useToggleState()
   const languageToggleState = useToggleState()
 
