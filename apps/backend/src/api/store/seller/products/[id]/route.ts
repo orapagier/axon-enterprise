@@ -316,7 +316,7 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
   })
 
   const updatedListing = (
-    (updated?.[0] as { product_listing?: unknown[] } | undefined)?.product_listing?.[0] as
+    (updated?.[0] as unknown as { product_listing?: unknown[] } | undefined)?.product_listing?.[0] as
       | Record<string, unknown>
       | undefined
   )
