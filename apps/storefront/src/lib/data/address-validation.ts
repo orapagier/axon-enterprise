@@ -40,7 +40,10 @@ export function validateEmail(value: unknown, _label?: string): string | null {
 }
 
 /** Philippine postal codes are 4-digit numbers. */
-export function validatePhilippinePostalCode(value: unknown): string | null {
+export function validatePhilippinePostalCode(
+  value: unknown,
+  _label?: string
+): string | null {
   const s = String(value ?? "").trim()
   if (s.length === 0) return "Postal code is required."
   if (!/^\d{4}$/.test(s)) return "Postal code must be a 4-digit number (e.g. 8100)."
