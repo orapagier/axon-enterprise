@@ -222,14 +222,14 @@ export default async function Nav() {
             <NavSearch />
 
             <div className="flex items-center gap-x-0.5 ml-2">
-              {/* Producer shortcut: post a new listing */}
+              {/* Producer shortcut: start a new listing */}
               {isProducer && (
                 <LocalizedClientLink
                   className="hidden small:inline-flex items-center gap-x-1.5 h-9 pl-2.5 pr-3 rounded-full bg-brand-green-50 hover:bg-brand-green-100 text-brand-green-800 border border-brand-green-100 text-[12px] font-semibold transition-all"
                   href="/account/producer/listings/new"
-                  data-testid="nav-post-listing-link"
-                  aria-label="Post a new listing"
-                  title="Post a new listing"
+                  data-testid="nav-sell-link"
+                  aria-label="Sell a product"
+                  title="Sell a product"
                 >
                   <svg
                     width="14"
@@ -244,7 +244,7 @@ export default async function Nav() {
                     <line x1="12" y1="5" x2="12" y2="19" />
                     <line x1="5" y1="12" x2="19" y2="12" />
                   </svg>
-                  <span>Post listing</span>
+                  <span>Sell</span>
                 </LocalizedClientLink>
               )}
 
