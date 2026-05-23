@@ -63,9 +63,9 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
       <div className="content-container pt-4 pb-8 small:pt-6 small:pb-12">
         {/* Header card */}
         <div className="bg-white rounded-2xl shadow-soft border border-grey-10/60 p-4 small:p-6 mb-4 small:mb-6">
-          <div className="flex flex-col small:flex-row small:items-center small:justify-between gap-5">
-            <div className="flex items-center gap-x-4">
-              <div className="w-14 h-14 small:w-16 small:h-16 rounded-2xl bg-gradient-to-br from-brand-green-500 to-brand-green-700 text-white flex items-center justify-center text-2xl shrink-0">
+          <div className="flex flex-col small:flex-row small:items-center small:justify-between gap-3 small:gap-4">
+            <div className="flex items-center gap-x-3 small:gap-x-4">
+              <div className="w-12 h-12 small:w-14 small:h-14 rounded-2xl bg-gradient-to-br from-brand-green-500 to-brand-green-700 text-white flex items-center justify-center text-xl small:text-2xl shrink-0">
                 {roleIcon}
               </div>
               <div className="min-w-0">
