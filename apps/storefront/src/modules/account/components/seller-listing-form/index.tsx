@@ -217,11 +217,19 @@ export default function SellerListingForm({ mode, existing }: Props) {
     startUpload(async () => {
       const fd = new FormData()
       fd.append("files", file)
-      const result = await uploadListingPhoto(fd)
-      if (result.ok && result.url) {
-        setPhotoUrl(result.url)
-      } else {
-        setUploadError(result.error ?? "Upload failed.")
+      try {
+        const result = await uploadListingPhoto(fd)
+        if (result.ok && result.url) {
+          setPhotoUrl(result.url)
+        } else {
+          setUploadError(result.error ?? "Upload failed.")
+        }
+      } catch (e) {
+        const message =
+          e instanceof Error && e.message
+            ? e.message
+            : "Upload failed — try a smaller image."
+        setUploadError(message)
       }
     })
   }
