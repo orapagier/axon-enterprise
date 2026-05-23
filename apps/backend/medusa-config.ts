@@ -33,6 +33,9 @@ module.exports = defineConfig({
       resolve: "./src/modules/accountability",
     },
     {
+      resolve: "./src/modules/delivery-fees",
+    },
+    {
       resolve: "@medusajs/medusa/payment",
       options: {
         providers: [
