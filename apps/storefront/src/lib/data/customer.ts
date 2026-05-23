@@ -179,7 +179,17 @@ export async function requestEmailCode(
     return { ok: true, devCode: code }
   }
 
-  return { ok: true }
+  // Until an email provider is wired up, fail loudly in production rather
+  // than returning ok and leaving the user with no way to receive the code.
+  // eslint-disable-next-line no-console
+  console.error(
+    "[MFH auth] No transactional email provider configured; OTP not delivered."
+  )
+  return {
+    ok: false,
+    error:
+      "We can't send login codes right now. Please try again later or contact support.",
+  }
 }
 
 export type OtpVerifyState = {
