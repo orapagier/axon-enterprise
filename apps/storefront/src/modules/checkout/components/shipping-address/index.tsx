@@ -62,8 +62,16 @@ const ShippingAddress = ({
     "shipping_address.country_code": cart?.shipping_address?.country_code || "",
     "shipping_address.province": cart?.shipping_address?.province || "",
     "shipping_address.phone": cart?.shipping_address?.phone || "",
+    "shipping_address.barangay":
+      ((cart?.shipping_address as { metadata?: { barangay?: string } } | null)
+        ?.metadata?.barangay as string | undefined) || "",
     email: cart?.email || "",
   })
+
+  const hubSlug = useMemo(
+    () => hubSlugForCity(formData["shipping_address.city"] ?? ""),
+    [formData]
+  )
 
   const [errors, setErrors] = useState<AddressErrors>({})
   const [touched, setTouched] = useState<Set<string>>(new Set())
