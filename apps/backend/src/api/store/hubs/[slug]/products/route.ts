@@ -42,7 +42,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       filters: { id: hub.id },
     })
 
-    const hubEntry = data[0] as {
+    const hubEntry = data[0] as unknown as {
       product?: Array<{
         id: string
         product_listing?: Array<{ listing_type: string }>
