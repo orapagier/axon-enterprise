@@ -72,7 +72,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     filters: { id: hub.id },
   })
 
-  const products = (data[0] as { product?: { id: string }[] } | undefined)?.product ?? []
+  const products = (data[0] as unknown as { product?: { id: string }[] } | undefined)?.product ?? []
   res.json({
     hub_id: hub.id,
     slug: hub.slug,
