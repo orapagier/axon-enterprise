@@ -40,9 +40,13 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
       })
   }
 
-  // TODO: Update this to grab the actual max inventory
-  const maxQtyFromInventory = 10
-  const maxQuantity = item.variant?.manage_inventory ? 10 : maxQtyFromInventory
+  const CART_QUANTITY_CAP = 10
+  const inventoryQty =
+    (item.variant as { inventory_quantity?: number } | undefined)
+      ?.inventory_quantity
+  const maxQuantity = item.variant?.manage_inventory
+    ? Math.min(inventoryQty ?? CART_QUANTITY_CAP, CART_QUANTITY_CAP)
+    : CART_QUANTITY_CAP
 
   return (
     <Table.Row className="w-full" data-testid="product-row">
