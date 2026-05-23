@@ -69,7 +69,7 @@ export function sanitizeText(value: unknown): string {
 
 // ── field → validator mapping ─────────────────────────────────────────
 
-type FieldValidator = (value: unknown) => string | null
+type FieldValidator = (value: unknown, label: string) => string | null
 
 interface FieldDef {
   key: string // form field key used in error map return
