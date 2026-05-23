@@ -9,7 +9,6 @@ import { redirect } from "next/navigation"
 import crypto from "crypto"
 import {
   getAuthHeaders,
-  getCacheOptions,
   getCacheTag,
   getCartId,
   removeAuthToken,
