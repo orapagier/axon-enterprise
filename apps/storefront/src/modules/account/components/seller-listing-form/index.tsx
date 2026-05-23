@@ -198,8 +198,15 @@ export default function SellerListingForm({ mode, existing }: Props) {
     const file = fileList[0]
     setUploadError(null)
     const MAX_BYTES = 4 * 1024 * 1024
-    const ALLOWED = ["image/jpeg", "image/png", "image/webp", "image/avif"]
-    if (!ALLOWED.includes(file.type)) {
+    const ALLOWED_MIME = ["image/jpeg", "image/png", "image/webp", "image/avif"]
+    const ALLOWED_EXT = ["jpg", "jpeg", "png", "webp", "avif"]
+    // Some browsers (notably Safari/iOS for .webp) report an empty or
+    // application/octet-stream type. Fall back to the extension so we don't
+    // reject legitimate images client-side.
+    const ext = file.name.split(".").pop()?.toLowerCase() ?? ""
+    const mimeOk = ALLOWED_MIME.includes(file.type)
+    const extOk = ALLOWED_EXT.includes(ext)
+    if (!mimeOk && !extOk) {
       setUploadError("Use a JPG, PNG, WebP or AVIF image.")
       return
     }
