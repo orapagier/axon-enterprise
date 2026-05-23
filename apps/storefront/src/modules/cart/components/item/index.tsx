@@ -86,21 +86,14 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
               className="w-14 h-10 p-4"
               data-testid="product-select-button"
             >
-              {/* TODO: Update this with the v2 way of managing inventory */}
               {Array.from(
-                {
-                  length: Math.min(maxQuantity, 10),
-                },
+                { length: Math.max(1, maxQuantity) },
                 (_, i) => (
-                  <option value={i + 1} key={i}>
+                  <option value={i + 1} key={i + 1}>
                     {i + 1}
                   </option>
                 )
               )}
-
-              <option value={1} key={1}>
-                1
-              </option>
             </CartItemSelect>
             {updating && <Spinner />}
           </div>
