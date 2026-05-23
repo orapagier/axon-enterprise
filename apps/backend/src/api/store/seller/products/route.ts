@@ -112,7 +112,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   // Shape listing into a friendly payload per product
   const shaped = ours.map((p) => {
-    const listing = (p as { product_listing?: unknown[] }).product_listing?.[0] as
+    const listing = (p as unknown as { product_listing?: unknown[] }).product_listing?.[0] as
       | Record<string, unknown>
       | undefined
     return {
