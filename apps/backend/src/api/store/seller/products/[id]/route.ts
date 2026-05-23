@@ -102,7 +102,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   if (!product) return
 
   // Shape listing into friendly payload
-  const listingArr = (product as { product_listing?: unknown[] }).product_listing
+  const listingArr = (product as unknown as { product_listing?: unknown[] }).product_listing
   const listing = listingArr?.[0] as Record<string, unknown> | undefined
   const shaped = {
     ...product,
@@ -131,7 +131,7 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
   if (!product) return
 
   const existingListing = (
-    (product as { product_listing?: unknown[] }).product_listing?.[0] as
+    (product as unknown as { product_listing?: unknown[] }).product_listing?.[0] as
       | Record<string, unknown>
       | undefined
   )
@@ -352,7 +352,7 @@ export async function DELETE(req: MedusaRequest, res: MedusaResponse) {
 
   // Clean up the listing row if it exists
   const existingListing = (
-    (product as { product_listing?: unknown[] }).product_listing?.[0] as
+    (product as unknown as { product_listing?: unknown[] }).product_listing?.[0] as
       | Record<string, unknown>
       | undefined
   )
