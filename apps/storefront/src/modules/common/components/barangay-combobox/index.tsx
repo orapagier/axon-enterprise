@@ -88,7 +88,9 @@ const BarangayCombobox: React.FC<Props> = ({
       </label>
       <Combobox
         value={value ?? ""}
-        onChange={(v: string) => v && onChange(v)}
+        onChange={(v: string | null) => {
+          if (v) onChange(v)
+        }}
         disabled={isDisabled}
       >
         <div className="relative">
