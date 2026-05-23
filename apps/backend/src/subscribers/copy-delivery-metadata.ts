@@ -42,7 +42,7 @@ export default async function copyDeliveryMetadataHandler({
       fields: ["id", "metadata", "cart_id"],
       filters: { id: orderId },
     })
-    const order = orders[0] as
+    const order = orders[0] as unknown as
       | {
           id: string
           metadata: Record<string, unknown> | null
