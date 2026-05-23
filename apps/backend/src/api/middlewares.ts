@@ -24,14 +24,22 @@ const upload = multer({
 export default defineMiddlewares({
   routes: [
     {
+      // Multer must be paired with auth in the same entry: when a more
+      // specific matcher (this one) overlaps a broader one, Medusa applies
+      // only the more specific entry's middlewares to that exact path. So
+      // we re-declare authenticate here, otherwise the upload route lands
+      // without `req.auth_context` and returns 401.
+      matcher: "/store/seller/uploads",
+      method: ["POST"],
+      middlewares: [
+        authenticate("customer", ["session", "bearer"]),
+        upload.array("files"),
+      ],
+    },
+    {
       matcher: "/store/seller*",
       method: ["GET", "POST", "PATCH", "DELETE"],
       middlewares: [authenticate("customer", ["session", "bearer"])],
-    },
-    {
-      matcher: "/store/seller/uploads",
-      method: ["POST"],
-      middlewares: [upload.array("files")],
     },
     {
       matcher: "/admin/sellers*",
