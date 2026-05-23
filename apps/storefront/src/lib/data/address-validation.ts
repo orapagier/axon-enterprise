@@ -51,7 +51,7 @@ export function validatePhilippinePostalCode(
 }
 
 /** City must be one of the configured hub cities. */
-export function validateHubCity(value: unknown): string | null {
+export function validateHubCity(value: unknown, _label?: string): string | null {
   const s = String(value ?? "").trim()
   if (s.length === 0) return "City is required."
 
