@@ -356,6 +356,41 @@ const ShippingAddress = ({
           onChange={handleChange}
           data-testid="shipping-province-input"
         />
+        <div className="col-span-2">
+          <BarangayCombobox
+            hubSlug={hubSlug}
+            value={formData["shipping_address.barangay"] || null}
+            onChange={(b) => {
+              setFormData((prev) => ({
+                ...prev,
+                "shipping_address.barangay": b,
+              }))
+              setTouched((prev) =>
+                new Set(prev).add("shipping_address.barangay")
+              )
+              setErrors((prev) => {
+                const next = { ...prev }
+                delete next["shipping_address.barangay"]
+                return next
+              })
+            }}
+            required
+            invalid={!!fieldError("shipping_address.barangay")}
+            data-testid="shipping-barangay-combobox"
+          />
+          {fieldError("shipping_address.barangay") && (
+            <p className="text-rose-500 text-xs mt-1">
+              {fieldError("shipping_address.barangay")}
+            </p>
+          )}
+          {/* Mirror the combobox value into a normal form field so the
+              server action picks it up via FormData. */}
+          <input
+            type="hidden"
+            name="shipping_address.barangay"
+            value={formData["shipping_address.barangay"]}
+          />
+        </div>
       </div>
       <div className="my-8">
         <Checkbox
