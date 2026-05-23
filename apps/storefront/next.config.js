@@ -24,6 +24,14 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  experimental: {
+    // Seller listing photos are forwarded through a server action; the
+    // default 1 MB cap rejects most phone photos before they reach the
+    // backend (which enforces its own 4 MB / file limit).
+    serverActions: {
+      bodySizeLimit: "6mb",
+    },
+  },
   images: {
     unoptimized: true,
     remotePatterns: [
