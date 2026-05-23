@@ -12,16 +12,27 @@ import { getDeliveryHub } from "@lib/util/delivery-hub"
 import HubSwitcher from "@modules/hub/components/hub-switcher"
 import { listHubs } from "@modules/hub/data/hubs"
 import { getHubCookie } from "@modules/hub/actions/set-hub"
+import { retrieveCustomer } from "@lib/data/customer"
 
 export default async function Nav() {
-  const [regions, locales, currentLocale, hub, hubs, currentHubSlug] = await Promise.all([
-    listRegions().then((regions: StoreRegion[]) => regions),
-    listLocales(),
-    getLocale(),
-    getDeliveryHub(),
-    listHubs(),
-    getHubCookie(),
-  ])
+  const [regions, locales, currentLocale, hub, hubs, currentHubSlug, customer] =
+    await Promise.all([
+      listRegions().then((regions: StoreRegion[]) => regions),
+      listLocales(),
+      getLocale(),
+      getDeliveryHub(),
+      listHubs(),
+      getHubCookie(),
+      retrieveCustomer(),
+    ])
+
+  // Producer/trader accounts (incl. legacy "seller") get a shortcut to post a
+  // new listing without drilling into the account dashboard.
+  const accountType = customer?.metadata?.account_type as string | undefined
+  const isProducer =
+    accountType === "producer" ||
+    accountType === "trader" ||
+    accountType === "seller"
 
   return (
     <div className="sticky top-0 inset-x-0 z-50">
