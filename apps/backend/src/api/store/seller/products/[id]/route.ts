@@ -10,7 +10,7 @@ import {
   validateListingTypeLock,
   validateStatusTransition,
 } from "../../../../../modules/listing/validators"
-import type { ListingStatus, ListingType } from "../../../../../modules/listing/types"
+import type { ListingStatus } from "../../../../../modules/listing/types"
 
 type StoreCustomer = {
   id: string
@@ -70,7 +70,6 @@ async function loadOwnedProduct(
       "variants.prices.amount",
       "variants.prices.currency_code",
       "product_listing.id",
-      "product_listing.listing_type",
       "product_listing.harvest_date",
       "product_listing.status",
       "product_listing.pickup_window_id",
@@ -101,7 +100,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const product = await loadOwnedProduct(req, res, customer.id)
   if (!product) return
 
-  // Shape listing into friendly payload
   const listingArr = (product as unknown as { product_listing?: unknown[] }).product_listing
   const listing = listingArr?.[0] as Record<string, unknown> | undefined
   const shaped = {
@@ -110,7 +108,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     listing: listing
       ? {
           id: listing.id,
-          listing_type: listing.listing_type,
           harvest_date: listing.harvest_date,
           status: listing.status,
           pickup_window_id: listing.pickup_window_id ?? null,
@@ -145,42 +142,13 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     unit?: string
     price?: number
     currency_code?: string
-    selling_mode?: string
     harvest_date?: string
-    listing_type?: string
     status?: string
   }
 
-  // ----- Listing-type changes: validate lock -----
-  const rawListingType = (body.listing_type ?? body.selling_mode ?? "").trim()
   const currentStatus = (existingListing?.status ?? "draft") as ListingStatus
 
-  if (rawListingType) {
-    const newType: ListingType =
-      rawListingType === "direct_to_consumer" || rawListingType === "direct"
-        ? "direct_to_consumer"
-        : rawListingType === "sell_to_freshhub" || rawListingType === "hub"
-          ? "sell_to_freshhub"
-          : (null as unknown as ListingType)
-
-    if (!newType) {
-      res.status(400).json({
-        error: "listing_type must be 'direct_to_consumer' or 'sell_to_freshhub'.",
-      })
-      return
-    }
-
-    const lockCheck = validateListingTypeLock(currentStatus, "listing_type")
-    if (!lockCheck.ok) {
-      res.status(409).json({
-        error: lockCheck.errors[0].message,
-        code: lockCheck.errors[0].code,
-      })
-      return
-    }
-  }
-
-  // ----- Harvest date changes: validate lock -----
+  // ----- Harvest date changes: lock once a slot has been reserved -----
   if (body.harvest_date !== undefined) {
     const dateLockCheck = validateListingTypeLock(currentStatus, "harvest_date")
     if (!dateLockCheck.ok) {
@@ -214,9 +182,6 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     ...((product.metadata as Record<string, unknown> | null) ?? {}),
     ...(body.unit !== undefined ? { unit: body.unit } : {}),
     ...(body.category !== undefined ? { category: body.category } : {}),
-    ...(rawListingType !== undefined
-      ? { selling_mode: rawListingType }
-      : {}),
     ...(body.harvest_date !== undefined
       ? { harvest_date: body.harvest_date?.trim() || null }
       : {}),
@@ -278,11 +243,10 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     const listingService: ListingModuleService = req.scope.resolve(LISTING_MODULE)
     const listingUpdates: Record<string, unknown> = {}
 
-    if (rawListingType) {
-      listingUpdates.listing_type = rawListingType === "direct" ? "direct_to_consumer" : rawListingType === "hub" ? "sell_to_freshhub" : rawListingType
-    }
     if (body.harvest_date !== undefined) {
-      listingUpdates.harvest_date = body.harvest_date?.trim() ? new Date(body.harvest_date.trim()) : null
+      listingUpdates.harvest_date = body.harvest_date?.trim()
+        ? new Date(body.harvest_date.trim())
+        : null
     }
     if (body.status) {
       listingUpdates.status = body.status
@@ -307,7 +271,6 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     fields: [
       "id",
       "product_listing.id",
-      "product_listing.listing_type",
       "product_listing.harvest_date",
       "product_listing.status",
       "product_listing.pickup_window_id",
@@ -326,7 +289,6 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     listing: updatedListing
       ? {
           id: updatedListing.id,
-          listing_type: updatedListing.listing_type,
           harvest_date: updatedListing.harvest_date,
           status: updatedListing.status,
           pickup_window_id: updatedListing.pickup_window_id ?? null,
@@ -350,7 +312,6 @@ export async function DELETE(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // Clean up the listing row if it exists
   const existingListing = (
     (product as unknown as { product_listing?: unknown[] }).product_listing?.[0] as
       | Record<string, unknown>
