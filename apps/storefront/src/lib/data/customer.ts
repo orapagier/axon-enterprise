@@ -409,6 +409,7 @@ export async function login(_currentState: unknown, formData: FormData) {
 
   try {
     await transferCart()
+    await syncCustomerHubFromCookie()
   } catch (error) {
     return String(error)
   }
