@@ -305,8 +305,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
           description: body.description?.trim() ?? undefined,
           thumbnail: body.thumbnail?.trim() || undefined,
           origin_country: body.origin_country?.trim() || undefined,
-          // Drafts are not visible to buyers until an admin publishes them.
-          status: "draft",
+          status: productStatus,
           shipping_profile_id: shippingProfileId,
           sales_channels: salesChannelId ? [{ id: salesChannelId }] : [],
           options: [{ title: "Size", values: ["Default"] }],
