@@ -50,7 +50,6 @@ type PickupWindow = {
 
 type Listing = {
   id: string
-  listing_type: "direct_to_consumer" | "sell_to_freshhub"
   status: string
   harvest_date: string | null
   pickup_window_id: string | null
@@ -71,9 +70,9 @@ const fetchListings = async (tab: Tab): Promise<Listing[]> => {
   if (tab === "pending") {
     url += "?review=pending"
   } else if (tab === "approved") {
-    url += "?listing_type=sell_to_freshhub&status=active"
+    url += "?status=active"
   } else if (tab === "rejected") {
-    url += "?listing_type=sell_to_freshhub&status=cancelled"
+    url += "?status=cancelled"
   }
   const res = await fetch(url, { credentials: "include" })
   if (!res.ok) throw new Error(`Failed to load (${res.status})`)
