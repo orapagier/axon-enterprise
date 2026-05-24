@@ -106,7 +106,6 @@ function parseListing(formData: FormData): {
   const unit = get("unit") || "kg"
   const priceRaw = get("price")
   const price = Number(priceRaw)
-  const listingType = get("listing_type") || get("selling_mode") || "direct_to_consumer"
   const harvestDate = get("harvest_date")
   const pickupWindowId = get("pickup_window_id")
   const estimatedKgRaw = get("estimated_kg")
@@ -116,12 +115,21 @@ function parseListing(formData: FormData): {
     fieldErrors.title = "Title must be at least 2 characters."
   }
   if (!priceRaw) {
-    fieldErrors.price = "Price is required."
+    fieldErrors.price = "Asking price is required."
   } else if (Number.isNaN(price) || price <= 0) {
     fieldErrors.price = "Enter a price greater than zero."
   }
   if (thumbnail && !/^https?:\/\//.test(thumbnail)) {
     fieldErrors.thumbnail = "Thumbnail must be a full https:// URL."
+  }
+  if (!harvestDate) {
+    fieldErrors.harvest_date = "Harvest date is required."
+  }
+  if (!pickupWindowId) {
+    fieldErrors.pickup_window_id = "Pickup window is required."
+  }
+  if (!estimatedKgRaw || Number.isNaN(estimatedKg) || estimatedKg <= 0) {
+    fieldErrors.estimated_kg = "Estimated weight is required."
   }
 
   return {
@@ -134,8 +142,6 @@ function parseListing(formData: FormData): {
       unit,
       price,
       currency_code: "php",
-      listing_type: listingType,
-      selling_mode: listingType, // backward compat
       harvest_date: harvestDate || undefined,
       pickup_window_id: pickupWindowId || undefined,
       estimated_kg: estimatedKgRaw ? estimatedKg : undefined,
