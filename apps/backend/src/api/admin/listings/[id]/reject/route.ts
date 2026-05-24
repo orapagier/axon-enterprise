@@ -47,7 +47,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     fields: ["id", "product.id", "product.status", "pickup_slot.id", "pickup_slot.estimated_kg"],
     filters: { id: listingId },
   })
-  const row = linkRows?.[0] as
+  const row = linkRows?.[0] as unknown as
     | {
         product?: Array<{ id: string; status: string }>
         pickup_slot?: Array<{ id: string; estimated_kg: number }>
