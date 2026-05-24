@@ -302,30 +302,15 @@ export default function SellerListingForm({ mode, existing }: Props) {
         </div>
       </div>
 
-      {/* Listing type — using dedicated component */}
-      <ListingTypeField
-        value={values.listing_type}
-        onChange={(val) =>
-          setValues((v) => ({
-            ...v,
-            listing_type: val,
-            // Reset harvest date when switching types
-            harvest_date: val === "direct_to_consumer" ? "" : v.harvest_date,
-          }))
-        }
-        disabled={!isDraft}
-      />
-
-      {/* Harvest date — shown only for sell_to_freshhub */}
+      {/* Hub logistics — every listing commits to a pickup slot */}
       <HarvestDateField
         value={values.harvest_date}
         onChange={(val) => setValues((v) => ({ ...v, harvest_date: val, pickup_window_id: "" }))}
-        visible={isSellToHub}
+        visible={true}
         disabled={!isDraft}
         error={state.fieldErrors?.harvest_date ?? null}
       />
 
-      {/* Pickup window select — replaced Phase 2 placeholder */}
       <PickupWindowSelect
         value={values.pickup_window_id}
         onChange={(val) =>
@@ -334,23 +319,19 @@ export default function SellerListingForm({ mode, existing }: Props) {
         windows={pickupWindows}
         loading={pickupLoading}
         error={pickupError}
-        visible={isSellToHub}
+        visible={true}
         disabled={!isDraft}
       />
 
-      {/* Estimated weight — only for sell_to_freshhub */}
       <EstimatedKgField
         value={values.estimated_kg}
         onChange={(val) =>
           setValues((v) => ({ ...v, estimated_kg: val }))
         }
-        visible={isSellToHub}
+        visible={true}
         disabled={!isDraft}
         error={state.fieldErrors?.estimated_kg ?? null}
       />
-
-      {/* Legacy hidden fields for backward compat */}
-      <input type="hidden" name="selling_mode" value={values.listing_type} />
 
       {/* Product fields */}
       <div className="px-7 small:px-12 py-6">
