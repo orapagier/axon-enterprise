@@ -723,6 +723,34 @@ export default function SellerListingForm({ mode, existing }: Props) {
         </div>
       </div>
 
+      {/* Top-level error banner — shown when the server action returns
+          state.error (auth expired, profile incomplete, validation rejection,
+          etc.). Without this, failures are silent and the submit button just
+          flickers through "Saving…" back to "Submit for review". */}
+      {state.error && (
+        <div
+          role="alert"
+          className="mx-7 small:mx-12 mb-4 -mt-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-body-sm text-red-800 flex items-start gap-x-2"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="mt-0.5 shrink-0"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <span className="font-medium">{state.error}</span>
+        </div>
+      )}
+
       {/* Footer */}
       <div className="flex flex-col xsmall:flex-row xsmall:items-center xsmall:justify-between gap-3 px-7 small:px-12 py-5 bg-grey-5/70 border-t border-grey-10">
         <LocalizedClientLink
