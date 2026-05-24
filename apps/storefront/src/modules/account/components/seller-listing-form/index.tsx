@@ -178,7 +178,7 @@ export default function SellerListingForm({ mode, existing }: Props) {
     return () => {
       cancelled = true
     }
-  }, [isSellToHub, values.harvest_date])
+  }, [values.harvest_date])
 
   // Photo upload state
   const [photoUrl, setPhotoUrl] = useState<string>(
