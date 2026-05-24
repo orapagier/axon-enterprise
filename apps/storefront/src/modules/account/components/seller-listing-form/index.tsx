@@ -150,6 +150,7 @@ export default function SellerListingForm({ mode, existing }: Props) {
   const [pickupWindows, setPickupWindows] = useState<PickupWindow[]>([])
   const [pickupLoading, setPickupLoading] = useState(false)
   const [pickupError, setPickupError] = useState<string | null>(null)
+  const [hubMissing, setHubMissing] = useState(false)
 
   useEffect(() => {
     if (!values.harvest_date) {
@@ -160,22 +161,46 @@ export default function SellerListingForm({ mode, existing }: Props) {
     let cancelled = false
     setPickupLoading(true)
     setPickupError(null)
+    setHubMissing(false)
 
-    listOpenPickupWindows(values.harvest_date, values.harvest_date, 20)
-      .then((result) => {
-        if (cancelled) return
+    const load = async (allowRecovery: boolean) => {
+      const result = await listOpenPickupWindows(
+        values.harvest_date,
+        values.harvest_date,
+        20
+      )
+      if (cancelled) return
+
+      if (result.ok) {
         setPickupLoading(false)
-        if (result.ok) {
-          setPickupWindows(result.windows)
-        } else {
-          setPickupError(result.error ?? "Failed to load pickup windows.")
+        setPickupWindows(result.windows)
+        return
+      }
+
+      // Producers often pick a hub anonymously before signing up, leaving
+      // the cookie set but no DB link. Try a one-shot repair from the
+      // cookie before surfacing the CTA.
+      if (result.code === "NO_HUB_ASSIGNED" && allowRecovery) {
+        const sync = await syncCustomerHubFromCookie()
+        if (cancelled) return
+        if (sync.ok && sync.slug) {
+          await load(false)
+          return
         }
-      })
-      .catch(() => {
-        if (cancelled) return
         setPickupLoading(false)
-        setPickupError("Couldn't reach the server.")
-      })
+        setHubMissing(true)
+        return
+      }
+
+      setPickupLoading(false)
+      setPickupError(result.error ?? "Failed to load pickup windows.")
+    }
+
+    load(true).catch(() => {
+      if (cancelled) return
+      setPickupLoading(false)
+      setPickupError("Couldn't reach the server.")
+    })
 
     return () => {
       cancelled = true
