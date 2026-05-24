@@ -65,12 +65,9 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     })
   }
 
-  // Release pickup slot + restore window capacity for STH listings.
-  if (
-    listing.listing_type === "sell_to_freshhub" &&
-    listing.pickup_window_id &&
-    linkedSlot
-  ) {
+  // Release pickup slot + restore window capacity. Every listing reserves a
+  // slot at submit time in the hub-only model.
+  if (listing.pickup_window_id && linkedSlot) {
     try {
       const windows = await pickupService.listPickupWindows(
         { id: listing.pickup_window_id },
