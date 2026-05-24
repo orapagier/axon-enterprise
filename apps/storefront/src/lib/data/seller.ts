@@ -191,6 +191,12 @@ export async function createListing(
 
   const tag = await getCacheTag("seller-listings")
   if (tag) revalidateTag(tag)
+  // Also bust the shop grid cache so a freshly auto-published direct-to-consumer
+  // listing appears for buyers immediately. listProducts() uses "force-cache"
+  // with the "products" cache tag, so without this revalidate the new product
+  // is only reachable via search/handle until the cache expires naturally.
+  const productsTag = await getCacheTag("products")
+  if (productsTag) revalidateTag(productsTag)
 
   const countryCode = String(formData.get("countryCode") ?? "ph")
   redirect(`/${countryCode}/account/producer`)
