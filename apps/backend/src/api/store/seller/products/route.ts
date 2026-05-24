@@ -304,6 +304,13 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
           title: body.title.trim(),
           description: body.description?.trim() ?? undefined,
           thumbnail: body.thumbnail?.trim() || undefined,
+          // Mirror the thumbnail into the gallery — the product detail page
+          // renders product.images[] and falls through to an empty gallery
+          // when only `thumbnail` is set. Without this the producer's photo
+          // shows on the card but vanishes when buyers click into the page.
+          images: body.thumbnail?.trim()
+            ? [{ url: body.thumbnail.trim() }]
+            : undefined,
           origin_country: body.origin_country?.trim() || undefined,
           status: productStatus,
           shipping_profile_id: shippingProfileId,
