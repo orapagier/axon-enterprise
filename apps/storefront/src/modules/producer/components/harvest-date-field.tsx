@@ -22,23 +22,24 @@ export default function HarvestDateField({
   visible = true,
 }: Props) {
   const { minDate, maxDate } = useMemo(() => {
-    const now = new Date()
-    // Approximate Manila timezone (UTC+8)
-    const tzOffset = 8 * 60
-    const localNow = new Date(now.getTime() + tzOffset * 60_000)
-    const today = new Date(
-      localNow.getUTCFullYear(),
-      localNow.getUTCMonth(),
-      localNow.getUTCDate()
+    // Mirror the backend (apps/backend/src/modules/listing/validators.ts):
+    // shift wall-clock to Manila (UTC+8), then anchor today to UTC midnight
+    // so date math stays on the Manila calendar without crossing midnight
+    // when we format. Building Date via local-time constructors and then
+    // toISOString() drifts back a day in UTC+8 browsers — use Date.UTC + UTC
+    // getters end-to-end.
+    const manilaNow = new Date(Date.now() + 8 * 60 * 60_000)
+    const todayUtc = Date.UTC(
+      manilaNow.getUTCFullYear(),
+      manilaNow.getUTCMonth(),
+      manilaNow.getUTCDate()
     )
-
-    const min = new Date(today)
-    min.setDate(min.getDate() + 3)
-    const max = new Date(today)
-    max.setDate(max.getDate() + 5)
-
-    const fmt = (d: Date) => d.toISOString().slice(0, 10)
-    return { minDate: fmt(min), maxDate: fmt(max) }
+    const fmt = (ms: number) => new Date(ms).toISOString().slice(0, 10)
+    const dayMs = 24 * 60 * 60_000
+    return {
+      minDate: fmt(todayUtc + 3 * dayMs),
+      maxDate: fmt(todayUtc + 5 * dayMs),
+    }
   }, [])
 
   if (!visible) return null
