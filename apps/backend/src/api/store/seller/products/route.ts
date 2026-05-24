@@ -267,8 +267,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       })
       return
     }
-
-    listingStatus = "active"
+    // listingStatus stays "active" — the slot is reserved at submit time;
+    // admin approval only flips product.status, it doesn't re-reserve.
   }
 
   // ----- Basic field validation -----
