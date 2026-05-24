@@ -50,3 +50,49 @@ export async function clearHubCookie(): Promise<void> {
   jar.delete(COOKIE_NAME)
   revalidatePath("/", "layout")
 }
+
+/**
+ * Ensure the authenticated customer has a DB link to the hub stored in their
+ * `fh_hub` cookie. Safe to call repeatedly — POSTs only when the customer
+ * has no link yet. Returns the slug it linked (or already linked), or null
+ * when there's nothing to do (anonymous visitor, no cookie, or sync failed).
+ *
+ * Use this after sign-in / sign-up flows, and as a recovery path when a
+ * "must be assigned to a hub" error hits in the UI: visitors often pick
+ * their hub anonymously before signing up, so the cookie outlives the
+ * missing DB link.
+ */
+export async function syncCustomerHubFromCookie(): Promise<{
+  ok: boolean
+  slug: string | null
+}> {
+  const headers = await getAuthHeaders()
+  if (!("authorization" in headers)) {
+    return { ok: false, slug: null }
+  }
+
+  const jar = await cookies()
+  const slug = jar.get(COOKIE_NAME)?.value ?? null
+  if (!slug) return { ok: false, slug: null }
+
+  try {
+    const current = await sdk.client.fetch<{
+      hub: { id: string; slug: string } | null
+    }>("/store/customers/me/hub", {
+      method: "GET",
+      headers,
+    })
+    if (current?.hub?.id) {
+      return { ok: true, slug: current.hub.slug }
+    }
+
+    await sdk.client.fetch("/store/customers/me/hub", {
+      method: "POST",
+      body: { slug },
+      headers,
+    })
+    return { ok: true, slug }
+  } catch {
+    return { ok: false, slug: null }
+  }
+}
