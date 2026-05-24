@@ -69,12 +69,13 @@ const FIELDS: FieldDef[] = [
   },
   {
     name: "price",
-    label: "Price",
+    label: "Asking price",
     placeholder: "120",
     type: "number",
     required: true,
     prefix: "₱",
-    helper: "Per unit (default: per kilogram).",
+    helper:
+      "Per unit (default: per kilogram). The hub may adjust the retail price at approval.",
   },
   {
     name: "unit",
