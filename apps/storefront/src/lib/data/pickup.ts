@@ -40,6 +40,7 @@ export async function listOpenPickupWindows(
   windows: PickupWindow[]
   count: number
   error?: string
+  code?: string
 }> {
   const params = new URLSearchParams()
   if (from) params.set("from", from)
@@ -55,7 +56,7 @@ export async function listOpenPickupWindows(
 
   if (!res.ok) {
     const body = (await res.json().catch(() => ({}))) as { error?: string; code?: string }
-    return { ok: false, windows: [], count: 0, error: body.error }
+    return { ok: false, windows: [], count: 0, error: body.error, code: body.code }
   }
 
   const data = (await res.json()) as { windows: PickupWindow[]; count: number }
