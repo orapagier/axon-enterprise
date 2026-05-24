@@ -1,18 +1,13 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
-import {
-  createProductsWorkflow,
-} from "@medusajs/medusa/core-flows"
+import { createProductsWorkflow } from "@medusajs/medusa/core-flows"
 import { LISTING_MODULE } from "../../../../modules/listing"
 import ListingModuleService from "../../../../modules/listing/service"
 import {
   validateProducerEligibility,
   validateHarvestDate,
 } from "../../../../modules/listing/validators"
-import {
-  validateSlotReserve,
-} from "../../../../modules/pickup/validators"
-import type { ListingType, ListingStatus } from "../../../../modules/listing/types"
+import { validateSlotReserve } from "../../../../modules/pickup/validators"
 import { PICKUP_MODULE } from "../../../../modules/pickup"
 import PickupModuleService from "../../../../modules/pickup/service"
 import reservePickupSlotWorkflow from "../../../../workflows/reserve-pickup-slot"
@@ -23,9 +18,10 @@ type StoreCustomer = {
 }
 
 /**
- * Look up the authenticated customer and verify they're a seller.
- * Returns the customer record if OK, otherwise sends an error response and
- * returns null.
+ * Look up the authenticated customer and verify they're a producer with a
+ * completed profile. All listings flow through the hub (sell_to_freshhub),
+ * so producers must be a hub member and have committed to a hub before they
+ * can list.
  */
 async function assertSeller(
   req: MedusaRequest,
@@ -71,7 +67,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
 
-  // Fetch products with their listing via the link
   const { data } = await query.graph({
     entity: "product",
     fields: [
@@ -91,16 +86,13 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       "variants.prices.amount",
       "variants.prices.currency_code",
       "product_listing.id",
-      "product_listing.listing_type",
       "product_listing.harvest_date",
       "product_listing.status",
       "product_listing.pickup_window_id",
       "product_listing.created_at",
       "product_listing.updated_at",
     ],
-    filters: {
-      // Fetch a generous page and filter in memory by seller_customer_id.
-    },
+    filters: {},
     pagination: { take: 500, skip: 0 },
   })
 
@@ -110,18 +102,16 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         ?.seller_customer_id === customer.id
   )
 
-  // Shape listing into a friendly payload per product
   const shaped = ours.map((p) => {
     const listing = (p as unknown as { product_listing?: unknown[] }).product_listing?.[0] as
       | Record<string, unknown>
       | undefined
     return {
       ...p,
-      product_listing: undefined, // strip raw link array
+      product_listing: undefined,
       listing: listing
         ? {
             id: listing.id,
-            listing_type: listing.listing_type,
             harvest_date: listing.harvest_date,
             status: listing.status,
             pickup_window_id: listing.pickup_window_id ?? null,
@@ -135,7 +125,16 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   res.json({ products: shaped, count: shaped.length })
 }
 
-/** POST /store/seller/products — create a new draft listing. */
+/**
+ * POST /store/seller/products — create a new listing.
+ *
+ * Hub-only model: every submission commits volume to a hub pickup window.
+ * The product is always created as `draft` and waits for admin approval
+ * via /admin/listings before buyers see it on the shop.
+ *
+ * Required body: title, price (asking price in PHP; hub may adjust at
+ * approval), harvest_date, pickup_window_id, estimated_kg.
+ */
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const customer = await assertSeller(req, res)
   if (!customer) return
@@ -151,32 +150,12 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     unit?: string
     price?: number
     currency_code?: string
-    inventory_quantity?: number
-    selling_mode?: string
     harvest_date?: string
-    listing_type?: string
     pickup_window_id?: string
     estimated_kg?: number
   }
 
-  // ----- Listing-type from body (preferred) or fallback to legacy selling_mode -----
-  const rawListingType = (body.listing_type ?? body.selling_mode ?? "").trim()
-  let listingType: ListingType | null = null
-
-  if (rawListingType === "direct_to_consumer" || rawListingType === "direct") {
-    listingType = "direct_to_consumer"
-  } else if (rawListingType === "sell_to_freshhub" || rawListingType === "hub") {
-    listingType = "sell_to_freshhub"
-  }
-
-  if (!listingType) {
-    res.status(400).json({
-      error: "listing_type is required. Must be 'direct_to_consumer' or 'sell_to_freshhub'.",
-    })
-    return
-  }
-
-  // ----- Producer eligibility check -----
+  // ----- Producer eligibility (active hub membership) -----
   const eligibility = validateProducerEligibility(meta)
   if (!eligibility.ok) {
     res.status(422).json({
@@ -187,88 +166,70 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // ----- Harvest date for sell_to_freshhub -----
-  let harvestDate: string | null = null
-  if (listingType === "sell_to_freshhub") {
-    // Find the producer's hub timezone via the customer↔hub link.
-    const hubQuery = req.scope.resolve(ContainerRegistrationKeys.QUERY)
-    const { data: hubData } = await hubQuery.graph({
-      entity: "customer",
-      fields: ["id", "hub.id", "hub.timezone"],
-      filters: { id: customer.id },
-    })
-    const hub = (hubData?.[0] as { hub?: { id?: string; timezone?: string } } | undefined)?.hub
-    const hubTimezone = hub?.timezone ?? "Asia/Manila"
+  // ----- Harvest date (validated against the producer's hub timezone) -----
+  const hubQuery = req.scope.resolve(ContainerRegistrationKeys.QUERY)
+  const { data: hubData } = await hubQuery.graph({
+    entity: "customer",
+    fields: ["id", "hub.id", "hub.timezone"],
+    filters: { id: customer.id },
+  })
+  const hub = (hubData?.[0] as { hub?: { id?: string; timezone?: string } } | undefined)?.hub
+  const hubTimezone = hub?.timezone ?? "Asia/Manila"
 
-    const harvestRaw = body.harvest_date?.trim() ?? null
-    const dateCheck = validateHarvestDate(harvestRaw, hubTimezone, 3, 5)
-    if (!dateCheck.ok) {
-      res.status(400).json({
-        error: dateCheck.errors[0].message,
-        code: dateCheck.errors[0].code,
-        fieldErrors: dateCheck.errors,
-      })
-      return
-    }
-    harvestDate = harvestRaw
+  const harvestRaw = body.harvest_date?.trim() ?? null
+  const dateCheck = validateHarvestDate(harvestRaw, hubTimezone, 3, 5)
+  if (!dateCheck.ok) {
+    res.status(400).json({
+      error: dateCheck.errors[0].message,
+      code: dateCheck.errors[0].code,
+      fieldErrors: dateCheck.errors,
+    })
+    return
+  }
+  const harvestDate = harvestRaw as string
+
+  // ----- Pickup window + estimated_kg -----
+  if (!body.pickup_window_id || !body.estimated_kg) {
+    res.status(400).json({
+      error: "pickup_window_id and estimated_kg are required.",
+      code: "MISSING_PICKUP_FIELDS",
+    })
+    return
   }
 
-  // ----- Pickup window + estimated_kg validation (Phase 3) -----
-  // direct_to_consumer listings auto-publish: the producer is already a paid
-  // premium member, so no admin gate. sell_to_freshhub listings stay draft
-  // until an admin approves via /admin/listings, because the hub commits to
-  // pickup capacity + volume on its side.
-  let listingStatus: ListingStatus = "active"
-  let productStatus: "draft" | "published" = "published"
-
-  if (listingType === "sell_to_freshhub") {
-    productStatus = "draft"
-    if (!body.pickup_window_id || !body.estimated_kg) {
-      res.status(400).json({
-        error:
-          "pickup_window_id and estimated_kg are required for sell_to_freshhub listings.",
-        code: "MISSING_PICKUP_FIELDS",
-      })
-      return
-    }
-
-    const pickupService: PickupModuleService = req.scope.resolve(PICKUP_MODULE)
-    const windows = await pickupService.listPickupWindows(
-      { id: body.pickup_window_id },
-      { take: 1 }
-    )
-    const window = windows[0]
-    if (!window) {
-      res.status(400).json({
-        error: "Pickup window not found.",
-        code: "PICKUP_WINDOW_NOT_FOUND",
-      })
-      return
-    }
-
-    // Validate the reserve
-    const reserveValidation = validateSlotReserve({
-      windowStatus: window.status as "open" | "full" | "closed" | "completed",
-      windowDate:
-        typeof window.date === "string"
-          ? window.date
-          : new Date(window.date).toISOString(),
-      harvestDate: harvestDate!,
-      reserved_kg: window.reserved_kg ?? 0,
-      estimated_kg: body.estimated_kg,
-      capacity_kg: window.capacity_kg ?? null,
+  const pickupService: PickupModuleService = req.scope.resolve(PICKUP_MODULE)
+  const windows = await pickupService.listPickupWindows(
+    { id: body.pickup_window_id },
+    { take: 1 }
+  )
+  const window = windows[0]
+  if (!window) {
+    res.status(400).json({
+      error: "Pickup window not found.",
+      code: "PICKUP_WINDOW_NOT_FOUND",
     })
+    return
+  }
 
-    if (!reserveValidation.ok) {
-      res.status(400).json({
-        error: reserveValidation.errors[0].message,
-        code: reserveValidation.errors[0].code,
-        fieldErrors: reserveValidation.errors,
-      })
-      return
-    }
-    // listingStatus stays "active" — the slot is reserved at submit time;
-    // admin approval only flips product.status, it doesn't re-reserve.
+  const reserveValidation = validateSlotReserve({
+    windowStatus: window.status as "open" | "full" | "closed" | "completed",
+    windowDate:
+      typeof window.date === "string"
+        ? window.date
+        : new Date(window.date).toISOString(),
+    harvestDate,
+    reserved_kg: window.reserved_kg ?? 0,
+    estimated_kg: body.estimated_kg,
+    capacity_kg: window.capacity_kg ?? null,
+  })
+
+  if (!reserveValidation.ok) {
+    res.status(400).json({
+      error: reserveValidation.errors[0].message,
+      code: reserveValidation.errors[0].code,
+      fieldErrors: reserveValidation.errors,
+    })
+    return
   }
 
   // ----- Basic field validation -----
@@ -306,13 +267,14 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
           thumbnail: body.thumbnail?.trim() || undefined,
           // Mirror the thumbnail into the gallery — the product detail page
           // renders product.images[] and falls through to an empty gallery
-          // when only `thumbnail` is set. Without this the producer's photo
-          // shows on the card but vanishes when buyers click into the page.
+          // when only `thumbnail` is set.
           images: body.thumbnail?.trim()
             ? [{ url: body.thumbnail.trim() }]
             : undefined,
           origin_country: body.origin_country?.trim() || undefined,
-          status: productStatus,
+          // Always draft: hub reviews + sets the retail price before
+          // approving via /admin/listings.
+          status: "draft",
           shipping_profile_id: shippingProfileId,
           sales_channels: salesChannelId ? [{ id: salesChannelId }] : [],
           options: [{ title: "Size", values: ["Default"] }],
@@ -332,10 +294,10 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
           ],
           metadata: {
             seller_customer_id: customer.id,
-            selling_mode: listingType,
             harvest_date: harvestDate,
             unit: body.unit ?? "kg",
             category: body.category ?? null,
+            asking_price: Math.round(Number(body.price)),
             submitted_at: new Date().toISOString(),
           },
         },
@@ -344,8 +306,6 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   })
 
   const product = result?.[0]
-
-  // ----- Create the ProductListing row + link, then reserve pickup slot atomically -----
   if (!product) {
     res.status(500).json({ error: "Product creation failed." })
     return
@@ -357,14 +317,13 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   let listing
   try {
     listing = await listingService.createProductListings({
-      listing_type: listingType,
-      harvest_date: harvestDate ? new Date(harvestDate) : null,
-      pickup_window_id: body.pickup_window_id ?? null,
-      status: listingStatus,
+      listing_type: "sell_to_freshhub",
+      harvest_date: new Date(harvestDate),
+      pickup_window_id: body.pickup_window_id,
+      status: "active",
     })
 
-    // Without this link the GET graph join (entity:"product", fields:["product_listing.*"])
-    // returns null and the storefront/admin can't see the listing.
+    // Link product ↔ listing so the GET graph join can hydrate it.
     await link.create({
       [Modules.PRODUCT]: { product_id: product.id },
       [LISTING_MODULE]: { product_listing_id: listing.id },
@@ -378,50 +337,42 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // sell_to_freshhub: reserve a pickup slot through the workflow so the
-  // slot + capacity bump + window-full flip roll back together on failure.
-  if (
-    listingType === "sell_to_freshhub" &&
-    body.pickup_window_id &&
-    body.estimated_kg &&
-    harvestDate
-  ) {
-    try {
-      const { result: slot } = await reservePickupSlotWorkflow(req.scope).run({
-        input: {
-          listing_id: listing.id,
-          pickup_window_id: body.pickup_window_id,
-          harvest_date: harvestDate,
-          estimated_kg: body.estimated_kg,
-        },
-      })
+  // Reserve the pickup slot through the workflow so the slot + capacity bump
+  // + window-full flip roll back together on failure.
+  try {
+    const { result: slot } = await reservePickupSlotWorkflow(req.scope).run({
+      input: {
+        listing_id: listing.id,
+        pickup_window_id: body.pickup_window_id,
+        harvest_date: harvestDate,
+        estimated_kg: body.estimated_kg,
+      },
+    })
 
-      if (slot?.id) {
-        // Link listing ↔ slot so admin queries can hop between them.
-        await link.create({
-          [LISTING_MODULE]: { product_listing_id: listing.id },
-          [PICKUP_MODULE]: { pickup_slot_id: slot.id },
-        })
-      }
-    } catch (err) {
-      // Workflow already compensated the slot + capacity. Roll back the listing
-      // + link so the producer can retry cleanly.
-      console.error("Pickup slot reservation failed:", err)
-      try {
-        await link.dismiss({
-          [Modules.PRODUCT]: { product_id: product.id },
-          [LISTING_MODULE]: { product_listing_id: listing.id },
-        })
-        await listingService.deleteProductListings(listing.id)
-      } catch {
-        // best-effort cleanup
-      }
-      res.status(400).json({
-        error: err instanceof Error ? err.message : "Pickup slot reservation failed.",
-        code: "PICKUP_RESERVE_FAILED",
+    if (slot?.id) {
+      await link.create({
+        [LISTING_MODULE]: { product_listing_id: listing.id },
+        [PICKUP_MODULE]: { pickup_slot_id: slot.id },
       })
-      return
     }
+  } catch (err) {
+    // Workflow already compensated the slot + capacity. Roll back the listing
+    // + link so the producer can retry cleanly.
+    console.error("Pickup slot reservation failed:", err)
+    try {
+      await link.dismiss({
+        [Modules.PRODUCT]: { product_id: product.id },
+        [LISTING_MODULE]: { product_listing_id: listing.id },
+      })
+      await listingService.deleteProductListings(listing.id)
+    } catch {
+      // best-effort cleanup
+    }
+    res.status(400).json({
+      error: err instanceof Error ? err.message : "Pickup slot reservation failed.",
+      code: "PICKUP_RESERVE_FAILED",
+    })
+    return
   }
 
   res.status(201).json({ product, listing })
