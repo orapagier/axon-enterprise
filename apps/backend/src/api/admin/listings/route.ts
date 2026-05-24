@@ -84,7 +84,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   })
 
   const productByListing = new Map<string, Record<string, unknown>>()
-  for (const row of (linkRows ?? []) as Array<{
+  for (const row of (linkRows ?? []) as unknown as Array<{
     id: string
     product?: Record<string, unknown>[]
   }>) {
