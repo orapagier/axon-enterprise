@@ -384,6 +384,7 @@ export async function signup(_currentState: unknown, formData: FormData) {
     revalidateTag(customerCacheTag)
 
     await transferCart()
+    await syncCustomerHubFromCookie()
 
     return createdCustomer
   } catch (error) {
