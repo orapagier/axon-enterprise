@@ -41,8 +41,9 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     fields: ["id", "product.id", "product.status"],
     filters: { id: listingId },
   })
-  const linked = (linkRows?.[0] as { product?: Array<{ id: string; status: string }> })
-    ?.product?.[0]
+  const linked = (linkRows?.[0] as unknown as
+    | { product?: Array<{ id: string; status: string }> }
+    | undefined)?.product?.[0]
   if (!linked) {
     res.status(409).json({
       error: "Listing has no linked product to publish.",
