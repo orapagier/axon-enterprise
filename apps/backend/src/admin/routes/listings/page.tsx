@@ -160,12 +160,12 @@ const ListingsPage = () => {
 
   const headline = useMemo(() => {
     if (tab === "pending") {
-      return "Sell-to-FreshHub listings awaiting hub approval. Approving publishes the product to the shop; rejecting releases the pickup slot."
+      return "Producer listings awaiting hub approval. Approving publishes the product to the shop; rejecting releases the pickup slot."
     }
     if (tab === "approved") {
-      return "Sell-to-FreshHub listings that have been approved and are live on the shop."
+      return "Listings that have been approved and are live on the shop."
     }
-    return "Sell-to-FreshHub listings that were rejected. The pickup slot was released back to the window."
+    return "Listings that were rejected. The pickup slot was released back to the window."
   }, [tab])
 
   return (
