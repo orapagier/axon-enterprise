@@ -323,6 +323,12 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       status: "active",
     })
 
+    if (!listing?.id) {
+      throw new Error(
+        `createProductListings returned no id (got ${JSON.stringify(listing)})`
+      )
+    }
+
     // Link product ↔ listing so the GET graph join can hydrate it.
     await link.create({
       [Modules.PRODUCT]: { product_id: product.id },
@@ -331,7 +337,10 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   } catch (err) {
     console.error("Failed to create listing row or link:", err)
     res.status(500).json({
-      error: "Could not record the listing for this product.",
+      error:
+        err instanceof Error
+          ? `Listing record failed: ${err.message}`
+          : "Could not record the listing for this product.",
       product,
     })
     return
