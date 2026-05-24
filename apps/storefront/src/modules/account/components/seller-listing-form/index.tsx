@@ -9,7 +9,6 @@ import {
 } from "@lib/data/seller"
 import { listOpenPickupWindows, type PickupWindow } from "@lib/data/pickup"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import ListingTypeField from "@modules/producer/components/listing-type-field"
 import HarvestDateField from "@modules/producer/components/harvest-date-field"
 import PickupWindowSelect from "@modules/producer/components/pickup-window-select"
 import EstimatedKgField from "@modules/producer/components/estimated-kg-field"
