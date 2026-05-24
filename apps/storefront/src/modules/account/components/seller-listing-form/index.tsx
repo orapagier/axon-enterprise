@@ -125,13 +125,7 @@ export default function SellerListingForm({ mode, existing }: Props) {
     seed.category = typeof meta.category === "string" ? meta.category : ""
     seed.unit = typeof meta.unit === "string" ? meta.unit : "kg"
     seed.price = firstPrice ? String(firstPrice) : ""
-    seed.selling_mode = typeof meta.selling_mode === "string" ? meta.selling_mode : "direct"
     seed.harvest_date = typeof meta.harvest_date === "string" ? meta.harvest_date : ""
-    seed.listing_type = typeof meta.selling_mode === "string"
-      ? (meta.selling_mode === "direct" || meta.selling_mode === "direct_to_consumer"
-        ? "direct_to_consumer"
-        : "sell_to_freshhub")
-      : "direct_to_consumer"
     // Use listing row status from the listing payload
     const listing = (existing as unknown as { listing?: Record<string, unknown> }).listing
     seed.listing_status = typeof listing?.status === "string" ? listing.status : "draft"
@@ -143,8 +137,6 @@ export default function SellerListingForm({ mode, existing }: Props) {
     FIELDS.forEach((f) => {
       seed[f.name] = defaults[f.name] ?? ""
     })
-    seed.selling_mode = (defaults.selling_mode as string) ?? "direct"
-    seed.listing_type = (defaults.listing_type as string) ?? "direct_to_consumer"
     seed.harvest_date = (defaults.harvest_date as string) ?? ""
     seed.pickup_window_id = ""
     seed.estimated_kg = ""
@@ -157,10 +149,8 @@ export default function SellerListingForm({ mode, existing }: Props) {
   const [pickupLoading, setPickupLoading] = useState(false)
   const [pickupError, setPickupError] = useState<string | null>(null)
 
-  const isSellToHub = values.listing_type === "sell_to_freshhub"
-
   useEffect(() => {
-    if (!isSellToHub || !values.harvest_date) {
+    if (!values.harvest_date) {
       setPickupWindows([])
       return
     }
