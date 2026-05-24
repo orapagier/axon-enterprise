@@ -254,7 +254,6 @@ export default function SellerListingForm({ mode, existing }: Props) {
     >
       <input type="hidden" name="countryCode" value={countryCode} />
       <input type="hidden" name="thumbnail" value={photoUrl} />
-      <input type="hidden" name="listing_type" value={values.listing_type} />
       {existing && <input type="hidden" name="id" value={existing.id} />}
 
       {/* Banner */}
