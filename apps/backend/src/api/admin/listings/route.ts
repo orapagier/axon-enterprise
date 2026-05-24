@@ -7,14 +7,12 @@ import PickupModuleService from "../../../modules/pickup/service"
 
 /**
  * GET /admin/listings — paginated read of all listings, joined with their
- * linked product + producer customer + (for sell_to_freshhub) pickup window.
+ * linked product + producer customer + pickup window.
  *
  * Query params:
- *   listing_type: "direct_to_consumer" | "sell_to_freshhub"
  *   status:       listing status (draft|pending_pickup|active|sold_out|expired|cancelled)
  *   review:       "pending" — convenience filter for the admin review queue
- *                 (sell_to_freshhub + product.status=draft). Overrides
- *                 listing_type/status if set.
+ *                 (any listing whose product is still draft). Overrides status if set.
  *   producer_id:  customer id of the producer
  */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
@@ -26,32 +24,22 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const review = req.query.review as string | undefined
   const isReviewQueue = review === "pending"
 
-  const listingType = req.query.listing_type as string | undefined
   const status = req.query.status as string | undefined
 
   const filters: Record<string, unknown> = {}
-  if (isReviewQueue) {
-    filters.listing_type = "sell_to_freshhub"
-  } else {
-    if (
-      listingType &&
-      ["direct_to_consumer", "sell_to_freshhub"].includes(listingType)
-    ) {
-      filters.listing_type = listingType
-    }
-    if (
-      status &&
-      [
-        "draft",
-        "pending_pickup",
-        "active",
-        "sold_out",
-        "expired",
-        "cancelled",
-      ].includes(status)
-    ) {
-      filters.status = status
-    }
+  if (
+    !isReviewQueue &&
+    status &&
+    [
+      "draft",
+      "pending_pickup",
+      "active",
+      "sold_out",
+      "expired",
+      "cancelled",
+    ].includes(status)
+  ) {
+    filters.status = status
   }
 
   const listings = await listingService.listProductListings(filters, {
@@ -64,8 +52,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // Hop listing -> product via the link table. graph.* fields traverse the
-  // module link defined in src/links/product-listing.ts (or equivalent).
   const listingIds = listings.map((l) => l.id)
   const { data: linkRows } = await query.graph({
     entity: "product_listing",
@@ -92,8 +78,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     if (p) productByListing.set(row.id, p)
   }
 
-  // Collect distinct producer ids from product metadata so we can hydrate
-  // producer info in a single batch.
   const producerIds = new Set<string>()
   for (const p of productByListing.values()) {
     const meta = (p.metadata ?? {}) as Record<string, unknown>
@@ -127,7 +111,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   }
   const producerById = new Map(producers.map((c) => [c.id, c]))
 
-  // Pickup windows for STH listings — join inline.
   const windowIds = listings
     .map((l) => l.pickup_window_id)
     .filter((id): id is string => typeof id === "string" && id.length > 0)
@@ -170,7 +153,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         : null
       return {
         id: l.id,
-        listing_type: l.listing_type,
         status: l.status,
         harvest_date: l.harvest_date,
         pickup_window_id: l.pickup_window_id,
@@ -184,6 +166,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
               thumbnail: product.thumbnail,
               unit: meta.unit ?? null,
               category: meta.category ?? null,
+              asking_price: meta.asking_price ?? null,
             }
           : null,
         producer,
@@ -200,7 +183,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
           : null,
       }
     })
-    // Apply the review-queue product-status filter after the join.
     .filter((row) => {
       if (!isReviewQueue) return true
       return row.product?.status === "draft"
