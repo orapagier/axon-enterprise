@@ -8,6 +8,7 @@ import {
   type SellerListing,
 } from "@lib/data/seller"
 import { listOpenPickupWindows, type PickupWindow } from "@lib/data/pickup"
+import { syncCustomerHubFromCookie } from "@modules/hub/actions/set-hub"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import HarvestDateField from "@modules/producer/components/harvest-date-field"
 import PickupWindowSelect from "@modules/producer/components/pickup-window-select"
