@@ -214,9 +214,15 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   }
 
   // ----- Pickup window + estimated_kg validation (Phase 3) -----
-  let listingStatus: ListingStatus = "draft"
+  // direct_to_consumer listings auto-publish: the producer is already a paid
+  // premium member, so no admin gate. sell_to_freshhub listings stay draft
+  // until an admin approves via /admin/listings, because the hub commits to
+  // pickup capacity + volume on its side.
+  let listingStatus: ListingStatus = "active"
+  let productStatus: "draft" | "published" = "published"
 
   if (listingType === "sell_to_freshhub") {
+    productStatus = "draft"
     if (!body.pickup_window_id || !body.estimated_kg) {
       res.status(400).json({
         error:
