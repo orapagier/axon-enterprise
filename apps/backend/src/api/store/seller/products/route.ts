@@ -258,55 +258,88 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const salesChannelId = salesChannels?.[0]?.id
   const shippingProfileId = shippingProfiles?.[0]?.id
 
-  const { result } = await createProductsWorkflow(req.scope).run({
-    input: {
-      products: [
-        {
-          title: body.title.trim(),
-          description: body.description?.trim() ?? undefined,
-          thumbnail: body.thumbnail?.trim() || undefined,
-          // Mirror the thumbnail into the gallery — the product detail page
-          // renders product.images[] and falls through to an empty gallery
-          // when only `thumbnail` is set.
-          images: body.thumbnail?.trim()
-            ? [{ url: body.thumbnail.trim() }]
-            : undefined,
-          origin_country: body.origin_country?.trim() || undefined,
-          // Always draft: hub reviews + sets the retail price before
-          // approving via /admin/listings.
-          status: "draft",
-          shipping_profile_id: shippingProfileId,
-          sales_channels: salesChannelId ? [{ id: salesChannelId }] : [],
-          options: [{ title: "Size", values: ["Default"] }],
-          variants: [
-            {
-              title: "Default",
-              sku: undefined,
-              manage_inventory: false,
-              options: { Size: "Default" },
-              prices: [
-                {
-                  amount: Math.round(Number(body.price)),
-                  currency_code: currency,
-                },
-              ],
+  // Title is shared across sellers, so the auto-derived handle ("potatoes",
+  // "mangoes", …) collides as soon as a second producer lists the same crop.
+  // Append a short random suffix so every listing gets a unique URL slug.
+  // Hubs can still rename the handle at approval time in the admin.
+  const titleTrimmed = body.title.trim()
+  const baseSlug = titleTrimmed
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 48) || "listing"
+  const suffix = Math.random().toString(36).slice(2, 8)
+  const uniqueHandle = `${baseSlug}-${suffix}`
+
+  let result: { id?: string }[] | undefined
+  try {
+    const workflowRes = await createProductsWorkflow(req.scope).run({
+      input: {
+        products: [
+          {
+            title: titleTrimmed,
+            handle: uniqueHandle,
+            description: body.description?.trim() ?? undefined,
+            thumbnail: body.thumbnail?.trim() || undefined,
+            // Mirror the thumbnail into the gallery — the product detail page
+            // renders product.images[] and falls through to an empty gallery
+            // when only `thumbnail` is set.
+            images: body.thumbnail?.trim()
+              ? [{ url: body.thumbnail.trim() }]
+              : undefined,
+            origin_country: body.origin_country?.trim() || undefined,
+            // Always draft: hub reviews + sets the retail price before
+            // approving via /admin/listings.
+            status: "draft",
+            shipping_profile_id: shippingProfileId,
+            sales_channels: salesChannelId ? [{ id: salesChannelId }] : [],
+            options: [{ title: "Size", values: ["Default"] }],
+            variants: [
+              {
+                title: "Default",
+                sku: undefined,
+                manage_inventory: false,
+                options: { Size: "Default" },
+                prices: [
+                  {
+                    amount: Math.round(Number(body.price)),
+                    currency_code: currency,
+                  },
+                ],
+              },
+            ],
+            metadata: {
+              seller_customer_id: customer.id,
+              harvest_date: harvestDate,
+              unit: body.unit ?? "kg",
+              category: body.category ?? null,
+              asking_price: Math.round(Number(body.price)),
+              submitted_at: new Date().toISOString(),
             },
-          ],
-          metadata: {
-            seller_customer_id: customer.id,
-            harvest_date: harvestDate,
-            unit: body.unit ?? "kg",
-            category: body.category ?? null,
-            asking_price: Math.round(Number(body.price)),
-            submitted_at: new Date().toISOString(),
           },
-        },
-      ],
-    },
-  })
+        ],
+      },
+    })
+    result = workflowRes.result as { id?: string }[] | undefined
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    console.error("createProductsWorkflow failed:", err)
+    // Duplicate handle should be impossible with the random suffix, but
+    // surface it cleanly if some other unique constraint trips.
+    const isDuplicate = /already exists|duplicate/i.test(message)
+    res.status(isDuplicate ? 409 : 500).json({
+      error: isDuplicate
+        ? "A product with these details already exists. Please change the title and try again."
+        : `Could not create the product: ${message}`,
+      code: isDuplicate ? "PRODUCT_DUPLICATE" : "PRODUCT_CREATE_FAILED",
+    })
+    return
+  }
 
   const product = result?.[0]
-  if (!product) {
+  if (!product?.id) {
     res.status(500).json({ error: "Product creation failed." })
     return
   }
