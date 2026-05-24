@@ -28,6 +28,13 @@ const reserveSlotStep = createStep(
   async (input: ReservePickupSlotInput, { container }) => {
     const service: PickupModuleService = container.resolve(PICKUP_MODULE)
 
+    if (!input.pickup_window_id) {
+      throw new Error("reserve-pickup-slot: pickup_window_id is required")
+    }
+    if (!input.listing_id) {
+      throw new Error("reserve-pickup-slot: listing_id is required")
+    }
+
     const windows = await service.listPickupWindows(
       { id: input.pickup_window_id },
       { take: 1 }
@@ -52,12 +59,29 @@ const reserveSlotStep = createStep(
       throw new Error(result.errors.map((e) => e.message).join("; "))
     }
 
-    const newSlot = await service.createPickupSlots({
-      pickup_window: input.pickup_window_id,
-      listing_id: input.listing_id,
-      estimated_kg: input.estimated_kg,
-      status: "reserved",
-    })
+    // belongsTo relations: pass the FK column directly. Passing the relation
+    // field name with a string id triggers `Cannot read properties of
+    // undefined (reading 'id')` inside MikroORM when it tries to deref the
+    // string as an entity reference.
+    let newSlot
+    try {
+      newSlot = await service.createPickupSlots({
+        pickup_window_id: input.pickup_window_id,
+        listing_id: input.listing_id,
+        estimated_kg: input.estimated_kg,
+        status: "reserved",
+      } as unknown as Parameters<typeof service.createPickupSlots>[0])
+    } catch (err) {
+      throw new Error(
+        `createPickupSlots failed (window=${input.pickup_window_id}, listing=${input.listing_id}, kg=${input.estimated_kg}): ${err instanceof Error ? err.message : String(err)}`
+      )
+    }
+
+    if (!newSlot?.id) {
+      throw new Error(
+        `createPickupSlots returned no id (got ${JSON.stringify(newSlot)})`
+      )
+    }
 
     const newReservedKg = (window.reserved_kg ?? 0) + input.estimated_kg
     const update: Record<string, unknown> = { reserved_kg: newReservedKg }
@@ -70,7 +94,14 @@ const reserveSlotStep = createStep(
       update.status = "full"
       flippedToFull = true
     }
-    await service.updatePickupWindows({ id: window.id, ...update })
+
+    try {
+      await service.updatePickupWindows({ id: window.id, ...update })
+    } catch (err) {
+      throw new Error(
+        `updatePickupWindows failed (window=${window.id}): ${err instanceof Error ? err.message : String(err)}`
+      )
+    }
 
     const state: ReservedSlotState = {
       slot_id: newSlot.id,
