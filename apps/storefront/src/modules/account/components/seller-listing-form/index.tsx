@@ -238,10 +238,16 @@ export default function SellerListingForm({ mode, existing }: Props) {
   }
 
   const progressPct = useMemo(() => {
-    const required = FIELDS.filter((f) => f.required)
-    if (!required.length) return 100
-    const filled = required.filter((f) => values[f.name]?.trim().length).length
-    return Math.round((filled / required.length) * 100)
+    // Include the hub-logistics fields in the readiness check — they live
+    // outside FIELDS but are required for every listing.
+    const requiredKeys = [
+      ...FIELDS.filter((f) => f.required).map((f) => f.name),
+      "harvest_date",
+      "pickup_window_id",
+      "estimated_kg",
+    ]
+    const filled = requiredKeys.filter((k) => values[k]?.trim().length).length
+    return Math.round((filled / requiredKeys.length) * 100)
   }, [values])
   const ready = progressPct === 100
 
