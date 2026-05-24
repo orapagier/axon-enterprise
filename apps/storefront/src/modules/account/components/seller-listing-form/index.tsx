@@ -344,17 +344,49 @@ export default function SellerListingForm({ mode, existing }: Props) {
         error={state.fieldErrors?.harvest_date ?? null}
       />
 
-      <PickupWindowSelect
-        value={values.pickup_window_id}
-        onChange={(val) =>
-          setValues((v) => ({ ...v, pickup_window_id: val }))
-        }
-        windows={pickupWindows}
-        loading={pickupLoading}
-        error={pickupError}
-        visible={true}
-        disabled={!isDraft}
-      />
+      {hubMissing ? (
+        <div className="px-7 small:px-12 py-5 border-b border-grey-10 bg-grey-5/30">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-caption font-semibold text-grey-70 uppercase tracking-[0.06em]">
+              Pickup window
+            </span>
+            <span className="text-[10px] text-grey-50">
+              Required for Sell to FreshHub
+            </span>
+          </div>
+          <div className="py-4 px-4 rounded-xl border border-amber-200 bg-amber-50">
+            <p className="text-body-sm font-medium text-amber-900">
+              Set your home hub before listing products.
+            </p>
+            <p className="mt-1 text-caption text-amber-800/90">
+              FreshHub pickup windows are scheduled per hub. Pick yours so we
+              can show the right slots for your harvest date.
+            </p>
+            <LocalizedClientLink
+              href="/account/profile"
+              className="inline-flex items-center gap-x-1.5 mt-3 px-3 py-2 rounded-lg bg-amber-900 text-white text-body-sm font-medium hover:bg-amber-950 transition-colors"
+            >
+              Pick your home hub
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </LocalizedClientLink>
+          </div>
+        </div>
+      ) : (
+        <PickupWindowSelect
+          value={values.pickup_window_id}
+          onChange={(val) =>
+            setValues((v) => ({ ...v, pickup_window_id: val }))
+          }
+          windows={pickupWindows}
+          loading={pickupLoading}
+          error={pickupError}
+          visible={true}
+          disabled={!isDraft}
+        />
+      )}
 
       <EstimatedKgField
         value={values.estimated_kg}
