@@ -323,6 +323,7 @@ export async function verifyEmailCode(
     const customerCacheTag = await getCacheTag("customers")
     revalidateTag(customerCacheTag)
     await transferCart()
+    await syncCustomerHubFromCookie()
   } catch (error) {
     return { ok: false, error: String(error) }
   } finally {
