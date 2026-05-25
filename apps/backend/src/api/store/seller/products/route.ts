@@ -10,7 +10,6 @@ import {
 import { validateSlotReserve } from "../../../../modules/pickup/validators"
 import { PICKUP_MODULE } from "../../../../modules/pickup"
 import PickupModuleService from "../../../../modules/pickup/service"
-import reservePickupSlotWorkflow from "../../../../workflows/reserve-pickup-slot"
 
 type StoreCustomer = {
   id: string
