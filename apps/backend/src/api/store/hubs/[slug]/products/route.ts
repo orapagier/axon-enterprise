@@ -42,16 +42,18 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       filters: { id: hub.id },
     })
 
-    const hubEntry = data[0] as unknown as {
-      product?: Array<{
-        id: string
-        product_listing?: Array<{ listing_type: string }>
-      }>
-    } | undefined
+    const rawProducts = (data[0] as unknown as {
+      product?: unknown
+    } | undefined)?.product
+    const productArr = Array.isArray(rawProducts) ? rawProducts : rawProducts ? [rawProducts] : []
 
-    const products = (hubEntry?.product ?? [])
+    const products = (productArr as Array<{
+      id: string
+      product_listing?: { listing_type: string } | Array<{ listing_type: string }>
+    }>)
       .filter((p) => {
-        const listing = p.product_listing?.[0]
+        const rawListing = p.product_listing
+        const listing = Array.isArray(rawListing) ? rawListing[0] : rawListing
         return listing?.listing_type === listingType
       })
       .map((p) => ({ id: p.id }))
