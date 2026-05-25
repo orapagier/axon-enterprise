@@ -191,7 +191,7 @@ export default async function Nav() {
           </div>
 
           {/* Center: Nav links with refined hover */}
-          <div className="hidden small:flex items-center h-full absolute left-1/2 -translate-x-1/2">
+          <div className="hidden small:flex items-center h-full">
             <div className="flex items-center gap-x-0.5">
               <LocalizedClientLink href="/store" className="nav-link-premium">
                 Shop
