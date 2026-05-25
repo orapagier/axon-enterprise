@@ -4,5 +4,5 @@ import HubModule from "../modules/hub"
 
 export default defineLink(
   ProductModule.linkable.product,
-  HubModule.linkable.hub
+  { linkable: HubModule.linkable.hub, isList: true }
 )
