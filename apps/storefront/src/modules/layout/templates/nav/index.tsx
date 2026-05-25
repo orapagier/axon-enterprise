@@ -44,7 +44,7 @@ export default async function Nav() {
             className="absolute inset-y-0 left-0 right-0 opacity-[0.06]"
             style={{
               backgroundImage:
-                "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 200 30' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>\")",
+                "url(\"data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMjAwIDMwJyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnPjxmaWx0ZXIgaWQ9J24nPjxmZVR1cmJ1bGVuY2UgdHlwZT0nZnJhY3RhbE5vaXNlJyBiYXNlRnJlcXVlbmN5PScxLjQnIG51bU9jdGF2ZXM9JzInLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWx0ZXI9J3VybCgjbiknLz48L3N2Zz4=\")",
             }}
           />
         </div>
