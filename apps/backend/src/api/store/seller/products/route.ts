@@ -102,7 +102,8 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   )
 
   const shaped = ours.map((p) => {
-    const listing = (p as unknown as { product_listing?: unknown[] }).product_listing?.[0] as
+    const raw = (p as unknown as { product_listing?: unknown }).product_listing
+    const listing = (Array.isArray(raw) ? raw[0] : raw) as
       | Record<string, unknown>
       | undefined
     return {
