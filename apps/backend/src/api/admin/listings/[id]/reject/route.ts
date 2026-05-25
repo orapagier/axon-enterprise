@@ -49,12 +49,14 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   })
   const row = linkRows?.[0] as unknown as
     | {
-        product?: Array<{ id: string; status: string }>
-        pickup_slot?: Array<{ id: string; estimated_kg: number }>
+        product?: { id: string; status: string } | Array<{ id: string; status: string }>
+        pickup_slot?: { id: string; estimated_kg: number } | Array<{ id: string; estimated_kg: number }>
       }
     | undefined
-  const linkedProduct = row?.product?.[0]
-  const linkedSlot = row?.pickup_slot?.[0]
+  const rawProduct = row?.product
+  const linkedProduct = Array.isArray(rawProduct) ? rawProduct[0] : rawProduct
+  const rawSlot = row?.pickup_slot
+  const linkedSlot = Array.isArray(rawSlot) ? rawSlot[0] : rawSlot
 
   if (linkedProduct && linkedProduct.status !== "rejected") {
     await updateProductsWorkflow(req.scope).run({
