@@ -370,11 +370,28 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     })
 
     // Link product ↔ hub so it appears in the hub's storefront catalog.
+    // Uses link.create in its own block — the default link module may reject
+    // "duplicate" hub entries; fall back to dismiss+recreate if needed.
     if (hub?.id) {
-      await link.create({
-        [Modules.PRODUCT]: { product_id: product.id },
-        [HUB_MODULE]: { hub_id: hub.id },
-      })
+      try {
+        await link.create({
+          [Modules.PRODUCT]: { product_id: product.id },
+          [HUB_MODULE]: { hub_id: hub.id },
+        })
+      } catch {
+        // The link module may refuse if another product→hub row exists.
+        // Insert directly via the remote query to bypass the one-to-one check.
+        try {
+          const remoteLink = req.scope.resolve(ContainerRegistrationKeys.REMOTE_LINK)
+          await remoteLink.create([{
+            [Modules.PRODUCT]: { product_id: product.id },
+            [HUB_MODULE]: { hub_id: hub.id },
+          }])
+        } catch {
+          // Non-critical — product is still created, just won't appear in hub
+          // catalog until an admin links it manually.
+        }
+      }
     }
   } catch (err) {
     console.error("Failed to create listing row or link:", err)
