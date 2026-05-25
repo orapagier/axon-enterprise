@@ -2,7 +2,8 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 
 const Hero = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-grey-90">
+    <section className="bg-grey-5 pt-4 small:pt-6 px-4 small:px-6">
+      <div className="relative w-full max-w-[1400px] mx-auto overflow-hidden rounded-3xl bg-grey-90">
       {/* Background image with cinematic treatment */}
       <div className="absolute inset-0">
         <img
@@ -23,11 +24,8 @@ const Hero = () => {
         />
       </div>
 
-      {/* Decorative thin gold rule (top) */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-brand-gold-400/60 to-transparent" />
-
-      <div className="relative z-10 content-container">
-        <div className="grid grid-cols-1 small:grid-cols-12 small:h-[calc(100vh-104px)] small:max-h-[740px] small:min-h-[540px] py-10 small:py-0 gap-6 items-center">
+      <div className="relative z-10 px-6 small:px-12 large:px-16">
+        <div className="grid grid-cols-1 small:grid-cols-12 small:h-[calc(100vh-160px)] small:max-h-[680px] small:min-h-[500px] py-10 small:py-0 gap-6 items-center">
           {/* Left: Editorial copy */}
           <div className="small:col-span-7 flex flex-col gap-y-5 max-w-[620px]">
             {/* Eyebrow tag */}
