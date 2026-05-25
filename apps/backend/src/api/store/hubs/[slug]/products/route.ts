@@ -72,7 +72,8 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     filters: { id: hub.id },
   })
 
-  const products = (data[0] as unknown as { product?: { id: string }[] } | undefined)?.product ?? []
+  const raw = (data[0] as unknown as { product?: { id: string } | { id: string }[] } | undefined)?.product
+  const products = Array.isArray(raw) ? raw : raw ? [raw] : []
   res.json({
     hub_id: hub.id,
     slug: hub.slug,
