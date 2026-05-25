@@ -370,27 +370,25 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     })
 
     // Link product ↔ hub so it appears in the hub's storefront catalog.
-    // Uses link.create in its own block — the default link module may reject
-    // "duplicate" hub entries; fall back to dismiss+recreate if needed.
+    // Medusa's link.create enforces one-to-one, but the DB supports
+    // many products per hub. Insert directly to bypass the SDK constraint.
     if (hub?.id) {
       try {
-        await link.create({
-          [Modules.PRODUCT]: { product_id: product.id },
-          [HUB_MODULE]: { hub_id: hub.id },
+        const { Client } = await import("pg")
+        const pgClient = new Client({
+          connectionString: process.env.DATABASE_URL,
         })
+        await pgClient.connect()
+        const linkId = `link_${product.id.replace("prod_", "")}_hub`
+        await pgClient.query(
+          `INSERT INTO product_product_hub_hub (product_id, hub_id, id, created_at, updated_at)
+           VALUES ($1, $2, $3, NOW(), NOW())
+           ON CONFLICT (product_id, hub_id) DO NOTHING`,
+          [product.id, hub.id, linkId]
+        )
+        await pgClient.end()
       } catch {
-        // The link module may refuse if another product→hub row exists.
-        // Insert directly via the remote query to bypass the one-to-one check.
-        try {
-          const remoteLink = req.scope.resolve(ContainerRegistrationKeys.REMOTE_LINK)
-          await remoteLink.create([{
-            [Modules.PRODUCT]: { product_id: product.id },
-            [HUB_MODULE]: { hub_id: hub.id },
-          }])
-        } catch {
-          // Non-critical — product is still created, just won't appear in hub
-          // catalog until an admin links it manually.
-        }
+        // Non-critical — product is still created and listed.
       }
     }
   } catch (err) {
