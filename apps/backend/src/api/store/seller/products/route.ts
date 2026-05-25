@@ -378,10 +378,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // Reserve the pickup slot inline (bypasses the workflow for hot-reload
-  // compatibility; the route handles its own rollback).
+  // Reserve the pickup slot inline.
   try {
-    const pickupService: PickupModuleService = req.scope.resolve(PICKUP_MODULE)
     const slot = await pickupService.createPickupSlots({
       pickup_window: body.pickup_window_id,
       listing_id: listing.id,
