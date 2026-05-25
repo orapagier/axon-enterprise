@@ -368,6 +368,14 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       [Modules.PRODUCT]: { product_id: product.id },
       [LISTING_MODULE]: { product_listing_id: listing.id },
     })
+
+    // Link product ↔ hub so it appears in the hub's storefront catalog.
+    if (hub?.id) {
+      await link.create({
+        [Modules.PRODUCT]: { product_id: product.id },
+        [HUB_MODULE]: { hub_id: hub.id },
+      })
+    }
   } catch (err) {
     console.error("Failed to create listing row or link:", err)
     res.status(500).json({
