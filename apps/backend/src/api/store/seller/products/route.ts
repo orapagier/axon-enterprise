@@ -379,27 +379,41 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // Reserve the pickup slot through the workflow so the slot + capacity bump
-  // + window-full flip roll back together on failure.
+  // Reserve the pickup slot inline (bypasses the workflow for hot-reload
+  // compatibility; the route handles its own rollback).
   try {
-    const { result: slot } = await reservePickupSlotWorkflow(req.scope).run({
-      input: {
-        listing_id: listing.id,
-        pickup_window_id: body.pickup_window_id,
-        harvest_date: harvestDate,
-        estimated_kg: body.estimated_kg,
-      },
-    })
+    const pickupService: PickupModuleService = req.scope.resolve(PICKUP_MODULE)
+    const slot = await pickupService.createPickupSlots({
+      pickup_window: body.pickup_window_id,
+      listing_id: listing.id,
+      estimated_kg: body.estimated_kg,
+      status: "reserved",
+    } as unknown as Parameters<typeof pickupService.createPickupSlots>[0])
 
-    if (slot?.id) {
-      await link.create({
-        [LISTING_MODULE]: { product_listing_id: listing.id },
-        [PICKUP_MODULE]: { pickup_slot_id: slot.id },
-      })
+    if (!slot?.id) {
+      throw new Error(
+        `createPickupSlots returned no id (got ${JSON.stringify(slot)})`
+      )
     }
+
+    // Bump window reserved_kg
+    const newReservedKg = (window.reserved_kg ?? 0) + body.estimated_kg
+    const windowUpdate: Record<string, unknown> = { reserved_kg: newReservedKg }
+    if (
+      window.capacity_kg !== null &&
+      window.capacity_kg !== undefined &&
+      newReservedKg >= window.capacity_kg
+    ) {
+      windowUpdate.status = "full"
+    }
+    await pickupService.updatePickupWindows({ id: window.id, ...windowUpdate })
+
+    // Link listing ↔ slot
+    await link.create({
+      [LISTING_MODULE]: { product_listing_id: listing.id },
+      [PICKUP_MODULE]: { pickup_slot_id: slot.id },
+    })
   } catch (err) {
-    // Workflow already compensated the slot + capacity. Roll back the listing
-    // + link so the producer can retry cleanly.
     console.error("Pickup slot reservation failed:", err)
     try {
       await link.dismiss({
