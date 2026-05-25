@@ -369,26 +369,11 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     })
 
     // Link product ↔ hub so it appears in the hub's storefront catalog.
-    // Medusa's link.create enforces one-to-one, but the DB supports
-    // many products per hub. Insert directly to bypass the SDK constraint.
     if (hub?.id) {
-      try {
-        const { Client } = await import("pg")
-        const pgClient = new Client({
-          connectionString: process.env.DATABASE_URL,
-        })
-        await pgClient.connect()
-        const linkId = `link_${product.id.replace("prod_", "")}_hub`
-        await pgClient.query(
-          `INSERT INTO product_product_hub_hub (product_id, hub_id, id, created_at, updated_at)
-           VALUES ($1, $2, $3, NOW(), NOW())
-           ON CONFLICT (product_id, hub_id) DO NOTHING`,
-          [product.id, hub.id, linkId]
-        )
-        await pgClient.end()
-      } catch {
-        // Non-critical — product is still created and listed.
-      }
+      await link.create({
+        [Modules.PRODUCT]: { product_id: product.id },
+        [HUB_MODULE]: { hub_id: hub.id },
+      })
     }
   } catch (err) {
     console.error("Failed to create listing row or link:", err)
