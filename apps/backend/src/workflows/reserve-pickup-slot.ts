@@ -59,14 +59,10 @@ const reserveSlotStep = createStep(
       throw new Error(result.errors.map((e) => e.message).join("; "))
     }
 
-    // belongsTo relations: pass the FK column directly. Passing the relation
-    // field name with a string id triggers `Cannot read properties of
-    // undefined (reading 'id')` inside MikroORM when it tries to deref the
-    // string as an entity reference.
     let newSlot
     try {
       newSlot = await service.createPickupSlots({
-        pickup_window_id: input.pickup_window_id,
+        pickup_window: input.pickup_window_id,
         listing_id: input.listing_id,
         estimated_kg: input.estimated_kg,
         status: "reserved",
