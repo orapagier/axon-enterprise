@@ -36,23 +36,22 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       entity: "hub",
       fields: [
         "id",
-        "product.id",
-        "product.product_listing.listing_type",
+        "products.id",
+        "products.product_listing.listing_type",
       ],
       filters: { id: hub.id },
     })
 
-    const rawProducts = (data[0] as unknown as {
-      product?: unknown
-    } | undefined)?.product
-    const productArr = Array.isArray(rawProducts) ? rawProducts : rawProducts ? [rawProducts] : []
+    const productArr = (data[0] as unknown as {
+      products?: Array<{ id: string; product_listing?: unknown }>
+    } | undefined)?.products ?? []
 
-    const products = (productArr as Array<{
-      id: string
-      product_listing?: { listing_type: string } | Array<{ listing_type: string }>
-    }>)
+    const products = productArr
       .filter((p) => {
-        const rawListing = p.product_listing
+        const rawListing = p.product_listing as
+          | { listing_type: string }
+          | Array<{ listing_type: string }>
+          | undefined
         const listing = Array.isArray(rawListing) ? rawListing[0] : rawListing
         return listing?.listing_type === listingType
       })
@@ -70,12 +69,11 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   // Default: return all hub-linked product IDs
   const { data } = await query.graph({
     entity: "hub",
-    fields: ["id", "product.id"],
+    fields: ["id", "products.id"],
     filters: { id: hub.id },
   })
 
-  const raw = (data[0] as unknown as { product?: { id: string } | { id: string }[] } | undefined)?.product
-  const products = Array.isArray(raw) ? raw : raw ? [raw] : []
+  const products = (data[0] as unknown as { products?: Array<{ id: string }> } | undefined)?.products ?? []
   res.json({
     hub_id: hub.id,
     slug: hub.slug,
