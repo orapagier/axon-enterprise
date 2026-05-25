@@ -3,6 +3,6 @@ import ProductModule from "@medusajs/medusa/product"
 import HubModule from "../modules/hub"
 
 export default defineLink(
-  ProductModule.linkable.product,
-  { linkable: HubModule.linkable.hub, isList: true }
+  { linkable: ProductModule.linkable.product, isList: true },
+  HubModule.linkable.hub
 )
