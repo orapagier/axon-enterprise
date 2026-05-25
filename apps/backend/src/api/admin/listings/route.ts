@@ -53,29 +53,33 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   }
 
   const listingIds = listings.map((l) => l.id)
-  const { data: linkRows } = await query.graph({
-    entity: "product_listing",
+
+  // Query from product side (reverse traversal from product_listing → product
+  // doesn't resolve in Medusa's graph engine for custom modules).
+  const { data: productRows } = await query.graph({
+    entity: "product",
     fields: [
       "id",
-      "product.id",
-      "product.title",
-      "product.handle",
-      "product.status",
-      "product.thumbnail",
-      "product.metadata",
-      "product.created_at",
+      "title",
+      "handle",
+      "status",
+      "thumbnail",
+      "metadata",
+      "created_at",
+      "product_listing.id",
     ],
-    filters: { id: listingIds },
+    filters: {},
     pagination: { take: 500 },
   })
 
   const productByListing = new Map<string, Record<string, unknown>>()
-  for (const row of (linkRows ?? []) as unknown as Array<{
-    id: string
-    product?: Record<string, unknown>[]
-  }>) {
-    const p = row.product?.[0]
-    if (p) productByListing.set(row.id, p)
+  for (const row of (productRows ?? []) as unknown as Array<
+    Record<string, unknown> & { product_listing?: Array<{ id: string }> }
+  >) {
+    const linkedListingId = row.product_listing?.[0]?.id
+    if (linkedListingId && listingIds.includes(linkedListingId)) {
+      productByListing.set(linkedListingId, row)
+    }
   }
 
   const producerIds = new Set<string>()
