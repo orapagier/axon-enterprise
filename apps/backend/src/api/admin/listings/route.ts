@@ -54,8 +54,9 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   const listingIds = listings.map((l) => l.id)
 
-  // Query from product side (reverse traversal from product_listing → product
-  // doesn't resolve in Medusa's graph engine for custom modules).
+  // Resolve products via the product→product_listing link.
+  // The graph returns product_listing as a single object (not array) for
+  // one-to-one links.
   const { data: productRows } = await query.graph({
     entity: "product",
     fields: [
@@ -74,9 +75,10 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   const productByListing = new Map<string, Record<string, unknown>>()
   for (const row of (productRows ?? []) as unknown as Array<
-    Record<string, unknown> & { product_listing?: Array<{ id: string }> }
+    Record<string, unknown> & { product_listing?: { id: string } | Array<{ id: string }> }
   >) {
-    const linkedListingId = row.product_listing?.[0]?.id
+    const raw = row.product_listing
+    const linkedListingId = Array.isArray(raw) ? raw[0]?.id : raw?.id
     if (linkedListingId && listingIds.includes(linkedListingId)) {
       productByListing.set(linkedListingId, row)
     }
