@@ -54,24 +54,25 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
     : CART_QUANTITY_CAP
 
   return (
-    <Table.Row className="w-full" data-testid="product-row">
-      <Table.Cell className="!pl-0 p-4 w-24">
+    <Table.Row className="w-full group" data-testid="product-row">
+      <Table.Cell className="!pl-6 py-4 w-24">
         <LocalizedClientLink
           href={`/products/${item.product_handle}`}
           className={clx("flex", {
             "w-16": type === "preview",
-            "small:w-24 w-12": type === "full",
+            "small:w-20 w-12": type === "full",
           })}
         >
           <Thumbnail
             thumbnail={item.thumbnail}
             images={item.variant?.product?.images}
             size="square"
+            className="rounded-lg"
           />
         </LocalizedClientLink>
       </Table.Cell>
 
-      <Table.Cell className="text-left">
+      <Table.Cell className="text-left py-4">
         <Text
           className="txt-medium-plus text-ui-fg-base"
           data-testid="product-title"
@@ -82,7 +83,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
       </Table.Cell>
 
       {type === "full" && (
-        <Table.Cell>
+        <Table.Cell className="py-4">
           <div className="flex gap-2 items-center w-28">
             <DeleteButton id={item.id} data-testid="product-delete-button" />
             <CartItemSelect
@@ -107,7 +108,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
       )}
 
       {type === "full" && (
-        <Table.Cell className="hidden small:table-cell">
+        <Table.Cell className="hidden small:table-cell py-4">
           <LineItemUnitPrice
             item={item}
             style="tight"
@@ -116,15 +117,15 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
         </Table.Cell>
       )}
 
-      <Table.Cell className="!pr-0">
+      <Table.Cell className="!pr-6 py-4">
         <span
-          className={clx("!pr-0", {
+          className={clx({
             "flex flex-col items-end h-full justify-center": type === "preview",
           })}
         >
           {type === "preview" && (
-            <span className="flex gap-x-1 ">
-              <Text className="text-ui-fg-muted">{item.quantity} {getUnitLabel(unit, item.quantity)} </Text>
+            <span className="flex gap-x-1">
+              <Text className="text-ui-fg-muted">{item.quantity} {getUnitLabel(unit, item.quantity)}</Text>
               <LineItemUnitPrice
                 item={item}
                 style="tight"
