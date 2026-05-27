@@ -30,6 +30,7 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
   const [added, setAdded] = useState(false)
   const countryCode = useParams().countryCode as string
   const router = useRouter()
+  const unit = getProductUnit(product)
 
   const hasOptions = (product.variants?.length ?? 0) > 1
 
