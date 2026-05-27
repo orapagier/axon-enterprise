@@ -106,6 +106,9 @@ export default function ProductPrice({
         >
           {selectedPrice.calculated_price}
         </span>
+        <span className="text-body-sm font-normal text-grey-50">
+          {" "}per {getUnitLabel(unit, 1)}
+        </span>
       </span>
       {isSale && (
         <div className="flex items-center gap-x-2">
