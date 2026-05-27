@@ -211,22 +211,6 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId, hub }: RefinementLi
     })
   }
 
-  // Derived values for the price slider visual
-  const sliderMin = urlMin ? Number(urlMin) : PRICE_FLOOR
-  const sliderMax = urlMax ? Number(urlMax) : PRICE_CEILING
-  const leftPct = Math.max(
-    0,
-    Math.min(100, ((sliderMin - PRICE_FLOOR) / (PRICE_CEILING - PRICE_FLOOR)) * 100)
-  )
-  const rightPct = Math.max(
-    0,
-    Math.min(
-      100,
-      100 -
-        ((sliderMax - PRICE_FLOOR) / (PRICE_CEILING - PRICE_FLOOR)) * 100
-    )
-  )
-
   const SectionHeader = ({
     title,
     sectionKey,
