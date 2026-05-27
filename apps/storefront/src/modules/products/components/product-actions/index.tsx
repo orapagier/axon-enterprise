@@ -164,6 +164,55 @@ export default function ProductActions({
           isMember={isMember}
         />
 
+        {/* Quantity selector */}
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-caption font-semibold text-grey-60 uppercase tracking-wider">
+              Quantity
+            </span>
+            {selectedVariant?.manage_inventory &&
+              !selectedVariant.allow_backorder &&
+              inStock && (
+                <span className="text-caption text-grey-50">
+                  {maxQuantity} {getUnitLabel(unit, maxQuantity)} available
+                </span>
+              )}
+          </div>
+          <div className="flex items-center justify-between gap-3 rounded-xl border border-grey-20 bg-grey-5 p-1.5">
+            <button
+              type="button"
+              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+              disabled={quantity <= 1 || isAdding}
+              aria-label="Decrease quantity"
+              className="w-10 h-10 flex items-center justify-center rounded-lg bg-white border border-grey-10 text-grey-70 hover:text-brand-green-700 hover:border-brand-green-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </button>
+            <div className="flex-1 flex items-baseline justify-center gap-x-1.5" aria-live="polite">
+              <span className="text-body-sm font-bold text-grey-90 tabular-nums">
+                {quantity}
+              </span>
+              <span className="text-body-sm text-grey-60">
+                {getUnitLabel(unit, quantity)}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))}
+              disabled={quantity >= maxQuantity || isAdding}
+              aria-label="Increase quantity"
+              className="w-10 h-10 flex items-center justify-center rounded-lg bg-white border border-grey-10 text-grey-70 hover:text-brand-green-700 hover:border-brand-green-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
         <Button
           onClick={handleAddToCart}
           disabled={
