@@ -83,10 +83,6 @@ const RefinementList = ({ hub }: RefinementListProps) => {
     [pathname, router, searchParams]
   )
 
-  const setQueryParams = (name: string, value: string) => {
-    pushParams((p) => p.set(name, value))
-  }
-
   const applySearch = useCallback(
     (value: string) => {
       pushParams((p) => {
