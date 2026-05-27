@@ -96,6 +96,11 @@ const EditAddress: React.FC<EditAddressProps> = ({
               {address.address_1}
               {address.address_2 && <span>, {address.address_2}</span>}
             </span>
+            {(address.metadata as { barangay?: string } | null)?.barangay && (
+              <span data-testid="address-barangay">
+                {(address.metadata as { barangay: string }).barangay}
+              </span>
+            )}
             <span data-testid="address-postal-city">
               {address.postal_code}, {address.city}
             </span>
