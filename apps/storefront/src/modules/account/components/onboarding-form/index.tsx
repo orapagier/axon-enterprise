@@ -502,7 +502,22 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
                   )}
                 </span>
 
-                {f.type === "textarea" ? (
+                {f.type === "barangay" ? (
+                  <>
+                    <BarangayCombobox
+                      hubSlug={hubSlugForCity(values[f.cityField ?? "default_city"] ?? "")}
+                      value={value || null}
+                      onChange={(b) =>
+                        setValues((v) => ({ ...v, [f.name]: b }))
+                      }
+                      label=""
+                      required={f.required}
+                      invalid={!!err}
+                      data-testid={`onboarding-${f.name}`}
+                    />
+                    <input type="hidden" name={f.name} value={value} />
+                  </>
+                ) : f.type === "textarea" ? (
                   <textarea
                     name={f.name}
                     placeholder={f.placeholder}
