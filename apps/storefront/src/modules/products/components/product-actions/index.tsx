@@ -97,28 +97,22 @@ export default function ProductActions({
     router.replace(pathname + "?" + params.toString())
   }, [selectedVariant, isValidVariant])
 
-  // check if the selected variant is in stock
   const inStock = useMemo(() => {
-    // If we don't manage inventory, we can always add to cart
-    if (selectedVariant && !selectedVariant.manage_inventory) {
-      return true
-    }
-
-    // If we allow back orders on the variant, we can add to cart
-    if (selectedVariant?.allow_backorder) {
-      return true
-    }
-
-    // If there is inventory available, we can add to cart
+    if (selectedVariant && !selectedVariant.manage_inventory) return true
+    if (selectedVariant?.allow_backorder) return true
     if (
       selectedVariant?.manage_inventory &&
       (selectedVariant?.inventory_quantity || 0) > 0
-    ) {
+    )
       return true
-    }
-
-    // Otherwise, we can't add to cart
     return false
+  }, [selectedVariant])
+
+  const maxQuantity = useMemo(() => {
+    if (!selectedVariant) return 99
+    if (!selectedVariant.manage_inventory) return 99
+    if (selectedVariant.allow_backorder) return 99
+    return Math.max(1, selectedVariant.inventory_quantity || 0)
   }, [selectedVariant])
 
   const actionsRef = useRef<HTMLDivElement>(null)
