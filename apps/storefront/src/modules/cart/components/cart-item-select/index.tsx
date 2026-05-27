@@ -38,11 +38,9 @@ const CartItemSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
 
     return (
       <div>
-        <IconBadge
-          onFocus={() => innerRef.current?.focus()}
-          onBlur={() => innerRef.current?.blur()}
+        <div
           className={clx(
-            "relative flex items-center txt-compact-small border text-ui-fg-base group",
+            "relative flex items-center txt-compact-small rounded-lg border border-gray-200 bg-white text-ui-fg-base group hover:border-gray-300 transition-colors",
             className,
             {
               "text-ui-fg-subtle": isPlaceholder,
@@ -52,17 +50,17 @@ const CartItemSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
           <select
             ref={innerRef}
             {...props}
-            className="appearance-none bg-transparent border-none pl-3 pr-7 transition-colors duration-150 focus:border-gray-700 outline-none h-10 items-center justify-center"
+            className="appearance-none bg-transparent border-none pl-3 pr-7 transition-colors duration-150 outline-none h-10 cursor-pointer"
           >
             <option disabled value="">
               {placeholder}
             </option>
             {children}
           </select>
-          <span className="absolute right-2 flex pointer-events-none group-hover:animate-pulse">
+          <span className="absolute right-2 flex pointer-events-none text-ui-fg-subtle">
             <ChevronDown />
           </span>
-        </IconBadge>
+        </div>
       </div>
     )
   }
