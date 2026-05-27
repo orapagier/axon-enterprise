@@ -227,18 +227,18 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
             </div>
 
             {/* Options */}
-            <div className="flex flex-col gap-y-4 mb-5">
+            <div className="flex flex-col gap-y-3 mb-3">
               {(product.options || []).map((option) => (
                 <div key={option.id}>
-                  <span className="text-caption font-semibold text-grey-60 uppercase tracking-wider mb-2 block">
+                  <span className="text-caption font-semibold text-grey-60 uppercase tracking-wider mb-1.5 block">
                     {option.title}
                   </span>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {(option.values ?? []).map((v) => (
                       <button
                         key={v.value}
                         onClick={() => setOptionValue(option.id, v.value)}
-                        className={`px-4 py-2 rounded-lg text-body-sm font-medium border transition-all duration-150 ${
+                        className={`px-3 py-1.5 rounded-lg text-caption font-medium border transition-all duration-150 ${
                           options[option.id] === v.value
                             ? "border-brand-green-500 bg-brand-green-50 text-brand-green-700"
                             : "border-grey-20 text-grey-60 hover:border-grey-40 hover:text-grey-80"
