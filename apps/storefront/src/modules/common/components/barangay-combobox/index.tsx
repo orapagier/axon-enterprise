@@ -56,7 +56,11 @@ const BarangayCombobox: React.FC<Props> = ({
     }
     setLoadError(null)
     setBarangays(null)
-    fetch(`/store/hubs/${encodeURIComponent(hubSlug)}/barangays`)
+    fetch(`${BACKEND_URL}/store/hubs/${encodeURIComponent(hubSlug)}/barangays`, {
+      headers: {
+        "x-publishable-api-key": PUBLISHABLE_KEY,
+      },
+    })
       .then(async (res) => {
         if (!res.ok) {
           throw new Error(`Failed to load barangays (${res.status})`)
