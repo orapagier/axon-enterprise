@@ -30,7 +30,7 @@ export default async function PreviewPrice({ price, unit = "kg" }: { price: Vari
       <div className="flex flex-col" data-testid="preview-price-member">
         <div className="flex items-baseline gap-x-1">
           <span
-            className="font-heading text-h2 font-bold tabular-nums leading-none tracking-[-0.01em] text-grey-90"
+            className="font-heading text-body-sm font-bold tabular-nums leading-none tracking-[-0.01em] text-grey-90"
             data-testid="price"
           >
             {memberLabel}
@@ -65,7 +65,7 @@ export default async function PreviewPrice({ price, unit = "kg" }: { price: Vari
       <div className="flex items-baseline gap-x-1 mt-0.5">
         <span
           className={clx(
-            "font-heading text-h2 font-bold tabular-nums leading-none tracking-[-0.01em]",
+            "font-heading text-body-sm font-bold tabular-nums leading-none tracking-[-0.01em]",
             {
               "text-brand-green-700": isSale,
               "text-grey-90": !isSale,
