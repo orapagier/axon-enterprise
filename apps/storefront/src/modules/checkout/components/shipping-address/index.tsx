@@ -161,11 +161,20 @@ const ShippingAddress = ({
   useEffect(() => {
     if (cart && cart.shipping_address) {
       setFormAddress(cart?.shipping_address, cart?.email)
-    }
-    if (cart && !cart.email && customer?.email) {
+    } else if (cart && customer) {
+      const defaultAddr = addressesInRegion?.[0]
+      if (defaultAddr) {
+        setFormAddress(
+          defaultAddr as unknown as HttpTypes.StoreCartAddress,
+          customer.email
+        )
+      } else if (customer.email) {
+        setFormAddress(undefined, customer.email)
+      }
+    } else if (cart && !cart.email && customer?.email) {
       setFormAddress(undefined, customer.email)
     }
-  }, [cart])
+  }, [cart, customer, addressesInRegion])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
