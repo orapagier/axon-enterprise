@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
-import SortProducts, { SortOptions } from "./sort-products"
+import { SortOptions } from "./sort-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import {
   DEFAULT_OFF_PEAK_DELIVERY_FEE_PHP,
