@@ -17,12 +17,20 @@ type RefinementListProps = {
 
 const categories = [
   { label: "All Products", value: "all", icon: "🛒" },
-  { label: "Vegetables", value: "vegetables", icon: "🥬" },
   { label: "Fruits", value: "fruits", icon: "🥭" },
-  { label: "Herbs", value: "herbs", icon: "🌿" },
-  { label: "Root Crops", value: "root-crops", icon: "🥔" },
+  { label: "Vegetables", value: "vegetables", icon: "🥬" },
   { label: "Leafy Greens", value: "leafy-greens", icon: "🥗" },
-  { label: "Fish", value: "fish", icon: "🐟" },
+  { label: "Root Crops", value: "root-crops", icon: "🥔" },
+  { label: "Herbs & Spices", value: "herbs-spices", icon: "🌿" },
+  { label: "Rice & Grains", value: "rice-grains", icon: "🌾" },
+  { label: "Fish & Seafood", value: "fish-seafood", icon: "🐟" },
+  { label: "Meat & Poultry", value: "meat-poultry", icon: "🍗" },
+  { label: "Eggs & Dairy", value: "eggs-dairy", icon: "🥚" },
+  { label: "Coconut & Oil", value: "coconut-oil", icon: "🥥" },
+  { label: "Dried & Preserved", value: "dried-preserved", icon: "🫙" },
+  { label: "Ready-to-Cook", value: "ready-to-cook", icon: "🍳" },
+  { label: "Beverages", value: "beverages", icon: "🍵" },
+  { label: "Pasalubong", value: "pasalubong", icon: "🎁" },
 ]
 
 const origins = [
