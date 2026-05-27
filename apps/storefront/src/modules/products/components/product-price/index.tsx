@@ -3,6 +3,7 @@ import { clx } from "@modules/common/components/ui"
 import { getProductPrice } from "@lib/util/get-product-price"
 import { getMemberPrice } from "@lib/util/membership"
 import { convertToLocale } from "@lib/util/money"
+import { getProductUnit, getUnitLabel } from "@lib/util/unit"
 import { HttpTypes } from "@medusajs/types"
 
 export default function ProductPrice({
