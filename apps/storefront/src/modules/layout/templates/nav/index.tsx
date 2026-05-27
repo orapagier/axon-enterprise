@@ -217,14 +217,6 @@ export default async function Nav() {
 
           {/* Right: Actions */}
           <div className="flex items-center h-full">
-            {/* Currency / region chip */}
-            <span className="hidden large:inline-flex items-center gap-x-1.5 px-3 py-1.5 mr-3 rounded-full bg-white border border-grey-10 text-[10px] font-semibold text-grey-70 uppercase tracking-[0.12em] shadow-soft">
-              <span className="w-1 h-1 rounded-full bg-brand-green-500" />
-              <span>PH</span>
-              <span className="text-grey-30">·</span>
-              <span className="text-brand-gold-700">₱</span>
-            </span>
-
             {/* Inline search with results dropdown */}
             <NavSearch />
 
