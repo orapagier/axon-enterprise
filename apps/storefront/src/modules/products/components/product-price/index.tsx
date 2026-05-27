@@ -51,6 +51,9 @@ export default function ProductPrice({
           >
             {!variant && "From "}
             {memberLabel}
+            <span className="text-body-sm font-normal text-grey-50">
+              {" "}per {getUnitLabel(unit, 1)}
+            </span>
           </span>
           <span className="inline-flex items-center gap-x-1.5 px-2 py-0.5 rounded-md bg-brand-gold-400/15 border border-brand-gold-400/40 text-caption font-bold uppercase tracking-wider text-brand-gold-600">
             <svg
