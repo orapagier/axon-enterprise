@@ -15,35 +15,24 @@ const CartTemplate = ({
 }) => {
   const isMember = checkIsMember(customer)
   return (
-    <div className="py-12">
+    <div className="py-8 small:py-12 bg-ui-bg-subtle min-h-[60vh]">
       <div className="content-container" data-testid="cart-container">
         {cart?.items?.length ? (
-          <div className="grid grid-cols-1 small:grid-cols-[1fr_360px] gap-x-40">
-            <div className="flex flex-col bg-white py-6 gap-y-6">
-              {!customer && (
-                <>
-                  <SignInPrompt />
-                  <Divider />
-                </>
-              )}
+          <div className="flex flex-col gap-y-4 small:gap-y-0 small:grid small:grid-cols-[1fr_380px] small:gap-x-8">
+            <div className="flex flex-col gap-y-4">
+              {!customer && <SignInPrompt />}
               <ItemsTemplate cart={cart} />
             </div>
             <div className="relative">
-              <div className="flex flex-col gap-y-8 sticky top-12">
+              <div className="flex flex-col gap-y-4 small:sticky small:top-20">
                 {cart && cart.region && (
-                  <>
-                    <div className="bg-white py-6">
-                      <Summary cart={cart} isMember={isMember} />
-                    </div>
-                  </>
+                  <Summary cart={cart} isMember={isMember} />
                 )}
               </div>
             </div>
           </div>
         ) : (
-          <div>
-            <EmptyCartMessage />
-          </div>
+          <EmptyCartMessage />
         )}
       </div>
     </div>
