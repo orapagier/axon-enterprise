@@ -39,7 +39,7 @@ export default async function ProductPreview({
         href={`/products/${product.handle}`}
         className="block"
       >
-        <div className="relative overflow-hidden bg-gradient-to-br from-brand-cream-50 via-white to-brand-cream-50 aspect-square">
+        <div className="relative overflow-hidden bg-gradient-to-br from-brand-cream-50 via-white to-brand-cream-50 aspect-[4/3]">
           <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.04]">
             <Thumbnail
               thumbnail={product.thumbnail}
@@ -51,13 +51,13 @@ export default async function ProductPreview({
 
           {/* Top-left badge */}
           {(isOnSale || isFreshToday) && (
-            <div className="absolute top-3 left-3 z-10">
+            <div className="absolute top-2 left-2 z-10">
               {isOnSale ? (
-                <span className="inline-flex items-center px-2.5 py-1 bg-grey-90 text-white text-[10px] font-bold uppercase tracking-[0.14em] rounded-md shadow-medium">
+                <span className="inline-flex items-center px-2 py-0.5 bg-grey-90 text-white text-[9px] font-bold uppercase tracking-[0.14em] rounded-md shadow-medium">
                   Sale
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-x-1.5 px-2.5 py-1 bg-white text-brand-green-700 text-[10px] font-bold uppercase tracking-[0.14em] rounded-md shadow-medium">
+                <span className="inline-flex items-center gap-x-1 px-2 py-0.5 bg-white text-brand-green-700 text-[9px] font-bold uppercase tracking-[0.14em] rounded-md shadow-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-green-500 animate-pulse" />
                   Fresh
                 </span>
@@ -66,11 +66,11 @@ export default async function ProductPreview({
           )}
 
           {/* Hover gradient */}
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-grey-90/45 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-grey-90/45 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
           {/* Quick view chip on hover */}
-          <span className="absolute bottom-3 left-1/2 -translate-x-1/2 inline-flex items-center gap-x-1.5 pl-2.5 pr-3 py-1.5 rounded-full bg-white text-grey-90 text-caption font-semibold shadow-large opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <span className="absolute bottom-2 left-1/2 -translate-x-1/2 inline-flex items-center gap-x-1 pl-2 pr-2.5 py-1 rounded-full bg-white text-grey-90 text-[10px] font-semibold shadow-large opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none whitespace-nowrap">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
               <circle cx="12" cy="12" r="3" />
             </svg>
