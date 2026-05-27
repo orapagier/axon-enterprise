@@ -123,8 +123,8 @@ const BarangayCombobox: React.FC<Props> = ({
           {label && (
             <label
               className={clx(
-                "flex items-center mx-3 px-1 transition-all absolute duration-300 -z-1 origin-0 text-ui-fg-subtle",
-                hasValue || query ? "top-0.5 text-xs" : "top-2.5"
+                "flex items-center mx-3 px-1 transition-all absolute duration-300 top-3 -z-1 origin-0 text-ui-fg-subtle",
+                (hasValue || query) && "-translate-y-2 text-xsmall-regular"
               )}
             >
               {label}
