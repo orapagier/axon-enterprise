@@ -1,10 +1,11 @@
 import { retrieveCustomer } from "@lib/data/customer"
 import { getMemberPrice, isMember } from "@lib/util/membership"
 import { convertToLocale } from "@lib/util/money"
+import { getUnitLabel } from "@lib/util/unit"
 import { clx } from "@modules/common/components/ui"
 import { VariantPrice } from "types/global"
 
-export default async function PreviewPrice({ price }: { price: VariantPrice }) {
+export default async function PreviewPrice({ price, unit = "kg" }: { price: VariantPrice; unit?: string }) {
   if (!price) {
     return null
   }
