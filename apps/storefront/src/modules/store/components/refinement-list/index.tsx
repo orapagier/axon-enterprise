@@ -52,7 +52,6 @@ const RefinementList = ({ hub }: RefinementListProps) => {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     categories: true,
     price: true,
-    origin: true,
   })
 
   // Sync local input if URL changes from elsewhere (e.g. browser back/forward)
