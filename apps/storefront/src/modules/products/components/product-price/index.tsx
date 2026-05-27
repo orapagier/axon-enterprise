@@ -15,6 +15,8 @@ export default function ProductPrice({
   variant?: HttpTypes.StoreProductVariant
   isMember?: boolean
 }) {
+  const unit = getProductUnit(product)
+
   const { cheapestPrice, variantPrice } = getProductPrice({
     product,
     variantId: variant?.id,
