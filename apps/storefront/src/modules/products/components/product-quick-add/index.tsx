@@ -185,11 +185,11 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
 
       {/* In-card overlay */}
       {isOpen && (
-        <div className="absolute inset-0 z-30 flex flex-col justify-end bg-white/95 backdrop-blur-[2px] rounded-xl animate-enter">
+        <div className="absolute inset-x-0 bottom-0 z-30 bg-white rounded-b-xl shadow-[0_-4px_12px_rgba(0,0,0,0.08)] animate-enter">
           {/* Close button */}
           <button
             onClick={() => setIsOpen(false)}
-            className="absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-grey-5 hover:bg-grey-10 transition-colors"
+            className="absolute -top-3 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-white shadow-medium hover:bg-grey-5 transition-colors"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" />
