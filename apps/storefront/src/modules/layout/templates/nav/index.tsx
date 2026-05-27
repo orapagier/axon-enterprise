@@ -189,15 +189,6 @@ export default async function Nav() {
             </span>
           </div>
 
-          {/* Center: Nav links with refined hover */}
-          <div className="hidden small:flex items-center h-full">
-            <div className="flex items-center gap-x-0.5">
-              <LocalizedClientLink href="/store" className="nav-link-premium">
-                Shop
-              </LocalizedClientLink>
-            </div>
-          </div>
-
           {/* Right: Actions */}
           <div className="flex items-center h-full">
             {/* Inline search with results dropdown */}
