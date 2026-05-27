@@ -17,12 +17,14 @@ type FieldDef = {
   label: string
   placeholder: string
   icon: string
-  type?: "text" | "tel" | "textarea"
+  type?: "text" | "tel" | "textarea" | "barangay"
   required?: boolean
   helper?: string
   suggestions?: string[]
   /** Span both columns on small+ screens (good for street address). */
   full?: boolean
+  /** For barangay fields: which form field holds the city value. */
+  cityField?: string
 }
 
 const MINDANAO_CITY_SUGGESTIONS = [
