@@ -567,7 +567,13 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
                         key={s}
                         type="button"
                         onClick={() =>
-                          setValues((v) => ({ ...v, [f.name]: s }))
+                          setValues((v) => {
+                            const next = { ...v, [f.name]: s }
+                            if (f.name === "default_city" || f.name === "primary_hub") {
+                              next.barangay = ""
+                            }
+                            return next
+                          })
                         }
                         className="px-2.5 py-1 rounded-full bg-grey-5 hover:bg-brand-green-50 border border-grey-10 hover:border-brand-green-200 text-[11px] text-grey-70 hover:text-brand-green-700 transition-colors"
                       >
