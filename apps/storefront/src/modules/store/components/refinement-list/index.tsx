@@ -337,11 +337,41 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId, hub }: RefinementLi
       <div>
         <SectionHeader title="Sort by" sectionKey="sort" />
         {openSections.sort && (
-          <SortProducts
-            sortBy={sortBy}
-            setQueryParams={setQueryParams}
-            data-testid={dataTestId}
-          />
+          <div className="flex flex-wrap gap-1.5">
+            {[
+              { value: "created_at" as const, label: "Newest", icon: "M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" },
+              { value: "price_asc" as const, label: "Price: Low", icon: "M3 17l6-6 4 4 8-8M14 7h7v7" },
+              { value: "price_desc" as const, label: "Price: High", icon: "M3 7l6 6 4-4 8 8M14 17h7v-7" },
+            ].map((opt) => {
+              const active = sortBy === opt.value
+              return (
+                <button
+                  key={opt.value}
+                  onClick={() => setQueryParams("sortBy", opt.value)}
+                  className={`inline-flex items-center gap-x-1.5 px-3 py-2 rounded-lg text-caption font-medium transition-all duration-150 ${
+                    active
+                      ? "bg-brand-green-600 text-white shadow-soft"
+                      : "bg-grey-5 text-grey-60 border border-grey-10 hover:border-grey-30 hover:text-grey-80"
+                  }`}
+                  data-testid={dataTestId}
+                >
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d={opt.icon} />
+                  </svg>
+                  {opt.label}
+                </button>
+              )
+            })}
+          </div>
         )}
       </div>
 
@@ -351,62 +381,66 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId, hub }: RefinementLi
       <div>
         <SectionHeader title="Price range" sectionKey="price" />
         {openSections.price && (
-          <div className="px-1 pt-1">
-            <div className="flex items-center justify-between text-caption text-grey-50 mb-2">
-              <span>₱{PRICE_FLOOR.toLocaleString()}</span>
-              <span>₱{PRICE_CEILING.toLocaleString()}+</span>
+          <div className="space-y-3">
+            {/* Quick presets */}
+            <div className="flex flex-wrap gap-1.5">
+              {[
+                { label: "Any", min: "", max: "" },
+                { label: "Under ₱100", min: "", max: "100" },
+                { label: "₱100–500", min: "100", max: "500" },
+                { label: "₱500+", min: "500", max: "" },
+              ].map((preset) => {
+                const isActive =
+                  (minInput || "") === preset.min && (maxInput || "") === preset.max
+                return (
+                  <button
+                    key={preset.label}
+                    onClick={() => {
+                      setMinInput(preset.min)
+                      setMaxInput(preset.max)
+                      applyPriceRange(preset.min, preset.max)
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-caption font-medium transition-all duration-150 ${
+                      isActive
+                        ? "bg-brand-green-600 text-white shadow-soft"
+                        : "bg-grey-5 text-grey-60 border border-grey-10 hover:border-grey-30 hover:text-grey-80"
+                    }`}
+                  >
+                    {preset.label}
+                  </button>
+                )
+              })}
             </div>
-            <div className="relative h-1.5 bg-grey-10 rounded-full">
-              <div
-                className="absolute h-full bg-gradient-to-r from-brand-green-500 to-brand-green-600 rounded-full"
-                style={{ left: `${leftPct}%`, right: `${rightPct}%` }}
-              />
-              <div
-                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-brand-green-600 rounded-full shadow-medium"
-                style={{ left: `${leftPct}%` }}
-              />
-              <div
-                className="absolute top-1/2 translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-brand-green-600 rounded-full shadow-medium"
-                style={{ right: `${rightPct}%` }}
-              />
-            </div>
-            <div className="flex items-center justify-between gap-2 mt-4">
-              <label className="flex-1 rounded-lg border border-grey-20 px-2.5 py-1.5 focus-within:border-brand-green-400 focus-within:ring-2 focus-within:ring-brand-green-100 transition-all">
-                <span className="text-[10px] uppercase tracking-wider text-grey-40 font-semibold block">
-                  Min
-                </span>
-                <div className="flex items-baseline gap-x-0.5">
-                  <span className="text-body-sm text-grey-50">₱</span>
-                  <input
-                    type="number"
-                    inputMode="numeric"
-                    min={PRICE_FLOOR}
-                    max={PRICE_CEILING}
-                    placeholder={String(PRICE_FLOOR)}
-                    value={minInput}
-                    onChange={(e) => setMinInput(e.target.value)}
-                    className="w-full text-body-sm font-semibold text-grey-80 tabular-nums bg-transparent focus:outline-none placeholder:text-grey-30 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  />
-                </div>
-              </label>
-              <label className="flex-1 rounded-lg border border-grey-20 px-2.5 py-1.5 focus-within:border-brand-green-400 focus-within:ring-2 focus-within:ring-brand-green-100 transition-all">
-                <span className="text-[10px] uppercase tracking-wider text-grey-40 font-semibold block">
-                  Max
-                </span>
-                <div className="flex items-baseline gap-x-0.5">
-                  <span className="text-body-sm text-grey-50">₱</span>
-                  <input
-                    type="number"
-                    inputMode="numeric"
-                    min={PRICE_FLOOR}
-                    max={PRICE_CEILING}
-                    placeholder={String(PRICE_CEILING)}
-                    value={maxInput}
-                    onChange={(e) => setMaxInput(e.target.value)}
-                    className="w-full text-body-sm font-semibold text-grey-80 tabular-nums bg-transparent focus:outline-none placeholder:text-grey-30 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  />
-                </div>
-              </label>
+
+            {/* Custom range inputs */}
+            <div className="flex items-center gap-2">
+              <div className="flex-1 flex items-center gap-x-1 px-2.5 py-2 rounded-lg bg-grey-5 border border-grey-10 focus-within:border-brand-green-300 focus-within:ring-1 focus-within:ring-brand-green-100 transition-all">
+                <span className="text-caption text-grey-40 font-medium">₱</span>
+                <input
+                  type="number"
+                  inputMode="numeric"
+                  min={PRICE_FLOOR}
+                  max={PRICE_CEILING}
+                  placeholder="Min"
+                  value={minInput}
+                  onChange={(e) => setMinInput(e.target.value)}
+                  className="w-full text-caption font-semibold text-grey-80 tabular-nums bg-transparent focus:outline-none placeholder:text-grey-40 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                />
+              </div>
+              <span className="text-grey-30 text-caption">—</span>
+              <div className="flex-1 flex items-center gap-x-1 px-2.5 py-2 rounded-lg bg-grey-5 border border-grey-10 focus-within:border-brand-green-300 focus-within:ring-1 focus-within:ring-brand-green-100 transition-all">
+                <span className="text-caption text-grey-40 font-medium">₱</span>
+                <input
+                  type="number"
+                  inputMode="numeric"
+                  min={PRICE_FLOOR}
+                  max={PRICE_CEILING}
+                  placeholder="Max"
+                  value={maxInput}
+                  onChange={(e) => setMaxInput(e.target.value)}
+                  className="w-full text-caption font-semibold text-grey-80 tabular-nums bg-transparent focus:outline-none placeholder:text-grey-40 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                />
+              </div>
             </div>
           </div>
         )}
