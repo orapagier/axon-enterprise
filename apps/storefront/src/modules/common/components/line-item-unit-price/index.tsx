@@ -14,6 +14,10 @@ const LineItemUnitPrice = ({
   style = "default",
   currencyCode,
 }: LineItemUnitPriceProps) => {
+  const unit =
+    ((item.variant as { product?: { metadata?: Record<string, unknown> } } | undefined)
+      ?.product?.metadata?.unit as string | undefined) ?? "kg"
+
   const total = item.total ?? 0
   const original_total = item.original_total ?? 0
   const hasReducedPrice = total < original_total
