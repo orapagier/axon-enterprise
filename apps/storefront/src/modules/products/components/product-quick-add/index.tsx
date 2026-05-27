@@ -1,6 +1,7 @@
 "use client"
 
 import { addToCart } from "@lib/data/cart"
+import { getProductUnit, getUnitLabel } from "@lib/util/unit"
 import { HttpTypes } from "@medusajs/types"
 import { isEqual } from "lodash"
 import { useParams, useRouter } from "next/navigation"
