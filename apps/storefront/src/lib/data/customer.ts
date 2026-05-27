@@ -585,6 +585,7 @@ export const updateCustomerAddress = async (
     return { success: false, error: "Address ID is required" }
   }
 
+  const barangay = (formData.get("barangay") as string) || ""
   const address = {
     first_name: formData.get("first_name") as string,
     last_name: formData.get("last_name") as string,
@@ -595,6 +596,7 @@ export const updateCustomerAddress = async (
     postal_code: formData.get("postal_code") as string,
     province: formData.get("province") as string,
     country_code: formData.get("country_code") as string,
+    metadata: barangay ? { barangay } : undefined,
   } as HttpTypes.StoreUpdateCustomerAddress
 
   const phone = formData.get("phone") as string
