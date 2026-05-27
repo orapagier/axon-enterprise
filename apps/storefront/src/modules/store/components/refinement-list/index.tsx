@@ -606,7 +606,7 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId, hub }: RefinementLi
       )}
 
       {/* Desktop sidebar */}
-      <aside className="hidden small:block small:min-w-[280px] small:max-w-[280px] small:sticky small:top-28 small:self-start">
+      <aside className="hidden small:block small:min-w-[260px] small:max-w-[260px] small:sticky small:top-24 small:self-start">
         <div className="bg-white rounded-2xl shadow-soft p-5 border border-grey-10/60">
           <div className="flex items-center justify-between mb-5 pb-4 border-b border-grey-10">
             <div className="flex items-center gap-x-2.5">
