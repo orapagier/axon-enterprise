@@ -184,8 +184,8 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
         </button>
       )}
 
-      {/* Options popup/modal */}
-      {isOpen && (
+      {/* Options popup/modal – portaled to body to avoid hover/blur conflicts with parent card */}
+      {isOpen && createPortal(
         <div
           className="fixed inset-0 z-[200] flex items-center justify-center p-4"
           onClick={(e) => {
@@ -346,7 +346,8 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
                 : `Add ${quantity} ${getUnitLabel(unit, quantity)} to cart`}
             </button>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )
