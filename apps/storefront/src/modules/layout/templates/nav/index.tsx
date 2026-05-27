@@ -107,6 +107,13 @@ export default async function Nav() {
               </svg>
               0910 089 5288
             </span>
+            <span className="text-white/15">·</span>
+            <span className="flex items-center gap-x-1.5 text-white/55">
+              <span className="w-1 h-1 rounded-full bg-brand-green-500" />
+              <span>PH</span>
+              <span className="text-white/25">·</span>
+              <span className="text-brand-gold-300">₱</span>
+            </span>
           </div>
         </div>
         {/* Top metallic gold line */}
