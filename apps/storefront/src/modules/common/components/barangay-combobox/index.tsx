@@ -88,12 +88,10 @@ const BarangayCombobox: React.FC<Props> = ({
 
   const isDisabled = !hubSlug || barangays === null
 
+  const hasValue = !!value
+
   return (
     <div className="flex flex-col w-full" data-testid={testId}>
-      <label className="mb-1 txt-compact-small text-ui-fg-subtle">
-        {label}
-        {required && <span className="text-rose-500 ml-0.5">*</span>}
-      </label>
       <Combobox
         value={value ?? ""}
         onChange={(v: string | null) => {
@@ -101,10 +99,10 @@ const BarangayCombobox: React.FC<Props> = ({
         }}
         disabled={isDisabled}
       >
-        <div className="relative">
+        <div className="relative z-0 w-full txt-compact-medium">
           <ComboboxInput
             className={clx(
-              "block w-full h-11 px-4 pr-10 bg-ui-bg-field border rounded-md txt-compact-medium",
+              "block w-full h-11 pt-4 pb-1 px-4 pr-10 bg-ui-bg-field border rounded-md txt-compact-medium",
               "focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active",
               "hover:bg-ui-bg-field-hover",
               invalid
@@ -119,9 +117,20 @@ const BarangayCombobox: React.FC<Props> = ({
                 ? "Pick city first"
                 : barangays === null
                   ? "Loading…"
-                  : "Type to search barangay"
+                  : " "
             }
           />
+          {label && (
+            <label
+              className={clx(
+                "flex items-center mx-3 px-1 transition-all absolute duration-300 -z-1 origin-0 text-ui-fg-subtle",
+                hasValue || query ? "top-1 text-xs" : "top-3"
+              )}
+            >
+              {label}
+              {required && <span className="text-rose-500">*</span>}
+            </label>
+          )}
           <ComboboxButton className="absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronUpDown className="text-ui-fg-muted" />
           </ComboboxButton>
