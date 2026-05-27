@@ -37,30 +37,28 @@ const CartItemSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
     }, [innerRef.current?.value])
 
     return (
-      <div>
-        <div
-          className={clx(
-            "relative flex items-center txt-compact-small rounded-lg border border-gray-200 bg-white text-ui-fg-base group hover:border-gray-300 transition-colors",
-            className,
-            {
-              "text-ui-fg-subtle": isPlaceholder,
-            }
-          )}
+      <div
+        className={clx(
+          "relative inline-flex items-center txt-compact-small rounded-lg border border-gray-200 bg-white text-ui-fg-base hover:border-gray-300 transition-colors",
+          className,
+          {
+            "text-ui-fg-subtle": isPlaceholder,
+          }
+        )}
+      >
+        <select
+          ref={innerRef}
+          {...props}
+          className="appearance-none bg-transparent border-none pl-3 pr-8 py-2 outline-none cursor-pointer text-sm"
         >
-          <select
-            ref={innerRef}
-            {...props}
-            className="appearance-none bg-transparent border-none pl-3 pr-7 transition-colors duration-150 outline-none h-10 cursor-pointer"
-          >
-            <option disabled value="">
-              {placeholder}
-            </option>
-            {children}
-          </select>
-          <span className="absolute right-2 flex pointer-events-none text-ui-fg-subtle">
-            <ChevronDown />
-          </span>
-        </div>
+          <option disabled value="">
+            {placeholder}
+          </option>
+          {children}
+        </select>
+        <span className="absolute right-2 pointer-events-none text-ui-fg-subtle">
+          <ChevronDown size="14" />
+        </span>
       </div>
     )
   }
