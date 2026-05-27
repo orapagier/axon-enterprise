@@ -100,6 +100,7 @@ export async function completeOnboarding(
   const address_1 = required("address_1", "Street address")
   const province = required("province", "Province")
   const postal_code = String(formData.get("postal_code") ?? "").trim()
+  const barangay = String(formData.get("barangay") ?? "").trim()
 
   if (isProducer) {
     const business_name = required("business_name", "Business or farm name")
