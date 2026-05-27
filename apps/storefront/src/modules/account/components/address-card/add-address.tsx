@@ -115,9 +115,22 @@ const AddAddress = ({
                   name="city"
                   required
                   autoComplete="locality"
+                  value={city}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setCity(e.target.value)
+                    setBarangay(null)
+                  }}
                   data-testid="city-input"
                 />
               </div>
+              <BarangayCombobox
+                hubSlug={hubSlugForCity(city)}
+                value={barangay}
+                onChange={setBarangay}
+                required
+                data-testid="barangay-input"
+              />
+              <input type="hidden" name="barangay" value={barangay ?? ""} />
               <Input
                 label="Province / State"
                 name="province"
