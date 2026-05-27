@@ -417,6 +417,40 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
   )
 }
 
+export async function applyCustomerAddressToCart(
+  customer: HttpTypes.StoreCustomer,
+  cart: HttpTypes.StoreCart
+) {
+  if (cart.shipping_address?.address_1) return
+
+  const addr = customer.addresses?.[0]
+  if (!addr) return
+
+  try {
+    const shipping_address: Record<string, unknown> = {
+      first_name: addr.first_name || customer.first_name || "",
+      last_name: addr.last_name || customer.last_name || "",
+      address_1: addr.address_1 || "",
+      address_2: addr.address_2 || "",
+      company: addr.company || "",
+      postal_code: addr.postal_code || "",
+      city: addr.city || "",
+      country_code: addr.country_code || "",
+      province: addr.province || "",
+      phone: addr.phone || customer.phone || "",
+      metadata: addr.metadata ?? undefined,
+    }
+
+    await updateCart({
+      shipping_address,
+      billing_address: shipping_address,
+      email: customer.email,
+    } as any)
+  } catch {
+    // Non-fatal — checkout will fall back to the address form
+  }
+}
+
 /**
  * Places an order for a cart. If no cart ID is provided, it will use the cart ID from the cookies.
  * @param cartId - optional - The ID of the cart to place an order for.
