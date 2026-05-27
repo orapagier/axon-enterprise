@@ -224,6 +224,17 @@ const TRADER_FIELDS: FieldDef[] = [
     suggestions: MINDANAO_CITY_SUGGESTIONS,
   },
   {
+    name: "barangay",
+    label: "Barangay",
+    placeholder: "Type to search barangay",
+    icon: "📍",
+    type: "barangay",
+    required: true,
+    full: true,
+    cityField: "default_city",
+    helper: "Select the barangay where you'd like deliveries.",
+  },
+  {
     name: "province",
     label: "Province",
     placeholder: "Davao del Norte",
