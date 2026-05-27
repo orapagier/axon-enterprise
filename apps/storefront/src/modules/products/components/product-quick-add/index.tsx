@@ -262,7 +262,7 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
                   !selectedVariant.allow_backorder &&
                   inStock && (
                     <span className="text-caption text-grey-50">
-                      {maxQuantity} available
+                      {maxQuantity} {getUnitLabel(unit, maxQuantity)} available
                     </span>
                   )}
               </div>
