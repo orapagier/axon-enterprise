@@ -119,7 +119,7 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
           onClick={handleClick}
           disabled={isAdding}
           aria-label={`Add ${product.title} to cart`}
-          className="shrink-0 w-11 h-11 flex items-center justify-center rounded-xl bg-brand-green-700 hover:bg-brand-green-800 text-white shadow-medium hover:shadow-large ring-1 ring-brand-green-800/30 hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:hover:translate-y-0"
+          className="shrink-0 w-9 h-9 flex items-center justify-center rounded-lg bg-brand-green-700 hover:bg-brand-green-800 text-white shadow-medium hover:shadow-large ring-1 ring-brand-green-800/30 hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:hover:translate-y-0"
         >
           {isAdding ? (
             <svg
