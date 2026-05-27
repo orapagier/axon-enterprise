@@ -80,7 +80,7 @@ export default async function CategoryTemplate({
       </div>
 
       <div className="flex flex-col small:flex-row small:items-start gap-8">
-        <RefinementList hub={hub} />
+        <RefinementList />
         <div className="w-full">
           <Suspense
             fallback={
