@@ -3,16 +3,8 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import {
-  DEFAULT_OFF_PEAK_DELIVERY_FEE_PHP,
-  type DeliveryHub,
-} from "@lib/util/delivery-hub-types"
-
 type RefinementListProps = {
   search?: boolean
-  /** Resolved from the customer's saved address — used to tailor the promo card. */
-  hub?: DeliveryHub
 }
 
 const categories = [
