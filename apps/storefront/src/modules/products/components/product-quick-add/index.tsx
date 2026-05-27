@@ -295,7 +295,7 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
                     {quantity}
                   </span>
                   <span className="text-body-sm text-grey-60">
-                    {quantity === 1 ? "piece" : "pieces"}
+                    {getUnitLabel(unit, quantity)}
                   </span>
                 </div>
                 <button
