@@ -10,9 +10,7 @@ import {
 } from "@lib/util/delivery-hub-types"
 
 type RefinementListProps = {
-  sortBy: SortOptions
   search?: boolean
-  'data-testid'?: string
   /** Resolved from the customer's saved address — used to tailor the promo card. */
   hub?: DeliveryHub
 }
