@@ -231,7 +231,7 @@ export default function ProductActions({
             ? "Select variant"
             : !inStock || !isValidVariant
             ? "Out of stock"
-            : "Add to cart"}
+            : `Add ${quantity} ${getUnitLabel(unit, quantity)} to cart`}
         </Button>
         <MobileActions
           product={product}
