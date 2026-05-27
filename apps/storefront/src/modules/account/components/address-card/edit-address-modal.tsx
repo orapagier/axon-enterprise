@@ -137,7 +137,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
         <form action={formAction}>
           <input type="hidden" name="addressId" value={address.id} />
           <Modal.Body>
-            <div className="grid grid-cols-1 gap-y-2">
+            <div className="flex flex-col gap-y-3">
               <div className="grid grid-cols-2 gap-x-2">
                 <Input
                   label="First name"
@@ -157,36 +157,14 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 />
               </div>
               <Input
-                label="Company"
-                name="company"
-                autoComplete="organization"
-                defaultValue={address.company || undefined}
-                data-testid="company-input"
-              />
-              <Input
-                label="Address"
+                label="Street address"
                 name="address_1"
                 required
                 autoComplete="address-line1"
                 defaultValue={address.address_1 || undefined}
                 data-testid="address-1-input"
               />
-              <Input
-                label="Apartment, suite, etc."
-                name="address_2"
-                autoComplete="address-line2"
-                defaultValue={address.address_2 || undefined}
-                data-testid="address-2-input"
-              />
-              <div className="grid grid-cols-[144px_1fr] gap-x-2">
-                <Input
-                  label="Postal code"
-                  name="postal_code"
-                  required
-                  autoComplete="postal-code"
-                  defaultValue={address.postal_code || undefined}
-                  data-testid="postal-code-input"
-                />
+              <div className="grid grid-cols-2 gap-x-2">
                 <Input
                   label="City"
                   name="city"
@@ -199,6 +177,13 @@ const EditAddress: React.FC<EditAddressProps> = ({
                   }}
                   data-testid="city-input"
                 />
+                <Input
+                  label="Postal code"
+                  name="postal_code"
+                  autoComplete="postal-code"
+                  defaultValue={address.postal_code || undefined}
+                  data-testid="postal-code-input"
+                />
               </div>
               <BarangayCombobox
                 hubSlug={hubSlugForCity(city)}
@@ -208,21 +193,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 data-testid="barangay-input"
               />
               <input type="hidden" name="barangay" value={barangay ?? ""} />
-              <Input
-                label="Province / State"
-                name="province"
-                autoComplete="address-level1"
-                defaultValue={address.province || undefined}
-                data-testid="state-input"
-              />
-              <CountrySelect
-                name="country_code"
-                region={region}
-                required
-                autoComplete="country"
-                defaultValue={address.country_code || undefined}
-                data-testid="country-select"
-              />
+              <input type="hidden" name="country_code" value={address.country_code || "ph"} />
               <Input
                 label="Phone"
                 name="phone"
