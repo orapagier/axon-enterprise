@@ -102,16 +102,6 @@ const RefinementList = ({ hub }: RefinementListProps) => {
     })
   }
 
-  const toggleOrigin = (value: string) => {
-    const next = urlOrigins.includes(value)
-      ? urlOrigins.filter((v) => v !== value)
-      : [...urlOrigins, value]
-    pushParams((p) => {
-      if (next.length === 0) p.delete("origin")
-      else p.set("origin", next.join(","))
-    })
-  }
-
   const applyPriceRange = useCallback(
     (rawMin: string, rawMax: string) => {
       const minNum = rawMin === "" ? null : Number(rawMin)
