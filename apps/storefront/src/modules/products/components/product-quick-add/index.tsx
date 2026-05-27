@@ -208,19 +208,19 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
             </button>
 
             {/* Product info */}
-            <div className="flex items-center gap-3 mb-5">
+            <div className="flex items-center gap-2.5 mb-3">
               {product.thumbnail && (
                 <img
                   src={product.thumbnail}
                   alt={product.title}
-                  className="w-14 h-14 rounded-xl object-cover bg-grey-5"
+                  className="w-10 h-10 rounded-lg object-cover bg-grey-5"
                 />
               )}
               <div>
                 <h3 className="text-body-sm font-semibold text-grey-90 line-clamp-1">
                   {product.title}
                 </h3>
-                <p className="text-caption text-grey-50 mt-0.5">
+                <p className="text-caption text-grey-50">
                   Select options
                 </p>
               </div>
