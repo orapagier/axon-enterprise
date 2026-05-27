@@ -52,7 +52,7 @@ const FIELDS: FieldDef[] = [
     name: "category",
     label: "Category",
     placeholder: "Fruits",
-    suggestions: ["Fruits", "Vegetables", "Leafy Greens", "Herbs", "Root Crops", "Fish"],
+    suggestions: ["Fruits", "Vegetables", "Leafy Greens", "Root Crops", "Herbs & Spices", "Rice & Grains", "Fish & Seafood", "Meat & Poultry", "Eggs & Dairy", "Coconut & Oil", "Dried & Preserved", "Ready-to-Cook", "Beverages", "Pasalubong"],
     helper: "Helps buyers find your listing.",
   },
   {
