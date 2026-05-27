@@ -317,50 +317,6 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId, hub }: RefinementLi
 
       <div className="h-px bg-grey-10" />
 
-      {/* Sort */}
-      <div>
-        <SectionHeader title="Sort by" sectionKey="sort" />
-        {openSections.sort && (
-          <div className="flex flex-wrap gap-1.5">
-            {[
-              { value: "created_at" as const, label: "Newest", icon: "M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" },
-              { value: "price_asc" as const, label: "Price: Low", icon: "M3 17l6-6 4 4 8-8M14 7h7v7" },
-              { value: "price_desc" as const, label: "Price: High", icon: "M3 7l6 6 4-4 8 8M14 17h7v-7" },
-            ].map((opt) => {
-              const active = sortBy === opt.value
-              return (
-                <button
-                  key={opt.value}
-                  onClick={() => setQueryParams("sortBy", opt.value)}
-                  className={`inline-flex items-center gap-x-1.5 px-3 py-2 rounded-lg text-caption font-medium transition-all duration-150 ${
-                    active
-                      ? "bg-brand-green-600 text-white shadow-soft"
-                      : "bg-grey-5 text-grey-60 border border-grey-10 hover:border-grey-30 hover:text-grey-80"
-                  }`}
-                  data-testid={dataTestId}
-                >
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d={opt.icon} />
-                  </svg>
-                  {opt.label}
-                </button>
-              )
-            })}
-          </div>
-        )}
-      </div>
-
-      <div className="h-px bg-grey-10" />
-
       {/* Price Range */}
       <div>
         <SectionHeader title="Price range" sectionKey="price" />
