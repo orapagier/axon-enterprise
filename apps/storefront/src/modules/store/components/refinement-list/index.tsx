@@ -172,7 +172,6 @@ const RefinementList = ({ hub }: RefinementListProps) => {
     setMaxInput("")
     pushParams((p) => {
       p.delete("category")
-      p.delete("origin")
       p.delete("min")
       p.delete("max")
     })
