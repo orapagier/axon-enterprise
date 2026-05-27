@@ -28,25 +28,29 @@ const Summary = ({ cart, isMember = false }: SummaryProps) => {
   const step = getCheckoutStep(cart)
 
   return (
-    <div className="flex flex-col gap-y-4">
-      <Heading level="h2" className="text-[2rem] leading-[2.75rem]">
-        Summary
-      </Heading>
-      <DiscountCode cart={cart} />
-      <Divider />
-      <CartTotals totals={cart} />
-      {!isMember && (
-        <MembershipUpsellStrip
-          subtotal={cart.subtotal ?? 0}
-          currencyCode={cart.currency_code}
-        />
-      )}
-      <LocalizedClientLink
-        href={"/checkout?step=" + step}
-        data-testid="checkout-button"
-      >
-        <Button className="w-full h-10">Go to checkout</Button>
-      </LocalizedClientLink>
+    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div className="px-6 py-4 border-b border-gray-100">
+        <Heading level="h2" className="text-xl font-semibold text-ui-fg-base">
+          Summary
+        </Heading>
+      </div>
+      <div className="px-6 py-5 flex flex-col gap-y-4">
+        <DiscountCode cart={cart} />
+        <Divider />
+        <CartTotals totals={cart} />
+        {!isMember && (
+          <MembershipUpsellStrip
+            subtotal={cart.subtotal ?? 0}
+            currencyCode={cart.currency_code}
+          />
+        )}
+        <LocalizedClientLink
+          href={"/checkout?step=" + step}
+          data-testid="checkout-button"
+        >
+          <Button className="w-full h-10">Go to checkout</Button>
+        </LocalizedClientLink>
+      </div>
     </div>
   )
 }
