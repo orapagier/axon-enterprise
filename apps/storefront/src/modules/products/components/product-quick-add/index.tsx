@@ -183,138 +183,77 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
         </button>
       )}
 
-      {/* Options popup/modal – portaled to body to avoid hover/blur conflicts with parent card */}
-      {isOpen && createPortal(
-        <div
-          className="fixed inset-0 z-[200] flex items-center justify-center p-4"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setIsOpen(false)
-          }}
-        >
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
+      {/* In-card overlay */}
+      {isOpen && (
+        <div className="absolute inset-0 z-30 flex flex-col justify-end bg-white/95 backdrop-blur-[2px] rounded-xl animate-enter">
+          {/* Close button */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-grey-5 hover:bg-grey-10 transition-colors"
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
 
-          {/* Modal */}
-          <div className="relative bg-white rounded-2xl shadow-xl max-w-sm w-full p-4 animate-enter">
-            {/* Close button */}
-            <button
-              onClick={() => setIsOpen(false)}
-              className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center rounded-full hover:bg-grey-5 transition-colors"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-
-            {/* Product info */}
-            <div className="flex items-center gap-2.5 mb-3">
-              {product.thumbnail && (
-                <img
-                  src={product.thumbnail}
-                  alt={product.title}
-                  className="w-10 h-10 rounded-lg object-cover bg-grey-5"
-                />
-              )}
-              <div>
-                <h3 className="text-body-sm font-semibold text-grey-90 line-clamp-1">
-                  {product.title}
-                </h3>
-                <p className="text-caption text-grey-50">
-                  Select options
-                </p>
-              </div>
-            </div>
-
+          <div className="p-3 flex flex-col gap-2.5">
             {/* Options */}
-            <div className="flex flex-col gap-y-3 mb-3">
-              {(product.options || []).map((option) => (
-                <div key={option.id}>
-                  <span className="text-caption font-semibold text-grey-60 uppercase tracking-wider mb-1.5 block">
-                    {option.title}
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {(option.values ?? []).map((v) => (
-                      <button
-                        key={v.value}
-                        onClick={() => setOptionValue(option.id, v.value)}
-                        className={`px-3 py-1.5 rounded-lg text-caption font-medium border transition-all duration-150 ${
-                          options[option.id] === v.value
-                            ? "border-brand-green-500 bg-brand-green-50 text-brand-green-700"
-                            : "border-grey-20 text-grey-60 hover:border-grey-40 hover:text-grey-80"
-                        }`}
-                      >
-                        {v.value}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Quantity selector */}
-            <div className="mb-4">
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="text-caption font-semibold text-grey-60 uppercase tracking-wider">
-                  Quantity
-                </span>
-                {selectedVariant?.manage_inventory &&
-                  !selectedVariant.allow_backorder &&
-                  inStock && (
-                    <span className="text-caption text-grey-50">
-                      {maxQuantity} {getUnitLabel(unit, maxQuantity)} available
+            {hasOptions && (
+              <div className="flex flex-col gap-2">
+                {(product.options || []).map((option) => (
+                  <div key={option.id}>
+                    <span className="text-[10px] font-semibold text-grey-50 uppercase tracking-wider mb-1 block">
+                      {option.title}
                     </span>
-                  )}
+                    <div className="flex flex-wrap gap-1">
+                      {(option.values ?? []).map((v) => (
+                        <button
+                          key={v.value}
+                          onClick={() => setOptionValue(option.id, v.value)}
+                          className={`px-2 py-1 rounded-md text-[11px] font-medium border transition-all duration-150 ${
+                            options[option.id] === v.value
+                              ? "border-brand-green-500 bg-brand-green-50 text-brand-green-700"
+                              : "border-grey-20 text-grey-50 hover:border-grey-40"
+                          }`}
+                        >
+                          {v.value}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="flex items-center justify-between gap-2 rounded-lg border border-grey-20 bg-grey-5 p-1">
+            )}
+
+            {/* Quantity row */}
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[10px] font-semibold text-grey-50 uppercase tracking-wider">
+                Qty
+              </span>
+              <div className="flex items-center gap-1.5">
                 <button
                   type="button"
                   onClick={decrementQty}
                   disabled={quantity <= 1 || isAdding}
                   aria-label="Decrease quantity"
-                  className="w-8 h-8 flex items-center justify-center rounded-md bg-white border border-grey-10 text-grey-70 hover:text-brand-green-700 hover:border-brand-green-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-7 h-7 flex items-center justify-center rounded-md bg-grey-5 border border-grey-10 text-grey-60 hover:text-brand-green-700 transition-colors disabled:opacity-40"
                 >
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12" />
                   </svg>
                 </button>
-                <div
-                  className="flex-1 flex items-baseline justify-center gap-x-1"
-                  aria-live="polite"
-                >
-                  <span className="text-caption font-bold text-grey-90 tabular-nums">
-                    {quantity}
-                  </span>
-                  <span className="text-caption text-grey-60">
-                    {getUnitLabel(unit, quantity)}
-                  </span>
-                </div>
+                <span className="text-caption font-bold text-grey-90 tabular-nums w-8 text-center" aria-live="polite">
+                  {quantity}
+                </span>
                 <button
                   type="button"
                   onClick={incrementQty}
                   disabled={quantity >= maxQuantity || isAdding}
                   aria-label="Increase quantity"
-                  className="w-8 h-8 flex items-center justify-center rounded-md bg-white border border-grey-10 text-grey-70 hover:text-brand-green-700 hover:border-brand-green-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-7 h-7 flex items-center justify-center rounded-md bg-grey-5 border border-grey-10 text-grey-60 hover:text-brand-green-700 transition-colors disabled:opacity-40"
                 >
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19" />
                     <line x1="5" y1="12" x2="19" y2="12" />
                   </svg>
@@ -326,7 +265,7 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
             <button
               onClick={handleAddToCart}
               disabled={!selectedVariant || !inStock || isAdding}
-              className={`w-full py-2.5 rounded-lg font-semibold text-caption transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed ${
+              className={`w-full py-2 rounded-lg font-semibold text-caption transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed ${
                 mode === "buy"
                   ? "bg-brand-gold-500 hover:bg-brand-gold-400 text-grey-90"
                   : "bg-brand-green-600 hover:bg-brand-green-700 text-white"
@@ -345,8 +284,7 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
                 : `Add ${quantity} ${getUnitLabel(unit, quantity)} to cart`}
             </button>
           </div>
-        </div>,
-        document.body
+        </div>
       )}
     </>
   )
