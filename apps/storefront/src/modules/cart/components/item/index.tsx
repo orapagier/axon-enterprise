@@ -41,6 +41,10 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
       })
   }
 
+  const unit =
+    (item.variant?.product as { metadata?: Record<string, unknown> } | undefined)
+      ?.metadata?.unit as string | undefined ?? "kg"
+
   const CART_QUANTITY_CAP = 10
   const inventoryQty =
     (item.variant as { inventory_quantity?: number } | undefined)
