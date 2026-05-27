@@ -80,14 +80,14 @@ export default async function ProductPreview({
       </LocalizedClientLink>
 
       {/* Info */}
-      <div className="flex flex-col flex-1 p-4 small:p-5">
+      <div className="flex flex-col flex-1 p-3 small:p-3.5">
         {/* Origin pill + listing badge + rating */}
-        <div className="flex items-center justify-between gap-x-2 mb-2.5">
-          <div className="flex items-center gap-x-1.5 min-w-0">
-            <span className="inline-flex items-center gap-x-1 px-2 py-0.5 rounded-md bg-brand-green-50 text-brand-green-700 border border-brand-green-100 min-w-0">
+        <div className="flex items-center justify-between gap-x-1.5 mb-2">
+          <div className="flex items-center gap-x-1 min-w-0">
+            <span className="inline-flex items-center gap-x-0.5 px-1.5 py-0.5 rounded bg-brand-green-50 text-brand-green-700 border border-brand-green-100 min-w-0">
               <svg
-                width="9"
-                height="9"
+                width="8"
+                height="8"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -99,17 +99,17 @@ export default async function ProductPreview({
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              <span className="text-[9px] uppercase tracking-[0.12em] font-bold truncate">
+              <span className="text-[8px] uppercase tracking-[0.12em] font-bold truncate">
                 {product.origin_country || "Mindanao"}
               </span>
             </span>
             <ListingBadge listingType={listingType} />
           </div>
-          <span className="inline-flex items-center gap-x-1 flex-shrink-0">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="#eab308" stroke="none">
+          <span className="inline-flex items-center gap-x-0.5 flex-shrink-0">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#eab308" stroke="none">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
             </svg>
-            <span className="text-[11px] font-bold text-grey-80 tabular-nums">
+            <span className="text-[10px] font-bold text-grey-80 tabular-nums">
               4.8
             </span>
           </span>
@@ -118,7 +118,7 @@ export default async function ProductPreview({
         {/* Title */}
         <LocalizedClientLink href={`/products/${product.handle}`}>
           <h3
-            className="font-heading font-bold text-body small:text-body-lg text-grey-90 leading-[1.2] line-clamp-2 hover:text-brand-green-700 transition-colors duration-200 min-h-[2.4em] tracking-[-0.008em]"
+            className="font-heading font-bold text-caption small:text-body-sm text-grey-90 leading-[1.2] line-clamp-2 hover:text-brand-green-700 transition-colors duration-200 min-h-[2.4em] tracking-[-0.008em]"
             data-testid="product-title"
           >
             {product.title}
@@ -126,7 +126,7 @@ export default async function ProductPreview({
         </LocalizedClientLink>
 
         {/* Price + add */}
-        <div className="mt-auto pt-3 flex items-end justify-between gap-3 border-t border-grey-10 mt-3">
+        <div className="mt-auto pt-2 flex items-end justify-between gap-2 border-t border-grey-10 mt-2">
           <div className="flex flex-col min-w-0">
             {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
           </div>
