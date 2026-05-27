@@ -30,6 +30,10 @@ const EditAddress: React.FC<EditAddressProps> = ({
 }) => {
   const [removing, setRemoving] = useState(false)
   const [successState, setSuccessState] = useState(false)
+  const [city, setCity] = useState(address.city || "")
+  const [barangay, setBarangay] = useState<string | null>(
+    (address.metadata as { barangay?: string } | null)?.barangay ?? null
+  )
   const { state, open, close: closeModal } = useToggleState(false)
 
   const [formState, formAction] = useActionState(updateCustomerAddress, {
