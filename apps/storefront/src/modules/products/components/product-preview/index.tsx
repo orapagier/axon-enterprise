@@ -31,7 +31,7 @@ export default async function ProductPreview({
 
   return (
     <div
-      className="relative bg-white rounded-2xl shadow-medium hover:shadow-xl ring-1 ring-grey-90/5 hover:ring-brand-green-300/40 transition-all duration-300 ease-out overflow-hidden hover:-translate-y-1 group flex flex-col h-full"
+      className="relative bg-white rounded-xl shadow-medium hover:shadow-xl ring-1 ring-grey-90/5 hover:ring-brand-green-300/40 transition-all duration-300 ease-out overflow-hidden hover:-translate-y-0.5 group flex flex-col h-full"
       data-testid="product-wrapper"
     >
       {/* Image area */}
