@@ -59,7 +59,6 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId, hub }: RefinementLi
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     categories: true,
-    sort: true,
     price: true,
     origin: true,
   })
