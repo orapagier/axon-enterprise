@@ -6,6 +6,7 @@ import { HttpTypes } from "@medusajs/types"
 import { isEqual } from "lodash"
 import { useParams, useRouter } from "next/navigation"
 import { useEffect, useMemo, useState } from "react"
+import { createPortal } from "react-dom"
 
 type QuickAddProps = {
   product: HttpTypes.StoreProduct
