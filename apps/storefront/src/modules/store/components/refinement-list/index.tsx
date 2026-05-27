@@ -42,11 +42,6 @@ const RefinementList = ({ hub }: RefinementListProps) => {
   const searchParams = useSearchParams()
   const urlQuery = searchParams.get("q") ?? ""
   const urlCategory = searchParams.get("category") ?? "all"
-  const urlOriginRaw = searchParams.get("origin") ?? ""
-  const urlOrigins = useMemo(
-    () => urlOriginRaw.split(",").map((s) => s.trim()).filter(Boolean),
-    [urlOriginRaw]
-  )
   const urlMin = searchParams.get("min")
   const urlMax = searchParams.get("max")
 
