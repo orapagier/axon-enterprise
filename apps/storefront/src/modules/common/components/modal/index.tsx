@@ -103,7 +103,7 @@ const Description: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 }
 
 const Body: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <div className="flex justify-center">{children}</div>
+  return <div className="flex-1 w-full">{children}</div>
 }
 
 const Footer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
