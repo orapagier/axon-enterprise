@@ -66,7 +66,7 @@ export default async function ProductRail({
             </svg>
           </LocalizedClientLink>
         </div>
-        <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-4 small:gap-5">
+        <ul className="grid grid-cols-3 small:grid-cols-4 medium:grid-cols-5 gap-3 small:gap-4">
           {displayed.map((product) => (
             <li key={product.id}>
               <ProductPreview product={product} region={region} isFeatured />
