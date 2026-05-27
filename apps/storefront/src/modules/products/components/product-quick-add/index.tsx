@@ -253,8 +253,8 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
             </div>
 
             {/* Quantity selector */}
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
+            <div className="mb-4">
+              <div className="flex items-center justify-between mb-1.5">
                 <span className="text-caption font-semibold text-grey-60 uppercase tracking-wider">
                   Quantity
                 </span>
@@ -266,17 +266,17 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
                     </span>
                   )}
               </div>
-              <div className="flex items-center justify-between gap-3 rounded-xl border border-grey-20 bg-grey-5 p-1.5">
+              <div className="flex items-center justify-between gap-2 rounded-lg border border-grey-20 bg-grey-5 p-1">
                 <button
                   type="button"
                   onClick={decrementQty}
                   disabled={quantity <= 1 || isAdding}
                   aria-label="Decrease quantity"
-                  className="w-10 h-10 flex items-center justify-center rounded-lg bg-white border border-grey-10 text-grey-70 hover:text-brand-green-700 hover:border-brand-green-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-8 h-8 flex items-center justify-center rounded-md bg-white border border-grey-10 text-grey-70 hover:text-brand-green-700 hover:border-brand-green-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <svg
-                    width="14"
-                    height="14"
+                    width="12"
+                    height="12"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -288,13 +288,13 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
                   </svg>
                 </button>
                 <div
-                  className="flex-1 flex items-baseline justify-center gap-x-1.5"
+                  className="flex-1 flex items-baseline justify-center gap-x-1"
                   aria-live="polite"
                 >
-                  <span className="text-body-sm font-bold text-grey-90 tabular-nums">
+                  <span className="text-caption font-bold text-grey-90 tabular-nums">
                     {quantity}
                   </span>
-                  <span className="text-body-sm text-grey-60">
+                  <span className="text-caption text-grey-60">
                     {getUnitLabel(unit, quantity)}
                   </span>
                 </div>
@@ -303,11 +303,11 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
                   onClick={incrementQty}
                   disabled={quantity >= maxQuantity || isAdding}
                   aria-label="Increase quantity"
-                  className="w-10 h-10 flex items-center justify-center rounded-lg bg-white border border-grey-10 text-grey-70 hover:text-brand-green-700 hover:border-brand-green-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-8 h-8 flex items-center justify-center rounded-md bg-white border border-grey-10 text-grey-70 hover:text-brand-green-700 hover:border-brand-green-300 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <svg
-                    width="14"
-                    height="14"
+                    width="12"
+                    height="12"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
