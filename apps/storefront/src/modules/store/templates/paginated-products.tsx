@@ -21,7 +21,7 @@ const productMatchesCategory = (
   product: HttpTypes.StoreProduct,
   category: string
 ) => {
-  const target = category.toLowerCase()
+  const target = category.toLowerCase().replace(/-/g, " ")
   const hay: string[] = []
   product.categories?.forEach((c) => {
     if (c.handle) hay.push(c.handle.toLowerCase())
@@ -35,6 +35,9 @@ const productMatchesCategory = (
     hay.push(product.collection.handle.toLowerCase())
   if (product.collection?.title)
     hay.push(product.collection.title.toLowerCase())
+  const meta = product.metadata as Record<string, unknown> | null | undefined
+  if (typeof meta?.category === "string")
+    hay.push(meta.category.toLowerCase().replace(/&/g, " ").replace(/\s+/g, " "))
   return hay.some(
     (entry) => entry === target || entry.includes(target) || target.includes(entry)
   )
