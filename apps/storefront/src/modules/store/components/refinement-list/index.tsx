@@ -352,62 +352,6 @@ const RefinementList = ({ hub }: RefinementListProps) => {
         )}
       </div>
 
-      <div className="h-px bg-grey-10" />
-
-      {/* Origin */}
-      <div>
-        <SectionHeader title="Origin" sectionKey="origin" />
-        {openSections.origin && (
-          <ul className="flex flex-col gap-y-1 px-1">
-            {origins.map((origin) => {
-              const checked = urlOrigins.includes(origin.value)
-              return (
-                <li key={origin.value}>
-                  <label className="flex items-center gap-x-3 cursor-pointer group py-1.5 px-1 rounded-md hover:bg-grey-5 transition-colors">
-                    <span
-                      className={`relative w-[18px] h-[18px] rounded-md border-2 flex items-center justify-center transition-all duration-150 ${
-                        checked
-                          ? "border-brand-green-600 bg-brand-green-600"
-                          : "border-grey-30 group-hover:border-brand-green-400 bg-white"
-                      }`}
-                    >
-                      {checked && (
-                        <svg
-                          width="11"
-                          height="11"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="white"
-                          strokeWidth="3.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                      )}
-                    </span>
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      onChange={() => toggleOrigin(origin.value)}
-                      className="sr-only"
-                    />
-                    <span
-                      className={`text-body-sm transition-colors ${
-                        checked
-                          ? "text-grey-90 font-medium"
-                          : "text-grey-60 group-hover:text-grey-80"
-                      }`}
-                    >
-                      {origin.label}
-                    </span>
-                  </label>
-                </li>
-              )
-            })}
-          </ul>
-        )}
-      </div>
 
       {/* Delivery promo card — copy adapts to the customer's resolved hub */}
       {hub && !hub.isHubCity ? (
