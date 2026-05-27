@@ -150,15 +150,6 @@ const RefinementList = ({ hub }: RefinementListProps) => {
           onRemove: () => setCategory("all"),
         })
     }
-    urlOrigins.forEach((o) => {
-      const origin = origins.find((or) => or.value === o)
-      if (origin)
-        chips.push({
-          key: `origin-${origin.value}`,
-          label: origin.label,
-          onRemove: () => toggleOrigin(origin.value),
-        })
-    })
     if (urlMin || urlMax) {
       const minLabel = urlMin ? `₱${urlMin}` : `₱${PRICE_FLOOR}`
       const maxLabel = urlMax ? `₱${urlMax}` : `₱${PRICE_CEILING}+`
