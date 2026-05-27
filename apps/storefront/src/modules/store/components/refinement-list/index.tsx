@@ -33,14 +33,6 @@ const categories = [
   { label: "Pasalubong", value: "pasalubong", icon: "🎁" },
 ]
 
-const origins = [
-  { label: "Bukidnon", value: "bukidnon" },
-  { label: "Davao", value: "davao" },
-  { label: "Cagayan de Oro", value: "cdo" },
-  { label: "General Santos", value: "gensan" },
-  { label: "Zamboanga", value: "zamboanga" },
-]
-
 const PRICE_FLOOR = 0
 const PRICE_CEILING = 2000
 
