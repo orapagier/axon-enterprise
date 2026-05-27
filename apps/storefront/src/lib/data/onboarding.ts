@@ -256,7 +256,8 @@ export async function completeOnboarding(
       postal_code: postal_code || undefined,
       country_code: countryCode,
       is_default_shipping: true,
-      is_default_billing: !existingDefault, // default-billing too if no other address exists
+      is_default_billing: !existingDefault,
+      metadata: barangay ? { barangay } : undefined,
     }
 
     try {
