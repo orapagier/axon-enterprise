@@ -28,7 +28,7 @@ const categories = [
 const PRICE_FLOOR = 0
 const PRICE_CEILING = 2000
 
-const RefinementList = ({ hub }: RefinementListProps) => {
+const RefinementList = (_props: RefinementListProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
