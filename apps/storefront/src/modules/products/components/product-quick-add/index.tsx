@@ -123,8 +123,8 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
         >
           {isAdding ? (
             <svg
-              width="16"
-              height="16"
+              width="14"
+              height="14"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -137,8 +137,8 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
             </svg>
           ) : added ? (
             <svg
-              width="16"
-              height="16"
+              width="14"
+              height="14"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -150,8 +150,8 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
             </svg>
           ) : (
             <svg
-              width="16"
-              height="16"
+              width="14"
+              height="14"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
