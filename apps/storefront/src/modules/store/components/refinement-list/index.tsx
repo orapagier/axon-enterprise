@@ -351,60 +351,6 @@ const RefinementList = ({ hub }: RefinementListProps) => {
           </div>
         )}
       </div>
-
-
-      {/* Delivery promo card — copy adapts to the customer's resolved hub */}
-      {hub && !hub.isHubCity ? (
-        <div className="rounded-xl bg-gradient-to-br from-grey-90 to-grey-90 p-5 text-white relative overflow-hidden border border-brand-gold-400/30">
-          <div
-            aria-hidden
-            className="absolute -top-8 -right-8 w-28 h-28 rounded-full bg-brand-gold-400/15 blur-2xl"
-          />
-          <div className="relative">
-            <div className="inline-flex items-center gap-x-1.5 px-2 py-0.5 rounded-full bg-white/10 text-brand-gold-300 text-[10px] font-bold uppercase tracking-wider mb-3 border border-brand-gold-400/40">
-              No hub yet
-            </div>
-            <p className="text-body-sm font-semibold leading-snug mb-2">
-              We don&apos;t have a hub in {hub.city} yet.
-            </p>
-            <p className="text-caption text-white/70 leading-relaxed mb-3">
-              We&apos;re expanding city by city. If you&apos;d like to bring the
-              Hub to {hub.city}, we&apos;d love to talk about partnership.
-            </p>
-            <LocalizedClientLink
-              href="/partner-hub"
-              className="inline-flex items-center gap-x-1.5 text-caption font-semibold text-brand-gold-300 hover:text-brand-gold-200 underline-offset-4 hover:underline"
-            >
-              Become a partner hub
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </LocalizedClientLink>
-          </div>
-        </div>
-      ) : (
-        <div className="rounded-xl bg-gradient-to-br from-brand-green-700 to-brand-green-900 p-5 text-white relative overflow-hidden">
-          <div
-            aria-hidden
-            className="absolute -top-8 -right-8 w-28 h-28 rounded-full bg-brand-gold-400/20 blur-2xl"
-          />
-          <div className="relative">
-            <div className="inline-flex items-center gap-x-1.5 px-2 py-0.5 rounded-full bg-brand-gold-400 text-grey-90 text-[10px] font-bold uppercase tracking-wider mb-3">
-              Free Delivery
-            </div>
-            <p className="text-body-sm font-semibold leading-snug mb-2">
-              Free delivery in {hub?.city ?? "your hub city"} — one batch a
-              day at 4 PM.
-            </p>
-            <p className="text-caption text-white/70 leading-relaxed">
-              Order by 12 PM to make today&apos;s dispatch. After cut-off, a
-              flat ₱{DEFAULT_OFF_PEAK_DELIVERY_FEE_PHP} delivery fee applies —
-              roughly the one-way fare from your address to our hub.
-            </p>
-          </div>
-        </div>
-      )}
     </div>
   )
 
