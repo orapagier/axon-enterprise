@@ -22,6 +22,8 @@ const AddAddress = ({
   addresses: HttpTypes.StoreCustomerAddress[]
 }) => {
   const [successState, setSuccessState] = useState(false)
+  const [city, setCity] = useState("")
+  const [barangay, setBarangay] = useState<string | null>(null)
   const { state, open, close: closeModal } = useToggleState(false)
 
   const [formState, formAction] = useActionState(addCustomerAddress, {
