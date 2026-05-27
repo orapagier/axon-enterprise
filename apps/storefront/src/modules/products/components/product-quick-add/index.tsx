@@ -326,7 +326,7 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
             <button
               onClick={handleAddToCart}
               disabled={!selectedVariant || !inStock || isAdding}
-              className={`w-full py-3 rounded-xl font-semibold text-body-sm transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed ${
+              className={`w-full py-2.5 rounded-lg font-semibold text-caption transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed ${
                 mode === "buy"
                   ? "bg-brand-gold-500 hover:bg-brand-gold-400 text-grey-90"
                   : "bg-brand-green-600 hover:bg-brand-green-700 text-white"
