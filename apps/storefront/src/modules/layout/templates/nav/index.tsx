@@ -195,15 +195,6 @@ export default async function Nav() {
               <LocalizedClientLink href="/store" className="nav-link-premium">
                 Shop
               </LocalizedClientLink>
-              <LocalizedClientLink href="/how-it-works" className="nav-link-premium">
-                How it works
-              </LocalizedClientLink>
-              <LocalizedClientLink href="/farmers" className="nav-link-premium">
-                Farmers
-              </LocalizedClientLink>
-              <LocalizedClientLink href="/about" className="nav-link-premium">
-                About
-              </LocalizedClientLink>
             </div>
           </div>
 
