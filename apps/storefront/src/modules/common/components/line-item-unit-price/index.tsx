@@ -59,6 +59,7 @@ const LineItemUnitPrice = ({
           amount: total / item.quantity,
           currency_code: currencyCode,
         })}
+        <span className="text-ui-fg-muted">/{getUnitLabel(unit, 1)}</span>
       </span>
     </div>
   )
