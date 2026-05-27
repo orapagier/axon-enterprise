@@ -36,7 +36,7 @@ export default async function PreviewPrice({ price, unit = "kg" }: { price: Vari
             {memberLabel}
           </span>
           <span className="text-[10px] text-grey-50 font-bold leading-none uppercase tracking-[0.12em]">
-            /kg
+            /{getUnitLabel(unit, 1)}
           </span>
         </div>
         <div className="flex items-center gap-x-1.5 mt-1">
@@ -76,7 +76,7 @@ export default async function PreviewPrice({ price, unit = "kg" }: { price: Vari
           {price.calculated_price}
         </span>
         <span className="text-[10px] text-grey-50 font-bold leading-none uppercase tracking-[0.12em]">
-          /kg
+          /{getUnitLabel(unit, 1)}
         </span>
       </div>
       {memberLabel && (
