@@ -39,8 +39,8 @@ const StoreTemplate = async ({
 
   return (
     <div data-testid="category-container" className="bg-grey-5 min-h-screen">
-      <div className="content-container pt-8 small:pt-10 pb-20 relative">
-        <div className="flex flex-col small:flex-row small:items-start gap-6 small:gap-8">
+      <div className="content-container pt-4 small:pt-5 pb-20 relative">
+        <div className="flex flex-col small:flex-row small:items-start gap-4 small:gap-6">
           <RefinementList sortBy={sort} hub={hub} />
           <div className="w-full min-w-0">
             {hubProductIds && hubProductIds.length === 0 ? (
