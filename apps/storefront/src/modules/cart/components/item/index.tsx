@@ -95,7 +95,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
                 { length: Math.max(1, maxQuantity) },
                 (_, i) => (
                   <option value={i + 1} key={i + 1}>
-                    {i + 1}
+                    {i + 1} {getUnitLabel(unit, i + 1)}
                   </option>
                 )
               )}
