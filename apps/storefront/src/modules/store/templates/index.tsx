@@ -41,7 +41,7 @@ const StoreTemplate = async ({
     <div data-testid="category-container" className="bg-grey-5 min-h-screen">
       <div className="content-container pt-4 small:pt-5 pb-20 relative">
         <div className="flex flex-col small:flex-row small:items-start gap-4 small:gap-6">
-          <RefinementList hub={hub} />
+          <RefinementList />
           <div className="w-full min-w-0">
             {hubProductIds && hubProductIds.length === 0 ? (
               <div className="bg-white rounded-3xl border border-grey-10/60 shadow-soft p-10 text-center">
