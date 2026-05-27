@@ -341,8 +341,8 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
                 : added
                 ? "Added!"
                 : mode === "buy"
-                ? `Buy ${quantity} now`
-                : `Add ${quantity} to cart`}
+                ? `Buy ${quantity} ${getUnitLabel(unit, quantity)} now`
+                : `Add ${quantity} ${getUnitLabel(unit, quantity)} to cart`}
             </button>
           </div>
         </div>
