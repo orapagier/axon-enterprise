@@ -72,11 +72,6 @@ export default defineMiddlewares({
       middlewares: [authenticate("user", ["session", "bearer"])],
     },
     {
-      matcher: "/admin/deposits*",
-      method: ["GET", "POST", "PATCH", "DELETE"],
-      middlewares: [authenticate("user", ["session", "bearer"])],
-    },
-    {
       matcher: "/admin/cod-reconcile*",
       method: ["GET"],
       middlewares: [authenticate("user", ["session", "bearer"])],
