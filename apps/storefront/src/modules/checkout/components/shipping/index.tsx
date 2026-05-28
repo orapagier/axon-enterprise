@@ -9,6 +9,9 @@ import { Button, clx, Heading, Text } from "@modules/common/components/ui"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ?? "http://localhost:9000"
+
 type Tier = "free" | "standard" | "special"
 
 type TierOption = {
