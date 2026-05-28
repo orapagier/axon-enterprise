@@ -66,7 +66,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
     setLoadError(null)
     try {
       const res = await fetch(
-        `/store/delivery-options?cart_id=${encodeURIComponent(cart.id)}`
+        `${BACKEND_URL}/store/delivery-options?cart_id=${encodeURIComponent(cart.id)}`
       )
       if (!res.ok) {
         const err = (await res.json().catch(() => ({}))) as { error?: string }
