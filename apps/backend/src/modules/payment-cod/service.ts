@@ -89,7 +89,7 @@ export default class CodPaymentProviderService extends AbstractPaymentProvider {
       null
 
     if (customerId) {
-      // 1. Prepay-lock check (Phase 6).
+      // Prepay-lock check: buyers locked after a prior refusal can't use COD.
       const accountability = this.container_[ACCOUNTABILITY_MODULE]
       if (accountability) {
         const [status] = await accountability.listBuyerAccountStatuses(
@@ -102,23 +102,6 @@ export default class CodPaymentProviderService extends AbstractPaymentProvider {
             status.state === "prepay_locked_permanent"
               ? "Your account is in a permanent prepay-only state. COD is not available."
               : "Your account is in a 30-day prepay-only period due to a prior refusal."
-          )
-        }
-      }
-
-      // 2. Deposit-verified gate (Phase 5).
-      const ledger = this.resolveLedger({
-        context: { customer: { id: customerId } },
-      })
-      if (ledger) {
-        const [wallet] = await ledger.listBuyerWallets(
-          { customer_id: customerId },
-          { take: 1 }
-        )
-        if (!wallet || wallet.status !== "verified") {
-          throw new MedusaError(
-            MedusaError.Types.NOT_ALLOWED,
-            "COD is locked until the ₱100 refundable deposit is verified."
           )
         }
       }
