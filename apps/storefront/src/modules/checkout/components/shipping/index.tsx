@@ -218,7 +218,19 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
                         )}
                       </div>
                       <div className="self-center pl-2">
-                        <MedusaRadio checked={isSelected} />
+                        <span
+                          role="radio"
+                          aria-checked={isSelected}
+                          data-state={isSelected ? "checked" : "unchecked"}
+                          data-testid="radio-button"
+                          className="group relative flex h-5 w-5 items-center justify-center outline-none"
+                        >
+                          <span className="shadow-borders-base group-data-[state=checked]:bg-ui-bg-interactive group-data-[state=checked]:shadow-borders-interactive bg-ui-bg-base flex h-[14px] w-[14px] items-center justify-center rounded-full transition-all">
+                            {isSelected && (
+                              <span className="bg-ui-bg-base shadow-details-contrast-on-bg-interactive h-1.5 w-1.5 rounded-full" />
+                            )}
+                          </span>
+                        </span>
                       </div>
                     </button>
                   )
