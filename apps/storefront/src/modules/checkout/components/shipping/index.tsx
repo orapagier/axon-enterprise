@@ -63,14 +63,10 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
     setIsLoading(true)
     setLoadError(null)
     try {
-      const res = await fetch(
-        `${BACKEND_URL}/store/delivery-options?cart_id=${encodeURIComponent(cart.id)}`
+      const body = await sdk.client.fetch<DeliveryOptionsResponse>(
+        `/store/delivery-options?cart_id=${encodeURIComponent(cart.id)}`,
+        { method: "GET" }
       )
-      if (!res.ok) {
-        const err = (await res.json().catch(() => ({}))) as { error?: string }
-        throw new Error(err.error ?? `Failed (${res.status})`)
-      }
-      const body = (await res.json()) as DeliveryOptionsResponse
       setData(body)
     } catch (e) {
       setLoadError((e as Error).message)
