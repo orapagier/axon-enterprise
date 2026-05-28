@@ -6,11 +6,6 @@ import {
 } from "@medusajs/framework/workflows-sdk"
 import { ACCOUNTABILITY_MODULE } from "../modules/accountability"
 import type AccountabilityModuleService from "../modules/accountability/service"
-import {
-  COD_LEDGER_MODULE,
-  DEPOSIT_AMOUNT_CENTAVOS,
-} from "../modules/cod-ledger"
-import type CodLedgerModuleService from "../modules/cod-ledger/service"
 
 type Resolution =
   | "buyer_fault"
@@ -36,7 +31,7 @@ const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000
 /**
  * Pure escalation rule used by the workflow and by tests.
  *
- *  strikes = 1 → warned + deposit_action="forfeit"
+ *  strikes = 1 → warned
  *  strikes = 2 → prepay_locked_30d, state_until = now + 30d
  *  strikes ≥ 3 → prepay_locked_permanent
  */
@@ -47,7 +42,6 @@ export function applyBuyerFaultEscalation(
   strike_count: number
   state: AccountState
   state_until: Date | null
-  deposit_action: "none" | "forfeit"
 } {
   const nextStrikes = currentStrikes + 1
   if (nextStrikes >= 3) {
@@ -55,7 +49,6 @@ export function applyBuyerFaultEscalation(
       strike_count: nextStrikes,
       state: "prepay_locked_permanent",
       state_until: null,
-      deposit_action: "forfeit",
     }
   }
   if (nextStrikes === 2) {
@@ -63,7 +56,6 @@ export function applyBuyerFaultEscalation(
       strike_count: nextStrikes,
       state: "prepay_locked_30d",
       state_until: new Date(now.getTime() + THIRTY_DAYS_MS),
-      deposit_action: "forfeit",
     }
   }
   // first strike
@@ -71,14 +63,11 @@ export function applyBuyerFaultEscalation(
     strike_count: nextStrikes,
     state: "warned",
     state_until: null,
-    deposit_action: "forfeit",
   }
 }
 
 type ResolveState = {
   dispute_id: string
-  customer_id: string
-  forfeited_centavos: number
   prior_status_snapshot: {
     id?: string
     strike_count: number
@@ -92,8 +81,6 @@ const resolveStep = createStep(
   async (input: ResolveDisputeInput, { container }) => {
     const accountability: AccountabilityModuleService =
       container.resolve(ACCOUNTABILITY_MODULE)
-    const ledger: CodLedgerModuleService =
-      container.resolve(COD_LEDGER_MODULE)
 
     const [dispute] = await accountability.listRefusalDisputes(
       { id: input.dispute_id },
@@ -116,15 +103,11 @@ const resolveStep = createStep(
       { take: 1 }
     )
 
-    let depositAction: "none" | "forfeit" | "refund" = "none"
-    let forfeited = 0
-
     if (input.resolution === "buyer_fault") {
       const escalation = applyBuyerFaultEscalation(
         statusBefore?.strike_count ?? 0,
         now
       )
-      depositAction = escalation.deposit_action
 
       if (statusBefore) {
         await accountability.updateBuyerAccountStatuses({
@@ -141,32 +124,6 @@ const resolveStep = createStep(
           state_until: escalation.state_until,
         })
       }
-
-      // Forfeit the buyer's ₱100 deposit if they still have one.
-      const [wallet] = await ledger.listBuyerWallets(
-        { customer_id: dispute.customer_id },
-        { take: 1 }
-      )
-      if (wallet && wallet.deposit_balance > 0) {
-        const amount = Math.min(wallet.deposit_balance, DEPOSIT_AMOUNT_CENTAVOS)
-        await ledger.updateBuyerWallets({
-          id: wallet.id,
-          deposit_balance: wallet.deposit_balance - amount,
-        })
-        await ledger.createCodTransactions({
-          customer_id: dispute.customer_id,
-          order_id: dispute.order_id,
-          type: "deposit_forfeit",
-          amount: -amount,
-          notes: `dispute ${dispute.id}: ${input.resolution_notes ?? "buyer_fault"}`,
-          recorded_by: input.resolved_by ?? null,
-        })
-        forfeited = amount
-      }
-    } else {
-      // Non-buyer-fault resolutions: refund the buyer's wallet to full if it
-      // was drained by an earlier order, but day-1 we don't drain on non-fault.
-      depositAction = "none"
     }
 
     const updated = await accountability.updateRefusalDisputes({
@@ -175,13 +132,10 @@ const resolveStep = createStep(
       resolution_notes: input.resolution_notes ?? null,
       resolved_by: input.resolved_by ?? null,
       resolved_at: now,
-      deposit_action: depositAction,
     })
 
     const state: ResolveState = {
       dispute_id: dispute.id,
-      customer_id: dispute.customer_id,
-      forfeited_centavos: forfeited,
       prior_status_snapshot: statusBefore
         ? {
             id: statusBefore.id,
@@ -203,8 +157,6 @@ const resolveStep = createStep(
     if (!state) return
     const accountability: AccountabilityModuleService =
       container.resolve(ACCOUNTABILITY_MODULE)
-    const ledger: CodLedgerModuleService =
-      container.resolve(COD_LEDGER_MODULE)
 
     // Restore dispute to pending.
     try {
@@ -214,7 +166,6 @@ const resolveStep = createStep(
         resolution_notes: null,
         resolved_by: null,
         resolved_at: null,
-        deposit_action: "none",
       })
     } catch {
       // shrug
@@ -231,27 +182,6 @@ const resolveStep = createStep(
         })
       } catch {
         // shrug
-      }
-    }
-
-    // Refund forfeited deposit if any.
-    if (state.forfeited_centavos > 0) {
-      const [wallet] = await ledger.listBuyerWallets(
-        { customer_id: state.customer_id },
-        { take: 1 }
-      )
-      if (wallet) {
-        await ledger.updateBuyerWallets({
-          id: wallet.id,
-          deposit_balance: wallet.deposit_balance + state.forfeited_centavos,
-        })
-        await ledger.createCodTransactions({
-          customer_id: state.customer_id,
-          order_id: null,
-          type: "deposit_refund",
-          amount: state.forfeited_centavos,
-          notes: `compensation: undo dispute ${state.dispute_id}`,
-        })
       }
     }
   }
