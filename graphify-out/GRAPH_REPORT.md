@@ -1,16 +1,16 @@
 # Graph Report - freshhub  (2026-05-28)
 
 ## Corpus Check
-- 425 files · ~180,594 words
+- 425 files · ~180,630 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2101 nodes · 2638 edges · 239 communities (178 shown, 61 thin omitted)
+- 2101 nodes · 2638 edges · 240 communities (178 shown, 62 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 28 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9faef8c1`
+- Built from commit: `ca04bd84`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -189,6 +189,7 @@
 - [[_COMMUNITY_Community 236|Community 236]]
 - [[_COMMUNITY_Community 237|Community 237]]
 - [[_COMMUNITY_Community 238|Community 238]]
+- [[_COMMUNITY_Community 239|Community 239]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `getAuthHeaders()` - 50 edges
@@ -219,7 +220,7 @@
 - **MedusaContainer Dependency Injection Consumers** — api_readme, subscribers_readme, jobs_readme, freshhub_dependency_injection [EXTRACTED 1.00]
 - **Workflow Execution Contexts** — workflows_readme, api_readme, subscribers_readme, jobs_readme [EXTRACTED 1.00]
 
-## Communities (239 total, 61 thin omitted)
+## Communities (240 total, 62 thin omitted)
 
 ### Community 0 - "Backend Type System"
 Cohesion: 0.01
@@ -230,8 +231,8 @@ Cohesion: 0.14
 Nodes (23): Checkout(), metadata, addToCart(), applyCustomerAddressToCart(), applyPromotions(), deleteLineItem(), getOrSetCart(), initiatePaymentSession() (+15 more)
 
 ### Community 2 - "Price & Order Utils"
-Cohesion: 0.12
-Nodes (11): CartDropdown(), CartTotals(), CartTotalsProps, FreeShippingInline(), FreeShippingPopup(), OrderCard(), OrderCardProps, OrderSummaryProps (+3 more)
+Cohesion: 0.14
+Nodes (10): CartDropdown(), CartTotals(), CartTotalsProps, FreeShippingInline(), FreeShippingPopup(), OrderCard(), OrderCardProps, ShippingDetails() (+2 more)
 
 ### Community 3 - "Backend Dependencies"
 Cohesion: 0.04
@@ -676,7 +677,7 @@ Nodes (4): 7. Seed script, `apps/backend/src/migration-scripts/seed-hubs.ts`, co
 ## Knowledge Gaps
 - **930 isolated node(s):** `name`, `private`, `packageManager`, `node`, `dev` (+925 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **61 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **62 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -685,7 +686,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.046) - this node is a cross-community bridge._
 - **Why does `getAuthHeaders()` connect `Account & Checkout Pages` to `Community 34`, `Community 130`, `Community 227`, `Community 36`, `Product Quick Add`, `Community 135`, `Community 136`, `Community 146`, `Community 179`, `Order Confirmation Flow`, `Order Transfer Flow`, `Root Layout & Fonts`?**
   _High betweenness centrality (0.039) - this node is a cross-community bridge._
-- **Why does `convertToLocale()` connect `Price & Order Utils` to `Community 162`, `Payment Integration`, `Community 200`, `Community 201`, `Community 144`, `Community 145`, `Community 147`, `Community 150`, `Community 151`?**
+- **Why does `convertToLocale()` connect `Price & Order Utils` to `Community 162`, `Payment Integration`, `Community 200`, `Community 201`, `Community 239`, `Community 144`, `Community 145`, `Community 147`, `Community 150`, `Community 151`?**
   _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **What connects `name`, `private`, `packageManager` to the rest of the system?**
   _934 weakly-connected nodes found - possible documentation gaps or missing edges._
@@ -694,4 +695,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `Account & Checkout Pages` be split into smaller, more focused modules?**
   _Cohesion score 0.14 - nodes in this community are weakly interconnected._
 - **Should `Price & Order Utils` be split into smaller, more focused modules?**
-  _Cohesion score 0.12 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.14 - nodes in this community are weakly interconnected._
