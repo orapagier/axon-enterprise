@@ -31,9 +31,6 @@ const RefusalDispute = model.define("refusal_dispute", {
   resolution_notes: model.text().nullable(),
   resolved_by: model.text().nullable(),
   resolved_at: model.dateTime().nullable(),
-  deposit_action: model
-    .enum(["none", "forfeit", "refund"])
-    .default("none"),
 })
 
 export default RefusalDispute
