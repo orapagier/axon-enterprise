@@ -12,7 +12,7 @@ const VALID_RESOLUTIONS = [
  * POST /admin/disputes/:id/resolve
  * Body: { resolution, resolution_notes? }
  *
- * Runs the resolve-dispute workflow which writes the strike + deposit ledger.
+ * Runs the resolve-dispute workflow which applies the buyer strike on buyer_fault.
  */
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const body = req.body as {
