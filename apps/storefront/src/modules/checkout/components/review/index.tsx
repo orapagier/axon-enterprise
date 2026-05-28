@@ -15,9 +15,13 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
     (cart as unknown as Record<string, unknown>)?.gift_cards && ((cart as unknown as Record<string, unknown>)?.gift_cards as unknown[])?.length > 0 && cart?.total === 0
   )
 
+  const deliverySelected =
+    (cart.shipping_methods?.length ?? 0) > 0 ||
+    !!(cart.metadata as { delivery_tier?: string } | null)?.delivery_tier
+
   const previousStepsCompleted =
     cart.shipping_address &&
-    (cart.shipping_methods?.length ?? 0) > 0 &&
+    deliverySelected &&
     (cart.payment_collection || paidByGiftcard)
 
   return (
