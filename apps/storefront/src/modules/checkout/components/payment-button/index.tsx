@@ -39,6 +39,8 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
       return (
         <ManualTestPaymentButton notReady={notReady} data-testid={dataTestId} />
       )
+    case isCod(paymentSession?.provider_id):
+      return <CodPaymentButton notReady={notReady} data-testid={dataTestId} />
     default:
       return <Button disabled>Select a payment method</Button>
   }
