@@ -275,8 +275,7 @@ const DisputesPage = () => {
             ) : (
               <div className="mt-3 text-sm">
                 <Text>
-                  Resolved as <Badge color={TONE[open.resolution]}>{open.resolution}</Badge>{" "}
-                  · deposit_action <Badge>{open.deposit_action}</Badge>
+                  Resolved as <Badge color={TONE[open.resolution]}>{open.resolution}</Badge>
                 </Text>
                 {open.resolution_notes && (
                   <Text className="text-ui-fg-subtle mt-1">
