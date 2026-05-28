@@ -85,15 +85,10 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
     const prev = selectedTier
     setSelectedTier(tier)
     try {
-      const res = await fetch(`${BACKEND_URL}/store/delivery-options/select`, {
+      await sdk.client.fetch(`/store/delivery-options/select`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cart_id: cart.id, tier }),
+        body: { cart_id: cart.id, tier },
       })
-      if (!res.ok) {
-        const err = (await res.json().catch(() => ({}))) as { error?: string }
-        throw new Error(err.error ?? `Failed (${res.status})`)
-      }
     } catch (e) {
       setSelectedTier(prev)
       setSelectError((e as Error).message)
