@@ -23,7 +23,10 @@ export default async function Checkout({
 
   const customer = await retrieveCustomer()
 
-  if (customer && !cart.shipping_address?.address_1) {
+  const cartBarangay = (
+    cart.shipping_address?.metadata as { barangay?: string } | undefined
+  )?.barangay
+  if (customer && (!cart.shipping_address?.address_1 || !cartBarangay)) {
     await applyCustomerAddressToCart(customer, cart)
     cart = await retrieveCart()
     if (!cart) return notFound()
