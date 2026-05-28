@@ -70,7 +70,6 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     rider_photo_url: body.rider_photo_url ?? null,
     rider_notes: body.rider_notes ?? null,
     resolution: "pending",
-    deposit_action: "none",
   })
 
   res.status(201).json({ dispute })
