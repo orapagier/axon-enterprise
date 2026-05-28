@@ -147,6 +147,9 @@ const ShippingAddress = ({
         "shipping_address.country_code": address?.country_code || "",
         "shipping_address.province": address?.province || "",
         "shipping_address.phone": address?.phone || "",
+        "shipping_address.barangay":
+          ((address as { metadata?: { barangay?: string } } | undefined)
+            ?.metadata?.barangay as string | undefined) || "",
       }))
     }
 
