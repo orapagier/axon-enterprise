@@ -421,9 +421,17 @@ export async function applyCustomerAddressToCart(
   customer: HttpTypes.StoreCustomer,
   cart: HttpTypes.StoreCart
 ) {
-  if (cart.shipping_address?.address_1) return
+  const cartBarangay = (
+    cart.shipping_address?.metadata as { barangay?: string } | undefined
+  )?.barangay
+  // Re-apply when the cart has no address yet OR has an address that's
+  // missing the barangay (e.g. a stale cart from an older checkout flow).
+  // Without the barangay, the delivery step can't resolve a hub/fee.
+  if (cart.shipping_address?.address_1 && cartBarangay) return
 
-  const addr = customer.addresses?.[0]
+  const addr =
+    customer.addresses?.find((a) => a.is_default_shipping) ??
+    customer.addresses?.[0]
   if (!addr) return
 
   try {
