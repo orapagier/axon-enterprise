@@ -119,6 +119,12 @@ const SHIPPING_FIELDS: FieldDef[] = [
     validators: [validateRequired],
   },
   {
+    key: "shipping_address.barangay",
+    sourceKey: "shipping_address.barangay",
+    label: "Barangay",
+    validators: [validateRequired],
+  },
+  {
     key: "email",
     sourceKey: "email",
     label: "Email",
