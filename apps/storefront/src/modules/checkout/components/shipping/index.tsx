@@ -91,7 +91,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
     const prev = selectedTier
     setSelectedTier(tier)
     try {
-      const res = await fetch(`/store/delivery-options/select`, {
+      const res = await fetch(`${BACKEND_URL}/store/delivery-options/select`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cart_id: cart.id, tier }),
