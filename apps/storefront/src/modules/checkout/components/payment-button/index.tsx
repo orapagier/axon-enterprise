@@ -17,12 +17,16 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
   cart,
   "data-testid": dataTestId,
 }) => {
+  const deliverySelected =
+    (cart.shipping_methods?.length ?? 0) >= 1 ||
+    !!(cart.metadata as { delivery_tier?: string } | null)?.delivery_tier
+
   const notReady =
     !cart ||
     !cart.shipping_address ||
     !cart.billing_address ||
     !cart.email ||
-    (cart.shipping_methods?.length ?? 0) < 1
+    !deliverySelected
 
   const paymentSession = cart.payment_collection?.payment_sessions?.[0]
 
