@@ -58,20 +58,6 @@ export default class CodPaymentProviderService extends AbstractPaymentProvider {
     this.logger_ = container.logger
   }
 
-  private resolveLedger(input: { context?: { customer?: { id?: string } } }):
-    | CodLedgerModuleService
-    | null {
-    const ledger = this.container_[COD_LEDGER_MODULE]
-    if (!ledger) {
-      this.logger_.warn(
-        "cod-payment-provider: cod_ledger module not resolved; deposit gate will be skipped."
-      )
-      return null
-    }
-    void input
-    return ledger
-  }
-
   async initiatePayment(
     input: InitiatePaymentInput
   ): Promise<InitiatePaymentOutput> {
