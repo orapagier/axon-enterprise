@@ -21,7 +21,6 @@ type Dispute = {
   buyer_notes: string | null
   resolution: Resolution
   resolution_notes: string | null
-  deposit_action: "none" | "forfeit" | "refund"
   created_at: string
 }
 
