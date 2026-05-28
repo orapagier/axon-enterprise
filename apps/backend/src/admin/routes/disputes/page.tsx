@@ -132,7 +132,7 @@ const ResolveForm = ({
       </div>
       {resolution === "buyer_fault" && (
         <Text className="text-ui-fg-subtle text-sm mt-2">
-          Strike count will increment; ₱100 deposit will be forfeited if present.
+          Strike count will increment (warned → 30-day prepay lock → permanent).
         </Text>
       )}
     </div>
