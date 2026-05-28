@@ -168,11 +168,6 @@ const Payment = ({
                   </div>
                 ))}
               </RadioGroup>
-              {isCod(selectedPaymentMethod) && (
-                <div className="mt-4">
-                  <CodDepositGate onStatusChange={setCodWalletStatus} />
-                </div>
-              )}
             </>
           )}
 
