@@ -58,8 +58,11 @@ const Payment = ({
     (cart as unknown as Record<string, unknown>)?.gift_cards && ((cart as unknown as Record<string, unknown>)?.gift_cards as unknown[])?.length > 0 && cart?.total === 0
   )
 
-  const paymentReady =
-    (activeSession && (cart?.shipping_methods?.length ?? 0) !== 0) || paidByGiftcard
+  const deliverySelected =
+    (cart?.shipping_methods?.length ?? 0) !== 0 ||
+    !!(cart.metadata as { delivery_tier?: string } | null)?.delivery_tier
+
+  const paymentReady = (activeSession && deliverySelected) || paidByGiftcard
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
