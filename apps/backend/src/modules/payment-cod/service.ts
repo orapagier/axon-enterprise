@@ -25,8 +25,6 @@ import type {
   UpdatePaymentOutput,
   WebhookActionResult,
 } from "@medusajs/framework/types"
-import { COD_LEDGER_MODULE } from "../cod-ledger"
-import type CodLedgerModuleService from "../cod-ledger/service"
 import {
   ACCOUNTABILITY_MODULE,
   PREPAY_LOCKED_STATES,
@@ -35,7 +33,6 @@ import type AccountabilityModuleService from "../accountability/service"
 
 type InjectedDeps = {
   logger: Logger
-  [COD_LEDGER_MODULE]?: CodLedgerModuleService
   [ACCOUNTABILITY_MODULE]?: AccountabilityModuleService
 }
 
@@ -44,11 +41,8 @@ type InjectedDeps = {
  *
  * Stays inside the standard Medusa payment flow (initiate → authorize → capture)
  * so the storefront and admin don't need a parallel checkout path. The only
- * gate is at `authorizePayment`: the customer's `BuyerWallet.status` must be
- * `verified` before authorization succeeds. First-time COD buyers must pay the
- * ₱100 refundable deposit via GCash (manually verified by admin) — handled by
- * separate `/store/customer/deposit/initiate` + `/admin/deposits/:id/verify`
- * endpoints in this phase.
+ * gate is at `authorizePayment`: buyers in a prepay-locked accountability state
+ * (after a prior refusal) are blocked from COD; everyone else passes.
  */
 export default class CodPaymentProviderService extends AbstractPaymentProvider {
   static identifier = "cod"
