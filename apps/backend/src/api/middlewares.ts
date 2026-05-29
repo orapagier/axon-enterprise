@@ -106,10 +106,5 @@ export default defineMiddlewares({
       method: ["POST", "DELETE"],
       middlewares: [authenticate("customer", ["session", "bearer"])],
     },
-    {
-      matcher: "/store/carts/*/line-items",
-      method: ["POST"],
-      middlewares: [forceNoShipping],
-    },
   ],
 })
