@@ -1,31 +1,6 @@
 import { defineMiddlewares } from "@medusajs/framework/http"
 import { authenticate } from "@medusajs/framework/http"
-import type {
-  MedusaNextFunction,
-  MedusaRequest,
-  MedusaResponse,
-} from "@medusajs/framework/http"
 import multer from "multer"
-
-/**
- * FreshHub delivers entirely outside Medusa's fulfillment system: the chosen
- * delivery tier + fee live in cart.metadata (see /store/delivery-options) and
- * the dispatch system reads them off the order. We never attach a Medusa
- * shipping method, so completeCartWorkflow would reject every order with
- * "No shipping method selected but the cart contains items that require
- * shipping." Forcing requires_shipping=false on each line item opts the cart
- * out of that validation.
- */
-const forceNoShipping = (
-  req: MedusaRequest,
-  _res: MedusaResponse,
-  next: MedusaNextFunction
-) => {
-  if (req.validatedBody && typeof req.validatedBody === "object") {
-    ;(req.validatedBody as Record<string, unknown>).requires_shipping = false
-  }
-  next()
-}
 
 /**
  * MFH custom API middlewares.
