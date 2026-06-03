@@ -390,12 +390,17 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
   // Reserve the pickup slot inline.
   try {
-    const slot = await pickupService.createPickupSlots({
+    const createdSlot = await pickupService.createPickupSlots({
       pickup_window: body.pickup_window_id,
       listing_id: listing.id,
       estimated_kg: body.estimated_kg,
       status: "reserved",
     } as unknown as Parameters<typeof pickupService.createPickupSlots>[0])
+    // A single-object input returns a single slot at runtime, but the typed
+    // signature widens to the array overload — normalize to the element.
+    const slot = (Array.isArray(createdSlot) ? createdSlot[0] : createdSlot) as
+      | { id: string }
+      | undefined
 
     if (!slot?.id) {
       throw new Error(
