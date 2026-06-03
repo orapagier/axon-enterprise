@@ -662,19 +662,19 @@ If a product has no hub link (legacy data), exclude it from the public storefron
 
 Mark phase complete only when ALL pass:
 
-- [ ] `npx medusa db:migrate` runs clean from a fresh DB and creates `hub`, `hub_area`, and the two link tables.
-- [ ] `npx medusa exec ./src/migration-scripts/seed-hubs.ts` creates Tagum hub + Tagum Central area, idempotently.
-- [ ] `curl /admin/hubs` (with admin auth) returns the Tagum hub with one area.
-- [ ] `curl /store/hubs` returns the same hub, no auth needed.
-- [ ] Admin UI at `/app/hubs` lists hubs and lets you create/edit a hub + add an area.
-- [ ] Storefront first-visit (no `fh_hub` cookie) shows the hub picker modal.
-- [ ] Selecting a hub sets the cookie; reload no longer shows the modal.
-- [ ] Nav-bar hub switcher changes the cookie and refreshes the page.
-- [ ] Account page shows "Home Hub: Tagum City Hub" and Change updates the customer↔hub link.
-- [ ] `/store` page shows ONLY products linked to the cookie's hub. Products with no hub link do not appear.
-- [ ] Creating a product in admin without a hub link succeeds (admin can still create) but the storefront filters it out.
-- [ ] All existing admin pages (`/app/sellers`, `/app/memberships`) still work — nothing broke.
-- [ ] `tsc --noEmit` passes on both `apps/backend` and `apps/storefront`.
+- [x] `npx medusa db:migrate` runs clean from a fresh DB and creates `hub`, `hub_area`, and the two link tables.
+- [x] `npx medusa exec ./src/migration-scripts/seed-hubs.ts` creates Tagum hub + Tagum Central area, idempotently.
+- [x] `curl /admin/hubs` (with admin auth) returns the Tagum hub with one area.
+- [x] `curl /store/hubs` returns the same hub, no auth needed.
+- [x] Admin UI at `/app/hubs` lists hubs and lets you create/edit a hub + add an area.
+- [x] Storefront first-visit (no `fh_hub` cookie) shows the hub picker modal.
+- [x] Selecting a hub sets the cookie; reload no longer shows the modal.
+- [x] Nav-bar hub switcher changes the cookie and refreshes the page.
+- [x] Account page shows "Home Hub: Tagum City Hub" and Change updates the customer↔hub link.
+- [x] `/store` page shows ONLY products linked to the cookie's hub. Products with no hub link do not appear.
+- [x] Creating a product in admin without a hub link succeeds (admin can still create) but the storefront filters it out.
+- [x] All existing admin pages (`/app/sellers`, `/app/memberships`) still work — nothing broke.
+- [x] `tsc --noEmit` passes on both `apps/backend` and `apps/storefront`.
 
 ---
 
