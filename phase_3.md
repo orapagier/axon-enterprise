@@ -1,6 +1,6 @@
 # Phase 3 — Pickup Scheduling
 
-**Status:** pending
+**Status:** complete
 **Depends on:** Phase 1 (Hub) ✓, Phase 2 (Listing types) ✓
 **Estimated time:** 1–2 weeks
 
