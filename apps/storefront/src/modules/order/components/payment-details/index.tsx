@@ -83,8 +83,8 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
             className="text-body font-semibold text-grey-90"
             data-testid="payment-amount"
           >
-            {isStripeLike(providerId) && payment?.data?.card_last4
-              ? `•••• •••• •••• ${payment.data.card_last4}`
+            {isStripeLike(providerId) && cardLast4
+              ? `•••• •••• •••• ${cardLast4}`
               : convertToLocale({
                   amount: dueOnDelivery,
                   currency_code: order.currency_code,
