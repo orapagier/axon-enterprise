@@ -12,7 +12,7 @@ import BarangayCombobox from "@modules/common/components/barangay-combobox"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
 import Input from "@modules/common/components/input"
 import Modal from "@modules/common/components/modal"
-import { Button, Heading, Text, clx } from "@modules/common/components/ui"
+import { Button, Heading, clx } from "@modules/common/components/ui"
 import Spinner from "@modules/common/icons/spinner"
 import React, { useActionState, useEffect, useState } from "react"
 
