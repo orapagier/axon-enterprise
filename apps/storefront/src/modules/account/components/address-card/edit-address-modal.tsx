@@ -68,62 +68,86 @@ const EditAddress: React.FC<EditAddressProps> = ({
     <>
       <div
         className={clx(
-          "border rounded-rounded p-5 min-h-[220px] h-full w-full flex flex-col justify-between transition-colors",
-          {
-            "border-gray-900": isActive,
-          }
+          "group flex h-full min-h-[200px] w-full flex-col justify-between rounded-2xl border bg-white p-6 shadow-soft transition-all hover:shadow-medium",
+          isActive ? "border-brand-green-300" : "border-grey-10"
         )}
         data-testid="address-container"
       >
         <div className="flex flex-col">
-          <Heading
-            className="text-left text-base-semi"
+          <div className="mb-3 flex items-start justify-between gap-2">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-green-50 text-brand-green-700 ring-1 ring-brand-green-100">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </span>
+            {address.is_default_shipping && (
+              <span className="inline-flex items-center gap-x-1 rounded-full border border-brand-green-100 bg-brand-green-50 px-2.5 py-1 text-caption font-semibold text-brand-green-700">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-green-500" />
+                Default
+              </span>
+            )}
+          </div>
+
+          <h3
+            className="font-heading text-h3 text-grey-90"
             data-testid="address-name"
           >
             {address.first_name} {address.last_name}
-          </Heading>
+          </h3>
           {address.company && (
-            <Text
-              className="txt-compact-small text-ui-fg-base"
+            <p
+              className="text-caption text-grey-50"
               data-testid="address-company"
             >
               {address.company}
-            </Text>
+            </p>
           )}
-          <Text className="flex flex-col text-left text-base-regular mt-2">
+          <div className="mt-2 flex flex-col gap-y-0.5 text-body-sm leading-relaxed text-grey-60">
             <span data-testid="address-address">
               {address.address_1}
               {address.address_2 && <span>, {address.address_2}</span>}
             </span>
             {(address.metadata as { barangay?: string } | null)?.barangay && (
               <span data-testid="address-barangay">
-                {(address.metadata as { barangay: string }).barangay}
+                Brgy. {(address.metadata as { barangay: string }).barangay}
               </span>
             )}
             <span data-testid="address-postal-city">
-              {address.postal_code}, {address.city}
+              {[address.postal_code, address.city].filter(Boolean).join(", ")}
             </span>
             <span data-testid="address-province-country">
               {address.province && `${address.province}, `}
               {address.country_code?.toUpperCase()}
             </span>
-          </Text>
+          </div>
         </div>
-        <div className="flex items-center gap-x-4">
+
+        <div className="mt-5 flex items-center gap-x-3 border-t border-grey-10 pt-4">
           <button
-            className="text-small-regular text-ui-fg-base flex items-center gap-x-2"
+            className="inline-flex items-center gap-x-1.5 text-body-sm font-medium text-grey-60 transition-colors hover:text-brand-green-700"
             onClick={open}
             data-testid="address-edit-button"
           >
-            <Edit />
+            <Edit className="h-4 w-4" />
             Edit
           </button>
+          <span className="h-4 w-px bg-grey-20" />
           <button
-            className="text-small-regular text-ui-fg-base flex items-center gap-x-2"
+            className="inline-flex items-center gap-x-1.5 text-body-sm font-medium text-grey-60 transition-colors hover:text-rose-600"
             onClick={removeAddress}
             data-testid="address-delete-button"
           >
-            {removing ? <Spinner /> : <Trash />}
+            {removing ? <Spinner /> : <Trash className="h-4 w-4" />}
             Remove
           </button>
         </div>
