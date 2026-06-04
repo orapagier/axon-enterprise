@@ -1,5 +1,3 @@
-import { Heading, Text } from "@modules/common/components/ui"
-
 /**
  * Phase 4 — show the expected delivery day based on the 12:00 PM Manila cutoff.
  * Orders placed before noon ship that same day's 4 PM dispatch; orders placed
@@ -27,14 +25,42 @@ export default function DispatchEstimate({
 
   return (
     <div
-      className="flex flex-col gap-2 border-b border-gray-200 pb-6"
+      className="relative flex items-center gap-x-4 overflow-hidden rounded-2xl border border-brand-green-100 bg-gradient-to-br from-brand-green-50 to-white p-6 shadow-soft small:gap-x-5 small:p-7"
       data-testid="dispatch-estimate"
     >
-      <Heading level="h2" className="flex flex-row text-3xl-regular my-6">
-        Estimated delivery
-      </Heading>
-      <Text className="text-ui-fg-base">{label}</Text>
-      <Text className="text-ui-fg-subtle text-sm">{note}</Text>
+      {/* Soft gold glow accent */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand-gold-300/15 blur-2xl"
+      />
+
+      <span className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-brand-green-700 shadow-soft ring-1 ring-brand-green-100">
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect x="1" y="3" width="15" height="13" rx="1.5" />
+          <path d="M16 8h4l3 3v5h-7z" />
+          <circle cx="5.5" cy="18.5" r="2.5" />
+          <circle cx="18.5" cy="18.5" r="2.5" />
+        </svg>
+      </span>
+
+      <div className="relative flex flex-col gap-y-0.5">
+        <span className="text-caption font-semibold uppercase tracking-[0.16em] text-brand-green-700">
+          Estimated delivery
+        </span>
+        <span className="font-heading text-h3 text-grey-90 small:text-h2">
+          {label}
+        </span>
+        <p className="text-body-sm text-grey-60">{note}</p>
+      </div>
     </div>
   )
 }
