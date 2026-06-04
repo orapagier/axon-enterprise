@@ -1,16 +1,16 @@
 # Graph Report - freshhub  (2026-06-05)
 
 ## Corpus Check
-- 425 files · ~182,364 words
+- 425 files · ~182,438 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2145 nodes · 2679 edges · 246 communities (187 shown, 59 thin omitted)
+- 2145 nodes · 2679 edges · 246 communities (188 shown, 58 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 28 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5518c2bb`
+- Built from commit: `63b26abe`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -223,7 +223,7 @@
 - **MedusaContainer Dependency Injection Consumers** — api_readme, subscribers_readme, jobs_readme, freshhub_dependency_injection [EXTRACTED 1.00]
 - **Workflow Execution Contexts** — workflows_readme, api_readme, subscribers_readme, jobs_readme [EXTRACTED 1.00]
 
-## Communities (246 total, 59 thin omitted)
+## Communities (246 total, 58 thin omitted)
 
 ### Community 0 - "Backend Type System"
 Cohesion: 0.01
@@ -258,8 +258,8 @@ Cohesion: 0.09
 Nodes (16): isCod(), isManual(), isStripeLike(), noDivisionCurrencies, paymentInfoMap, PaymentButton(), PaymentButtonProps, PaymentContainer() (+8 more)
 
 ### Community 8 - "Product Display"
-Cohesion: 0.15
-Nodes (7): ProductPreview(), Props, ThumbnailProps, FeaturedProduct, StoreFreeShippingPrice, VariantPrice, getProductPrice()
+Cohesion: 0.1
+Nodes (11): MobileActions(), MobileActionsProps, OptionSelectProps, ProductPreview(), Props, ThumbnailProps, FeaturedProduct, StoreFreeShippingPrice (+3 more)
 
 ### Community 9 - "Cart & Order Items"
 Cohesion: 0.08
@@ -366,8 +366,8 @@ Cohesion: 0.28
 Nodes (5): TransferPage(), acceptTransferRequest(), declineTransferRequest(), TransferPage(), TransferStatus
 
 ### Community 37 - "Product Quick Add"
-Cohesion: 0.11
-Nodes (17): AccountPageLayout(), Addresses(), metadata, Cart(), metadata, metadata, OverviewTemplate(), retrieveCustomer() (+9 more)
+Cohesion: 0.14
+Nodes (14): AccountPageLayout(), Addresses(), metadata, Cart(), metadata, metadata, OverviewTemplate(), retrieveCustomer() (+6 more)
 
 ### Community 38 - "Cart/Order Line Items"
 Cohesion: 0.06
@@ -394,8 +394,8 @@ Cohesion: 0.4
 Nodes (4): name, namespaces, nativeEnums, tables
 
 ### Community 119 - "Micro Community 119"
-Cohesion: 0.11
-Nodes (6): CodLedgerModuleService, getCustomerId(), POST(), BuyerWallet, CodTransaction, POST()
+Cohesion: 0.12
+Nodes (7): CodLedgerModuleService, GET(), getCustomerId(), getCustomerId(), POST(), BuyerWallet, POST()
 
 ### Community 130 - "Community 130"
 Cohesion: 0.12
@@ -454,8 +454,8 @@ Cohesion: 0.36
 Nodes (5): LineItemPrice(), LineItemPriceProps, getPercentageDiff(), getPricesForVariant(), VariantWithPrice
 
 ### Community 145 - "Community 145"
-Cohesion: 0.29
-Nodes (4): MobileActions(), MobileActionsProps, OptionSelectProps, isSimpleProduct()
+Cohesion: 0.38
+Nodes (4): POST(), validateWindowCreate(), GET(), POST()
 
 ### Community 146 - "Community 146"
 Cohesion: 0.4
@@ -502,8 +502,8 @@ Cohesion: 0.67
 Nodes (3): DEFAULT_TAGS, GET(), POST()
 
 ### Community 157 - "Community 157"
-Cohesion: 0.15
-Nodes (8): POST(), config, PickupModuleService, validateSlotStatusTransition(), validateWindowCreate(), GET(), POST(), PATCH()
+Cohesion: 0.18
+Nodes (4): config, PickupSlot, PickupWindow, PickupModuleService
 
 ### Community 158 - "Community 158"
 Cohesion: 0.13
@@ -526,8 +526,8 @@ Cohesion: 0.13
 Nodes (6): DeliveryFeesModuleService, FeeRow, TAGUM_FEES, HubBarangayFee, Tier, VALID_TIERS
 
 ### Community 165 - "Community 165"
-Cohesion: 0.14
-Nodes (14): PICKUP_SLOT_STATUSES, PICKUP_WINDOW_STATUSES, PickupSlotStatus, PickupWindowStatus, SLOT_TRANSITIONS, validateSlotCapacity(), validateSlotReserve(), ValidationError (+6 more)
+Cohesion: 0.12
+Nodes (16): PICKUP_SLOT_STATUSES, PICKUP_WINDOW_STATUSES, PickupSlotStatus, PickupWindowStatus, SLOT_TRANSITIONS, validateSlotCapacity(), validateSlotReserve(), validateSlotStatusTransition() (+8 more)
 
 ### Community 167 - "Community 167"
 Cohesion: 0.14
@@ -673,6 +673,10 @@ Nodes (20): baseHeaders(), listOpenPickupWindows(), PickupWindow, baseHeaders(),
 Cohesion: 0.19
 Nodes (13): LISTING_STATUSES, LISTING_TYPES, ListingStatus, ListingType, ALLOWED_TRANSITIONS, validateHarvestDate(), validateProducerEligibility(), ValidationError (+5 more)
 
+### Community 227 - "Community 227"
+Cohesion: 0.5
+Nodes (3): metadata, OnboardingPage(), Props
+
 ### Community 228 - "Community 228"
 Cohesion: 0.4
 Nodes (4): getLocale(), newHeaders, originalFetch, getLocaleHeader()
@@ -704,16 +708,16 @@ Nodes (4): GET(), POST(), UpsertRow, validateRow()
 ## Knowledge Gaps
 - **945 isolated node(s):** `name`, `private`, `packageManager`, `node`, `dev` (+940 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **59 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **58 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `getAuthHeaders()` connect `Order Transfer Flow` to `Account & Checkout Pages`, `Community 130`, `Community 34`, `Community 36`, `Product Quick Add`, `Community 135`, `Community 179`, `Order Confirmation Flow`, `Community 223`?**
   _High betweenness centrality (0.042) - this node is a cross-community bridge._
-- **Why does `retrieveCustomer()` connect `Product Quick Add` to `Account & Checkout Pages`, `Community 34`, `Community 229`, `Community 230`, `Community 135`, `Community 137`, `Community 206`, `Community 240`, `Community 147`, `Community 182`, `Order Transfer Flow`?**
+- **Why does `retrieveCustomer()` connect `Product Quick Add` to `Account & Checkout Pages`, `Community 34`, `Community 227`, `Community 229`, `Community 230`, `Community 135`, `Community 137`, `Community 206`, `Community 240`, `Community 147`, `Community 182`, `Order Transfer Flow`?**
   _High betweenness centrality (0.040) - this node is a cross-community bridge._
-- **Why does `convertToLocale()` connect `Price & Order Utils` to `Community 162`, `Community 197`, `Payment Integration`, `Community 200`, `Community 201`, `Community 144`, `Community 145`, `Community 147`, `Community 150`, `Community 151`?**
+- **Why does `convertToLocale()` connect `Price & Order Utils` to `Community 162`, `Community 197`, `Payment Integration`, `Community 200`, `Community 201`, `Product Display`, `Community 144`, `Community 147`, `Community 150`, `Community 151`?**
   _High betweenness centrality (0.016) - this node is a cross-community bridge._
 - **What connects `name`, `private`, `packageManager` to the rest of the system?**
   _949 weakly-connected nodes found - possible documentation gaps or missing edges._
