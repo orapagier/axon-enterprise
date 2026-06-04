@@ -1,16 +1,16 @@
 # Graph Report - freshhub  (2026-06-04)
 
 ## Corpus Check
-- 422 files · ~180,204 words
+- 422 files · ~180,125 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2126 nodes · 2659 edges · 245 communities (181 shown, 64 thin omitted)
+- 2126 nodes · 2659 edges · 244 communities (180 shown, 64 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 28 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `323f7c29`
+- Built from commit: `d629fc4d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -191,7 +191,6 @@
 - [[_COMMUNITY_Community 238|Community 238]]
 - [[_COMMUNITY_Community 240|Community 240]]
 - [[_COMMUNITY_Community 241|Community 241]]
-- [[_COMMUNITY_Community 242|Community 242]]
 - [[_COMMUNITY_Community 243|Community 243]]
 - [[_COMMUNITY_Community 245|Community 245]]
 
@@ -224,15 +223,15 @@
 - **MedusaContainer Dependency Injection Consumers** — api_readme, subscribers_readme, jobs_readme, freshhub_dependency_injection [EXTRACTED 1.00]
 - **Workflow Execution Contexts** — workflows_readme, api_readme, subscribers_readme, jobs_readme [EXTRACTED 1.00]
 
-## Communities (245 total, 64 thin omitted)
+## Communities (244 total, 64 thin omitted)
 
 ### Community 0 - "Backend Type System"
 Cohesion: 0.01
 Nodes (190): AccountHolder, Address, ApiKey, ApiKeyTypeEnum, ApplicationMethod, ApplicationMethodAllocationEnum, ApplicationMethodTargetTypeEnum, ApplicationMethodTypeEnum (+182 more)
 
 ### Community 1 - "Account & Checkout Pages"
-Cohesion: 0.13
-Nodes (20): Checkout(), metadata, addToCart(), applyCustomerAddressToCart(), applyPromotions(), deleteLineItem(), getOrSetCart(), initiatePaymentSession() (+12 more)
+Cohesion: 0.11
+Nodes (24): Checkout(), metadata, addToCart(), applyCustomerAddressToCart(), applyPromotions(), deleteLineItem(), getOrSetCart(), initiatePaymentSession() (+16 more)
 
 ### Community 2 - "Price & Order Utils"
 Cohesion: 0.14
@@ -359,8 +358,8 @@ Cohesion: 0.1
 Nodes (19): AccountType, BUYER_FIELDS, CONSUMER_FIELDS, FieldDef, FIELDS_BY_ROLE, initialState, MINDANAO_CITY_SUGGESTIONS, MINDANAO_PROVINCE_SUGGESTIONS (+11 more)
 
 ### Community 34 - "Community 34"
-Cohesion: 0.23
-Nodes (9): getCacheTag(), setLocaleCookie(), updateLocale(), completeOnboarding(), deferOnboarding(), isValidPhone(), OnboardingState, resetOnboardingState() (+1 more)
+Cohesion: 0.29
+Nodes (7): getCacheTag(), completeOnboarding(), deferOnboarding(), isValidPhone(), OnboardingState, resetOnboardingState(), splitDisplayName()
 
 ### Community 36 - "Community 36"
 Cohesion: 0.28
@@ -500,7 +499,7 @@ Nodes (3): DEFAULT_TAGS, GET(), POST()
 
 ### Community 157 - "Community 157"
 Cohesion: 0.13
-Nodes (6): POST(), config, PickupModuleService, validateWindowCreate(), GET(), POST()
+Nodes (8): POST(), config, PickupSlot, PickupWindow, PickupModuleService, validateWindowCreate(), GET(), POST()
 
 ### Community 158 - "Community 158"
 Cohesion: 0.13
@@ -551,7 +550,7 @@ Cohesion: 0.27
 Nodes (8): getHubCookie(), listHubs(), listLocales(), metadata, PageLayout(), Nav(), metadata, Profile()
 
 ### Community 183 - "Community 183"
-Cohesion: 0.2
+Cohesion: 0.16
 Nodes (3): ListingModuleService, ProductListing, ModuleImplementations
 
 ### Community 184 - "Community 184"
@@ -682,10 +681,6 @@ Nodes (5): categories, origins, RefinementListProps, SortOptions, SortProductsPr
 Cohesion: 0.6
 Nodes (4): getMyListing(), EditListingPage(), metadata, Props
 
-### Community 245 - "Community 245"
-Cohesion: 0.4
-Nodes (4): getLocale(), newHeaders, originalFetch, getLocaleHeader()
-
 ## Knowledge Gaps
 - **938 isolated node(s):** `name`, `private`, `packageManager`, `node`, `dev` (+933 more)
   These have ≤1 connection - possible missing edges or undocumented components.
@@ -705,6 +700,6 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `Backend Type System` be split into smaller, more focused modules?**
   _Cohesion score 0.01 - nodes in this community are weakly interconnected._
 - **Should `Account & Checkout Pages` be split into smaller, more focused modules?**
-  _Cohesion score 0.13 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.11 - nodes in this community are weakly interconnected._
 - **Should `Price & Order Utils` be split into smaller, more focused modules?**
   _Cohesion score 0.14 - nodes in this community are weakly interconnected._

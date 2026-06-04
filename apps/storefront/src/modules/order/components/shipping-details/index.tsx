@@ -8,7 +8,31 @@ type ShippingDetailsProps = {
   order: HttpTypes.StoreOrder
 }
 
+const TIER_LABELS: Record<string, string> = {
+  free: "Free delivery",
+  standard: "Standard delivery",
+  special: "Special delivery",
+}
+
 const ShippingDetails = ({ order }: ShippingDetailsProps) => {
+  // Delivery in this checkout is captured as a tier in order.metadata (the
+  // fee is paid COD), not as a Medusa shipping_method — so shipping_methods is
+  // usually empty. Read the tier/fee from metadata, falling back to a real
+  // shipping method for any legacy orders that used one.
+  const meta = (order.metadata ?? {}) as {
+    delivery_tier?: string
+    delivery_fee_php?: number
+  }
+  const shippingMethod = order.shipping_methods?.[0] as
+    | { name?: string; total?: number }
+    | undefined
+
+  const methodName =
+    (meta.delivery_tier ? TIER_LABELS[meta.delivery_tier] : undefined) ??
+    shippingMethod?.name ??
+    "Delivery"
+  const methodAmount = meta.delivery_fee_php ?? shippingMethod?.total ?? 0
+
   return (
     <div>
       <Heading level="h2" className="flex flex-row text-3xl-regular my-6">
