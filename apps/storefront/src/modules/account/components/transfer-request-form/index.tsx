@@ -1,7 +1,7 @@
 "use client"
 import { createTransferRequest } from "@lib/data/orders"
 import { CheckCircleMiniSolid, XCircleSolid } from "@medusajs/icons"
-import { Heading, IconButton, Input, Text } from "@modules/common/components/ui"
+import { IconButton, Input } from "@modules/common/components/ui"
 import { useActionState } from "react"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
 import { useEffect, useState } from "react"
@@ -22,56 +22,53 @@ export default function TransferRequestForm() {
   }, [state.success, state.order])
 
   return (
-    <div className="flex flex-col gap-y-4 w-full">
-      <div className="grid sm:grid-cols-2 items-center gap-x-8 gap-y-4 w-full">
+    <div className="flex w-full flex-col gap-y-4 rounded-2xl border border-grey-10 bg-white p-5 shadow-soft small:p-6">
+      <div className="grid items-center gap-x-8 gap-y-4 sm:grid-cols-2">
         <div className="flex flex-col gap-y-1">
-          <Heading level="h3" className="!text-sm font-semibold text-neutral-950">
-            Order transfers
-          </Heading>
-          <p className="text-small-regular text-neutral-500">
-            Can&apos;t find the order you are looking for?
-            <br /> Connect an order to your account.
+          <h3 className="font-heading text-h3 text-grey-90">
+            Transfer an order
+          </h3>
+          <p className="text-body-sm text-grey-50">
+            Placed an order as a guest? Connect it to your account with its
+            order ID.
           </p>
         </div>
-        <form
-          action={formAction}
-          className="flex flex-col gap-y-1 sm:items-end"
-        >
-          <div className="flex flex-col gap-y-2 w-full">
-            <Input className="w-full" name="order_id" placeholder="Order ID" />
-            <SubmitButton
-              variant="secondary"
-              size="small"
-              className="w-fit whitespace-nowrap self-end"
-            >
-              Request transfer
-            </SubmitButton>
-          </div>
+        <form action={formAction} className="flex flex-col gap-y-2 sm:items-end">
+          <Input className="w-full" name="order_id" placeholder="Order ID" />
+          <SubmitButton
+            variant="secondary"
+            size="small"
+            className="w-fit self-end whitespace-nowrap"
+          >
+            Request transfer
+          </SubmitButton>
         </form>
       </div>
+
       {!state.success && state.error && (
-        <Text className="text-base-regular text-rose-500 text-right">
+        <p className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-body-sm text-rose-600">
           {state.error}
-        </Text>
+        </p>
       )}
+
       {showSuccess && (
-        <div className="flex justify-between p-4 bg-neutral-50 shadow-borders-base w-full self-stretch items-center">
-          <div className="flex gap-x-2 items-center">
-            <CheckCircleMiniSolid className="w-4 h-4 text-emerald-500" />
-            <div className="flex flex-col gap-y-1">
-              <Text className="text-medim-pl text-neutral-950">
-                Transfer for order {state.order?.id} requested
-              </Text>
-              <Text className="text-base-regular text-neutral-600">
-                Transfer request email sent to {state.order?.email}
-              </Text>
+        <div className="flex items-center justify-between gap-x-3 rounded-xl border border-brand-green-100 bg-brand-green-50 p-4">
+          <div className="flex items-center gap-x-3">
+            <CheckCircleMiniSolid className="h-5 w-5 shrink-0 text-brand-green-600" />
+            <div className="flex flex-col gap-y-0.5">
+              <p className="text-body-sm font-semibold text-grey-90">
+                Transfer requested for order {state.order?.id}
+              </p>
+              <p className="text-caption text-grey-50">
+                A confirmation email was sent to {state.order?.email}.
+              </p>
             </div>
           </div>
           <IconButton
             className="h-fit"
             onClick={() => setShowSuccess(false)}
           >
-            <XCircleSolid className="w-4 h-4 text-neutral-500" />
+            <XCircleSolid className="h-4 w-4 text-grey-50" />
           </IconButton>
         </div>
       )}
