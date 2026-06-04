@@ -51,17 +51,26 @@ const AddAddress = ({
   return (
     <>
       <button
-        className="border border-ui-border-base rounded-rounded p-5 min-h-[220px] h-full w-full flex flex-col justify-between"
+        className="group flex h-full min-h-[200px] w-full flex-col items-center justify-center gap-y-3 rounded-2xl border-2 border-dashed border-grey-20 bg-white p-6 text-center transition-all hover:border-brand-green-300 hover:bg-brand-green-50/40"
         onClick={open}
         data-testid="add-address-button"
       >
-        <span className="text-base-semi">New address</span>
-        <Plus />
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-green-50 text-brand-green-600 ring-1 ring-brand-green-100 transition-transform group-hover:scale-105">
+          <Plus />
+        </span>
+        <span className="flex flex-col gap-y-0.5">
+          <span className="font-heading text-h3 text-grey-90">New address</span>
+          <span className="text-caption text-grey-50">
+            Add a delivery location
+          </span>
+        </span>
       </button>
 
       <Modal isOpen={state} close={close} data-testid="add-address-modal">
         <Modal.Title>
-          <Heading className="mb-2">Add address</Heading>
+          <Heading className="mb-2 font-heading text-h3 text-grey-90">
+            Add address
+          </Heading>
         </Modal.Title>
         <form action={formAction}>
           <Modal.Body>
