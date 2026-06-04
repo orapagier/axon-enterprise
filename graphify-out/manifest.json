@@ -959,6 +959,11 @@
     "ast_hash": "4846b1f2174995192cc43d0cf5dcae42",
     "semantic_hash": "4846b1f2174995192cc43d0cf5dcae42"
   },
+  "/home/ramlej/MFH/freshhub/apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/default.tsx": {
+    "mtime": 1780574021.2029397,
+    "ast_hash": "ac53fe3e559231435170bdb76106835a",
+    "semantic_hash": ""
+  },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/membership/page.tsx": {
     "mtime": 1779223271.0653455,
     "ast_hash": "57c7a70d4063cab806ace33243674143",
@@ -1013,6 +1018,11 @@
     "mtime": 1779014865.562968,
     "ast_hash": "98c338897d2c1e628cebf491b5dc5177",
     "semantic_hash": "98c338897d2c1e628cebf491b5dc5177"
+  },
+  "/home/ramlej/MFH/freshhub/apps/storefront/src/app/[countryCode]/(main)/account/@login/default.tsx": {
+    "mtime": 1780573811.2338727,
+    "ast_hash": "380d7a6ff9aa87ce6fc422f6dd29020c",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/app/[countryCode]/(main)/products/[handle]/page.tsx": {
     "mtime": 1779014879.5194113,
