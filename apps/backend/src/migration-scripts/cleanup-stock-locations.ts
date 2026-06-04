@@ -43,6 +43,7 @@ export default async function cleanupStockLocations({ container }: ExecArgs) {
   const salesChannelModule = container.resolve(Modules.SALES_CHANNEL)
   const fulfillmentModule = container.resolve(Modules.FULFILLMENT)
   const inventoryModule = container.resolve(Modules.INVENTORY)
+  const storeModule = container.resolve(Modules.STORE)
 
   const locations = (await stockLocationModule.listStockLocations(
     {},
