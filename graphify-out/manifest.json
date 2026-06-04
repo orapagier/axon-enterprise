@@ -1994,6 +1994,11 @@
     "ast_hash": "b164cb72237768ec2ba93265570664a1",
     "semantic_hash": "b164cb72237768ec2ba93265570664a1"
   },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/cleanup-stock-locations.ts": {
+    "mtime": 1780575213.9670866,
+    "ast_hash": "8d3fbcabfb239dfecbf64ba7c6b22359",
+    "semantic_hash": ""
+  },
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/seed-pickup-windows.ts": {
     "mtime": 1779403916.988252,
     "ast_hash": "9537d28508d365fa1c4a1634dd5a3274",
@@ -2020,8 +2025,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/query-entry-points.d.ts": {
-    "mtime": 1780570269.359993,
-    "ast_hash": "6fa986873ec5e64de0efe13cf87fa373",
+    "mtime": 1780575217.6558442,
+    "ast_hash": "f77df708db39ce1b9bcd97e7ca5c1683",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/index.d.ts": {
@@ -2030,12 +2035,12 @@
     "semantic_hash": "92cfe3ea73a656c693052260d34e9dc5"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/modules-bindings.d.ts": {
-    "mtime": 1780570269.359993,
+    "mtime": 1780575217.6558442,
     "ast_hash": "563f921c0fc6762a8a77ccc8c275df39",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/entry.jsx": {
-    "mtime": 1780570268.39199,
+    "mtime": 1780575409.2699087,
     "ast_hash": "8b276d285c6e460a0c2c67b57ec8d943",
     "semantic_hash": "8b276d285c6e460a0c2c67b57ec8d943"
   },
@@ -2120,7 +2125,7 @@
     "semantic_hash": "6f36f79ab958b75e4fdaf581b92a1225"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/index.html": {
-    "mtime": 1780570268.39199,
+    "mtime": 1780575409.2699087,
     "ast_hash": "1f14bb0d5e89bc45a4265b714e6c6de6",
     "semantic_hash": "1f14bb0d5e89bc45a4265b714e6c6de6"
   },

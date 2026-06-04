@@ -1,18 +1,26 @@
 /**
  * One-time cleanup for the order-fulfillment "Location" dropdown.
  *
- * Before add-philippines-region.ts became idempotent, repeated runs created
- * duplicate "Mindanao Hub" stock locations. The default Medusa seed also
- * created a demo "European Warehouse" that is irrelevant to this PH-only store.
- * Both clutter the location dropdown on the order fulfillment screen.
+ * History: repeated runs of add-philippines-region.ts (before it became
+ * idempotent) created several empty "Mindanao Hub" stock locations, while the
+ * actual product inventory + sales-channel link still live on the default
+ * Medusa demo location ("European Warehouse"). The empty hubs clutter the
+ * location dropdown on the order fulfillment screen.
  *
- * This keeps a single canonical Mindanao Hub — the one holding the most
- * inventory (tie-break: a PH address, then the oldest) — soft-deletes every
- * other Mindanao Hub plus the European Warehouse, and re-wires the survivor to
- * the default sales channel, the manual fulfillment provider, and the PH
- * fulfillment set so fulfillment keeps working.
+ * This consolidates to a single canonical hub:
+ *   1. Picks the location that actually holds inventory (the "European
+ *      Warehouse") as the keeper — most inventory levels wins, tie-break a PH
+ *      address, then the oldest row.
+ *   2. Renames the keeper to "Mindanao Hub" with a PH address (so it stops
+ *      reading as a European demo warehouse) — this preserves all inventory
+ *      and the sales-channel link.
+ *   3. Soft-deletes every other stock location (the empty Mindanao Hub
+ *      duplicates), which also removes their fulfillment-set / provider links
+ *      so they drop out of the dropdown.
+ *   4. Re-wires the keeper to the default sales channel, the manual
+ *      fulfillment provider, and the PH "Philippines delivery" fulfillment set.
  *
- * Soft-delete is recoverable. Idempotent: re-running is a no-op once cleaned.
+ * Soft-delete + rename are recoverable. Idempotent: a no-op once cleaned.
  *
  * Run with:
  *   npx medusa exec ./src/migration-scripts/cleanup-stock-locations.ts
@@ -25,9 +33,11 @@ import {
 import {
   deleteStockLocationsWorkflow,
   linkSalesChannelsToStockLocationWorkflow,
+  updateStockLocationsWorkflow,
 } from "@medusajs/medusa/core-flows"
 
 const PH = "ph"
+const HUB_NAME = "Mindanao Hub"
 
 type Loc = {
   id: string
@@ -49,30 +59,27 @@ export default async function cleanupStockLocations({ container }: ExecArgs) {
     {},
     { relations: ["address"] }
   )) as unknown as Loc[]
-  logger.info(`Found ${locations.length} stock location(s).`)
+  logger.info(`Found ${locations.length} active stock location(s).`)
+
+  if (locations.length === 0) {
+    logger.warn("No stock locations found. Run add-philippines-region.ts first.")
+    return
+  }
 
   const isPh = (l: Loc) => l.address?.country_code?.toLowerCase() === PH
-  const isMindanao = (l: Loc) => l.name === "Mindanao Hub" || isPh(l)
 
-  const mindanaoHubs = locations.filter(isMindanao)
-  const europeWarehouses = locations.filter(
-    (l) => l.name === "European Warehouse"
-  )
-
-  // Count inventory levels per Mindanao Hub so we keep the one with real stock.
+  // Count inventory levels per location so the keeper is the one with real stock.
   const levelCount = new Map<string, number>()
-  if (mindanaoHubs.length > 1) {
-    const levels = await inventoryModule.listInventoryLevels(
-      { location_id: mindanaoHubs.map((l) => l.id) },
-      { take: 1_000_000, select: ["location_id"] }
-    )
-    for (const lvl of levels as { location_id: string }[]) {
-      levelCount.set(lvl.location_id, (levelCount.get(lvl.location_id) ?? 0) + 1)
-    }
+  const levels = await inventoryModule.listInventoryLevels(
+    { location_id: locations.map((l) => l.id) },
+    { take: 1_000_000 }
+  )
+  for (const lvl of levels as { location_id: string }[]) {
+    levelCount.set(lvl.location_id, (levelCount.get(lvl.location_id) ?? 0) + 1)
   }
 
   // Keeper ranking: most inventory → PH-addressed → oldest.
-  mindanaoHubs.sort((a, b) => {
+  const ranked = [...locations].sort((a, b) => {
     const invA = levelCount.get(a.id) ?? 0
     const invB = levelCount.get(b.id) ?? 0
     if (invB !== invA) return invB - invA
@@ -84,47 +91,48 @@ export default async function cleanupStockLocations({ container }: ExecArgs) {
       new Date(b.created_at ?? 0).getTime()
     )
   })
-  const keeper = mindanaoHubs[0] ?? null
+  const keeper = ranked[0]
+  logger.info(
+    `Keeping "${keeper.name}" (${keeper.id}) — ` +
+      `${levelCount.get(keeper.id) ?? 0} inventory level(s). Renaming to "${HUB_NAME}".`
+  )
 
-  if (mindanaoHubs.length === 0) {
-    logger.warn(
-      "No Mindanao Hub found. Run add-philippines-region.ts first; nothing to dedupe."
-    )
-  } else {
-    logger.info(
-      `Keeping Mindanao Hub: ${keeper!.id} ` +
-        `(stock entries: ${levelCount.get(keeper!.id) ?? 0}, ph: ${isPh(keeper!)}).`
-    )
-  }
-
-  const toDelete = [
-    ...mindanaoHubs.filter((l) => l.id !== keeper?.id),
-    ...europeWarehouses,
-  ]
-  const deleteIds = [...new Set(toDelete.map((l) => l.id))]
-
+  // ── 1. Soft-delete every other location (workflow removes their links) ──
+  const deleteIds = locations
+    .filter((l) => l.id !== keeper.id)
+    .map((l) => l.id)
   if (deleteIds.length === 0) {
-    logger.info("Nothing to delete — location list is already clean. ✅")
+    logger.info("No duplicate locations to delete.")
   } else {
     logger.info(
-      `Soft-deleting ${deleteIds.length} location(s): ` +
-        toDelete.map((l) => `${l.name} (${l.id})`).join(", ")
+      `Soft-deleting ${deleteIds.length} location(s): ${deleteIds.join(", ")}`
     )
     await deleteStockLocationsWorkflow(container).run({
       input: { ids: deleteIds },
     })
-    logger.info("Deleted duplicate / demo stock locations.")
   }
 
-  if (!keeper) {
-    logger.info("Cleanup finished (no Mindanao Hub to re-link).")
-    return
+  // ── 2. Rename + PH-ify the keeper (preserves inventory & links) ─────────
+  if (keeper.name !== HUB_NAME || !isPh(keeper)) {
+    await updateStockLocationsWorkflow(container).run({
+      input: {
+        selector: { id: keeper.id },
+        update: {
+          name: HUB_NAME,
+          address: {
+            city: "Davao City",
+            country_code: "PH",
+            address_1: "Mindanao Fresh Hub Warehouse",
+          },
+        },
+      },
+    })
+    logger.info(`Renamed keeper to "${HUB_NAME}" with a PH address.`)
   }
 
-  // ── Re-wire the survivor so fulfillment keeps working ──────────────
+  // ── 3. Ensure the keeper's links so fulfillment keeps working ───────────
 
-  // 1. Default sales channel (so the hub shows for store orders). The default
-  // is tracked on the store, not the sales channel itself.
+  // Default sales channel (tracked on the store, not the channel).
   const stores = await storeModule.listStores({})
   const defaultScId = (
     stores[0] as { default_sales_channel_id?: string } | undefined
@@ -145,7 +153,7 @@ export default async function cleanupStockLocations({ container }: ExecArgs) {
     }
   }
 
-  // 2. Manual fulfillment provider.
+  // Manual fulfillment provider.
   try {
     await link.create({
       [Modules.STOCK_LOCATION]: { stock_location_id: keeper.id },
@@ -156,7 +164,7 @@ export default async function cleanupStockLocations({ container }: ExecArgs) {
     logger.info(`Provider link already present: ${String(err)}`)
   }
 
-  // 3. PH fulfillment set.
+  // PH fulfillment set.
   const phSets = await fulfillmentModule.listFulfillmentSets({
     name: "Philippines delivery",
   })
@@ -171,7 +179,11 @@ export default async function cleanupStockLocations({ container }: ExecArgs) {
     } catch (err) {
       logger.info(`Fulfillment-set link already present: ${String(err)}`)
     }
+  } else {
+    logger.warn(
+      'No "Philippines delivery" fulfillment set found — run add-philippines-region.ts to create it.'
+    )
   }
 
-  logger.info("✅ Stock-location cleanup complete.")
+  logger.info("✅ Stock-location cleanup complete. One hub remains.")
 }
