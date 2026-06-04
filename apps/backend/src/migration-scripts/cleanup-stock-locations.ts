@@ -8,15 +8,14 @@
  * location dropdown on the order fulfillment screen.
  *
  * This consolidates to a single canonical hub:
- *   1. Picks the location that actually holds inventory (the "European
- *      Warehouse") as the keeper — most inventory levels wins, tie-break a PH
- *      address, then the oldest row.
- *   2. Renames the keeper to "Mindanao Hub" with a PH address (so it stops
- *      reading as a European demo warehouse) — this preserves all inventory
- *      and the sales-channel link.
+ *   1. Picks a keeper — the location with the most *active* inventory levels
+ *      wins; ties break to a PH address, then the oldest row. (If inventory has
+ *      been cleared, the PH-addressed/oldest hub is kept.)
+ *   2. Renames the keeper to "Mindanao Hub" with a PH address if it isn't
+ *      already — preserving its inventory and sales-channel link.
  *   3. Soft-deletes every other stock location (the empty Mindanao Hub
- *      duplicates), which also removes their fulfillment-set / provider links
- *      so they drop out of the dropdown.
+ *      duplicates and the demo "European Warehouse"), which also removes their
+ *      fulfillment-set / provider links so they drop out of the dropdown.
  *   4. Re-wires the keeper to the default sales channel, the manual
  *      fulfillment provider, and the PH "Philippines delivery" fulfillment set.
  *
