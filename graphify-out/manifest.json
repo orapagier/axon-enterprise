@@ -500,8 +500,8 @@
     "semantic_hash": "eb14d33abbc86b5eb6ebfc8328b2c9f1"
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/order/templates/order-completed-template.tsx": {
-    "mtime": 1779428916.7876265,
-    "ast_hash": "df2c5e6e787418642213b7d536ec87a5",
+    "mtime": 1780572660.5896819,
+    "ast_hash": "7015b6981fd7604651291290055e8d6e",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/order/components/transfer-image/index.tsx": {
@@ -510,14 +510,14 @@
     "semantic_hash": "e37a18cf1fbe5cfcdc099c2a7c8aa310"
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/order/components/dispatch-estimate/index.tsx": {
-    "mtime": 1779428905.4459155,
-    "ast_hash": "f95739762bb79f7101de2b2c0a3fc6d2",
+    "mtime": 1780572701.6670656,
+    "ast_hash": "44a6359fde1f3463b6f3e2e5cf78e8bd",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/order/components/payment-details/index.tsx": {
-    "mtime": 1779007605.5444722,
-    "ast_hash": "4aef13818492c6e9c7cb2fdc67e95e6c",
-    "semantic_hash": "4aef13818492c6e9c7cb2fdc67e95e6c"
+    "mtime": 1780573221.4422164,
+    "ast_hash": "a1ccc170138d7db06d31e5e689bb1479",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/order/components/order-summary/index.tsx": {
     "mtime": 1779007605.5444722,
@@ -525,18 +525,18 @@
     "semantic_hash": "9cc3855d9822a0e0505461a723389ac3"
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/order/components/items/index.tsx": {
-    "mtime": 1779007605.5444722,
-    "ast_hash": "dedc2bda473a99d7148964f319941687",
-    "semantic_hash": "dedc2bda473a99d7148964f319941687"
+    "mtime": 1780573022.704688,
+    "ast_hash": "9c054c505a6fc52b8ced4e8828c800bb",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/order/components/item/index.tsx": {
-    "mtime": 1779007605.5444722,
-    "ast_hash": "b6b04608ac1294199048a20c3493a1bb",
-    "semantic_hash": "b6b04608ac1294199048a20c3493a1bb"
+    "mtime": 1780573036.2413185,
+    "ast_hash": "dd1d9c993b27a1d5b33f8791e7ca1c0c",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/order/components/shipping-details/index.tsx": {
-    "mtime": 1780572014.0460148,
-    "ast_hash": "62df94ce311214ff7097fc08a8a881b5",
+    "mtime": 1780573075.632158,
+    "ast_hash": "ffc2da7e32aedd2ba085e664f2d0f9cb",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/order/components/transfer-actions/index.tsx": {
@@ -550,14 +550,14 @@
     "semantic_hash": "1b8f5870cf6d1a2d2ab314e699a449c4"
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/order/components/order-details/index.tsx": {
-    "mtime": 1779007605.5444722,
-    "ast_hash": "e135273bf9e1f83de96bb8eef7915f94",
-    "semantic_hash": "e135273bf9e1f83de96bb8eef7915f94"
+    "mtime": 1780572680.9178843,
+    "ast_hash": "89fdbd1dcb39617b9f93fffa70e48bca",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/order/components/help/index.tsx": {
-    "mtime": 1779007605.5444722,
-    "ast_hash": "f9bc9f6765bdff96b9996433b7438c60",
-    "semantic_hash": "f9bc9f6765bdff96b9996433b7438c60"
+    "mtime": 1780573235.146214,
+    "ast_hash": "fa2f1b81399c4d9d8dd88b12679463c9",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/store/templates/paginated-products.tsx": {
     "mtime": 1779875700.395949,
