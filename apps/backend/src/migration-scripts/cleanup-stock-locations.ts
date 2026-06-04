@@ -123,11 +123,16 @@ export default async function cleanupStockLocations({ container }: ExecArgs) {
 
   // ── Re-wire the survivor so fulfillment keeps working ──────────────
 
-  // 1. Default sales channel (so the hub shows for store orders).
+  // 1. Default sales channel (so the hub shows for store orders). The default
+  // is tracked on the store, not the sales channel itself.
+  const stores = await storeModule.listStores({})
+  const defaultScId = (
+    stores[0] as { default_sales_channel_id?: string } | undefined
+  )?.default_sales_channel_id
   const salesChannels = await salesChannelModule.listSalesChannels({})
   const defaultSc =
-    salesChannels.find((s) => s.is_default) ??
-    salesChannels.find((s) => s.name === "Default Sales Channel") ??
+    (defaultScId && salesChannels.find((s) => s.id === defaultScId)) ||
+    salesChannels.find((s) => s.name === "Default Sales Channel") ||
     salesChannels[0]
   if (defaultSc) {
     try {
