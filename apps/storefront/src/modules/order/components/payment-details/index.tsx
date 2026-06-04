@@ -36,6 +36,10 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
   const goodsTotal = payment?.amount ?? order.total ?? 0
   const dueOnDelivery = goodsTotal + (cod ? deliveryFee : 0)
 
+  const cardLast4 = (
+    payment?.data as { card_last4?: string } | null | undefined
+  )?.card_last4
+
   return (
     <section className="flex h-full flex-col rounded-2xl border border-grey-10 bg-white p-6 shadow-soft small:p-7">
       <div className="mb-5 flex items-center gap-x-2.5">
