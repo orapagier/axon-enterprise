@@ -3963,7 +3963,7 @@
       "source_file": "apps/storefront/src/modules/order/components/order-summary/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_order_components_order_summary_index_tsx",
-      "community": 2,
+      "community": 243,
       "norm_label": "index.tsx"
     },
     {
@@ -3972,7 +3972,7 @@
       "source_file": "apps/storefront/src/modules/order/components/order-summary/index.tsx",
       "source_location": "L4",
       "id": "order_summary_index_ordersummaryprops",
-      "community": 2,
+      "community": 243,
       "norm_label": "ordersummaryprops"
     },
     {
@@ -3981,7 +3981,7 @@
       "source_file": "apps/storefront/src/modules/order/components/order-summary/index.tsx",
       "source_location": "L8",
       "id": "order_summary_index_ordersummary",
-      "community": 2,
+      "community": 243,
       "norm_label": "ordersummary()"
     },
     {
@@ -6105,7 +6105,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/nav-search/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_layout_components_nav_search_index_tsx",
-      "community": 130,
+      "community": 241,
       "norm_label": "index.tsx"
     },
     {
@@ -6114,7 +6114,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/nav-search/index.tsx",
       "source_location": "L9",
       "id": "nav_search_index_navsearch",
-      "community": 130,
+      "community": 241,
       "norm_label": "navsearch()"
     },
     {
@@ -7680,7 +7680,7 @@
       "source_file": "apps/storefront/src/lib/data/search.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_search_ts",
-      "community": 130,
+      "community": 241,
       "norm_label": "search.ts"
     },
     {
@@ -7689,7 +7689,7 @@
       "source_file": "apps/storefront/src/lib/data/search.ts",
       "source_location": "L5",
       "id": "data_search_searchhit",
-      "community": 130,
+      "community": 241,
       "norm_label": "searchhit"
     },
     {
@@ -7698,7 +7698,7 @@
       "source_file": "apps/storefront/src/lib/data/search.ts",
       "source_location": "L14",
       "id": "data_search_searchproducts",
-      "community": 130,
+      "community": 241,
       "norm_label": "searchproducts()"
     },
     {
@@ -7707,7 +7707,7 @@
       "source_file": "apps/storefront/src/lib/data/products.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_products_ts",
-      "community": 130,
+      "community": 22,
       "norm_label": "products.ts"
     },
     {
@@ -7779,7 +7779,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L62",
       "id": "data_cookies_removeauthtoken",
-      "community": 34,
+      "community": 135,
       "norm_label": "removeauthtoken()"
     },
     {
@@ -7806,7 +7806,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L84",
       "id": "data_cookies_removecartid",
-      "community": 34,
+      "community": 1,
       "norm_label": "removecartid()"
     },
     {
@@ -7860,7 +7860,7 @@
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_regions_ts",
-      "community": 130,
+      "community": 22,
       "norm_label": "regions.ts"
     },
     {
@@ -7878,7 +7878,7 @@
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L21",
       "id": "data_regions_retrieveregion",
-      "community": 130,
+      "community": 22,
       "norm_label": "retrieveregion()"
     },
     {
@@ -8040,7 +8040,7 @@
       "source_file": "apps/storefront/src/lib/data/cart.ts",
       "source_location": "L467",
       "id": "data_cart_placeorder",
-      "community": 34,
+      "community": 1,
       "norm_label": "placeorder()"
     },
     {
@@ -8058,7 +8058,7 @@
       "source_file": "apps/storefront/src/lib/data/cart.ts",
       "source_location": "L537",
       "id": "data_cart_listcartoptions",
-      "community": 22,
+      "community": 1,
       "norm_label": "listcartoptions()"
     },
     {
@@ -8067,7 +8067,7 @@
       "source_file": "apps/storefront/src/lib/data/locale-actions.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_locale_actions_ts",
-      "community": 1,
+      "community": 34,
       "norm_label": "locale-actions.ts"
     },
     {
@@ -8076,7 +8076,7 @@
       "source_file": "apps/storefront/src/lib/data/locale-actions.ts",
       "source_location": "L13",
       "id": "data_locale_actions_getlocale",
-      "community": 1,
+      "community": 245,
       "norm_label": "getlocale()"
     },
     {
@@ -8085,7 +8085,7 @@
       "source_file": "apps/storefront/src/lib/data/locale-actions.ts",
       "source_location": "L25",
       "id": "data_locale_actions_setlocalecookie",
-      "community": 1,
+      "community": 34,
       "norm_label": "setlocalecookie()"
     },
     {
@@ -8094,7 +8094,7 @@
       "source_file": "apps/storefront/src/lib/data/locale-actions.ts",
       "source_location": "L39",
       "id": "data_locale_actions_updatelocale",
-      "community": 1,
+      "community": 34,
       "norm_label": "updatelocale()"
     },
     {
@@ -8742,7 +8742,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L419",
       "id": "data_customer_signout",
-      "community": 34,
+      "community": 135,
       "norm_label": "signout()"
     },
     {
@@ -9048,7 +9048,7 @@
       "source_file": "apps/storefront/src/lib/util/get-locale-header.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_util_get_locale_header_ts",
-      "community": 1,
+      "community": 245,
       "norm_label": "get-locale-header.ts"
     },
     {
@@ -9057,7 +9057,7 @@
       "source_file": "apps/storefront/src/lib/util/get-locale-header.ts",
       "source_location": "L3",
       "id": "util_get_locale_header_getlocaleheader",
-      "community": 1,
+      "community": 245,
       "norm_label": "getlocaleheader()"
     },
     {
@@ -10794,7 +10794,7 @@
       "source_file": "apps/backend/src/modules/pickup/models/pickup-window.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_pickup_models_pickup_window_ts",
-      "community": 157,
+      "community": 242,
       "norm_label": "pickup-window.ts"
     },
     {
@@ -10803,7 +10803,7 @@
       "source_file": "apps/backend/src/modules/pickup/models/pickup-window.ts",
       "source_location": "L4",
       "id": "models_pickup_window_pickupwindow",
-      "community": 157,
+      "community": 242,
       "norm_label": "pickupwindow"
     },
     {
@@ -10812,7 +10812,7 @@
       "source_file": "apps/backend/src/modules/pickup/models/pickup-slot.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_pickup_models_pickup_slot_ts",
-      "community": 157,
+      "community": 242,
       "norm_label": "pickup-slot.ts"
     },
     {
@@ -10821,7 +10821,7 @@
       "source_file": "apps/backend/src/modules/pickup/models/pickup-slot.ts",
       "source_location": "L4",
       "id": "models_pickup_slot_pickupslot",
-      "community": 157,
+      "community": 242,
       "norm_label": "pickupslot"
     },
     {
@@ -12675,7 +12675,7 @@
       "source_file": "apps/backend/src/api/admin/listings/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_listings_route_ts",
-      "community": 183,
+      "community": 157,
       "norm_label": "route.ts"
     },
     {
@@ -12684,7 +12684,7 @@
       "source_file": "apps/backend/src/api/admin/listings/route.ts",
       "source_location": "L18",
       "id": "listings_route_get",
-      "community": 183,
+      "community": 157,
       "norm_label": "get()"
     },
     {
@@ -12693,7 +12693,7 @@
       "source_file": "apps/backend/src/api/admin/listings/[id]/reject/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_listings_id_reject_route_ts",
-      "community": 183,
+      "community": 157,
       "norm_label": "route.ts"
     },
     {
@@ -12702,7 +12702,7 @@
       "source_file": "apps/backend/src/api/admin/listings/[id]/reject/route.ts",
       "source_location": "L23",
       "id": "reject_route_post",
-      "community": 183,
+      "community": 157,
       "norm_label": "post()"
     },
     {
@@ -14650,10 +14650,19 @@
       "norm_label": "codtransaction"
     },
     {
-      "label": "ProductListingListingTypeEnum",
+      "label": "HubBarangayFee",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
       "source_location": "L43",
+      "id": "types_query_entry_points_d_hubbarangayfee",
+      "community": 0,
+      "norm_label": "hubbarangayfee"
+    },
+    {
+      "label": "ProductListingListingTypeEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L56",
       "id": "types_query_entry_points_d_productlistinglistingtypeenum",
       "community": 0,
       "norm_label": "productlistinglistingtypeenum"
@@ -14662,7 +14671,7 @@
       "label": "ProductListingStatusEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L47",
+      "source_location": "L60",
       "id": "types_query_entry_points_d_productlistingstatusenum",
       "community": 0,
       "norm_label": "productlistingstatusenum"
@@ -14671,25 +14680,25 @@
       "label": "ProductListing",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L55",
+      "source_location": "L68",
       "id": "types_query_entry_points_d_productlisting",
       "community": 0,
       "norm_label": "productlisting"
     },
     {
-      "label": "HubBarangayFee",
+      "label": "SalesChannel",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L71",
-      "id": "types_query_entry_points_d_hubbarangayfee",
+      "source_location": "L84",
+      "id": "types_query_entry_points_d_saleschannel",
       "community": 0,
-      "norm_label": "hubbarangayfee"
+      "norm_label": "saleschannel"
     },
     {
       "label": "ApiKeyTypeEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L84",
+      "source_location": "L103",
       "id": "types_query_entry_points_d_apikeytypeenum",
       "community": 0,
       "norm_label": "apikeytypeenum"
@@ -14698,19 +14707,10 @@
       "label": "ApiKey",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L88",
+      "source_location": "L107",
       "id": "types_query_entry_points_d_apikey",
       "community": 0,
       "norm_label": "apikey"
-    },
-    {
-      "label": "SalesChannel",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L107",
-      "id": "types_query_entry_points_d_saleschannel",
-      "community": 0,
-      "norm_label": "saleschannel"
     },
     {
       "label": "Hub",
@@ -14731,46 +14731,10 @@
       "norm_label": "hubarea"
     },
     {
-      "label": "DispatchBatchStatusEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L166",
-      "id": "types_query_entry_points_d_dispatchbatchstatusenum",
-      "community": 0,
-      "norm_label": "dispatchbatchstatusenum"
-    },
-    {
-      "label": "DispatchBatch",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L172",
-      "id": "types_query_entry_points_d_dispatchbatch",
-      "community": 0,
-      "norm_label": "dispatchbatch"
-    },
-    {
-      "label": "DispatchOrderDeliveryStatusEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L188",
-      "id": "types_query_entry_points_d_dispatchorderdeliverystatusenum",
-      "community": 0,
-      "norm_label": "dispatchorderdeliverystatusenum"
-    },
-    {
-      "label": "DispatchOrder",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L195",
-      "id": "types_query_entry_points_d_dispatchorder",
-      "community": 0,
-      "norm_label": "dispatchorder"
-    },
-    {
       "label": "PickupWindowStatusEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L212",
+      "source_location": "L166",
       "id": "types_query_entry_points_d_pickupwindowstatusenum",
       "community": 0,
       "norm_label": "pickupwindowstatusenum"
@@ -14779,7 +14743,7 @@
       "label": "PickupWindow",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L218",
+      "source_location": "L172",
       "id": "types_query_entry_points_d_pickupwindow",
       "community": 0,
       "norm_label": "pickupwindow"
@@ -14788,7 +14752,7 @@
       "label": "PickupSlotStatusEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L237",
+      "source_location": "L191",
       "id": "types_query_entry_points_d_pickupslotstatusenum",
       "community": 0,
       "norm_label": "pickupslotstatusenum"
@@ -14797,34 +14761,52 @@
       "label": "PickupSlot",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L243",
+      "source_location": "L197",
       "id": "types_query_entry_points_d_pickupslot",
       "community": 0,
       "norm_label": "pickupslot"
     },
     {
-      "label": "StockLocationAddress",
+      "label": "DispatchBatchStatusEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L260",
-      "id": "types_query_entry_points_d_stocklocationaddress",
+      "source_location": "L214",
+      "id": "types_query_entry_points_d_dispatchbatchstatusenum",
       "community": 0,
-      "norm_label": "stocklocationaddress"
+      "norm_label": "dispatchbatchstatusenum"
     },
     {
-      "label": "StockLocation",
+      "label": "DispatchBatch",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L278",
-      "id": "types_query_entry_points_d_stocklocation",
+      "source_location": "L220",
+      "id": "types_query_entry_points_d_dispatchbatch",
       "community": 0,
-      "norm_label": "stocklocation"
+      "norm_label": "dispatchbatch"
+    },
+    {
+      "label": "DispatchOrderDeliveryStatusEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L236",
+      "id": "types_query_entry_points_d_dispatchorderdeliverystatusenum",
+      "community": 0,
+      "norm_label": "dispatchorderdeliverystatusenum"
+    },
+    {
+      "label": "DispatchOrder",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L243",
+      "id": "types_query_entry_points_d_dispatchorder",
+      "community": 0,
+      "norm_label": "dispatchorder"
     },
     {
       "label": "RefusalDisputeBuyerReasonEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L296",
+      "source_location": "L260",
       "id": "types_query_entry_points_d_refusaldisputebuyerreasonenum",
       "community": 0,
       "norm_label": "refusaldisputebuyerreasonenum"
@@ -14833,7 +14815,7 @@
       "label": "RefusalDisputeResolutionEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L302",
+      "source_location": "L266",
       "id": "types_query_entry_points_d_refusaldisputeresolutionenum",
       "community": 0,
       "norm_label": "refusaldisputeresolutionenum"
@@ -14842,7 +14824,7 @@
       "label": "RefusalDispute",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L309",
+      "source_location": "L273",
       "id": "types_query_entry_points_d_refusaldispute",
       "community": 0,
       "norm_label": "refusaldispute"
@@ -14851,7 +14833,7 @@
       "label": "BuyerAccountStatusStateEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L334",
+      "source_location": "L298",
       "id": "types_query_entry_points_d_buyeraccountstatusstateenum",
       "community": 0,
       "norm_label": "buyeraccountstatusstateenum"
@@ -14860,34 +14842,34 @@
       "label": "BuyerAccountStatus",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L340",
+      "source_location": "L304",
       "id": "types_query_entry_points_d_buyeraccountstatus",
       "community": 0,
       "norm_label": "buyeraccountstatus"
     },
     {
-      "label": "WorkflowExecutionStateEnum",
+      "label": "StockLocationAddress",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L356",
-      "id": "types_query_entry_points_d_workflowexecutionstateenum",
+      "source_location": "L320",
+      "id": "types_query_entry_points_d_stocklocationaddress",
       "community": 0,
-      "norm_label": "workflowexecutionstateenum"
+      "norm_label": "stocklocationaddress"
     },
     {
-      "label": "WorkflowExecution",
+      "label": "StockLocation",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L365",
-      "id": "types_query_entry_points_d_workflowexecution",
+      "source_location": "L338",
+      "id": "types_query_entry_points_d_stocklocation",
       "community": 0,
-      "norm_label": "workflowexecution"
+      "norm_label": "stocklocation"
     },
     {
       "label": "User",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L380",
+      "source_location": "L356",
       "id": "types_query_entry_points_d_user",
       "community": 0,
       "norm_label": "user"
@@ -14896,10 +14878,28 @@
       "label": "Invite",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L393",
+      "source_location": "L369",
       "id": "types_query_entry_points_d_invite",
       "community": 0,
       "norm_label": "invite"
+    },
+    {
+      "label": "WorkflowExecutionStateEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L382",
+      "id": "types_query_entry_points_d_workflowexecutionstateenum",
+      "community": 0,
+      "norm_label": "workflowexecutionstateenum"
+    },
+    {
+      "label": "WorkflowExecution",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L391",
+      "id": "types_query_entry_points_d_workflowexecution",
+      "community": 0,
+      "norm_label": "workflowexecution"
     },
     {
       "label": "InventoryItem",
@@ -14929,37 +14929,10 @@
       "norm_label": "reservationitem"
     },
     {
-      "label": "ViewConfiguration",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L469",
-      "id": "types_query_entry_points_d_viewconfiguration",
-      "community": 0,
-      "norm_label": "viewconfiguration"
-    },
-    {
-      "label": "UserPreference",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L482",
-      "id": "types_query_entry_points_d_userpreference",
-      "community": 0,
-      "norm_label": "userpreference"
-    },
-    {
-      "label": "PropertyLabel",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L493",
-      "id": "types_query_entry_points_d_propertylabel",
-      "community": 0,
-      "norm_label": "propertylabel"
-    },
-    {
       "label": "Store",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L505",
+      "source_location": "L469",
       "id": "types_query_entry_points_d_store",
       "community": 0,
       "norm_label": "store"
@@ -14968,7 +14941,7 @@
       "label": "StoreCurrency",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L520",
+      "source_location": "L484",
       "id": "types_query_entry_points_d_storecurrency",
       "community": 0,
       "norm_label": "storecurrency"
@@ -14977,10 +14950,37 @@
       "label": "StoreLocale",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L533",
+      "source_location": "L497",
       "id": "types_query_entry_points_d_storelocale",
       "community": 0,
       "norm_label": "storelocale"
+    },
+    {
+      "label": "ViewConfiguration",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L508",
+      "id": "types_query_entry_points_d_viewconfiguration",
+      "community": 0,
+      "norm_label": "viewconfiguration"
+    },
+    {
+      "label": "UserPreference",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L521",
+      "id": "types_query_entry_points_d_userpreference",
+      "community": 0,
+      "norm_label": "userpreference"
+    },
+    {
+      "label": "PropertyLabel",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L532",
+      "id": "types_query_entry_points_d_propertylabel",
+      "community": 0,
+      "norm_label": "propertylabel"
     },
     {
       "label": "CustomerAddress",
@@ -15685,64 +15685,10 @@
       "norm_label": "currency"
     },
     {
-      "label": "Region",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2048",
-      "id": "types_query_entry_points_d_region",
-      "community": 0,
-      "norm_label": "region"
-    },
-    {
-      "label": "Country",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2065",
-      "id": "types_query_entry_points_d_country",
-      "community": 0,
-      "norm_label": "country"
-    },
-    {
-      "label": "TaxRate",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2080",
-      "id": "types_query_entry_points_d_taxrate",
-      "community": 0,
-      "norm_label": "taxrate"
-    },
-    {
-      "label": "TaxRegion",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2098",
-      "id": "types_query_entry_points_d_taxregion",
-      "community": 0,
-      "norm_label": "taxregion"
-    },
-    {
-      "label": "TaxRateRule",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2116",
-      "id": "types_query_entry_points_d_taxraterule",
-      "community": 0,
-      "norm_label": "taxraterule"
-    },
-    {
-      "label": "TaxProvider",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2130",
-      "id": "types_query_entry_points_d_taxprovider",
-      "community": 0,
-      "norm_label": "taxprovider"
-    },
-    {
       "label": "AccountHolder",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2140",
+      "source_location": "L2048",
       "id": "types_query_entry_points_d_accountholder",
       "community": 0,
       "norm_label": "accountholder"
@@ -15751,7 +15697,7 @@
       "label": "Capture",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2155",
+      "source_location": "L2063",
       "id": "types_query_entry_points_d_capture",
       "community": 0,
       "norm_label": "capture"
@@ -15760,7 +15706,7 @@
       "label": "PaymentCollectionStatusEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2169",
+      "source_location": "L2077",
       "id": "types_query_entry_points_d_paymentcollectionstatusenum",
       "community": 0,
       "norm_label": "paymentcollectionstatusenum"
@@ -15769,7 +15715,7 @@
       "label": "PaymentCollection",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2179",
+      "source_location": "L2087",
       "id": "types_query_entry_points_d_paymentcollection",
       "community": 0,
       "norm_label": "paymentcollection"
@@ -15778,7 +15724,7 @@
       "label": "PaymentProvider",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2206",
+      "source_location": "L2114",
       "id": "types_query_entry_points_d_paymentprovider",
       "community": 0,
       "norm_label": "paymentprovider"
@@ -15787,7 +15733,7 @@
       "label": "PaymentSessionStatusEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2218",
+      "source_location": "L2126",
       "id": "types_query_entry_points_d_paymentsessionstatusenum",
       "community": 0,
       "norm_label": "paymentsessionstatusenum"
@@ -15796,7 +15742,7 @@
       "label": "Payment",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2226",
+      "source_location": "L2134",
       "id": "types_query_entry_points_d_payment",
       "community": 0,
       "norm_label": "payment"
@@ -15805,7 +15751,7 @@
       "label": "PaymentSession",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2248",
+      "source_location": "L2156",
       "id": "types_query_entry_points_d_paymentsession",
       "community": 0,
       "norm_label": "paymentsession"
@@ -15814,7 +15760,7 @@
       "label": "RefundReason",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2268",
+      "source_location": "L2176",
       "id": "types_query_entry_points_d_refundreason",
       "community": 0,
       "norm_label": "refundreason"
@@ -15823,10 +15769,64 @@
       "label": "Refund",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2281",
+      "source_location": "L2189",
       "id": "types_query_entry_points_d_refund",
       "community": 0,
       "norm_label": "refund"
+    },
+    {
+      "label": "Region",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2206",
+      "id": "types_query_entry_points_d_region",
+      "community": 0,
+      "norm_label": "region"
+    },
+    {
+      "label": "Country",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2223",
+      "id": "types_query_entry_points_d_country",
+      "community": 0,
+      "norm_label": "country"
+    },
+    {
+      "label": "TaxRate",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2238",
+      "id": "types_query_entry_points_d_taxrate",
+      "community": 0,
+      "norm_label": "taxrate"
+    },
+    {
+      "label": "TaxRegion",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2256",
+      "id": "types_query_entry_points_d_taxregion",
+      "community": 0,
+      "norm_label": "taxregion"
+    },
+    {
+      "label": "TaxRateRule",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2274",
+      "id": "types_query_entry_points_d_taxraterule",
+      "community": 0,
+      "norm_label": "taxraterule"
+    },
+    {
+      "label": "TaxProvider",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2288",
+      "id": "types_query_entry_points_d_taxprovider",
+      "community": 0,
+      "norm_label": "taxprovider"
     },
     {
       "label": "NotificationStatusEnum",
@@ -18992,7 +18992,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L35",
-      "community": 130,
+      "community": 22,
       "norm_label": "regionmap",
       "id": "data_regions_regionmap"
     },
@@ -39529,9 +39529,9 @@
       "source_file": "apps/backend/src/api/store/carts/[id]/line-items/route.ts",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_store_carts_id_line_items_route_ts",
-      "target": "line_items_route_post",
-      "confidence_score": 1.0
+      "target": "line_items_route_post"
     },
     {
       "relation": "contains",
@@ -42158,6 +42158,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L48",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_hubbarangayfee"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
       "source_location": "L20",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -42188,11 +42198,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L48",
+      "source_location": "L20",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_hubbarangayfee"
+      "target": "types_query_entry_points_d_saleschannel"
     },
     {
       "relation": "contains",
@@ -42218,16 +42228,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_saleschannel"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
       "source_location": "L103",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -42243,46 +42243,6 @@
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
       "target": "types_query_entry_points_d_hubarea"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L303",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_dispatchbatchstatusenum"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L309",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_dispatchbatch"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L325",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_dispatchorderdeliverystatusenum"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L332",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_dispatchorder"
     },
     {
       "relation": "contains",
@@ -42328,21 +42288,41 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L62",
+      "source_location": "L303",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_stocklocationaddress"
+      "target": "types_query_entry_points_d_dispatchbatchstatusenum"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L80",
+      "source_location": "L309",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_stocklocation"
+      "target": "types_query_entry_points_d_dispatchbatch"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L325",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_dispatchorderdeliverystatusenum"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L332",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_dispatchorder"
     },
     {
       "relation": "contains",
@@ -42398,21 +42378,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L124",
+      "source_location": "L62",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_workflowexecutionstateenum"
+      "target": "types_query_entry_points_d_stocklocationaddress"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L133",
+      "source_location": "L80",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_workflowexecution"
+      "target": "types_query_entry_points_d_stocklocation"
     },
     {
       "relation": "contains",
@@ -42433,6 +42413,26 @@
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
       "target": "types_query_entry_points_d_invite"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L124",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_workflowexecutionstateenum"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L133",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_workflowexecution"
     },
     {
       "relation": "contains",
@@ -42468,36 +42468,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L250",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_viewconfiguration"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L263",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_userpreference"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L274",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_propertylabel"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
       "source_location": "L211",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -42523,6 +42493,36 @@
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
       "target": "types_query_entry_points_d_storelocale"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L250",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_viewconfiguration"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L263",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_userpreference"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L274",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_propertylabel"
     },
     {
       "relation": "contains",
@@ -43308,66 +43308,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L1978",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_region"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L1995",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_country"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2196",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_taxrate"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2214",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_taxregion"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2232",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_taxraterule"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2246",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_taxprovider"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
       "source_location": "L2038",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -43463,6 +43403,66 @@
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
       "target": "types_query_entry_points_d_refund"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L1978",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_region"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L1995",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_country"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2196",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_taxrate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2214",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_taxregion"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2232",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_taxraterule"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2246",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_taxprovider"
     },
     {
       "relation": "contains",
@@ -46846,5 +46846,5 @@
       "source_file": "apps/backend/src/workflows/README.md"
     }
   ],
-  "built_at_commit": "aa7494f87f59bc1698ac536aff6e9ffd1541939e"
+  "built_at_commit": "323f7c291df29e20122f864620509f49ec9cde3a"
 }

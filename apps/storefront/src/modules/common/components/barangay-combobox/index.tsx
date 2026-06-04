@@ -99,7 +99,7 @@ const BarangayCombobox: React.FC<Props> = ({
         }}
         disabled={isDisabled}
       >
-        <div className="relative z-0 w-full txt-compact-medium">
+        <div className="relative z-30 w-full txt-compact-medium">
           <ComboboxInput
             className={clx(
               "block w-full h-11 pt-4 pb-1 px-4 pr-10 bg-ui-bg-field border rounded-md txt-compact-medium",
