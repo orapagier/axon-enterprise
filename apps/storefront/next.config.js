@@ -19,10 +19,16 @@ const nextConfig = {
     },
   },
   eslint: {
+    // ESLint is run as a separate (non-blocking) CI step rather than gating the
+    // build: the legacy lint backlog hasn't been triaged yet, and the toolchain
+    // needs the scoped `ajv` override in the root package.json to even run.
+    // Flip this to `false` once `npm run lint` is clean.
     ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: true,
+    // Type errors now fail the build. The codebase typechecks clean today
+    // (`tsc --noEmit`), so keep this honest — a broken type is a broken build.
+    ignoreBuildErrors: false,
   },
   experimental: {
     // Seller listing photos are forwarded through a server action; the
