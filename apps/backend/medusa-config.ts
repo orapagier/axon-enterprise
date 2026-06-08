@@ -146,10 +146,6 @@ const customModules: Record<string, unknown>[] = [
 module.exports = defineConfig({
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
-    // Shared Redis for Medusa internals (sessions, etc.). The infra modules
-    // below get their own explicit connections; this stops the "fake redis"
-    // fallback for the components that read it from projectConfig.
-    redisUrl: REDIS_URL,
     http: {
       storeCors: process.env.STORE_CORS!,
       adminCors: process.env.ADMIN_CORS!,
