@@ -1,6 +1,9 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
-import { createProductsWorkflow } from "@medusajs/medusa/core-flows"
+import {
+  createProductsWorkflow,
+  deleteProductsWorkflow,
+} from "@medusajs/medusa/core-flows"
 import { LISTING_MODULE } from "../../../../modules/listing"
 import ListingModuleService from "../../../../modules/listing/service"
 import {
@@ -11,6 +14,7 @@ import { validateSlotReserve } from "../../../../modules/pickup/validators"
 import { PICKUP_MODULE } from "../../../../modules/pickup"
 import PickupModuleService from "../../../../modules/pickup/service"
 import { HUB_MODULE } from "../../../../modules/hub"
+import reservePickupSlotWorkflow from "../../../../workflows/reserve-pickup-slot"
 
 type StoreCustomer = {
   id: string
