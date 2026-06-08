@@ -1,0 +1,14 @@
+**/node_modules
+**/.next
+**/out
+**/dist
+**/build
+apps/backend/.medusa
+.git
+.turbo
+**/.env
+**/.env.*
+!**/.env.template
+graphify-out
+coverage
+*.log
