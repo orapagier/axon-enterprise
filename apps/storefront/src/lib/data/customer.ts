@@ -30,6 +30,14 @@ export type AuthMode = "signin" | "signup"
 const PENDING_AUTH_COOKIE = "_mfh_pending_auth"
 const PENDING_AUTH_TTL_SECONDS = 10 * 60
 
+// OTP abuse limits (per browser). A short cooldown stops rapid resends and a
+// rolling window caps total sends to blunt email-bombing. IP/edge-level limits
+// remain a recommended additional layer.
+const OTP_THROTTLE_COOKIE = "_mfh_otp_throttle"
+const OTP_RESEND_COOLDOWN_MS = 30 * 1000
+const OTP_MAX_SENDS_PER_WINDOW = 5
+const OTP_WINDOW_MS = 15 * 60 * 1000
+
 type PendingAuth = {
   email: string
   codeHash: string
