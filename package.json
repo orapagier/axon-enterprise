@@ -30,6 +30,9 @@
     "!apps/backend/.medusa/**"
   ],
   "overrides": {
-    "ajv": "^8.0.0"
+    "ajv": "^8.0.0",
+    "@eslint/eslintrc": {
+      "ajv": "^6.12.6"
+    }
   }
 }
