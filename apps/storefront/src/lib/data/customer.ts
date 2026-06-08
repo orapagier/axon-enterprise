@@ -17,6 +17,7 @@ import {
 } from "./cookies"
 import { MEMBERSHIP_META } from "@lib/util/membership"
 import { syncCustomerHubFromCookie } from "@modules/hub/actions/set-hub"
+import { sendOtpEmail } from "@lib/email/send-otp"
 
 // Naming follows the founder's initials, "CPT":
 //   Consumer — household buyers ordering for their own kitchen.
