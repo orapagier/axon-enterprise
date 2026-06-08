@@ -59,15 +59,33 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     (req as unknown as { auth_context?: { actor_id?: string } }).auth_context
       ?.actor_id ?? null
 
-  const tx = await ledger.createCodTransactions({
-    customer_id: order.customer_id,
-    order_id: orderId,
-    type: "rider_remitted",
-    amount: body.amount,
-    rider_id: body.rider_id,
-    recorded_by: actorId,
-    notes: body.notes ?? null,
-  })
+  let tx
+  try {
+    tx = await ledger.createCodTransactions({
+      customer_id: order.customer_id,
+      order_id: orderId,
+      type: "rider_remitted",
+      amount: body.amount,
+      rider_id: body.rider_id,
+      recorded_by: actorId,
+      notes: body.notes ?? null,
+    })
+  } catch (err) {
+    // Lost the race against a concurrent remit: the unique index rejected the
+    // second insert. Surface it as the same 409 the read check returns.
+    if (isDuplicateCodTransaction(err)) {
+      const [existingRow] = await ledger.listCodTransactions(
+        { order_id: orderId, type: "rider_remitted" },
+        { take: 1 }
+      )
+      res.status(409).json({
+        error: "Order already marked as rider_remitted.",
+        transaction: existingRow,
+      })
+      return
+    }
+    throw err
+  }
 
   res.status(201).json({ transaction: tx })
 }
