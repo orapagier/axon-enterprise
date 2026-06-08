@@ -382,12 +382,16 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     }
   } catch (err) {
     console.error("Failed to create listing row or link:", err)
+    // Roll back the orphaned product so a failed listing doesn't leave a
+    // dangling draft behind.
+    await deleteProductsWorkflow(req.scope)
+      .run({ input: { ids: [product.id] } })
+      .catch((e) => console.error("Orphan product cleanup failed:", e))
     res.status(500).json({
       error:
         err instanceof Error
           ? `Listing record failed: ${err.message}`
           : "Could not record the listing for this product.",
-      product,
     })
     return
   }
