@@ -50,7 +50,10 @@ if (REDIS_URL) {
     {
       key: Modules.WORKFLOW_ENGINE,
       resolve: '@medusajs/workflow-engine-redis',
-      options: { redisUrl: REDIS_URL },
+      // NOTE: this module still reads `options.redis.url`. It logs a
+      // deprecation hint about `redisUrl`, but passing `redisUrl` instead makes
+      // `options.redis` undefined and the loader crashes — keep the nested form.
+      options: { redis: { url: REDIS_URL } },
     },
     {
       key: Modules.LOCKING,
