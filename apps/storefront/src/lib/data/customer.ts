@@ -35,9 +35,6 @@ type PendingAuth = {
   codeHash: string
   mode: AuthMode
   role?: AccountType
-  // Internal password used with Medusa emailpass under the hood.
-  // The user never sees or types this.
-  derivedPassword: string
   expiresAt: number
   attempts: number
 }
