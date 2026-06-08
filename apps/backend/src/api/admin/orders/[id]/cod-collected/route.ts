@@ -2,6 +2,7 @@ import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { COD_LEDGER_MODULE } from "../../../../../modules/cod-ledger"
 import type CodLedgerModuleService from "../../../../../modules/cod-ledger/service"
+import { isDuplicateCodTransaction } from "../../../../../modules/cod-ledger/is-duplicate"
 
 /**
  * POST /admin/orders/:id/cod-collected
