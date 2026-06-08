@@ -88,6 +88,7 @@ const hasS3 =
 
 if (hasS3) {
   infraModules.push({
+    key: Modules.FILE,
     resolve: '@medusajs/file',
     options: {
       providers: [
