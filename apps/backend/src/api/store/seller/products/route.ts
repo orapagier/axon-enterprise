@@ -71,40 +71,58 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
 
-  const { data } = await query.graph({
-    entity: "product",
-    fields: [
-      "id",
-      "title",
-      "handle",
-      "status",
-      "thumbnail",
-      "description",
-      "origin_country",
-      "metadata",
-      "created_at",
-      "updated_at",
-      "variants.id",
-      "variants.title",
-      "variants.sku",
-      "variants.prices.amount",
-      "variants.prices.currency_code",
-      "product_listing.id",
-      "product_listing.harvest_date",
-      "product_listing.status",
-      "product_listing.pickup_window_id",
-      "product_listing.created_at",
-      "product_listing.updated_at",
-    ],
-    filters: {},
-    pagination: { take: 500, skip: 0 },
-  })
+  const PRODUCT_FIELDS = [
+    "id",
+    "title",
+    "handle",
+    "status",
+    "thumbnail",
+    "description",
+    "origin_country",
+    "metadata",
+    "created_at",
+    "updated_at",
+    "variants.id",
+    "variants.title",
+    "variants.sku",
+    "variants.prices.amount",
+    "variants.prices.currency_code",
+    "product_listing.id",
+    "product_listing.harvest_date",
+    "product_listing.status",
+    "product_listing.pickup_window_id",
+    "product_listing.created_at",
+    "product_listing.updated_at",
+  ]
 
-  const ours = (data ?? []).filter(
-    (p) =>
-      (p as { metadata?: Record<string, unknown> })?.metadata
-        ?.seller_customer_id === customer.id
-  )
+  // Products carry their seller in `metadata.seller_customer_id` rather than a
+  // queryable link, so we can't filter at the DB layer (the previous code
+  // capped at 500 products and filtered in JS, silently hiding a seller's own
+  // listings once the catalog grew past that). Page through the catalog so the
+  // result is always complete.
+  //
+  // TODO(perf): introduce a seller(customer) ↔ product module link created at
+  // listing time and query by it for an O(seller) lookup instead of scanning.
+  const PAGE_SIZE = 200
+  const MAX_PAGES = 50 // safety bound (<= 10k products scanned)
+  const ours: Record<string, unknown>[] = []
+
+  for (let page = 0; page < MAX_PAGES; page++) {
+    const { data } = await query.graph({
+      entity: "product",
+      fields: PRODUCT_FIELDS,
+      pagination: { take: PAGE_SIZE, skip: page * PAGE_SIZE },
+    })
+    const batch = data ?? []
+    for (const p of batch) {
+      const sellerId = (p as { metadata?: Record<string, unknown> })?.metadata
+        ?.seller_customer_id
+      if (sellerId === customer.id) {
+        ours.push(p as Record<string, unknown>)
+      }
+    }
+    if (batch.length < PAGE_SIZE) break // last page reached
+  }
 
   const shaped = ours.map((p) => {
     const raw = (p as unknown as { product_listing?: unknown }).product_listing
