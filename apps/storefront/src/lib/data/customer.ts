@@ -106,6 +106,33 @@ const clearPendingAuth = async () => {
   cookies.set(PENDING_AUTH_COOKIE, "", { maxAge: -1 })
 }
 
+type OtpThrottle = { windowStart: number; count: number; lastSentAt: number }
+
+const readThrottle = async (): Promise<OtpThrottle> => {
+  const cookies = await nextCookies()
+  const raw = cookies.get(OTP_THROTTLE_COOKIE)?.value
+  if (raw) {
+    try {
+      const parsed = JSON.parse(raw) as OtpThrottle
+      // Keep the same window only while it's still open; otherwise reset.
+      if (Date.now() - parsed.windowStart < OTP_WINDOW_MS) return parsed
+    } catch {
+      // fall through to a fresh window
+    }
+  }
+  return { windowStart: Date.now(), count: 0, lastSentAt: 0 }
+}
+
+const writeThrottle = async (t: OtpThrottle) => {
+  const cookies = await nextCookies()
+  cookies.set(OTP_THROTTLE_COOKIE, JSON.stringify(t), {
+    maxAge: Math.ceil(OTP_WINDOW_MS / 1000),
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  })
+}
+
 export const retrieveCustomer =
   async (): Promise<HttpTypes.StoreCustomer | null> => {
     const authHeaders = await getAuthHeaders()
