@@ -300,11 +300,15 @@ export async function verifyEmailCode(
   }
 
   try {
+    const derivedPassword = deriveCustomerSecret(pending.email)
+
     if (pending.mode === "signup") {
-      // Register, then create the customer record with role metadata, then sign in.
+      // Register the auth identity, attach the customer record with role
+      // metadata, then sign in. The derived password is reproducible, so it is
+      // never persisted — Medusa keeps only its own salted hash.
       const registerToken = await sdk.auth.register("customer", "emailpass", {
         email: pending.email,
-        password: pending.derivedPassword,
+        password: derivedPassword,
       })
       await setAuthToken(registerToken as string)
 
@@ -317,9 +321,6 @@ export async function verifyEmailCode(
             profile_completed: pending.role === "rider" ? true : false,
             rider_available: pending.role === "rider" ? true : undefined,
             auth_method: "email_otp",
-            // The derived password lets us re-issue sessions for this user
-            // without ever exposing a real password to the customer.
-            _derived_secret: pending.derivedPassword,
           },
         },
         {},
@@ -328,64 +329,16 @@ export async function verifyEmailCode(
 
       const loginToken = await sdk.auth.login("customer", "emailpass", {
         email: pending.email,
-        password: pending.derivedPassword,
+        password: derivedPassword,
       })
       await setAuthToken(loginToken as string)
     } else {
-      // Sign-in via OTP. Ask the backend (via the HMAC-signed passwordless
-      // route) for the customer's derived secret, then mint a session.
-      const sharedSecret = process.env.MFH_OTP_SECRET
-      const backendUrl =
-        process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ?? "http://localhost:9000"
-
-      if (!sharedSecret) {
-        return {
-          ok: false,
-          error:
-            "Passwordless sign-in is not configured (MFH_OTP_SECRET missing).",
-        }
-      }
-
-      const timestamp = Date.now()
-      const signature = crypto
-        .createHmac("sha256", sharedSecret)
-        .update(`${pending.email}:${timestamp}`)
-        .digest("hex")
-
-      const lookupRes = await fetch(
-        `${backendUrl}/store/auth/passwordless-login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-publishable-api-key":
-              process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY ?? "",
-          },
-          body: JSON.stringify({
-            email: pending.email,
-            signature,
-            timestamp,
-          }),
-        }
-      )
-
-      if (!lookupRes.ok) {
-        const body = (await lookupRes.json().catch(() => ({}))) as {
-          error?: string
-        }
-        return {
-          ok: false,
-          error: body.error ?? "We couldn't sign you in. Please try again.",
-        }
-      }
-
-      const { derivedSecret } = (await lookupRes.json()) as {
-        derivedSecret: string
-      }
-
+      // Sign-in: re-derive the same internal credential and mint a session.
+      // No backend round-trip and nothing stored server-side — verifying the
+      // OTP above is what authorizes this login.
       const loginToken = await sdk.auth.login("customer", "emailpass", {
         email: pending.email,
-        password: derivedSecret,
+        password: derivedPassword,
       })
       await setAuthToken(loginToken as string)
     }
