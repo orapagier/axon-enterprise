@@ -204,7 +204,7 @@ export async function completeOnboarding(
     }
   }
 
-  // Merge metadata so existing keys (account_type, _derived_secret, etc.) survive.
+  // Merge metadata so existing keys (account_type, auth_method, etc.) survive.
   const mergedMetadata = {
     ...(customer.metadata ?? {}),
     ...metadataPatch,
