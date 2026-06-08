@@ -206,38 +206,58 @@ export async function requestEmailCode(
     return { ok: false, error: "Please choose an account type." }
   }
 
+  // ----- Rate limiting (per browser): cooldown + rolling window cap. -----
+  const throttle = await readThrottle()
+  const now = Date.now()
+  if (now - throttle.lastSentAt < OTP_RESEND_COOLDOWN_MS) {
+    const wait = Math.ceil(
+      (OTP_RESEND_COOLDOWN_MS - (now - throttle.lastSentAt)) / 1000
+    )
+    return {
+      ok: false,
+      error: `Please wait ${wait}s before requesting another code.`,
+    }
+  }
+  if (throttle.count >= OTP_MAX_SENDS_PER_WINDOW) {
+    return {
+      ok: false,
+      error: "Too many code requests. Please try again in a little while.",
+    }
+  }
+
   const code = generateCode()
-  const derivedPassword = generateDerivedPassword()
 
   await setPendingAuth({
     email,
     codeHash: hashCode(code, email),
     mode,
     role,
-    derivedPassword,
-    expiresAt: Date.now() + PENDING_AUTH_TTL_SECONDS * 1000,
+    expiresAt: now + PENDING_AUTH_TTL_SECONDS * 1000,
     attempts: 0,
   })
 
-  // TODO(email-provider): replace with real transactional email send.
-  // For dev we log + return the code so the UI can show it.
-  if (process.env.NODE_ENV !== "production") {
-    // eslint-disable-next-line no-console
-    console.log(`[MFH auth] OTP for ${email}: ${code}`)
-    return { ok: true, devCode: code }
+  const delivery = await sendOtpEmail(email, code)
+
+  // Provider failed or isn't configured in production: don't leave the user
+  // holding a pending code they can never receive.
+  if (!delivery.delivered && !delivery.devCode) {
+    await clearPendingAuth()
+    return {
+      ok: false,
+      error:
+        "We can't send login codes right now. Please try again later or contact support.",
+    }
   }
 
-  // Until an email provider is wired up, fail loudly in production rather
-  // than returning ok and leaving the user with no way to receive the code.
-  // eslint-disable-next-line no-console
-  console.error(
-    "[MFH auth] No transactional email provider configured; OTP not delivered."
-  )
-  return {
-    ok: false,
-    error:
-      "We can't send login codes right now. Please try again later or contact support.",
-  }
+  await writeThrottle({
+    windowStart: throttle.windowStart,
+    count: throttle.count + 1,
+    lastSentAt: now,
+  })
+
+  // devCode is only ever populated in non-production when no email provider is
+  // configured, so the dev UI can still display the code.
+  return { ok: true, devCode: delivery.devCode }
 }
 
 export type OtpVerifyState = {
