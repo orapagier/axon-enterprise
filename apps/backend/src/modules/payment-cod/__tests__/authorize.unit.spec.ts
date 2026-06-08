@@ -9,9 +9,11 @@ type StatusRow = { state: string }
  * (no DI container, no payment framework wiring).
  */
 function makeService(statuses: StatusRow[]): CodPaymentProviderService {
+  // Assign through a loosely-typed view so we can inject test doubles without
+  // satisfying the full Logger / module-service interfaces.
   const svc = Object.create(
     CodPaymentProviderService.prototype
-  ) as CodPaymentProviderService & { container_: unknown; logger_: unknown }
+  ) as Record<string, unknown>
   svc.logger_ = console
   svc.container_ = {
     logger: console,
@@ -19,7 +21,7 @@ function makeService(statuses: StatusRow[]): CodPaymentProviderService {
       listBuyerAccountStatuses: async () => statuses,
     },
   }
-  return svc
+  return svc as unknown as CodPaymentProviderService
 }
 
 const input = { data: { customer_id: "cus_1", id: "cod_1" } } as never
