@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck (backend)
+        working-directory: apps/backend
+        run: npx tsc -p tsconfig.json --noEmit
+
+      - name: Unit tests (backend)
+        working-directory: apps/backend
+        run: npm run test:unit
+
+      - name: Typecheck (storefront)
+        working-directory: apps/storefront
+        run: npx tsc --noEmit
+
+      # TODO: re-enable once the ESLint/ajv toolchain is fixed (see the scoped
+      # override in the root package.json). Kept non-blocking for now.
+      # - name: Lint (storefront)
+      #   working-directory: apps/storefront
+      #   run: npm run lint
+      #   continue-on-error: true
+
+  # Integration tests and full builds need a Postgres + Redis service and a
+  # running backend; wire them here once the deploy target is chosen, e.g.:
+  #
+  # integration:
+  #   runs-on: ubuntu-latest
+  #   services:
+  #     postgres: { image: postgres:16, env: { POSTGRES_PASSWORD: postgres }, ports: ["5432:5432"] }
+  #     redis:    { image: redis:7, ports: ["6379:6379"] }
+  #   steps: [...]
