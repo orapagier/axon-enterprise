@@ -396,56 +396,49 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // Reserve the pickup slot inline.
+  // Reserve the pickup slot + link it to the listing. The workflow runs the
+  // reservation under a per-window lock (so concurrent submissions can't
+  // overcommit capacity) and self-compensates its slot/capacity/link work if
+  // anything inside it fails.
   try {
-    const createdSlot = await pickupService.createPickupSlots({
-      pickup_window: body.pickup_window_id,
-      listing_id: listing.id,
-      estimated_kg: body.estimated_kg,
-      status: "reserved",
-    } as unknown as Parameters<typeof pickupService.createPickupSlots>[0])
-    // A single-object input returns a single slot at runtime, but the typed
-    // signature widens to the array overload — normalize to the element.
-    const slot = (Array.isArray(createdSlot) ? createdSlot[0] : createdSlot) as
-      | { id: string }
-      | undefined
-
-    if (!slot?.id) {
-      throw new Error(
-        `createPickupSlots returned no id (got ${JSON.stringify(slot)})`
-      )
-    }
-
-    // Bump window reserved_kg
-    const newReservedKg = (window.reserved_kg ?? 0) + body.estimated_kg
-    const windowUpdate: Record<string, unknown> = { reserved_kg: newReservedKg }
-    if (
-      window.capacity_kg !== null &&
-      window.capacity_kg !== undefined &&
-      newReservedKg >= window.capacity_kg
-    ) {
-      windowUpdate.status = "full"
-    }
-    await pickupService.updatePickupWindows({ id: window.id, ...windowUpdate })
-
-    // Link listing ↔ slot
-    await link.create({
-      [LISTING_MODULE]: { product_listing_id: listing.id },
-      [PICKUP_MODULE]: { pickup_slot_id: slot.id },
+    await reservePickupSlotWorkflow(req.scope).run({
+      input: {
+        listing_id: listing.id,
+        pickup_window_id: body.pickup_window_id,
+        harvest_date: harvestDate,
+        estimated_kg: body.estimated_kg,
+      },
     })
   } catch (err) {
     console.error("Pickup slot reservation failed:", err)
+    // The workflow already rolled back its own work. Unwind everything created
+    // before it — the listing, its links, and the product itself — so a failed
+    // reservation never leaves an orphaned draft product or dangling listing.
     try {
       await link.dismiss({
         [Modules.PRODUCT]: { product_id: product.id },
         [LISTING_MODULE]: { product_listing_id: listing.id },
       })
-      await listingService.deleteProductListings(listing.id)
     } catch {
-      // best-effort cleanup
+      // best-effort
     }
+    if (hub?.id) {
+      try {
+        await link.dismiss({
+          [Modules.PRODUCT]: { product_id: product.id },
+          [HUB_MODULE]: { hub_id: hub.id },
+        })
+      } catch {
+        // best-effort
+      }
+    }
+    await listingService.deleteProductListings(listing.id).catch(() => {})
+    await deleteProductsWorkflow(req.scope)
+      .run({ input: { ids: [product.id] } })
+      .catch((e) => console.error("Orphan product cleanup failed:", e))
     res.status(400).json({
-      error: err instanceof Error ? err.message : "Pickup slot reservation failed.",
+      error:
+        err instanceof Error ? err.message : "Pickup slot reservation failed.",
       code: "PICKUP_RESERVE_FAILED",
     })
     return
