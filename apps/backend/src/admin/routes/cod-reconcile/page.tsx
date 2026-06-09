@@ -16,7 +16,7 @@ type Tx = {
   id: string
   customer_id: string
   order_id: string | null
-  type: "cod_collected" | "rider_remitted"
+  type: "cod_collected" | "rider_remitted" | "otc_collected"
   amount: number
   rider_id: string | null
   reference: string | null
@@ -27,10 +27,12 @@ type Tx = {
 type ReconcileResponse = {
   collected: Tx[]
   remitted: Tx[]
+  otc_collected: Tx[]
   totals: {
     collected_centavos: number
     remitted_centavos: number
     outstanding_centavos: number
+    otc_collected_centavos: number
   }
 }
 
