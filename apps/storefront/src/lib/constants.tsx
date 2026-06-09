@@ -62,6 +62,10 @@ export const isCod = (providerId?: string) => {
   return providerId?.startsWith("pp_cod_")
 }
 
+export const isOtc = (providerId?: string) => {
+  return providerId?.startsWith("pp_otc_")
+}
+
 // Add currencies that don't need to be divided by 100
 export const noDivisionCurrencies = [
   "krw",
