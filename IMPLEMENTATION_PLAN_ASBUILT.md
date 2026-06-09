@@ -385,23 +385,26 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 
 Ordered by business priority. Each item is scoped to be a small, shippable slice.
 
-### Phase A — Close the prepay loop (highest priority)
+### Phase A — Make prepay-lock resolve to OTC (highest priority)
 **Problem:** `payment-cod.authorizePayment` blocks `prepay_locked_*` buyers from
-COD, but **no online/prepay payment method exists** — so a locked buyer cannot
-check out at all. The accountability system's whole point (let repeat-refusers
-keep buying, but prepaid) is currently a dead end.
+COD, but they currently have **no alternative checkout** — so a locked buyer
+can't buy at all. The fix needs **no payment integration**: OTC (walk-in pay at
+the physical hub store) is the cash prepay rail.
 
-> **Scope guardrail (sealed founder decision, 2026-05-28):** the *universal
-> upfront COD deposit* was deliberately removed and must NOT be reintroduced
-> without an explicit founder call. This phase is strictly the **reactive**
-> prepay path for buyers already in a `prepay_locked_*` state — exactly the
-> "reactive/threshold gate" the founder named as the agreed next step. Do not
-> add an upfront gate for normal buyers.
+> **Sealed founder decisions (kept):** (1) the universal upfront COD deposit was
+> removed 2026-05-28 and stays removed; (2) there is **no first-order COD cap or
+> any upfront gate** — bogus buyers are handled by the strike system + same-day
+> resale of returned produce. Neither is to be reintroduced without an explicit
+> founder call.
 
-- [ ] Integrate **GCash** (PayMongo or GCash API) as a Medusa payment provider.
-- [ ] Make prepay-locked buyers fall through to the online provider instead of a hard error.
-- [ ] Reuse the same rail to (optionally) collect membership fees online.
-- [ ] Prepay applies to locked buyers only; keep COD frictionless for everyone else.
+- [ ] Surface **OTC** as a selectable payment method: buyer pays at the counter,
+      hub admin records the cash at order time (`cod_collected`-equivalent ledger
+      entry, no remittance leg).
+- [ ] For `prepay_locked_*` buyers: hide COD, offer **OTC only** — instead of the
+      current hard error.
+- [ ] Keep COD frictionless for every non-locked buyer.
+- [ ] Online/GCash prepay stays **deferred** (no PayMongo budget yet — see §12);
+      when added it slots in as a third payment source with no redesign.
 
 ### Phase B — Notifications (email + push)
 **Problem:** no subscriber sends any email/push. Order confirmations, dispute
