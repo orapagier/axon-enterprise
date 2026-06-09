@@ -188,6 +188,34 @@ const CodReconcilePage = () => {
                 ))}
               </Table.Body>
             </Table>
+
+            <Heading level="h2" className="my-4">
+              Over the Counter ({q.data.otc_collected.length})
+            </Heading>
+            <Table>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Order</Table.HeaderCell>
+                  <Table.HeaderCell>Reference</Table.HeaderCell>
+                  <Table.HeaderCell>Amount</Table.HeaderCell>
+                  <Table.HeaderCell>When</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {q.data.otc_collected.map((t) => (
+                  <Table.Row key={t.id}>
+                    <Table.Cell>{t.order_id ?? "—"}</Table.Cell>
+                    <Table.Cell>{t.reference ?? "—"}</Table.Cell>
+                    <Table.Cell>{peso(t.amount)}</Table.Cell>
+                    <Table.Cell>
+                      {new Date(t.created_at).toLocaleString("en-PH", {
+                        timeZone: "Asia/Manila",
+                      })}
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
           </>
         )}
       </div>
