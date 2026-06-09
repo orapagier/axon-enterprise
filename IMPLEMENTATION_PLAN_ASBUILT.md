@@ -429,15 +429,24 @@ For a perishable hub, bulk buyers clear volume fast — high ROI.
 - [ ] Admin trader approval + discount entry + min-order-qty note.
 - [ ] Storefront shows trader their discounted price only.
 
-### Phase E — Rider operations
-**Problem:** `rider_id` is a free-text field; there is no rider auth, no rider
-view of their manifest, no rider-side proof/refusal capture.
-- [ ] Decide model: lightweight **rider manifest view** (recommended now) vs a
-      full PWA (defer — see §12).
-- [ ] Rider login + per-batch manifest (ordered by `manifest_position`).
-- [ ] Proof of delivery capture (photo → object storage) → sets
-      `dispatch_order.delivered_at` / `delivery_status`.
-- [ ] Rider-initiated refusal (populates `rider_photo_url`, `rider_notes` on the dispute).
+### Phase E — Rider operations & accountability
+**Problem:** `rider_id` is free text on `dispatch_order` *and* `cod_transaction`;
+there is no rider entity, auth, manifest view, or rider-side capture. A real
+rider record is a **launch necessity** (COD cash must be traced to a rider) and
+is also the foundation any future gig model would need.
+- [ ] Promote **rider to a first-class entity** (id, name, phone, hub_id, status);
+      replace the free-text `rider_id` references.
+- [ ] Rider login + per-batch manifest (ordered by `manifest_position`); keep
+      assignment swappable (manual admin assign now, self-claim later).
+- [ ] **Delivered** action (QR scan / button) → auto-fulfill **and** auto-record
+      `cod_collected` (rider owes the cash); **Refused** action → opens the
+      refusal dispute (`rider_photo_url`, `rider_notes`).
+- [ ] Remittance event (rider→hub) kept separate from delivery; per-rider
+      *collected − remitted = outstanding* on the reconcile view.
+- [ ] **Producer payout gated on remittance, not delivery.**
+- [ ] **Rider accountability (mirror of buyer strikes):** a rider whose aged
+      collected-but-unremitted balance crosses a limit is flagged/blocked from
+      taking new orders — the automated version of "go after the rider."
 
 ### Phase F — Multi-hub readiness
 **Problem:** hub resolution in `delivery-options` matches on `city` string and
