@@ -360,10 +360,18 @@ Ordered by business priority. Each item is scoped to be a small, shippable slice
 COD, but **no online/prepay payment method exists** — so a locked buyer cannot
 check out at all. The accountability system's whole point (let repeat-refusers
 keep buying, but prepaid) is currently a dead end.
+
+> **Scope guardrail (sealed founder decision, 2026-05-28):** the *universal
+> upfront COD deposit* was deliberately removed and must NOT be reintroduced
+> without an explicit founder call. This phase is strictly the **reactive**
+> prepay path for buyers already in a `prepay_locked_*` state — exactly the
+> "reactive/threshold gate" the founder named as the agreed next step. Do not
+> add an upfront gate for normal buyers.
+
 - [ ] Integrate **GCash** (PayMongo or GCash API) as a Medusa payment provider.
 - [ ] Make prepay-locked buyers fall through to the online provider instead of a hard error.
 - [ ] Reuse the same rail to (optionally) collect membership fees online.
-- [ ] Decide deposit semantics: full prepay vs partial deposit; make the amount configurable.
+- [ ] Prepay applies to locked buyers only; keep COD frictionless for everyone else.
 
 ### Phase B — Notifications (email + push)
 **Problem:** no subscriber sends any email/push. Order confirmations, dispute
