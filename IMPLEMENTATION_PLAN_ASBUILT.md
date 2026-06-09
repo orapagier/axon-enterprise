@@ -362,7 +362,8 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | `lock-dispatch-batches` | */15m | collecting → locked at cutoff |
 | `dispatch-batches-in-transit` | */15m | locked → in_transit at dispatch_time |
 | `expire-pickup-windows` | nightly 01:00 | close past windows; orphan slots → no_show |
-| `clean-order-tick` | nightly 02:00 | strike recovery (warned→normal, 30d lock expiry) |
+| `clean-order-tick` | nightly 02:00 | buyer strike recovery (warned→normal, 30d lock expiry) |
+| `rider-unremitted-tick` | nightly 03:00 | suspend riders over the unremitted-cash limit |
 
 ---
 
