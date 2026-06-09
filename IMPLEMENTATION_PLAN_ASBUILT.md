@@ -401,8 +401,9 @@ the physical hub store) is the cash prepay rail.
       registered in `medusa-config.ts`; `GET /store/payment-methods` returns
       per-buyer eligibility (COD hidden for `prepay_locked_*`, OTC always on).
 - [ ] **Data:** enable both `pp_cod_freshhub` and `pp_otc_freshhub` on the PH region.
-- [ ] **Storefront:** checkout payment step reads `/store/payment-methods` and
-      renders COD + OTC (OTC-only when locked).
+- [x] **Storefront (2026-06-10):** OTC added to `paymentInfoMap`; checkout reads
+      `/store/payment-methods` (`getPaymentEligibility`), drops COD + shows a
+      notice for locked buyers (OTC-only), keeps both for everyone else.
 - [ ] **OTC cash:** record an OTC order's counter payment via the `cod_collected`
       ledger path (no remittance leg).
 - [ ] Keep COD frictionless for every non-locked buyer. *(provider unchanged; COD

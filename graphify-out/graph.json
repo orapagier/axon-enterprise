@@ -1902,7 +1902,7 @@
       "source_file": "apps/storefront/src/modules/account/components/account-info/index.tsx",
       "source_location": "L19",
       "id": "account_info_index_accountinfo",
-      "community": 136,
+      "community": 4,
       "norm_label": "accountinfo()"
     },
     {
@@ -2586,7 +2586,7 @@
       "source_file": "apps/storefront/src/modules/account/components/auth-card/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_components_auth_card_index_tsx",
-      "community": 198,
+      "community": 135,
       "norm_label": "index.tsx"
     },
     {
@@ -2595,7 +2595,7 @@
       "source_file": "apps/storefront/src/modules/account/components/auth-card/index.tsx",
       "source_location": "L23",
       "id": "auth_card_index_step",
-      "community": 198,
+      "community": 135,
       "norm_label": "step"
     },
     {
@@ -2604,7 +2604,7 @@
       "source_file": "apps/storefront/src/modules/account/components/auth-card/index.tsx",
       "source_location": "L25",
       "id": "auth_card_index_role_copy",
-      "community": 198,
+      "community": 135,
       "norm_label": "role_copy"
     },
     {
@@ -2613,7 +2613,7 @@
       "source_file": "apps/storefront/src/modules/account/components/auth-card/index.tsx",
       "source_location": "L51",
       "id": "auth_card_index_authcard",
-      "community": 198,
+      "community": 135,
       "norm_label": "authcard()"
     },
     {
@@ -2782,7 +2782,7 @@
       "label": "CheckoutForm()",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/checkout/templates/checkout-form/index.tsx",
-      "source_location": "L9",
+      "source_location": "L13",
       "id": "checkout_form_index_checkoutform",
       "community": 22,
       "norm_label": "checkoutform()"
@@ -3045,7 +3045,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/submit-button/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_checkout_components_submit_button_index_tsx",
-      "community": 167,
+      "community": 246,
       "norm_label": "index.tsx"
     },
     {
@@ -3054,7 +3054,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/submit-button/index.tsx",
       "source_location": "L7",
       "id": "submit_button_index_submitbutton",
-      "community": 167,
+      "community": 246,
       "norm_label": "submitbutton()"
     },
     {
@@ -3063,7 +3063,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/discount-code/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_checkout_components_discount_code_index_tsx",
-      "community": 167,
+      "community": 246,
       "norm_label": "index.tsx"
     },
     {
@@ -3072,7 +3072,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/discount-code/index.tsx",
       "source_location": "L13",
       "id": "discount_code_index_discountcodeprops",
-      "community": 167,
+      "community": 246,
       "norm_label": "discountcodeprops"
     },
     {
@@ -3081,7 +3081,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/discount-code/index.tsx",
       "source_location": "L17",
       "id": "discount_code_index_discountcode",
-      "community": 167,
+      "community": 246,
       "norm_label": "discountcode()"
     },
     {
@@ -3090,7 +3090,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/addresses/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_checkout_components_addresses_index_tsx",
-      "community": 167,
+      "community": 246,
       "norm_label": "index.tsx"
     },
     {
@@ -3099,7 +3099,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/addresses/index.tsx",
       "source_location": "L17",
       "id": "addresses_index_addresses",
-      "community": 167,
+      "community": 4,
       "norm_label": "addresses()"
     },
     {
@@ -3189,7 +3189,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/error-message/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_checkout_components_error_message_index_tsx",
-      "community": 167,
+      "community": 246,
       "norm_label": "index.tsx"
     },
     {
@@ -3198,7 +3198,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/error-message/index.tsx",
       "source_location": "L1",
       "id": "error_message_index_errormessage",
-      "community": 167,
+      "community": 246,
       "norm_label": "errormessage()"
     },
     {
@@ -3792,7 +3792,7 @@
       "source_file": "apps/storefront/src/modules/hub/data/hubs.ts",
       "source_location": "L55",
       "id": "data_hubs_gethubproductids",
-      "community": 182,
+      "community": 206,
       "norm_label": "gethubproductids()"
     },
     {
@@ -4341,7 +4341,7 @@
       "source_file": "apps/storefront/src/modules/store/templates/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_store_templates_index_tsx",
-      "community": 182,
+      "community": 206,
       "norm_label": "index.tsx"
     },
     {
@@ -4350,7 +4350,7 @@
       "source_file": "apps/storefront/src/modules/store/templates/index.tsx",
       "source_location": "L12",
       "id": "templates_index_storetemplate",
-      "community": 182,
+      "community": 206,
       "norm_label": "storetemplate()"
     },
     {
@@ -6069,7 +6069,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/cart-mismatch-banner/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_layout_components_cart_mismatch_banner_index_tsx",
-      "community": 251,
+      "community": 135,
       "norm_label": "index.tsx"
     },
     {
@@ -6078,7 +6078,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/cart-mismatch-banner/index.tsx",
       "source_location": "L8",
       "id": "cart_mismatch_banner_index_cartmismatchbanner",
-      "community": 251,
+      "community": 135,
       "norm_label": "cartmismatchbanner()"
     },
     {
@@ -6285,7 +6285,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/side-menu/index.tsx",
       "source_location": "L52",
       "id": "side_menu_index_sidemenu",
-      "community": 136,
+      "community": 4,
       "norm_label": "sidemenu()"
     },
     {
@@ -6645,7 +6645,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_producer_page_tsx",
-      "community": 37,
+      "community": 242,
       "norm_label": "page.tsx"
     },
     {
@@ -6654,7 +6654,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/page.tsx",
       "source_location": "L7",
       "id": "producer_page_metadata",
-      "community": 37,
+      "community": 242,
       "norm_label": "metadata"
     },
     {
@@ -6663,7 +6663,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/page.tsx",
       "source_location": "L12",
       "id": "producer_page_props",
-      "community": 37,
+      "community": 242,
       "norm_label": "props"
     },
     {
@@ -6672,7 +6672,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/page.tsx",
       "source_location": "L16",
       "id": "producer_page_producerdashboardpage",
-      "community": 37,
+      "community": 242,
       "norm_label": "producerdashboardpage()"
     },
     {
@@ -6717,7 +6717,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/listings/new/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_producer_listings_new_page_tsx",
-      "community": 265,
+      "community": 37,
       "norm_label": "page.tsx"
     },
     {
@@ -6726,7 +6726,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/listings/new/page.tsx",
       "source_location": "L6",
       "id": "new_page_metadata",
-      "community": 265,
+      "community": 37,
       "norm_label": "metadata"
     },
     {
@@ -6735,7 +6735,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/listings/new/page.tsx",
       "source_location": "L11",
       "id": "new_page_props",
-      "community": 265,
+      "community": 37,
       "norm_label": "props"
     },
     {
@@ -6744,7 +6744,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/listings/new/page.tsx",
       "source_location": "L13",
       "id": "new_page_newlistingpage",
-      "community": 265,
+      "community": 37,
       "norm_label": "newlistingpage()"
     },
     {
@@ -6915,7 +6915,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/rider/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_rider_page_tsx",
-      "community": 243,
+      "community": 37,
       "norm_label": "page.tsx"
     },
     {
@@ -6924,7 +6924,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/rider/page.tsx",
       "source_location": "L5",
       "id": "rider_page_metadata",
-      "community": 243,
+      "community": 37,
       "norm_label": "metadata"
     },
     {
@@ -6933,7 +6933,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/rider/page.tsx",
       "source_location": "L10",
       "id": "rider_page_props",
-      "community": 243,
+      "community": 37,
       "norm_label": "props"
     },
     {
@@ -6942,7 +6942,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/rider/page.tsx",
       "source_location": "L14",
       "id": "rider_page_riderdashboardpage",
-      "community": 243,
+      "community": 37,
       "norm_label": "riderdashboardpage()"
     },
     {
@@ -7750,7 +7750,7 @@
       "label": "isStripeLike()",
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/constants.tsx",
-      "source_location": "L44",
+      "source_location": "L48",
       "id": "lib_constants_isstripelike",
       "community": 7,
       "norm_label": "isstripelike()"
@@ -7759,7 +7759,7 @@
       "label": "isPaypal()",
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/constants.tsx",
-      "source_location": "L50",
+      "source_location": "L54",
       "id": "lib_constants_ispaypal",
       "community": 7,
       "norm_label": "ispaypal()"
@@ -7768,7 +7768,7 @@
       "label": "isManual()",
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/constants.tsx",
-      "source_location": "L53",
+      "source_location": "L57",
       "id": "lib_constants_ismanual",
       "community": 7,
       "norm_label": "ismanual()"
@@ -7777,16 +7777,25 @@
       "label": "isCod()",
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/constants.tsx",
-      "source_location": "L57",
+      "source_location": "L61",
       "id": "lib_constants_iscod",
       "community": 7,
       "norm_label": "iscod()"
     },
     {
+      "label": "isOtc()",
+      "file_type": "code",
+      "source_file": "apps/storefront/src/lib/constants.tsx",
+      "source_location": "L65",
+      "id": "lib_constants_isotc",
+      "community": 7,
+      "norm_label": "isotc()"
+    },
+    {
       "label": "noDivisionCurrencies",
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/constants.tsx",
-      "source_location": "L62",
+      "source_location": "L70",
       "id": "lib_constants_nodivisioncurrencies",
       "community": 7,
       "norm_label": "nodivisioncurrencies"
@@ -7815,7 +7824,7 @@
       "source_file": "apps/storefront/src/lib/hooks/use-toggle-state.tsx",
       "source_location": "L23",
       "id": "hooks_use_toggle_state_usetogglestate",
-      "community": 136,
+      "community": 4,
       "norm_label": "usetogglestate()"
     },
     {
@@ -7896,7 +7905,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_cookies_ts",
-      "community": 22,
+      "community": 1,
       "norm_label": "cookies.ts"
     },
     {
@@ -7905,7 +7914,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L4",
       "id": "data_cookies_getauthheaders",
-      "community": 1,
+      "community": 22,
       "norm_label": "getauthheaders()"
     },
     {
@@ -7914,7 +7923,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L21",
       "id": "data_cookies_getcachetag",
-      "community": 223,
+      "community": 1,
       "norm_label": "getcachetag()"
     },
     {
@@ -7941,7 +7950,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L62",
       "id": "data_cookies_removeauthtoken",
-      "community": 22,
+      "community": 1,
       "norm_label": "removeauthtoken()"
     },
     {
@@ -7968,7 +7977,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L84",
       "id": "data_cookies_removecartid",
-      "community": 22,
+      "community": 1,
       "norm_label": "removecartid()"
     },
     {
@@ -8220,7 +8229,7 @@
       "source_file": "apps/storefront/src/lib/data/cart.ts",
       "source_location": "L537",
       "id": "data_cart_listcartoptions",
-      "community": 1,
+      "community": 22,
       "norm_label": "listcartoptions()"
     },
     {
@@ -8278,12 +8287,30 @@
       "norm_label": "listcartpaymentmethods()"
     },
     {
+      "label": "PaymentEligibility",
+      "file_type": "code",
+      "source_file": "apps/storefront/src/lib/data/payment.ts",
+      "source_location": "L37",
+      "id": "data_payment_paymenteligibility",
+      "community": 22,
+      "norm_label": "paymenteligibility"
+    },
+    {
+      "label": "getPaymentEligibility()",
+      "file_type": "code",
+      "source_file": "apps/storefront/src/lib/data/payment.ts",
+      "source_location": "L61",
+      "id": "data_payment_getpaymenteligibility",
+      "community": 22,
+      "norm_label": "getpaymenteligibility()"
+    },
+    {
       "label": "address-validation.ts",
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_address_validation_ts",
-      "community": 167,
+      "community": 198,
       "norm_label": "address-validation.ts"
     },
     {
@@ -8301,7 +8328,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L12",
       "id": "data_address_validation_shippingformdata",
-      "community": 167,
+      "community": 198,
       "norm_label": "shippingformdata"
     },
     {
@@ -8337,7 +8364,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L54",
       "id": "data_address_validation_validatehubcity",
-      "community": 167,
+      "community": 198,
       "norm_label": "validatehubcity()"
     },
     {
@@ -8346,7 +8373,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L67",
       "id": "data_address_validation_sanitizetext",
-      "community": 167,
+      "community": 198,
       "norm_label": "sanitizetext()"
     },
     {
@@ -8355,7 +8382,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L75",
       "id": "data_address_validation_fieldvalidator",
-      "community": 167,
+      "community": 198,
       "norm_label": "fieldvalidator"
     },
     {
@@ -8364,7 +8391,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L77",
       "id": "data_address_validation_fielddef",
-      "community": 167,
+      "community": 198,
       "norm_label": "fielddef"
     },
     {
@@ -8373,7 +8400,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L84",
       "id": "data_address_validation_shipping_fields",
-      "community": 167,
+      "community": 198,
       "norm_label": "shipping_fields"
     },
     {
@@ -8382,7 +8409,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L135",
       "id": "data_address_validation_billing_fields",
-      "community": 167,
+      "community": 198,
       "norm_label": "billing_fields"
     },
     {
@@ -8391,7 +8418,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L181",
       "id": "data_address_validation_validateshippingaddress",
-      "community": 167,
+      "community": 198,
       "norm_label": "validateshippingaddress()"
     },
     {
@@ -8400,7 +8427,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L191",
       "id": "data_address_validation_validatebillingaddress",
-      "community": 167,
+      "community": 198,
       "norm_label": "validatebillingaddress()"
     },
     {
@@ -8409,7 +8436,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L201",
       "id": "data_address_validation_validateaddressform",
-      "community": 167,
+      "community": 198,
       "norm_label": "validateaddressform()"
     },
     {
@@ -8418,7 +8445,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L220",
       "id": "data_address_validation_runvalidators",
-      "community": 167,
+      "community": 198,
       "norm_label": "runvalidators()"
     },
     {
@@ -8427,7 +8454,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L246",
       "id": "data_address_validation_sanitizecity",
-      "community": 167,
+      "community": 198,
       "norm_label": "sanitizecity()"
     },
     {
@@ -8598,7 +8625,7 @@
       "source_file": "apps/storefront/src/lib/data/seller.ts",
       "source_location": "L49",
       "id": "data_seller_listmylistings",
-      "community": 223,
+      "community": 242,
       "norm_label": "listmylistings()"
     },
     {
@@ -8742,7 +8769,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L27",
       "id": "data_customer_accounttype",
-      "community": 198,
+      "community": 135,
       "norm_label": "accounttype"
     },
     {
@@ -8751,7 +8778,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L28",
       "id": "data_customer_authmode",
-      "community": 198,
+      "community": 135,
       "norm_label": "authmode"
     },
     {
@@ -8859,7 +8886,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L162",
       "id": "data_customer_updatecustomer",
-      "community": 16,
+      "community": 135,
       "norm_label": "updatecustomer()"
     },
     {
@@ -8868,7 +8895,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L178",
       "id": "data_customer_otprequeststate",
-      "community": 198,
+      "community": 135,
       "norm_label": "otprequeststate"
     },
     {
@@ -8886,7 +8913,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L263",
       "id": "data_customer_otpverifystate",
-      "community": 198,
+      "community": 135,
       "norm_label": "otpverifystate"
     },
     {
@@ -8931,7 +8958,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L442",
       "id": "data_customer_signout",
-      "community": 22,
+      "community": 1,
       "norm_label": "signout()"
     },
     {
@@ -8940,7 +8967,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L467",
       "id": "data_customer_requestmembership",
-      "community": 16,
+      "community": 135,
       "norm_label": "requestmembership()"
     },
     {
@@ -8949,7 +8976,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L509",
       "id": "data_customer_cancelmembership",
-      "community": 16,
+      "community": 135,
       "norm_label": "cancelmembership()"
     },
     {
@@ -9030,7 +9057,7 @@
       "source_file": "apps/storefront/src/lib/email/send-otp.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_email_send_otp_ts",
-      "community": 246,
+      "community": 135,
       "norm_label": "send-otp.ts"
     },
     {
@@ -9039,7 +9066,7 @@
       "source_file": "apps/storefront/src/lib/email/send-otp.ts",
       "source_location": "L19",
       "id": "email_send_otp_otpemailresult",
-      "community": 246,
+      "community": 135,
       "norm_label": "otpemailresult"
     },
     {
@@ -9048,7 +9075,7 @@
       "source_file": "apps/storefront/src/lib/email/send-otp.ts",
       "source_location": "L28",
       "id": "email_send_otp_buildbody",
-      "community": 246,
+      "community": 135,
       "norm_label": "buildbody()"
     },
     {
@@ -9057,7 +9084,7 @@
       "source_file": "apps/storefront/src/lib/email/send-otp.ts",
       "source_location": "L42",
       "id": "email_send_otp_sendotpemail",
-      "community": 246,
+      "community": 135,
       "norm_label": "sendotpemail()"
     },
     {
@@ -9111,7 +9138,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_constants_hub_cities_ts",
-      "community": 167,
+      "community": 243,
       "norm_label": "hub-cities.ts"
     },
     {
@@ -9120,7 +9147,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L15",
       "id": "constants_hub_cities_hub_cities",
-      "community": 167,
+      "community": 243,
       "norm_label": "hub_cities"
     },
     {
@@ -9129,7 +9156,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L24",
       "id": "constants_hub_cities_hubcity",
-      "community": 167,
+      "community": 243,
       "norm_label": "hubcity"
     },
     {
@@ -9138,7 +9165,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L31",
       "id": "constants_hub_cities_hub_slug_by_city",
-      "community": 167,
+      "community": 243,
       "norm_label": "hub_slug_by_city"
     },
     {
@@ -9156,7 +9183,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L43",
       "id": "constants_hub_cities_hub_city_set",
-      "community": 167,
+      "community": 243,
       "norm_label": "hub_city_set"
     },
     {
@@ -9165,7 +9192,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L48",
       "id": "constants_hub_cities_ishubcity",
-      "community": 167,
+      "community": 198,
       "norm_label": "ishubcity()"
     },
     {
@@ -9174,7 +9201,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L56",
       "id": "constants_hub_cities_canonicalhubcity",
-      "community": 167,
+      "community": 198,
       "norm_label": "canonicalhubcity()"
     },
     {
@@ -9183,7 +9210,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L67",
       "id": "constants_hub_cities_hub_warehouse",
-      "community": 167,
+      "community": 243,
       "norm_label": "hub_warehouse"
     },
     {
@@ -9192,7 +9219,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L76",
       "id": "constants_hub_cities_haversinekm",
-      "community": 167,
+      "community": 243,
       "norm_label": "haversinekm()"
     },
     {
@@ -9201,7 +9228,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L91",
       "id": "constants_hub_cities_torad",
-      "community": 167,
+      "community": 243,
       "norm_label": "torad()"
     },
     {
@@ -9327,7 +9354,7 @@
       "source_file": "apps/storefront/src/lib/util/compare-addresses.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_util_compare_addresses_ts",
-      "community": 167,
+      "community": 4,
       "norm_label": "compare-addresses.ts"
     },
     {
@@ -9336,7 +9363,7 @@
       "source_file": "apps/storefront/src/lib/util/compare-addresses.ts",
       "source_location": "L3",
       "id": "util_compare_addresses_compareaddresses",
-      "community": 167,
+      "community": 4,
       "norm_label": "compareaddresses()"
     },
     {
@@ -10731,7 +10758,7 @@
       "source_file": "apps/backend/src/modules/hub/models/hub.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_hub_models_hub_ts",
-      "community": 242,
+      "community": 161,
       "norm_label": "hub.ts"
     },
     {
@@ -10740,7 +10767,7 @@
       "source_file": "apps/backend/src/modules/hub/models/hub.ts",
       "source_location": "L4",
       "id": "models_hub_hub",
-      "community": 242,
+      "community": 161,
       "norm_label": "hub"
     },
     {
@@ -10749,7 +10776,7 @@
       "source_file": "apps/backend/src/modules/hub/models/hub-area.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_hub_models_hub_area_ts",
-      "community": 242,
+      "community": 161,
       "norm_label": "hub-area.ts"
     },
     {
@@ -10758,7 +10785,7 @@
       "source_file": "apps/backend/src/modules/hub/models/hub-area.ts",
       "source_location": "L4",
       "id": "models_hub_area_hubarea",
-      "community": 242,
+      "community": 161,
       "norm_label": "hubarea"
     },
     {
@@ -15060,7 +15087,7 @@
       "source_file": "apps/backend/src/migration-scripts/seed-pickup-windows.ts",
       "source_location": "L1",
       "id": "apps_backend_src_migration_scripts_seed_pickup_windows_ts",
-      "community": 157,
+      "community": 161,
       "norm_label": "seed-pickup-windows.ts"
     },
     {
@@ -15069,7 +15096,7 @@
       "source_file": "apps/backend/src/migration-scripts/seed-pickup-windows.ts",
       "source_location": "L16",
       "id": "migration_scripts_seed_pickup_windows_seedpickupwindows",
-      "community": 157,
+      "community": 161,
       "norm_label": "seedpickupwindows()"
     },
     {
@@ -18748,7 +18775,7 @@
       "label": "Phase B \u2014 Notifications (email + push)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L409",
+      "source_location": "L413",
       "id": "freshhub_implementation_plan_asbuilt_phase_b_notifications_email_push",
       "community": 259,
       "norm_label": "phase b \u2014 notifications (email + push)"
@@ -18757,7 +18784,7 @@
       "label": "Phase C \u2014 Membership lifecycle automation",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L417",
+      "source_location": "L421",
       "id": "freshhub_implementation_plan_asbuilt_phase_c_membership_lifecycle_automation",
       "community": 259,
       "norm_label": "phase c \u2014 membership lifecycle automation"
@@ -18766,7 +18793,7 @@
       "label": "Phase D \u2014 Trader (B2B) pricing",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L425",
+      "source_location": "L429",
       "id": "freshhub_implementation_plan_asbuilt_phase_d_trader_b2b_pricing",
       "community": 259,
       "norm_label": "phase d \u2014 trader (b2b) pricing"
@@ -18775,7 +18802,7 @@
       "label": "Phase E \u2014 Rider operations & accountability",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L432",
+      "source_location": "L436",
       "id": "freshhub_implementation_plan_asbuilt_phase_e_rider_operations_accountability",
       "community": 259,
       "norm_label": "phase e \u2014 rider operations & accountability"
@@ -18784,7 +18811,7 @@
       "label": "Phase F \u2014 Multi-hub readiness",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L451",
+      "source_location": "L455",
       "id": "freshhub_implementation_plan_asbuilt_phase_f_multi_hub_readiness",
       "community": 259,
       "norm_label": "phase f \u2014 multi-hub readiness"
@@ -18793,7 +18820,7 @@
       "label": "Phase G \u2014 Dispute fairness & SLAs",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L457",
+      "source_location": "L461",
       "id": "freshhub_implementation_plan_asbuilt_phase_g_dispute_fairness_slas",
       "community": 259,
       "norm_label": "phase g \u2014 dispute fairness & slas"
@@ -18802,7 +18829,7 @@
       "label": "Phase H \u2014 Hardening",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L463",
+      "source_location": "L467",
       "id": "freshhub_implementation_plan_asbuilt_phase_h_hardening",
       "community": 259,
       "norm_label": "phase h \u2014 hardening"
@@ -18811,7 +18838,7 @@
       "label": "11. Risks to watch",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L470",
+      "source_location": "L474",
       "id": "freshhub_implementation_plan_asbuilt_11_risks_to_watch",
       "community": 253,
       "norm_label": "11. risks to watch"
@@ -18820,7 +18847,7 @@
       "label": "12. Deferred roadmap (superseded v2 ideas)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L486",
+      "source_location": "L490",
       "id": "freshhub_implementation_plan_asbuilt_12_deferred_roadmap_superseded_v2_ideas",
       "community": 253,
       "norm_label": "12. deferred roadmap (superseded v2 ideas)"
@@ -21161,7 +21188,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/page.tsx",
       "source_location": "L1",
-      "community": 37,
+      "community": 242,
       "norm_label": "page.tsx",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_seller_page_tsx"
     },
@@ -21170,7 +21197,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/page.tsx",
       "source_location": "L7",
-      "community": 37,
+      "community": 242,
       "norm_label": "metadata",
       "id": "seller_page_metadata"
     },
@@ -21179,7 +21206,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/page.tsx",
       "source_location": "L12",
-      "community": 37,
+      "community": 242,
       "norm_label": "props",
       "id": "seller_page_props"
     },
@@ -21188,7 +21215,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/page.tsx",
       "source_location": "L16",
-      "community": 37,
+      "community": 242,
       "norm_label": "sellerdashboardpage()",
       "id": "seller_page_sellerdashboardpage"
     },
@@ -21206,7 +21233,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/listings/new/page.tsx",
       "source_location": "L1",
-      "community": 265,
+      "community": 37,
       "norm_label": "page.tsx",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_seller_listings_new_page_tsx"
     },
@@ -24872,9 +24899,31 @@
       "source_file": "apps/storefront/src/modules/checkout/templates/checkout-form/index.tsx",
       "source_location": "L2",
       "weight": 1.0,
+      "source": "apps_storefront_src_modules_checkout_templates_checkout_form_index_tsx",
+      "target": "data_payment_getpaymenteligibility",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/storefront/src/modules/checkout/templates/checkout-form/index.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_storefront_src_modules_checkout_templates_checkout_form_index_tsx",
       "target": "data_payment_listcartpaymentmethods"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/storefront/src/modules/checkout/templates/checkout-form/index.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_storefront_src_modules_checkout_templates_checkout_form_index_tsx",
+      "target": "lib_constants_iscod",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -24907,6 +24956,17 @@
       "weight": 1.0,
       "source": "checkout_form_index_checkoutform",
       "target": "data_payment_listcartpaymentmethods"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/storefront/src/modules/checkout/templates/checkout-form/index.tsx",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "checkout_form_index_checkoutform",
+      "target": "data_payment_getpaymenteligibility"
     },
     {
       "relation": "imports",
@@ -32978,6 +33038,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/storefront/src/lib/constants.tsx",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "apps_storefront_src_lib_constants_tsx",
+      "target": "lib_constants_isotc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/storefront/src/lib/constants.tsx",
       "source_location": "L54",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -33715,6 +33785,17 @@
       "source_location": "L9",
       "weight": 1.0,
       "source": "data_payment_listcartpaymentmethods",
+      "target": "data_cookies_getauthheaders"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/storefront/src/lib/data/payment.ts",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "data_payment_getpaymenteligibility",
       "target": "data_cookies_getauthheaders"
     },
     {
@@ -35260,6 +35341,26 @@
       "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_data_payment_ts",
       "target": "data_payment_listcartpaymentmethods"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/storefront/src/lib/data/payment.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "apps_storefront_src_lib_data_payment_ts",
+      "target": "data_payment_paymenteligibility",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/storefront/src/lib/data/payment.ts",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "apps_storefront_src_lib_data_payment_ts",
+      "target": "data_payment_getpaymenteligibility",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -40587,9 +40688,9 @@
       "source_file": "apps/backend/src/api/store/payment-methods/route.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_store_payment_methods_route_ts",
-      "target": "apps_backend_src_modules_accountability_index_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_accountability_index_ts"
     },
     {
       "relation": "imports_from",
@@ -40697,9 +40798,9 @@
       "source_file": "apps/backend/src/api/store/payment-methods/route.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_store_payment_methods_route_ts",
-      "target": "accountability_index_prepay_locked_states",
-      "confidence_score": 1.0
+      "target": "accountability_index_prepay_locked_states"
     },
     {
       "relation": "imports_from",
@@ -40751,9 +40852,9 @@
       "source_file": "apps/backend/src/api/store/payment-methods/route.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_store_payment_methods_route_ts",
-      "target": "apps_backend_src_modules_accountability_service_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_accountability_service_ts"
     },
     {
       "relation": "imports_from",
@@ -41478,9 +41579,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/index.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_modules_payment_otc_index_ts",
-      "target": "apps_backend_src_modules_payment_otc_service_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_payment_otc_service_ts"
     },
     {
       "relation": "contains",
@@ -41488,9 +41589,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_modules_payment_otc_service_ts",
-      "target": "payment_otc_service_injecteddeps",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_injecteddeps"
     },
     {
       "relation": "contains",
@@ -41498,9 +41599,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_modules_payment_otc_service_ts",
-      "target": "payment_otc_service_otcpaymentproviderservice",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_otcpaymentproviderservice"
     },
     {
       "relation": "method",
@@ -41508,9 +41609,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "payment_otc_service_otcpaymentproviderservice",
-      "target": "payment_otc_service_otcpaymentproviderservice_constructor",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_otcpaymentproviderservice_constructor"
     },
     {
       "relation": "method",
@@ -41518,9 +41619,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "payment_otc_service_otcpaymentproviderservice",
-      "target": "payment_otc_service_otcpaymentproviderservice_initiatepayment",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_otcpaymentproviderservice_initiatepayment"
     },
     {
       "relation": "method",
@@ -41528,9 +41629,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L69",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "payment_otc_service_otcpaymentproviderservice",
-      "target": "payment_otc_service_otcpaymentproviderservice_authorizepayment",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_otcpaymentproviderservice_authorizepayment"
     },
     {
       "relation": "method",
@@ -41538,9 +41639,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "payment_otc_service_otcpaymentproviderservice",
-      "target": "payment_otc_service_otcpaymentproviderservice_capturepayment",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_otcpaymentproviderservice_capturepayment"
     },
     {
       "relation": "method",
@@ -41548,9 +41649,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L87",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "payment_otc_service_otcpaymentproviderservice",
-      "target": "payment_otc_service_otcpaymentproviderservice_cancelpayment",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_otcpaymentproviderservice_cancelpayment"
     },
     {
       "relation": "method",
@@ -41558,9 +41659,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L93",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "payment_otc_service_otcpaymentproviderservice",
-      "target": "payment_otc_service_otcpaymentproviderservice_deletepayment",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_otcpaymentproviderservice_deletepayment"
     },
     {
       "relation": "method",
@@ -41568,9 +41669,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L99",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "payment_otc_service_otcpaymentproviderservice",
-      "target": "payment_otc_service_otcpaymentproviderservice_getpaymentstatus",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_otcpaymentproviderservice_getpaymentstatus"
     },
     {
       "relation": "method",
@@ -41578,9 +41679,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L115",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "payment_otc_service_otcpaymentproviderservice",
-      "target": "payment_otc_service_otcpaymentproviderservice_refundpayment",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_otcpaymentproviderservice_refundpayment"
     },
     {
       "relation": "method",
@@ -41588,9 +41689,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L121",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "payment_otc_service_otcpaymentproviderservice",
-      "target": "payment_otc_service_otcpaymentproviderservice_retrievepayment",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_otcpaymentproviderservice_retrievepayment"
     },
     {
       "relation": "method",
@@ -41598,9 +41699,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L127",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "payment_otc_service_otcpaymentproviderservice",
-      "target": "payment_otc_service_otcpaymentproviderservice_updatepayment",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_otcpaymentproviderservice_updatepayment"
     },
     {
       "relation": "method",
@@ -41608,9 +41709,9 @@
       "source_file": "apps/backend/src/modules/payment-otc/service.ts",
       "source_location": "L133",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "payment_otc_service_otcpaymentproviderservice",
-      "target": "payment_otc_service_otcpaymentproviderservice_getwebhookactionanddata",
-      "confidence_score": 1.0
+      "target": "payment_otc_service_otcpaymentproviderservice_getwebhookactionanddata"
     },
     {
       "relation": "imports_from",
@@ -42638,9 +42739,9 @@
       "source_file": "apps/backend/src/api/store/payment-methods/route.ts",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_store_payment_methods_route_ts",
-      "target": "payment_methods_route_accountstate",
-      "confidence_score": 1.0
+      "target": "payment_methods_route_accountstate"
     },
     {
       "relation": "contains",
@@ -42648,9 +42749,9 @@
       "source_file": "apps/backend/src/api/store/payment-methods/route.ts",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_store_payment_methods_route_ts",
-      "target": "payment_methods_route_get",
-      "confidence_score": 1.0
+      "target": "payment_methods_route_get"
     },
     {
       "relation": "contains",
@@ -47233,9 +47334,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "implementation_plan_md",
-      "target": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan"
     },
     {
       "relation": "contains",
@@ -47253,9 +47354,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_for_use_with_claude_code_medusa_v2",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_for_use_with_claude_code_medusa_v2"
     },
     {
       "relation": "contains",
@@ -47263,9 +47364,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_table_of_contents",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_table_of_contents"
     },
     {
       "relation": "contains",
@@ -47273,9 +47374,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_1_project_overview",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_1_project_overview"
     },
     {
       "relation": "contains",
@@ -47283,9 +47384,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_2_tech_stack",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_2_tech_stack"
     },
     {
       "relation": "contains",
@@ -47293,9 +47394,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L114",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_3_repository_structure",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_3_repository_structure"
     },
     {
       "relation": "contains",
@@ -47303,9 +47404,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L175",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_4_database_schema_data_models",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_4_database_schema_data_models"
     },
     {
       "relation": "contains",
@@ -47313,9 +47414,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L388",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_5_medusa_custom_modules",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_5_medusa_custom_modules"
     },
     {
       "relation": "contains",
@@ -47323,9 +47424,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L425",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_6_phase_by_phase_build_plan",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_6_phase_by_phase_build_plan"
     },
     {
       "relation": "contains",
@@ -47333,9 +47434,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L526",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_7_feature_specifications",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_7_feature_specifications"
     },
     {
       "relation": "contains",
@@ -47343,9 +47444,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L664",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_8_api_endpoints_reference",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_8_api_endpoints_reference"
     },
     {
       "relation": "contains",
@@ -47353,9 +47454,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L762",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_9_storefront_pages",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_9_storefront_pages"
     },
     {
       "relation": "contains",
@@ -47363,9 +47464,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L791",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_10_rider_pwa_pages",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_10_rider_pwa_pages"
     },
     {
       "relation": "contains",
@@ -47373,9 +47474,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L853",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_11_admin_dashboard_extensions",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_11_admin_dashboard_extensions"
     },
     {
       "relation": "contains",
@@ -47383,9 +47484,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L878",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_12_payment_fee_logic",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_12_payment_fee_logic"
     },
     {
       "relation": "contains",
@@ -47393,9 +47494,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L930",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_13_notifications_events",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_13_notifications_events"
     },
     {
       "relation": "contains",
@@ -47403,9 +47504,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L959",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_14_environment_variables",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_14_environment_variables"
     },
     {
       "relation": "contains",
@@ -47413,9 +47514,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1007",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_15_claude_code_prompting_guide",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_15_claude_code_prompting_guide"
     },
     {
       "relation": "contains",
@@ -47423,9 +47524,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1163",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_mindanao_fresh_hub_full_implementation_plan",
-      "target": "freshhub_implementation_plan_quick_reference_status_flows",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_quick_reference_status_flows"
     },
     {
       "relation": "contains",
@@ -47433,9 +47534,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_1_project_overview",
-      "target": "freshhub_implementation_plan_user_roles_summary",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_user_roles_summary"
     },
     {
       "relation": "contains",
@@ -47443,9 +47544,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_1_project_overview",
-      "target": "freshhub_implementation_plan_two_fulfillment_modes",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_two_fulfillment_modes"
     },
     {
       "relation": "contains",
@@ -47453,9 +47554,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_1_project_overview",
-      "target": "freshhub_implementation_plan_multi_hub_model",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_multi_hub_model"
     },
     {
       "relation": "contains",
@@ -47463,9 +47564,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L69",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_2_tech_stack",
-      "target": "freshhub_implementation_plan_backend",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_backend"
     },
     {
       "relation": "contains",
@@ -47473,9 +47574,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L76",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_2_tech_stack",
-      "target": "freshhub_implementation_plan_storefront",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_storefront"
     },
     {
       "relation": "contains",
@@ -47483,9 +47584,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_2_tech_stack",
-      "target": "freshhub_implementation_plan_rider_pwa",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_rider_pwa"
     },
     {
       "relation": "contains",
@@ -47493,9 +47594,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_2_tech_stack",
-      "target": "freshhub_implementation_plan_admin",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_admin"
     },
     {
       "relation": "contains",
@@ -47503,9 +47604,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L90",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_2_tech_stack",
-      "target": "freshhub_implementation_plan_payments",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_payments"
     },
     {
       "relation": "contains",
@@ -47513,9 +47614,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L96",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_2_tech_stack",
-      "target": "freshhub_implementation_plan_file_storage",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_file_storage"
     },
     {
       "relation": "contains",
@@ -47523,9 +47624,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L101",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_2_tech_stack",
-      "target": "freshhub_implementation_plan_notifications",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_notifications"
     },
     {
       "relation": "contains",
@@ -47533,9 +47634,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L106",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_2_tech_stack",
-      "target": "freshhub_implementation_plan_infrastructure_self_hosted",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_infrastructure_self_hosted"
     },
     {
       "relation": "contains",
@@ -47543,9 +47644,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L116",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_3_repository_structure",
-      "target": "freshhub_implementation_plan_codeblock_1",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_1"
     },
     {
       "relation": "contains",
@@ -47563,9 +47664,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L179",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_4_database_schema_data_models",
-      "target": "freshhub_implementation_plan_hubs",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_hubs"
     },
     {
       "relation": "contains",
@@ -47573,9 +47674,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L197",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_4_database_schema_data_models",
-      "target": "freshhub_implementation_plan_hub_admins",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_hub_admins"
     },
     {
       "relation": "contains",
@@ -47583,9 +47684,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L208",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_4_database_schema_data_models",
-      "target": "freshhub_implementation_plan_producers",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_producers"
     },
     {
       "relation": "contains",
@@ -47593,9 +47694,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L227",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_4_database_schema_data_models",
-      "target": "freshhub_implementation_plan_producer_products",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_producer_products"
     },
     {
       "relation": "contains",
@@ -47603,9 +47704,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L245",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_4_database_schema_data_models",
-      "target": "freshhub_implementation_plan_traders",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_traders"
     },
     {
       "relation": "contains",
@@ -47613,9 +47714,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L266",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_4_database_schema_data_models",
-      "target": "freshhub_implementation_plan_riders",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_riders"
     },
     {
       "relation": "contains",
@@ -47623,9 +47724,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L287",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_4_database_schema_data_models",
-      "target": "freshhub_implementation_plan_rider_orders",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_rider_orders"
     },
     {
       "relation": "contains",
@@ -47633,9 +47734,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L312",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_4_database_schema_data_models",
-      "target": "freshhub_implementation_plan_rider_penalties",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_rider_penalties"
     },
     {
       "relation": "contains",
@@ -47643,9 +47744,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L329",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_4_database_schema_data_models",
-      "target": "freshhub_implementation_plan_hub_credits",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_hub_credits"
     },
     {
       "relation": "contains",
@@ -47653,9 +47754,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L340",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_4_database_schema_data_models",
-      "target": "freshhub_implementation_plan_hub_credit_transactions",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_hub_credit_transactions"
     },
     {
       "relation": "contains",
@@ -47663,9 +47764,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L355",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_4_database_schema_data_models",
-      "target": "freshhub_implementation_plan_registrations",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_registrations"
     },
     {
       "relation": "contains",
@@ -47673,9 +47774,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L375",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_4_database_schema_data_models",
-      "target": "freshhub_implementation_plan_push_subscriptions",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_push_subscriptions"
     },
     {
       "relation": "contains",
@@ -47683,9 +47784,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L180",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_hubs",
-      "target": "freshhub_implementation_plan_codeblock_2",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_2"
     },
     {
       "relation": "contains",
@@ -47703,9 +47804,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L198",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_hub_admins",
-      "target": "freshhub_implementation_plan_codeblock_3",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_3"
     },
     {
       "relation": "contains",
@@ -47723,9 +47824,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L209",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_producers",
-      "target": "freshhub_implementation_plan_codeblock_4",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_4"
     },
     {
       "relation": "contains",
@@ -47743,9 +47844,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L228",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_producer_products",
-      "target": "freshhub_implementation_plan_codeblock_5",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_5"
     },
     {
       "relation": "contains",
@@ -47763,9 +47864,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L246",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_traders",
-      "target": "freshhub_implementation_plan_codeblock_6",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_6"
     },
     {
       "relation": "contains",
@@ -47783,9 +47884,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L267",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_riders",
-      "target": "freshhub_implementation_plan_codeblock_7",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_7"
     },
     {
       "relation": "contains",
@@ -47803,9 +47904,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L288",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_rider_orders",
-      "target": "freshhub_implementation_plan_codeblock_8",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_8"
     },
     {
       "relation": "contains",
@@ -47823,9 +47924,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L313",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_rider_penalties",
-      "target": "freshhub_implementation_plan_codeblock_9",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_9"
     },
     {
       "relation": "contains",
@@ -47833,9 +47934,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L330",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_hub_credits",
-      "target": "freshhub_implementation_plan_codeblock_10",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_10"
     },
     {
       "relation": "contains",
@@ -47843,9 +47944,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L341",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_hub_credit_transactions",
-      "target": "freshhub_implementation_plan_codeblock_11",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_11"
     },
     {
       "relation": "contains",
@@ -47853,9 +47954,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L356",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_registrations",
-      "target": "freshhub_implementation_plan_codeblock_12",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_12"
     },
     {
       "relation": "contains",
@@ -47863,9 +47964,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L376",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_push_subscriptions",
-      "target": "freshhub_implementation_plan_codeblock_13",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_13"
     },
     {
       "relation": "contains",
@@ -47873,9 +47974,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L392",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_5_medusa_custom_modules",
-      "target": "freshhub_implementation_plan_5_1_hub_module_src_modules_hub",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_5_1_hub_module_src_modules_hub"
     },
     {
       "relation": "contains",
@@ -47883,9 +47984,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L397",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_5_medusa_custom_modules",
-      "target": "freshhub_implementation_plan_5_2_producer_module_src_modules_producer",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_5_2_producer_module_src_modules_producer"
     },
     {
       "relation": "contains",
@@ -47893,9 +47994,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L402",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_5_medusa_custom_modules",
-      "target": "freshhub_implementation_plan_5_3_rider_module_src_modules_rider",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_5_3_rider_module_src_modules_rider"
     },
     {
       "relation": "contains",
@@ -47903,9 +48004,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L409",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_5_medusa_custom_modules",
-      "target": "freshhub_implementation_plan_5_4_hub_credit_module_src_modules_hub_credit",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_5_4_hub_credit_module_src_modules_hub_credit"
     },
     {
       "relation": "contains",
@@ -47913,9 +48014,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L414",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_5_medusa_custom_modules",
-      "target": "freshhub_implementation_plan_5_5_registration_module_src_modules_registration",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_5_5_registration_module_src_modules_registration"
     },
     {
       "relation": "contains",
@@ -47923,9 +48024,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L419",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_5_medusa_custom_modules",
-      "target": "freshhub_implementation_plan_5_6_pickup_schedule_module_src_modules_pickup_schedule",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_5_6_pickup_schedule_module_src_modules_pickup_schedule"
     },
     {
       "relation": "contains",
@@ -47933,9 +48034,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L427",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_6_phase_by_phase_build_plan",
-      "target": "freshhub_implementation_plan_phase_0_infrastructure_foundation_week_1_2",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_phase_0_infrastructure_foundation_week_1_2"
     },
     {
       "relation": "contains",
@@ -47943,9 +48044,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L438",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_6_phase_by_phase_build_plan",
-      "target": "freshhub_implementation_plan_phase_1_hub_system_auth_week_3",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_phase_1_hub_system_auth_week_3"
     },
     {
       "relation": "contains",
@@ -47953,9 +48054,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L446",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_6_phase_by_phase_build_plan",
-      "target": "freshhub_implementation_plan_phase_2_user_registration_week_4_5",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_phase_2_user_registration_week_4_5"
     },
     {
       "relation": "contains",
@@ -47963,9 +48064,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L455",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_6_phase_by_phase_build_plan",
-      "target": "freshhub_implementation_plan_phase_3_producer_dashboard_listings_week_6_7",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_phase_3_producer_dashboard_listings_week_6_7"
     },
     {
       "relation": "contains",
@@ -47973,9 +48074,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L466",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_6_phase_by_phase_build_plan",
-      "target": "freshhub_implementation_plan_phase_4_storefront_consumer_shopping_week_8_10",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_phase_4_storefront_consumer_shopping_week_8_10"
     },
     {
       "relation": "contains",
@@ -47983,9 +48084,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L478",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_6_phase_by_phase_build_plan",
-      "target": "freshhub_implementation_plan_phase_5_rider_system_delivery_week_11_13",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_phase_5_rider_system_delivery_week_11_13"
     },
     {
       "relation": "contains",
@@ -47993,9 +48094,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L495",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_6_phase_by_phase_build_plan",
-      "target": "freshhub_implementation_plan_phase_6_admin_dashboard_extensions_week_14_15",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_phase_6_admin_dashboard_extensions_week_14_15"
     },
     {
       "relation": "contains",
@@ -48003,9 +48104,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L506",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_6_phase_by_phase_build_plan",
-      "target": "freshhub_implementation_plan_phase_7_qr_codes_order_packaging_week_16",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_phase_7_qr_codes_order_packaging_week_16"
     },
     {
       "relation": "contains",
@@ -48013,9 +48114,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L513",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_6_phase_by_phase_build_plan",
-      "target": "freshhub_implementation_plan_phase_8_polish_launch_prep_week_17_18",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_phase_8_polish_launch_prep_week_17_18"
     },
     {
       "relation": "contains",
@@ -48023,9 +48124,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L528",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_7_feature_specifications",
-      "target": "freshhub_implementation_plan_7_1_multi_hub_scoping",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_7_1_multi_hub_scoping"
     },
     {
       "relation": "contains",
@@ -48033,9 +48134,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L545",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_7_feature_specifications",
-      "target": "freshhub_implementation_plan_7_2_cod_payment_flow",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_7_2_cod_payment_flow"
     },
     {
       "relation": "contains",
@@ -48043,9 +48144,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L564",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_7_feature_specifications",
-      "target": "freshhub_implementation_plan_7_3_trader_pricing",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_7_3_trader_pricing"
     },
     {
       "relation": "contains",
@@ -48053,9 +48154,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L578",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_7_feature_specifications",
-      "target": "freshhub_implementation_plan_7_4_hub_credits_reward_system",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_7_4_hub_credits_reward_system"
     },
     {
       "relation": "contains",
@@ -48063,9 +48164,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L597",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_7_feature_specifications",
-      "target": "freshhub_implementation_plan_7_5_rider_first_grab_system",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_7_5_rider_first_grab_system"
     },
     {
       "relation": "contains",
@@ -48073,9 +48174,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L622",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_7_feature_specifications",
-      "target": "freshhub_implementation_plan_7_6_delivery_confirmation_stock_deduction",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_7_6_delivery_confirmation_stock_deduction"
     },
     {
       "relation": "contains",
@@ -48083,9 +48184,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L643",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_7_feature_specifications",
-      "target": "freshhub_implementation_plan_7_7_producer_hub_submission_flow",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_7_7_producer_hub_submission_flow"
     },
     {
       "relation": "contains",
@@ -48093,9 +48194,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L547",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_7_2_cod_payment_flow",
-      "target": "freshhub_implementation_plan_codeblock_14",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_14"
     },
     {
       "relation": "contains",
@@ -48103,9 +48204,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L645",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_7_7_producer_hub_submission_flow",
-      "target": "freshhub_implementation_plan_codeblock_15",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_15"
     },
     {
       "relation": "contains",
@@ -48113,9 +48214,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L666",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_8_api_endpoints_reference",
-      "target": "freshhub_implementation_plan_store_api_consumers_producers",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_store_api_consumers_producers"
     },
     {
       "relation": "contains",
@@ -48123,9 +48224,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L694",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_8_api_endpoints_reference",
-      "target": "freshhub_implementation_plan_admin_api",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_admin_api"
     },
     {
       "relation": "contains",
@@ -48133,9 +48234,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L743",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_8_api_endpoints_reference",
-      "target": "freshhub_implementation_plan_rider_api",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_rider_api"
     },
     {
       "relation": "contains",
@@ -48143,9 +48244,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L668",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_store_api_consumers_producers",
-      "target": "freshhub_implementation_plan_codeblock_16",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_16"
     },
     {
       "relation": "contains",
@@ -48153,9 +48254,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L696",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_admin_api",
-      "target": "freshhub_implementation_plan_codeblock_17",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_17"
     },
     {
       "relation": "contains",
@@ -48163,9 +48264,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L745",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_rider_api",
-      "target": "freshhub_implementation_plan_codeblock_18",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_18"
     },
     {
       "relation": "contains",
@@ -48173,9 +48274,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L764",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_9_storefront_pages",
-      "target": "freshhub_implementation_plan_codeblock_19",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_19"
     },
     {
       "relation": "contains",
@@ -48183,9 +48284,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L793",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_10_rider_pwa_pages",
-      "target": "freshhub_implementation_plan_codeblock_20",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_20"
     },
     {
       "relation": "contains",
@@ -48193,9 +48294,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L807",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_10_rider_pwa_pages",
-      "target": "freshhub_implementation_plan_codeblock_21",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_21"
     },
     {
       "relation": "contains",
@@ -48203,9 +48304,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L817",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_10_rider_pwa_pages",
-      "target": "freshhub_implementation_plan_codeblock_22",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_22"
     },
     {
       "relation": "contains",
@@ -48213,9 +48314,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L834",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_10_rider_pwa_pages",
-      "target": "freshhub_implementation_plan_codeblock_23",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_23"
     },
     {
       "relation": "contains",
@@ -48223,9 +48324,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L857",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_11_admin_dashboard_extensions",
-      "target": "freshhub_implementation_plan_codeblock_24",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_24"
     },
     {
       "relation": "contains",
@@ -48233,9 +48334,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L880",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_12_payment_fee_logic",
-      "target": "freshhub_implementation_plan_platform_fee_direct_sell",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_platform_fee_direct_sell"
     },
     {
       "relation": "contains",
@@ -48243,9 +48344,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L888",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_12_payment_fee_logic",
-      "target": "freshhub_implementation_plan_hub_credits_earned_premium_only_on_delivery",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_hub_credits_earned_premium_only_on_delivery"
     },
     {
       "relation": "contains",
@@ -48253,9 +48354,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L893",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_12_payment_fee_logic",
-      "target": "freshhub_implementation_plan_hub_credits_cod_adjustment",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_hub_credits_cod_adjustment"
     },
     {
       "relation": "contains",
@@ -48263,9 +48364,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L900",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_12_payment_fee_logic",
-      "target": "freshhub_implementation_plan_rider_payout_per_delivery",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_rider_payout_per_delivery"
     },
     {
       "relation": "contains",
@@ -48273,9 +48374,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L908",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_12_payment_fee_logic",
-      "target": "freshhub_implementation_plan_penalty_on_claim_cancellation_without_valid_reason",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_penalty_on_claim_cancellation_without_valid_reason"
     },
     {
       "relation": "contains",
@@ -48283,9 +48384,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L913",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_12_payment_fee_logic",
-      "target": "freshhub_implementation_plan_delivery_fees_tagum_city_hub_starting_values_admin_can_edit",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_delivery_fees_tagum_city_hub_starting_values_admin_can_edit"
     },
     {
       "relation": "contains",
@@ -48293,9 +48394,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L920",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_12_payment_fee_logic",
-      "target": "freshhub_implementation_plan_registration_fees_paid_at_hub_cash",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_registration_fees_paid_at_hub_cash"
     },
     {
       "relation": "contains",
@@ -48303,9 +48404,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L881",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_platform_fee_direct_sell",
-      "target": "freshhub_implementation_plan_codeblock_25",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_25"
     },
     {
       "relation": "contains",
@@ -48313,9 +48414,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L889",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_hub_credits_earned_premium_only_on_delivery",
-      "target": "freshhub_implementation_plan_codeblock_26",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_26"
     },
     {
       "relation": "contains",
@@ -48323,9 +48424,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L894",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_hub_credits_cod_adjustment",
-      "target": "freshhub_implementation_plan_codeblock_27",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_27"
     },
     {
       "relation": "contains",
@@ -48333,9 +48434,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L901",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_rider_payout_per_delivery",
-      "target": "freshhub_implementation_plan_codeblock_28",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_28"
     },
     {
       "relation": "contains",
@@ -48343,9 +48444,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L909",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_penalty_on_claim_cancellation_without_valid_reason",
-      "target": "freshhub_implementation_plan_codeblock_29",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_29"
     },
     {
       "relation": "contains",
@@ -48353,9 +48454,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L914",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_delivery_fees_tagum_city_hub_starting_values_admin_can_edit",
-      "target": "freshhub_implementation_plan_codeblock_30",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_30"
     },
     {
       "relation": "contains",
@@ -48363,9 +48464,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L921",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_registration_fees_paid_at_hub_cash",
-      "target": "freshhub_implementation_plan_codeblock_31",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_31"
     },
     {
       "relation": "contains",
@@ -48373,9 +48474,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L932",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_13_notifications_events",
-      "target": "freshhub_implementation_plan_email_notifications_via_resend",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_email_notifications_via_resend"
     },
     {
       "relation": "contains",
@@ -48383,9 +48484,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L949",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_13_notifications_events",
-      "target": "freshhub_implementation_plan_push_notifications_via_web_push",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_push_notifications_via_web_push"
     },
     {
       "relation": "contains",
@@ -48393,9 +48494,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L961",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_14_environment_variables",
-      "target": "freshhub_implementation_plan_codeblock_32",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_32"
     },
     {
       "relation": "contains",
@@ -48403,9 +48504,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1013",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_15_claude_code_prompting_guide",
-      "target": "freshhub_implementation_plan_infrastructure_setup",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_infrastructure_setup"
     },
     {
       "relation": "contains",
@@ -48413,9 +48514,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1027",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_15_claude_code_prompting_guide",
-      "target": "freshhub_implementation_plan_database_migrations",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_database_migrations"
     },
     {
       "relation": "contains",
@@ -48423,9 +48524,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1046",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_15_claude_code_prompting_guide",
-      "target": "freshhub_implementation_plan_hub_module",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_hub_module"
     },
     {
       "relation": "contains",
@@ -48433,9 +48534,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1057",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_15_claude_code_prompting_guide",
-      "target": "freshhub_implementation_plan_producer_module",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_producer_module"
     },
     {
       "relation": "contains",
@@ -48443,9 +48544,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1072",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_15_claude_code_prompting_guide",
-      "target": "freshhub_implementation_plan_rider_module",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_rider_module"
     },
     {
       "relation": "contains",
@@ -48453,9 +48554,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1095",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_15_claude_code_prompting_guide",
-      "target": "freshhub_implementation_plan_hub_credits_module",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_hub_credits_module"
     },
     {
       "relation": "contains",
@@ -48463,9 +48564,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1111",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_15_claude_code_prompting_guide",
-      "target": "freshhub_implementation_plan_rider_pwa_1111",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_rider_pwa_1111"
     },
     {
       "relation": "contains",
@@ -48473,9 +48574,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1132",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_15_claude_code_prompting_guide",
-      "target": "freshhub_implementation_plan_admin_hub_submissions_page",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_admin_hub_submissions_page"
     },
     {
       "relation": "contains",
@@ -48483,9 +48584,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1147",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_15_claude_code_prompting_guide",
-      "target": "freshhub_implementation_plan_qr_code_generation",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_qr_code_generation"
     },
     {
       "relation": "contains",
@@ -48493,9 +48594,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1014",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_infrastructure_setup",
-      "target": "freshhub_implementation_plan_codeblock_33",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_33"
     },
     {
       "relation": "contains",
@@ -48503,9 +48604,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1028",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_database_migrations",
-      "target": "freshhub_implementation_plan_codeblock_34",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_34"
     },
     {
       "relation": "contains",
@@ -48513,9 +48614,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1047",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_hub_module",
-      "target": "freshhub_implementation_plan_codeblock_35",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_35"
     },
     {
       "relation": "contains",
@@ -48523,9 +48624,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1058",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_producer_module",
-      "target": "freshhub_implementation_plan_codeblock_36",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_36"
     },
     {
       "relation": "contains",
@@ -48533,9 +48634,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1073",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_rider_module",
-      "target": "freshhub_implementation_plan_codeblock_37",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_37"
     },
     {
       "relation": "contains",
@@ -48543,9 +48644,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1096",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_hub_credits_module",
-      "target": "freshhub_implementation_plan_codeblock_38",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_38"
     },
     {
       "relation": "contains",
@@ -48553,9 +48654,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1112",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_rider_pwa_1111",
-      "target": "freshhub_implementation_plan_codeblock_39",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_39"
     },
     {
       "relation": "contains",
@@ -48563,9 +48664,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1133",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_admin_hub_submissions_page",
-      "target": "freshhub_implementation_plan_codeblock_40",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_40"
     },
     {
       "relation": "contains",
@@ -48573,9 +48674,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1148",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_qr_code_generation",
-      "target": "freshhub_implementation_plan_codeblock_41",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_41"
     },
     {
       "relation": "contains",
@@ -48583,9 +48684,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1165",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_quick_reference_status_flows",
-      "target": "freshhub_implementation_plan_order_lifecycle",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_order_lifecycle"
     },
     {
       "relation": "contains",
@@ -48593,9 +48694,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1174",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_quick_reference_status_flows",
-      "target": "freshhub_implementation_plan_producer_hub_submission",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_producer_hub_submission"
     },
     {
       "relation": "contains",
@@ -48603,9 +48704,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1180",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_quick_reference_status_flows",
-      "target": "freshhub_implementation_plan_rider_order",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_rider_order"
     },
     {
       "relation": "contains",
@@ -48613,9 +48714,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1187",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_quick_reference_status_flows",
-      "target": "freshhub_implementation_plan_registration",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_registration"
     },
     {
       "relation": "contains",
@@ -48623,9 +48724,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1193",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_quick_reference_status_flows",
-      "target": "freshhub_implementation_plan_hub_credits_1193",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_hub_credits_1193"
     },
     {
       "relation": "contains",
@@ -48633,9 +48734,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1166",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_order_lifecycle",
-      "target": "freshhub_implementation_plan_codeblock_42",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_42"
     },
     {
       "relation": "contains",
@@ -48643,9 +48744,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1175",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_producer_hub_submission",
-      "target": "freshhub_implementation_plan_codeblock_43",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_43"
     },
     {
       "relation": "contains",
@@ -48653,9 +48754,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1181",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_rider_order",
-      "target": "freshhub_implementation_plan_codeblock_44",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_44"
     },
     {
       "relation": "contains",
@@ -48663,9 +48764,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1188",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_registration",
-      "target": "freshhub_implementation_plan_codeblock_45",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_45"
     },
     {
       "relation": "contains",
@@ -48673,9 +48774,9 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L1194",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_hub_credits_1193",
-      "target": "freshhub_implementation_plan_codeblock_46",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_codeblock_46"
     },
     {
       "relation": "contains",
@@ -48853,9 +48954,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "implementation_plan_asbuilt_md",
-      "target": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3"
     },
     {
       "relation": "contains",
@@ -48863,9 +48964,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_table_of_contents",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_table_of_contents"
     },
     {
       "relation": "contains",
@@ -48873,9 +48974,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L49",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_1_what_changed_vs_the_v2_plan",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_1_what_changed_vs_the_v2_plan"
     },
     {
       "relation": "contains",
@@ -48883,9 +48984,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L66",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_2_as_built_architecture",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_2_as_built_architecture"
     },
     {
       "relation": "contains",
@@ -48893,9 +48994,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L95",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_3_as_built_data_model"
     },
     {
       "relation": "contains",
@@ -48903,9 +49004,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L184",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_4_modules_responsibilities",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_4_modules_responsibilities"
     },
     {
       "relation": "contains",
@@ -48913,9 +49014,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L202",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_5_core_flows_as_built",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_5_core_flows_as_built"
     },
     {
       "relation": "contains",
@@ -48923,9 +49024,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L295",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_6_api_surface_as_built",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_6_api_surface_as_built"
     },
     {
       "relation": "contains",
@@ -48933,9 +49034,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L341",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_7_admin_surface_as_built",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_7_admin_surface_as_built"
     },
     {
       "relation": "contains",
@@ -48943,9 +49044,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L349",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_8_background_jobs",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_8_background_jobs"
     },
     {
       "relation": "contains",
@@ -48953,9 +49054,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L360",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_9_shipped_vs_partial_status_matrix",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_9_shipped_vs_partial_status_matrix"
     },
     {
       "relation": "contains",
@@ -48963,9 +49064,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L384",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap"
     },
     {
       "relation": "contains",
@@ -48973,9 +49074,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L470",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_11_risks_to_watch",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_11_risks_to_watch"
     },
     {
       "relation": "contains",
@@ -48983,9 +49084,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L486",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_mindanao_fresh_hub_as_built_implementation_plan_v3",
-      "target": "freshhub_implementation_plan_asbuilt_12_deferred_roadmap_superseded_v2_ideas",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_12_deferred_roadmap_superseded_v2_ideas"
     },
     {
       "relation": "contains",
@@ -48993,9 +49094,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L68",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_2_as_built_architecture",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_1",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_1"
     },
     {
       "relation": "contains",
@@ -49003,9 +49104,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L100",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
-      "target": "freshhub_implementation_plan_asbuilt_hub_hub_area",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_hub_hub_area"
     },
     {
       "relation": "contains",
@@ -49013,9 +49114,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L109",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
-      "target": "freshhub_implementation_plan_asbuilt_product_listing_producer_listings",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_product_listing_producer_listings"
     },
     {
       "relation": "contains",
@@ -49023,9 +49124,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L118",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
-      "target": "freshhub_implementation_plan_asbuilt_pickup_window_pickup_slot_sell_to_freshhub_intake",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_pickup_window_pickup_slot_sell_to_freshhub_intake"
     },
     {
       "relation": "contains",
@@ -49033,9 +49134,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L128",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
-      "target": "freshhub_implementation_plan_asbuilt_dispatch_batch_dispatch_order_delivery_batching",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_dispatch_batch_dispatch_order_delivery_batching"
     },
     {
       "relation": "contains",
@@ -49043,9 +49144,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L137",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
-      "target": "freshhub_implementation_plan_asbuilt_hub_barangay_fee_delivery_pricing",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_hub_barangay_fee_delivery_pricing"
     },
     {
       "relation": "contains",
@@ -49053,9 +49154,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L143",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
-      "target": "freshhub_implementation_plan_asbuilt_cod_transaction_cash_ledger",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_cod_transaction_cash_ledger"
     },
     {
       "relation": "contains",
@@ -49063,9 +49164,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L151",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
-      "target": "freshhub_implementation_plan_asbuilt_buyer_account_status_refusal_dispute_accountability",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_buyer_account_status_refusal_dispute_accountability"
     },
     {
       "relation": "contains",
@@ -49073,9 +49174,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L166",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
-      "target": "freshhub_implementation_plan_asbuilt_membership_no_table_metadata_on_customer",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_membership_no_table_metadata_on_customer"
     },
     {
       "relation": "contains",
@@ -49083,9 +49184,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L173",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
-      "target": "freshhub_implementation_plan_asbuilt_seller_no_table_metadata_on_customer",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_seller_no_table_metadata_on_customer"
     },
     {
       "relation": "contains",
@@ -49093,9 +49194,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L177",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
-      "target": "freshhub_implementation_plan_asbuilt_links",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_links"
     },
     {
       "relation": "contains",
@@ -49103,9 +49204,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L101",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_hub_hub_area",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_2",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_2"
     },
     {
       "relation": "contains",
@@ -49113,9 +49214,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L110",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_product_listing_producer_listings",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_3",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_3"
     },
     {
       "relation": "contains",
@@ -49123,9 +49224,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L119",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_pickup_window_pickup_slot_sell_to_freshhub_intake",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_4",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_4"
     },
     {
       "relation": "contains",
@@ -49133,9 +49234,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L129",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_dispatch_batch_dispatch_order_delivery_batching",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_5",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_5"
     },
     {
       "relation": "contains",
@@ -49143,9 +49244,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L138",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_hub_barangay_fee_delivery_pricing",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_6",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_6"
     },
     {
       "relation": "contains",
@@ -49153,9 +49254,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L144",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_cod_transaction_cash_ledger",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_7",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_7"
     },
     {
       "relation": "contains",
@@ -49163,9 +49264,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L152",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_buyer_account_status_refusal_dispute_accountability",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_8",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_8"
     },
     {
       "relation": "contains",
@@ -49173,9 +49274,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L204",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_5_core_flows_as_built",
-      "target": "freshhub_implementation_plan_asbuilt_5_1_hub_scoping_catalog",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_5_1_hub_scoping_catalog"
     },
     {
       "relation": "contains",
@@ -49183,9 +49284,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L209",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_5_core_flows_as_built",
-      "target": "freshhub_implementation_plan_asbuilt_5_2_producer_listing_pickup_sell_to_freshhub",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_5_2_producer_listing_pickup_sell_to_freshhub"
     },
     {
       "relation": "contains",
@@ -49193,9 +49294,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L219",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_5_core_flows_as_built",
-      "target": "freshhub_implementation_plan_asbuilt_5_3_checkout_delivery_tier_selection",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_5_3_checkout_delivery_tier_selection"
     },
     {
       "relation": "contains",
@@ -49203,9 +49304,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L233",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_5_core_flows_as_built",
-      "target": "freshhub_implementation_plan_asbuilt_5_4_order_dispatch_batch",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_5_4_order_dispatch_batch"
     },
     {
       "relation": "contains",
@@ -49213,9 +49314,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L244",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_5_core_flows_as_built",
-      "target": "freshhub_implementation_plan_asbuilt_5_5_cod_cash_lifecycle",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_5_5_cod_cash_lifecycle"
     },
     {
       "relation": "contains",
@@ -49223,9 +49324,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L263",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_5_core_flows_as_built",
-      "target": "freshhub_implementation_plan_asbuilt_5_6_refusal_dispute_strike_prepay_lock",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_5_6_refusal_dispute_strike_prepay_lock"
     },
     {
       "relation": "contains",
@@ -49233,9 +49334,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L283",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_5_core_flows_as_built",
-      "target": "freshhub_implementation_plan_asbuilt_5_7_membership_lifecycle",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_5_7_membership_lifecycle"
     },
     {
       "relation": "contains",
@@ -49243,9 +49344,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L210",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_5_2_producer_listing_pickup_sell_to_freshhub",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_9",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_9"
     },
     {
       "relation": "contains",
@@ -49253,9 +49354,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L234",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_5_4_order_dispatch_batch",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_10",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_10"
     },
     {
       "relation": "contains",
@@ -49263,9 +49364,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L246",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_5_5_cod_cash_lifecycle",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_11",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_11"
     },
     {
       "relation": "contains",
@@ -49273,9 +49374,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L264",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_5_6_refusal_dispute_strike_prepay_lock",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_12",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_12"
     },
     {
       "relation": "contains",
@@ -49283,9 +49384,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L284",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_5_7_membership_lifecycle",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_13",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_13"
     },
     {
       "relation": "contains",
@@ -49293,9 +49394,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L297",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_6_api_surface_as_built",
-      "target": "freshhub_implementation_plan_asbuilt_store",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_store"
     },
     {
       "relation": "contains",
@@ -49303,9 +49404,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L318",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_6_api_surface_as_built",
-      "target": "freshhub_implementation_plan_asbuilt_admin",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_admin"
     },
     {
       "relation": "contains",
@@ -49313,9 +49414,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L298",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_store",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_14",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_14"
     },
     {
       "relation": "contains",
@@ -49323,9 +49424,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L319",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_admin",
-      "target": "freshhub_implementation_plan_asbuilt_codeblock_15",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_15"
     },
     {
       "relation": "contains",
@@ -49333,9 +49434,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L388",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
-      "target": "freshhub_implementation_plan_asbuilt_phase_a_make_prepay_lock_resolve_to_otc_highest_priority",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_phase_a_make_prepay_lock_resolve_to_otc_highest_priority"
     },
     {
       "relation": "contains",
@@ -49343,9 +49444,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L409",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
-      "target": "freshhub_implementation_plan_asbuilt_phase_b_notifications_email_push",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_phase_b_notifications_email_push"
     },
     {
       "relation": "contains",
@@ -49353,9 +49454,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L417",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
-      "target": "freshhub_implementation_plan_asbuilt_phase_c_membership_lifecycle_automation",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_phase_c_membership_lifecycle_automation"
     },
     {
       "relation": "contains",
@@ -49363,9 +49464,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L425",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
-      "target": "freshhub_implementation_plan_asbuilt_phase_d_trader_b2b_pricing",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_phase_d_trader_b2b_pricing"
     },
     {
       "relation": "contains",
@@ -49373,9 +49474,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L432",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
-      "target": "freshhub_implementation_plan_asbuilt_phase_e_rider_operations_accountability",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_phase_e_rider_operations_accountability"
     },
     {
       "relation": "contains",
@@ -49383,9 +49484,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L451",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
-      "target": "freshhub_implementation_plan_asbuilt_phase_f_multi_hub_readiness",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_phase_f_multi_hub_readiness"
     },
     {
       "relation": "contains",
@@ -49393,9 +49494,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L457",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
-      "target": "freshhub_implementation_plan_asbuilt_phase_g_dispute_fairness_slas",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_phase_g_dispute_fairness_slas"
     },
     {
       "relation": "contains",
@@ -49403,9 +49504,9 @@
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L463",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
-      "target": "freshhub_implementation_plan_asbuilt_phase_h_hardening",
-      "confidence_score": 1.0
+      "target": "freshhub_implementation_plan_asbuilt_phase_h_hardening"
     },
     {
       "relation": "contains",
@@ -52029,5 +52130,5 @@
       "source_file": "apps/backend/src/workflows/README.md"
     }
   ],
-  "built_at_commit": "5b3f2eab2f3a843533314f68e68cc4f7f59ff9e6"
+  "built_at_commit": "2cf9b17c3c998d95bf39b306e6bad9442980307f"
 }
