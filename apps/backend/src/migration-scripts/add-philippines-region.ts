@@ -92,7 +92,11 @@ export default async function addPhilippinesRegion({ container }: ExecArgs) {
             name: "Philippines",
             currency_code: PH_CURRENCY,
             countries: [PH_COUNTRY],
-            payment_providers: ["pp_system_default", "pp_cod_freshhub"],
+            payment_providers: [
+            "pp_system_default",
+            "pp_cod_freshhub",
+            "pp_otc_freshhub",
+          ],
           },
         ],
       },
@@ -109,7 +113,11 @@ export default async function addPhilippinesRegion({ container }: ExecArgs) {
       input: {
         selector: { id: phRegion.id },
         update: {
-          payment_providers: ["pp_system_default", "pp_cod_freshhub"],
+          payment_providers: [
+            "pp_system_default",
+            "pp_cod_freshhub",
+            "pp_otc_freshhub",
+          ],
         },
       },
     })
