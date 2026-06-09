@@ -482,8 +482,9 @@ is also the foundation any future gig model would need.
       admin-operated.*
 - [ ] **Producer payout gated on remittance, not delivery.** *Blocked: producer
       payout doesn't exist yet — wire the gate when payout lands.*
-- [ ] **Enforce suspension on assignment:** reject assigning a `suspended` rider
-      in the dispatch assign/PATCH path (small follow-up).
+- [x] **Enforce suspension on assignment (2026-06-10):** `PATCH /admin/dispatch/orders/:id`
+      and the `delivered` route reject assigning a non-`active` rider (409).
+      Unassigning and completing in-flight deliveries stay allowed.
 - [ ] Aging refinement for the strike job (oldest unremitted > N days, not just a
       balance threshold).
 
