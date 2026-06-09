@@ -5,6 +5,8 @@ import type DispatchModuleService from "../../../../../modules/dispatch/service"
 import { COD_LEDGER_MODULE } from "../../../../../modules/cod-ledger"
 import type CodLedgerModuleService from "../../../../../modules/cod-ledger/service"
 import { isDuplicateCodTransaction } from "../../../../../modules/cod-ledger/is-duplicate"
+import { RIDER_MODULE } from "../../../../../modules/rider"
+import type RiderModuleService from "../../../../../modules/rider/service"
 
 type CodTx = Awaited<
   ReturnType<CodLedgerModuleService["listCodTransactions"]>
