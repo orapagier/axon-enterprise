@@ -22,16 +22,18 @@ import type AccountabilityModuleService from "../../../modules/accountability/se
  * enforces the lock at `authorizePayment` as a safety net, so a stale UI can
  * never actually push a locked buyer through COD.
  */
+type AccountState =
+  | "normal"
+  | "warned"
+  | "prepay_locked_30d"
+  | "prepay_locked_permanent"
+
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const customerId =
     (req as unknown as { auth_context?: { actor_id?: string } }).auth_context
       ?.actor_id ?? null
 
-  let accountState:
-    | "normal"
-    | "warned"
-    | "prepay_locked_30d"
-    | "prepay_locked_permanent" = "normal"
+  let accountState: AccountState = "normal"
 
   if (customerId) {
     const accountability: AccountabilityModuleService =
@@ -41,7 +43,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       { take: 1 }
     )
     if (status?.state) {
-      accountState = status.state as typeof accountState
+      accountState = status.state as AccountState
     }
   }
 
