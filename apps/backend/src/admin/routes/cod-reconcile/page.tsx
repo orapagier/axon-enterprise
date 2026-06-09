@@ -75,7 +75,7 @@ const CodReconcilePage = () => {
           <div>
             <Heading level="h1">COD Reconciliation</Heading>
             <Text className="text-ui-fg-subtle">
-              Compare cash collected vs. rider remits per day.
+              Rider cash (collected vs. remitted) and hub counter cash (OTC) per day.
             </Text>
           </div>
           <div className="flex gap-2 items-center">
