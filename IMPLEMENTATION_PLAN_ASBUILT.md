@@ -134,6 +134,14 @@ dispatch_order: id, order_id, rider_id?, manifest_position=0, delivered_at?,
                 dispatch_batch→
 ```
 
+### rider  (delivery riders)
+```
+rider: id, full_name, phone(unique), hub_id,
+       status: active | inactive | suspended,
+       pin_hash?(reserved for self-service login), notes?
+```
+`dispatch_order.rider_id` and `cod_transaction.rider_id` reference this id.
+
 ### hub_barangay_fee  (delivery pricing)
 ```
 hub_barangay_fee: id, hub_id, barangay, standard_fee_php, special_fee_php,
