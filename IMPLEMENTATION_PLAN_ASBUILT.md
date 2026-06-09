@@ -370,11 +370,12 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | Refusal → dispute → strike → prepay-lock + recovery | ✅ shipped |
 | Membership (metadata + group, admin approve) | ✅ shipped |
 | Seller verification gate | ✅ shipped |
-| **OTC payment method + prepay-lock → OTC fallthrough** | ❌ missing (Phase A — the launch fix; no PayMongo needed) |
+| **OTC payment method + prepay-lock → OTC fallthrough** | ✅ code-complete (Phase A, 2026-06-10) — needs `db:migrate` + region seed + runtime verify |
 | **Transactional email / push notifications** | ❌ missing |
 | **Membership expiry enforcement + renewal reminders** | ⚠️ partial (expiry stored, not enforced/notified) |
 | **Trader (B2B) pricing** | ❌ missing |
-| **Rider entity, capture & accountability** (delivered→collect, remit tracking, rider strikes) | ⚠️ partial (free-text `rider_id`, fields exist, no UI/auth) |
+| **Rider entity + admin CRUD + delivered→collect + strikes** | ✅ code-complete (Phase E, 2026-06-10) — needs `db:migrate` + runtime verify |
+| **Rider self-service auth / PWA** | ❌ missing (logic works admin-operated; needs auth design) |
 | **Address → hub resolution** (multi-hub) | ⚠️ partial (city-name match, Tagum-only) |
 | Online / GCash payment | ⏸️ deferred (no PayMongo budget; OTC covers prepay at launch) |
 | QR codes / order labels | ⏸️ deferred (do not implement yet) |
