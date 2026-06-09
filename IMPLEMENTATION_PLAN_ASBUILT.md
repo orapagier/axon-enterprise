@@ -242,12 +242,23 @@ dispatch-batches-in-transit (*/15m): locked → in_transit   at hub dispatch_tim
 Failures in assignment are logged, never block checkout.
 
 ### 5.5 COD cash lifecycle
+As built today (admin-recorded):
 ```
 rider delivers → admin POST /admin/orders/:id/cod-collected   (cod_collected row)
 rider hands cash to hub → POST /admin/orders/:id/cod-remitted  (rider_remitted row)
 admin reconciliation view: GET /admin/cod-reconcile
 ```
 Unique `(order_id, type)` index makes collected/remitted idempotent under races.
+
+**Target (Phase E) — rider-driven, two separate events:**
+- The rider's QR scan / "Delivered" action marks the order fulfilled **and**
+  auto-records `cod_collected` — the rider is now on the hook for that cash. No
+  admin step.
+- **Delivered ≠ remitted.** Remittance (rider hands cash to hub) is a separate
+  event; the reconcile view shows per-rider *collected − remitted = outstanding*.
+- **Producer payout is gated on remittance, not delivery.**
+- OTC (walk-in) has no remittance leg — cash is collected at the counter at
+  purchase time.
 
 ### 5.6 Refusal → dispute → strike → prepay-lock
 ```
