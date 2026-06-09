@@ -400,13 +400,19 @@ the physical hub store) is the cash prepay rail.
 - [x] **Backend (2026-06-10):** `otc` payment provider (`src/modules/payment-otc`),
       registered in `medusa-config.ts`; `GET /store/payment-methods` returns
       per-buyer eligibility (COD hidden for `prepay_locked_*`, OTC always on).
-- [ ] **Data:** enable both `pp_cod_freshhub` and `pp_otc_freshhub` on the PH region.
+- [x] **Data (2026-06-10):** `add-philippines-region` seed now attaches both
+      `pp_cod_freshhub` and `pp_otc_freshhub` to the PH region (re-run the script
+      to apply). *Needs running stack to take effect.*
 - [x] **Storefront (2026-06-10):** OTC added to `paymentInfoMap`; checkout reads
       `/store/payment-methods` (`getPaymentEligibility`), drops COD + shows a
       notice for locked buyers (OTC-only), keeps both for everyone else.
-- [ ] **OTC cash:** record an OTC order's counter payment via the `cod_collected`
-      ledger path (no remittance leg).
-- [ ] Keep COD frictionless for every non-locked buyer. *(provider unchanged; COD
+- [x] **OTC cash (2026-06-10):** new `otc_collected` ledger type (model +
+      `Migration20260610120000`); `POST /admin/orders/:id/otc-collected` records
+      the counter payment (hub-held, **no remittance leg**); `cod-reconcile`
+      reports OTC separately so it never counts as rider-outstanding. *Recorded
+      at counter-payment confirmation, not at online placement.* **Needs
+      `db:migrate` + runtime verification.**
+- [x] Keep COD frictionless for every non-locked buyer. *(COD provider unchanged;
       block at `authorizePayment` remains the safety net.)*
 - [ ] Online/GCash prepay stays **deferred** (no PayMongo budget yet — see §12);
       when added it slots in as a third payment source with no redesign.
