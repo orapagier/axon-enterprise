@@ -1,6 +1,8 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { DISPATCH_MODULE } from "../../../../../modules/dispatch"
 import type DispatchModuleService from "../../../../../modules/dispatch/service"
+import { RIDER_MODULE } from "../../../../../modules/rider"
+import type RiderModuleService from "../../../../../modules/rider/service"
 
 const VALID_DELIVERY_STATUSES = [
   "pending",
