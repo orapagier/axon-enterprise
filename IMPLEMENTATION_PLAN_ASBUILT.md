@@ -494,6 +494,9 @@ Kept intentionally out of the build for now; revisit when the trigger condition 
   density the single Tagum hub doesn't have yet. Batch dispatch is the right
   model at launch. Revisit when one hub exceeds batch capacity or genuine
   on-demand demand (Special tier) justifies it.
+- **Online / GCash payment (PayMongo etc.).** Deferred — no budget at launch, and
+  OTC already provides a cash prepay rail. Add when affordable; it slots in as
+  another payment source (no redesign), and can also collect membership fees.
 - **QR codes / printable order labels.** Phase 7 in v2; currently stub-only.
   Pairs naturally with Phase E (rider proof of delivery).
 
