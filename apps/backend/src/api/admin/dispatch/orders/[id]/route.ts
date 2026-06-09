@@ -35,7 +35,30 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
   }
 
   const update: Record<string, unknown> = { id }
-  if (body.rider_id !== undefined) update.rider_id = body.rider_id
+  if (body.rider_id !== undefined) {
+    // Assigning a rider (non-null): only an active rider may take new orders.
+    // A suspended rider (e.g. flagged by rider-unremitted-tick for unremitted
+    // cash) is blocked until an admin reactivates them. Unassigning (null) is
+    // always allowed.
+    if (body.rider_id) {
+      const riders: RiderModuleService = req.scope.resolve(RIDER_MODULE)
+      const [rider] = await riders.listRiders(
+        { id: body.rider_id },
+        { take: 1 }
+      )
+      if (!rider) {
+        res.status(400).json({ error: "rider_id does not match a known rider" })
+        return
+      }
+      if (rider.status !== "active") {
+        res.status(409).json({
+          error: `Rider is ${rider.status}; cannot assign new orders until reactivated.`,
+        })
+        return
+      }
+    }
+    update.rider_id = body.rider_id
+  }
   if (body.manifest_position !== undefined) {
     update.manifest_position = body.manifest_position
   }
