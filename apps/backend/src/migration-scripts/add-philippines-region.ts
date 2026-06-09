@@ -121,10 +121,10 @@ export default async function addPhilippinesRegion({ container }: ExecArgs) {
         },
       },
     })
-    logger.info("Ensured PH region has COD payment provider attached.")
+    logger.info("Ensured PH region has COD + OTC payment providers attached.")
   } catch (err) {
     logger.warn(
-      `Could not attach pp_cod_freshhub to PH region: ${String(err)}`
+      `Could not attach COD/OTC providers to PH region: ${String(err)}`
     )
   }
 
