@@ -94,9 +94,11 @@ const CodReconcilePage = () => {
           <Text className="text-ui-fg-subtle">No data.</Text>
         ) : (
           <>
-            <div className="grid grid-cols-3 gap-4 mb-6">
+            <div className="grid grid-cols-2 large:grid-cols-4 gap-4 mb-6">
               <div className="rounded-lg border p-4">
-                <Text className="text-ui-fg-subtle text-sm">Collected</Text>
+                <Text className="text-ui-fg-subtle text-sm">
+                  Collected (rider)
+                </Text>
                 <div className="text-2xl font-semibold">
                   {peso(q.data.totals.collected_centavos)}
                 </div>
@@ -108,7 +110,9 @@ const CodReconcilePage = () => {
                 </div>
               </div>
               <div className="rounded-lg border p-4">
-                <Text className="text-ui-fg-subtle text-sm">Outstanding</Text>
+                <Text className="text-ui-fg-subtle text-sm">
+                  Outstanding (rider owes)
+                </Text>
                 <div
                   className={`text-2xl font-semibold ${
                     q.data.totals.outstanding_centavos > 0
@@ -117,6 +121,14 @@ const CodReconcilePage = () => {
                   }`}
                 >
                   {peso(q.data.totals.outstanding_centavos)}
+                </div>
+              </div>
+              <div className="rounded-lg border p-4">
+                <Text className="text-ui-fg-subtle text-sm">
+                  Over the Counter (hub-held)
+                </Text>
+                <div className="text-2xl font-semibold">
+                  {peso(q.data.totals.otc_collected_centavos)}
                 </div>
               </div>
             </div>
