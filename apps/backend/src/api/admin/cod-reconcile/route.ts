@@ -6,8 +6,12 @@ import type CodLedgerModuleService from "../../../modules/cod-ledger/service"
  * GET /admin/cod-reconcile
  * Query: from?, to? (ISO date strings, optional)
  *
- * Returns ledger rows of types cod_collected + rider_remitted with running
- * totals so the admin can see end-of-day reconciliation at a glance.
+ * Returns ledger rows with running totals so the admin can see end-of-day
+ * reconciliation at a glance:
+ *  - rider cash: cod_collected (rider-held) vs rider_remitted; outstanding is
+ *    what riders still owe the hub.
+ *  - hub cash: otc_collected — paid at the counter, already in the hub's hands,
+ *    so it has no remittance leg and is reported separately (never "outstanding").
  */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const ledger: CodLedgerModuleService = req.scope.resolve(COD_LEDGER_MODULE)
@@ -15,13 +19,17 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const from = req.query.from ? new Date(req.query.from as string) : null
   const to = req.query.to ? new Date(req.query.to as string) : null
 
-  const [collected, remitted] = await Promise.all([
+  const [collected, remitted, otc] = await Promise.all([
     ledger.listCodTransactions(
       { type: "cod_collected" },
       { order: { created_at: "DESC" }, take: 500 }
     ),
     ledger.listCodTransactions(
       { type: "rider_remitted" },
+      { order: { created_at: "DESC" }, take: 500 }
+    ),
+    ledger.listCodTransactions(
+      { type: "otc_collected" },
       { order: { created_at: "DESC" }, take: 500 }
     ),
   ])
