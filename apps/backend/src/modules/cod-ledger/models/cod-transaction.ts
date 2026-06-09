@@ -5,7 +5,16 @@ const CodTransaction = model
     id: model.id().primaryKey(),
     customer_id: model.text(),
     order_id: model.text().nullable(),
-    type: model.enum(["cod_collected", "rider_remitted", "reconciled"]),
+    // cod_collected   — rider took cash from buyer (rider-held until remitted)
+    // rider_remitted  — rider handed cash to the hub
+    // otc_collected   — buyer paid at the hub counter (hub-held; NO remittance leg)
+    // reconciled      — end-of-day reconciliation marker
+    type: model.enum([
+      "cod_collected",
+      "rider_remitted",
+      "otc_collected",
+      "reconciled",
+    ]),
     amount: model.number(),
     reference: model.text().nullable(),
     rider_id: model.text().nullable(),
