@@ -397,12 +397,16 @@ the physical hub store) is the cash prepay rail.
 > resale of returned produce. Neither is to be reintroduced without an explicit
 > founder call.
 
-- [ ] Surface **OTC** as a selectable payment method: buyer pays at the counter,
-      hub admin records the cash at order time (`cod_collected`-equivalent ledger
-      entry, no remittance leg).
-- [ ] For `prepay_locked_*` buyers: hide COD, offer **OTC only** — instead of the
-      current hard error.
-- [ ] Keep COD frictionless for every non-locked buyer.
+- [x] **Backend (2026-06-10):** `otc` payment provider (`src/modules/payment-otc`),
+      registered in `medusa-config.ts`; `GET /store/payment-methods` returns
+      per-buyer eligibility (COD hidden for `prepay_locked_*`, OTC always on).
+- [ ] **Data:** enable both `pp_cod_freshhub` and `pp_otc_freshhub` on the PH region.
+- [ ] **Storefront:** checkout payment step reads `/store/payment-methods` and
+      renders COD + OTC (OTC-only when locked).
+- [ ] **OTC cash:** record an OTC order's counter payment via the `cod_collected`
+      ledger path (no remittance leg).
+- [ ] Keep COD frictionless for every non-locked buyer. *(provider unchanged; COD
+      block at `authorizePayment` remains the safety net.)*
 - [ ] Online/GCash prepay stays **deferred** (no PayMongo budget yet — see §12);
       when added it slots in as a third payment source with no redesign.
 

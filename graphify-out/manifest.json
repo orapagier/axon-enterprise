@@ -25,8 +25,8 @@
     "semantic_hash": "87f0d903477984d0587a02f8fe185263"
   },
   "/home/ramlej/MFH/freshhub/.claude/settings.local.json": {
-    "mtime": 1780905164.3209147,
-    "ast_hash": "45f7f654905d2aaa1bb0a78cddb2f51f",
+    "mtime": 1781034308.7075975,
+    "ast_hash": "4ea43ffb14d036216a3c134b76ac12f0",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/next-sitemap.js": {
@@ -1345,8 +1345,8 @@
     "semantic_hash": "f495023b76539854a7171b5272ed1418"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/medusa-config.ts": {
-    "mtime": 1780891893.4123292,
-    "ast_hash": "c5f9266b20b915d5d9b16bd9e96f3d37",
+    "mtime": 1781041421.4645095,
+    "ast_hash": "d97e42e9d2e82e30a87908311517b328",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/jest.config.js": {
@@ -1599,6 +1599,16 @@
     "ast_hash": "b143cae5b176ebdd44d573ce30eaf554",
     "semantic_hash": ""
   },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/modules/payment-otc/index.ts": {
+    "mtime": 1781041389.8447993,
+    "ast_hash": "40134cd331b42b23ff7ae4138e643de0",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/modules/payment-otc/service.ts": {
+    "mtime": 1781041378.8528345,
+    "ast_hash": "c483aabff0742c8bc1d8978abe34bf6a",
+    "semantic_hash": ""
+  },
   "/home/ramlej/MFH/freshhub/apps/backend/src/modules/payment-cod/index.ts": {
     "mtime": 1779431733.082445,
     "ast_hash": "6342fd031afd36400655b0cbe98b6e67",
@@ -1707,6 +1717,11 @@
   "/home/ramlej/MFH/freshhub/apps/backend/src/api/store/hubs/[slug]/barangays/route.ts": {
     "mtime": 1779546472.43776,
     "ast_hash": "d9e0b4028ccb1f8a39bbf29187c8127a",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/api/store/payment-methods/route.ts": {
+    "mtime": 1781041538.0791707,
+    "ast_hash": "10dbe5794697337914483a74da7fc497",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/api/store/customer/disputes/route.ts": {
@@ -2050,8 +2065,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/query-entry-points.d.ts": {
-    "mtime": 1780888967.1537466,
-    "ast_hash": "cc9d0def29bb4378c54a4282e8df200e",
+    "mtime": 1781041543.048221,
+    "ast_hash": "34f6cf4dd098a31a7dae27dc09257d2d",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/index.d.ts": {
@@ -2060,12 +2075,12 @@
     "semantic_hash": "92cfe3ea73a656c693052260d34e9dc5"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/modules-bindings.d.ts": {
-    "mtime": 1780888967.1537466,
+    "mtime": 1781041543.048221,
     "ast_hash": "563f921c0fc6762a8a77ccc8c275df39",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/entry.jsx": {
-    "mtime": 1780888966.1417465,
+    "mtime": 1781041541.1722212,
     "ast_hash": "8b276d285c6e460a0c2c67b57ec8d943",
     "semantic_hash": "8b276d285c6e460a0c2c67b57ec8d943"
   },
@@ -2074,19 +2089,14 @@
     "ast_hash": "6e1369247e3100e3eb95415b5cb49719",
     "semantic_hash": ""
   },
-  "/home/ramlej/MFH/freshhub/phase_2.md": {
-    "mtime": 1779379618.4987626,
-    "ast_hash": "1b347ba326bdb225c195b7412d002353",
-    "semantic_hash": ""
-  },
   "/home/ramlej/MFH/freshhub/CLAUDE.md": {
     "mtime": 1779046822.8111067,
     "ast_hash": "82efb97a359f5c7290bf2513d14686be",
     "semantic_hash": "82efb97a359f5c7290bf2513d14686be"
   },
   "/home/ramlej/MFH/freshhub/IMPLEMENTATION_PLAN.md": {
-    "mtime": 1779343375.7319796,
-    "ast_hash": "68274c12622027285de401fb4d39d271",
+    "mtime": 1781032151.8727703,
+    "ast_hash": "6198a30b8ff1e89ee45df9995dcd9e19",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/README.md": {
@@ -2094,19 +2104,9 @@
     "ast_hash": "42ceca1f28ee6045ab20a957b55a88ce",
     "semantic_hash": "42ceca1f28ee6045ab20a957b55a88ce"
   },
-  "/home/ramlej/MFH/freshhub/phase_3.md": {
-    "mtime": 1780520735.9172263,
-    "ast_hash": "da0afc924f20d0931030421d4474eb54",
-    "semantic_hash": ""
-  },
-  "/home/ramlej/MFH/freshhub/phase_1.md": {
-    "mtime": 1779353583.7189796,
-    "ast_hash": "318477ef61c58128843d84d6343b521c",
-    "semantic_hash": ""
-  },
-  "/home/ramlej/MFH/freshhub/PHASE_1_HUB.md": {
-    "mtime": 1780520746.8252246,
-    "ast_hash": "096a85ef8078d20ed0ae932bb347397a",
+  "/home/ramlej/MFH/freshhub/IMPLEMENTATION_PLAN_ASBUILT.md": {
+    "mtime": 1781039048.4461536,
+    "ast_hash": "9c550ea34a7635dea5abc271e99cd41c",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/.github/workflows/ci.yml": {
@@ -2160,7 +2160,7 @@
     "semantic_hash": "6f36f79ab958b75e4fdaf581b92a1225"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/index.html": {
-    "mtime": 1780888966.1417465,
+    "mtime": 1781041541.1722212,
     "ast_hash": "1f14bb0d5e89bc45a4265b714e6c6de6",
     "semantic_hash": "1f14bb0d5e89bc45a4265b714e6c6de6"
   },
