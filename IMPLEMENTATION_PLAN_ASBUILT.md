@@ -52,7 +52,7 @@
 |---|---|---|
 | Repo layout | top-level `backend/`, `storefront/`, `rider-portal/`, `admin-extensions/` | Turbo monorepo: `apps/backend` + `apps/storefront`; admin pages live **inside** `apps/backend/src/admin`; **no** rider-portal app |
 | Delivery | rider **first-grab** PWA + auto-release + rider penalties | **dispatch batches** with hub cutoff → lock → in_transit |
-| Buyer trust | **Hub Credits** rewards wallet | **prepay-lock** accountability (refusal → strike → COD blocked) |
+| Buyer trust | **Hub Credits** rewards wallet | **prepay-lock** accountability (refusal → strike → COD off, OTC-only) |
 | Producer | `producer` module | `listing` module + storefront `producer`/`seller` flows |
 | Pickup | `pickup-schedule` module | `pickup` module (windows + slots, capacity-locked) |
 | Membership | `registration` module w/ DB tables | metadata-on-customer + `hub-members` customer group |
