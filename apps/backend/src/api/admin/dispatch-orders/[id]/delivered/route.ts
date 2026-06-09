@@ -86,7 +86,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   }
 
   // 2. For COD, record cod_collected.
-  let transaction = null
+  let transaction: CodTx | null = null
   if (!isOtc) {
     const existing = await ledger.listCodTransactions(
       { order_id: order.id, type: "cod_collected" },
