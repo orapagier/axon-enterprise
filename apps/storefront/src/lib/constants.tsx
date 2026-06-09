@@ -37,6 +37,10 @@ export const paymentInfoMap: Record<
     title: "Cash on Delivery",
     icon: <CreditCard />,
   },
+  pp_otc_freshhub: {
+    title: "Over the Counter (pay at hub)",
+    icon: <CreditCard />,
+  },
   // Add more payment providers here
 }
 
