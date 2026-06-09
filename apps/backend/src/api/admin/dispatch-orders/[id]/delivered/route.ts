@@ -60,6 +60,27 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
+  // An explicit rider_id here is a (late) assignment, so it must be an active
+  // rider. Completing a delivery with the already-assigned rider is NOT blocked
+  // even if they were since suspended — we want that in-flight cash recorded.
+  if (body.rider_id) {
+    const riders: RiderModuleService = req.scope.resolve(RIDER_MODULE)
+    const [rider] = await riders.listRiders(
+      { id: body.rider_id },
+      { take: 1 }
+    )
+    if (!rider) {
+      res.status(400).json({ error: "rider_id does not match a known rider" })
+      return
+    }
+    if (rider.status !== "active") {
+      res.status(409).json({
+        error: `Rider is ${rider.status}; cannot assign new orders until reactivated.`,
+      })
+      return
+    }
+  }
+
   const riderId = body.rider_id ?? dispatchOrder.rider_id ?? null
 
   // OTC orders are paid at the counter; their cash is recorded as otc_collected
