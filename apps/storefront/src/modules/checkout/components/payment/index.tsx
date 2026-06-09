@@ -146,6 +146,14 @@ const Payment = ({
       </div>
       <div>
         <div className={isOpen ? "block" : "hidden"}>
+          {codNotice && (
+            <Text
+              className="txt-medium text-ui-fg-subtle mb-4 p-3 rounded-md bg-ui-bg-subtle border border-ui-border-base"
+              data-testid="cod-unavailable-notice"
+            >
+              {codNotice}
+            </Text>
+          )}
           {!paidByGiftcard && availablePaymentMethods?.length && (
             <>
               <RadioGroup
