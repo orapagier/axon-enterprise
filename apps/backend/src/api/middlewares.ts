@@ -102,6 +102,11 @@ export default defineMiddlewares({
       middlewares: [authenticate("user", ["session", "bearer"])],
     },
     {
+      matcher: "/admin/orders/*/otc-collected",
+      method: ["POST"],
+      middlewares: [authenticate("user", ["session", "bearer"])],
+    },
+    {
       matcher: "/store/customers/me/hub",
       method: ["POST", "DELETE"],
       middlewares: [authenticate("customer", ["session", "bearer"])],
