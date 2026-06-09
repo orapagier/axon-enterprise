@@ -334,9 +334,11 @@ GET/POST/PATCH /admin/pickup-windows[/bulk][/:id]    + /slots[/:slotId]
 GET    /admin/dispatch/batches[/:id]                 dispatch board
 GET/PATCH /admin/dispatch/orders/:id
 POST   /admin/dispatch-orders/:id/refusal            open a refusal dispute
+POST   /admin/dispatch-orders/:id/delivered          mark delivered + auto cod_collected (COD)
 GET    /admin/disputes ; POST /admin/disputes/:id/resolve
-POST   /admin/orders/:id/cod-collected | cod-remitted
-GET    /admin/cod-reconcile                          cash reconciliation
+GET/POST /admin/riders ; GET/PATCH /admin/riders/:id  rider management
+POST   /admin/orders/:id/cod-collected | cod-remitted | otc-collected
+GET    /admin/cod-reconcile                          cash reconciliation (rider + OTC)
 GET/POST /admin/memberships ; POST /admin/memberships/:id  (approve|reject|cancel)
 GET    /admin/sellers ; POST /admin/sellers/:id/verify
 ```
