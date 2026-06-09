@@ -275,8 +275,10 @@ clean-order-tick (nightly 02:00):
      prepay_locked_30d past state_until → normal (strikes preserved)
      permanent → admin override only
 ```
-**Enforcement:** `payment-cod.authorizePayment` blocks COD for any buyer in a
-`prepay_locked_*` state.
+**Enforcement:** `payment-cod.authorizePayment` blocks **COD** for any buyer in a
+`prepay_locked_*` state. *Target (Phase A):* such buyers are not blocked outright
+— they fall through to **OTC (pay at the hub counter)**, the launch prepay rail.
+No online payment required.
 
 ### 5.7 Membership lifecycle
 ```
