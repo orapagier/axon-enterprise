@@ -138,6 +138,12 @@ const customModules: Record<string, unknown>[] = [
           resolve: './src/modules/payment-cod',
           id: 'freshhub',
         },
+        {
+          // OTC (walk-in, pay at the hub counter). The cash prepay rail for
+          // prepay-locked buyers — always authorizable, no accountability gate.
+          resolve: './src/modules/payment-otc',
+          id: 'freshhub',
+        },
       ],
     },
   },
