@@ -445,19 +445,34 @@ For a perishable hub, bulk buyers clear volume fast — high ROI.
 there is no rider entity, auth, manifest view, or rider-side capture. A real
 rider record is a **launch necessity** (COD cash must be traced to a rider) and
 is also the foundation any future gig model would need.
-- [ ] Promote **rider to a first-class entity** (id, name, phone, hub_id, status);
-      replace the free-text `rider_id` references.
-- [ ] Rider login + per-batch manifest (ordered by `manifest_position`); keep
-      assignment swappable (manual admin assign now, self-claim later).
-- [ ] **Delivered** action (QR scan / button) → auto-fulfill **and** auto-record
-      `cod_collected` (rider owes the cash); **Refused** action → opens the
-      refusal dispute (`rider_photo_url`, `rider_notes`).
-- [ ] Remittance event (rider→hub) kept separate from delivery; per-rider
-      *collected − remitted = outstanding* on the reconcile view.
-- [ ] **Producer payout gated on remittance, not delivery.**
-- [ ] **Rider accountability (mirror of buyer strikes):** a rider whose aged
-      collected-but-unremitted balance crosses a limit is flagged/blocked from
-      taking new orders — the automated version of "go after the rider."
+- [x] **Rider entity (2026-06-10):** `rider` module (id, full_name, phone[unique],
+      hub_id, status[active|inactive|suspended], pin_hash, notes) +
+      `Migration20260610130000`; registered in `medusa-config.ts`. `rider_id`
+      fields now hold a real rider id.
+- [x] **Admin CRUD (2026-06-10):** `GET/POST /admin/riders`, `GET/PATCH
+      /admin/riders/:id` (admin-only; no self-signup). Admin clears a suspension
+      by PATCHing status back to `active`.
+- [x] **Delivered action (2026-06-10):** `POST /admin/dispatch-orders/:id/delivered`
+      → marks delivered **and** auto-records `cod_collected` for COD (rider owes
+      the cash; skipped for already-paid OTC). **Refused** already exists
+      (`.../refusal`). *Admin/cashier-operated for now (matches the refusal
+      route); a `/rider/*` surface is the auth slice below.*
+- [x] **Remittance separate (2026-06-10):** delivery records collection only;
+      `rider_remitted` stays its own event; per-rider outstanding =
+      `cod_collected − rider_remitted` (rider-strike job already sums it).
+- [x] **Rider accountability (2026-06-10):** `rider-unremitted-tick` job
+      (nightly) suspends an active rider whose unremitted balance exceeds
+      `RIDER_UNREMITTED_LIMIT_CENTAVOS` (default ₱5,000). Recovery is admin-driven.
+- [ ] **Rider self-service auth + `/rider/*`** (phone+PIN login, manifest,
+      rider-driven delivered/refused). *Deferred — needs an auth-provider design
+      decision and runtime verification; the logic above already works
+      admin-operated.*
+- [ ] **Producer payout gated on remittance, not delivery.** *Blocked: producer
+      payout doesn't exist yet — wire the gate when payout lands.*
+- [ ] **Enforce suspension on assignment:** reject assigning a `suspended` rider
+      in the dispatch assign/PATCH path (small follow-up).
+- [ ] Aging refinement for the strike job (oldest unremitted > N days, not just a
+      balance threshold).
 
 ### Phase F — Multi-hub readiness
 **Problem:** hub resolution in `delivery-options` matches on `city` string and
