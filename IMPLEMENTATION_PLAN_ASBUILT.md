@@ -471,14 +471,14 @@ assumes Tagum. The data model already supports areas/barangays/postal codes.
 
 | Risk | Why it bites here | Mitigation |
 |---|---|---|
-| **Prepay-lock with no prepay rail** | Locked buyers are fully blocked, not "prepay-only" as intended | Phase A — ship GCash before relying on locks |
+| **Prepay-locked buyers stuck** | They lose COD but currently have no other way to pay | Phase A — fall through to **OTC** (pay at counter); no PayMongo needed |
 | **Delivery latency vs expectations** | Batch model = "wait for next cutoff"; "Special within 1h" is promised but dispatch is batch-based | Make Special a genuine on-demand path or set ETAs honestly at checkout |
-| **Deposit/fee friction & GCash UX** | Too-high prepay kills conversion; too-low doesn't deter refusal | Make amounts configurable; A/B the threshold |
+| **Rider deliver-and-pocket** | "Delivered" releases the order while the rider still holds the cash | Delivered ≠ remitted; producer payout gated on remittance; rider-strike block on aged unremitted balance (Phase E) |
 | **Disputes feel unfair** | Auto-strikes on legit quality complaints alienate good buyers | Phase G appeals + clear buyer-facing status |
 | **Silent system** | No emails/push → buyers don't know order/dispute/membership state | Phase B |
 | **Membership expiry not enforced** | Members keep perks past expiry; no renewal nudge → churn | Phase C |
 | **City-name hub matching** | Breaks the moment a second hub launches | Phase F address→hub resolution |
-| **Perishable write-offs on refusal** | Refused COD produce can't be restocked | Prepay rail + strikes (already designed) + tighten refusal SLA |
+| **Perishable write-offs on refusal** | Refused COD produce can't be restocked; strikes only deter *repeat* refusers | Same-day resale of returned goods (founder's model) + strikes; first refusal absorbed (no upfront gate, by decision) |
 | **Membership state in metadata only** | No first-class table → admin list scans 1000 customers in memory | Move to link table / view when user base grows |
 
 ---
