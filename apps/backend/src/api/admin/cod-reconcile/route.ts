@@ -44,18 +44,24 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   const collectedF = collected.filter((t) => inRange(t.created_at))
   const remittedF = remitted.filter((t) => inRange(t.created_at))
+  const otcF = otc.filter((t) => inRange(t.created_at))
 
   const totalCollected = collectedF.reduce((s, t) => s + t.amount, 0)
   const totalRemitted = remittedF.reduce((s, t) => s + t.amount, 0)
+  // Rider outstanding = rider-collected cash not yet remitted. OTC is excluded
+  // on purpose: it's hub-held from the start, so it can never be "outstanding".
   const outstanding = totalCollected - totalRemitted
+  const totalOtc = otcF.reduce((s, t) => s + t.amount, 0)
 
   res.json({
     collected: collectedF,
     remitted: remittedF,
+    otc_collected: otcF,
     totals: {
       collected_centavos: totalCollected,
       remitted_centavos: totalRemitted,
       outstanding_centavos: outstanding,
+      otc_collected_centavos: totalOtc,
     },
   })
 }
