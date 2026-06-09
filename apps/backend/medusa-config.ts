@@ -127,6 +127,7 @@ const customModules: Record<string, unknown>[] = [
   { resolve: './src/modules/listing' },
   { resolve: './src/modules/pickup' },
   { resolve: './src/modules/dispatch' },
+  { resolve: './src/modules/rider' },
   { resolve: './src/modules/cod-ledger' },
   { resolve: './src/modules/accountability' },
   { resolve: './src/modules/delivery-fees' },
