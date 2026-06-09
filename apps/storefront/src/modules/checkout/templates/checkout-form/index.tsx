@@ -28,13 +28,31 @@ export default async function CheckoutForm({
     return null
   }
 
+  // FreshHub: prepay-locked buyers (after repeated refusals) lose COD and must
+  // pay Over the Counter. Drop COD from the offered methods and surface why.
+  // Fails open — if eligibility can't be read we leave COD in (the COD provider
+  // still blocks locked buyers at authorize).
+  const eligibility = await getPaymentEligibility()
+  let availablePaymentMethods = paymentMethods
+  let codNotice: string | null = null
+  if (eligibility && eligibility.cod_available === false) {
+    availablePaymentMethods = paymentMethods.filter((m) => !isCod(m.id))
+    codNotice =
+      eligibility.methods.find((m) => m.type === "cod")?.reason_if_unavailable ??
+      "Cash on Delivery isn't available on your account. Please pay Over the Counter at the hub."
+  }
+
   return (
     <div className="w-full grid grid-cols-1 gap-y-8">
       <Addresses cart={cart} customer={customer} />
 
       <Shipping cart={cart} availableShippingMethods={shippingMethods} />
 
-      <Payment cart={cart} availablePaymentMethods={paymentMethods} />
+      <Payment
+        cart={cart}
+        availablePaymentMethods={availablePaymentMethods}
+        codNotice={codNotice}
+      />
 
       <Review cart={cart} />
     </div>
