@@ -197,6 +197,7 @@ Members are also mirrored into the `hub-members` customer group.
 | `listing` | producer product listings (both sell modes) + lifecycle | admin approve/reject; links product↔hub |
 | `pickup` | sell-to-freshhub intake windows & slots, capacity in kg | concurrency-safe reservation |
 | `dispatch` | delivery batches & per-order manifest | cutoff→lock→in_transit→completed |
+| `rider` | delivery riders (per hub) + status | COD cash traced to a rider; suspendable |
 | `delivery-fees` | per-(hub,barangay) standard/special fee table | drives the 3 checkout tiers |
 | `payment-cod` | COD payment provider | enforces prepay-lock at authorize |
 | `cod-ledger` | cash collected / remitted / reconciled | idempotent per (order, type) |
