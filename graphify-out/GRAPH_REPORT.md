@@ -1,7 +1,7 @@
 # Graph Report - freshhub  (2026-06-10)
 
 ## Corpus Check
-- 433 files · ~187,739 words
+- 433 files · ~187,856 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `3af8b7d6`
+- Built from commit: `a559cef2`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -388,7 +388,7 @@ Nodes (9): TransferPage(), acceptTransferRequest(), createTransferRequest(), dec
 
 ### Community 37 - "Product Quick Add"
 Cohesion: 0.14
-Nodes (14): AccountPageLayout(), Addresses(), metadata, Cart(), metadata, metadata, OverviewTemplate(), retrieveCustomer() (+6 more)
+Nodes (15): AccountPageLayout(), Addresses(), metadata, Cart(), metadata, metadata, OverviewTemplate(), retrieveCustomer() (+7 more)
 
 ### Community 38 - "Cart/Order Line Items"
 Cohesion: 0.07
@@ -712,7 +712,7 @@ Nodes (6): beforeCutoff(), GET(), nowInHubTimezone(), parseHHMM(), Tier, TierOpt
 
 ### Community 240 - "Community 240"
 Cohesion: 0.6
-Nodes (4): getMyListing(), EditListingPage(), metadata, Props
+Nodes (3): metadata, NewListingPage(), Props
 
 ### Community 242 - "Community 242"
 Cohesion: 0.28
