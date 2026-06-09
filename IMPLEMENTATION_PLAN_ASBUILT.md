@@ -12,6 +12,22 @@
 > 2. Lay out the remaining work — the **gaps** and **risks-to-watch** — as an
 >    actionable forward roadmap.
 
+> **Launch decisions (locked-in 2026-06-10).**
+> - **Payments at launch = COD + OTC only. No PayMongo/online yet.** OTC is a
+>   walk-in purchase at the physical hub store (pay + collect at the counter) and
+>   doubles as the cash "prepay" rail.
+> - **Prepay-lock = OTC-only, not blocked.** A buyer in a `prepay_locked_*` state
+>   loses COD but can still buy by paying at the counter — no online prepay needed.
+> - **No first-order COD cap / no upfront gate** (founder call, kept). Bogus buyers
+>   are handled solely by the strike system + same-day resale of returned produce.
+> - **Delivery is rider-driven and automated:** the rider's QR scan / "Delivered"
+>   action marks the order fulfilled *and* records the COD cash as collected (the
+>   rider now owes it). **Delivered ≠ remitted** — remittance (rider→hub) is a
+>   separate, tracked event.
+> - **Producer payout is gated on remittance, not delivery.**
+> - **Rider accountability mirrors buyer strikes:** a rider with too much aged
+>   collected-but-unremitted cash is flagged/blocked from taking new orders.
+
 ---
 
 ## Table of Contents
