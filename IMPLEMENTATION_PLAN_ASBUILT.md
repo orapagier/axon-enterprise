@@ -151,8 +151,8 @@ hub_barangay_fee: id, hub_id, barangay, standard_fee_php, special_fee_php,
 ### cod_transaction  (cash ledger)
 ```
 cod_transaction: id, customer_id, order_id?,
-                 type: cod_collected | rider_remitted | reconciled,
-                 amount, reference?, rider_id?, recorded_by?, notes?
+                 type: cod_collected | rider_remitted | otc_collected | reconciled,
+                 amount (centavos), reference?, rider_id?, recorded_by?, notes?
                  — unique(order_id, type) for idempotency
 ```
 
