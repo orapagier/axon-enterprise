@@ -6,6 +6,10 @@ import { COD_LEDGER_MODULE } from "../../../../../modules/cod-ledger"
 import type CodLedgerModuleService from "../../../../../modules/cod-ledger/service"
 import { isDuplicateCodTransaction } from "../../../../../modules/cod-ledger/is-duplicate"
 
+type CodTx = Awaited<
+  ReturnType<CodLedgerModuleService["listCodTransactions"]>
+>[number]
+
 /**
  * POST /admin/dispatch-orders/:id/delivered
  * Body: { amount?: number (centavos), rider_id?: string }
