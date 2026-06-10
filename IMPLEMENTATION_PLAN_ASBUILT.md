@@ -566,7 +566,7 @@ assumes Tagum. The data model already supports areas/barangays/postal codes.
 
 | Risk | Why it bites here | Mitigation |
 |---|---|---|
-| **Prepay-locked buyers stuck** | They lose COD but currently have no other way to pay | Phase A — fall through to **OTC** (pay at counter); no PayMongo needed |
+| **Prepay-locked buyers can't get delivery** | OTC is walk-in only, so locked buyers lose online ordering entirely and must come to the hub | **Intended** deterrent (untrusted buyers transact in person); Phase A blocks their online checkout and points them to the **OTC Counter** |
 | **Delivery latency vs expectations** | Batch model = "wait for next cutoff"; "Special within 1h" is promised but dispatch is batch-based | Make Special a genuine on-demand path or set ETAs honestly at checkout |
 | **Rider deliver-and-pocket** | "Delivered" releases the order while the rider still holds the cash | Delivered ≠ remitted; producer payout gated on remittance; rider-strike block on aged unremitted balance (Phase E) |
 | **Disputes feel unfair** | Auto-strikes on legit quality complaints alienate good buyers | Phase G appeals + clear buyer-facing status |
