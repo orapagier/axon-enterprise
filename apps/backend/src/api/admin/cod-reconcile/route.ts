@@ -19,32 +19,27 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const from = req.query.from ? new Date(req.query.from as string) : null
   const to = req.query.to ? new Date(req.query.to as string) : null
 
-  const [collected, remitted, otc] = await Promise.all([
+  // The date range is applied in the DB query — filtering a take-limited page
+  // in memory would silently drop in-range rows once the ledger outgrows it.
+  const createdAt: Record<string, Date> = {}
+  if (from) createdAt.$gte = from
+  if (to) createdAt.$lte = to
+  const rangeFilter = from || to ? { created_at: createdAt } : {}
+
+  const [collectedF, remittedF, otcF] = await Promise.all([
     ledger.listCodTransactions(
-      { type: "cod_collected" },
+      { type: "cod_collected", ...rangeFilter },
       { order: { created_at: "DESC" }, take: 500 }
     ),
     ledger.listCodTransactions(
-      { type: "rider_remitted" },
+      { type: "rider_remitted", ...rangeFilter },
       { order: { created_at: "DESC" }, take: 500 }
     ),
     ledger.listCodTransactions(
-      { type: "otc_collected" },
+      { type: "otc_collected", ...rangeFilter },
       { order: { created_at: "DESC" }, take: 500 }
     ),
   ])
-
-  const inRange = (createdAt: string | Date) => {
-    if (!from && !to) return true
-    const d = typeof createdAt === "string" ? new Date(createdAt) : createdAt
-    if (from && d < from) return false
-    if (to && d > to) return false
-    return true
-  }
-
-  const collectedF = collected.filter((t) => inRange(t.created_at))
-  const remittedF = remitted.filter((t) => inRange(t.created_at))
-  const otcF = otc.filter((t) => inRange(t.created_at))
 
   const totalCollected = collectedF.reduce((s, t) => s + t.amount, 0)
   const totalRemitted = remittedF.reduce((s, t) => s + t.amount, 0)
