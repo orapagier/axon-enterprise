@@ -28,6 +28,28 @@
 > - **Rider accountability mirrors buyer strikes:** a rider with too much aged
 >   collected-but-unremitted cash is flagged/blocked from taking new orders.
 
+> **▶ Current build state (2026-06-10) — read this first if resuming.**
+> - **Code-complete this session (TypeScript-clean across the whole backend, but
+>   NOT yet runtime-verified — no DB/stack was run):**
+>   - **Phase A** — OTC payment provider (`pp_otc_freshhub`), `/store/payment-methods`
+>     eligibility, prepay-lock → OTC fallthrough in storefront checkout, `otc_collected`
+>     ledger type + `POST /admin/orders/:id/otc-collected`, reconcile + admin page updated.
+>   - **Phase E** — `rider` module + admin CRUD, `/rider/*` self-service (HS256 token,
+>     scrypt PIN), `POST /admin/dispatch-orders/:id/delivered` (auto `cod_collected`),
+>     shared `src/lib/delivery-actions.ts`, suspension-on-assignment, `rider-unremitted-tick`
+>     (balance+aging), payout gate primitive (`src/lib/order-cash.ts`, `/admin/orders/:id/cash-state`).
+> - **Before building anything else, run + verify:**
+>   1. `cd apps/backend && npx medusa db:migrate` — creates the `rider` table and the
+>      `otc_collected` constraint (Migrations `20260610120000`, `20260610130000`).
+>   2. `npx medusa exec ./src/migration-scripts/add-philippines-region.ts` — attaches
+>      `pp_otc_freshhub` to the PH region (else OTC won't appear at checkout).
+>   3. Smoke-test: locked buyer → checkout shows **OTC only**; rider `login → manifest →
+>      delivered` → a `cod_collected` row shows in `/admin/cod-reconcile`.
+> - **Next on the roadmap (not started):** Phase B (Resend notifications), C (membership
+>   expiry job + reminders), D (trader B2B pricing), F (address→hub resolution); plus the
+>   **rider PWA frontend** (API ready) and **producer payout disbursement** (gate exists).
+> - Full detail: **§9** status matrix, **§10** phase checkboxes (dated).
+
 ---
 
 ## Table of Contents
