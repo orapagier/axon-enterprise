@@ -43,6 +43,27 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
+  // Remittance is the second leg of collected → remitted: there must be a
+  // cod_collected row first, and the remitting rider must be the one who
+  // collected (otherwise the per-rider outstanding math is corrupted).
+  const [collectedRow] = await ledger.listCodTransactions(
+    { order_id: orderId, type: "cod_collected" },
+    { take: 1 }
+  )
+  if (!collectedRow) {
+    res.status(409).json({
+      error:
+        "No cod_collected row for this order yet — record the collection (delivery confirmation) before the remittance.",
+    })
+    return
+  }
+  if (collectedRow.rider_id && collectedRow.rider_id !== body.rider_id) {
+    res.status(409).json({
+      error: `This order's cash was collected by rider ${collectedRow.rider_id}; remit under that rider.`,
+    })
+    return
+  }
+
   const existingRemit = await ledger.listCodTransactions(
     { order_id: orderId, type: "rider_remitted" },
     { take: 1 }
