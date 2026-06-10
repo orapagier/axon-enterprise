@@ -71,8 +71,10 @@
 >   2. ✅ `npx medusa exec ./src/migration-scripts/add-philippines-region.ts` — attached
 >      `pp_cod_freshhub` + `pp_otc_freshhub` to the PH region.
 >   3. ✅ OTC smoke-test passed (counter sale paid + off-manifest + ledgered; locked buyer
->      blocked). **Still TODO: the rider smoke-test** — rider `login → manifest → delivered`
->      → a `cod_collected` row shows for a COD order (Phase E unverified).
+>      blocked).
+>   4. ✅ Rider smoke-test passed (login → manifest → delivered → `cod_collected`; idempotent;
+>      ownership + suspended-login 403s; payout `settled` gate flips on remittance). Fixed the
+>      `/rider/auth/login` middleware bug found during it. **Phase E is now runtime-verified.**
 > - **Next on the roadmap (not started):** Phase B (Resend notifications), C (membership
 >   expiry job + reminders), D (trader B2B pricing), F (address→hub resolution); plus the
 >   **rider PWA frontend** (API ready) and **producer payout disbursement** (gate exists).
