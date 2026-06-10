@@ -87,6 +87,15 @@ export function authenticateRider(
   res: MedusaResponse,
   next: () => void
 ) {
+  // POST /rider/auth/login is public — it issues the token. Medusa applies all
+  // matching middleware entries cumulatively (a more-specific matcher does NOT
+  // override a broader one), so the broad /rider/* guard also runs on the login
+  // path. Exempt it here rather than rely on matcher precedence that doesn't exist.
+  if (req.path.endsWith("/rider/auth/login")) {
+    next()
+    return
+  }
+
   const header = req.headers.authorization
   const token = header?.startsWith("Bearer ") ? header.slice(7) : null
   const payload = token ? verifyRiderToken(token) : null
