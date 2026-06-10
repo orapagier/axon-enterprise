@@ -150,9 +150,21 @@
 >   each, flags re-armed on approval); the Special-tier gate now checks
 >   `membership_expires_at`, not just status. Live-verified end-to-end (approve →
 >   remind → expire → cancelled).
-> - **Next on the roadmap (not started):** Phase D (trader B2B pricing), F (address→hub
->   resolution); plus the **rider PWA frontend** (API ready) and **producer payout
->   disbursement** (gate exists). Web Push (Phase B optional half) when wanted.
+> - **Phase D (trader B2B pricing) backend BUILT + RUNTIME-VERIFIED (2026-06-11):**
+>   negotiated per-trader discount as **automatic percentage promotions** (price lists
+>   are absolute amounts — wrong primitive). Approving a trader
+>   (`POST /admin/traders/:id {action:"approve", discount_percent, min_order_note?}`)
+>   lazily creates a shared tier: customer group `traders-<pct>` + active automatic
+>   promotion `TRADER-<pct>` (rule `customer.groups.id`), and moves the customer into
+>   exactly one tier. Verified live: trader cart ₱100 → ₱90 with `TRADER-10`
+>   auto-applied, guest cart untouched, revoke restores full price instantly,
+>   re-approval reuses the tier (exactly one promotion row). `GET /store/trader-pricing`
+>   exposes the state for storefront display; approve/revoke emails wired. **Remaining D
+>   slice: storefront "your price" display** (consume `/store/trader-pricing`).
+> - **Next on the roadmap (not started):** Phase F (address→hub resolution); the
+>   **storefront trader-price display** (backend ready); the **rider PWA frontend**
+>   (API ready); **producer payout disbursement** (gate exists). Web Push (Phase B
+>   optional half) when wanted.
 > - Full detail: **§9** status matrix, **§10** phase checkboxes (dated).
 
 ---
@@ -444,6 +456,7 @@ POST   /store/customers/me/hub                      set/clear my hub
 GET    /store/delivery-options?cart_id=             3 delivery tiers for cart
 POST   /store/delivery-options/select               choose tier → cart metadata
 GET    /store/payment-methods                       COD/OTC eligibility (COD hidden if prepay-locked)
+GET    /store/trader-pricing                        my trader discount state (display only)
 POST   /store/carts/:id/line-items                  (custom add-to-cart)
 # Seller (account_type=producer + seller_verified)
 GET/POST /store/seller/products                     my listings / create listing
@@ -469,6 +482,7 @@ POST   /admin/dispatch-orders/:id/refusal            open a refusal dispute
 POST   /admin/dispatch-orders/:id/delivered          mark delivered + auto cod_collected (COD)
 GET    /admin/disputes ; POST /admin/disputes/:id/resolve
 GET/POST /admin/riders ; GET/PATCH /admin/riders/:id  rider management
+GET    /admin/traders ; GET/POST /admin/traders/:id    trader approval + discount %
 POST   /admin/orders/:id/cod-collected | cod-remitted | otc-collected
 GET    /admin/orders/:id/cash-state                  settled? (payout gate)
 GET    /admin/cod-reconcile                          cash reconciliation (rider + OTC)
@@ -530,7 +544,7 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | **Locked buyers blocked from online checkout** (no OTC online; "buy in person") | ✅ code-complete (Phase A, 2026-06-10) — needs runtime verify |
 | **Transactional email** (Resend; 10 templates across order/dispute/membership flows) | ✅ shipped (2026-06-10) — set `RESEND_API_KEY` to enable delivery; Web Push still ❌ |
 | **Membership expiry enforcement + renewal reminders** | ✅ shipped (2026-06-10) — nightly tick + 30/7d emails + expiry-aware tier gate |
-| **Trader (B2B) pricing** | ❌ missing |
+| **Trader (B2B) pricing** | ✅ backend shipped (2026-06-11) — auto promotions per tier; storefront price display pending |
 | **Rider entity + admin CRUD + delivered→collect + strikes** | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
 | **Rider self-service API** (login, manifest, delivered/refused) | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
 | **Rider PWA frontend** | ❌ missing (API ready; no rider-facing UI app yet) |
@@ -608,9 +622,18 @@ tier checks `membership_status==active` only, not the expiry date.
 ### Phase D — Trader (B2B) pricing
 **Problem:** Trader is a recognized account type but there is no B2B pricing.
 For a perishable hub, bulk buyers clear volume fast — high ROI.
-- [ ] Per-trader (or trader-group) Medusa **price list** with a negotiated discount %.
-- [ ] Admin trader approval + discount entry + min-order-qty note.
-- [ ] Storefront shows trader their discounted price only.
+- [x] **Negotiated discount % per trader (2026-06-11)** — implemented as
+      **automatic percentage promotions** per tier (`TRADER-<pct>` + group
+      `traders-<pct>`, rule `customer.groups.id`), NOT price lists (those are
+      absolute amount overrides, not percentages). Shared helpers in
+      `src/lib/trader.ts`; tiers created lazily, reused across traders.
+- [x] **Admin trader approval + discount entry + min-order note (2026-06-11)** —
+      `GET /admin/traders[?approved=]`, `GET/POST /admin/traders/:id`
+      (approve/revoke; re-approve to renegotiate). Approval emails wired.
+- [ ] Storefront shows trader their discounted price ("your price" on product
+      pages) — backend ready: `GET /store/trader-pricing` returns
+      `{approved, discount_percent, min_order_note}`; the cart/order discount is
+      already server-enforced regardless of display.
 
 ### Phase E — Rider operations & accountability
 **Problem:** `rider_id` is free text on `dispatch_order` *and* `cod_transaction`;

@@ -17,6 +17,8 @@ describe("buildEmail", () => {
         tier: "harvest-01",
         expires_at_ms: Date.UTC(2027, 5, 10),
         days_left: 7,
+        discount_percent: 10,
+        min_order_note: "min. 20 kg per order",
       })
       expect(email).not.toBeNull()
       expect(email!.subject.length).toBeGreaterThan(0)
@@ -42,6 +44,15 @@ describe("buildEmail", () => {
       resolution: "buyer_fault",
     })!
     expect(email.html).toContain("strike")
+  })
+
+  it("trader-approved includes the discount and minimum-order note", () => {
+    const email = buildEmail("trader-approved", {
+      discount_percent: 12,
+      min_order_note: "min. 20 kg per order",
+    })!
+    expect(email.subject).toContain("12%")
+    expect(email.html).toContain("min. 20 kg per order")
   })
 
   it("membership-expiring pluralizes days and includes the date", () => {
