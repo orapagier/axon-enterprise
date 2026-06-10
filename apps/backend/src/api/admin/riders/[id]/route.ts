@@ -19,7 +19,8 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     res.status(404).json({ error: "Rider not found" })
     return
   }
-  res.json({ rider })
+  // Never echo the pin/hash back.
+  res.json({ rider: { ...rider, pin_hash: undefined } })
 }
 
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
