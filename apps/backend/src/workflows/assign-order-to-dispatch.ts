@@ -127,26 +127,39 @@ const assignStep = createStep(
     )
 
     // 3. Find or create the batch. Same (hub_id, dispatch_date) → same batch.
-    const existing = await dispatchService.listDispatchBatches(
-      { hub_id: hub.id, dispatch_date },
-      { take: 1 }
-    )
-    let batch = existing[0]
+    //    If the resolved batch is already locked (the order landed in the
+    //    cutoff race window: resolveBatchDate said "today" but the lock job
+    //    got there first), roll forward day by day until an open batch is
+    //    found — throwing here would strand a paid order with no dispatch
+    //    entry, because the order-placed subscriber only logs failures.
+    const DAY_MS = 24 * 60 * 60 * 1000
+    let batch: Awaited<
+      ReturnType<DispatchModuleService["listDispatchBatches"]>
+    >[number] | null = null
     let createdBatch = false
+    for (let dayOffset = 0; dayOffset < 3 && !batch; dayOffset++) {
+      const candidateDate = new Date(dispatch_date.getTime() + dayOffset * DAY_MS)
+      const candidateCutoff = new Date(cutoff_at.getTime() + dayOffset * DAY_MS)
+      const existing = await dispatchService.listDispatchBatches(
+        { hub_id: hub.id, dispatch_date: candidateDate },
+        { take: 1 }
+      )
+      if (!existing[0]) {
+        batch = await dispatchService.createDispatchBatches({
+          hub_id: hub.id,
+          dispatch_date: candidateDate,
+          cutoff_at: candidateCutoff,
+          status: "collecting",
+        })
+        createdBatch = true
+      } else if (existing[0].status === "collecting") {
+        batch = existing[0]
+      }
+      // locked / in_transit / completed → try the next day
+    }
     if (!batch) {
-      batch = await dispatchService.createDispatchBatches({
-        hub_id: hub.id,
-        dispatch_date,
-        cutoff_at,
-        status: "collecting",
-      })
-      createdBatch = true
-    } else if (batch.status === "locked" || batch.status === "in_transit" || batch.status === "completed") {
-      // The current cutoff already passed for this batch — caller should
-      // re-resolve to the next batch instead. We don't silently roll it
-      // forward because order placement should be reflected accurately.
       const err = new Error(
-        `Dispatch batch ${batch.id} is ${batch.status}; order ${input.order_id} cannot be added.`
+        `No open dispatch batch found for hub ${hub.id} within 3 days; order ${input.order_id} cannot be added.`
       )
       ;(err as { status?: number }).status = 409
       throw err
