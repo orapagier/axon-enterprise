@@ -100,11 +100,15 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       currency_code: PH_CURRENCY,
       customer_id: body.customer_id,
       email: body.email,
+      // `unit_price` is intentionally omitted: the workflow reads each
+      // variant's calculated (region/tax-aware) price when it isn't supplied
+      // (see prepareLineItems in create-order). The DTO marks it required, so
+      // cast to satisfy the type without forcing a custom price.
       items: items.map((i) => ({
         variant_id: i.variant_id,
         quantity: Number(i.quantity),
         title: titleByVariant.get(i.variant_id) ?? "Item",
-      })),
+      })) as unknown as CreateOrderLineItemDTO[],
       metadata: { sale_channel: "otc_counter" },
     },
   })
