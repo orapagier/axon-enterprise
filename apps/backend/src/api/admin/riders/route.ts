@@ -62,7 +62,12 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     hub_id: body.hub_id,
     status: body.status ?? "active",
     notes: body.notes ?? null,
+    pin_hash: body.pin ? hashPin(body.pin) : null,
   })
 
-  res.status(201).json({ rider })
+  // Never echo the pin/hash back.
+  res.status(201).json({
+    rider: { ...rider, pin_hash: undefined },
+    pin_set: !!body.pin,
+  })
 }
