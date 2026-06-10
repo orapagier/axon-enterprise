@@ -108,6 +108,11 @@ export default defineMiddlewares({
       middlewares: [authenticate("user", ["session", "bearer"])],
     },
     {
+      matcher: "/admin/orders/*/cash-state",
+      method: ["GET"],
+      middlewares: [authenticate("user", ["session", "bearer"])],
+    },
+    {
       matcher: "/admin/riders*",
       method: ["GET", "POST", "PATCH", "DELETE"],
       middlewares: [authenticate("user", ["session", "bearer"])],
