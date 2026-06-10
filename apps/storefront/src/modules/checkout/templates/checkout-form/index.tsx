@@ -28,18 +28,22 @@ export default async function CheckoutForm({
     return null
   }
 
-  // FreshHub: prepay-locked buyers (after repeated refusals) lose COD and must
-  // pay Over the Counter. Drop COD from the offered methods and surface why.
-  // Fails open — if eligibility can't be read we leave COD in (the COD provider
-  // still blocks locked buyers at authorize).
+  // FreshHub: OTC is walk-in only (never an online method), so drop it from the
+  // offered methods for everyone. Prepay-locked buyers also lose COD — leaving
+  // them no online method, so checkout is blocked and they're told to buy in
+  // person at the hub. Fails open — if eligibility can't be read we leave COD in
+  // (the COD provider still blocks locked buyers at authorize).
   const eligibility = await getPaymentEligibility()
-  let availablePaymentMethods = paymentMethods
+  let availablePaymentMethods = paymentMethods.filter((m) => !isOtc(m.id))
   let codNotice: string | null = null
+  let checkoutBlocked = false
   if (eligibility && eligibility.cod_available === false) {
-    availablePaymentMethods = paymentMethods.filter((m) => !isCod(m.id))
+    availablePaymentMethods = availablePaymentMethods.filter((m) => !isCod(m.id))
+    checkoutBlocked = true
     codNotice =
+      eligibility.block_reason ??
       eligibility.methods.find((m) => m.type === "cod")?.reason_if_unavailable ??
-      "Cash on Delivery isn't available on your account. Please pay Over the Counter at the hub."
+      "Online ordering isn't available on your account. Please buy in person at the hub counter."
   }
 
   return (
@@ -52,6 +56,7 @@ export default async function CheckoutForm({
         cart={cart}
         availablePaymentMethods={availablePaymentMethods}
         codNotice={codNotice}
+        checkoutBlocked={checkoutBlocked}
       />
 
       <Review cart={cart} />
