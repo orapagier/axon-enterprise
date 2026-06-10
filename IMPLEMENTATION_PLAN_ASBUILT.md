@@ -443,11 +443,14 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 
 Ordered by business priority. Each item is scoped to be a small, shippable slice.
 
-### Phase A — Make prepay-lock resolve to OTC (highest priority)
+### Phase A — Walk-in OTC counter (reframed 2026-06-10, highest priority)
 **Problem:** `payment-cod.authorizePayment` blocks `prepay_locked_*` buyers from
-COD, but they currently have **no alternative checkout** — so a locked buyer
-can't buy at all. The fix needs **no payment integration**: OTC (walk-in pay at
-the physical hub store) is the cash prepay rail.
+COD. **Founder reframe (2026-06-10):** OTC is **walk-in only**, *not* an online
+payment method — a locked buyer does **not** place an online order; they buy in
+person at the hub like a normal retail purchase. So a locked buyer is **blocked
+from online checkout** and directed to the counter. This also closes a latent
+bug: the cart payment-providers list surfaced OTC online to *every* buyer, and
+unpaid OTC orders would have auto-dispatched to riders.
 
 > **Sealed founder decisions (kept):** (1) the universal upfront COD deposit was
 > removed 2026-05-28 and stays removed; (2) there is **no first-order COD cap or
@@ -455,25 +458,27 @@ the physical hub store) is the cash prepay rail.
 > resale of returned produce. Neither is to be reintroduced without an explicit
 > founder call.
 
-- [x] **Backend (2026-06-10):** `otc` payment provider (`src/modules/payment-otc`),
-      registered in `medusa-config.ts`; `GET /store/payment-methods` returns
-      per-buyer eligibility (COD hidden for `prepay_locked_*`, OTC always on).
-- [x] **Data (2026-06-10):** `add-philippines-region` seed now attaches both
-      `pp_cod_freshhub` and `pp_otc_freshhub` to the PH region (re-run the script
-      to apply). *Needs running stack to take effect.*
-- [x] **Storefront (2026-06-10):** OTC added to `paymentInfoMap`; checkout reads
-      `/store/payment-methods` (`getPaymentEligibility`), drops COD + shows a
-      notice for locked buyers (OTC-only), keeps both for everyone else.
-- [x] **OTC cash (2026-06-10):** new `otc_collected` ledger type (model +
-      `Migration20260610120000`); `POST /admin/orders/:id/otc-collected` records
-      the counter payment (hub-held, **no remittance leg**); `cod-reconcile`
-      reports OTC separately so it never counts as rider-outstanding. *Recorded
-      at counter-payment confirmation, not at online placement.* **Needs
-      `db:migrate` + runtime verification.**
-- [x] Keep COD frictionless for every non-locked buyer. *(COD provider unchanged;
-      block at `authorizePayment` remains the safety net.)*
+- [x] **Block online checkout for locked buyers (2026-06-10):** `GET /store/payment-methods`
+      returns `checkout_blocked`/`block_reason`; storefront filters OTC out for
+      everyone and, for locked buyers, drops COD too → empty methods → "buy in
+      person at the hub" notice, submit hidden. COD `authorizePayment` block stays
+      the safety net.
+- [x] **OTC Counter register (2026-06-10):** `POST /admin/otc-counter` creates a real
+      Medusa order via `createOrderWorkflow` (metadata `sale_channel="otc_counter"`),
+      marks it paid (`createOrderPaymentCollectionWorkflow` + `markPaymentCollectionAsPaid`,
+      provider `pp_otc_freshhub`), records `otc_collected`, and best-effort fulfills to
+      decrement stock. `GET /admin/otc-counter` = today's drawer total. Admin page at
+      `src/admin/routes/otc-counter`.
+- [x] **Dispatch-skip (2026-06-10):** `order-placed` subscriber returns early for
+      `metadata.sale_channel === "otc_counter"` (belt-and-suspenders;
+      `createOrderWorkflow` doesn't emit `order.placed`). Walk-in OTC never reaches a rider.
+- [x] **OTC cash unchanged (2026-06-10):** `otc_collected` ledger type (model +
+      `Migration20260610120000`), hub-held, **no remittance leg**; `cod-reconcile`
+      reports it separately. Shared `recordOtcCollected` (`src/lib/otc-sale.ts`); legacy
+      `POST /admin/orders/:id/otc-collected` kept (deprecated). **Needs `db:migrate` +
+      runtime verification, esp. the fulfillment/stock-decrement step.**
 - [ ] Online/GCash prepay stays **deferred** (no PayMongo budget yet — see §12);
-      when added it slots in as a third payment source with no redesign.
+      when added it slots in as a separate online source with no redesign.
 
 ### Phase B — Notifications (email + push)
 **Problem:** no subscriber sends any email/push. Order confirmations, dispute
