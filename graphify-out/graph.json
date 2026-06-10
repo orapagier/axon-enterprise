@@ -561,7 +561,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L1",
       "id": "apps_storefront_package_json",
-      "community": 25,
+      "community": 15,
       "norm_label": "package.json"
     },
     {
@@ -570,7 +570,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L2",
       "id": "storefront_package_name",
-      "community": 25,
+      "community": 15,
       "norm_label": "name"
     },
     {
@@ -579,7 +579,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L3",
       "id": "storefront_package_version",
-      "community": 25,
+      "community": 15,
       "norm_label": "version"
     },
     {
@@ -588,7 +588,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L4",
       "id": "storefront_package_private",
-      "community": 25,
+      "community": 15,
       "norm_label": "private"
     },
     {
@@ -597,7 +597,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L5",
       "id": "storefront_package_author",
-      "community": 25,
+      "community": 15,
       "norm_label": "author"
     },
     {
@@ -606,7 +606,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L6",
       "id": "storefront_package_description",
-      "community": 25,
+      "community": 15,
       "norm_label": "description"
     },
     {
@@ -615,7 +615,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L7",
       "id": "storefront_package_keywords",
-      "community": 25,
+      "community": 15,
       "norm_label": "keywords"
     },
     {
@@ -624,7 +624,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L10",
       "id": "storefront_package_scripts",
-      "community": 30,
+      "community": 15,
       "norm_label": "scripts"
     },
     {
@@ -633,7 +633,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L11",
       "id": "storefront_package_scripts_dev",
-      "community": 30,
+      "community": 15,
       "norm_label": "dev"
     },
     {
@@ -642,7 +642,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L12",
       "id": "storefront_package_scripts_build",
-      "community": 30,
+      "community": 15,
       "norm_label": "build"
     },
     {
@@ -651,7 +651,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L13",
       "id": "storefront_package_scripts_start",
-      "community": 30,
+      "community": 15,
       "norm_label": "start"
     },
     {
@@ -660,7 +660,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L14",
       "id": "storefront_package_scripts_lint",
-      "community": 30,
+      "community": 15,
       "norm_label": "lint"
     },
     {
@@ -669,7 +669,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L15",
       "id": "storefront_package_scripts_analyze",
-      "community": 30,
+      "community": 15,
       "norm_label": "analyze"
     },
     {
@@ -777,7 +777,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L28",
       "id": "storefront_package_dependencies_next",
-      "community": 14,
+      "community": 166,
       "norm_label": "next"
     },
     {
@@ -1011,7 +1011,7 @@
       "source_file": "apps/storefront/package.json",
       "source_location": "L56",
       "id": "storefront_package_packagemanager",
-      "community": 25,
+      "community": 15,
       "norm_label": "packagemanager"
     },
     {
@@ -1839,7 +1839,7 @@
       "source_file": "apps/storefront/src/modules/account/components/address-card/edit-address-modal.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_components_address_card_edit_address_modal_tsx",
-      "community": 268,
+      "community": 250,
       "norm_label": "edit-address-modal.tsx"
     },
     {
@@ -1848,7 +1848,7 @@
       "source_file": "apps/storefront/src/modules/account/components/address-card/edit-address-modal.tsx",
       "source_location": "L19",
       "id": "address_card_edit_address_modal_editaddressprops",
-      "community": 268,
+      "community": 250,
       "norm_label": "editaddressprops"
     },
     {
@@ -1920,7 +1920,7 @@
       "source_file": "apps/storefront/src/modules/account/components/account-info/index.tsx",
       "source_location": "L19",
       "id": "account_info_index_accountinfo",
-      "community": 240,
+      "community": 250,
       "norm_label": "accountinfo()"
     },
     {
@@ -2037,7 +2037,7 @@
       "source_file": "apps/storefront/src/modules/account/components/membership-request-form/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_components_membership_request_form_index_tsx",
-      "community": 137,
+      "community": 30,
       "norm_label": "index.tsx"
     },
     {
@@ -2046,7 +2046,7 @@
       "source_file": "apps/storefront/src/modules/account/components/membership-request-form/index.tsx",
       "source_location": "L12",
       "id": "membership_request_form_index_formstate",
-      "community": 137,
+      "community": 30,
       "norm_label": "formstate"
     },
     {
@@ -2055,7 +2055,7 @@
       "source_file": "apps/storefront/src/modules/account/components/membership-request-form/index.tsx",
       "source_location": "L14",
       "id": "membership_request_form_index_initial",
-      "community": 137,
+      "community": 30,
       "norm_label": "initial"
     },
     {
@@ -2064,7 +2064,7 @@
       "source_file": "apps/storefront/src/modules/account/components/membership-request-form/index.tsx",
       "source_location": "L16",
       "id": "membership_request_form_index_methods",
-      "community": 137,
+      "community": 30,
       "norm_label": "methods"
     },
     {
@@ -2073,7 +2073,7 @@
       "source_file": "apps/storefront/src/modules/account/components/membership-request-form/index.tsx",
       "source_location": "L33",
       "id": "membership_request_form_index_membershiprequestform",
-      "community": 137,
+      "community": 30,
       "norm_label": "membershiprequestform()"
     },
     {
@@ -2082,7 +2082,7 @@
       "source_file": "apps/storefront/src/modules/account/components/membership-request-form/index.tsx",
       "source_location": "L294",
       "id": "membership_request_form_index_paymentline",
-      "community": 137,
+      "community": 30,
       "norm_label": "paymentline()"
     },
     {
@@ -2091,7 +2091,7 @@
       "source_file": "apps/storefront/src/modules/account/components/profile-billing-address/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_components_profile_billing_address_index_tsx",
-      "community": 268,
+      "community": 250,
       "norm_label": "index.tsx"
     },
     {
@@ -2100,7 +2100,7 @@
       "source_file": "apps/storefront/src/modules/account/components/profile-billing-address/index.tsx",
       "source_location": "L12",
       "id": "profile_billing_address_index_myinformationprops",
-      "community": 268,
+      "community": 250,
       "norm_label": "myinformationprops"
     },
     {
@@ -2109,7 +2109,7 @@
       "source_file": "apps/storefront/src/modules/account/components/profile-billing-address/index.tsx",
       "source_location": "L17",
       "id": "profile_billing_address_index_profilebillingaddress",
-      "community": 268,
+      "community": 250,
       "norm_label": "profilebillingaddress()"
     },
     {
@@ -2244,7 +2244,7 @@
       "source_file": "apps/storefront/src/modules/account/components/profile-name/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_components_profile_name_index_tsx",
-      "community": 240,
+      "community": 217,
       "norm_label": "index.tsx"
     },
     {
@@ -2253,7 +2253,7 @@
       "source_file": "apps/storefront/src/modules/account/components/profile-name/index.tsx",
       "source_location": "L11",
       "id": "profile_name_index_myinformationprops",
-      "community": 240,
+      "community": 217,
       "norm_label": "myinformationprops"
     },
     {
@@ -2262,7 +2262,7 @@
       "source_file": "apps/storefront/src/modules/account/components/profile-name/index.tsx",
       "source_location": "L15",
       "id": "profile_name_index_profilename",
-      "community": 240,
+      "community": 217,
       "norm_label": "profilename()"
     },
     {
@@ -3000,7 +3000,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/country-select/index.tsx",
       "source_location": "L29",
       "id": "country_select_index_countryselect",
-      "community": 4,
+      "community": 167,
       "norm_label": "countryselect()"
     },
     {
@@ -3459,7 +3459,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/accordion.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_products_components_product_tabs_accordion_tsx",
-      "community": 136,
+      "community": 206,
       "norm_label": "accordion.tsx"
     },
     {
@@ -3468,7 +3468,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/accordion.tsx",
       "source_location": "L5",
       "id": "product_tabs_accordion_accordionitemprops",
-      "community": 136,
+      "community": 206,
       "norm_label": "accordionitemprops"
     },
     {
@@ -3477,7 +3477,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/accordion.tsx",
       "source_location": "L20",
       "id": "product_tabs_accordion_accordionprops",
-      "community": 136,
+      "community": 206,
       "norm_label": "accordionprops"
     },
     {
@@ -3486,7 +3486,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/accordion.tsx",
       "source_location": "L26",
       "id": "product_tabs_accordion_accordion",
-      "community": 136,
+      "community": 206,
       "norm_label": "accordion()"
     },
     {
@@ -3495,7 +3495,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/accordion.tsx",
       "source_location": "L34",
       "id": "product_tabs_accordion_item",
-      "community": 136,
+      "community": 206,
       "norm_label": "item()"
     },
     {
@@ -3504,7 +3504,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/accordion.tsx",
       "source_location": "L89",
       "id": "product_tabs_accordion_morphingtrigger",
-      "community": 136,
+      "community": 206,
       "norm_label": "morphingtrigger()"
     },
     {
@@ -3513,7 +3513,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_products_components_product_tabs_index_tsx",
-      "community": 136,
+      "community": 206,
       "norm_label": "index.tsx"
     },
     {
@@ -3522,7 +3522,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/index.tsx",
       "source_location": "L15",
       "id": "product_tabs_index_producttabsprops",
-      "community": 136,
+      "community": 206,
       "norm_label": "producttabsprops"
     },
     {
@@ -3531,7 +3531,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/index.tsx",
       "source_location": "L21",
       "id": "product_tabs_index_producttabs",
-      "community": 136,
+      "community": 206,
       "norm_label": "producttabs()"
     },
     {
@@ -3540,7 +3540,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/index.tsx",
       "source_location": "L55",
       "id": "product_tabs_index_productinfotab",
-      "community": 136,
+      "community": 206,
       "norm_label": "productinfotab()"
     },
     {
@@ -3549,7 +3549,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/index.tsx",
       "source_location": "L80",
       "id": "product_tabs_index_freshnesstab",
-      "community": 136,
+      "community": 206,
       "norm_label": "freshnesstab()"
     },
     {
@@ -3558,7 +3558,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/index.tsx",
       "source_location": "L109",
       "id": "product_tabs_index_shippinginfotab",
-      "community": 136,
+      "community": 206,
       "norm_label": "shippinginfotab()"
     },
     {
@@ -3792,7 +3792,7 @@
       "source_file": "apps/storefront/src/modules/hub/data/hubs.ts",
       "source_location": "L24",
       "id": "data_hubs_listhubs",
-      "community": 182,
+      "community": 37,
       "norm_label": "listhubs()"
     },
     {
@@ -3837,7 +3837,7 @@
       "source_file": "apps/storefront/src/modules/hub/actions/set-hub.ts",
       "source_location": "L43",
       "id": "actions_set_hub_gethubcookie",
-      "community": 182,
+      "community": 37,
       "norm_label": "gethubcookie()"
     },
     {
@@ -3855,7 +3855,7 @@
       "source_file": "apps/storefront/src/modules/hub/actions/set-hub.ts",
       "source_location": "L65",
       "id": "actions_set_hub_synccustomerhubfromcookie",
-      "community": 135,
+      "community": 204,
       "norm_label": "synccustomerhubfromcookie()"
     },
     {
@@ -4377,7 +4377,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_store_components_refinement_list_index_tsx",
-      "community": 217,
+      "community": 206,
       "norm_label": "index.tsx"
     },
     {
@@ -4386,7 +4386,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/index.tsx",
       "source_location": "L6",
       "id": "refinement_list_index_refinementlistprops",
-      "community": 217,
+      "community": 206,
       "norm_label": "refinementlistprops"
     },
     {
@@ -4395,7 +4395,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/index.tsx",
       "source_location": "L10",
       "id": "refinement_list_index_categories",
-      "community": 217,
+      "community": 206,
       "norm_label": "categories"
     },
     {
@@ -4404,7 +4404,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/index.tsx",
       "source_location": "L31",
       "id": "refinement_list_index_refinementlist",
-      "community": 217,
+      "community": 206,
       "norm_label": "refinementlist()"
     },
     {
@@ -4413,7 +4413,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_store_components_refinement_list_sort_products_index_tsx",
-      "community": 217,
+      "community": 206,
       "norm_label": "index.tsx"
     },
     {
@@ -4422,7 +4422,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
       "source_location": "L5",
       "id": "sort_products_index_sortoptions",
-      "community": 217,
+      "community": 206,
       "norm_label": "sortoptions"
     },
     {
@@ -4431,7 +4431,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
       "source_location": "L7",
       "id": "sort_products_index_sortproductsprops",
-      "community": 217,
+      "community": 206,
       "norm_label": "sortproductsprops"
     },
     {
@@ -4440,7 +4440,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
       "source_location": "L28",
       "id": "sort_products_index_sortproducts",
-      "community": 217,
+      "community": 206,
       "norm_label": "sortproducts()"
     },
     {
@@ -6051,7 +6051,7 @@
       "source_file": "apps/storefront/src/modules/layout/templates/nav/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_layout_templates_nav_index_tsx",
-      "community": 182,
+      "community": 37,
       "norm_label": "index.tsx"
     },
     {
@@ -6060,7 +6060,7 @@
       "source_file": "apps/storefront/src/modules/layout/templates/nav/index.tsx",
       "source_location": "L17",
       "id": "nav_index_nav",
-      "community": 182,
+      "community": 37,
       "norm_label": "nav()"
     },
     {
@@ -6087,7 +6087,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/cart-mismatch-banner/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_layout_components_cart_mismatch_banner_index_tsx",
-      "community": 135,
+      "community": 204,
       "norm_label": "index.tsx"
     },
     {
@@ -6096,7 +6096,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/cart-mismatch-banner/index.tsx",
       "source_location": "L8",
       "id": "cart_mismatch_banner_index_cartmismatchbanner",
-      "community": 135,
+      "community": 204,
       "norm_label": "cartmismatchbanner()"
     },
     {
@@ -6249,7 +6249,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/nav-search/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_layout_components_nav_search_index_tsx",
-      "community": 130,
+      "community": 242,
       "norm_label": "index.tsx"
     },
     {
@@ -6258,7 +6258,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/nav-search/index.tsx",
       "source_location": "L9",
       "id": "nav_search_index_navsearch",
-      "community": 130,
+      "community": 242,
       "norm_label": "navsearch()"
     },
     {
@@ -6393,7 +6393,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/layout.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_layout_tsx",
-      "community": 182,
+      "community": 37,
       "norm_label": "layout.tsx"
     },
     {
@@ -6402,7 +6402,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/layout.tsx",
       "source_location": "L15",
       "id": "main_layout_metadata",
-      "community": 182,
+      "community": 37,
       "norm_label": "metadata"
     },
     {
@@ -6411,7 +6411,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/layout.tsx",
       "source_location": "L19",
       "id": "main_layout_pagelayout",
-      "community": 182,
+      "community": 37,
       "norm_label": "pagelayout()"
     },
     {
@@ -6447,7 +6447,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_page_tsx",
-      "community": 34,
+      "community": 130,
       "norm_label": "page.tsx"
     },
     {
@@ -6456,7 +6456,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/page.tsx",
       "source_location": "L11",
       "id": "main_page_metadata",
-      "community": 34,
+      "community": 130,
       "norm_label": "metadata"
     },
     {
@@ -6465,7 +6465,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/page.tsx",
       "source_location": "L17",
       "id": "main_page_home",
-      "community": 34,
+      "community": 130,
       "norm_label": "home()"
     },
     {
@@ -6528,7 +6528,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_page_tsx",
-      "community": 37,
+      "community": 265,
       "norm_label": "page.tsx"
     },
     {
@@ -6537,7 +6537,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/page.tsx",
       "source_location": "L8",
       "id": "dashboard_page_metadata",
-      "community": 37,
+      "community": 265,
       "norm_label": "metadata"
     },
     {
@@ -6546,7 +6546,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/page.tsx",
       "source_location": "L13",
       "id": "dashboard_page_overviewtemplate",
-      "community": 37,
+      "community": 265,
       "norm_label": "overviewtemplate()"
     },
     {
@@ -6663,7 +6663,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_producer_page_tsx",
-      "community": 242,
+      "community": 223,
       "norm_label": "page.tsx"
     },
     {
@@ -6672,7 +6672,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/page.tsx",
       "source_location": "L7",
       "id": "producer_page_metadata",
-      "community": 242,
+      "community": 223,
       "norm_label": "metadata"
     },
     {
@@ -6681,7 +6681,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/page.tsx",
       "source_location": "L12",
       "id": "producer_page_props",
-      "community": 242,
+      "community": 223,
       "norm_label": "props"
     },
     {
@@ -6690,7 +6690,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/page.tsx",
       "source_location": "L16",
       "id": "producer_page_producerdashboardpage",
-      "community": 242,
+      "community": 223,
       "norm_label": "producerdashboardpage()"
     },
     {
@@ -6699,7 +6699,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/listings/[id]/edit/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_producer_listings_id_edit_page_tsx",
-      "community": 269,
+      "community": 223,
       "norm_label": "page.tsx"
     },
     {
@@ -6708,7 +6708,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/listings/[id]/edit/page.tsx",
       "source_location": "L7",
       "id": "edit_page_metadata",
-      "community": 269,
+      "community": 223,
       "norm_label": "metadata"
     },
     {
@@ -6717,7 +6717,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/listings/[id]/edit/page.tsx",
       "source_location": "L11",
       "id": "edit_page_props",
-      "community": 269,
+      "community": 223,
       "norm_label": "props"
     },
     {
@@ -6726,7 +6726,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/listings/[id]/edit/page.tsx",
       "source_location": "L13",
       "id": "edit_page_editlistingpage",
-      "community": 269,
+      "community": 223,
       "norm_label": "editlistingpage()"
     },
     {
@@ -6771,7 +6771,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/addresses/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_addresses_page_tsx",
-      "community": 37,
+      "community": 130,
       "norm_label": "page.tsx"
     },
     {
@@ -6780,7 +6780,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/addresses/page.tsx",
       "source_location": "L9",
       "id": "addresses_page_metadata",
-      "community": 37,
+      "community": 130,
       "norm_label": "metadata"
     },
     {
@@ -6789,7 +6789,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/addresses/page.tsx",
       "source_location": "L14",
       "id": "addresses_page_addresses",
-      "community": 37,
+      "community": 130,
       "norm_label": "addresses()"
     },
     {
@@ -6861,7 +6861,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/profile/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_profile_page_tsx",
-      "community": 182,
+      "community": 37,
       "norm_label": "page.tsx"
     },
     {
@@ -6870,7 +6870,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/profile/page.tsx",
       "source_location": "L14",
       "id": "profile_page_metadata",
-      "community": 182,
+      "community": 37,
       "norm_label": "metadata"
     },
     {
@@ -6879,7 +6879,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/profile/page.tsx",
       "source_location": "L19",
       "id": "profile_page_profile",
-      "community": 182,
+      "community": 37,
       "norm_label": "profile()"
     },
     {
@@ -6888,7 +6888,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/profile/page.tsx",
       "source_location": "L83",
       "id": "profile_page_profilesection",
-      "community": 182,
+      "community": 37,
       "norm_label": "profilesection()"
     },
     {
@@ -6897,7 +6897,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/profile/page.tsx",
       "source_location": "L110",
       "id": "profile_page_divider",
-      "community": 182,
+      "community": 37,
       "norm_label": "divider()"
     },
     {
@@ -7014,7 +7014,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/products/[handle]/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_products_handle_page_tsx",
-      "community": 34,
+      "community": 130,
       "norm_label": "page.tsx"
     },
     {
@@ -7023,7 +7023,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/collections/[handle]/page.tsx",
       "source_location": "L10",
       "id": "handle_page_props",
-      "community": 34,
+      "community": 130,
       "norm_label": "props"
     },
     {
@@ -7032,7 +7032,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/collections/[handle]/page.tsx",
       "source_location": "L20",
       "id": "handle_page_generatestaticparams",
-      "community": 34,
+      "community": 130,
       "norm_label": "generatestaticparams()"
     },
     {
@@ -7041,7 +7041,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/products/[handle]/page.tsx",
       "source_location": "L55",
       "id": "handle_page_getimagesforvariant",
-      "community": 34,
+      "community": 130,
       "norm_label": "getimagesforvariant()"
     },
     {
@@ -7050,7 +7050,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/collections/[handle]/page.tsx",
       "source_location": "L53",
       "id": "handle_page_generatemetadata",
-      "community": 34,
+      "community": 130,
       "norm_label": "generatemetadata()"
     },
     {
@@ -7059,7 +7059,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/products/[handle]/page.tsx",
       "source_location": "L101",
       "id": "handle_page_productpage",
-      "community": 34,
+      "community": 130,
       "norm_label": "productpage()"
     },
     {
@@ -7473,7 +7473,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/collections/[handle]/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_collections_handle_page_tsx",
-      "community": 34,
+      "community": 130,
       "norm_label": "page.tsx"
     },
     {
@@ -7482,7 +7482,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/collections/[handle]/page.tsx",
       "source_location": "L69",
       "id": "handle_page_collectionpage",
-      "community": 34,
+      "community": 130,
       "norm_label": "collectionpage()"
     },
     {
@@ -7563,7 +7563,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_categories_category_page_tsx",
-      "community": 16,
+      "community": 136,
       "norm_label": "page.tsx"
     },
     {
@@ -7572,7 +7572,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L10",
       "id": "category_page_props",
-      "community": 16,
+      "community": 136,
       "norm_label": "props"
     },
     {
@@ -7581,7 +7581,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L18",
       "id": "category_page_generatestaticparams",
-      "community": 16,
+      "community": 136,
       "norm_label": "generatestaticparams()"
     },
     {
@@ -7590,7 +7590,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L45",
       "id": "category_page_generatemetadata",
-      "community": 16,
+      "community": 136,
       "norm_label": "generatemetadata()"
     },
     {
@@ -7599,7 +7599,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L66",
       "id": "category_page_categorypage",
-      "community": 16,
+      "community": 136,
       "norm_label": "categorypage()"
     },
     {
@@ -7653,7 +7653,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(checkout)/checkout/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_checkout_checkout_page_tsx",
-      "community": 1,
+      "community": 37,
       "norm_label": "page.tsx"
     },
     {
@@ -7662,7 +7662,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(checkout)/checkout/page.tsx",
       "source_location": "L9",
       "id": "checkout_page_metadata",
-      "community": 1,
+      "community": 37,
       "norm_label": "metadata"
     },
     {
@@ -7671,7 +7671,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(checkout)/checkout/page.tsx",
       "source_location": "L13",
       "id": "checkout_page_checkout",
-      "community": 1,
+      "community": 37,
       "norm_label": "checkout()"
     },
     {
@@ -7716,7 +7716,7 @@
       "source_file": "apps/storefront/src/lib/config.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_config_ts",
-      "community": 251,
+      "community": 1,
       "norm_label": "config.ts"
     },
     {
@@ -7734,7 +7734,7 @@
       "source_file": "apps/storefront/src/lib/config.ts",
       "source_location": "L17",
       "id": "lib_config_originalfetch",
-      "community": 251,
+      "community": 1,
       "norm_label": "originalfetch"
     },
     {
@@ -7743,7 +7743,7 @@
       "source_file": "apps/storefront/src/lib/config.ts",
       "source_location": "L30",
       "id": "lib_config_newheaders",
-      "community": 251,
+      "community": 1,
       "norm_label": "newheaders"
     },
     {
@@ -7869,7 +7869,7 @@
       "source_file": "apps/storefront/src/lib/data/search.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_search_ts",
-      "community": 130,
+      "community": 242,
       "norm_label": "search.ts"
     },
     {
@@ -7878,7 +7878,7 @@
       "source_file": "apps/storefront/src/lib/data/search.ts",
       "source_location": "L5",
       "id": "data_search_searchhit",
-      "community": 130,
+      "community": 242,
       "norm_label": "searchhit"
     },
     {
@@ -7887,7 +7887,7 @@
       "source_file": "apps/storefront/src/lib/data/search.ts",
       "source_location": "L14",
       "id": "data_search_searchproducts",
-      "community": 130,
+      "community": 242,
       "norm_label": "searchproducts()"
     },
     {
@@ -7896,7 +7896,7 @@
       "source_file": "apps/storefront/src/lib/data/products.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_products_ts",
-      "community": 130,
+      "community": 16,
       "norm_label": "products.ts"
     },
     {
@@ -7932,7 +7932,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L4",
       "id": "data_cookies_getauthheaders",
-      "community": 1,
+      "community": 16,
       "norm_label": "getauthheaders()"
     },
     {
@@ -7941,7 +7941,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L21",
       "id": "data_cookies_getcachetag",
-      "community": 223,
+      "community": 233,
       "norm_label": "getcachetag()"
     },
     {
@@ -7968,7 +7968,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L62",
       "id": "data_cookies_removeauthtoken",
-      "community": 135,
+      "community": 233,
       "norm_label": "removeauthtoken()"
     },
     {
@@ -8013,7 +8013,7 @@
       "source_file": "apps/storefront/src/lib/data/categories.ts",
       "source_location": "L5",
       "id": "data_categories_listcategories",
-      "community": 16,
+      "community": 136,
       "norm_label": "listcategories()"
     },
     {
@@ -8022,7 +8022,7 @@
       "source_file": "apps/storefront/src/lib/data/categories.ts",
       "source_location": "L29",
       "id": "data_categories_getcategorybyhandle",
-      "community": 16,
+      "community": 136,
       "norm_label": "getcategorybyhandle()"
     },
     {
@@ -8049,7 +8049,7 @@
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_regions_ts",
-      "community": 130,
+      "community": 16,
       "norm_label": "regions.ts"
     },
     {
@@ -8058,7 +8058,7 @@
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L7",
       "id": "data_regions_listregions",
-      "community": 182,
+      "community": 37,
       "norm_label": "listregions()"
     },
     {
@@ -8067,7 +8067,7 @@
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L21",
       "id": "data_regions_retrieveregion",
-      "community": 130,
+      "community": 16,
       "norm_label": "retrieveregion()"
     },
     {
@@ -8094,7 +8094,7 @@
       "source_file": "apps/storefront/src/lib/data/cart.ts",
       "source_location": "L25",
       "id": "data_cart_retrievecart",
-      "community": 1,
+      "community": 37,
       "norm_label": "retrievecart()"
     },
     {
@@ -8220,7 +8220,7 @@
       "source_file": "apps/storefront/src/lib/data/cart.ts",
       "source_location": "L420",
       "id": "data_cart_applycustomeraddresstocart",
-      "community": 1,
+      "community": 37,
       "norm_label": "applycustomeraddresstocart()"
     },
     {
@@ -8247,7 +8247,7 @@
       "source_file": "apps/storefront/src/lib/data/cart.ts",
       "source_location": "L537",
       "id": "data_cart_listcartoptions",
-      "community": 1,
+      "community": 37,
       "norm_label": "listcartoptions()"
     },
     {
@@ -8265,7 +8265,7 @@
       "source_file": "apps/storefront/src/lib/data/locale-actions.ts",
       "source_location": "L13",
       "id": "data_locale_actions_getlocale",
-      "community": 251,
+      "community": 1,
       "norm_label": "getlocale()"
     },
     {
@@ -8364,7 +8364,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L34",
       "id": "data_address_validation_validateemail",
-      "community": 190,
+      "community": 167,
       "norm_label": "validateemail()"
     },
     {
@@ -8382,7 +8382,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L54",
       "id": "data_address_validation_validatehubcity",
-      "community": 167,
+      "community": 190,
       "norm_label": "validatehubcity()"
     },
     {
@@ -8544,7 +8544,7 @@
       "source_file": "apps/storefront/src/lib/data/collections.ts",
       "source_location": "L23",
       "id": "data_collections_listcollections",
-      "community": 34,
+      "community": 130,
       "norm_label": "listcollections()"
     },
     {
@@ -8553,7 +8553,7 @@
       "source_file": "apps/storefront/src/lib/data/collections.ts",
       "source_location": "L45",
       "id": "data_collections_getcollectionbyhandle",
-      "community": 34,
+      "community": 130,
       "norm_label": "getcollectionbyhandle()"
     },
     {
@@ -8643,7 +8643,7 @@
       "source_file": "apps/storefront/src/lib/data/seller.ts",
       "source_location": "L49",
       "id": "data_seller_listmylistings",
-      "community": 242,
+      "community": 223,
       "norm_label": "listmylistings()"
     },
     {
@@ -8652,7 +8652,7 @@
       "source_file": "apps/storefront/src/lib/data/seller.ts",
       "source_location": "L74",
       "id": "data_seller_getmylisting",
-      "community": 269,
+      "community": 223,
       "norm_label": "getmylisting()"
     },
     {
@@ -8742,7 +8742,7 @@
       "source_file": "apps/storefront/src/lib/data/locales.ts",
       "source_location": "L14",
       "id": "data_locales_listlocales",
-      "community": 182,
+      "community": 37,
       "norm_label": "listlocales()"
     },
     {
@@ -8904,7 +8904,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L162",
       "id": "data_customer_updatecustomer",
-      "community": 135,
+      "community": 217,
       "norm_label": "updatecustomer()"
     },
     {
@@ -8958,7 +8958,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L372",
       "id": "data_customer_signup",
-      "community": 135,
+      "community": 204,
       "norm_label": "signup()"
     },
     {
@@ -8967,7 +8967,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L418",
       "id": "data_customer_login",
-      "community": 135,
+      "community": 204,
       "norm_label": "login()"
     },
     {
@@ -8976,7 +8976,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L442",
       "id": "data_customer_signout",
-      "community": 135,
+      "community": 233,
       "norm_label": "signout()"
     },
     {
@@ -8985,7 +8985,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L467",
       "id": "data_customer_requestmembership",
-      "community": 135,
+      "community": 217,
       "norm_label": "requestmembership()"
     },
     {
@@ -8994,7 +8994,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L509",
       "id": "data_customer_cancelmembership",
-      "community": 135,
+      "community": 217,
       "norm_label": "cancelmembership()"
     },
     {
@@ -9003,7 +9003,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L526",
       "id": "data_customer_transfercart",
-      "community": 135,
+      "community": 204,
       "norm_label": "transfercart()"
     },
     {
@@ -9012,7 +9012,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L541",
       "id": "data_customer_addcustomeraddress",
-      "community": 268,
+      "community": 250,
       "norm_label": "addcustomeraddress()"
     },
     {
@@ -9021,7 +9021,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L581",
       "id": "data_customer_deletecustomeraddress",
-      "community": 268,
+      "community": 250,
       "norm_label": "deletecustomeraddress()"
     },
     {
@@ -9030,7 +9030,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L600",
       "id": "data_customer_updatecustomeraddress",
-      "community": 268,
+      "community": 250,
       "norm_label": "updatecustomeraddress()"
     },
     {
@@ -9075,7 +9075,7 @@
       "source_file": "apps/storefront/src/lib/email/send-otp.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_email_send_otp_ts",
-      "community": 135,
+      "community": 251,
       "norm_label": "send-otp.ts"
     },
     {
@@ -9084,7 +9084,7 @@
       "source_file": "apps/storefront/src/lib/email/send-otp.ts",
       "source_location": "L19",
       "id": "email_send_otp_otpemailresult",
-      "community": 135,
+      "community": 251,
       "norm_label": "otpemailresult"
     },
     {
@@ -9093,7 +9093,7 @@
       "source_file": "apps/storefront/src/lib/email/send-otp.ts",
       "source_location": "L28",
       "id": "email_send_otp_buildbody",
-      "community": 135,
+      "community": 251,
       "norm_label": "buildbody()"
     },
     {
@@ -9102,7 +9102,7 @@
       "source_file": "apps/storefront/src/lib/email/send-otp.ts",
       "source_location": "L42",
       "id": "email_send_otp_sendotpemail",
-      "community": 135,
+      "community": 251,
       "norm_label": "sendotpemail()"
     },
     {
@@ -9165,7 +9165,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L15",
       "id": "constants_hub_cities_hub_cities",
-      "community": 167,
+      "community": 246,
       "norm_label": "hub_cities"
     },
     {
@@ -9210,7 +9210,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L48",
       "id": "constants_hub_cities_ishubcity",
-      "community": 246,
+      "community": 190,
       "norm_label": "ishubcity()"
     },
     {
@@ -9318,7 +9318,7 @@
       "source_file": "apps/storefront/src/lib/util/get-locale-header.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_util_get_locale_header_ts",
-      "community": 251,
+      "community": 1,
       "norm_label": "get-locale-header.ts"
     },
     {
@@ -9327,7 +9327,7 @@
       "source_file": "apps/storefront/src/lib/util/get-locale-header.ts",
       "source_location": "L3",
       "id": "util_get_locale_header_getlocaleheader",
-      "community": 251,
+      "community": 1,
       "norm_label": "getlocaleheader()"
     },
     {
@@ -9579,7 +9579,7 @@
       "source_file": "apps/storefront/src/lib/util/membership.ts",
       "source_location": "L22",
       "id": "util_membership_membershippaymentmethod",
-      "community": 137,
+      "community": 30,
       "norm_label": "membershippaymentmethod"
     },
     {
@@ -9696,7 +9696,7 @@
       "source_file": "apps/storefront/src/lib/util/membership.ts",
       "source_location": "L134",
       "id": "util_membership_membership_payout",
-      "community": 137,
+      "community": 30,
       "norm_label": "membership_payout"
     },
     {
@@ -9705,7 +9705,7 @@
       "source_file": "apps/storefront/src/lib/util/membership.ts",
       "source_location": "L148",
       "id": "util_membership_ispayoutchannelconfigured",
-      "community": 137,
+      "community": 30,
       "norm_label": "ispayoutchannelconfigured()"
     },
     {
@@ -11325,7 +11325,7 @@
       "source_file": "apps/backend/src/modules/accountability/index.ts",
       "source_location": "L10",
       "id": "accountability_index_prepay_locked_states",
-      "community": 209,
+      "community": 200,
       "norm_label": "prepay_locked_states"
     },
     {
@@ -11532,7 +11532,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_listing_types_ts",
-      "community": 26,
+      "community": 143,
       "norm_label": "types.ts"
     },
     {
@@ -11541,7 +11541,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L1",
       "id": "listing_types_listing_types",
-      "community": 26,
+      "community": 143,
       "norm_label": "listing_types"
     },
     {
@@ -11550,7 +11550,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L2",
       "id": "listing_types_listingtype",
-      "community": 26,
+      "community": 143,
       "norm_label": "listingtype"
     },
     {
@@ -11559,7 +11559,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L4",
       "id": "listing_types_listing_statuses",
-      "community": 26,
+      "community": 143,
       "norm_label": "listing_statuses"
     },
     {
@@ -11568,7 +11568,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L12",
       "id": "listing_types_listingstatus",
-      "community": 26,
+      "community": 143,
       "norm_label": "listingstatus"
     },
     {
@@ -11577,7 +11577,7 @@
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_listing_validators_ts",
-      "community": 26,
+      "community": 143,
       "norm_label": "validators.ts"
     },
     {
@@ -11586,7 +11586,7 @@
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L9",
       "id": "listing_validators_validationerror",
-      "community": 26,
+      "community": 143,
       "norm_label": "validationerror"
     },
     {
@@ -11595,7 +11595,7 @@
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L15",
       "id": "listing_validators_validationresult",
-      "community": 26,
+      "community": 143,
       "norm_label": "validationresult"
     },
     {
@@ -11622,7 +11622,7 @@
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L127",
       "id": "listing_validators_allowed_transitions",
-      "community": 26,
+      "community": 143,
       "norm_label": "allowed_transitions"
     },
     {
@@ -11944,7 +11944,7 @@
       "label": ".capturePayment()",
       "file_type": "code",
       "source_file": "apps/backend/src/modules/payment-cod/service.ts",
-      "source_location": "L116",
+      "source_location": "L127",
       "id": "payment_cod_service_codpaymentproviderservice_capturepayment",
       "community": 140,
       "norm_label": ".capturepayment()"
@@ -11953,7 +11953,7 @@
       "label": ".cancelPayment()",
       "file_type": "code",
       "source_file": "apps/backend/src/modules/payment-cod/service.ts",
-      "source_location": "L124",
+      "source_location": "L135",
       "id": "payment_cod_service_codpaymentproviderservice_cancelpayment",
       "community": 140,
       "norm_label": ".cancelpayment()"
@@ -11962,7 +11962,7 @@
       "label": ".deletePayment()",
       "file_type": "code",
       "source_file": "apps/backend/src/modules/payment-cod/service.ts",
-      "source_location": "L130",
+      "source_location": "L141",
       "id": "payment_cod_service_codpaymentproviderservice_deletepayment",
       "community": 140,
       "norm_label": ".deletepayment()"
@@ -11971,7 +11971,7 @@
       "label": ".getPaymentStatus()",
       "file_type": "code",
       "source_file": "apps/backend/src/modules/payment-cod/service.ts",
-      "source_location": "L136",
+      "source_location": "L147",
       "id": "payment_cod_service_codpaymentproviderservice_getpaymentstatus",
       "community": 140,
       "norm_label": ".getpaymentstatus()"
@@ -11980,7 +11980,7 @@
       "label": ".refundPayment()",
       "file_type": "code",
       "source_file": "apps/backend/src/modules/payment-cod/service.ts",
-      "source_location": "L152",
+      "source_location": "L163",
       "id": "payment_cod_service_codpaymentproviderservice_refundpayment",
       "community": 140,
       "norm_label": ".refundpayment()"
@@ -11989,7 +11989,7 @@
       "label": ".retrievePayment()",
       "file_type": "code",
       "source_file": "apps/backend/src/modules/payment-cod/service.ts",
-      "source_location": "L158",
+      "source_location": "L169",
       "id": "payment_cod_service_codpaymentproviderservice_retrievepayment",
       "community": 140,
       "norm_label": ".retrievepayment()"
@@ -11998,7 +11998,7 @@
       "label": ".updatePayment()",
       "file_type": "code",
       "source_file": "apps/backend/src/modules/payment-cod/service.ts",
-      "source_location": "L164",
+      "source_location": "L175",
       "id": "payment_cod_service_codpaymentproviderservice_updatepayment",
       "community": 140,
       "norm_label": ".updatepayment()"
@@ -12007,7 +12007,7 @@
       "label": ".getWebhookActionAndData()",
       "file_type": "code",
       "source_file": "apps/backend/src/modules/payment-cod/service.ts",
-      "source_location": "L170",
+      "source_location": "L181",
       "id": "payment_cod_service_codpaymentproviderservice_getwebhookactionanddata",
       "community": 140,
       "norm_label": ".getwebhookactionanddata()"
@@ -12063,7 +12063,7 @@
       "source_file": "apps/backend/src/modules/cod-ledger/is-duplicate.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_cod_ledger_is_duplicate_ts",
-      "community": 186,
+      "community": 25,
       "norm_label": "is-duplicate.ts"
     },
     {
@@ -12072,7 +12072,7 @@
       "source_file": "apps/backend/src/modules/cod-ledger/is-duplicate.ts",
       "source_location": "L7",
       "id": "cod_ledger_is_duplicate_isduplicatecodtransaction",
-      "community": 186,
+      "community": 25,
       "norm_label": "isduplicatecodtransaction()"
     },
     {
@@ -12333,7 +12333,7 @@
       "source_file": "apps/backend/src/modules/cod-ledger/__tests__/is-duplicate.unit.spec.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_cod_ledger_tests_is_duplicate_unit_spec_ts",
-      "community": 186,
+      "community": 25,
       "norm_label": "is-duplicate.unit.spec.ts"
     },
     {
@@ -12405,7 +12405,7 @@
       "source_file": "apps/backend/src/modules/rider/pin.ts",
       "source_location": "L13",
       "id": "rider_pin_verifypin",
-      "community": 23,
+      "community": 166,
       "norm_label": "verifypin()"
     },
     {
@@ -12585,7 +12585,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_delivery_options_route_ts",
-      "community": 164,
+      "community": 34,
       "norm_label": "route.ts"
     },
     {
@@ -12594,7 +12594,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L8",
       "id": "delivery_options_route_tier",
-      "community": 164,
+      "community": 34,
       "norm_label": "tier"
     },
     {
@@ -12603,7 +12603,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L10",
       "id": "delivery_options_route_tieroption",
-      "community": 164,
+      "community": 34,
       "norm_label": "tieroption"
     },
     {
@@ -12612,7 +12612,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L19",
       "id": "delivery_options_route_getcustomerid",
-      "community": 164,
+      "community": 34,
       "norm_label": "getcustomerid()"
     },
     {
@@ -12621,7 +12621,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L25",
       "id": "delivery_options_route_nowinhubtimezone",
-      "community": 164,
+      "community": 34,
       "norm_label": "nowinhubtimezone()"
     },
     {
@@ -12630,7 +12630,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L41",
       "id": "delivery_options_route_parsehhmm",
-      "community": 164,
+      "community": 34,
       "norm_label": "parsehhmm()"
     },
     {
@@ -12639,7 +12639,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L46",
       "id": "delivery_options_route_beforecutoff",
-      "community": 164,
+      "community": 34,
       "norm_label": "beforecutoff()"
     },
     {
@@ -12648,7 +12648,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L66",
       "id": "delivery_options_route_get",
-      "community": 164,
+      "community": 34,
       "norm_label": "get()"
     },
     {
@@ -12729,7 +12729,7 @@
       "source_file": "apps/backend/src/api/store/hubs/[slug]/products/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_hubs_slug_products_route_ts",
-      "community": 161,
+      "community": 26,
       "norm_label": "route.ts"
     },
     {
@@ -12846,7 +12846,7 @@
       "source_file": "apps/backend/src/api/store/customer/disputes/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_customer_disputes_route_ts",
-      "community": 200,
+      "community": 226,
       "norm_label": "route.ts"
     },
     {
@@ -12855,7 +12855,7 @@
       "source_file": "apps/backend/src/api/store/customer/disputes/route.ts",
       "source_location": "L5",
       "id": "disputes_route_getcustomerid",
-      "community": 200,
+      "community": 226,
       "norm_label": "getcustomerid()"
     },
     {
@@ -12864,7 +12864,7 @@
       "source_file": "apps/backend/src/api/admin/disputes/route.ts",
       "source_location": "L10",
       "id": "disputes_route_get",
-      "community": 200,
+      "community": 226,
       "norm_label": "get()"
     },
     {
@@ -12873,7 +12873,7 @@
       "source_file": "apps/backend/src/api/store/customer/disputes/[id]/respond/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_customer_disputes_id_respond_route_ts",
-      "community": 226,
+      "community": 200,
       "norm_label": "route.ts"
     },
     {
@@ -12882,7 +12882,7 @@
       "source_file": "apps/backend/src/api/store/customer/disputes/[id]/respond/route.ts",
       "source_location": "L5",
       "id": "respond_route_getcustomerid",
-      "community": 226,
+      "community": 200,
       "norm_label": "getcustomerid()"
     },
     {
@@ -12891,7 +12891,7 @@
       "source_file": "apps/backend/src/api/store/customer/disputes/[id]/respond/route.ts",
       "source_location": "L11",
       "id": "respond_route_valid_reasons",
-      "community": 226,
+      "community": 200,
       "norm_label": "valid_reasons"
     },
     {
@@ -12900,7 +12900,7 @@
       "source_file": "apps/backend/src/api/store/seller/disputes/[id]/respond/route.ts",
       "source_location": "L15",
       "id": "respond_route_post",
-      "community": 226,
+      "community": 200,
       "norm_label": "post()"
     },
     {
@@ -13116,7 +13116,7 @@
       "source_file": "apps/backend/src/api/store/seller/disputes/[id]/respond/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_seller_disputes_id_respond_route_ts",
-      "community": 226,
+      "community": 200,
       "norm_label": "route.ts"
     },
     {
@@ -13161,7 +13161,7 @@
       "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_otc_counter_route_ts",
-      "community": 186,
+      "community": 25,
       "norm_label": "route.ts"
     },
     {
@@ -13170,7 +13170,7 @@
       "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
       "source_location": "L37",
       "id": "otc_counter_route_counteritem",
-      "community": 186,
+      "community": 25,
       "norm_label": "counteritem"
     },
     {
@@ -13179,7 +13179,7 @@
       "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
       "source_location": "L39",
       "id": "otc_counter_route_actorid",
-      "community": 186,
+      "community": 25,
       "norm_label": "actorid()"
     },
     {
@@ -13188,7 +13188,7 @@
       "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
       "source_location": "L46",
       "id": "otc_counter_route_post",
-      "community": 186,
+      "community": 25,
       "norm_label": "post()"
     },
     {
@@ -13197,7 +13197,7 @@
       "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
       "source_location": "L220",
       "id": "otc_counter_route_get",
-      "community": 186,
+      "community": 25,
       "norm_label": "get()"
     },
     {
@@ -13242,7 +13242,7 @@
       "source_file": "apps/backend/src/api/admin/memberships/[id]/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_memberships_id_route_ts",
-      "community": 143,
+      "community": 182,
       "norm_label": "route.ts"
     },
     {
@@ -13251,7 +13251,7 @@
       "source_file": "apps/backend/src/api/admin/memberships/[id]/route.ts",
       "source_location": "L29",
       "id": "id_route_action",
-      "community": 143,
+      "community": 182,
       "norm_label": "action"
     },
     {
@@ -13260,7 +13260,7 @@
       "source_file": "apps/backend/src/api/admin/memberships/[id]/route.ts",
       "source_location": "L31",
       "id": "id_route_membership_meta",
-      "community": 143,
+      "community": 182,
       "norm_label": "membership_meta"
     },
     {
@@ -13269,7 +13269,7 @@
       "source_file": "apps/backend/src/api/admin/memberships/[id]/route.ts",
       "source_location": "L50",
       "id": "id_route_membershipevent",
-      "community": 143,
+      "community": 182,
       "norm_label": "membershipevent"
     },
     {
@@ -13278,7 +13278,7 @@
       "source_file": "apps/backend/src/api/admin/memberships/[id]/route.ts",
       "source_location": "L59",
       "id": "id_route_appendevent",
-      "community": 143,
+      "community": 182,
       "norm_label": "appendevent()"
     },
     {
@@ -13287,7 +13287,7 @@
       "source_file": "apps/backend/src/api/admin/riders/[id]/route.ts",
       "source_location": "L26",
       "id": "id_route_post",
-      "community": 143,
+      "community": 182,
       "norm_label": "post()"
     },
     {
@@ -13584,7 +13584,7 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cod-remitted/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_orders_id_cod_remitted_route_ts",
-      "community": 186,
+      "community": 25,
       "norm_label": "route.ts"
     },
     {
@@ -13593,7 +13593,7 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cod-remitted/route.ts",
       "source_location": "L14",
       "id": "cod_remitted_route_post",
-      "community": 186,
+      "community": 25,
       "norm_label": "post()"
     },
     {
@@ -13602,7 +13602,7 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cod-collected/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_orders_id_cod_collected_route_ts",
-      "community": 186,
+      "community": 25,
       "norm_label": "route.ts"
     },
     {
@@ -13611,7 +13611,7 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cod-collected/route.ts",
       "source_location": "L15",
       "id": "cod_collected_route_post",
-      "community": 186,
+      "community": 25,
       "norm_label": "post()"
     },
     {
@@ -13620,7 +13620,7 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
-      "community": 186,
+      "community": 25,
       "norm_label": "route.ts"
     },
     {
@@ -13629,7 +13629,7 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
       "source_location": "L19",
       "id": "otc_collected_route_post",
-      "community": 186,
+      "community": 25,
       "norm_label": "post()"
     },
     {
@@ -13674,7 +13674,7 @@
       "source_file": "apps/backend/src/api/admin/dispatch/batches/[id]/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_dispatch_batches_id_route_ts",
-      "community": 158,
+      "community": 143,
       "norm_label": "route.ts"
     },
     {
@@ -13683,7 +13683,7 @@
       "source_file": "apps/backend/src/api/admin/dispatch/batches/[id]/route.ts",
       "source_location": "L5",
       "id": "id_route_valid_transitions",
-      "community": 158,
+      "community": 143,
       "norm_label": "valid_transitions"
     },
     {
@@ -13755,7 +13755,7 @@
       "source_file": "apps/backend/src/api/admin/disputes/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_disputes_route_ts",
-      "community": 200,
+      "community": 226,
       "norm_label": "route.ts"
     },
     {
@@ -13926,7 +13926,7 @@
       "source_file": "apps/backend/src/api/rider/auth/login/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_rider_auth_login_route_ts",
-      "community": 23,
+      "community": 166,
       "norm_label": "route.ts"
     },
     {
@@ -13935,7 +13935,7 @@
       "source_file": "apps/backend/src/api/rider/auth/login/route.ts",
       "source_location": "L14",
       "id": "login_route_post",
-      "community": 23,
+      "community": 166,
       "norm_label": "post()"
     },
     {
@@ -15379,6 +15379,24 @@
       "norm_label": "reservepickupslotworkflow"
     },
     {
+      "label": "validate-cart-completion.ts",
+      "file_type": "code",
+      "source_file": "apps/backend/src/workflows/hooks/validate-cart-completion.ts",
+      "source_location": "L1",
+      "id": "apps_backend_src_workflows_hooks_validate_cart_completion_ts",
+      "community": 200,
+      "norm_label": "validate-cart-completion.ts"
+    },
+    {
+      "label": "accountability",
+      "file_type": "code",
+      "source_file": "apps/backend/src/workflows/hooks/validate-cart-completion.ts",
+      "source_location": "L28",
+      "id": "hooks_validate_cart_completion_accountability",
+      "community": 200,
+      "norm_label": "accountability"
+    },
+    {
       "label": "resolve-dispute-escalation.unit.spec.ts",
       "file_type": "code",
       "source_file": "apps/backend/src/workflows/__tests__/resolve-dispute-escalation.unit.spec.ts",
@@ -15591,7 +15609,7 @@
       "source_file": "apps/backend/src/lib/otc-sale.ts",
       "source_location": "L1",
       "id": "apps_backend_src_lib_otc_sale_ts",
-      "community": 186,
+      "community": 25,
       "norm_label": "otc-sale.ts"
     },
     {
@@ -15600,7 +15618,7 @@
       "source_file": "apps/backend/src/lib/otc-sale.ts",
       "source_location": "L18",
       "id": "lib_otc_sale_codtx",
-      "community": 186,
+      "community": 25,
       "norm_label": "codtx"
     },
     {
@@ -15609,7 +15627,7 @@
       "source_file": "apps/backend/src/lib/otc-sale.ts",
       "source_location": "L22",
       "id": "lib_otc_sale_recordotcresult",
-      "community": 186,
+      "community": 25,
       "norm_label": "recordotcresult"
     },
     {
@@ -15618,7 +15636,7 @@
       "source_file": "apps/backend/src/lib/otc-sale.ts",
       "source_location": "L26",
       "id": "lib_otc_sale_recordotccollected",
-      "community": 186,
+      "community": 25,
       "norm_label": "recordotccollected()"
     },
     {
@@ -15762,7 +15780,7 @@
       "source_file": "apps/backend/src/jobs/clean-order-tick.ts",
       "source_location": "L1",
       "id": "apps_backend_src_jobs_clean_order_tick_ts",
-      "community": 270,
+      "community": 226,
       "norm_label": "clean-order-tick.ts"
     },
     {
@@ -15771,7 +15789,7 @@
       "source_file": "apps/backend/src/jobs/clean-order-tick.ts",
       "source_location": "L26",
       "id": "jobs_clean_order_tick_config",
-      "community": 270,
+      "community": 226,
       "norm_label": "config"
     },
     {
@@ -15780,7 +15798,7 @@
       "source_file": "apps/backend/src/jobs/clean-order-tick.ts",
       "source_location": "L32",
       "id": "jobs_clean_order_tick_cleanordertick",
-      "community": 270,
+      "community": 226,
       "norm_label": "cleanordertick()"
     },
     {
@@ -17233,28 +17251,10 @@
       "norm_label": "taxprovider"
     },
     {
-      "label": "NotificationStatusEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2136",
-      "id": "types_query_entry_points_d_notificationstatusenum",
-      "community": 0,
-      "norm_label": "notificationstatusenum"
-    },
-    {
-      "label": "Notification",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2141",
-      "id": "types_query_entry_points_d_notification",
-      "community": 0,
-      "norm_label": "notification"
-    },
-    {
       "label": "GeoZoneType",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2164",
+      "source_location": "L2136",
       "id": "types_query_entry_points_d_geozonetype",
       "community": 0,
       "norm_label": "geozonetype"
@@ -17263,7 +17263,7 @@
       "label": "ShippingOptionPriceType",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2170",
+      "source_location": "L2142",
       "id": "types_query_entry_points_d_shippingoptionpricetype",
       "community": 0,
       "norm_label": "shippingoptionpricetype"
@@ -17272,7 +17272,7 @@
       "label": "FulfillmentAddress",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2174",
+      "source_location": "L2146",
       "id": "types_query_entry_points_d_fulfillmentaddress",
       "community": 0,
       "norm_label": "fulfillmentaddress"
@@ -17281,7 +17281,7 @@
       "label": "FulfillmentItem",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2193",
+      "source_location": "L2165",
       "id": "types_query_entry_points_d_fulfillmentitem",
       "community": 0,
       "norm_label": "fulfillmentitem"
@@ -17290,7 +17290,7 @@
       "label": "FulfillmentLabel",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2209",
+      "source_location": "L2181",
       "id": "types_query_entry_points_d_fulfillmentlabel",
       "community": 0,
       "norm_label": "fulfillmentlabel"
@@ -17299,7 +17299,7 @@
       "label": "FulfillmentProvider",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2222",
+      "source_location": "L2194",
       "id": "types_query_entry_points_d_fulfillmentprovider",
       "community": 0,
       "norm_label": "fulfillmentprovider"
@@ -17308,7 +17308,7 @@
       "label": "FulfillmentSet",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2233",
+      "source_location": "L2205",
       "id": "types_query_entry_points_d_fulfillmentset",
       "community": 0,
       "norm_label": "fulfillmentset"
@@ -17317,7 +17317,7 @@
       "label": "Fulfillment",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2247",
+      "source_location": "L2219",
       "id": "types_query_entry_points_d_fulfillment",
       "community": 0,
       "norm_label": "fulfillment"
@@ -17326,7 +17326,7 @@
       "label": "GeoZone",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2275",
+      "source_location": "L2247",
       "id": "types_query_entry_points_d_geozone",
       "community": 0,
       "norm_label": "geozone"
@@ -17335,7 +17335,7 @@
       "label": "ServiceZone",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2291",
+      "source_location": "L2263",
       "id": "types_query_entry_points_d_servicezone",
       "community": 0,
       "norm_label": "servicezone"
@@ -17344,7 +17344,7 @@
       "label": "ShippingOptionRule",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2305",
+      "source_location": "L2277",
       "id": "types_query_entry_points_d_shippingoptionrule",
       "community": 0,
       "norm_label": "shippingoptionrule"
@@ -17353,7 +17353,7 @@
       "label": "ShippingOptionType",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2318",
+      "source_location": "L2290",
       "id": "types_query_entry_points_d_shippingoptiontype",
       "community": 0,
       "norm_label": "shippingoptiontype"
@@ -17362,7 +17362,7 @@
       "label": "ShippingOption",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2330",
+      "source_location": "L2302",
       "id": "types_query_entry_points_d_shippingoption",
       "community": 0,
       "norm_label": "shippingoption"
@@ -17371,34 +17371,16 @@
       "label": "ShippingProfile",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2353",
+      "source_location": "L2325",
       "id": "types_query_entry_points_d_shippingprofile",
       "community": 0,
       "norm_label": "shippingprofile"
     },
     {
-      "label": "WorkflowExecutionStateEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2366",
-      "id": "types_query_entry_points_d_workflowexecutionstateenum",
-      "community": 0,
-      "norm_label": "workflowexecutionstateenum"
-    },
-    {
-      "label": "WorkflowExecution",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2375",
-      "id": "types_query_entry_points_d_workflowexecution",
-      "community": 0,
-      "norm_label": "workflowexecution"
-    },
-    {
       "label": "AccountHolder",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2390",
+      "source_location": "L2338",
       "id": "types_query_entry_points_d_accountholder",
       "community": 0,
       "norm_label": "accountholder"
@@ -17407,7 +17389,7 @@
       "label": "Capture",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2405",
+      "source_location": "L2353",
       "id": "types_query_entry_points_d_capture",
       "community": 0,
       "norm_label": "capture"
@@ -17416,7 +17398,7 @@
       "label": "PaymentCollectionStatusEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2419",
+      "source_location": "L2367",
       "id": "types_query_entry_points_d_paymentcollectionstatusenum",
       "community": 0,
       "norm_label": "paymentcollectionstatusenum"
@@ -17425,7 +17407,7 @@
       "label": "PaymentCollection",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2429",
+      "source_location": "L2377",
       "id": "types_query_entry_points_d_paymentcollection",
       "community": 0,
       "norm_label": "paymentcollection"
@@ -17434,7 +17416,7 @@
       "label": "PaymentProvider",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2456",
+      "source_location": "L2404",
       "id": "types_query_entry_points_d_paymentprovider",
       "community": 0,
       "norm_label": "paymentprovider"
@@ -17443,7 +17425,7 @@
       "label": "PaymentSessionStatusEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2468",
+      "source_location": "L2416",
       "id": "types_query_entry_points_d_paymentsessionstatusenum",
       "community": 0,
       "norm_label": "paymentsessionstatusenum"
@@ -17452,7 +17434,7 @@
       "label": "Payment",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2476",
+      "source_location": "L2424",
       "id": "types_query_entry_points_d_payment",
       "community": 0,
       "norm_label": "payment"
@@ -17461,7 +17443,7 @@
       "label": "PaymentSession",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2498",
+      "source_location": "L2446",
       "id": "types_query_entry_points_d_paymentsession",
       "community": 0,
       "norm_label": "paymentsession"
@@ -17470,7 +17452,7 @@
       "label": "RefundReason",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2518",
+      "source_location": "L2466",
       "id": "types_query_entry_points_d_refundreason",
       "community": 0,
       "norm_label": "refundreason"
@@ -17479,10 +17461,46 @@
       "label": "Refund",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2531",
+      "source_location": "L2479",
       "id": "types_query_entry_points_d_refund",
       "community": 0,
       "norm_label": "refund"
+    },
+    {
+      "label": "NotificationStatusEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2496",
+      "id": "types_query_entry_points_d_notificationstatusenum",
+      "community": 0,
+      "norm_label": "notificationstatusenum"
+    },
+    {
+      "label": "Notification",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2501",
+      "id": "types_query_entry_points_d_notification",
+      "community": 0,
+      "norm_label": "notification"
+    },
+    {
+      "label": "WorkflowExecutionStateEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2524",
+      "id": "types_query_entry_points_d_workflowexecutionstateenum",
+      "community": 0,
+      "norm_label": "workflowexecutionstateenum"
+    },
+    {
+      "label": "WorkflowExecution",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2533",
+      "id": "types_query_entry_points_d_workflowexecution",
+      "community": 0,
+      "norm_label": "workflowexecution"
     },
     {
       "label": "LinkCartPaymentCollection",
@@ -17760,7 +17778,7 @@
       "source_file": "apps/backend/.medusa/types/modules-bindings.d.ts",
       "source_location": "L1",
       "id": "apps_backend_medusa_types_modules_bindings_d_ts",
-      "community": 183,
+      "community": 164,
       "norm_label": "modules-bindings.d.ts"
     },
     {
@@ -17769,7 +17787,7 @@
       "source_file": "apps/backend/.medusa/types/modules-bindings.d.ts",
       "source_location": "L36",
       "id": "types_modules_bindings_d_moduleimplementations",
-      "community": 183,
+      "community": 164,
       "norm_label": "moduleimplementations"
     },
     {
@@ -19225,7 +19243,7 @@
       "label": "Table of Contents",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L113",
+      "source_location": "L144",
       "id": "freshhub_implementation_plan_asbuilt_table_of_contents",
       "community": 253,
       "norm_label": "table of contents"
@@ -19234,7 +19252,7 @@
       "label": "1. What changed vs the v2 plan",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L129",
+      "source_location": "L160",
       "id": "freshhub_implementation_plan_asbuilt_1_what_changed_vs_the_v2_plan",
       "community": 253,
       "norm_label": "1. what changed vs the v2 plan"
@@ -19243,7 +19261,7 @@
       "label": "2. As-built architecture",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L146",
+      "source_location": "L177",
       "id": "freshhub_implementation_plan_asbuilt_2_as_built_architecture",
       "community": 253,
       "norm_label": "2. as-built architecture"
@@ -19252,7 +19270,7 @@
       "label": "code:block1 (freshhub/                         # Turborepo)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L148",
+      "source_location": "L179",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_1",
       "community": 253,
       "norm_label": "code:block1 (freshhub/                         # turborepo)"
@@ -19261,7 +19279,7 @@
       "label": "3. As-built data model",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L175",
+      "source_location": "L206",
       "id": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
       "community": 181,
       "norm_label": "3. as-built data model"
@@ -19270,7 +19288,7 @@
       "label": "hub  / hub_area",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L180",
+      "source_location": "L211",
       "id": "freshhub_implementation_plan_asbuilt_hub_hub_area",
       "community": 181,
       "norm_label": "hub  / hub_area"
@@ -19279,7 +19297,7 @@
       "label": "code:block2 (hub:        id, name, slug(unique), city, province, country=)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L181",
+      "source_location": "L212",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_2",
       "community": 181,
       "norm_label": "code:block2 (hub:        id, name, slug(unique), city, province, country=)"
@@ -19288,7 +19306,7 @@
       "label": "product_listing  (producer listings)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L189",
+      "source_location": "L220",
       "id": "freshhub_implementation_plan_asbuilt_product_listing_producer_listings",
       "community": 181,
       "norm_label": "product_listing  (producer listings)"
@@ -19297,7 +19315,7 @@
       "label": "code:block3 (product_listing: id,)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L190",
+      "source_location": "L221",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_3",
       "community": 181,
       "norm_label": "code:block3 (product_listing: id,)"
@@ -19306,7 +19324,7 @@
       "label": "pickup_window / pickup_slot  (sell-to-freshhub intake)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L198",
+      "source_location": "L229",
       "id": "freshhub_implementation_plan_asbuilt_pickup_window_pickup_slot_sell_to_freshhub_intake",
       "community": 181,
       "norm_label": "pickup_window / pickup_slot  (sell-to-freshhub intake)"
@@ -19315,7 +19333,7 @@
       "label": "code:block4 (pickup_window: id, hub_id, hub_area_id, date, start_time, en)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L199",
+      "source_location": "L230",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_4",
       "community": 181,
       "norm_label": "code:block4 (pickup_window: id, hub_id, hub_area_id, date, start_time, en)"
@@ -19324,7 +19342,7 @@
       "label": "dispatch_batch / dispatch_order  (delivery batching)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L208",
+      "source_location": "L239",
       "id": "freshhub_implementation_plan_asbuilt_dispatch_batch_dispatch_order_delivery_batching",
       "community": 181,
       "norm_label": "dispatch_batch / dispatch_order  (delivery batching)"
@@ -19333,7 +19351,7 @@
       "label": "code:block5 (dispatch_batch: id, hub_id, dispatch_date, cutoff_at, dispat)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L209",
+      "source_location": "L240",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_5",
       "community": 181,
       "norm_label": "code:block5 (dispatch_batch: id, hub_id, dispatch_date, cutoff_at, dispat)"
@@ -19342,7 +19360,7 @@
       "label": "rider  (delivery riders)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L217",
+      "source_location": "L248",
       "id": "freshhub_implementation_plan_asbuilt_rider_delivery_riders",
       "community": 181,
       "norm_label": "rider  (delivery riders)"
@@ -19351,7 +19369,7 @@
       "label": "code:block6 (rider: id, full_name, phone(unique), hub_id,)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L218",
+      "source_location": "L249",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_6",
       "community": 181,
       "norm_label": "code:block6 (rider: id, full_name, phone(unique), hub_id,)"
@@ -19360,7 +19378,7 @@
       "label": "hub_barangay_fee  (delivery pricing)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L225",
+      "source_location": "L256",
       "id": "freshhub_implementation_plan_asbuilt_hub_barangay_fee_delivery_pricing",
       "community": 181,
       "norm_label": "hub_barangay_fee  (delivery pricing)"
@@ -19369,7 +19387,7 @@
       "label": "code:block7 (hub_barangay_fee: id, hub_id, barangay, standard_fee_php, sp)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L226",
+      "source_location": "L257",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_7",
       "community": 181,
       "norm_label": "code:block7 (hub_barangay_fee: id, hub_id, barangay, standard_fee_php, sp)"
@@ -19378,7 +19396,7 @@
       "label": "cod_transaction  (cash ledger)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L231",
+      "source_location": "L262",
       "id": "freshhub_implementation_plan_asbuilt_cod_transaction_cash_ledger",
       "community": 181,
       "norm_label": "cod_transaction  (cash ledger)"
@@ -19387,7 +19405,7 @@
       "label": "code:block8 (cod_transaction: id, customer_id, order_id?,)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L232",
+      "source_location": "L263",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_8",
       "community": 181,
       "norm_label": "code:block8 (cod_transaction: id, customer_id, order_id?,)"
@@ -19396,7 +19414,7 @@
       "label": "buyer_account_status / refusal_dispute  (accountability)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L239",
+      "source_location": "L270",
       "id": "freshhub_implementation_plan_asbuilt_buyer_account_status_refusal_dispute_accountability",
       "community": 181,
       "norm_label": "buyer_account_status / refusal_dispute  (accountability)"
@@ -19405,7 +19423,7 @@
       "label": "code:block9 (buyer_account_status: id, customer_id(unique), strike_count=)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L240",
+      "source_location": "L271",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_9",
       "community": 181,
       "norm_label": "code:block9 (buyer_account_status: id, customer_id(unique), strike_count=)"
@@ -19414,7 +19432,7 @@
       "label": "Membership (no table \u2014 metadata on `customer`)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L254",
+      "source_location": "L285",
       "id": "freshhub_implementation_plan_asbuilt_membership_no_table_metadata_on_customer",
       "community": 181,
       "norm_label": "membership (no table \u2014 metadata on `customer`)"
@@ -19423,7 +19441,7 @@
       "label": "Seller (no table \u2014 metadata on `customer`)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L261",
+      "source_location": "L292",
       "id": "freshhub_implementation_plan_asbuilt_seller_no_table_metadata_on_customer",
       "community": 181,
       "norm_label": "seller (no table \u2014 metadata on `customer`)"
@@ -19432,7 +19450,7 @@
       "label": "Links",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L265",
+      "source_location": "L296",
       "id": "freshhub_implementation_plan_asbuilt_links",
       "community": 181,
       "norm_label": "links"
@@ -19441,7 +19459,7 @@
       "label": "4. Modules & responsibilities",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L272",
+      "source_location": "L303",
       "id": "freshhub_implementation_plan_asbuilt_4_modules_responsibilities",
       "community": 253,
       "norm_label": "4. modules & responsibilities"
@@ -19450,7 +19468,7 @@
       "label": "5. Core flows (as built)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L291",
+      "source_location": "L322",
       "id": "freshhub_implementation_plan_asbuilt_5_core_flows_as_built",
       "community": 247,
       "norm_label": "5. core flows (as built)"
@@ -19459,7 +19477,7 @@
       "label": "5.1 Hub scoping & catalog",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L293",
+      "source_location": "L324",
       "id": "freshhub_implementation_plan_asbuilt_5_1_hub_scoping_catalog",
       "community": 247,
       "norm_label": "5.1 hub scoping & catalog"
@@ -19468,7 +19486,7 @@
       "label": "5.2 Producer listing \u2192 pickup (sell-to-freshhub)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L298",
+      "source_location": "L329",
       "id": "freshhub_implementation_plan_asbuilt_5_2_producer_listing_pickup_sell_to_freshhub",
       "community": 247,
       "norm_label": "5.2 producer listing \u2192 pickup (sell-to-freshhub)"
@@ -19477,7 +19495,7 @@
       "label": "code:block10 (Seller (account_type=producer, seller_verified=true) creates)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L299",
+      "source_location": "L330",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_10",
       "community": 247,
       "norm_label": "code:block10 (seller (account_type=producer, seller_verified=true) creates)"
@@ -19486,7 +19504,7 @@
       "label": "5.3 Checkout \u2192 delivery tier selection",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L308",
+      "source_location": "L339",
       "id": "freshhub_implementation_plan_asbuilt_5_3_checkout_delivery_tier_selection",
       "community": 247,
       "norm_label": "5.3 checkout \u2192 delivery tier selection"
@@ -19495,7 +19513,7 @@
       "label": "5.4 Order \u2192 dispatch batch",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L322",
+      "source_location": "L353",
       "id": "freshhub_implementation_plan_asbuilt_5_4_order_dispatch_batch",
       "community": 247,
       "norm_label": "5.4 order \u2192 dispatch batch"
@@ -19504,7 +19522,7 @@
       "label": "code:block11 (order.placed \u2192 assign-order-to-dispatch workflow)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L323",
+      "source_location": "L354",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_11",
       "community": 247,
       "norm_label": "code:block11 (order.placed \u2192 assign-order-to-dispatch workflow)"
@@ -19513,7 +19531,7 @@
       "label": "5.5 COD cash lifecycle",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L333",
+      "source_location": "L364",
       "id": "freshhub_implementation_plan_asbuilt_5_5_cod_cash_lifecycle",
       "community": 247,
       "norm_label": "5.5 cod cash lifecycle"
@@ -19522,7 +19540,7 @@
       "label": "code:block12 (rider delivers \u2192 admin POST /admin/orders/:id/cod-collected )",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L335",
+      "source_location": "L366",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_12",
       "community": 247,
       "norm_label": "code:block12 (rider delivers \u2192 admin post /admin/orders/:id/cod-collected )"
@@ -19531,7 +19549,7 @@
       "label": "5.6 Refusal \u2192 dispute \u2192 strike \u2192 prepay-lock",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L354",
+      "source_location": "L385",
       "id": "freshhub_implementation_plan_asbuilt_5_6_refusal_dispute_strike_prepay_lock",
       "community": 247,
       "norm_label": "5.6 refusal \u2192 dispute \u2192 strike \u2192 prepay-lock"
@@ -19540,7 +19558,7 @@
       "label": "code:block13 (rider marks refusal \u2192 POST /admin/dispatch-orders/:id/refusa)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L355",
+      "source_location": "L386",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_13",
       "community": 247,
       "norm_label": "code:block13 (rider marks refusal \u2192 post /admin/dispatch-orders/:id/refusa)"
@@ -19549,7 +19567,7 @@
       "label": "5.7 Membership lifecycle",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L376",
+      "source_location": "L407",
       "id": "freshhub_implementation_plan_asbuilt_5_7_membership_lifecycle",
       "community": 247,
       "norm_label": "5.7 membership lifecycle"
@@ -19558,16 +19576,16 @@
       "label": "code:block14 (storefront request \u2192 membership_status=pending + payment ref)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L377",
+      "source_location": "L408",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_14",
-      "community": 247,
+      "community": 267,
       "norm_label": "code:block14 (storefront request \u2192 membership_status=pending + payment ref)"
     },
     {
       "label": "6. API surface (as built)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L388",
+      "source_location": "L419",
       "id": "freshhub_implementation_plan_asbuilt_6_api_surface_as_built",
       "community": 267,
       "norm_label": "6. api surface (as built)"
@@ -19576,7 +19594,7 @@
       "label": "Store",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L390",
+      "source_location": "L421",
       "id": "freshhub_implementation_plan_asbuilt_store",
       "community": 267,
       "norm_label": "store"
@@ -19585,7 +19603,7 @@
       "label": "code:block15 (GET    /store/hubs                                  list act)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L391",
+      "source_location": "L422",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_15",
       "community": 267,
       "norm_label": "code:block15 (get    /store/hubs                                  list act)"
@@ -19594,7 +19612,7 @@
       "label": "Admin",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L412",
+      "source_location": "L443",
       "id": "freshhub_implementation_plan_asbuilt_admin",
       "community": 267,
       "norm_label": "admin"
@@ -19603,7 +19621,7 @@
       "label": "code:block16 (GET/POST/PATCH /admin/hubs, /admin/hubs/:id)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L413",
+      "source_location": "L444",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_16",
       "community": 267,
       "norm_label": "code:block16 (get/post/patch /admin/hubs, /admin/hubs/:id)"
@@ -19612,7 +19630,7 @@
       "label": "Rider (self-service; HS256 rider token)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L432",
+      "source_location": "L463",
       "id": "freshhub_implementation_plan_asbuilt_rider_self_service_hs256_rider_token",
       "community": 267,
       "norm_label": "rider (self-service; hs256 rider token)"
@@ -19621,7 +19639,7 @@
       "label": "code:block17 (POST   /rider/auth/login                     phone + PIN \u2192 3)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L433",
+      "source_location": "L464",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_17",
       "community": 267,
       "norm_label": "code:block17 (post   /rider/auth/login                     phone + pin \u2192 3)"
@@ -19630,7 +19648,7 @@
       "label": "7. Admin surface (as built)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L448",
+      "source_location": "L479",
       "id": "freshhub_implementation_plan_asbuilt_7_admin_surface_as_built",
       "community": 253,
       "norm_label": "7. admin surface (as built)"
@@ -19639,7 +19657,7 @@
       "label": "8. Background jobs",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L456",
+      "source_location": "L487",
       "id": "freshhub_implementation_plan_asbuilt_8_background_jobs",
       "community": 253,
       "norm_label": "8. background jobs"
@@ -19648,7 +19666,7 @@
       "label": "9. Shipped vs partial \u2014 status matrix",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L468",
+      "source_location": "L499",
       "id": "freshhub_implementation_plan_asbuilt_9_shipped_vs_partial_status_matrix",
       "community": 253,
       "norm_label": "9. shipped vs partial \u2014 status matrix"
@@ -19657,7 +19675,7 @@
       "label": "10. Gaps & forward roadmap",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L496",
+      "source_location": "L527",
       "id": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
       "community": 259,
       "norm_label": "10. gaps & forward roadmap"
@@ -19666,7 +19684,7 @@
       "label": "Phase A \u2014 Walk-in OTC counter (reframed 2026-06-10, highest priority)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L500",
+      "source_location": "L531",
       "id": "freshhub_implementation_plan_asbuilt_phase_a_walk_in_otc_counter_reframed_2026_06_10_highest_priority",
       "community": 259,
       "norm_label": "phase a \u2014 walk-in otc counter (reframed 2026-06-10, highest priority)"
@@ -19675,7 +19693,7 @@
       "label": "Phase B \u2014 Notifications (email + push)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L537",
+      "source_location": "L568",
       "id": "freshhub_implementation_plan_asbuilt_phase_b_notifications_email_push",
       "community": 259,
       "norm_label": "phase b \u2014 notifications (email + push)"
@@ -19684,7 +19702,7 @@
       "label": "Phase C \u2014 Membership lifecycle automation",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L545",
+      "source_location": "L576",
       "id": "freshhub_implementation_plan_asbuilt_phase_c_membership_lifecycle_automation",
       "community": 259,
       "norm_label": "phase c \u2014 membership lifecycle automation"
@@ -19693,7 +19711,7 @@
       "label": "Phase D \u2014 Trader (B2B) pricing",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L553",
+      "source_location": "L584",
       "id": "freshhub_implementation_plan_asbuilt_phase_d_trader_b2b_pricing",
       "community": 259,
       "norm_label": "phase d \u2014 trader (b2b) pricing"
@@ -19702,7 +19720,7 @@
       "label": "Phase E \u2014 Rider operations & accountability",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L560",
+      "source_location": "L591",
       "id": "freshhub_implementation_plan_asbuilt_phase_e_rider_operations_accountability",
       "community": 259,
       "norm_label": "phase e \u2014 rider operations & accountability"
@@ -19711,7 +19729,7 @@
       "label": "Phase F \u2014 Multi-hub readiness",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L600",
+      "source_location": "L631",
       "id": "freshhub_implementation_plan_asbuilt_phase_f_multi_hub_readiness",
       "community": 259,
       "norm_label": "phase f \u2014 multi-hub readiness"
@@ -19720,7 +19738,7 @@
       "label": "Phase G \u2014 Dispute fairness & SLAs",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L606",
+      "source_location": "L637",
       "id": "freshhub_implementation_plan_asbuilt_phase_g_dispute_fairness_slas",
       "community": 259,
       "norm_label": "phase g \u2014 dispute fairness & slas"
@@ -19729,7 +19747,7 @@
       "label": "Phase H \u2014 Hardening",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L612",
+      "source_location": "L643",
       "id": "freshhub_implementation_plan_asbuilt_phase_h_hardening",
       "community": 259,
       "norm_label": "phase h \u2014 hardening"
@@ -19738,7 +19756,7 @@
       "label": "11. Risks to watch",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L619",
+      "source_location": "L650",
       "id": "freshhub_implementation_plan_asbuilt_11_risks_to_watch",
       "community": 253,
       "norm_label": "11. risks to watch"
@@ -19747,7 +19765,7 @@
       "label": "12. Deferred roadmap (superseded v2 ideas)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L635",
+      "source_location": "L666",
       "id": "freshhub_implementation_plan_asbuilt_12_deferred_roadmap_superseded_v2_ideas",
       "community": 253,
       "norm_label": "12. deferred roadmap (superseded v2 ideas)"
@@ -21872,7 +21890,7 @@
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/customer/deposit/route.ts",
       "source_location": "L1",
-      "community": 266,
+      "community": 186,
       "norm_label": "route.ts",
       "id": "apps_backend_src_api_store_customer_deposit_route_ts"
     },
@@ -21881,7 +21899,7 @@
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/customer/deposit/route.ts",
       "source_location": "L5",
-      "community": 266,
+      "community": 186,
       "norm_label": "getcustomerid()",
       "id": "deposit_route_getcustomerid"
     },
@@ -21890,7 +21908,7 @@
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/customer/deposit/route.ts",
       "source_location": "L14",
-      "community": 266,
+      "community": 186,
       "norm_label": "get()",
       "id": "deposit_route_get"
     },
@@ -22061,7 +22079,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/index.tsx",
       "source_location": "L31",
-      "community": 217,
+      "community": 206,
       "norm_label": "origins",
       "id": "refinement_list_index_origins"
     },
@@ -22106,7 +22124,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/page.tsx",
       "source_location": "L1",
-      "community": 242,
+      "community": 223,
       "norm_label": "page.tsx",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_seller_page_tsx"
     },
@@ -22115,7 +22133,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/page.tsx",
       "source_location": "L7",
-      "community": 242,
+      "community": 223,
       "norm_label": "metadata",
       "id": "seller_page_metadata"
     },
@@ -22124,7 +22142,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/page.tsx",
       "source_location": "L12",
-      "community": 242,
+      "community": 223,
       "norm_label": "props",
       "id": "seller_page_props"
     },
@@ -22133,7 +22151,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/page.tsx",
       "source_location": "L16",
-      "community": 242,
+      "community": 223,
       "norm_label": "sellerdashboardpage()",
       "id": "seller_page_sellerdashboardpage"
     },
@@ -22142,7 +22160,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/listings/[id]/edit/page.tsx",
       "source_location": "L1",
-      "community": 269,
+      "community": 223,
       "norm_label": "page.tsx",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_seller_listings_id_edit_page_tsx"
     },
@@ -22259,7 +22277,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L35",
-      "community": 130,
+      "community": 16,
       "norm_label": "regionmap",
       "id": "data_regions_regionmap"
     },
@@ -22964,9 +22982,9 @@
       "source_file": ".claude/settings.json",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_settings_json",
-      "target": "claude_settings_permissions",
-      "confidence_score": 1.0
+      "target": "claude_settings_permissions"
     },
     {
       "relation": "contains",
@@ -22984,9 +23002,9 @@
       "source_file": ".claude/settings.json",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_settings_permissions",
-      "target": "claude_settings_permissions_allow",
-      "confidence_score": 1.0
+      "target": "claude_settings_permissions_allow"
     },
     {
       "relation": "contains",
@@ -41854,12 +41872,23 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/workflows/hooks/validate-cart-completion.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_backend_src_workflows_hooks_validate_cart_completion_ts",
+      "target": "apps_backend_src_modules_accountability_index_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "apps/backend/src/workflows/__tests__/resolve-dispute-escalation.unit.spec.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_workflows_tests_resolve_dispute_escalation_unit_spec_ts",
-      "target": "apps_backend_src_modules_accountability_index_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_accountability_index_ts"
     },
     {
       "relation": "imports_from",
@@ -41926,6 +41955,17 @@
       "confidence_score": 1.0,
       "source": "apps_backend_src_api_store_payment_methods_route_ts",
       "target": "accountability_index_prepay_locked_states"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/workflows/hooks/validate-cart-completion.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_backend_src_workflows_hooks_validate_cart_completion_ts",
+      "target": "accountability_index_prepay_locked_states",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -42035,6 +42075,17 @@
       "confidence_score": 1.0,
       "source": "apps_backend_src_workflows_resolve_dispute_ts",
       "target": "apps_backend_src_modules_accountability_service_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/workflows/hooks/validate-cart-completion.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "apps_backend_src_workflows_hooks_validate_cart_completion_ts",
+      "target": "apps_backend_src_modules_accountability_service_ts",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -45933,9 +45984,9 @@
       "source_file": "apps/backend/src/api/admin/dispatch/orders/[id]/route.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_dispatch_orders_id_route_ts",
-      "target": "apps_backend_src_lib_delivery_actions_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_lib_delivery_actions_ts"
     },
     {
       "relation": "imports",
@@ -45944,9 +45995,9 @@
       "source_file": "apps/backend/src/api/admin/dispatch/orders/[id]/route.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_dispatch_orders_id_route_ts",
-      "target": "lib_delivery_actions_confirmdelivery",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_confirmdelivery"
     },
     {
       "relation": "imports",
@@ -45955,9 +46006,9 @@
       "source_file": "apps/backend/src/api/admin/dispatch/orders/[id]/route.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_dispatch_orders_id_route_ts",
-      "target": "lib_delivery_actions_recordrefusal",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_recordrefusal"
     },
     {
       "relation": "contains",
@@ -47754,9 +47805,9 @@
       "source_file": "apps/backend/src/workflows/__tests__/resolve-dispute-escalation.unit.spec.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_workflows_tests_resolve_dispute_escalation_unit_spec_ts",
-      "target": "apps_backend_src_workflows_resolve_dispute_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_workflows_resolve_dispute_ts"
     },
     {
       "relation": "imports",
@@ -47765,9 +47816,9 @@
       "source_file": "apps/backend/src/workflows/__tests__/resolve-dispute-escalation.unit.spec.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_workflows_tests_resolve_dispute_escalation_unit_spec_ts",
-      "target": "workflows_resolve_dispute_applybuyerfaultescalation",
-      "confidence_score": 1.0
+      "target": "workflows_resolve_dispute_applybuyerfaultescalation"
     },
     {
       "relation": "contains",
@@ -47883,12 +47934,22 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/workflows/hooks/validate-cart-completion.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "apps_backend_src_workflows_hooks_validate_cart_completion_ts",
+      "target": "hooks_validate_cart_completion_accountability",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "apps/backend/src/workflows/__tests__/resolve-dispute-escalation.unit.spec.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_workflows_tests_resolve_dispute_escalation_unit_spec_ts",
-      "target": "tests_resolve_dispute_escalation_unit_spec_now",
-      "confidence_score": 1.0
+      "target": "tests_resolve_dispute_escalation_unit_spec_now"
     },
     {
       "relation": "contains",
@@ -47896,9 +47957,9 @@
       "source_file": "apps/backend/src/workflows/__tests__/resolve-dispute-escalation.unit.spec.ts",
       "source_location": "L36",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_workflows_tests_resolve_dispute_escalation_unit_spec_ts",
-      "target": "tests_resolve_dispute_escalation_unit_spec_r",
-      "confidence_score": 1.0
+      "target": "tests_resolve_dispute_escalation_unit_spec_r"
     },
     {
       "relation": "contains",
@@ -48081,9 +48142,9 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
-      "target": "lib_delivery_actions_touchlastcleanorder",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_touchlastcleanorder"
     },
     {
       "relation": "contains",
@@ -48132,9 +48193,9 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L150",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_delivery_actions_confirmdelivery",
-      "target": "lib_delivery_actions_touchlastcleanorder",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_touchlastcleanorder"
     },
     {
       "relation": "contains",
@@ -49811,26 +49872,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2010",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_notificationstatusenum"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2015",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_notification"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
       "source_location": "L1776",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -49971,26 +50012,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L124",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_workflowexecutionstateenum"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L133",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_workflowexecution"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
       "source_location": "L2038",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -50086,6 +50107,46 @@
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
       "target": "types_query_entry_points_d_refund"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2010",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_notificationstatusenum"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2015",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_notification"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L124",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_workflowexecutionstateenum"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L133",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_workflowexecution"
     },
     {
       "relation": "contains",
@@ -55389,5 +55450,5 @@
       "source_file": "apps/backend/src/workflows/README.md"
     }
   ],
-  "built_at_commit": "40bef1a7377f7040a3f66a361799a722a9e21a61"
+  "built_at_commit": "c11b5828e0cad9f318a7174627f8dfb5e80cccfd"
 }
