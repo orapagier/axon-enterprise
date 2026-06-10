@@ -42,6 +42,7 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     hub_id?: string
     status?: string
     notes?: string | null
+    pin?: string
   }
 
   const update: Record<string, unknown> = { id }
@@ -49,6 +50,7 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
   if (body.phone !== undefined) update.phone = body.phone
   if (body.hub_id !== undefined) update.hub_id = body.hub_id
   if (body.notes !== undefined) update.notes = body.notes
+  if (body.pin !== undefined) update.pin_hash = body.pin ? hashPin(body.pin) : null
   if (body.status !== undefined) {
     if (!VALID_STATUSES.includes(body.status)) {
       res.status(400).json({ error: "Invalid status" })
@@ -58,5 +60,5 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
   }
 
   const updated = await riders.updateRiders(update)
-  res.json({ rider: updated })
+  res.json({ rider: { ...updated, pin_hash: undefined } })
 }
