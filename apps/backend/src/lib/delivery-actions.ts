@@ -21,6 +21,42 @@ type RefusalDispute = Awaited<
   ReturnType<AccountabilityModuleService["listRefusalDisputes"]>
 >[number]
 
+/**
+ * Stamp the buyer's `last_clean_order_at` on a completed delivery. This feeds
+ * the clean-order-tick recovery path (warned → normal after 6 clean months) —
+ * without it a warned buyer could never recover. Only existing status rows are
+ * touched: a buyer without one has no strikes, so there is nothing to recover.
+ * Best-effort: an accountability hiccup must not fail a delivery that is
+ * already marked and ledgered.
+ */
+async function touchLastCleanOrder(
+  container: MedusaContainer,
+  customerId: string
+): Promise<void> {
+  try {
+    const accountability: AccountabilityModuleService = container.resolve(
+      ACCOUNTABILITY_MODULE
+    )
+    const [status] = await accountability.listBuyerAccountStatuses(
+      { customer_id: customerId },
+      { take: 1 }
+    )
+    if (status) {
+      await accountability.updateBuyerAccountStatuses({
+        id: status.id,
+        last_clean_order_at: new Date(),
+      })
+    }
+  } catch (err) {
+    const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
+    logger.warn(
+      `Could not stamp last_clean_order_at for customer ${customerId}: ${
+        (err as Error).message
+      }`
+    )
+  }
+}
+
 export type ConfirmDeliveryResult =
   | {
       ok: true
