@@ -1,16 +1,16 @@
 # Graph Report - freshhub  (2026-06-10)
 
 ## Corpus Check
-- 456 files · ~195,742 words
+- 456 files · ~196,120 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2483 nodes · 3156 edges · 272 communities (209 shown, 63 thin omitted)
+- 2483 nodes · 3156 edges · 274 communities (208 shown, 66 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 30 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `82f547e7`
+- Built from commit: `cee9bd19`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -213,9 +213,11 @@
 - [[_COMMUNITY_Community 263|Community 263]]
 - [[_COMMUNITY_Community 264|Community 264]]
 - [[_COMMUNITY_Community 265|Community 265]]
+- [[_COMMUNITY_Community 266|Community 266]]
 - [[_COMMUNITY_Community 267|Community 267]]
 - [[_COMMUNITY_Community 268|Community 268]]
 - [[_COMMUNITY_Community 269|Community 269]]
+- [[_COMMUNITY_Community 270|Community 270]]
 - [[_COMMUNITY_Community 272|Community 272]]
 - [[_COMMUNITY_Community 273|Community 273]]
 - [[_COMMUNITY_Community 274|Community 274]]
@@ -249,7 +251,7 @@
 - **MedusaContainer Dependency Injection Consumers** — api_readme, subscribers_readme, jobs_readme, freshhub_dependency_injection [EXTRACTED 1.00]
 - **Workflow Execution Contexts** — workflows_readme, api_readme, subscribers_readme, jobs_readme [EXTRACTED 1.00]
 
-## Communities (272 total, 63 thin omitted)
+## Communities (274 total, 66 thin omitted)
 
 ### Community 0 - "Backend Type System"
 Cohesion: 0.01
@@ -416,8 +418,8 @@ Cohesion: 0.4
 Nodes (4): name, namespaces, nativeEnums, tables
 
 ### Community 119 - "Micro Community 119"
-Cohesion: 0.1
-Nodes (11): GET(), CodLedgerModuleService, GET(), getCustomerId(), getCustomerId(), POST(), getOrderCashState(), OrderCashState (+3 more)
+Cohesion: 0.6
+Nodes (3): GET(), getOrderCashState(), OrderCashState
 
 ### Community 130 - "Community 130"
 Cohesion: 0.1
@@ -544,8 +546,8 @@ Cohesion: 0.67
 Nodes (3): getProfileCompletion(), Overview(), OverviewProps
 
 ### Community 164 - "Community 164"
-Cohesion: 0.11
-Nodes (10): GET(), POST(), UpsertRow, validateRow(), DeliveryFeesModuleService, FeeRow, TAGUM_FEES, HubBarangayFee (+2 more)
+Cohesion: 0.08
+Nodes (16): GET(), POST(), UpsertRow, validateRow(), DeliveryFeesModuleService, beforeCutoff(), GET(), nowInHubTimezone() (+8 more)
 
 ### Community 165 - "Community 165"
 Cohesion: 0.17
@@ -592,8 +594,8 @@ Cohesion: 0.15
 Nodes (13): 8. Storefront: hub cookie + middleware, Account page widget: `apps/storefront/src/modules/account/components/home-hub-section.tsx`, code:ts ("use server"), code:ts (const BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_U), code:block21 (POST /store/customers/me/hub  { slug: "tagum" }), code:ts (import { MedusaRequest, MedusaResponse } from "@medusajs/fra), Cookie, Data fetch: `apps/storefront/src/modules/hub/data/hubs.ts` (+5 more)
 
 ### Community 186 - "Community 186"
-Cohesion: 0.21
-Nodes (10): POST(), isDuplicateCodTransaction(), POST(), CodTx, recordOtcCollected(), RecordOtcResult, POST(), actorId() (+2 more)
+Cohesion: 0.11
+Nodes (14): POST(), isDuplicateCodTransaction(), CodLedgerModuleService, POST(), CodTx, recordOtcCollected(), RecordOtcResult, BuyerWallet (+6 more)
 
 ### Community 187 - "Community 187"
 Cohesion: 0.18
@@ -640,8 +642,8 @@ Cohesion: 0.25
 Nodes (5): AccountStatus, Dispute, Reason, REASON_LABEL, Resolution
 
 ### Community 200 - "Community 200"
-Cohesion: 0.22
-Nodes (4): config, getCustomerId(), POST(), VALID_REASONS
+Cohesion: 0.32
+Nodes (3): getCustomerId(), POST(), VALID_REASONS
 
 ### Community 201 - "Community 201"
 Cohesion: 0.22
@@ -718,10 +720,6 @@ Nodes (7): CartLine, config, CustomerHit, OtcCounterPage(), peso(), pesoMajor(),
 ### Community 232 - "Community 232"
 Cohesion: 0.5
 Nodes (4): 7. Seed script, `apps/backend/src/migration-scripts/seed-hubs.ts`, code:ts (/**), code:bash (cd apps/backend)
-
-### Community 233 - "Community 233"
-Cohesion: 0.36
-Nodes (6): beforeCutoff(), GET(), nowInHubTimezone(), parseHHMM(), Tier, TierOption
 
 ### Community 240 - "Community 240"
 Cohesion: 0.13
@@ -818,7 +816,7 @@ Nodes (4): getMyListing(), EditListingPage(), metadata, Props
 ## Knowledge Gaps
 - **1078 isolated node(s):** `name`, `private`, `packageManager`, `node`, `dev` (+1073 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **63 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **66 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
