@@ -23,10 +23,12 @@ const Payment = ({
   cart,
   availablePaymentMethods,
   codNotice = null,
+  checkoutBlocked = false,
 }: {
   cart: HttpTypes.StoreCart
   availablePaymentMethods: { id: string }[]
   codNotice?: string | null
+  checkoutBlocked?: boolean
 }) => {
   const activeSession = cart.payment_collection?.payment_sessions?.find(
     (paymentSession) => paymentSession.status === "pending"
