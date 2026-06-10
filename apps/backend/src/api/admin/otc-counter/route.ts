@@ -168,7 +168,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // 4. Record the cash in the ledger (the source of truth for OTC cash).
+  // 5. Record the cash in the ledger (the source of truth for OTC cash).
   const ledgerResult = await recordOtcCollected(req.scope, {
     orderId,
     customerId: order.customer_id ?? WALKIN_CUSTOMER,
