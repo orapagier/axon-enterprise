@@ -20,7 +20,11 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     order: { created_at: "DESC" },
     take: 500,
   })
-  res.json({ riders: list, count: list.length })
+  // Never echo the pin/hash back.
+  res.json({
+    riders: list.map((r) => ({ ...r, pin_hash: undefined })),
+    count: list.length,
+  })
 }
 
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
