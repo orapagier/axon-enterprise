@@ -17,8 +17,13 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     req.scope.resolve(DISPATCH_MODULE)
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
 
+  // `delivery_status: pending` is filtered in the DB, not in memory: a rider
+  // accumulates delivered/refused rows over time, and a post-fetch filter on a
+  // take-limited page would eventually push today's pending orders out of the
+  // window. The batch-status filter stays in memory (relation filter), but
+  // pending rows are only ever one or two batches' worth.
   const dispatchOrders = await dispatchService.listDispatchOrders(
-    { rider_id: riderId },
+    { rider_id: riderId, delivery_status: "pending" },
     {
       take: 200,
       order: { manifest_position: "ASC" },
@@ -29,10 +34,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const active = dispatchOrders.filter((o) => {
     const status = (o as unknown as { dispatch_batch?: { status?: string } })
       .dispatch_batch?.status
-    return (
-      (status === "locked" || status === "in_transit") &&
-      o.delivery_status === "pending"
-    )
+    return status === "locked" || status === "in_transit"
   })
 
   const orderIds = active.map((o) => o.order_id)

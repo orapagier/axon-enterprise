@@ -3,6 +3,7 @@ import { DISPATCH_MODULE } from "../../../../../modules/dispatch"
 import type DispatchModuleService from "../../../../../modules/dispatch/service"
 import { RIDER_MODULE } from "../../../../../modules/rider"
 import type RiderModuleService from "../../../../../modules/rider/service"
+import { confirmDelivery, recordRefusal } from "../../../../../lib/delivery-actions"
 
 const VALID_DELIVERY_STATUSES = [
   "pending",
@@ -18,6 +19,11 @@ const VALID_DELIVERY_STATUSES = [
  *
  * Used by the admin UI to assign a rider, reorder a manifest, or mark a
  * delivery outcome.
+ *
+ * `delivered` and `refused` are not plain field writes: they go through the
+ * shared confirmDelivery / recordRefusal helpers so the COD ledger row and the
+ * refusal dispute are never skipped (same invariants as the dedicated
+ * /admin/dispatch-orders/:id/{delivered,refusal} routes).
  */
 export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
   const service: DispatchModuleService = req.scope.resolve(DISPATCH_MODULE)
@@ -62,17 +68,47 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
   if (body.manifest_position !== undefined) {
     update.manifest_position = body.manifest_position
   }
-  if (body.delivery_status !== undefined) {
-    if (!VALID_DELIVERY_STATUSES.includes(body.delivery_status)) {
-      res.status(400).json({ error: "Invalid delivery_status" })
+
+  if (
+    body.delivery_status !== undefined &&
+    !VALID_DELIVERY_STATUSES.includes(body.delivery_status)
+  ) {
+    res.status(400).json({ error: "Invalid delivery_status" })
+    return
+  }
+  const outcome =
+    body.delivery_status === "delivered" || body.delivery_status === "refused"
+      ? body.delivery_status
+      : null
+  if (body.delivery_status !== undefined && !outcome) {
+    update.delivery_status = body.delivery_status
+  }
+
+  // Apply the plain field updates first so a rider assigned in the same PATCH
+  // is visible to the outcome helpers below.
+  if (Object.keys(update).length > 1) {
+    await service.updateDispatchOrders(update)
+  }
+
+  if (outcome === "delivered") {
+    const result = await confirmDelivery(req.scope, {
+      dispatchOrderId: id,
+      recordedBy:
+        (req as unknown as { auth_context?: { actor_id?: string } })
+          .auth_context?.actor_id ?? null,
+    })
+    if (!result.ok) {
+      res.status(result.status).json({ error: result.error })
       return
     }
-    update.delivery_status = body.delivery_status
-    if (body.delivery_status === "delivered") {
-      update.delivered_at = new Date()
+  } else if (outcome === "refused") {
+    const result = await recordRefusal(req.scope, { dispatchOrderId: id })
+    if (!result.ok) {
+      res.status(result.status).json({ error: result.error })
+      return
     }
   }
 
-  const updated = await service.updateDispatchOrders(update)
+  const [updated] = await service.listDispatchOrders({ id }, { take: 1 })
   res.json({ order: updated })
 }

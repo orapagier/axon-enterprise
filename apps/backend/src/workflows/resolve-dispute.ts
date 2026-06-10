@@ -4,7 +4,10 @@ import {
   StepResponse,
   WorkflowResponse,
 } from "@medusajs/framework/workflows-sdk"
-import { ACCOUNTABILITY_MODULE } from "../modules/accountability"
+import {
+  ACCOUNTABILITY_MODULE,
+  WARNED_RECOVERY_WINDOW_MS,
+} from "../modules/accountability"
 import type AccountabilityModuleService from "../modules/accountability/service"
 
 type Resolution =
@@ -31,7 +34,8 @@ const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000
 /**
  * Pure escalation rule used by the workflow and by tests.
  *
- *  strikes = 1 → warned
+ *  strikes = 1 → warned, recovery_eligible_at = now + 6 months (the clean
+ *                window the clean-order-tick job checks before recovery)
  *  strikes = 2 → prepay_locked_30d, state_until = now + 30d
  *  strikes ≥ 3 → prepay_locked_permanent
  */
@@ -42,6 +46,7 @@ export function applyBuyerFaultEscalation(
   strike_count: number
   state: AccountState
   state_until: Date | null
+  recovery_eligible_at: Date | null
 } {
   const nextStrikes = currentStrikes + 1
   if (nextStrikes >= 3) {
@@ -49,6 +54,7 @@ export function applyBuyerFaultEscalation(
       strike_count: nextStrikes,
       state: "prepay_locked_permanent",
       state_until: null,
+      recovery_eligible_at: null,
     }
   }
   if (nextStrikes === 2) {
@@ -56,6 +62,7 @@ export function applyBuyerFaultEscalation(
       strike_count: nextStrikes,
       state: "prepay_locked_30d",
       state_until: new Date(now.getTime() + THIRTY_DAYS_MS),
+      recovery_eligible_at: null,
     }
   }
   // first strike
@@ -63,6 +70,7 @@ export function applyBuyerFaultEscalation(
     strike_count: nextStrikes,
     state: "warned",
     state_until: null,
+    recovery_eligible_at: new Date(now.getTime() + WARNED_RECOVERY_WINDOW_MS),
   }
 }
 
@@ -73,6 +81,7 @@ type ResolveState = {
     strike_count: number
     state: AccountState
     state_until: Date | null
+    recovery_eligible_at: Date | null
   } | null
 }
 
@@ -115,6 +124,7 @@ const resolveStep = createStep(
           strike_count: escalation.strike_count,
           state: escalation.state,
           state_until: escalation.state_until,
+          recovery_eligible_at: escalation.recovery_eligible_at,
         })
       } else {
         await accountability.createBuyerAccountStatuses({
@@ -122,6 +132,7 @@ const resolveStep = createStep(
           strike_count: escalation.strike_count,
           state: escalation.state,
           state_until: escalation.state_until,
+          recovery_eligible_at: escalation.recovery_eligible_at,
         })
       }
     }
@@ -147,6 +158,12 @@ const resolveStep = createStep(
                 : typeof statusBefore.state_until === "string"
                   ? new Date(statusBefore.state_until)
                   : statusBefore.state_until,
+            recovery_eligible_at:
+              statusBefore.recovery_eligible_at == null
+                ? null
+                : typeof statusBefore.recovery_eligible_at === "string"
+                  ? new Date(statusBefore.recovery_eligible_at)
+                  : statusBefore.recovery_eligible_at,
           }
         : null,
     }
@@ -179,6 +196,7 @@ const resolveStep = createStep(
           strike_count: state.prior_status_snapshot.strike_count,
           state: state.prior_status_snapshot.state,
           state_until: state.prior_status_snapshot.state_until,
+          recovery_eligible_at: state.prior_status_snapshot.recovery_eligible_at,
         })
       } catch {
         // shrug
