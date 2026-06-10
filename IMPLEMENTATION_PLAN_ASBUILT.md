@@ -387,7 +387,9 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | **Membership expiry enforcement + renewal reminders** | ⚠️ partial (expiry stored, not enforced/notified) |
 | **Trader (B2B) pricing** | ❌ missing |
 | **Rider entity + admin CRUD + delivered→collect + strikes** | ✅ code-complete (Phase E, 2026-06-10) — needs `db:migrate` + runtime verify |
-| **Rider self-service auth / PWA** | ❌ missing (logic works admin-operated; needs auth design) |
+| **Rider self-service API** (login, manifest, delivered/refused) | ✅ code-complete (Phase E, 2026-06-10) — needs runtime verify |
+| **Rider PWA frontend** | ❌ missing (API ready; no rider-facing UI app yet) |
+| **Producer-payout remittance gate** (`cash-state` / `settled`) | ✅ primitive ready; payout disbursement itself a separate phase |
 | **Address → hub resolution** (multi-hub) | ⚠️ partial (city-name match, Tagum-only) |
 | Online / GCash payment | ⏸️ deferred (no PayMongo budget; OTC covers prepay at launch) |
 | QR codes / order labels | ⏸️ deferred (do not implement yet) |
