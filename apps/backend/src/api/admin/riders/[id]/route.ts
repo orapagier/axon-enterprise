@@ -48,7 +48,14 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
 
   const update: Record<string, unknown> = { id }
   if (body.full_name !== undefined) update.full_name = body.full_name
-  if (body.phone !== undefined) update.phone = body.phone
+  if (body.phone !== undefined) {
+    const [taken] = await riders.listRiders({ phone: body.phone }, { take: 1 })
+    if (taken && taken.id !== id) {
+      res.status(409).json({ error: "A rider with this phone already exists." })
+      return
+    }
+    update.phone = body.phone
+  }
   if (body.hub_id !== undefined) update.hub_id = body.hub_id
   if (body.notes !== undefined) update.notes = body.notes
   if (body.pin !== undefined) update.pin_hash = body.pin ? hashPin(body.pin) : null
