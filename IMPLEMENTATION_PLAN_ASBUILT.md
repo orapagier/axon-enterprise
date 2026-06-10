@@ -476,17 +476,22 @@ is also the foundation any future gig model would need.
 - [x] **Rider accountability (2026-06-10):** `rider-unremitted-tick` job
       (nightly) suspends an active rider whose unremitted balance exceeds
       `RIDER_UNREMITTED_LIMIT_CENTAVOS` (default ₱5,000). Recovery is admin-driven.
-- [ ] **Rider self-service auth + `/rider/*`** (phone+PIN login, manifest,
-      rider-driven delivered/refused). *Deferred — needs an auth-provider design
-      decision and runtime verification; the logic above already works
-      admin-operated.*
-- [ ] **Producer payout gated on remittance, not delivery.** *Blocked: producer
-      payout doesn't exist yet — wire the gate when payout lands.*
+- [x] **Rider self-service auth + `/rider/*` (2026-06-10):** self-contained HS256
+      rider token (no extra dep); `POST /rider/auth/login` (phone+PIN, scrypt
+      hash), `GET /rider/me`, `GET /rider/manifest` (their active batch orders),
+      `POST /rider/orders/:id/{delivered,refused}` (ownership-checked). Shared
+      `confirmDelivery` / `recordRefusal` helpers back both the rider and admin
+      routes. Admin rider create/update accept a `pin`.
 - [x] **Enforce suspension on assignment (2026-06-10):** `PATCH /admin/dispatch/orders/:id`
       and the `delivered` route reject assigning a non-`active` rider (409).
       Unassigning and completing in-flight deliveries stay allowed.
-- [ ] Aging refinement for the strike job (oldest unremitted > N days, not just a
-      balance threshold).
+- [x] **Aging refinement (2026-06-10):** strike job now suspends on balance
+      **or** oldest-unremitted age (per-order matched; `RIDER_UNREMITTED_AGING_DAYS`,
+      default 3).
+- [x] **Producer-payout gate primitive (2026-06-10):** `getOrderCashState` +
+      `GET /admin/orders/:id/cash-state` expose `settled` (OTC paid, or COD
+      collected **and** remitted). *The payout disbursement itself is a separate
+      phase; this is the gate it must read instead of "delivered".*
 
 ### Phase F — Multi-hub readiness
 **Problem:** hub resolution in `delivery-options` matches on `city` string and
