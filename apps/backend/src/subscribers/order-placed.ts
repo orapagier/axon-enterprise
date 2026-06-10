@@ -21,6 +21,24 @@ export default async function orderPlacedHandler({
     return
   }
 
+  // Walk-in OTC counter sales are paid + handed over at the hub; they must never
+  // join a rider dispatch batch. `createOrderWorkflow` doesn't emit `order.placed`
+  // today, so this is belt-and-suspenders — but it keeps the invariant explicit
+  // if order creation ever starts emitting the event.
+  const query = container.resolve(ContainerRegistrationKeys.QUERY)
+  const { data: metaRows } = await query.graph({
+    entity: "order",
+    fields: ["id", "metadata"],
+    filters: { id: orderId },
+  })
+  const saleChannel = (
+    metaRows[0] as { metadata?: { sale_channel?: string } | null } | undefined
+  )?.metadata?.sale_channel
+  if (saleChannel === "otc_counter") {
+    logger.info(`Order ${orderId} is an OTC counter sale; skipping dispatch.`)
+    return
+  }
+
   try {
     await assignOrderToDispatchWorkflow(container).run({
       input: { order_id: orderId },
