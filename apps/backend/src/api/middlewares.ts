@@ -118,6 +118,16 @@ export default defineMiddlewares({
       middlewares: [authenticate("user", ["session", "bearer"])],
     },
     {
+      matcher: "/admin/traders*",
+      method: ["GET", "POST"],
+      middlewares: [authenticate("user", ["session", "bearer"])],
+    },
+    {
+      matcher: "/store/trader-pricing",
+      method: ["GET"],
+      middlewares: [authenticate("customer", ["session", "bearer"])],
+    },
+    {
       matcher: "/admin/dispatch-orders/*/delivered",
       method: ["POST"],
       middlewares: [authenticate("user", ["session", "bearer"])],
