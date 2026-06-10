@@ -3,7 +3,7 @@ import {
   getPaymentEligibility,
   listCartPaymentMethods,
 } from "@lib/data/payment"
-import { isCod } from "@lib/constants"
+import { isCod, isOtc } from "@lib/constants"
 import { HttpTypes } from "@medusajs/types"
 import Addresses from "@modules/checkout/components/addresses"
 import Payment from "@modules/checkout/components/payment"
