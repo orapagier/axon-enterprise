@@ -1,6 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { RIDER_MODULE } from "../../../../modules/rider"
 import type RiderModuleService from "../../../../modules/rider/service"
+import { hashPin } from "../../../../modules/rider/pin"
 
 const VALID_STATUSES = ["active", "inactive", "suspended"]
 
