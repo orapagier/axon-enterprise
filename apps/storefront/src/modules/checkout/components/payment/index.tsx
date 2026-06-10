@@ -150,13 +150,26 @@ const Payment = ({
         <div className={isOpen ? "block" : "hidden"}>
           {codNotice && (
             <Text
-              className="txt-medium text-ui-fg-subtle mb-4 p-3 rounded-md bg-ui-bg-subtle border border-ui-border-base"
+              className={
+                checkoutBlocked
+                  ? "txt-medium text-ui-fg-base mb-4 p-3 rounded-md bg-ui-bg-base border border-ui-border-error"
+                  : "txt-medium text-ui-fg-subtle mb-4 p-3 rounded-md bg-ui-bg-subtle border border-ui-border-base"
+              }
               data-testid="cod-unavailable-notice"
             >
               {codNotice}
             </Text>
           )}
-          {!paidByGiftcard && availablePaymentMethods?.length && (
+          {checkoutBlocked && (
+            <Text
+              className="txt-medium text-ui-fg-subtle"
+              data-testid="checkout-blocked-notice"
+            >
+              No online payment method is available on your account. Please
+              complete your purchase in person at the hub counter.
+            </Text>
+          )}
+          {!checkoutBlocked && !paidByGiftcard && availablePaymentMethods?.length && (
             <>
               <RadioGroup
                 value={selectedPaymentMethod}
