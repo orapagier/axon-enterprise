@@ -31,9 +31,14 @@
 > **▶ Current build state (2026-06-10) — read this first if resuming.**
 > - **Code-complete this session (TypeScript-clean across the whole backend, but
 >   NOT yet runtime-verified — no DB/stack was run):**
->   - **Phase A** — OTC payment provider (`pp_otc_freshhub`), `/store/payment-methods`
->     eligibility, prepay-lock → OTC fallthrough in storefront checkout, `otc_collected`
->     ledger type + `POST /admin/orders/:id/otc-collected`, reconcile + admin page updated.
+>   - **Phase A (walk-in OTC, reframed 2026-06-10)** — OTC is **in-person only**, not an
+>     online method. Locked buyers are **blocked from online checkout** (`/store/payment-methods`
+>     → `checkout_blocked`; storefront shows "buy in person at the hub"). New **OTC Counter**
+>     register: `POST/GET /admin/otc-counter` creates a paid, dispatch-skipped order
+>     (`metadata.sale_channel="otc_counter"`) + `otc_collected` ledger row, with an
+>     `src/admin/routes/otc-counter` page. `pp_otc_freshhub` is repurposed as the counter
+>     cash provider; `recordOtcCollected` helper (`src/lib/otc-sale.ts`) is shared with the
+>     legacy `POST /admin/orders/:id/otc-collected` (deprecated).
 >   - **Phase E** — `rider` module + admin CRUD, `/rider/*` self-service (HS256 token,
 >     scrypt PIN), `POST /admin/dispatch-orders/:id/delivered` (auto `cod_collected`),
 >     shared `src/lib/delivery-actions.ts`, suspension-on-assignment, `rider-unremitted-tick`
