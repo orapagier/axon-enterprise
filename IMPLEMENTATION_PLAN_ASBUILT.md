@@ -338,6 +338,7 @@ POST   /admin/dispatch-orders/:id/delivered          mark delivered + auto cod_c
 GET    /admin/disputes ; POST /admin/disputes/:id/resolve
 GET/POST /admin/riders ; GET/PATCH /admin/riders/:id  rider management
 POST   /admin/orders/:id/cod-collected | cod-remitted | otc-collected
+GET    /admin/orders/:id/cash-state                  settled? (payout gate)
 GET    /admin/cod-reconcile                          cash reconciliation (rider + OTC)
 GET/POST /admin/memberships ; POST /admin/memberships/:id  (approve|reject|cancel)
 GET    /admin/sellers ; POST /admin/sellers/:id/verify
