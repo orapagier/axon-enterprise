@@ -123,6 +123,18 @@ export default defineMiddlewares({
       middlewares: [authenticate("user", ["session", "bearer"])],
     },
     {
+      // Public rider login — more specific than /rider/* so it gets NO auth.
+      matcher: "/rider/auth/login",
+      method: ["POST"],
+      middlewares: [],
+    },
+    {
+      // All other rider endpoints require a valid rider token.
+      matcher: "/rider/*",
+      method: ["GET", "POST", "PATCH", "DELETE"],
+      middlewares: [authenticateRider],
+    },
+    {
       matcher: "/store/customers/me/hub",
       method: ["POST", "DELETE"],
       middlewares: [authenticate("customer", ["session", "bearer"])],
