@@ -8,17 +8,18 @@ import type AccountabilityModuleService from "../../../modules/accountability/se
 /**
  * GET /store/payment-methods
  *
- * Returns the payment methods available to the current buyer at checkout.
+ * Returns the online payment eligibility for the current buyer at checkout.
  *
- * - COD is hidden for buyers in a `prepay_locked_*` accountability state (after
- *   repeated refusals). They keep access to the store but must pay OTC.
- * - OTC (walk-in, pay at the hub counter) is always available — it is the cash
- *   prepay rail, so no online/PayMongo integration is needed at launch.
+ * Reframe 2026-06-10: OTC is **walk-in only**, not an online payment method, so
+ * it is no longer offered here. The only online method is COD, which is hidden
+ * for buyers in a `prepay_locked_*` accountability state (after repeated
+ * refusals). A locked buyer therefore has **no online method** — checkout is
+ * blocked and they are told to buy in person at the hub (OTC counter).
  *
- * Guests (no customer session) get both methods; strikes are keyed on a
- * customer id, so an anonymous cart can't be locked.
+ * Guests (no customer session) get COD; strikes are keyed on a customer id, so
+ * an anonymous cart can't be locked.
  *
- * The storefront uses this to render the right options. `payment-cod` also
+ * The storefront uses this to render the right state. `payment-cod` also
  * enforces the lock at `authorizePayment` as a safety net, so a stale UI can
  * never actually push a locked buyer through COD.
  */
