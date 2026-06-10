@@ -140,10 +140,30 @@ const customModules: Record<string, unknown>[] = [
           id: 'freshhub',
         },
         {
-          // OTC (walk-in, pay at the hub counter). The cash prepay rail for
-          // prepay-locked buyers — always authorizable, no accountability gate.
+          // OTC (walk-in, pay at the hub counter). Reframed 2026-06-10: OTC is
+          // walk-in ONLY — authorizePayment always rejects so the raw store API
+          // can't place an unpaid online "OTC" order. The counter flow pays via
+          // markPaymentCollectionAsPaid and never calls this provider.
           resolve: './src/modules/payment-otc',
           id: 'freshhub',
+        },
+      ],
+    },
+  },
+  {
+    // Transactional email (Phase B). Resend over plain fetch; without
+    // RESEND_API_KEY the provider logs + no-ops so dev runs stay quiet.
+    resolve: '@medusajs/medusa/notification',
+    options: {
+      providers: [
+        {
+          resolve: './src/modules/resend-notification',
+          id: 'resend',
+          options: {
+            channels: ['email'],
+            api_key: process.env.RESEND_API_KEY,
+            from: process.env.EMAIL_FROM,
+          },
         },
       ],
     },
