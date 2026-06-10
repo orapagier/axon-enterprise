@@ -33,6 +33,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     hub_id?: string
     status?: "active" | "inactive" | "suspended"
     notes?: string
+    pin?: string
   }
 
   if (!body.full_name || !body.phone || !body.hub_id) {
