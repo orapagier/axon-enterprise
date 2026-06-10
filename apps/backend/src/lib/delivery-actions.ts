@@ -115,7 +115,7 @@ export async function confirmDelivery(
     ],
     filters: { id: dispatchOrder.order_id },
   })
-  const order = orderRows[0] as
+  const order = orderRows[0] as unknown as
     | {
         id: string
         display_id: number
@@ -263,7 +263,7 @@ export async function recordRefusal(
     fields: ["id", "display_id", "email", "customer_id"],
     filters: { id: dispatchOrder.order_id },
   })
-  const order = orderRows[0] as
+  const order = orderRows[0] as unknown as
     | {
         id: string
         display_id: number

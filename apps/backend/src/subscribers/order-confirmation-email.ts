@@ -22,7 +22,7 @@ export default async function orderConfirmationEmailHandler({
     fields: ["id", "display_id", "email", "total", "summary.*", "metadata"],
     filters: { id: orderId },
   })
-  const order = data[0] as
+  const order = data[0] as unknown as
     | {
         display_id: number
         email: string | null

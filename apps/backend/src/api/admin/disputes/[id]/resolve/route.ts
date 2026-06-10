@@ -52,7 +52,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       fields: ["id", "display_id", "email"],
       filters: { id: (result as { order_id: string }).order_id },
     })
-    const order = orderRows[0] as
+    const order = orderRows[0] as unknown as
       | { display_id: number; email: string | null }
       | undefined
     if (order) {

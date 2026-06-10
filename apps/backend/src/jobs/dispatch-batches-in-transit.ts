@@ -116,7 +116,10 @@ async function notifyBatchInTransit(
     fields: ["id", "display_id", "email"],
     filters: { id: dispatchOrders.map((o) => o.order_id) },
   })
-  for (const order of orders as { display_id: number; email: string | null }[]) {
+  for (const order of orders as unknown as {
+    display_id: number
+    email: string | null
+  }[]) {
     await sendEmail(container, {
       to: order.email,
       template: "order-in-transit",

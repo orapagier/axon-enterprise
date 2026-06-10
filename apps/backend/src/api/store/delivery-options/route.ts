@@ -155,7 +155,12 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     const cust = customers[0] as
       | { metadata: Record<string, unknown> | null }
       | undefined
-    isMember = cust?.metadata?.membership_status === "active"
+    // Active AND unexpired — the nightly expiry job cancels stale members,
+    // but the tier gate must not honor an expiry the job hasn't reached yet.
+    const expiresAt = Number(cust?.metadata?.membership_expires_at)
+    isMember =
+      cust?.metadata?.membership_status === "active" &&
+      (!Number.isFinite(expiresAt) || expiresAt <= 0 || expiresAt > Date.now())
   }
 
   // 5. Time of day vs cutoff.
