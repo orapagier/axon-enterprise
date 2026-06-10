@@ -202,6 +202,31 @@ const TEMPLATES: Record<string, (d: Data) => BuiltEmail> = {
     ),
   }),
 
+  "trader-approved": (d) => ({
+    subject: `Your trader account is approved — ${d.discount_percent}% off`,
+    html: layout(
+      `Trader pricing activated`,
+      p(
+        `Your trader (bulk-buyer) account has been approved with a negotiated discount of <strong>${d.discount_percent}%</strong>, applied automatically at checkout.`
+      ) +
+        (d.min_order_note
+          ? p(`Minimum order: <strong>${d.min_order_note}</strong>.`)
+          : "") +
+        p(`The discount shows up on your cart total — no code needed.`)
+    ),
+  }),
+
+  "trader-revoked": () => ({
+    subject: `Trader pricing deactivated`,
+    html: layout(
+      `Trader pricing deactivated`,
+      p(`Your negotiated trader discount has been deactivated.`) +
+        p(
+          `You can still order at regular prices. Contact your hub for details.`
+        )
+    ),
+  }),
+
   "membership-expired": () => ({
     subject: `Your membership has expired`,
     html: layout(
