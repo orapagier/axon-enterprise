@@ -3,6 +3,7 @@ import { RIDER_MODULE } from "../../../modules/rider"
 import type RiderModuleService from "../../../modules/rider/service"
 import { HUB_MODULE } from "../../../modules/hub"
 import type HubModuleService from "../../../modules/hub/service"
+import { hashPin } from "../../../modules/rider/pin"
 
 /**
  * GET  /admin/riders?hub_id=&status=   — list riders (optionally scoped)
