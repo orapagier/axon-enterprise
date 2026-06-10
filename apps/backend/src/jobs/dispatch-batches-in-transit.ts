@@ -13,6 +13,7 @@ import { DISPATCH_MODULE } from "../modules/dispatch"
 import type DispatchModuleService from "../modules/dispatch/service"
 import { HUB_MODULE } from "../modules/hub"
 import type HubModuleService from "../modules/hub/service"
+import { sendEmail } from "../lib/notify"
 
 export const config = {
   name: "dispatch-batches-in-transit",
@@ -82,10 +83,44 @@ export default async function dispatchBatchesInTransit(
       logger.info(
         `Dispatch batch ${batch.id} (hub ${batch.hub_id}) → in_transit`
       )
+      await notifyBatchInTransit(container, batch.id)
     }
   }
 
   logger.info(
     `dispatch-batches-in-transit finished: ${transitioned} batches transitioned.`
   )
+}
+
+/**
+ * Phase B — "your order is on the way" email to every pending order in a batch
+ * that just went out. Best-effort per recipient; a mail failure never blocks
+ * the batch transition (sendEmail swallows + logs).
+ */
+async function notifyBatchInTransit(
+  container: MedusaContainer,
+  batchId: string
+) {
+  const dispatchService: DispatchModuleService =
+    container.resolve(DISPATCH_MODULE)
+  const query = container.resolve(ContainerRegistrationKeys.QUERY)
+
+  const dispatchOrders = await dispatchService.listDispatchOrders(
+    { dispatch_batch_id: batchId, delivery_status: "pending" },
+    { take: 200 }
+  )
+  if (!dispatchOrders.length) return
+
+  const { data: orders } = await query.graph({
+    entity: "order",
+    fields: ["id", "display_id", "email"],
+    filters: { id: dispatchOrders.map((o) => o.order_id) },
+  })
+  for (const order of orders as { display_id: number; email: string | null }[]) {
+    await sendEmail(container, {
+      to: order.email,
+      template: "order-in-transit",
+      data: { display_id: order.display_id },
+    })
+  }
 }

@@ -1,5 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
+import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import resolveDisputeWorkflow from "../../../../../workflows/resolve-dispute"
+import { sendEmail } from "../../../../../lib/notify"
 
 const VALID_RESOLUTIONS = [
   "buyer_fault",
@@ -43,6 +45,24 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         resolved_by: actorId,
       },
     })
+    // Phase B — tell the buyer how it ended (best-effort).
+    const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
+    const { data: orderRows } = await query.graph({
+      entity: "order",
+      fields: ["id", "display_id", "email"],
+      filters: { id: (result as { order_id: string }).order_id },
+    })
+    const order = orderRows[0] as
+      | { display_id: number; email: string | null }
+      | undefined
+    if (order) {
+      await sendEmail(req.scope, {
+        to: order.email,
+        template: "dispute-resolved",
+        data: { display_id: order.display_id, resolution: body.resolution },
+      })
+    }
+
     res.json({ dispute: result })
   } catch (err) {
     const msg = (err as Error).message

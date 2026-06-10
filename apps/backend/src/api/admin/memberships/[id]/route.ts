@@ -1,5 +1,6 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
+import { sendEmail } from "../../../../lib/notify"
 
 /**
  * POST /admin/memberships/:id
@@ -85,7 +86,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
   const customerModule = req.scope.resolve(Modules.CUSTOMER)
   const customer = await customerModule.retrieveCustomer(customerId, {
-    select: ["id", "metadata"],
+    select: ["id", "email", "metadata"],
   })
   if (!customer) {
     res.status(404).json({ error: "Customer not found" })
@@ -141,6 +142,9 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       [MEMBERSHIP_META.requestedAt]: null,
       [MEMBERSHIP_META.paymentMethod]: null,
       [MEMBERSHIP_META.paymentReference]: null,
+      // Fresh membership term — re-arm the expiry reminder emails (Phase B).
+      membership_reminder_30_sent: null,
+      membership_reminder_7_sent: null,
       [MEMBERSHIP_META.events]: appendEvent(existing, event),
     }
   } else if (body.action === "reject") {
@@ -204,6 +208,24 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   } catch {
     /* group lookup/create/assign/remove failed — ignore, metadata wins */
   }
+
+  // Phase B — membership status email (best-effort, never blocks the action).
+  await sendEmail(req.scope, {
+    to: customer.email,
+    template:
+      body.action === "approve"
+        ? "membership-approved"
+        : body.action === "reject"
+          ? "membership-rejected"
+          : "membership-cancelled",
+    data:
+      body.action === "approve"
+        ? {
+            tier: updatedMetadata[MEMBERSHIP_META.tier],
+            expires_at_ms: updatedMetadata[MEMBERSHIP_META.expiresAt],
+          }
+        : {},
+  })
 
   res.json({
     ok: true,

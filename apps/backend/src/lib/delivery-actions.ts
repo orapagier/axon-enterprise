@@ -7,6 +7,7 @@ import type CodLedgerModuleService from "../modules/cod-ledger/service"
 import { isDuplicateCodTransaction } from "../modules/cod-ledger/is-duplicate"
 import { ACCOUNTABILITY_MODULE } from "../modules/accountability"
 import type AccountabilityModuleService from "../modules/accountability/service"
+import { sendEmail } from "./notify"
 
 /**
  * Shared delivery-outcome logic, used by both the admin routes (cashier on the
@@ -103,12 +104,22 @@ export async function confirmDelivery(
   // route hit, where `total` alone read 0).
   const { data: orderRows } = await query.graph({
     entity: "order",
-    fields: ["id", "customer_id", "total", "summary.*", "metadata"],
+    fields: [
+      "id",
+      "display_id",
+      "email",
+      "customer_id",
+      "total",
+      "summary.*",
+      "metadata",
+    ],
     filters: { id: dispatchOrder.order_id },
   })
   const order = orderRows[0] as
     | {
         id: string
+        display_id: number
+        email: string | null
         customer_id: string | null
         total: number | string
         summary?: { current_order_total?: number } | null
@@ -135,7 +146,8 @@ export async function confirmDelivery(
     }
   }
 
-  if (dispatchOrder.delivery_status !== "delivered") {
+  const newlyDelivered = dispatchOrder.delivery_status !== "delivered"
+  if (newlyDelivered) {
     await dispatchService.updateDispatchOrders({
       id: args.dispatchOrderId,
       delivery_status: "delivered",
@@ -195,6 +207,18 @@ export async function confirmDelivery(
     }
   }
 
+  if (newlyDelivered) {
+    await sendEmail(container, {
+      to: order.email,
+      template: "order-delivered",
+      data: {
+        display_id: order.display_id,
+        payment: isOtc ? "otc" : "cod",
+        collected_php: transaction ? Number(transaction.amount) / 100 : null,
+      },
+    })
+  }
+
   return {
     ok: true,
     dispatch_order_id: args.dispatchOrderId,
@@ -236,11 +260,16 @@ export async function recordRefusal(
 
   const { data: orderRows } = await query.graph({
     entity: "order",
-    fields: ["id", "customer_id"],
+    fields: ["id", "display_id", "email", "customer_id"],
     filters: { id: dispatchOrder.order_id },
   })
   const order = orderRows[0] as
-    | { id: string; customer_id: string | null }
+    | {
+        id: string
+        display_id: number
+        email: string | null
+        customer_id: string | null
+      }
     | undefined
   if (!order?.customer_id) {
     return { ok: false, status: 404, error: "Order or customer not found" }
@@ -268,6 +297,12 @@ export async function recordRefusal(
     rider_notes: args.riderNotes ?? null,
     resolution: "pending",
   })) as RefusalDispute
+
+  await sendEmail(container, {
+    to: order.email,
+    template: "dispute-opened",
+    data: { display_id: order.display_id },
+  })
 
   return { ok: true, created: true, dispute }
 }
