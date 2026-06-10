@@ -50,16 +50,14 @@
 >     scrypt PIN), `POST /admin/dispatch-orders/:id/delivered` (auto `cod_collected`),
 >     shared `src/lib/delivery-actions.ts`, suspension-on-assignment, `rider-unremitted-tick`
 >     (balance+aging), payout gate primitive (`src/lib/order-cash.ts`, `/admin/orders/:id/cash-state`).
-> - **Before building anything else, run + verify:**
->   1. `cd apps/backend && npx medusa db:migrate` — creates the `rider` table and the
+> - **Setup (done 2026-06-10 — idempotent, re-run on a fresh DB):**
+>   1. ✅ `cd apps/backend && npx medusa db:migrate` — applied the `rider` table + the
 >      `otc_collected` constraint (Migrations `20260610120000`, `20260610130000`).
->   2. `npx medusa exec ./src/migration-scripts/add-philippines-region.ts` — attaches
->      `pp_cod_freshhub` + `pp_otc_freshhub` to the PH region (OTC is now the counter cash
->      provider for `/admin/otc-counter`, not an online checkout option).
->   3. Smoke-test: locked buyer → online checkout is **blocked** ("buy in person"); **OTC
->      Counter** → add product + Record sale → order is **paid, not on any rider manifest**,
->      stock decremented, and an `otc_collected` row shows in `/admin/cod-reconcile`; rider
->      `login → manifest → delivered` → a `cod_collected` row shows for a COD order.
+>   2. ✅ `npx medusa exec ./src/migration-scripts/add-philippines-region.ts` — attached
+>      `pp_cod_freshhub` + `pp_otc_freshhub` to the PH region.
+>   3. ✅ OTC smoke-test passed (counter sale paid + off-manifest + ledgered; locked buyer
+>      blocked). **Still TODO: the rider smoke-test** — rider `login → manifest → delivered`
+>      → a `cod_collected` row shows for a COD order (Phase E unverified).
 > - **Next on the roadmap (not started):** Phase B (Resend notifications), C (membership
 >   expiry job + reminders), D (trader B2B pricing), F (address→hub resolution); plus the
 >   **rider PWA frontend** (API ready) and **producer payout disbursement** (gate exists).
