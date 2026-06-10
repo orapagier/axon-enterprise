@@ -1,26 +1,22 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
-import { COD_LEDGER_MODULE } from "../../../../../modules/cod-ledger"
-import type CodLedgerModuleService from "../../../../../modules/cod-ledger/service"
-import { isDuplicateCodTransaction } from "../../../../../modules/cod-ledger/is-duplicate"
+import { recordOtcCollected } from "../../../../../lib/otc-sale"
 
 /**
  * POST /admin/orders/:id/otc-collected
  * Body: { amount: number, reference?: string, notes?: string }
  *
  * Records that the buyer paid this order Over the Counter at the hub. Writes an
- * `otc_collected` ledger row — hub-held cash with NO remittance leg (no rider),
- * so it never appears in the rider collected−remitted outstanding total.
+ * `otc_collected` ledger row (hub-held cash, NO remittance leg) via the shared
+ * `recordOtcCollected` helper.
  *
- * Recorded at the moment the cashier confirms payment (not at online order
- * placement): a prepay-locked buyer who picks OTC online pays later at the
- * counter, so auto-marking at placement would falsely show the order as paid.
- *
- * Idempotent: the unique (order_id, type) index allows at most one
- * `otc_collected` row per order; a duplicate returns 409.
+ * @deprecated OTC is now walk-in only and counter sales are created through
+ * `POST /admin/otc-counter`, which records the ledger row itself. This per-order
+ * route remains only to back-fill a row against an existing order; it is no
+ * longer the primary path. (Reframe 2026-06-10: OTC = in-person counter sale,
+ * not an online payment method — locked buyers cannot place online orders.)
  */
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
-  const ledger: CodLedgerModuleService = req.scope.resolve(COD_LEDGER_MODULE)
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
 
   const orderId = req.params.id
@@ -28,10 +24,6 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     amount?: number
     reference?: string
     notes?: string
-  }
-  if (!body.amount || body.amount <= 0) {
-    res.status(400).json({ error: "amount (centavos > 0) required" })
-    return
   }
 
   const { data: orderRows } = await query.graph({
@@ -47,51 +39,30 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  const existing = await ledger.listCodTransactions(
-    { order_id: orderId, type: "otc_collected" },
-    { take: 1 }
-  )
-  if (existing.length > 0) {
-    res.status(409).json({
-      error: "Order already marked as otc_collected.",
-      transaction: existing[0],
-    })
-    return
-  }
-
   const actorId =
     (req as unknown as { auth_context?: { actor_id?: string } }).auth_context
       ?.actor_id ?? null
 
-  let tx
-  try {
-    tx = await ledger.createCodTransactions({
-      customer_id: order.customer_id,
-      order_id: orderId,
-      type: "otc_collected",
-      amount: body.amount,
-      reference: body.reference ?? null,
-      // OTC has no rider — cash is collected at the hub counter.
-      rider_id: null,
-      recorded_by: actorId,
-      notes: body.notes ?? null,
+  const result = await recordOtcCollected(req.scope, {
+    orderId,
+    customerId: order.customer_id,
+    amount: body.amount ?? 0,
+    reference: body.reference ?? null,
+    notes: body.notes ?? null,
+    recordedBy: actorId,
+  })
+
+  if (!result.ok) {
+    res.status(result.status).json({ error: result.error })
+    return
+  }
+  if (!result.created) {
+    res.status(409).json({
+      error: "Order already marked as otc_collected.",
+      transaction: result.transaction,
     })
-  } catch (err) {
-    // Lost the race against a concurrent collect: the unique index rejected the
-    // second insert. Surface it as the same 409 the read check returns.
-    if (isDuplicateCodTransaction(err)) {
-      const [existingRow] = await ledger.listCodTransactions(
-        { order_id: orderId, type: "otc_collected" },
-        { take: 1 }
-      )
-      res.status(409).json({
-        error: "Order already marked as otc_collected.",
-        transaction: existingRow,
-      })
-      return
-    }
-    throw err
+    return
   }
 
-  res.status(201).json({ transaction: tx })
+  res.status(201).json({ transaction: result.transaction })
 }
