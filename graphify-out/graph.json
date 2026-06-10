@@ -1776,7 +1776,7 @@
       "source_file": "apps/storefront/src/modules/account/templates/login-template.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_templates_login_template_tsx",
-      "community": 265,
+      "community": 135,
       "norm_label": "login-template.tsx"
     },
     {
@@ -1785,7 +1785,7 @@
       "source_file": "apps/storefront/src/modules/account/templates/login-template.tsx",
       "source_location": "L4",
       "id": "templates_login_template_value_props",
-      "community": 265,
+      "community": 135,
       "norm_label": "value_props"
     },
     {
@@ -1794,7 +1794,7 @@
       "source_file": "apps/storefront/src/modules/account/templates/login-template.tsx",
       "source_location": "L25",
       "id": "templates_login_template_logintemplate",
-      "community": 265,
+      "community": 135,
       "norm_label": "logintemplate()"
     },
     {
@@ -1902,7 +1902,7 @@
       "source_file": "apps/storefront/src/modules/account/components/account-info/index.tsx",
       "source_location": "L19",
       "id": "account_info_index_accountinfo",
-      "community": 268,
+      "community": 250,
       "norm_label": "accountinfo()"
     },
     {
@@ -2586,7 +2586,7 @@
       "source_file": "apps/storefront/src/modules/account/components/auth-card/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_components_auth_card_index_tsx",
-      "community": 190,
+      "community": 135,
       "norm_label": "index.tsx"
     },
     {
@@ -2595,7 +2595,7 @@
       "source_file": "apps/storefront/src/modules/account/components/auth-card/index.tsx",
       "source_location": "L23",
       "id": "auth_card_index_step",
-      "community": 190,
+      "community": 135,
       "norm_label": "step"
     },
     {
@@ -2604,7 +2604,7 @@
       "source_file": "apps/storefront/src/modules/account/components/auth-card/index.tsx",
       "source_location": "L25",
       "id": "auth_card_index_role_copy",
-      "community": 190,
+      "community": 135,
       "norm_label": "role_copy"
     },
     {
@@ -2613,7 +2613,7 @@
       "source_file": "apps/storefront/src/modules/account/components/auth-card/index.tsx",
       "source_location": "L51",
       "id": "auth_card_index_authcard",
-      "community": 190,
+      "community": 135,
       "norm_label": "authcard()"
     },
     {
@@ -3045,7 +3045,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/submit-button/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_checkout_components_submit_button_index_tsx",
-      "community": 167,
+      "community": 248,
       "norm_label": "index.tsx"
     },
     {
@@ -3054,7 +3054,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/submit-button/index.tsx",
       "source_location": "L7",
       "id": "submit_button_index_submitbutton",
-      "community": 167,
+      "community": 248,
       "norm_label": "submitbutton()"
     },
     {
@@ -3063,7 +3063,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/discount-code/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_checkout_components_discount_code_index_tsx",
-      "community": 167,
+      "community": 248,
       "norm_label": "index.tsx"
     },
     {
@@ -3072,7 +3072,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/discount-code/index.tsx",
       "source_location": "L13",
       "id": "discount_code_index_discountcodeprops",
-      "community": 167,
+      "community": 248,
       "norm_label": "discountcodeprops"
     },
     {
@@ -3081,7 +3081,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/discount-code/index.tsx",
       "source_location": "L17",
       "id": "discount_code_index_discountcode",
-      "community": 167,
+      "community": 248,
       "norm_label": "discountcode()"
     },
     {
@@ -3090,7 +3090,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/addresses/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_checkout_components_addresses_index_tsx",
-      "community": 167,
+      "community": 248,
       "norm_label": "index.tsx"
     },
     {
@@ -3099,7 +3099,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/addresses/index.tsx",
       "source_location": "L17",
       "id": "addresses_index_addresses",
-      "community": 167,
+      "community": 250,
       "norm_label": "addresses()"
     },
     {
@@ -3189,7 +3189,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/error-message/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_checkout_components_error_message_index_tsx",
-      "community": 167,
+      "community": 248,
       "norm_label": "index.tsx"
     },
     {
@@ -3198,7 +3198,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/error-message/index.tsx",
       "source_location": "L1",
       "id": "error_message_index_errormessage",
-      "community": 167,
+      "community": 248,
       "norm_label": "errormessage()"
     },
     {
@@ -4098,7 +4098,7 @@
       "source_file": "apps/storefront/src/modules/order/components/item/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_order_components_item_index_tsx",
-      "community": 150,
+      "community": 265,
       "norm_label": "index.tsx"
     },
     {
@@ -4107,7 +4107,7 @@
       "source_file": "apps/storefront/src/modules/cart/components/item/index.tsx",
       "source_location": "L18",
       "id": "item_index_itemprops",
-      "community": 150,
+      "community": 265,
       "norm_label": "itemprops"
     },
     {
@@ -4116,7 +4116,7 @@
       "source_file": "apps/storefront/src/modules/cart/components/item/index.tsx",
       "source_location": "L24",
       "id": "item_index_item",
-      "community": 150,
+      "community": 265,
       "norm_label": "item()"
     },
     {
@@ -4197,7 +4197,7 @@
       "source_file": "apps/storefront/src/modules/order/components/onboarding-cta/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_order_components_onboarding_cta_index_tsx",
-      "community": 264,
+      "community": 223,
       "norm_label": "index.tsx"
     },
     {
@@ -4206,7 +4206,7 @@
       "source_file": "apps/storefront/src/modules/order/components/onboarding-cta/index.tsx",
       "source_location": "L6",
       "id": "onboarding_cta_index_onboardingcta",
-      "community": 264,
+      "community": 223,
       "norm_label": "onboardingcta()"
     },
     {
@@ -5961,7 +5961,7 @@
       "source_file": "apps/storefront/src/modules/cart/components/item/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_cart_components_item_index_tsx",
-      "community": 150,
+      "community": 265,
       "norm_label": "index.tsx"
     },
     {
@@ -6069,7 +6069,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/cart-mismatch-banner/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_layout_components_cart_mismatch_banner_index_tsx",
-      "community": 243,
+      "community": 135,
       "norm_label": "index.tsx"
     },
     {
@@ -6078,7 +6078,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/cart-mismatch-banner/index.tsx",
       "source_location": "L8",
       "id": "cart_mismatch_banner_index_cartmismatchbanner",
-      "community": 243,
+      "community": 135,
       "norm_label": "cartmismatchbanner()"
     },
     {
@@ -6285,7 +6285,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/side-menu/index.tsx",
       "source_location": "L52",
       "id": "side_menu_index_sidemenu",
-      "community": 268,
+      "community": 250,
       "norm_label": "sidemenu()"
     },
     {
@@ -7545,7 +7545,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_categories_category_page_tsx",
-      "community": 198,
+      "community": 182,
       "norm_label": "page.tsx"
     },
     {
@@ -7554,7 +7554,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L10",
       "id": "category_page_props",
-      "community": 198,
+      "community": 182,
       "norm_label": "props"
     },
     {
@@ -7563,7 +7563,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L18",
       "id": "category_page_generatestaticparams",
-      "community": 198,
+      "community": 182,
       "norm_label": "generatestaticparams()"
     },
     {
@@ -7572,7 +7572,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L45",
       "id": "category_page_generatemetadata",
-      "community": 198,
+      "community": 182,
       "norm_label": "generatemetadata()"
     },
     {
@@ -7581,7 +7581,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L66",
       "id": "category_page_categorypage",
-      "community": 198,
+      "community": 182,
       "norm_label": "categorypage()"
     },
     {
@@ -7824,7 +7824,7 @@
       "source_file": "apps/storefront/src/lib/hooks/use-toggle-state.tsx",
       "source_location": "L23",
       "id": "hooks_use_toggle_state_usetogglestate",
-      "community": 268,
+      "community": 250,
       "norm_label": "usetogglestate()"
     },
     {
@@ -7878,7 +7878,7 @@
       "source_file": "apps/storefront/src/lib/data/products.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_products_ts",
-      "community": 130,
+      "community": 16,
       "norm_label": "products.ts"
     },
     {
@@ -7923,7 +7923,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L21",
       "id": "data_cookies_getcachetag",
-      "community": 264,
+      "community": 223,
       "norm_label": "getcachetag()"
     },
     {
@@ -7950,7 +7950,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L62",
       "id": "data_cookies_removeauthtoken",
-      "community": 264,
+      "community": 223,
       "norm_label": "removeauthtoken()"
     },
     {
@@ -7995,7 +7995,7 @@
       "source_file": "apps/storefront/src/lib/data/categories.ts",
       "source_location": "L5",
       "id": "data_categories_listcategories",
-      "community": 198,
+      "community": 182,
       "norm_label": "listcategories()"
     },
     {
@@ -8004,7 +8004,7 @@
       "source_file": "apps/storefront/src/lib/data/categories.ts",
       "source_location": "L29",
       "id": "data_categories_getcategorybyhandle",
-      "community": 198,
+      "community": 182,
       "norm_label": "getcategorybyhandle()"
     },
     {
@@ -8031,7 +8031,7 @@
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_regions_ts",
-      "community": 130,
+      "community": 16,
       "norm_label": "regions.ts"
     },
     {
@@ -8049,7 +8049,7 @@
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L21",
       "id": "data_regions_retrieveregion",
-      "community": 130,
+      "community": 16,
       "norm_label": "retrieveregion()"
     },
     {
@@ -8130,7 +8130,7 @@
       "source_file": "apps/storefront/src/lib/data/cart.ts",
       "source_location": "L221",
       "id": "data_cart_setshippingmethod",
-      "community": 1,
+      "community": 201,
       "norm_label": "setshippingmethod()"
     },
     {
@@ -8139,7 +8139,7 @@
       "source_file": "apps/storefront/src/lib/data/cart.ts",
       "source_location": "L241",
       "id": "data_cart_initiatepaymentsession",
-      "community": 1,
+      "community": 7,
       "norm_label": "initiatepaymentsession()"
     },
     {
@@ -8238,7 +8238,7 @@
       "source_file": "apps/storefront/src/lib/data/locale-actions.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_locale_actions_ts",
-      "community": 264,
+      "community": 1,
       "norm_label": "locale-actions.ts"
     },
     {
@@ -8256,7 +8256,7 @@
       "source_file": "apps/storefront/src/lib/data/locale-actions.ts",
       "source_location": "L25",
       "id": "data_locale_actions_setlocalecookie",
-      "community": 264,
+      "community": 1,
       "norm_label": "setlocalecookie()"
     },
     {
@@ -8265,7 +8265,7 @@
       "source_file": "apps/storefront/src/lib/data/locale-actions.ts",
       "source_location": "L39",
       "id": "data_locale_actions_updatelocale",
-      "community": 264,
+      "community": 1,
       "norm_label": "updatelocale()"
     },
     {
@@ -8299,7 +8299,7 @@
       "label": "getPaymentEligibility()",
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/payment.ts",
-      "source_location": "L61",
+      "source_location": "L65",
       "id": "data_payment_getpaymenteligibility",
       "community": 16,
       "norm_label": "getpaymenteligibility()"
@@ -8310,7 +8310,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_address_validation_ts",
-      "community": 167,
+      "community": 190,
       "norm_label": "address-validation.ts"
     },
     {
@@ -8328,7 +8328,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L12",
       "id": "data_address_validation_shippingformdata",
-      "community": 167,
+      "community": 190,
       "norm_label": "shippingformdata"
     },
     {
@@ -8364,7 +8364,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L54",
       "id": "data_address_validation_validatehubcity",
-      "community": 167,
+      "community": 190,
       "norm_label": "validatehubcity()"
     },
     {
@@ -8373,7 +8373,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L67",
       "id": "data_address_validation_sanitizetext",
-      "community": 167,
+      "community": 190,
       "norm_label": "sanitizetext()"
     },
     {
@@ -8382,7 +8382,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L75",
       "id": "data_address_validation_fieldvalidator",
-      "community": 167,
+      "community": 190,
       "norm_label": "fieldvalidator"
     },
     {
@@ -8391,7 +8391,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L77",
       "id": "data_address_validation_fielddef",
-      "community": 167,
+      "community": 190,
       "norm_label": "fielddef"
     },
     {
@@ -8400,7 +8400,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L84",
       "id": "data_address_validation_shipping_fields",
-      "community": 167,
+      "community": 190,
       "norm_label": "shipping_fields"
     },
     {
@@ -8409,7 +8409,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L135",
       "id": "data_address_validation_billing_fields",
-      "community": 167,
+      "community": 190,
       "norm_label": "billing_fields"
     },
     {
@@ -8418,7 +8418,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L181",
       "id": "data_address_validation_validateshippingaddress",
-      "community": 167,
+      "community": 190,
       "norm_label": "validateshippingaddress()"
     },
     {
@@ -8427,7 +8427,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L191",
       "id": "data_address_validation_validatebillingaddress",
-      "community": 167,
+      "community": 190,
       "norm_label": "validatebillingaddress()"
     },
     {
@@ -8436,7 +8436,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L201",
       "id": "data_address_validation_validateaddressform",
-      "community": 167,
+      "community": 190,
       "norm_label": "validateaddressform()"
     },
     {
@@ -8445,7 +8445,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L220",
       "id": "data_address_validation_runvalidators",
-      "community": 167,
+      "community": 190,
       "norm_label": "runvalidators()"
     },
     {
@@ -8454,7 +8454,7 @@
       "source_file": "apps/storefront/src/lib/data/address-validation.ts",
       "source_location": "L246",
       "id": "data_address_validation_sanitizecity",
-      "community": 167,
+      "community": 190,
       "norm_label": "sanitizecity()"
     },
     {
@@ -8463,7 +8463,7 @@
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_onboarding_ts",
-      "community": 264,
+      "community": 223,
       "norm_label": "onboarding.ts"
     },
     {
@@ -8472,7 +8472,7 @@
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L15",
       "id": "data_onboarding_resetonboardingstate",
-      "community": 264,
+      "community": 223,
       "norm_label": "resetonboardingstate()"
     },
     {
@@ -8481,7 +8481,7 @@
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L27",
       "id": "data_onboarding_onboardingstate",
-      "community": 264,
+      "community": 223,
       "norm_label": "onboardingstate"
     },
     {
@@ -8490,7 +8490,7 @@
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L33",
       "id": "data_onboarding_splitdisplayname",
-      "community": 264,
+      "community": 223,
       "norm_label": "splitdisplayname()"
     },
     {
@@ -8499,7 +8499,7 @@
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L46",
       "id": "data_onboarding_completeonboarding",
-      "community": 264,
+      "community": 223,
       "norm_label": "completeonboarding()"
     },
     {
@@ -8769,7 +8769,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L27",
       "id": "data_customer_accounttype",
-      "community": 190,
+      "community": 135,
       "norm_label": "accounttype"
     },
     {
@@ -8778,7 +8778,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L28",
       "id": "data_customer_authmode",
-      "community": 190,
+      "community": 135,
       "norm_label": "authmode"
     },
     {
@@ -8886,7 +8886,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L162",
       "id": "data_customer_updatecustomer",
-      "community": 240,
+      "community": 135,
       "norm_label": "updatecustomer()"
     },
     {
@@ -8895,7 +8895,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L178",
       "id": "data_customer_otprequeststate",
-      "community": 190,
+      "community": 135,
       "norm_label": "otprequeststate"
     },
     {
@@ -8913,7 +8913,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L263",
       "id": "data_customer_otpverifystate",
-      "community": 190,
+      "community": 135,
       "norm_label": "otpverifystate"
     },
     {
@@ -8958,7 +8958,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L442",
       "id": "data_customer_signout",
-      "community": 264,
+      "community": 223,
       "norm_label": "signout()"
     },
     {
@@ -8967,7 +8967,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L467",
       "id": "data_customer_requestmembership",
-      "community": 240,
+      "community": 135,
       "norm_label": "requestmembership()"
     },
     {
@@ -8976,7 +8976,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L509",
       "id": "data_customer_cancelmembership",
-      "community": 240,
+      "community": 135,
       "norm_label": "cancelmembership()"
     },
     {
@@ -9057,7 +9057,7 @@
       "source_file": "apps/storefront/src/lib/email/send-otp.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_email_send_otp_ts",
-      "community": 226,
+      "community": 135,
       "norm_label": "send-otp.ts"
     },
     {
@@ -9066,7 +9066,7 @@
       "source_file": "apps/storefront/src/lib/email/send-otp.ts",
       "source_location": "L19",
       "id": "email_send_otp_otpemailresult",
-      "community": 226,
+      "community": 135,
       "norm_label": "otpemailresult"
     },
     {
@@ -9075,7 +9075,7 @@
       "source_file": "apps/storefront/src/lib/email/send-otp.ts",
       "source_location": "L28",
       "id": "email_send_otp_buildbody",
-      "community": 226,
+      "community": 135,
       "norm_label": "buildbody()"
     },
     {
@@ -9084,7 +9084,7 @@
       "source_file": "apps/storefront/src/lib/email/send-otp.ts",
       "source_location": "L42",
       "id": "email_send_otp_sendotpemail",
-      "community": 226,
+      "community": 135,
       "norm_label": "sendotpemail()"
     },
     {
@@ -9138,7 +9138,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_constants_hub_cities_ts",
-      "community": 167,
+      "community": 246,
       "norm_label": "hub-cities.ts"
     },
     {
@@ -9147,7 +9147,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L15",
       "id": "constants_hub_cities_hub_cities",
-      "community": 167,
+      "community": 246,
       "norm_label": "hub_cities"
     },
     {
@@ -9156,7 +9156,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L24",
       "id": "constants_hub_cities_hubcity",
-      "community": 167,
+      "community": 246,
       "norm_label": "hubcity"
     },
     {
@@ -9165,7 +9165,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L31",
       "id": "constants_hub_cities_hub_slug_by_city",
-      "community": 167,
+      "community": 246,
       "norm_label": "hub_slug_by_city"
     },
     {
@@ -9183,7 +9183,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L43",
       "id": "constants_hub_cities_hub_city_set",
-      "community": 167,
+      "community": 246,
       "norm_label": "hub_city_set"
     },
     {
@@ -9192,7 +9192,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L48",
       "id": "constants_hub_cities_ishubcity",
-      "community": 167,
+      "community": 190,
       "norm_label": "ishubcity()"
     },
     {
@@ -9201,7 +9201,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L56",
       "id": "constants_hub_cities_canonicalhubcity",
-      "community": 167,
+      "community": 190,
       "norm_label": "canonicalhubcity()"
     },
     {
@@ -9210,7 +9210,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L67",
       "id": "constants_hub_cities_hub_warehouse",
-      "community": 167,
+      "community": 246,
       "norm_label": "hub_warehouse"
     },
     {
@@ -9219,7 +9219,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L76",
       "id": "constants_hub_cities_haversinekm",
-      "community": 167,
+      "community": 246,
       "norm_label": "haversinekm()"
     },
     {
@@ -9228,7 +9228,7 @@
       "source_file": "apps/storefront/src/lib/constants/hub-cities.ts",
       "source_location": "L91",
       "id": "constants_hub_cities_torad",
-      "community": 167,
+      "community": 246,
       "norm_label": "torad()"
     },
     {
@@ -9354,7 +9354,7 @@
       "source_file": "apps/storefront/src/lib/util/compare-addresses.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_util_compare_addresses_ts",
-      "community": 167,
+      "community": 250,
       "norm_label": "compare-addresses.ts"
     },
     {
@@ -9363,7 +9363,7 @@
       "source_file": "apps/storefront/src/lib/util/compare-addresses.ts",
       "source_location": "L3",
       "id": "util_compare_addresses_compareaddresses",
-      "community": 167,
+      "community": 250,
       "norm_label": "compareaddresses()"
     },
     {
@@ -9489,7 +9489,7 @@
       "source_file": "apps/storefront/src/lib/util/phone.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_util_phone_ts",
-      "community": 33,
+      "community": 257,
       "norm_label": "phone.ts"
     },
     {
@@ -9498,7 +9498,7 @@
       "source_file": "apps/storefront/src/lib/util/phone.ts",
       "source_location": "L18",
       "id": "util_phone_phonevalidation",
-      "community": 33,
+      "community": 257,
       "norm_label": "phonevalidation"
     },
     {
@@ -9507,7 +9507,7 @@
       "source_file": "apps/storefront/src/lib/util/phone.ts",
       "source_location": "L22",
       "id": "util_phone_iscountrycode",
-      "community": 33,
+      "community": 257,
       "norm_label": "iscountrycode()"
     },
     {
@@ -9516,7 +9516,7 @@
       "source_file": "apps/storefront/src/lib/util/phone.ts",
       "source_location": "L25",
       "id": "util_phone_tocountrycode",
-      "community": 33,
+      "community": 257,
       "norm_label": "tocountrycode()"
     },
     {
@@ -9525,7 +9525,7 @@
       "source_file": "apps/storefront/src/lib/util/phone.ts",
       "source_location": "L33",
       "id": "util_phone_validatephone",
-      "community": 33,
+      "community": 257,
       "norm_label": "validatephone()"
     },
     {
@@ -9534,7 +9534,7 @@
       "source_file": "apps/storefront/src/lib/util/phone.ts",
       "source_location": "L64",
       "id": "util_phone_formatphonefordisplay",
-      "community": 33,
+      "community": 257,
       "norm_label": "formatphonefordisplay()"
     },
     {
@@ -10569,7 +10569,7 @@
       "source_file": "apps/backend/src/links/buyer-account-status-customer.ts",
       "source_location": "L1",
       "id": "apps_backend_src_links_buyer_account_status_customer_ts",
-      "community": 140,
+      "community": 200,
       "norm_label": "buyer-account-status-customer.ts"
     },
     {
@@ -10605,7 +10605,7 @@
       "source_file": "apps/backend/src/links/refusal-dispute-order.ts",
       "source_location": "L1",
       "id": "apps_backend_src_links_refusal_dispute_order_ts",
-      "community": 140,
+      "community": 200,
       "norm_label": "refusal-dispute-order.ts"
     },
     {
@@ -10641,7 +10641,7 @@
       "source_file": "apps/backend/src/links/dispatch-batch-hub.ts",
       "source_location": "L1",
       "id": "apps_backend_src_links_dispatch_batch_hub_ts",
-      "community": 161,
+      "community": 158,
       "norm_label": "dispatch-batch-hub.ts"
     },
     {
@@ -10992,7 +10992,7 @@
       "source_file": "apps/backend/src/modules/pickup/validators.ts",
       "source_location": "L80",
       "id": "pickup_validators_validateslotcapacity",
-      "community": 165,
+      "community": 26,
       "norm_label": "validateslotcapacity()"
     },
     {
@@ -11046,7 +11046,7 @@
       "source_file": "apps/backend/src/modules/pickup/validators.ts",
       "source_location": "L279",
       "id": "pickup_validators_validateslotreserve",
-      "community": 165,
+      "community": 26,
       "norm_label": "validateslotreserve()"
     },
     {
@@ -11136,7 +11136,7 @@
       "source_file": "apps/backend/src/modules/pickup/__tests__/validate-slot-reserve.unit.spec.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_pickup_tests_validate_slot_reserve_unit_spec_ts",
-      "community": 165,
+      "community": 26,
       "norm_label": "validate-slot-reserve.unit.spec.ts"
     },
     {
@@ -11145,7 +11145,7 @@
       "source_file": "apps/backend/src/modules/pickup/__tests__/validate-slot-reserve.unit.spec.ts",
       "source_location": "L8",
       "id": "tests_validate_slot_reserve_unit_spec_res",
-      "community": 165,
+      "community": 26,
       "norm_label": "res"
     },
     {
@@ -11154,7 +11154,7 @@
       "source_file": "apps/backend/src/modules/pickup/__tests__/validate-slot-reserve.unit.spec.ts",
       "source_location": "L32",
       "id": "tests_validate_slot_reserve_unit_spec_base",
-      "community": 165,
+      "community": 26,
       "norm_label": "base"
     },
     {
@@ -11262,7 +11262,7 @@
       "source_file": "apps/backend/src/modules/dispatch/models/dispatch-batch.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_dispatch_models_dispatch_batch_ts",
-      "community": 158,
+      "community": 264,
       "norm_label": "dispatch-batch.ts"
     },
     {
@@ -11271,7 +11271,7 @@
       "source_file": "apps/backend/src/modules/dispatch/models/dispatch-batch.ts",
       "source_location": "L4",
       "id": "models_dispatch_batch_dispatchbatch",
-      "community": 158,
+      "community": 264,
       "norm_label": "dispatchbatch"
     },
     {
@@ -11280,7 +11280,7 @@
       "source_file": "apps/backend/src/modules/dispatch/models/dispatch-order.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_dispatch_models_dispatch_order_ts",
-      "community": 158,
+      "community": 264,
       "norm_label": "dispatch-order.ts"
     },
     {
@@ -11289,7 +11289,7 @@
       "source_file": "apps/backend/src/modules/dispatch/models/dispatch-order.ts",
       "source_location": "L4",
       "id": "models_dispatch_order_dispatchorder",
-      "community": 158,
+      "community": 264,
       "norm_label": "dispatchorder"
     },
     {
@@ -11298,7 +11298,7 @@
       "source_file": "apps/backend/src/modules/accountability/index.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_accountability_index_ts",
-      "community": 140,
+      "community": 200,
       "norm_label": "index.ts"
     },
     {
@@ -11307,7 +11307,7 @@
       "source_file": "apps/backend/src/modules/accountability/index.ts",
       "source_location": "L10",
       "id": "accountability_index_prepay_locked_states",
-      "community": 140,
+      "community": 209,
       "norm_label": "prepay_locked_states"
     },
     {
@@ -11316,7 +11316,7 @@
       "source_file": "apps/backend/src/modules/accountability/service.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_accountability_service_ts",
-      "community": 140,
+      "community": 226,
       "norm_label": "service.ts"
     },
     {
@@ -11325,7 +11325,7 @@
       "source_file": "apps/backend/src/modules/accountability/service.ts",
       "source_location": "L5",
       "id": "accountability_service_accountabilitymoduleservice",
-      "community": 140,
+      "community": 226,
       "norm_label": "accountabilitymoduleservice"
     },
     {
@@ -11451,7 +11451,7 @@
       "source_file": "apps/backend/src/modules/accountability/models/buyer-account-status.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_accountability_models_buyer_account_status_ts",
-      "community": 140,
+      "community": 226,
       "norm_label": "buyer-account-status.ts"
     },
     {
@@ -11460,7 +11460,7 @@
       "source_file": "apps/backend/src/modules/accountability/models/buyer-account-status.ts",
       "source_location": "L3",
       "id": "models_buyer_account_status_buyeraccountstatus",
-      "community": 140,
+      "community": 226,
       "norm_label": "buyeraccountstatus"
     },
     {
@@ -11469,7 +11469,7 @@
       "source_file": "apps/backend/src/modules/accountability/models/refusal-dispute.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_accountability_models_refusal_dispute_ts",
-      "community": 140,
+      "community": 226,
       "norm_label": "refusal-dispute.ts"
     },
     {
@@ -11478,7 +11478,7 @@
       "source_file": "apps/backend/src/modules/accountability/models/refusal-dispute.ts",
       "source_location": "L3",
       "id": "models_refusal_dispute_refusaldispute",
-      "community": 140,
+      "community": 226,
       "norm_label": "refusaldispute"
     },
     {
@@ -11514,7 +11514,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_listing_types_ts",
-      "community": 26,
+      "community": 143,
       "norm_label": "types.ts"
     },
     {
@@ -11523,7 +11523,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L1",
       "id": "listing_types_listing_types",
-      "community": 26,
+      "community": 143,
       "norm_label": "listing_types"
     },
     {
@@ -11532,7 +11532,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L2",
       "id": "listing_types_listingtype",
-      "community": 26,
+      "community": 143,
       "norm_label": "listingtype"
     },
     {
@@ -11541,7 +11541,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L4",
       "id": "listing_types_listing_statuses",
-      "community": 26,
+      "community": 143,
       "norm_label": "listing_statuses"
     },
     {
@@ -11550,7 +11550,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L12",
       "id": "listing_types_listingstatus",
-      "community": 26,
+      "community": 143,
       "norm_label": "listingstatus"
     },
     {
@@ -11559,7 +11559,7 @@
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_listing_validators_ts",
-      "community": 26,
+      "community": 143,
       "norm_label": "validators.ts"
     },
     {
@@ -11568,7 +11568,7 @@
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L9",
       "id": "listing_validators_validationerror",
-      "community": 26,
+      "community": 143,
       "norm_label": "validationerror"
     },
     {
@@ -11577,7 +11577,7 @@
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L15",
       "id": "listing_validators_validationresult",
-      "community": 26,
+      "community": 143,
       "norm_label": "validationresult"
     },
     {
@@ -11604,7 +11604,7 @@
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L127",
       "id": "listing_validators_allowed_transitions",
-      "community": 26,
+      "community": 143,
       "norm_label": "allowed_transitions"
     },
     {
@@ -11865,7 +11865,7 @@
       "source_file": "apps/backend/src/modules/payment-cod/index.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_payment_cod_index_ts",
-      "community": 140,
+      "community": 243,
       "norm_label": "index.ts"
     },
     {
@@ -11874,7 +11874,7 @@
       "source_file": "apps/backend/src/modules/payment-cod/service.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_payment_cod_service_ts",
-      "community": 140,
+      "community": 243,
       "norm_label": "service.ts"
     },
     {
@@ -11883,7 +11883,7 @@
       "source_file": "apps/backend/src/modules/payment-cod/service.ts",
       "source_location": "L34",
       "id": "payment_cod_service_injecteddeps",
-      "community": 140,
+      "community": 243,
       "norm_label": "injecteddeps"
     },
     {
@@ -12000,7 +12000,7 @@
       "source_file": "apps/backend/src/modules/payment-cod/__tests__/authorize.unit.spec.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_payment_cod_tests_authorize_unit_spec_ts",
-      "community": 140,
+      "community": 243,
       "norm_label": "authorize.unit.spec.ts"
     },
     {
@@ -12009,7 +12009,7 @@
       "source_file": "apps/backend/src/modules/payment-cod/__tests__/authorize.unit.spec.ts",
       "source_location": "L4",
       "id": "tests_authorize_unit_spec_statusrow",
-      "community": 140,
+      "community": 243,
       "norm_label": "statusrow"
     },
     {
@@ -12018,7 +12018,7 @@
       "source_file": "apps/backend/src/modules/payment-cod/__tests__/authorize.unit.spec.ts",
       "source_location": "L11",
       "id": "tests_authorize_unit_spec_makeservice",
-      "community": 140,
+      "community": 243,
       "norm_label": "makeservice()"
     },
     {
@@ -12027,7 +12027,7 @@
       "source_file": "apps/backend/src/modules/payment-cod/__tests__/authorize.unit.spec.ts",
       "source_location": "L27",
       "id": "tests_authorize_unit_spec_input",
-      "community": 140,
+      "community": 243,
       "norm_label": "input"
     },
     {
@@ -12036,7 +12036,7 @@
       "source_file": "apps/backend/src/modules/payment-cod/__tests__/authorize.unit.spec.ts",
       "source_location": "L31",
       "id": "tests_authorize_unit_spec_svc",
-      "community": 140,
+      "community": 243,
       "norm_label": "svc"
     },
     {
@@ -12045,7 +12045,7 @@
       "source_file": "apps/backend/src/modules/cod-ledger/is-duplicate.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_cod_ledger_is_duplicate_ts",
-      "community": 119,
+      "community": 186,
       "norm_label": "is-duplicate.ts"
     },
     {
@@ -12054,7 +12054,7 @@
       "source_file": "apps/backend/src/modules/cod-ledger/is-duplicate.ts",
       "source_location": "L7",
       "id": "cod_ledger_is_duplicate_isduplicatecodtransaction",
-      "community": 119,
+      "community": 186,
       "norm_label": "isduplicatecodtransaction()"
     },
     {
@@ -12315,7 +12315,7 @@
       "source_file": "apps/backend/src/modules/cod-ledger/__tests__/is-duplicate.unit.spec.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_cod_ledger_tests_is_duplicate_unit_spec_ts",
-      "community": 119,
+      "community": 186,
       "norm_label": "is-duplicate.unit.spec.ts"
     },
     {
@@ -12493,10 +12493,55 @@
       "label": "config",
       "file_type": "code",
       "source_file": "apps/backend/src/subscribers/order-placed.ts",
-      "source_location": "L38",
+      "source_location": "L56",
       "id": "subscribers_order_placed_config",
       "community": 193,
       "norm_label": "config"
+    },
+    {
+      "label": "order-placed.unit.spec.ts",
+      "file_type": "code",
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L1",
+      "id": "apps_backend_src_subscribers_tests_order_placed_unit_spec_ts",
+      "community": 193,
+      "norm_label": "order-placed.unit.spec.ts"
+    },
+    {
+      "label": "assignMock",
+      "file_type": "code",
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L17",
+      "id": "tests_order_placed_unit_spec_assignmock",
+      "community": 193,
+      "norm_label": "assignmock"
+    },
+    {
+      "label": "makeContainer()",
+      "file_type": "code",
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L19",
+      "id": "tests_order_placed_unit_spec_makecontainer",
+      "community": 193,
+      "norm_label": "makecontainer()"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L35",
+      "id": "tests_order_placed_unit_spec_run",
+      "community": 193,
+      "norm_label": "run()"
+    },
+    {
+      "label": "run0",
+      "file_type": "code",
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L53",
+      "id": "tests_order_placed_unit_spec_run0",
+      "community": 193,
+      "norm_label": "run0"
     },
     {
       "label": "middlewares.ts",
@@ -12522,7 +12567,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_delivery_options_route_ts",
-      "community": 164,
+      "community": 233,
       "norm_label": "route.ts"
     },
     {
@@ -12531,7 +12576,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L8",
       "id": "delivery_options_route_tier",
-      "community": 164,
+      "community": 233,
       "norm_label": "tier"
     },
     {
@@ -12540,7 +12585,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L10",
       "id": "delivery_options_route_tieroption",
-      "community": 164,
+      "community": 233,
       "norm_label": "tieroption"
     },
     {
@@ -12549,7 +12594,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L19",
       "id": "delivery_options_route_getcustomerid",
-      "community": 164,
+      "community": 233,
       "norm_label": "getcustomerid()"
     },
     {
@@ -12558,7 +12603,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L25",
       "id": "delivery_options_route_nowinhubtimezone",
-      "community": 164,
+      "community": 233,
       "norm_label": "nowinhubtimezone()"
     },
     {
@@ -12567,7 +12612,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L41",
       "id": "delivery_options_route_parsehhmm",
-      "community": 164,
+      "community": 233,
       "norm_label": "parsehhmm()"
     },
     {
@@ -12576,7 +12621,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L46",
       "id": "delivery_options_route_beforecutoff",
-      "community": 164,
+      "community": 233,
       "norm_label": "beforecutoff()"
     },
     {
@@ -12585,7 +12630,7 @@
       "source_file": "apps/backend/src/api/store/delivery-options/route.ts",
       "source_location": "L66",
       "id": "delivery_options_route_get",
-      "community": 164,
+      "community": 233,
       "norm_label": "get()"
     },
     {
@@ -12666,7 +12711,7 @@
       "source_file": "apps/backend/src/api/store/hubs/[slug]/products/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_hubs_slug_products_route_ts",
-      "community": 161,
+      "community": 26,
       "norm_label": "route.ts"
     },
     {
@@ -12702,26 +12747,80 @@
       "source_file": "apps/backend/src/api/store/payment-methods/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_payment_methods_route_ts",
-      "community": 140,
+      "community": 209,
       "norm_label": "route.ts"
     },
     {
       "label": "AccountState",
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/payment-methods/route.ts",
-      "source_location": "L25",
+      "source_location": "L26",
       "id": "payment_methods_route_accountstate",
-      "community": 140,
+      "community": 209,
       "norm_label": "accountstate"
     },
     {
       "label": "GET()",
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/payment-methods/route.ts",
-      "source_location": "L31",
+      "source_location": "L32",
       "id": "payment_methods_route_get",
-      "community": 140,
+      "community": 209,
       "norm_label": "get()"
+    },
+    {
+      "label": "payment-methods.unit.spec.ts",
+      "file_type": "code",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L1",
+      "id": "apps_backend_src_api_store_payment_methods_tests_payment_methods_unit_spec_ts",
+      "community": 209,
+      "norm_label": "payment-methods.unit.spec.ts"
+    },
+    {
+      "label": "Json",
+      "file_type": "code",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L10",
+      "id": "tests_payment_methods_unit_spec_json",
+      "community": 209,
+      "norm_label": "json"
+    },
+    {
+      "label": "makeReq()",
+      "file_type": "code",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L12",
+      "id": "tests_payment_methods_unit_spec_makereq",
+      "community": 209,
+      "norm_label": "makereq()"
+    },
+    {
+      "label": "makeRes()",
+      "file_type": "code",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L26",
+      "id": "tests_payment_methods_unit_spec_makeres",
+      "community": 209,
+      "norm_label": "makeres()"
+    },
+    {
+      "label": "{ res, captured }",
+      "file_type": "code",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L39",
+      "id": "tests_payment_methods_unit_spec_res_captured",
+      "community": 209,
+      "norm_label": "{ res, captured }"
+    },
+    {
+      "label": "body",
+      "file_type": "code",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L48",
+      "id": "tests_payment_methods_unit_spec_body",
+      "community": 209,
+      "norm_label": "body"
     },
     {
       "label": "route.ts",
@@ -12729,7 +12828,7 @@
       "source_file": "apps/backend/src/api/store/customer/disputes/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_customer_disputes_route_ts",
-      "community": 140,
+      "community": 226,
       "norm_label": "route.ts"
     },
     {
@@ -12738,7 +12837,7 @@
       "source_file": "apps/backend/src/api/store/customer/disputes/route.ts",
       "source_location": "L5",
       "id": "disputes_route_getcustomerid",
-      "community": 140,
+      "community": 226,
       "norm_label": "getcustomerid()"
     },
     {
@@ -12747,7 +12846,7 @@
       "source_file": "apps/backend/src/api/admin/disputes/route.ts",
       "source_location": "L10",
       "id": "disputes_route_get",
-      "community": 140,
+      "community": 226,
       "norm_label": "get()"
     },
     {
@@ -12756,7 +12855,7 @@
       "source_file": "apps/backend/src/api/store/customer/disputes/[id]/respond/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_customer_disputes_id_respond_route_ts",
-      "community": 140,
+      "community": 200,
       "norm_label": "route.ts"
     },
     {
@@ -12765,7 +12864,7 @@
       "source_file": "apps/backend/src/api/store/customer/disputes/[id]/respond/route.ts",
       "source_location": "L5",
       "id": "respond_route_getcustomerid",
-      "community": 140,
+      "community": 200,
       "norm_label": "getcustomerid()"
     },
     {
@@ -12774,7 +12873,7 @@
       "source_file": "apps/backend/src/api/store/customer/disputes/[id]/respond/route.ts",
       "source_location": "L11",
       "id": "respond_route_valid_reasons",
-      "community": 140,
+      "community": 200,
       "norm_label": "valid_reasons"
     },
     {
@@ -12783,7 +12882,7 @@
       "source_file": "apps/backend/src/api/store/seller/disputes/[id]/respond/route.ts",
       "source_location": "L15",
       "id": "respond_route_post",
-      "community": 140,
+      "community": 200,
       "norm_label": "post()"
     },
     {
@@ -12810,7 +12909,7 @@
       "source_file": "apps/backend/src/api/store/customers/me/hub/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_customers_me_hub_route_ts",
-      "community": 209,
+      "community": 161,
       "norm_label": "route.ts"
     },
     {
@@ -12819,7 +12918,7 @@
       "source_file": "apps/backend/src/api/store/customers/me/hub/route.ts",
       "source_location": "L10",
       "id": "hub_route_getcustomerid",
-      "community": 209,
+      "community": 161,
       "norm_label": "getcustomerid()"
     },
     {
@@ -12828,7 +12927,7 @@
       "source_file": "apps/backend/src/api/store/customers/me/hub/route.ts",
       "source_location": "L19",
       "id": "hub_route_get",
-      "community": 209,
+      "community": 161,
       "norm_label": "get()"
     },
     {
@@ -12837,7 +12936,7 @@
       "source_file": "apps/backend/src/api/store/customers/me/hub/route.ts",
       "source_location": "L41",
       "id": "hub_route_post",
-      "community": 209,
+      "community": 161,
       "norm_label": "post()"
     },
     {
@@ -12846,7 +12945,7 @@
       "source_file": "apps/backend/src/api/store/customers/me/hub/route.ts",
       "source_location": "L92",
       "id": "hub_route_delete",
-      "community": 209,
+      "community": 161,
       "norm_label": "delete()"
     },
     {
@@ -12999,7 +13098,7 @@
       "source_file": "apps/backend/src/api/store/seller/disputes/[id]/respond/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_seller_disputes_id_respond_route_ts",
-      "community": 140,
+      "community": 200,
       "norm_label": "route.ts"
     },
     {
@@ -13036,6 +13135,51 @@
       "source_location": "L16",
       "id": "cod_reconcile_route_get",
       "community": 119,
+      "norm_label": "get()"
+    },
+    {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L1",
+      "id": "apps_backend_src_api_admin_otc_counter_route_ts",
+      "community": 186,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "CounterItem",
+      "file_type": "code",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L37",
+      "id": "otc_counter_route_counteritem",
+      "community": 186,
+      "norm_label": "counteritem"
+    },
+    {
+      "label": "actorId()",
+      "file_type": "code",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L39",
+      "id": "otc_counter_route_actorid",
+      "community": 186,
+      "norm_label": "actorid()"
+    },
+    {
+      "label": "POST()",
+      "file_type": "code",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L46",
+      "id": "otc_counter_route_post",
+      "community": 186,
+      "norm_label": "post()"
+    },
+    {
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L216",
+      "id": "otc_counter_route_get",
+      "community": 186,
       "norm_label": "get()"
     },
     {
@@ -13080,7 +13224,7 @@
       "source_file": "apps/backend/src/api/admin/memberships/[id]/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_memberships_id_route_ts",
-      "community": 143,
+      "community": 251,
       "norm_label": "route.ts"
     },
     {
@@ -13089,7 +13233,7 @@
       "source_file": "apps/backend/src/api/admin/memberships/[id]/route.ts",
       "source_location": "L29",
       "id": "id_route_action",
-      "community": 143,
+      "community": 251,
       "norm_label": "action"
     },
     {
@@ -13098,7 +13242,7 @@
       "source_file": "apps/backend/src/api/admin/memberships/[id]/route.ts",
       "source_location": "L31",
       "id": "id_route_membership_meta",
-      "community": 143,
+      "community": 251,
       "norm_label": "membership_meta"
     },
     {
@@ -13107,7 +13251,7 @@
       "source_file": "apps/backend/src/api/admin/memberships/[id]/route.ts",
       "source_location": "L50",
       "id": "id_route_membershipevent",
-      "community": 143,
+      "community": 251,
       "norm_label": "membershipevent"
     },
     {
@@ -13116,7 +13260,7 @@
       "source_file": "apps/backend/src/api/admin/memberships/[id]/route.ts",
       "source_location": "L59",
       "id": "id_route_appendevent",
-      "community": 143,
+      "community": 251,
       "norm_label": "appendevent()"
     },
     {
@@ -13125,7 +13269,7 @@
       "source_file": "apps/backend/src/api/admin/riders/[id]/route.ts",
       "source_location": "L25",
       "id": "id_route_post",
-      "community": 143,
+      "community": 251,
       "norm_label": "post()"
     },
     {
@@ -13305,7 +13449,7 @@
       "source_file": "apps/backend/src/api/admin/dispatch-orders/[id]/delivered/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_dispatch_orders_id_delivered_route_ts",
-      "community": 119,
+      "community": 158,
       "norm_label": "route.ts"
     },
     {
@@ -13314,7 +13458,7 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/delivered/route.ts",
       "source_location": "L14",
       "id": "delivered_route_post",
-      "community": 119,
+      "community": 158,
       "norm_label": "post()"
     },
     {
@@ -13404,7 +13548,7 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cash-state/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_orders_id_cash_state_route_ts",
-      "community": 200,
+      "community": 119,
       "norm_label": "route.ts"
     },
     {
@@ -13413,7 +13557,7 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cash-state/route.ts",
       "source_location": "L11",
       "id": "cash_state_route_get",
-      "community": 200,
+      "community": 119,
       "norm_label": "get()"
     },
     {
@@ -13422,7 +13566,7 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cod-remitted/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_orders_id_cod_remitted_route_ts",
-      "community": 119,
+      "community": 186,
       "norm_label": "route.ts"
     },
     {
@@ -13431,7 +13575,7 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cod-remitted/route.ts",
       "source_location": "L14",
       "id": "cod_remitted_route_post",
-      "community": 119,
+      "community": 186,
       "norm_label": "post()"
     },
     {
@@ -13440,7 +13584,7 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cod-collected/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_orders_id_cod_collected_route_ts",
-      "community": 119,
+      "community": 186,
       "norm_label": "route.ts"
     },
     {
@@ -13449,7 +13593,7 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cod-collected/route.ts",
       "source_location": "L15",
       "id": "cod_collected_route_post",
-      "community": 119,
+      "community": 186,
       "norm_label": "post()"
     },
     {
@@ -13458,16 +13602,16 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
-      "community": 119,
+      "community": 186,
       "norm_label": "route.ts"
     },
     {
       "label": "POST()",
       "file_type": "code",
       "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
-      "source_location": "L22",
+      "source_location": "L19",
       "id": "otc_collected_route_post",
-      "community": 119,
+      "community": 186,
       "norm_label": "post()"
     },
     {
@@ -13512,7 +13656,7 @@
       "source_file": "apps/backend/src/api/admin/dispatch/batches/[id]/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_dispatch_batches_id_route_ts",
-      "community": 158,
+      "community": 143,
       "norm_label": "route.ts"
     },
     {
@@ -13521,7 +13665,7 @@
       "source_file": "apps/backend/src/api/admin/dispatch/batches/[id]/route.ts",
       "source_location": "L5",
       "id": "id_route_valid_transitions",
-      "community": 158,
+      "community": 143,
       "norm_label": "valid_transitions"
     },
     {
@@ -13593,7 +13737,7 @@
       "source_file": "apps/backend/src/api/admin/disputes/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_disputes_route_ts",
-      "community": 140,
+      "community": 226,
       "norm_label": "route.ts"
     },
     {
@@ -13602,7 +13746,7 @@
       "source_file": "apps/backend/src/api/admin/disputes/[id]/resolve/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_disputes_id_resolve_route_ts",
-      "community": 140,
+      "community": 198,
       "norm_label": "route.ts"
     },
     {
@@ -13611,7 +13755,7 @@
       "source_file": "apps/backend/src/api/admin/disputes/[id]/resolve/route.ts",
       "source_location": "L4",
       "id": "resolve_route_valid_resolutions",
-      "community": 140,
+      "community": 198,
       "norm_label": "valid_resolutions"
     },
     {
@@ -13620,7 +13764,7 @@
       "source_file": "apps/backend/src/api/admin/disputes/[id]/resolve/route.ts",
       "source_location": "L17",
       "id": "resolve_route_post",
-      "community": 140,
+      "community": 198,
       "norm_label": "post()"
     },
     {
@@ -14116,6 +14260,78 @@
       "source_location": "L226",
       "id": "cod_reconcile_page_config",
       "community": 196,
+      "norm_label": "config"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L1",
+      "id": "apps_backend_src_admin_routes_otc_counter_page_tsx",
+      "community": 229,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "CartLine",
+      "file_type": "code",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L26",
+      "id": "otc_counter_page_cartline",
+      "community": 229,
+      "norm_label": "cartline"
+    },
+    {
+      "label": "CustomerHit",
+      "file_type": "code",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L33",
+      "id": "otc_counter_page_customerhit",
+      "community": 229,
+      "norm_label": "customerhit"
+    },
+    {
+      "label": "peso()",
+      "file_type": "code",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L35",
+      "id": "otc_counter_page_peso",
+      "community": 229,
+      "norm_label": "peso()"
+    },
+    {
+      "label": "pesoMajor()",
+      "file_type": "code",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L36",
+      "id": "otc_counter_page_pesomajor",
+      "community": 229,
+      "norm_label": "pesomajor()"
+    },
+    {
+      "label": "useRegionId()",
+      "file_type": "code",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L38",
+      "id": "otc_counter_page_useregionid",
+      "community": 229,
+      "norm_label": "useregionid()"
+    },
+    {
+      "label": "OtcCounterPage()",
+      "file_type": "code",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L56",
+      "id": "otc_counter_page_otccounterpage",
+      "community": 229,
+      "norm_label": "otccounterpage()"
+    },
+    {
+      "label": "config",
+      "file_type": "code",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L449",
+      "id": "otc_counter_page_config",
+      "community": 229,
       "norm_label": "config"
     },
     {
@@ -14970,7 +15186,7 @@
       "source_file": "apps/backend/src/workflows/resolve-dispute.ts",
       "source_location": "L1",
       "id": "apps_backend_src_workflows_resolve_dispute_ts",
-      "community": 140,
+      "community": 198,
       "norm_label": "resolve-dispute.ts"
     },
     {
@@ -14979,7 +15195,7 @@
       "source_file": "apps/backend/src/workflows/resolve-dispute.ts",
       "source_location": "L10",
       "id": "workflows_resolve_dispute_resolution",
-      "community": 140,
+      "community": 198,
       "norm_label": "resolution"
     },
     {
@@ -14988,7 +15204,7 @@
       "source_file": "apps/backend/src/workflows/resolve-dispute.ts",
       "source_location": "L16",
       "id": "workflows_resolve_dispute_resolvedisputeinput",
-      "community": 140,
+      "community": 198,
       "norm_label": "resolvedisputeinput"
     },
     {
@@ -14997,7 +15213,7 @@
       "source_file": "apps/backend/src/workflows/resolve-dispute.ts",
       "source_location": "L23",
       "id": "workflows_resolve_dispute_accountstate",
-      "community": 140,
+      "community": 198,
       "norm_label": "accountstate"
     },
     {
@@ -15006,7 +15222,7 @@
       "source_file": "apps/backend/src/workflows/resolve-dispute.ts",
       "source_location": "L38",
       "id": "workflows_resolve_dispute_applybuyerfaultescalation",
-      "community": 140,
+      "community": 198,
       "norm_label": "applybuyerfaultescalation()"
     },
     {
@@ -15015,7 +15231,7 @@
       "source_file": "apps/backend/src/workflows/resolve-dispute.ts",
       "source_location": "L69",
       "id": "workflows_resolve_dispute_resolvestate",
-      "community": 140,
+      "community": 198,
       "norm_label": "resolvestate"
     },
     {
@@ -15024,7 +15240,7 @@
       "source_file": "apps/backend/src/workflows/resolve-dispute.ts",
       "source_location": "L79",
       "id": "workflows_resolve_dispute_resolvestep",
-      "community": 140,
+      "community": 198,
       "norm_label": "resolvestep"
     },
     {
@@ -15033,7 +15249,7 @@
       "source_file": "apps/backend/src/workflows/resolve-dispute.ts",
       "source_location": "L190",
       "id": "workflows_resolve_dispute_resolvedisputeworkflow",
-      "community": 140,
+      "community": 198,
       "norm_label": "resolvedisputeworkflow"
     },
     {
@@ -15150,7 +15366,7 @@
       "source_file": "apps/backend/src/lib/order-cash.ts",
       "source_location": "L1",
       "id": "apps_backend_src_lib_order_cash_ts",
-      "community": 200,
+      "community": 119,
       "norm_label": "order-cash.ts"
     },
     {
@@ -15159,7 +15375,7 @@
       "source_file": "apps/backend/src/lib/order-cash.ts",
       "source_location": "L15",
       "id": "lib_order_cash_ordercashstate",
-      "community": 200,
+      "community": 119,
       "norm_label": "ordercashstate"
     },
     {
@@ -15168,7 +15384,7 @@
       "source_file": "apps/backend/src/lib/order-cash.ts",
       "source_location": "L23",
       "id": "lib_order_cash_getordercashstate",
-      "community": 200,
+      "community": 119,
       "norm_label": "getordercashstate()"
     },
     {
@@ -15294,7 +15510,7 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L38",
       "id": "lib_delivery_actions_confirmdelivery",
-      "community": 119,
+      "community": 158,
       "norm_label": "confirmdelivery()"
     },
     {
@@ -15314,6 +15530,42 @@
       "id": "lib_delivery_actions_recordrefusal",
       "community": 158,
       "norm_label": "recordrefusal()"
+    },
+    {
+      "label": "otc-sale.ts",
+      "file_type": "code",
+      "source_file": "apps/backend/src/lib/otc-sale.ts",
+      "source_location": "L1",
+      "id": "apps_backend_src_lib_otc_sale_ts",
+      "community": 186,
+      "norm_label": "otc-sale.ts"
+    },
+    {
+      "label": "CodTx",
+      "file_type": "code",
+      "source_file": "apps/backend/src/lib/otc-sale.ts",
+      "source_location": "L18",
+      "id": "lib_otc_sale_codtx",
+      "community": 186,
+      "norm_label": "codtx"
+    },
+    {
+      "label": "RecordOtcResult",
+      "file_type": "code",
+      "source_file": "apps/backend/src/lib/otc-sale.ts",
+      "source_location": "L22",
+      "id": "lib_otc_sale_recordotcresult",
+      "community": 186,
+      "norm_label": "recordotcresult"
+    },
+    {
+      "label": "recordOtcCollected()",
+      "file_type": "code",
+      "source_file": "apps/backend/src/lib/otc-sale.ts",
+      "source_location": "L26",
+      "id": "lib_otc_sale_recordotccollected",
+      "community": 186,
+      "norm_label": "recordotccollected()"
     },
     {
       "label": "lock-dispatch-batches.ts",
@@ -15348,7 +15600,7 @@
       "source_file": "apps/backend/src/jobs/dispatch-batches-in-transit.ts",
       "source_location": "L1",
       "id": "apps_backend_src_jobs_dispatch_batches_in_transit_ts",
-      "community": 161,
+      "community": 158,
       "norm_label": "dispatch-batches-in-transit.ts"
     },
     {
@@ -15357,7 +15609,7 @@
       "source_file": "apps/backend/src/jobs/dispatch-batches-in-transit.ts",
       "source_location": "L17",
       "id": "jobs_dispatch_batches_in_transit_config",
-      "community": 161,
+      "community": 158,
       "norm_label": "config"
     },
     {
@@ -15366,7 +15618,7 @@
       "source_file": "apps/backend/src/jobs/dispatch-batches-in-transit.ts",
       "source_location": "L24",
       "id": "jobs_dispatch_batches_in_transit_parsehhmm",
-      "community": 161,
+      "community": 158,
       "norm_label": "parsehhmm()"
     },
     {
@@ -15375,7 +15627,7 @@
       "source_file": "apps/backend/src/jobs/dispatch-batches-in-transit.ts",
       "source_location": "L29",
       "id": "jobs_dispatch_batches_in_transit_dispatchbatchesintransit",
-      "community": 161,
+      "community": 158,
       "norm_label": "dispatchbatchesintransit()"
     },
     {
@@ -15456,7 +15708,7 @@
       "source_file": "apps/backend/src/jobs/clean-order-tick.ts",
       "source_location": "L1",
       "id": "apps_backend_src_jobs_clean_order_tick_ts",
-      "community": 140,
+      "community": 200,
       "norm_label": "clean-order-tick.ts"
     },
     {
@@ -15465,7 +15717,7 @@
       "source_file": "apps/backend/src/jobs/clean-order-tick.ts",
       "source_location": "L18",
       "id": "jobs_clean_order_tick_config",
-      "community": 140,
+      "community": 200,
       "norm_label": "config"
     },
     {
@@ -15474,7 +15726,7 @@
       "source_file": "apps/backend/src/jobs/clean-order-tick.ts",
       "source_location": "L25",
       "id": "jobs_clean_order_tick_cleanordertick",
-      "community": 140,
+      "community": 200,
       "norm_label": "cleanordertick()"
     },
     {
@@ -18919,7 +19171,7 @@
       "label": "Table of Contents",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L33",
+      "source_location": "L63",
       "id": "freshhub_implementation_plan_asbuilt_table_of_contents",
       "community": 253,
       "norm_label": "table of contents"
@@ -18928,7 +19180,7 @@
       "label": "1. What changed vs the v2 plan",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L49",
+      "source_location": "L79",
       "id": "freshhub_implementation_plan_asbuilt_1_what_changed_vs_the_v2_plan",
       "community": 253,
       "norm_label": "1. what changed vs the v2 plan"
@@ -18937,7 +19189,7 @@
       "label": "2. As-built architecture",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L66",
+      "source_location": "L96",
       "id": "freshhub_implementation_plan_asbuilt_2_as_built_architecture",
       "community": 253,
       "norm_label": "2. as-built architecture"
@@ -18946,7 +19198,7 @@
       "label": "code:block1 (freshhub/                         # Turborepo)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L68",
+      "source_location": "L98",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_1",
       "community": 253,
       "norm_label": "code:block1 (freshhub/                         # turborepo)"
@@ -18955,7 +19207,7 @@
       "label": "3. As-built data model",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L95",
+      "source_location": "L125",
       "id": "freshhub_implementation_plan_asbuilt_3_as_built_data_model",
       "community": 181,
       "norm_label": "3. as-built data model"
@@ -18964,7 +19216,7 @@
       "label": "hub  / hub_area",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L100",
+      "source_location": "L130",
       "id": "freshhub_implementation_plan_asbuilt_hub_hub_area",
       "community": 181,
       "norm_label": "hub  / hub_area"
@@ -18973,7 +19225,7 @@
       "label": "code:block2 (hub:        id, name, slug(unique), city, province, country=)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L101",
+      "source_location": "L131",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_2",
       "community": 181,
       "norm_label": "code:block2 (hub:        id, name, slug(unique), city, province, country=)"
@@ -18982,7 +19234,7 @@
       "label": "product_listing  (producer listings)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L109",
+      "source_location": "L139",
       "id": "freshhub_implementation_plan_asbuilt_product_listing_producer_listings",
       "community": 181,
       "norm_label": "product_listing  (producer listings)"
@@ -18991,7 +19243,7 @@
       "label": "code:block3 (product_listing: id,)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L110",
+      "source_location": "L140",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_3",
       "community": 181,
       "norm_label": "code:block3 (product_listing: id,)"
@@ -19000,7 +19252,7 @@
       "label": "pickup_window / pickup_slot  (sell-to-freshhub intake)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L118",
+      "source_location": "L148",
       "id": "freshhub_implementation_plan_asbuilt_pickup_window_pickup_slot_sell_to_freshhub_intake",
       "community": 181,
       "norm_label": "pickup_window / pickup_slot  (sell-to-freshhub intake)"
@@ -19009,7 +19261,7 @@
       "label": "code:block4 (pickup_window: id, hub_id, hub_area_id, date, start_time, en)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L119",
+      "source_location": "L149",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_4",
       "community": 181,
       "norm_label": "code:block4 (pickup_window: id, hub_id, hub_area_id, date, start_time, en)"
@@ -19018,7 +19270,7 @@
       "label": "dispatch_batch / dispatch_order  (delivery batching)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L128",
+      "source_location": "L158",
       "id": "freshhub_implementation_plan_asbuilt_dispatch_batch_dispatch_order_delivery_batching",
       "community": 181,
       "norm_label": "dispatch_batch / dispatch_order  (delivery batching)"
@@ -19027,7 +19279,7 @@
       "label": "code:block5 (dispatch_batch: id, hub_id, dispatch_date, cutoff_at, dispat)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L129",
+      "source_location": "L159",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_5",
       "community": 181,
       "norm_label": "code:block5 (dispatch_batch: id, hub_id, dispatch_date, cutoff_at, dispat)"
@@ -19036,7 +19288,7 @@
       "label": "rider  (delivery riders)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L137",
+      "source_location": "L167",
       "id": "freshhub_implementation_plan_asbuilt_rider_delivery_riders",
       "community": 181,
       "norm_label": "rider  (delivery riders)"
@@ -19045,7 +19297,7 @@
       "label": "code:block6 (rider: id, full_name, phone(unique), hub_id,)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L138",
+      "source_location": "L168",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_6",
       "community": 181,
       "norm_label": "code:block6 (rider: id, full_name, phone(unique), hub_id,)"
@@ -19054,7 +19306,7 @@
       "label": "hub_barangay_fee  (delivery pricing)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L145",
+      "source_location": "L175",
       "id": "freshhub_implementation_plan_asbuilt_hub_barangay_fee_delivery_pricing",
       "community": 181,
       "norm_label": "hub_barangay_fee  (delivery pricing)"
@@ -19063,7 +19315,7 @@
       "label": "code:block7 (hub_barangay_fee: id, hub_id, barangay, standard_fee_php, sp)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L146",
+      "source_location": "L176",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_7",
       "community": 181,
       "norm_label": "code:block7 (hub_barangay_fee: id, hub_id, barangay, standard_fee_php, sp)"
@@ -19072,7 +19324,7 @@
       "label": "cod_transaction  (cash ledger)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L151",
+      "source_location": "L181",
       "id": "freshhub_implementation_plan_asbuilt_cod_transaction_cash_ledger",
       "community": 181,
       "norm_label": "cod_transaction  (cash ledger)"
@@ -19081,34 +19333,34 @@
       "label": "code:block8 (cod_transaction: id, customer_id, order_id?,)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L152",
+      "source_location": "L182",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_8",
-      "community": 186,
+      "community": 181,
       "norm_label": "code:block8 (cod_transaction: id, customer_id, order_id?,)"
     },
     {
       "label": "buyer_account_status / refusal_dispute  (accountability)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L159",
+      "source_location": "L189",
       "id": "freshhub_implementation_plan_asbuilt_buyer_account_status_refusal_dispute_accountability",
-      "community": 186,
+      "community": 181,
       "norm_label": "buyer_account_status / refusal_dispute  (accountability)"
     },
     {
       "label": "code:block9 (buyer_account_status: id, customer_id(unique), strike_count=)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L160",
+      "source_location": "L190",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_9",
-      "community": 186,
+      "community": 181,
       "norm_label": "code:block9 (buyer_account_status: id, customer_id(unique), strike_count=)"
     },
     {
       "label": "Membership (no table \u2014 metadata on `customer`)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L174",
+      "source_location": "L204",
       "id": "freshhub_implementation_plan_asbuilt_membership_no_table_metadata_on_customer",
       "community": 181,
       "norm_label": "membership (no table \u2014 metadata on `customer`)"
@@ -19117,7 +19369,7 @@
       "label": "Seller (no table \u2014 metadata on `customer`)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L181",
+      "source_location": "L211",
       "id": "freshhub_implementation_plan_asbuilt_seller_no_table_metadata_on_customer",
       "community": 181,
       "norm_label": "seller (no table \u2014 metadata on `customer`)"
@@ -19126,7 +19378,7 @@
       "label": "Links",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L185",
+      "source_location": "L215",
       "id": "freshhub_implementation_plan_asbuilt_links",
       "community": 181,
       "norm_label": "links"
@@ -19135,7 +19387,7 @@
       "label": "4. Modules & responsibilities",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L192",
+      "source_location": "L222",
       "id": "freshhub_implementation_plan_asbuilt_4_modules_responsibilities",
       "community": 253,
       "norm_label": "4. modules & responsibilities"
@@ -19144,7 +19396,7 @@
       "label": "5. Core flows (as built)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L211",
+      "source_location": "L241",
       "id": "freshhub_implementation_plan_asbuilt_5_core_flows_as_built",
       "community": 247,
       "norm_label": "5. core flows (as built)"
@@ -19153,7 +19405,7 @@
       "label": "5.1 Hub scoping & catalog",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L213",
+      "source_location": "L243",
       "id": "freshhub_implementation_plan_asbuilt_5_1_hub_scoping_catalog",
       "community": 247,
       "norm_label": "5.1 hub scoping & catalog"
@@ -19162,7 +19414,7 @@
       "label": "5.2 Producer listing \u2192 pickup (sell-to-freshhub)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L218",
+      "source_location": "L248",
       "id": "freshhub_implementation_plan_asbuilt_5_2_producer_listing_pickup_sell_to_freshhub",
       "community": 247,
       "norm_label": "5.2 producer listing \u2192 pickup (sell-to-freshhub)"
@@ -19171,7 +19423,7 @@
       "label": "code:block10 (Seller (account_type=producer, seller_verified=true) creates)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L219",
+      "source_location": "L249",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_10",
       "community": 247,
       "norm_label": "code:block10 (seller (account_type=producer, seller_verified=true) creates)"
@@ -19180,7 +19432,7 @@
       "label": "5.3 Checkout \u2192 delivery tier selection",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L228",
+      "source_location": "L258",
       "id": "freshhub_implementation_plan_asbuilt_5_3_checkout_delivery_tier_selection",
       "community": 247,
       "norm_label": "5.3 checkout \u2192 delivery tier selection"
@@ -19189,7 +19441,7 @@
       "label": "5.4 Order \u2192 dispatch batch",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L242",
+      "source_location": "L272",
       "id": "freshhub_implementation_plan_asbuilt_5_4_order_dispatch_batch",
       "community": 247,
       "norm_label": "5.4 order \u2192 dispatch batch"
@@ -19198,7 +19450,7 @@
       "label": "code:block11 (order.placed \u2192 assign-order-to-dispatch workflow)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L243",
+      "source_location": "L273",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_11",
       "community": 247,
       "norm_label": "code:block11 (order.placed \u2192 assign-order-to-dispatch workflow)"
@@ -19207,7 +19459,7 @@
       "label": "5.5 COD cash lifecycle",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L253",
+      "source_location": "L283",
       "id": "freshhub_implementation_plan_asbuilt_5_5_cod_cash_lifecycle",
       "community": 247,
       "norm_label": "5.5 cod cash lifecycle"
@@ -19216,7 +19468,7 @@
       "label": "code:block12 (rider delivers \u2192 admin POST /admin/orders/:id/cod-collected )",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L255",
+      "source_location": "L285",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_12",
       "community": 247,
       "norm_label": "code:block12 (rider delivers \u2192 admin post /admin/orders/:id/cod-collected )"
@@ -19225,7 +19477,7 @@
       "label": "5.6 Refusal \u2192 dispute \u2192 strike \u2192 prepay-lock",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L272",
+      "source_location": "L302",
       "id": "freshhub_implementation_plan_asbuilt_5_6_refusal_dispute_strike_prepay_lock",
       "community": 247,
       "norm_label": "5.6 refusal \u2192 dispute \u2192 strike \u2192 prepay-lock"
@@ -19234,7 +19486,7 @@
       "label": "code:block13 (rider marks refusal \u2192 POST /admin/dispatch-orders/:id/refusa)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L273",
+      "source_location": "L303",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_13",
       "community": 247,
       "norm_label": "code:block13 (rider marks refusal \u2192 post /admin/dispatch-orders/:id/refusa)"
@@ -19243,7 +19495,7 @@
       "label": "5.7 Membership lifecycle",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L292",
+      "source_location": "L322",
       "id": "freshhub_implementation_plan_asbuilt_5_7_membership_lifecycle",
       "community": 247,
       "norm_label": "5.7 membership lifecycle"
@@ -19252,16 +19504,16 @@
       "label": "code:block14 (storefront request \u2192 membership_status=pending + payment ref)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L293",
+      "source_location": "L323",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_14",
-      "community": 247,
+      "community": 267,
       "norm_label": "code:block14 (storefront request \u2192 membership_status=pending + payment ref)"
     },
     {
       "label": "6. API surface (as built)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L304",
+      "source_location": "L334",
       "id": "freshhub_implementation_plan_asbuilt_6_api_surface_as_built",
       "community": 267,
       "norm_label": "6. api surface (as built)"
@@ -19270,7 +19522,7 @@
       "label": "Store",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L306",
+      "source_location": "L336",
       "id": "freshhub_implementation_plan_asbuilt_store",
       "community": 267,
       "norm_label": "store"
@@ -19279,7 +19531,7 @@
       "label": "code:block15 (GET    /store/hubs                                  list act)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L307",
+      "source_location": "L337",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_15",
       "community": 267,
       "norm_label": "code:block15 (get    /store/hubs                                  list act)"
@@ -19288,7 +19540,7 @@
       "label": "Admin",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L327",
+      "source_location": "L358",
       "id": "freshhub_implementation_plan_asbuilt_admin",
       "community": 267,
       "norm_label": "admin"
@@ -19297,16 +19549,34 @@
       "label": "code:block16 (GET/POST/PATCH /admin/hubs, /admin/hubs/:id)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L328",
+      "source_location": "L359",
       "id": "freshhub_implementation_plan_asbuilt_codeblock_16",
       "community": 267,
       "norm_label": "code:block16 (get/post/patch /admin/hubs, /admin/hubs/:id)"
     },
     {
+      "label": "Rider (self-service; HS256 rider token)",
+      "file_type": "document",
+      "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
+      "source_location": "L378",
+      "id": "freshhub_implementation_plan_asbuilt_rider_self_service_hs256_rider_token",
+      "community": 267,
+      "norm_label": "rider (self-service; hs256 rider token)"
+    },
+    {
+      "label": "code:block17 (POST   /rider/auth/login                     phone + PIN \u2192 3)",
+      "file_type": "document",
+      "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
+      "source_location": "L379",
+      "id": "freshhub_implementation_plan_asbuilt_codeblock_17",
+      "community": 267,
+      "norm_label": "code:block17 (post   /rider/auth/login                     phone + pin \u2192 3)"
+    },
+    {
       "label": "7. Admin surface (as built)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L352",
+      "source_location": "L394",
       "id": "freshhub_implementation_plan_asbuilt_7_admin_surface_as_built",
       "community": 253,
       "norm_label": "7. admin surface (as built)"
@@ -19315,7 +19585,7 @@
       "label": "8. Background jobs",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L360",
+      "source_location": "L402",
       "id": "freshhub_implementation_plan_asbuilt_8_background_jobs",
       "community": 253,
       "norm_label": "8. background jobs"
@@ -19324,7 +19594,7 @@
       "label": "9. Shipped vs partial \u2014 status matrix",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L372",
+      "source_location": "L414",
       "id": "freshhub_implementation_plan_asbuilt_9_shipped_vs_partial_status_matrix",
       "community": 253,
       "norm_label": "9. shipped vs partial \u2014 status matrix"
@@ -19333,25 +19603,25 @@
       "label": "10. Gaps & forward roadmap",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L397",
+      "source_location": "L442",
       "id": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
       "community": 259,
       "norm_label": "10. gaps & forward roadmap"
     },
     {
-      "label": "Phase A \u2014 Make prepay-lock resolve to OTC (highest priority)",
+      "label": "Phase A \u2014 Walk-in OTC counter (reframed 2026-06-10, highest priority)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L401",
-      "id": "freshhub_implementation_plan_asbuilt_phase_a_make_prepay_lock_resolve_to_otc_highest_priority",
+      "source_location": "L446",
+      "id": "freshhub_implementation_plan_asbuilt_phase_a_walk_in_otc_counter_reframed_2026_06_10_highest_priority",
       "community": 259,
-      "norm_label": "phase a \u2014 make prepay-lock resolve to otc (highest priority)"
+      "norm_label": "phase a \u2014 walk-in otc counter (reframed 2026-06-10, highest priority)"
     },
     {
       "label": "Phase B \u2014 Notifications (email + push)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L433",
+      "source_location": "L483",
       "id": "freshhub_implementation_plan_asbuilt_phase_b_notifications_email_push",
       "community": 259,
       "norm_label": "phase b \u2014 notifications (email + push)"
@@ -19360,7 +19630,7 @@
       "label": "Phase C \u2014 Membership lifecycle automation",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L441",
+      "source_location": "L491",
       "id": "freshhub_implementation_plan_asbuilt_phase_c_membership_lifecycle_automation",
       "community": 259,
       "norm_label": "phase c \u2014 membership lifecycle automation"
@@ -19369,7 +19639,7 @@
       "label": "Phase D \u2014 Trader (B2B) pricing",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L449",
+      "source_location": "L499",
       "id": "freshhub_implementation_plan_asbuilt_phase_d_trader_b2b_pricing",
       "community": 259,
       "norm_label": "phase d \u2014 trader (b2b) pricing"
@@ -19378,7 +19648,7 @@
       "label": "Phase E \u2014 Rider operations & accountability",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L456",
+      "source_location": "L506",
       "id": "freshhub_implementation_plan_asbuilt_phase_e_rider_operations_accountability",
       "community": 259,
       "norm_label": "phase e \u2014 rider operations & accountability"
@@ -19387,7 +19657,7 @@
       "label": "Phase F \u2014 Multi-hub readiness",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L491",
+      "source_location": "L546",
       "id": "freshhub_implementation_plan_asbuilt_phase_f_multi_hub_readiness",
       "community": 259,
       "norm_label": "phase f \u2014 multi-hub readiness"
@@ -19396,7 +19666,7 @@
       "label": "Phase G \u2014 Dispute fairness & SLAs",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L497",
+      "source_location": "L552",
       "id": "freshhub_implementation_plan_asbuilt_phase_g_dispute_fairness_slas",
       "community": 259,
       "norm_label": "phase g \u2014 dispute fairness & slas"
@@ -19405,7 +19675,7 @@
       "label": "Phase H \u2014 Hardening",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L503",
+      "source_location": "L558",
       "id": "freshhub_implementation_plan_asbuilt_phase_h_hardening",
       "community": 259,
       "norm_label": "phase h \u2014 hardening"
@@ -19414,7 +19684,7 @@
       "label": "11. Risks to watch",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L510",
+      "source_location": "L565",
       "id": "freshhub_implementation_plan_asbuilt_11_risks_to_watch",
       "community": 253,
       "norm_label": "11. risks to watch"
@@ -19423,7 +19693,7 @@
       "label": "12. Deferred roadmap (superseded v2 ideas)",
       "file_type": "document",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L526",
+      "source_location": "L581",
       "id": "freshhub_implementation_plan_asbuilt_12_deferred_roadmap_superseded_v2_ideas",
       "community": 253,
       "norm_label": "12. deferred roadmap (superseded v2 ideas)"
@@ -19951,11 +20221,20 @@
       "norm_label": "code:ts (import {)"
     },
     {
+      "label": "Phase A \u2014 Make prepay-lock resolve to OTC (highest priority)",
+      "file_type": "document",
+      "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
+      "source_location": "L401",
+      "community": 259,
+      "norm_label": "phase a \u2014 make prepay-lock resolve to otc (highest priority)",
+      "id": "freshhub_implementation_plan_asbuilt_phase_a_make_prepay_lock_resolve_to_otc_highest_priority"
+    },
+    {
       "label": "CodTx",
       "file_type": "code",
       "source_file": "apps/backend/src/api/admin/dispatch-orders/[id]/delivered/route.ts",
       "source_location": "L11",
-      "community": 119,
+      "community": 158,
       "norm_label": "codtx",
       "id": "delivered_route_codtx"
     },
@@ -21539,7 +21818,7 @@
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/customer/deposit/route.ts",
       "source_location": "L1",
-      "community": 233,
+      "community": 119,
       "norm_label": "route.ts",
       "id": "apps_backend_src_api_store_customer_deposit_route_ts"
     },
@@ -21548,7 +21827,7 @@
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/customer/deposit/route.ts",
       "source_location": "L5",
-      "community": 233,
+      "community": 119,
       "norm_label": "getcustomerid()",
       "id": "deposit_route_getcustomerid"
     },
@@ -21557,7 +21836,7 @@
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/customer/deposit/route.ts",
       "source_location": "L14",
-      "community": 233,
+      "community": 119,
       "norm_label": "get()",
       "id": "deposit_route_get"
     },
@@ -21566,7 +21845,7 @@
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/customer/deposit/initiate/route.ts",
       "source_location": "L1",
-      "community": 229,
+      "community": 119,
       "norm_label": "route.ts",
       "id": "apps_backend_src_api_store_customer_deposit_initiate_route_ts"
     },
@@ -21575,7 +21854,7 @@
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/customer/deposit/initiate/route.ts",
       "source_location": "L9",
-      "community": 229,
+      "community": 119,
       "norm_label": "getcustomerid()",
       "id": "initiate_route_getcustomerid"
     },
@@ -21584,7 +21863,7 @@
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/customer/deposit/initiate/route.ts",
       "source_location": "L23",
-      "community": 229,
+      "community": 119,
       "norm_label": "post()",
       "id": "initiate_route_post"
     },
@@ -21827,7 +22106,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L45",
-      "community": 264,
+      "community": 223,
       "norm_label": "isvalidphone()",
       "id": "data_onboarding_isvalidphone"
     },
@@ -21836,7 +22115,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L238",
-      "community": 264,
+      "community": 223,
       "norm_label": "deferonboarding()",
       "id": "data_onboarding_deferonboarding"
     },
@@ -21845,7 +22124,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/templates/login-template.tsx",
       "source_location": "L8",
-      "community": 265,
+      "community": 135,
       "norm_label": "login_view",
       "id": "templates_login_template_login_view"
     },
@@ -21872,7 +22151,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/login/index.tsx",
       "source_location": "L1",
-      "community": 265,
+      "community": 135,
       "norm_label": "index.tsx",
       "id": "apps_storefront_src_modules_account_components_login_index_tsx"
     },
@@ -21881,7 +22160,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/login/index.tsx",
       "source_location": "L8",
-      "community": 265,
+      "community": 135,
       "norm_label": "props",
       "id": "login_index_props"
     },
@@ -21890,7 +22169,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/login/index.tsx",
       "source_location": "L12",
-      "community": 265,
+      "community": 135,
       "norm_label": "login()",
       "id": "login_index_login"
     },
@@ -21899,7 +22178,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/register/index.tsx",
       "source_location": "L1",
-      "community": 265,
+      "community": 135,
       "norm_label": "index.tsx",
       "id": "apps_storefront_src_modules_account_components_register_index_tsx"
     },
@@ -21908,7 +22187,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/register/index.tsx",
       "source_location": "L11",
-      "community": 265,
+      "community": 135,
       "norm_label": "props",
       "id": "register_index_props"
     },
@@ -21917,7 +22196,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/register/index.tsx",
       "source_location": "L15",
-      "community": 265,
+      "community": 135,
       "norm_label": "register()",
       "id": "register_index_register"
     },
@@ -21926,7 +22205,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L35",
-      "community": 130,
+      "community": 16,
       "norm_label": "regionmap",
       "id": "data_regions_regionmap"
     },
@@ -25520,6 +25799,17 @@
       "confidence_score": 1.0,
       "source": "apps_storefront_src_modules_checkout_templates_checkout_form_index_tsx",
       "target": "lib_constants_iscod"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/storefront/src/modules/checkout/templates/checkout-form/index.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_storefront_src_modules_checkout_templates_checkout_form_index_tsx",
+      "target": "lib_constants_isotc",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -41038,9 +41328,9 @@
       "source_file": "apps/backend/src/api/rider/manifest/route.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_manifest_route_ts",
-      "target": "apps_backend_src_modules_dispatch_index_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_dispatch_index_ts"
     },
     {
       "relation": "imports_from",
@@ -41049,9 +41339,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/refused/route.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_refused_route_ts",
-      "target": "apps_backend_src_modules_dispatch_index_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_dispatch_index_ts"
     },
     {
       "relation": "imports_from",
@@ -41060,9 +41350,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/delivered/route.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_delivered_route_ts",
-      "target": "apps_backend_src_modules_dispatch_index_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_dispatch_index_ts"
     },
     {
       "relation": "imports_from",
@@ -41082,9 +41372,9 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
-      "target": "apps_backend_src_modules_dispatch_index_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_dispatch_index_ts"
     },
     {
       "relation": "imports_from",
@@ -41213,9 +41503,9 @@
       "source_file": "apps/backend/src/api/rider/manifest/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_manifest_route_ts",
-      "target": "apps_backend_src_modules_dispatch_service_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_dispatch_service_ts"
     },
     {
       "relation": "imports_from",
@@ -41224,9 +41514,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/refused/route.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_refused_route_ts",
-      "target": "apps_backend_src_modules_dispatch_service_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_dispatch_service_ts"
     },
     {
       "relation": "imports_from",
@@ -41235,9 +41525,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/delivered/route.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_delivered_route_ts",
-      "target": "apps_backend_src_modules_dispatch_service_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_dispatch_service_ts"
     },
     {
       "relation": "imports_from",
@@ -41257,9 +41547,9 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
-      "target": "apps_backend_src_modules_dispatch_service_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_dispatch_service_ts"
     },
     {
       "relation": "imports_from",
@@ -41424,6 +41714,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_store_payment_methods_tests_payment_methods_unit_spec_ts",
+      "target": "apps_backend_src_modules_accountability_index_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "apps/backend/src/api/store/customer/disputes/route.ts",
       "source_location": "L2",
       "weight": 1.0,
@@ -41482,9 +41783,9 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
-      "target": "apps_backend_src_modules_accountability_index_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_accountability_index_ts"
     },
     {
       "relation": "imports_from",
@@ -41657,9 +41958,9 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
-      "target": "apps_backend_src_modules_accountability_service_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_accountability_service_ts"
     },
     {
       "relation": "imports_from",
@@ -42745,23 +43046,34 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
-      "source_location": "L5",
+      "source_file": "apps/backend/src/lib/delivery-actions.ts",
+      "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
+      "source": "apps_backend_src_lib_delivery_actions_ts",
       "target": "apps_backend_src_modules_cod_ledger_is_duplicate_ts"
     },
     {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "apps/backend/src/lib/delivery-actions.ts",
-      "source_location": "L7",
+      "source_file": "apps/backend/src/lib/otc-sale.ts",
+      "source_location": "L4",
       "weight": 1.0,
-      "source": "apps_backend_src_lib_delivery_actions_ts",
+      "source": "apps_backend_src_lib_otc_sale_ts",
       "target": "apps_backend_src_modules_cod_ledger_is_duplicate_ts",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
+      "target": "apps_backend_src_modules_cod_ledger_is_duplicate_ts"
     },
     {
       "relation": "imports_from",
@@ -42811,21 +43123,21 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
-      "source_location": "L5",
+      "source_file": "apps/backend/src/lib/delivery-actions.ts",
+      "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
+      "source": "apps_backend_src_lib_delivery_actions_ts",
       "target": "cod_ledger_is_duplicate_isduplicatecodtransaction"
     },
     {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "apps/backend/src/lib/delivery-actions.ts",
-      "source_location": "L7",
+      "source_file": "apps/backend/src/lib/otc-sale.ts",
+      "source_location": "L4",
       "weight": 1.0,
-      "source": "apps_backend_src_lib_delivery_actions_ts",
+      "source": "apps_backend_src_lib_otc_sale_ts",
       "target": "cod_ledger_is_duplicate_isduplicatecodtransaction",
       "confidence_score": 1.0
     },
@@ -42856,10 +43168,10 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
-      "source_location": "L82",
+      "source_file": "apps/backend/src/lib/delivery-actions.ts",
+      "source_location": "L125",
       "weight": 1.0,
-      "source": "otc_collected_route_post",
+      "source": "lib_delivery_actions_confirmdelivery",
       "target": "cod_ledger_is_duplicate_isduplicatecodtransaction"
     },
     {
@@ -42867,10 +43179,32 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "apps/backend/src/lib/delivery-actions.ts",
-      "source_location": "L125",
+      "source_file": "apps/backend/src/lib/otc-sale.ts",
+      "source_location": "L67",
       "weight": 1.0,
-      "source": "lib_delivery_actions_confirmdelivery",
+      "source": "lib_otc_sale_recordotccollected",
+      "target": "cod_ledger_is_duplicate_isduplicatecodtransaction"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
+      "target": "cod_ledger_is_duplicate_isduplicatecodtransaction"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "otc_collected_route_post",
       "target": "cod_ledger_is_duplicate_isduplicatecodtransaction"
     },
     {
@@ -42921,6 +43255,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_admin_otc_counter_route_ts",
+      "target": "apps_backend_src_modules_cod_ledger_index_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "apps/backend/src/api/admin/orders/[id]/cod-remitted/route.ts",
       "source_location": "L3",
       "weight": 1.0,
@@ -42943,23 +43288,12 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
-      "target": "apps_backend_src_modules_cod_ledger_index_ts"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "apps/backend/src/lib/order-cash.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_order_cash_ts",
-      "target": "apps_backend_src_modules_cod_ledger_index_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_cod_ledger_index_ts"
     },
     {
       "relation": "imports_from",
@@ -42968,7 +43302,18 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
+      "target": "apps_backend_src_modules_cod_ledger_index_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/lib/otc-sale.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "apps_backend_src_lib_otc_sale_ts",
       "target": "apps_backend_src_modules_cod_ledger_index_ts",
       "confidence_score": 1.0
     },
@@ -42992,6 +43337,17 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_modules_bindings_d_ts",
+      "target": "apps_backend_src_modules_cod_ledger_index_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
       "target": "apps_backend_src_modules_cod_ledger_index_ts"
     },
     {
@@ -43107,6 +43463,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_admin_otc_counter_route_ts",
+      "target": "apps_backend_src_modules_cod_ledger_service_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "apps/backend/src/api/admin/orders/[id]/cod-remitted/route.ts",
       "source_location": "L4",
       "weight": 1.0,
@@ -43129,23 +43496,12 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
-      "target": "apps_backend_src_modules_cod_ledger_service_ts"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "apps/backend/src/lib/order-cash.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_order_cash_ts",
-      "target": "apps_backend_src_modules_cod_ledger_service_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_cod_ledger_service_ts"
     },
     {
       "relation": "imports_from",
@@ -43154,7 +43510,18 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
+      "target": "apps_backend_src_modules_cod_ledger_service_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/lib/otc-sale.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_backend_src_lib_otc_sale_ts",
       "target": "apps_backend_src_modules_cod_ledger_service_ts",
       "confidence_score": 1.0
     },
@@ -43167,6 +43534,17 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_backend_src_jobs_rider_unremitted_tick_ts",
+      "target": "apps_backend_src_modules_cod_ledger_service_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
       "target": "apps_backend_src_modules_cod_ledger_service_ts"
     },
     {
@@ -43508,9 +43886,9 @@
       "source_file": "apps/backend/src/api/rider/me/route.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_me_route_ts",
-      "target": "apps_backend_src_modules_rider_index_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_rider_index_ts"
     },
     {
       "relation": "imports_from",
@@ -43519,9 +43897,9 @@
       "source_file": "apps/backend/src/api/rider/auth/login/route.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_auth_login_route_ts",
-      "target": "apps_backend_src_modules_rider_index_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_rider_index_ts"
     },
     {
       "relation": "imports_from",
@@ -43617,9 +43995,9 @@
       "source_file": "apps/backend/src/api/rider/me/route.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_me_route_ts",
-      "target": "apps_backend_src_modules_rider_service_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_rider_service_ts"
     },
     {
       "relation": "imports_from",
@@ -43628,9 +44006,9 @@
       "source_file": "apps/backend/src/api/rider/auth/login/route.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_auth_login_route_ts",
-      "target": "apps_backend_src_modules_rider_service_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_rider_service_ts"
     },
     {
       "relation": "imports_from",
@@ -43649,9 +44027,9 @@
       "source_file": "apps/backend/src/modules/rider/pin.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_modules_rider_pin_ts",
-      "target": "rider_pin_hashpin",
-      "confidence_score": 1.0
+      "target": "rider_pin_hashpin"
     },
     {
       "relation": "contains",
@@ -43659,9 +44037,9 @@
       "source_file": "apps/backend/src/modules/rider/pin.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_modules_rider_pin_ts",
-      "target": "rider_pin_verifypin",
-      "confidence_score": 1.0
+      "target": "rider_pin_verifypin"
     },
     {
       "relation": "imports_from",
@@ -43670,9 +44048,9 @@
       "source_file": "apps/backend/src/api/admin/riders/route.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_riders_route_ts",
-      "target": "apps_backend_src_modules_rider_pin_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_rider_pin_ts"
     },
     {
       "relation": "imports_from",
@@ -43681,9 +44059,9 @@
       "source_file": "apps/backend/src/api/admin/riders/[id]/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_riders_id_route_ts",
-      "target": "apps_backend_src_modules_rider_pin_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_rider_pin_ts"
     },
     {
       "relation": "imports_from",
@@ -43692,9 +44070,9 @@
       "source_file": "apps/backend/src/api/rider/auth/login/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_auth_login_route_ts",
-      "target": "apps_backend_src_modules_rider_pin_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_modules_rider_pin_ts"
     },
     {
       "relation": "imports",
@@ -43703,9 +44081,9 @@
       "source_file": "apps/backend/src/api/admin/riders/route.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_riders_route_ts",
-      "target": "rider_pin_hashpin",
-      "confidence_score": 1.0
+      "target": "rider_pin_hashpin"
     },
     {
       "relation": "imports",
@@ -43714,9 +44092,9 @@
       "source_file": "apps/backend/src/api/admin/riders/[id]/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_riders_id_route_ts",
-      "target": "rider_pin_hashpin",
-      "confidence_score": 1.0
+      "target": "rider_pin_hashpin"
     },
     {
       "relation": "calls",
@@ -43747,9 +44125,9 @@
       "source_file": "apps/backend/src/api/rider/auth/login/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_auth_login_route_ts",
-      "target": "rider_pin_verifypin",
-      "confidence_score": 1.0
+      "target": "rider_pin_verifypin"
     },
     {
       "relation": "calls",
@@ -43854,6 +44232,17 @@
       "target": "subscribers_order_placed_config"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "apps_backend_src_subscribers_tests_order_placed_unit_spec_ts",
+      "target": "apps_backend_src_subscribers_order_placed_ts",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -43865,15 +44254,88 @@
       "target": "workflows_assign_order_to_dispatch_assignordertodispatchworkflow"
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "tests_order_placed_unit_spec_run",
+      "target": "subscribers_order_placed_orderplacedhandler"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "apps_backend_src_subscribers_tests_order_placed_unit_spec_ts",
+      "target": "apps_backend_src_workflows_assign_order_to_dispatch_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "apps_backend_src_subscribers_tests_order_placed_unit_spec_ts",
+      "target": "tests_order_placed_unit_spec_assignmock",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "apps_backend_src_subscribers_tests_order_placed_unit_spec_ts",
+      "target": "tests_order_placed_unit_spec_makecontainer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "apps_backend_src_subscribers_tests_order_placed_unit_spec_ts",
+      "target": "tests_order_placed_unit_spec_run",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "apps_backend_src_subscribers_tests_order_placed_unit_spec_ts",
+      "target": "tests_order_placed_unit_spec_run0",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/subscribers/__tests__/order-placed.unit.spec.ts",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "tests_order_placed_unit_spec_run",
+      "target": "tests_order_placed_unit_spec_makecontainer",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/src/api/middlewares.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_middlewares_ts",
-      "target": "apps_backend_src_lib_rider_auth_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_lib_rider_auth_ts"
     },
     {
       "relation": "imports",
@@ -43882,9 +44344,9 @@
       "source_file": "apps/backend/src/api/middlewares.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_middlewares_ts",
-      "target": "lib_rider_auth_authenticaterider",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_authenticaterider"
     },
     {
       "relation": "contains",
@@ -44119,6 +44581,78 @@
       "confidence_score": 1.0,
       "source": "apps_backend_src_api_store_payment_methods_route_ts",
       "target": "payment_methods_route_get"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_store_payment_methods_tests_payment_methods_unit_spec_ts",
+      "target": "apps_backend_src_api_store_payment_methods_route_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_store_payment_methods_tests_payment_methods_unit_spec_ts",
+      "target": "payment_methods_route_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_store_payment_methods_tests_payment_methods_unit_spec_ts",
+      "target": "tests_payment_methods_unit_spec_json",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_store_payment_methods_tests_payment_methods_unit_spec_ts",
+      "target": "tests_payment_methods_unit_spec_makereq",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_store_payment_methods_tests_payment_methods_unit_spec_ts",
+      "target": "tests_payment_methods_unit_spec_makeres",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_store_payment_methods_tests_payment_methods_unit_spec_ts",
+      "target": "tests_payment_methods_unit_spec_res_captured",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/store/payment-methods/__tests__/payment-methods.unit.spec.ts",
+      "source_location": "L77",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_store_payment_methods_tests_payment_methods_unit_spec_ts",
+      "target": "tests_payment_methods_unit_spec_body",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -44686,6 +45220,90 @@
       "target": "cod_reconcile_route_get"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_admin_otc_counter_route_ts",
+      "target": "apps_backend_src_lib_otc_sale_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_admin_otc_counter_route_ts",
+      "target": "lib_otc_sale_recordotccollected",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_admin_otc_counter_route_ts",
+      "target": "otc_counter_route_counteritem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_admin_otc_counter_route_ts",
+      "target": "otc_counter_route_actorid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_admin_otc_counter_route_ts",
+      "target": "otc_counter_route_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L216",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_admin_otc_counter_route_ts",
+      "target": "otc_counter_route_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "otc_counter_route_post",
+      "target": "otc_counter_route_actorid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/backend/src/api/admin/otc-counter/route.ts",
+      "source_location": "L177",
+      "weight": 1.0,
+      "source": "otc_counter_route_post",
+      "target": "lib_otc_sale_recordotccollected"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/src/api/admin/memberships/route.ts",
@@ -44925,9 +45543,9 @@
       "source_file": "apps/backend/src/api/admin/dispatch-orders/[id]/refusal/route.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_dispatch_orders_id_refusal_route_ts",
-      "target": "apps_backend_src_lib_delivery_actions_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_lib_delivery_actions_ts"
     },
     {
       "relation": "imports",
@@ -44936,9 +45554,9 @@
       "source_file": "apps/backend/src/api/admin/dispatch-orders/[id]/refusal/route.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_dispatch_orders_id_refusal_route_ts",
-      "target": "lib_delivery_actions_recordrefusal",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_recordrefusal"
     },
     {
       "relation": "contains",
@@ -44968,9 +45586,9 @@
       "source_file": "apps/backend/src/api/admin/dispatch-orders/[id]/delivered/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_dispatch_orders_id_delivered_route_ts",
-      "target": "apps_backend_src_lib_delivery_actions_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_lib_delivery_actions_ts"
     },
     {
       "relation": "imports",
@@ -44979,9 +45597,9 @@
       "source_file": "apps/backend/src/api/admin/dispatch-orders/[id]/delivered/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_dispatch_orders_id_delivered_route_ts",
-      "target": "lib_delivery_actions_confirmdelivery",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_confirmdelivery"
     },
     {
       "relation": "contains",
@@ -45009,9 +45627,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/delivered/route.ts",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_delivered_route_ts",
-      "target": "delivered_route_post",
-      "confidence_score": 1.0
+      "target": "delivered_route_post"
     },
     {
       "relation": "calls",
@@ -45102,9 +45720,9 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cash-state/route.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_orders_id_cash_state_route_ts",
-      "target": "apps_backend_src_lib_order_cash_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_lib_order_cash_ts"
     },
     {
       "relation": "imports",
@@ -45113,9 +45731,9 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cash-state/route.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_orders_id_cash_state_route_ts",
-      "target": "lib_order_cash_getordercashstate",
-      "confidence_score": 1.0
+      "target": "lib_order_cash_getordercashstate"
     },
     {
       "relation": "contains",
@@ -45123,9 +45741,9 @@
       "source_file": "apps/backend/src/api/admin/orders/[id]/cash-state/route.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_orders_id_cash_state_route_ts",
-      "target": "cash_state_route_get",
-      "confidence_score": 1.0
+      "target": "cash_state_route_get"
     },
     {
       "relation": "calls",
@@ -45159,6 +45777,28 @@
       "target": "cod_collected_route_post"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
+      "target": "apps_backend_src_lib_otc_sale_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
+      "target": "lib_otc_sale_recordotccollected",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
@@ -45167,6 +45807,17 @@
       "confidence_score": 1.0,
       "source": "apps_backend_src_api_admin_orders_id_otc_collected_route_ts",
       "target": "otc_collected_route_post"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/backend/src/api/admin/orders/[id]/otc-collected/route.ts",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "otc_collected_route_post",
+      "target": "lib_otc_sale_recordotccollected"
     },
     {
       "relation": "contains",
@@ -45337,9 +45988,9 @@
       "source_file": "apps/backend/src/api/rider/manifest/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_manifest_route_ts",
-      "target": "apps_backend_src_lib_rider_auth_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_lib_rider_auth_ts"
     },
     {
       "relation": "imports",
@@ -45348,9 +45999,9 @@
       "source_file": "apps/backend/src/api/rider/manifest/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_manifest_route_ts",
-      "target": "lib_rider_auth_getriderid",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_getriderid"
     },
     {
       "relation": "contains",
@@ -45358,9 +46009,9 @@
       "source_file": "apps/backend/src/api/rider/manifest/route.ts",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_manifest_route_ts",
-      "target": "manifest_route_get",
-      "confidence_score": 1.0
+      "target": "manifest_route_get"
     },
     {
       "relation": "calls",
@@ -45380,9 +46031,9 @@
       "source_file": "apps/backend/src/api/rider/me/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_me_route_ts",
-      "target": "apps_backend_src_lib_rider_auth_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_lib_rider_auth_ts"
     },
     {
       "relation": "imports",
@@ -45391,9 +46042,9 @@
       "source_file": "apps/backend/src/api/rider/me/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_me_route_ts",
-      "target": "lib_rider_auth_getriderid",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_getriderid"
     },
     {
       "relation": "contains",
@@ -45401,9 +46052,9 @@
       "source_file": "apps/backend/src/api/rider/me/route.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_me_route_ts",
-      "target": "me_route_get",
-      "confidence_score": 1.0
+      "target": "me_route_get"
     },
     {
       "relation": "calls",
@@ -45423,9 +46074,9 @@
       "source_file": "apps/backend/src/api/rider/auth/login/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_auth_login_route_ts",
-      "target": "apps_backend_src_lib_rider_auth_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_lib_rider_auth_ts"
     },
     {
       "relation": "imports",
@@ -45434,9 +46085,9 @@
       "source_file": "apps/backend/src/api/rider/auth/login/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_auth_login_route_ts",
-      "target": "lib_rider_auth_signridertoken",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_signridertoken"
     },
     {
       "relation": "contains",
@@ -45444,9 +46095,9 @@
       "source_file": "apps/backend/src/api/rider/auth/login/route.ts",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_auth_login_route_ts",
-      "target": "login_route_post",
-      "confidence_score": 1.0
+      "target": "login_route_post"
     },
     {
       "relation": "calls",
@@ -45466,9 +46117,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/refused/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_refused_route_ts",
-      "target": "apps_backend_src_lib_rider_auth_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_lib_rider_auth_ts"
     },
     {
       "relation": "imports",
@@ -45477,9 +46128,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/refused/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_refused_route_ts",
-      "target": "lib_rider_auth_getriderid",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_getriderid"
     },
     {
       "relation": "imports_from",
@@ -45488,9 +46139,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/refused/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_refused_route_ts",
-      "target": "apps_backend_src_lib_delivery_actions_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_lib_delivery_actions_ts"
     },
     {
       "relation": "imports",
@@ -45499,9 +46150,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/refused/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_refused_route_ts",
-      "target": "lib_delivery_actions_recordrefusal",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_recordrefusal"
     },
     {
       "relation": "contains",
@@ -45509,9 +46160,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/refused/route.ts",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_refused_route_ts",
-      "target": "refused_route_post",
-      "confidence_score": 1.0
+      "target": "refused_route_post"
     },
     {
       "relation": "calls",
@@ -45542,9 +46193,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/delivered/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_delivered_route_ts",
-      "target": "apps_backend_src_lib_rider_auth_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_lib_rider_auth_ts"
     },
     {
       "relation": "imports",
@@ -45553,9 +46204,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/delivered/route.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_delivered_route_ts",
-      "target": "lib_rider_auth_getriderid",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_getriderid"
     },
     {
       "relation": "imports_from",
@@ -45564,9 +46215,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/delivered/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_delivered_route_ts",
-      "target": "apps_backend_src_lib_delivery_actions_ts",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_lib_delivery_actions_ts"
     },
     {
       "relation": "imports",
@@ -45575,9 +46226,9 @@
       "source_file": "apps/backend/src/api/rider/orders/[id]/delivered/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_api_rider_orders_id_delivered_route_ts",
-      "target": "lib_delivery_actions_confirmdelivery",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_confirmdelivery"
     },
     {
       "relation": "contains",
@@ -45900,6 +46551,109 @@
       "confidence_score": 1.0,
       "source": "cod_reconcile_page_codreconcilepage",
       "target": "cod_reconcile_page_peso"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "apps_backend_src_admin_routes_otc_counter_page_tsx",
+      "target": "otc_counter_page_cartline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "apps_backend_src_admin_routes_otc_counter_page_tsx",
+      "target": "otc_counter_page_customerhit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "apps_backend_src_admin_routes_otc_counter_page_tsx",
+      "target": "otc_counter_page_peso",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "apps_backend_src_admin_routes_otc_counter_page_tsx",
+      "target": "otc_counter_page_pesomajor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "apps_backend_src_admin_routes_otc_counter_page_tsx",
+      "target": "otc_counter_page_useregionid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "apps_backend_src_admin_routes_otc_counter_page_tsx",
+      "target": "otc_counter_page_otccounterpage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L449",
+      "weight": 1.0,
+      "source": "apps_backend_src_admin_routes_otc_counter_page_tsx",
+      "target": "otc_counter_page_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L405",
+      "weight": 1.0,
+      "source": "otc_counter_page_otccounterpage",
+      "target": "otc_counter_page_peso",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L329",
+      "weight": 1.0,
+      "source": "otc_counter_page_otccounterpage",
+      "target": "otc_counter_page_pesomajor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/admin/routes/otc-counter/page.tsx",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "otc_counter_page_otccounterpage",
+      "target": "otc_counter_page_useregionid",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -46970,9 +47724,9 @@
       "source_file": "apps/backend/src/lib/order-cash.ts",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_order_cash_ts",
-      "target": "lib_order_cash_ordercashstate",
-      "confidence_score": 1.0
+      "target": "lib_order_cash_ordercashstate"
     },
     {
       "relation": "contains",
@@ -46980,9 +47734,9 @@
       "source_file": "apps/backend/src/lib/order-cash.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_order_cash_ts",
-      "target": "lib_order_cash_getordercashstate",
-      "confidence_score": 1.0
+      "target": "lib_order_cash_getordercashstate"
     },
     {
       "relation": "contains",
@@ -46990,9 +47744,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_rider_auth_ts",
-      "target": "lib_rider_auth_ridertokenpayload",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_ridertokenpayload"
     },
     {
       "relation": "contains",
@@ -47000,9 +47754,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_rider_auth_ts",
-      "target": "lib_rider_auth_getsecret",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_getsecret"
     },
     {
       "relation": "contains",
@@ -47010,9 +47764,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_rider_auth_ts",
-      "target": "lib_rider_auth_b64url",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_b64url"
     },
     {
       "relation": "contains",
@@ -47020,9 +47774,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_rider_auth_ts",
-      "target": "lib_rider_auth_sign",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_sign"
     },
     {
       "relation": "contains",
@@ -47030,9 +47784,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_rider_auth_ts",
-      "target": "lib_rider_auth_signridertoken",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_signridertoken"
     },
     {
       "relation": "contains",
@@ -47040,9 +47794,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_rider_auth_ts",
-      "target": "lib_rider_auth_verifyridertoken",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_verifyridertoken"
     },
     {
       "relation": "contains",
@@ -47050,9 +47804,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_rider_auth_ts",
-      "target": "lib_rider_auth_getriderid",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_getriderid"
     },
     {
       "relation": "contains",
@@ -47060,9 +47814,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L85",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_rider_auth_ts",
-      "target": "lib_rider_auth_authenticaterider",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_authenticaterider"
     },
     {
       "relation": "calls",
@@ -47071,9 +47825,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_rider_auth_sign",
-      "target": "lib_rider_auth_getsecret",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_getsecret"
     },
     {
       "relation": "calls",
@@ -47082,9 +47836,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_rider_auth_signridertoken",
-      "target": "lib_rider_auth_b64url",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_b64url"
     },
     {
       "relation": "calls",
@@ -47093,9 +47847,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_rider_auth_signridertoken",
-      "target": "lib_rider_auth_sign",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_sign"
     },
     {
       "relation": "calls",
@@ -47104,9 +47858,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_rider_auth_verifyridertoken",
-      "target": "lib_rider_auth_sign",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_sign"
     },
     {
       "relation": "calls",
@@ -47115,9 +47869,9 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L92",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_rider_auth_authenticaterider",
-      "target": "lib_rider_auth_verifyridertoken",
-      "confidence_score": 1.0
+      "target": "lib_rider_auth_verifyridertoken"
     },
     {
       "relation": "contains",
@@ -47125,9 +47879,9 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
-      "target": "lib_delivery_actions_codtx",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_codtx"
     },
     {
       "relation": "contains",
@@ -47135,9 +47889,9 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
-      "target": "lib_delivery_actions_refusaldispute",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_refusaldispute"
     },
     {
       "relation": "contains",
@@ -47145,9 +47899,9 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
-      "target": "lib_delivery_actions_confirmdeliveryresult",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_confirmdeliveryresult"
     },
     {
       "relation": "contains",
@@ -47155,9 +47909,9 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
-      "target": "lib_delivery_actions_confirmdelivery",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_confirmdelivery"
     },
     {
       "relation": "contains",
@@ -47165,9 +47919,9 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L146",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
-      "target": "lib_delivery_actions_recordrefusalresult",
-      "confidence_score": 1.0
+      "target": "lib_delivery_actions_recordrefusalresult"
     },
     {
       "relation": "contains",
@@ -47175,8 +47929,38 @@
       "source_file": "apps/backend/src/lib/delivery-actions.ts",
       "source_location": "L154",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_lib_delivery_actions_ts",
-      "target": "lib_delivery_actions_recordrefusal",
+      "target": "lib_delivery_actions_recordrefusal"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/lib/otc-sale.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "apps_backend_src_lib_otc_sale_ts",
+      "target": "lib_otc_sale_codtx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/lib/otc-sale.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "apps_backend_src_lib_otc_sale_ts",
+      "target": "lib_otc_sale_recordotcresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/lib/otc-sale.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "apps_backend_src_lib_otc_sale_ts",
+      "target": "lib_otc_sale_recordotccollected",
       "confidence_score": 1.0
     },
     {
@@ -47286,9 +48070,9 @@
       "source_file": "apps/backend/src/jobs/rider-unremitted-tick.ts",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_backend_src_jobs_rider_unremitted_tick_ts",
-      "target": "jobs_rider_unremitted_tick_aging_days",
-      "confidence_score": 1.0
+      "target": "jobs_rider_unremitted_tick_aging_days"
     },
     {
       "relation": "contains",
@@ -51644,6 +52428,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
+      "source_location": "L378",
+      "weight": 1.0,
+      "source": "freshhub_implementation_plan_asbuilt_6_api_surface_as_built",
+      "target": "freshhub_implementation_plan_asbuilt_rider_self_service_hs256_rider_token",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
       "source_location": "L307",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -51674,11 +52468,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
-      "source_location": "L388",
+      "source_location": "L379",
       "weight": 1.0,
-      "confidence_score": 1.0,
+      "source": "freshhub_implementation_plan_asbuilt_rider_self_service_hs256_rider_token",
+      "target": "freshhub_implementation_plan_asbuilt_codeblock_17",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
+      "source_location": "L446",
+      "weight": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
-      "target": "freshhub_implementation_plan_asbuilt_phase_a_make_prepay_lock_resolve_to_otc_highest_priority"
+      "target": "freshhub_implementation_plan_asbuilt_phase_a_walk_in_otc_counter_reframed_2026_06_10_highest_priority",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -51749,6 +52553,16 @@
       "confidence_score": 1.0,
       "source": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
       "target": "freshhub_implementation_plan_asbuilt_phase_h_hardening"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "IMPLEMENTATION_PLAN_ASBUILT.md",
+      "source_location": "L388",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "freshhub_implementation_plan_asbuilt_10_gaps_forward_roadmap",
+      "target": "freshhub_implementation_plan_asbuilt_phase_a_make_prepay_lock_resolve_to_otc_highest_priority"
     },
     {
       "relation": "contains",
@@ -54372,5 +55186,5 @@
       "source_file": "apps/backend/src/workflows/README.md"
     }
   ],
-  "built_at_commit": "a39d53cb05442feea91c6bac290805d3c505fc08"
+  "built_at_commit": "82f547e7af14d4451b36b98d3dca45c3f7bfabdc"
 }
