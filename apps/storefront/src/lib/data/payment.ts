@@ -42,6 +42,10 @@ export type PaymentEligibility = {
     | "prepay_locked_30d"
     | "prepay_locked_permanent"
   cod_available: boolean
+  // True for prepay-locked buyers: OTC is walk-in only (never online), so with
+  // COD removed they have no online method and must buy in person at the hub.
+  checkout_blocked: boolean
+  block_reason: string | null
   methods: {
     id: string
     type: string
