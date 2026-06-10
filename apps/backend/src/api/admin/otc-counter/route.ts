@@ -182,7 +182,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // 5. Decrement stock by fulfilling the handed-over items. Best-effort: a
+  // 6. Decrement stock by fulfilling the handed-over items. Best-effort: a
   //    fulfillment-setup quirk must never void an already-paid, already-ledgered
   //    cash sale — surface a warning so staff can adjust stock manually instead.
   let warning: string | null = null
