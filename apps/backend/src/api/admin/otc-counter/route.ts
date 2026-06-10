@@ -6,6 +6,7 @@ import {
   markPaymentCollectionAsPaid,
   createOrderFulfillmentWorkflow,
 } from "@medusajs/medusa/core-flows"
+import type { CreateOrderLineItemDTO } from "@medusajs/framework/types"
 import { recordOtcCollected } from "../../../lib/otc-sale"
 import { COD_LEDGER_MODULE } from "../../../modules/cod-ledger"
 import type CodLedgerModuleService from "../../../modules/cod-ledger/service"
