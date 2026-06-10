@@ -360,7 +360,9 @@ admin resolves  → POST /admin/disputes/:id/resolve → resolve-dispute workflo
      2 strikes → prepay_locked_30d (state_until = +30d)
      3+ strikes→ prepay_locked_permanent
 clean-order-tick (nightly 02:00):
-     warned + 6 months clean → normal (strikes reset)
+     warned → normal (strikes reset) once recovery_eligible_at (= strike + 6mo,
+       stamped at escalation) has passed AND a clean delivered order exists
+       since the strike (last_clean_order_at, stamped by confirmDelivery)
      prepay_locked_30d past state_until → normal (strikes preserved)
      permanent → admin override only
 ```
