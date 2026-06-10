@@ -140,7 +140,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const total = Number(order.total ?? 0)
   const amountCentavos = Math.round(total * 100)
 
-  // 3. Mark the order paid via OTC (cash taken at the counter now).
+  // 4. Mark the order paid via OTC (cash taken at the counter now).
   try {
     let paymentCollectionId = order.payment_collections?.[0]?.id
     if (!paymentCollectionId) {
