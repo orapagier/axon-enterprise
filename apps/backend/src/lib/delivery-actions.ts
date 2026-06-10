@@ -34,6 +34,11 @@ export type ConfirmDeliveryResult =
  * Mark a dispatch order delivered and, for a COD order, record `cod_collected`
  * (the rider now owes that cash). OTC orders are already paid at the counter,
  * so only the delivery is marked. Idempotent.
+ *
+ * The recorded amount is the full cash in the rider's hand: order total plus
+ * the delivery fee (`metadata.delivery_fee_php`, integer pesos) — the fee is
+ * metadata-only and never flows into the order's totals, but the buyer pays it
+ * in cash at the door, so reconciliation must include it.
  */
 export async function confirmDelivery(
   container: MedusaContainer,
@@ -57,13 +62,22 @@ export async function confirmDelivery(
     return { ok: false, status: 404, error: "Dispatch order not found" }
   }
 
+  // `summary.*` is loaded alongside `total` because the computed total only
+  // resolves reliably with the summary present (same quirk the OTC counter
+  // route hit, where `total` alone read 0).
   const { data: orderRows } = await query.graph({
     entity: "order",
-    fields: ["id", "customer_id", "total"],
+    fields: ["id", "customer_id", "total", "summary.*", "metadata"],
     filters: { id: dispatchOrder.order_id },
   })
   const order = orderRows[0] as
-    | { id: string; customer_id: string | null; total: number | string }
+    | {
+        id: string
+        customer_id: string | null
+        total: number | string
+        summary?: { current_order_total?: number } | null
+        metadata?: { delivery_fee_php?: number | string } | null
+      }
     | undefined
   if (!order?.customer_id) {
     return { ok: false, status: 404, error: "Order or customer not found" }
@@ -90,7 +104,14 @@ export async function confirmDelivery(
       id: args.dispatchOrderId,
       delivery_status: "delivered",
       delivered_at: new Date(),
+      // A rider id supplied at confirmation time (e.g. the admin route's late
+      // assignment) must land on the dispatch order too, or the ledger and the
+      // manifest would name different riders.
+      ...(riderId && dispatchOrder.rider_id !== riderId
+        ? { rider_id: riderId }
+        : {}),
     })
+    await touchLastCleanOrder(container, order.customer_id)
   }
 
   let transaction: CodTx | null = null
@@ -102,8 +123,11 @@ export async function confirmDelivery(
     if (existing.length > 0) {
       transaction = existing[0]
     } else {
+      const total = Number(order.total ?? order.summary?.current_order_total ?? 0)
+      const feePhp = Number(order.metadata?.delivery_fee_php ?? 0)
       const amount =
-        args.amountOverride ?? Math.round(Number(order.total ?? 0) * 100)
+        args.amountOverride ??
+        Math.round(total * 100) + Math.round(feePhp * 100)
       if (amount <= 0) {
         return {
           ok: false,

@@ -1,4 +1,7 @@
-import { AbstractPaymentProvider } from "@medusajs/framework/utils"
+import {
+  AbstractPaymentProvider,
+  MedusaError,
+} from "@medusajs/framework/utils"
 import type {
   AuthorizePaymentInput,
   AuthorizePaymentOutput,
@@ -30,15 +33,18 @@ type InjectedDeps = {
 /**
  * FreshHub Over-the-Counter (walk-in) payment provider.
  *
- * OTC = the buyer pays cash at the physical hub counter. It deliberately has
- * NO accountability gate: it is the cash "prepay" rail for buyers whose COD has
- * been revoked (a `prepay_locked_*` accountability state). Those buyers can't
- * use COD but can always pay OTC, so this provider always authorizes.
+ * Reframe 2026-06-10: OTC is **walk-in only**, never an online payment method.
+ * The counter flow (`POST /admin/otc-counter`) marks its order paid via
+ * `markPaymentCollectionAsPaid`, which authorizes through `pp_system_default`
+ * — it never calls this provider. So any session that *does* reach
+ * `authorizePayment` here came from the online checkout path (e.g. a client
+ * talking to the raw store API), which must not be able to place an unpaid
+ * "OTC" order that would auto-dispatch to a rider. authorizePayment therefore
+ * always rejects. The provider stays registered/attached to the region so the
+ * identifier (`pp_otc_freshhub`) remains reserved and fails closed.
  *
- * Cash for an OTC order is collected at the counter at order time and recorded
- * in the cod-ledger as `cod_collected` (no rider, no remittance leg) — see the
- * admin cod-collected route. This provider only keeps checkout inside the
- * standard Medusa initiate → authorize → capture flow.
+ * Cash for a walk-in sale is recorded in the cod-ledger as `otc_collected`
+ * (hub-held, no rider, no remittance leg) — see `src/lib/otc-sale.ts`.
  */
 export default class OtcPaymentProviderService extends AbstractPaymentProvider {
   static identifier = "otc"
@@ -67,13 +73,14 @@ export default class OtcPaymentProviderService extends AbstractPaymentProvider {
   }
 
   async authorizePayment(
-    input: AuthorizePaymentInput
+    _input: AuthorizePaymentInput
   ): Promise<AuthorizePaymentOutput> {
-    // No gate: OTC is always available, including to prepay-locked buyers.
-    return {
-      data: { ...(input.data ?? {}), status: "authorized" },
-      status: "authorized",
-    }
+    // OTC is walk-in only. Online checkout must never authorize through this
+    // provider — the counter flow marks orders paid without calling it.
+    throw new MedusaError(
+      MedusaError.Types.NOT_ALLOWED,
+      "Over-the-counter payment is only available in person at the hub counter."
+    )
   }
 
   async capturePayment(
