@@ -35,8 +35,23 @@
 >   **off every rider manifest**, and created a fulfillment — while a prepay-locked customer
 >   got `checkout_blocked` and a normal/guest buyer saw **COD only (no OTC)**. Verification
 >   caught + fixed one bug: the counter route queried `order.total` without `summary.*`/`items.*`,
->   so it read 0; now fixed (reads computed total with a summary fallback). **Phase E (rider)
->   is still code-complete but NOT runtime-verified.**
+>   so it read 0; now fixed (reads computed total with a summary fallback).
+> - **Phase E (rider) is now RUNTIME-VERIFIED (2026-06-10):** live HTTP run of
+>   `POST /rider/auth/login → GET /rider/manifest → POST /rider/orders/:id/delivered`
+>   against a real COD order (display_id 2, ₱100): login issued a token, the manifest
+>   listed the in_transit order, and `delivered` marked it delivered **and** wrote a
+>   single `cod_collected` row (10000 centavos, rider_id + `recorded_by=rider:<id>`).
+>   Idempotency held (second `delivered` returned the same txn, no duplicate); manifest
+>   emptied after delivery. Negative paths confirmed: wrong PIN → 401, no token → 401,
+>   another rider delivering this order → 403, **suspended rider login → 403**. The
+>   producer-payout gate `getOrderCashState().settled` was **false** while collected-only
+>   and flipped **true** after `rider_remitted` (delivered ≠ remitted holds end-to-end).
+>   **Verification caught + fixed a launch-blocking bug:** `POST /rider/auth/login` was
+>   unreachable — Medusa applies matching middlewares *cumulatively*, so the broad
+>   `/rider/*` `authenticateRider` guard also ran on the login path (the separate
+>   empty-middlewares matcher did **not** override it), 401-ing every login. Fixed by
+>   exempting the login path *inside* `authenticateRider` (`req.path.endsWith("/rider/auth/login")`)
+>   and dropping the misleading empty matcher entry — fails closed for any new `/rider/*` route.
 > - **Code-complete (TypeScript-clean across the whole backend):**
 >   - **Phase A (walk-in OTC, reframed 2026-06-10)** — OTC is **in-person only**, not an
 >     online method. Locked buyers are **blocked from online checkout** (`/store/payment-methods`
