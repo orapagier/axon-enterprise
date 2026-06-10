@@ -75,6 +75,34 @@
 >   4. ✅ Rider smoke-test passed (login → manifest → delivered → `cod_collected`; idempotent;
 >      ownership + suspended-login 403s; payout `settled` gate flips on remittance). Fixed the
 >      `/rider/auth/login` middleware bug found during it. **Phase E is now runtime-verified.**
+> - **Bug-fix pass (2026-06-10, post-verification; TypeScript-clean, 27/27 unit tests):**
+>   1. **Warned-buyer recovery was dead code** — nothing ever wrote `last_clean_order_at`,
+>      so `warned → normal` could never fire. Now: `confirmDelivery` stamps
+>      `last_clean_order_at`; buyer-fault escalation to `warned` stamps
+>      `recovery_eligible_at = strike + 6mo`; `clean-order-tick` recovers when the clock
+>      passed AND a clean order exists since the strike (legacy warned rows self-heal).
+>   2. **Online-OTC checkout bypass** — `pp_otc_freshhub.authorizePayment` always
+>      authorized and is attached to the PH region, so a locked buyer hitting the raw
+>      store API could place an unpaid "OTC" order that auto-dispatched. It now always
+>      throws NOT_ALLOWED (safe: the counter flow pays via `markPaymentCollectionAsPaid`
+>      → `pp_system_default`, never this provider).
+>   3. **`cod_collected` omitted the delivery fee** — fee is metadata-only (never in
+>      `order.total`) but is collected in cash at the door; auto-amount is now
+>      `total + delivery_fee_php` (also added the `summary.*` fallback for the
+>      computed-total query quirk).
+>   4. **`pin_hash` leaked** from `GET /admin/riders` + `GET /admin/riders/:id`.
+>   5. **Ledger bypass** — `PATCH /admin/dispatch/orders/:id` with
+>      `delivery_status=delivered|refused` now routes through
+>      `confirmDelivery`/`recordRefusal` instead of a bare field write.
+>   6. **Rider manifest pagination** — `delivery_status=pending` now filtered in the DB
+>      (history could push active orders out of the take-200 window); same class fixed in
+>      `cod-reconcile` (date range now in the DB query).
+>   7. **Cutoff-race stranded orders** — `assign-order-to-dispatch` rolls forward to the
+>      next day's batch instead of throwing a 409 the subscriber swallows.
+>   8. Late `rider_id` at delivery confirmation is persisted onto the dispatch order;
+>      `cod-remitted` now requires a prior `cod_collected` row and a matching rider;
+>      rider PATCH phone-uniqueness returns 409 instead of a raw 500.
+>   *(Runtime re-verification of items 1–3 still pending — unit-tested + type-checked only.)*
 > - **Next on the roadmap (not started):** Phase B (Resend notifications), C (membership
 >   expiry job + reminders), D (trader B2B pricing), F (address→hub resolution); plus the
 >   **rider PWA frontend** (API ready) and **producer payout disbursement** (gate exists).
