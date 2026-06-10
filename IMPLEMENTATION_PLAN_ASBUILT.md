@@ -334,6 +334,7 @@ GET    /store/hubs/:slug/barangays                  serviceable barangays
 POST   /store/customers/me/hub                      set/clear my hub
 GET    /store/delivery-options?cart_id=             3 delivery tiers for cart
 POST   /store/delivery-options/select               choose tier → cart metadata
+GET    /store/payment-methods                       COD/OTC eligibility (COD hidden if prepay-locked)
 POST   /store/carts/:id/line-items                  (custom add-to-cart)
 # Seller (account_type=producer + seller_verified)
 GET/POST /store/seller/products                     my listings / create listing
