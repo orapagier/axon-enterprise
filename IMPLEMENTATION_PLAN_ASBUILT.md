@@ -424,7 +424,8 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | Refusal → dispute → strike → prepay-lock + recovery | ✅ shipped |
 | Membership (metadata + group, admin approve) | ✅ shipped |
 | Seller verification gate | ✅ shipped |
-| **OTC payment method + prepay-lock → OTC fallthrough** | ✅ code-complete (Phase A, 2026-06-10) — needs `db:migrate` + region seed + runtime verify |
+| **Walk-in OTC counter sales** (`/admin/otc-counter` → paid, dispatch-skipped order + `otc_collected`) | ✅ code-complete (Phase A, reframed 2026-06-10) — needs `db:migrate` + region seed + runtime verify (esp. stock-decrement fulfillment) |
+| **Locked buyers blocked from online checkout** (no OTC online; "buy in person") | ✅ code-complete (Phase A, 2026-06-10) — needs runtime verify |
 | **Transactional email / push notifications** | ❌ missing |
 | **Membership expiry enforcement + renewal reminders** | ⚠️ partial (expiry stored, not enforced/notified) |
 | **Trader (B2B) pricing** | ❌ missing |
