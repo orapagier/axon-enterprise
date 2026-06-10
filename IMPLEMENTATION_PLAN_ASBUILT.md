@@ -29,8 +29,15 @@
 >   collected-but-unremitted cash is flagged/blocked from taking new orders.
 
 > **▶ Current build state (2026-06-10) — read this first if resuming.**
-> - **Code-complete this session (TypeScript-clean across the whole backend, but
->   NOT yet runtime-verified — no DB/stack was run):**
+> - **Phase A (walk-in OTC) is RUNTIME-VERIFIED (2026-06-10):** migrations applied
+>   (`rider` table + `otc_collected` constraint), PH region has COD+OTC attached, and a
+>   live counter sale created a **paid** order (₱200), recorded `otc_collected`, stayed
+>   **off every rider manifest**, and created a fulfillment — while a prepay-locked customer
+>   got `checkout_blocked` and a normal/guest buyer saw **COD only (no OTC)**. Verification
+>   caught + fixed one bug: the counter route queried `order.total` without `summary.*`/`items.*`,
+>   so it read 0; now fixed (reads computed total with a summary fallback). **Phase E (rider)
+>   is still code-complete but NOT runtime-verified.**
+> - **Code-complete (TypeScript-clean across the whole backend):**
 >   - **Phase A (walk-in OTC, reframed 2026-06-10)** — OTC is **in-person only**, not an
 >     online method. Locked buyers are **blocked from online checkout** (`/store/payment-methods`
 >     → `checkout_blocked`; storefront shows "buy in person at the hub"). New **OTC Counter**
