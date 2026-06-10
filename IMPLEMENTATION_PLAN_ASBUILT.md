@@ -344,9 +344,19 @@ GET/POST /admin/memberships ; POST /admin/memberships/:id  (approve|reject|cance
 GET    /admin/sellers ; POST /admin/sellers/:id/verify
 ```
 
+### Rider (self-service; HS256 rider token)
+```
+POST   /rider/auth/login                     phone + PIN → 30-day rider token (public)
+GET    /rider/me                             my profile
+GET    /rider/manifest                       my active-batch orders (by manifest_position)
+POST   /rider/orders/:id/delivered           mark delivered + auto cod_collected (COD)
+POST   /rider/orders/:id/refused             mark refused → opens dispute
+```
+
 Auth (`api/middlewares.ts`): `/store/seller*` requires a logged-in customer
 (handler additionally checks `account_type`); all `/admin/*` custom routes
-require an authenticated admin user.
+require an authenticated admin user; `/rider/*` (except `/rider/auth/login`)
+requires a valid rider token via the `authenticateRider` middleware.
 
 ---
 
