@@ -134,9 +134,25 @@
 >   4. **Jobs weren't exec-runnable as their own docs instruct** — `npx medusa exec`
 >      passes `{ container }` (ExecArgs) while the scheduler passes the bare container;
 >      all 5 jobs now accept both.
-> - **Next on the roadmap (not started):** Phase B (Resend notifications), C (membership
->   expiry job + reminders), D (trader B2B pricing), F (address→hub resolution); plus the
->   **rider PWA frontend** (API ready) and **producer payout disbursement** (gate exists).
+> - **Phase B (notifications) BUILT + RUNTIME-VERIFIED (2026-06-10 night):** Resend email
+>   provider for Medusa's Notification module (`src/modules/resend-notification`, raw
+>   fetch — no SDK dep; without `RESEND_API_KEY` it logs + no-ops but still records the
+>   notification row). Templates in `emails.ts` (pure, unit-tested); `sendEmail` helper
+>   (`src/lib/notify.ts`) is best-effort everywhere — mail can never break a flow. Wired:
+>   order placed (subscriber), batch in_transit (job), delivered + dispute opened
+>   (`delivery-actions`), dispute resolved (route), membership approved/rejected/cancelled
+>   (route). Live-verified: every template above produced a `success` notification row
+>   through the real flows. **To go live: set `RESEND_API_KEY` + `EMAIL_FROM` (verified
+>   domain) in env — everything else is already on.** Web Push remains a later add-on.
+> - **Phase C (membership lifecycle) now ~done (2026-06-10):** new nightly
+>   `membership-expiry-tick` (02:30) cancels expired memberships (+ removes from
+>   `hub-members` group, emails "expired") and sends 30/7-day renewal reminders (once
+>   each, flags re-armed on approval); the Special-tier gate now checks
+>   `membership_expires_at`, not just status. Live-verified end-to-end (approve →
+>   remind → expire → cancelled).
+> - **Next on the roadmap (not started):** Phase D (trader B2B pricing), F (address→hub
+>   resolution); plus the **rider PWA frontend** (API ready) and **producer payout
+>   disbursement** (gate exists). Web Push (Phase B optional half) when wanted.
 > - Full detail: **§9** status matrix, **§10** phase checkboxes (dated).
 
 ---
@@ -493,6 +509,7 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | `expire-pickup-windows` | nightly 01:00 | close past windows; orphan slots → no_show |
 | `clean-order-tick` | nightly 02:00 | buyer strike recovery (warned→normal, 30d lock expiry) |
 | `rider-unremitted-tick` | nightly 03:00 | suspend riders over the unremitted-cash limit |
+| `membership-expiry-tick` | nightly 02:30 | cancel expired memberships; 30/7-day renewal reminder emails |
 
 ---
 
@@ -511,8 +528,8 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | Seller verification gate | ✅ shipped |
 | **Walk-in OTC counter sales** (`/admin/otc-counter` → paid, dispatch-skipped order + `otc_collected`) | ✅ code-complete (Phase A, reframed 2026-06-10) — needs `db:migrate` + region seed + runtime verify (esp. stock-decrement fulfillment) |
 | **Locked buyers blocked from online checkout** (no OTC online; "buy in person") | ✅ code-complete (Phase A, 2026-06-10) — needs runtime verify |
-| **Transactional email / push notifications** | ❌ missing |
-| **Membership expiry enforcement + renewal reminders** | ⚠️ partial (expiry stored, not enforced/notified) |
+| **Transactional email** (Resend; 10 templates across order/dispute/membership flows) | ✅ shipped (2026-06-10) — set `RESEND_API_KEY` to enable delivery; Web Push still ❌ |
+| **Membership expiry enforcement + renewal reminders** | ✅ shipped (2026-06-10) — nightly tick + 30/7d emails + expiry-aware tier gate |
 | **Trader (B2B) pricing** | ❌ missing |
 | **Rider entity + admin CRUD + delivered→collect + strikes** | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
 | **Rider self-service API** (login, manifest, delivered/refused) | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
@@ -568,18 +585,25 @@ unpaid OTC orders would have auto-dispatched to riders.
 ### Phase B — Notifications (email + push)
 **Problem:** no subscriber sends any email/push. Order confirmations, dispute
 updates, membership approvals, and renewal reminders are all silent today.
-- [ ] Wire **Resend** transactional email; subscribers for: order placed,
-      dispatch in_transit, delivered, dispute opened/resolved, membership
-      approved/rejected, membership expiring (30/7 days).
+- [x] **Resend transactional email (2026-06-10):** provider module
+      `src/modules/resend-notification` (channel `email`, plain fetch, no-op +
+      warn without `RESEND_API_KEY`), pure templates in `emails.ts`, best-effort
+      `sendEmail` in `src/lib/notify.ts`. Wired: order placed, dispatch
+      in_transit, delivered, dispute opened/resolved, membership
+      approved/rejected/cancelled, membership expiring (30/7d) + expired.
+      Runtime-verified through the real flows (notification rows `success`).
 - [ ] Web Push for delivery status (consumer) — optional, after email.
 
 ### Phase C — Membership lifecycle automation
 **Problem:** `membership_expires_at` is set but nothing enforces it. The Special
 tier checks `membership_status==active` only, not the expiry date.
-- [ ] Nightly job: active memberships past `expires_at` → cancelled + remove from
-      `hub-members` group.
-- [ ] Renewal reminder emails (30/7 days) — ties to Phase B.
-- [ ] Make tier gating check expiry, not just status.
+- [x] Nightly `membership-expiry-tick` (2026-06-10): active memberships past
+      `expires_at` → cancelled + removed from `hub-members` group + "expired" email.
+- [x] Renewal reminder emails 30/7 days (2026-06-10) — sent once per window
+      (`membership_reminder_{30,7}_sent`), re-armed on approval.
+- [x] Tier gating checks expiry, not just status (2026-06-10) — both
+      delivery-options routes.
+- [ ] Storefront renewal flow (today renewal = pay at counter / new request).
 
 ### Phase D — Trader (B2B) pricing
 **Problem:** Trader is a recognized account type but there is no B2B pricing.
@@ -655,8 +679,8 @@ assumes Tagum. The data model already supports areas/barangays/postal codes.
 | **Delivery latency vs expectations** | Batch model = "wait for next cutoff"; "Special within 1h" is promised but dispatch is batch-based | Make Special a genuine on-demand path or set ETAs honestly at checkout |
 | **Rider deliver-and-pocket** | "Delivered" releases the order while the rider still holds the cash | Delivered ≠ remitted; producer payout gated on remittance; rider-strike block on aged unremitted balance (Phase E) |
 | **Disputes feel unfair** | Auto-strikes on legit quality complaints alienate good buyers | Phase G appeals + clear buyer-facing status |
-| **Silent system** | No emails/push → buyers don't know order/dispute/membership state | Phase B |
-| **Membership expiry not enforced** | Members keep perks past expiry; no renewal nudge → churn | Phase C |
+| **Silent system** | ~~No emails/push~~ Email shipped 2026-06-10; delivery OFF until `RESEND_API_KEY` is set | Set the key + verified `EMAIL_FROM`; Web Push later |
+| **Membership expiry not enforced** | ~~resolved 2026-06-10~~ nightly tick + reminders + expiry-aware gate | Watch the 02:30 job logs |
 | **City-name hub matching** | Breaks the moment a second hub launches | Phase F address→hub resolution |
 | **Perishable write-offs on refusal** | Refused COD produce can't be restocked; strikes only deter *repeat* refusers | Same-day resale of returned goods (founder's model) + strikes; first refusal absorbed (no upfront gate, by decision) |
 | **Membership state in metadata only** | No first-class table → admin list scans 1000 customers in memory | Move to link table / view when user base grows |
