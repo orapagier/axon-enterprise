@@ -175,9 +175,24 @@
 >   message); guests still match by city. Runtime-verified (Tagum address → 3 tiers;
 >   Davao address → rejected; guest → city match). Cross-hub "also available at <hub>"
 >   search stays future.
+> - **Rider PWA BUILT + API-LOOP-VERIFIED (2026-06-11):** single-file, mobile-first PWA
+>   served BY THE BACKEND at **GET /rider-app** (same-origin → zero CORS config; no new
+>   app/deploy target; installable via /rider-app/manifest + /rider-app/sw). Vanilla
+>   HTML/JS in `src/rider-app/app-html.ts` (TS string export so `medusa build` ships it).
+>   Login (phone+PIN) → run sheet of waybill-style stop tickets (customer, barangay,
+>   address, tap-to-call, **COLLECT amount = total + delivery fee** in mono), Delivered /
+>   Refused bottom-sheet confirms with a rubber-stamp effect, day strip (stops left /
+>   done / collected today) and a sticky **cash-in-hand bar** that warns near and over
+>   the ₱5,000 remit limit. New **GET /rider/summary** backs it (outstanding =
+>   collected−remitted per order, today's tally, limit — same math as the suspension
+>   job). Verified live end-to-end: login → summary (₱230 outstanding) → manifest stop
+>   (collect ₱250) → delivered → summary ₱480 / today 1 / manifest empty. SW is
+>   network-first on the shell only — /rider/* is never intercepted (a silently queued
+>   "delivered" would lie about cash). **Visual pass on a real phone still recommended:**
+>   open `http://<backend>/rider-app`, log in, add to home screen.
 > - **Next on the roadmap (not started):** the **storefront trader-price display**
->   (backend ready); the **rider PWA frontend** (API ready); **producer payout
->   disbursement** (gate exists). Web Push (Phase B optional half) when wanted.
+>   (backend ready); **producer payout disbursement** (gate exists). Web Push (Phase B
+>   optional half) when wanted.
 > - Full detail: **§9** status matrix, **§10** phase checkboxes (dated).
 
 ---
@@ -234,6 +249,8 @@ freshhub/                         # Turborepo
 │   │       ├── links/            # module-to-module links (hub↔customer, etc.)
 │   │       └── migration-scripts/ # seeds (hubs, catalog, pickup windows, fees)
 │   └── storefront/               # Next.js consumer store (incl. /producer flows)
+│   # rider PWA is NOT a separate app — served by the backend at /rider-app
+│   # (src/rider-app/app-html.ts), same-origin with the /rider/* API
 └── IMPLEMENTATION_PLAN*.md
 ```
 
@@ -503,10 +520,18 @@ GET/POST /admin/memberships ; POST /admin/memberships/:id  (approve|reject|cance
 GET    /admin/sellers ; POST /admin/sellers/:id/verify
 ```
 
+### Rider app (public shell; the app calls the token-guarded API below)
+```
+GET    /rider-app                            rider PWA (single-file, mobile-first)
+GET    /rider-app/manifest                   web app manifest (installable)
+GET    /rider-app/sw                         service worker (shell-only caching)
+```
+
 ### Rider (self-service; HS256 rider token)
 ```
 POST   /rider/auth/login                     phone + PIN → 30-day rider token (public)
 GET    /rider/me                             my profile
+GET    /rider/summary                        my cash position (outstanding/limit/today)
 GET    /rider/manifest                       my active-batch orders (by manifest_position)
 POST   /rider/orders/:id/delivered           mark delivered + auto cod_collected (COD)
 POST   /rider/orders/:id/refused             mark refused → opens dispute
@@ -560,7 +585,7 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | **Trader (B2B) pricing** | ✅ backend shipped (2026-06-11) — auto promotions per tier; storefront price display pending |
 | **Rider entity + admin CRUD + delivered→collect + strikes** | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
 | **Rider self-service API** (login, manifest, delivered/refused) | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
-| **Rider PWA frontend** | ❌ missing (API ready; no rider-facing UI app yet) |
+| **Rider PWA frontend** | ✅ shipped (2026-06-11) — served by the backend at `/rider-app` (installable, same-origin); needs a real-phone visual pass |
 | **Producer-payout remittance gate** (`cash-state` / `settled`) | ✅ primitive ready; payout disbursement itself a separate phase |
 | **Address → hub resolution** | ✅ by design city = hub service boundary (founder 2026-06-11); home-hub + city enforcement shipped (`src/lib/resolve-hub.ts`) |
 | Online / GCash payment | ⏸️ deferred (no PayMongo budget; OTC covers prepay at launch) |
