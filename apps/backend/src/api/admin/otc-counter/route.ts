@@ -115,15 +115,17 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
   const orderId = createdOrder.id
 
-  // Re-query for the settled total + line items (the create result omits totals).
+  // Re-query for the settled total + line items. The computed `total` only
+  // resolves when the order's `summary` and `items` are loaded too — selecting
+  // `total` alone returns 0.
   const { data: orderRows } = await query.graph({
     entity: "order",
     fields: [
       "id",
       "customer_id",
       "total",
-      "items.id",
-      "items.quantity",
+      "summary.*",
+      "items.*",
       "payment_collections.id",
     ],
     filters: { id: orderId },
@@ -133,6 +135,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         id: string
         customer_id: string | null
         total: number | string
+        summary?: { current_order_total?: number } | null
         items?: { id: string; quantity: number }[]
         payment_collections?: { id: string }[]
       }
@@ -142,7 +145,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  const total = Number(order.total ?? 0)
+  // Prefer the computed `total`; fall back to the summary total if needed.
+  const total = Number(order.total ?? order.summary?.current_order_total ?? 0)
   const amountCentavos = Math.round(total * 100)
 
   // 4. Mark the order paid via OTC (cash taken at the counter now).
