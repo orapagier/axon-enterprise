@@ -2,8 +2,7 @@ import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
 import { DELIVERY_FEES_MODULE } from "../../../../modules/delivery-fees"
 import type DeliveryFeesModuleService from "../../../../modules/delivery-fees/service"
-import { HUB_MODULE } from "../../../../modules/hub"
-import type HubModuleService from "../../../../modules/hub/service"
+import { resolveHubForDelivery } from "../../../../lib/resolve-hub"
 
 type Tier = "free" | "standard" | "special"
 const VALID_TIERS: Tier[] = ["free", "standard", "special"]
@@ -38,7 +37,6 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
   const cartModule = req.scope.resolve(Modules.CART)
-  const hubService: HubModuleService = req.scope.resolve(HUB_MODULE)
   const feesService: DeliveryFeesModuleService = req.scope.resolve(
     DELIVERY_FEES_MODULE
   )
@@ -78,18 +76,17 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  const city = (cart.shipping_address?.city ?? "").trim().toLowerCase()
-  const allHubs = await hubService.listHubs({ active: true }, { take: 100 })
-  const hub = allHubs.find(
-    (h) =>
-      h.city.toLowerCase() === city ||
-      `${h.city.toLowerCase()} city` === city ||
-      h.city.toLowerCase() === city.replace(/\s*city$/i, "").trim()
-  )
-  if (!hub) {
-    res.status(404).json({ error: "no hub serves this address" })
+  // Same hub-local rule as GET /store/delivery-options: home hub wins and
+  // the address must be inside its city.
+  const resolution = await resolveHubForDelivery(req.scope, {
+    customerId: cart.customer_id,
+    city: cart.shipping_address?.city,
+  })
+  if (!resolution.ok) {
+    res.status(resolution.status).json({ error: resolution.error })
     return
   }
+  const hub = resolution.hub
 
   const fee = await feesService.retrieveByHubBarangay(hub.id, barangay)
   if (!fee) {

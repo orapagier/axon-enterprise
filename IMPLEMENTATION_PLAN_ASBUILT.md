@@ -27,6 +27,11 @@
 > - **Producer payout is gated on remittance, not delivery.**
 > - **Rider accountability mirrors buyer strikes:** a rider with too much aged
 >   collected-but-unremitted cash is flagged/blocked from taking new orders.
+> - **Hubs are per-CITY and all operations are hub-local (founder call 2026-06-11).**
+>   A hub/store per barangay is unaffordable; Tagum Hub processes Tagum City only.
+>   The city is the service boundary — barangays matter only INSIDE a hub's city
+>   (fee table, service areas). Cross-city barangay/postal hub resolution is
+>   intentionally not built.
 
 > **▶ Current build state (2026-06-10) — read this first if resuming.**
 > - **Phase A (walk-in OTC) is RUNTIME-VERIFIED (2026-06-10):** migrations applied
@@ -161,10 +166,18 @@
 >   re-approval reuses the tier (exactly one promotion row). `GET /store/trader-pricing`
 >   exposes the state for storefront display; approve/revoke emails wired. **Remaining D
 >   slice: storefront "your price" display** (consume `/store/trader-pricing`).
-> - **Next on the roadmap (not started):** Phase F (address→hub resolution); the
->   **storefront trader-price display** (backend ready); the **rider PWA frontend**
->   (API ready); **producer payout disbursement** (gate exists). Web Push (Phase B
->   optional half) when wanted.
+> - **Phase F reframed + enforced (2026-06-11):** per the founder call above, city-level
+>   hub matching is the *intended* model, not a gap. What WAS missing is enforcement of
+>   hub-locality: delivery-options used to trust the typed address city, so (with a 2nd
+>   hub) a Tagum-linked buyer with a Davao address would get Davao fees while dispatch
+>   put the order on the Tagum batch. Now `src/lib/resolve-hub.ts` resolves the hub from
+>   the customer's **home hub** and rejects addresses outside its city (400 with a clear
+>   message); guests still match by city. Runtime-verified (Tagum address → 3 tiers;
+>   Davao address → rejected; guest → city match). Cross-hub "also available at <hub>"
+>   search stays future.
+> - **Next on the roadmap (not started):** the **storefront trader-price display**
+>   (backend ready); the **rider PWA frontend** (API ready); **producer payout
+>   disbursement** (gate exists). Web Push (Phase B optional half) when wanted.
 > - Full detail: **§9** status matrix, **§10** phase checkboxes (dated).
 
 ---
@@ -549,7 +562,7 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | **Rider self-service API** (login, manifest, delivered/refused) | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
 | **Rider PWA frontend** | ❌ missing (API ready; no rider-facing UI app yet) |
 | **Producer-payout remittance gate** (`cash-state` / `settled`) | ✅ primitive ready; payout disbursement itself a separate phase |
-| **Address → hub resolution** (multi-hub) | ⚠️ partial (city-name match, Tagum-only) |
+| **Address → hub resolution** | ✅ by design city = hub service boundary (founder 2026-06-11); home-hub + city enforcement shipped (`src/lib/resolve-hub.ts`) |
 | Online / GCash payment | ⏸️ deferred (no PayMongo budget; OTC covers prepay at launch) |
 | QR codes / order labels | ⏸️ deferred (do not implement yet) |
 
@@ -675,11 +688,19 @@ is also the foundation any future gig model would need.
       collected **and** remitted). *The payout disbursement itself is a separate
       phase; this is the gate it must read instead of "delivered".*
 
-### Phase F — Multi-hub readiness
-**Problem:** hub resolution in `delivery-options` matches on `city` string and
-assumes Tagum. The data model already supports areas/barangays/postal codes.
-- [ ] Resolve hub from address → `hub_area` (barangay/postal), not city name.
-- [ ] Cross-hub "also available at <hub>" search (per existing product memory).
+### Phase F — Multi-hub readiness (reframed 2026-06-11)
+**Founder decision:** hubs are per-CITY (a hub per barangay is unaffordable) and
+all operations are hub-local — Tagum Hub processes Tagum City only. City-level
+matching is therefore the intended model; barangay/postal hub resolution is
+**deliberately not built**.
+- [x] ~~Resolve hub from address → `hub_area` (barangay/postal)~~ — dropped by
+      founder decision; the city IS the service boundary.
+- [x] **Enforce hub-locality (2026-06-11):** shared `resolveHubForDelivery`
+      (`src/lib/resolve-hub.ts`) — a customer's home hub wins and their shipping
+      address must be inside that hub's city (400 otherwise); guests match an
+      active hub by normalized city name. Used by both delivery-options routes.
+- [ ] Cross-hub "also available at <hub>" search (per existing product memory) —
+      catalog stays per-hub; future.
 
 ### Phase G — Dispute fairness & SLAs
 - [ ] Buyer/seller response SLA timers; auto-resolve or escalate on no-response
@@ -704,7 +725,7 @@ assumes Tagum. The data model already supports areas/barangays/postal codes.
 | **Disputes feel unfair** | Auto-strikes on legit quality complaints alienate good buyers | Phase G appeals + clear buyer-facing status |
 | **Silent system** | ~~No emails/push~~ Email shipped 2026-06-10; delivery OFF until `RESEND_API_KEY` is set | Set the key + verified `EMAIL_FROM`; Web Push later |
 | **Membership expiry not enforced** | ~~resolved 2026-06-10~~ nightly tick + reminders + expiry-aware gate | Watch the 02:30 job logs |
-| **City-name hub matching** | Breaks the moment a second hub launches | Phase F address→hub resolution |
+| **City-name hub matching** | ~~reframed 2026-06-11~~ city = intended service boundary; hub-locality now enforced from the home hub | When hub #2 launches, seed its city + fee table; watch for city-name spelling drift in addresses |
 | **Perishable write-offs on refusal** | Refused COD produce can't be restocked; strikes only deter *repeat* refusers | Same-day resale of returned goods (founder's model) + strikes; first refusal absorbed (no upfront gate, by decision) |
 | **Membership state in metadata only** | No first-class table → admin list scans 1000 customers in memory | Move to link table / view when user base grows |
 

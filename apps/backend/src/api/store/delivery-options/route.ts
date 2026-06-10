@@ -2,8 +2,7 @@ import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { DELIVERY_FEES_MODULE } from "../../../modules/delivery-fees"
 import type DeliveryFeesModuleService from "../../../modules/delivery-fees/service"
-import { HUB_MODULE } from "../../../modules/hub"
-import type HubModuleService from "../../../modules/hub/service"
+import { resolveHubForDelivery } from "../../../lib/resolve-hub"
 
 type Tier = "free" | "standard" | "special"
 
@@ -71,7 +70,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   }
 
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY)
-  const hubService: HubModuleService = req.scope.resolve(HUB_MODULE)
   const feesService: DeliveryFeesModuleService = req.scope.resolve(
     DELIVERY_FEES_MODULE
   )
@@ -116,23 +114,22 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // 2. Resolve hub. MVP: city must match an active hub by name. Tagum at launch.
-  const city = (cart.shipping_address.city ?? "").trim().toLowerCase()
-  const allHubs = await hubService.listHubs({ active: true }, { take: 100 })
-  const hub = allHubs.find(
-    (h) =>
-      h.city.toLowerCase() === city ||
-      `${h.city.toLowerCase()} city` === city ||
-      h.city.toLowerCase() === city.replace(/\s*city$/i, "").trim()
-  )
-  if (!hub) {
-    res.status(404).json({
-      error: "no hub serves this address",
-      hint: "/partner-hub",
+  // 2. Resolve hub. Operations are hub-local by design (per-city hubs): a
+  //    customer's home hub wins and the address must be inside its city;
+  //    guests match an active hub by city.
+  const resolution = await resolveHubForDelivery(req.scope, {
+    customerId: cart.customer_id,
+    city: cart.shipping_address.city,
+  })
+  if (!resolution.ok) {
+    res.status(resolution.status).json({
+      error: resolution.error,
+      ...(resolution.hint ? { hint: resolution.hint } : {}),
       options: [],
     })
     return
   }
+  const hub = resolution.hub
 
   // 3. Lookup fees for (hub, barangay).
   const fee = await feesService.retrieveByHubBarangay(hub.id, barangay)
