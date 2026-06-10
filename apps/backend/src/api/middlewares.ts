@@ -1,6 +1,7 @@
 import { defineMiddlewares } from "@medusajs/framework/http"
 import { authenticate } from "@medusajs/framework/http"
 import multer from "multer"
+import { authenticateRider } from "../lib/rider-auth"
 
 /**
  * MFH custom API middlewares.
