@@ -74,7 +74,24 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // 2. Create the order. Prices are read from each variant's calculated price.
+  // 2. Resolve a title per variant (CreateOrderLineItemDTO requires `title`; the
+  //    workflow still recomputes price/title from the variant at runtime).
+  const { data: variantRows } = await query.graph({
+    entity: "variant",
+    fields: ["id", "title", "product.title"],
+    filters: { id: items.map((i) => i.variant_id) },
+  })
+  const titleByVariant = new Map<string, string>(
+    (
+      variantRows as {
+        id: string
+        title?: string | null
+        product?: { title?: string | null } | null
+      }[]
+    ).map((v) => [v.id, v.title || v.product?.title || "Item"])
+  )
+
+  // 3. Create the order. Prices are read from each variant's calculated price.
   //    The metadata flag keeps it out of dispatch.
   const { result: createdOrder } = await createOrderWorkflow(req.scope).run({
     input: {
@@ -85,6 +102,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       items: items.map((i) => ({
         variant_id: i.variant_id,
         quantity: Number(i.quantity),
+        title: titleByVariant.get(i.variant_id) ?? "Item",
       })),
       metadata: { sale_channel: "otc_counter" },
     },
