@@ -342,7 +342,9 @@ Unique `(order_id, type)` index makes collected/remitted idempotent under races.
 **Target (Phase E) — rider-driven, two separate events:**
 - The rider's QR scan / "Delivered" action marks the order fulfilled **and**
   auto-records `cod_collected` — the rider is now on the hook for that cash. No
-  admin step.
+  admin step. The recorded amount is the full cash in hand: **order total +
+  delivery fee** (`metadata.delivery_fee_php` — the fee never flows into
+  `order.total` but is paid in cash at the door).
 - **Delivered ≠ remitted.** Remittance (rider hands cash to hub) is a separate
   event; the reconcile view shows per-rider *collected − remitted = outstanding*.
 - **Producer payout is gated on remittance, not delivery.**
