@@ -102,7 +102,38 @@
 >   8. Late `rider_id` at delivery confirmation is persisted onto the dispatch order;
 >      `cod-remitted` now requires a prior `cod_collected` row and a matching rider;
 >      rider PATCH phone-uniqueness returns 409 instead of a raw 500.
->   *(Runtime re-verification of items 1–3 still pending — unit-tested + type-checked only.)*
+>   **All of 1–8 RUNTIME-VERIFIED over live HTTP (2026-06-10 evening):** fee-inclusive
+>   `cod_collected` (₱100 order + ₱30 fee → 13000 centavos, idempotent), warned→normal
+>   recovery fired after a clean delivery (legacy row self-healed), raw-API OTC
+>   completion rejected, remit guards 409'd, PATCH-delivered wrote the ledger row,
+>   roll-forward landed an order on day+2 past a locked batch.
+> - **Verification then exposed 4 MORE launch-blocking bugs (all fixed + runtime-verified
+>   2026-06-10):**
+>   1. **`customer-hub` link was 1:1** — after the first customer linked a hub, every
+>      other customer's `POST /store/customers/me/hub` failed with "Cannot create
+>      multiple links between 'customer' and 'hub'" (and unlinked customers' orders
+>      never dispatch). Fixed with `isList: true` on the customer side; same
+>      cardinality fix applied to `dispatch-batch-hub`, `pickup-window-hub-area`,
+>      `cod-transaction-order` (currently-unpopulated tables, same landmine).
+>      `pickup-slot-listing` (populated, 1:1) is intentionally untouched — flagged:
+>      a listing re-reserving a slot after a no-show would hit the same error.
+>   2. **COD checkout failed for EVERY logged-in customer** — `payment-cod`'s
+>      accountability lookup runs in the payment module's isolated container, and the
+>      Awilix cradle **throws** on unknown keys (it doesn't return undefined), so
+>      `authorizePayment` crashed whenever a session had a customer (guests skipped the
+>      check, which masked it). Provider check is now try/catch best-effort; the
+>      **authoritative prepay-lock gate moved to a `completeCartWorkflow.hooks.validate`
+>      hook** (`src/workflows/hooks/validate-cart-completion.ts`) — verified: locked
+>      buyer's completion → not_allowed, unlocked → order placed.
+>   3. **Dots in step names crash the workflow orchestrator** — `getPreviousStep`
+>      splits step ids on `"."`, so `createStep("assign-order-to-dispatch.assign", …)`
+>      made **every run of all 3 custom workflows** (dispatch assignment, dispute
+>      resolution/strikes, pickup-slot reservation) die with `Cannot read properties of
+>      undefined (reading 'id')`. Renamed to dash-only ids; assignment + dispute
+>      resolution re-verified live end-to-end.
+>   4. **Jobs weren't exec-runnable as their own docs instruct** — `npx medusa exec`
+>      passes `{ container }` (ExecArgs) while the scheduler passes the bare container;
+>      all 5 jobs now accept both.
 > - **Next on the roadmap (not started):** Phase B (Resend notifications), C (membership
 >   expiry job + reminders), D (trader B2B pricing), F (address→hub resolution); plus the
 >   **rider PWA frontend** (API ready) and **producer payout disbursement** (gate exists).

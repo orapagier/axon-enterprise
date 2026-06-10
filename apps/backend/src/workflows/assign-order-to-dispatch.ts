@@ -79,7 +79,7 @@ export function resolveBatchDate(now: Date, cutoff: string): {
 }
 
 const assignStep = createStep(
-  "assign-order-to-dispatch.assign",
+  "assign-order-to-dispatch-assign",  // NOTE: no dots — the orchestrator derives a step's parent by splitting its id on ".", so a dotted name crashes every run of the workflow
   async (input: AssignOrderToDispatchInput, { container }) => {
     const query = container.resolve(ContainerRegistrationKeys.QUERY)
     const dispatchService: DispatchModuleService =

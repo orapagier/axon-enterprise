@@ -16,7 +16,16 @@ export const config = {
   schedule: "*/15 * * * *",
 }
 
-export default async function lockDispatchBatches(container: MedusaContainer) {
+export default async function lockDispatchBatches(
+  input: MedusaContainer | { container: MedusaContainer }
+) {
+  // The scheduler invokes jobs with the bare container; `npx medusa exec`
+  // passes an ExecArgs object instead. Accept both so the documented
+  // run-on-demand command actually works.
+  const container =
+    "container" in input
+      ? (input as { container: MedusaContainer }).container
+      : input
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const service: DispatchModuleService = container.resolve(DISPATCH_MODULE)
 

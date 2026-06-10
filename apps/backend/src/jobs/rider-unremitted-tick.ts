@@ -33,7 +33,16 @@ const LIMIT_CENTAVOS = Number(
 const AGING_DAYS = Number(process.env.RIDER_UNREMITTED_AGING_DAYS ?? 3)
 const DAY_MS = 24 * 60 * 60 * 1000
 
-export default async function riderUnremittedTick(container: MedusaContainer) {
+export default async function riderUnremittedTick(
+  input: MedusaContainer | { container: MedusaContainer }
+) {
+  // The scheduler invokes jobs with the bare container; `npx medusa exec`
+  // passes an ExecArgs object instead. Accept both so the documented
+  // run-on-demand command actually works.
+  const container =
+    "container" in input
+      ? (input as { container: MedusaContainer }).container
+      : input
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const riders: RiderModuleService = container.resolve(RIDER_MODULE)
   const ledger: CodLedgerModuleService = container.resolve(COD_LEDGER_MODULE)

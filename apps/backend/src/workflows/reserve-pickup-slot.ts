@@ -35,7 +35,7 @@ type ReservedSlotState = {
 const RESERVE_LOCK_TIMEOUT_S = 10
 
 const reserveSlotStep = createStep(
-  "reserve-pickup-slot.reserve",
+  "reserve-pickup-slot-reserve",  // NOTE: no dots — the orchestrator derives a step's parent by splitting its id on ".", so a dotted name crashes every run of the workflow
   async (input: ReservePickupSlotInput, { container }) => {
     const service: PickupModuleService = container.resolve(PICKUP_MODULE)
     const locking = container.resolve(Modules.LOCKING)

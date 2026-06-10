@@ -89,8 +89,19 @@ export default class CodPaymentProviderService extends AbstractPaymentProvider {
       null
 
     if (customerId) {
-      // Prepay-lock check: buyers locked after a prior refusal can't use COD.
-      const accountability = this.container_[ACCOUNTABILITY_MODULE]
+      // Best-effort prepay-lock check. Payment providers run in the payment
+      // module's isolated container: resolving a custom module is expected to
+      // fail there (the Awilix cradle THROWS on unknown keys — it does not
+      // return undefined — which used to fail COD authorization for every
+      // logged-in customer). The authoritative gate is the completeCartWorkflow
+      // validate hook (src/workflows/hooks/validate-cart-completion.ts), which
+      // runs in the main container.
+      let accountability: AccountabilityModuleService | undefined
+      try {
+        accountability = this.container_[ACCOUNTABILITY_MODULE]
+      } catch {
+        accountability = undefined
+      }
       if (accountability) {
         const [status] = await accountability.listBuyerAccountStatuses(
           { customer_id: customerId },

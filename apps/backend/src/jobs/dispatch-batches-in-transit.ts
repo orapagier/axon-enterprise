@@ -27,8 +27,15 @@ function parseHHmm(s: string): { h: number; m: number } {
 }
 
 export default async function dispatchBatchesInTransit(
-  container: MedusaContainer
+  input: MedusaContainer | { container: MedusaContainer }
 ) {
+  // The scheduler invokes jobs with the bare container; `npx medusa exec`
+  // passes an ExecArgs object instead. Accept both so the documented
+  // run-on-demand command actually works.
+  const container =
+    "container" in input
+      ? (input as { container: MedusaContainer }).container
+      : input
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const dispatchService: DispatchModuleService =
     container.resolve(DISPATCH_MODULE)

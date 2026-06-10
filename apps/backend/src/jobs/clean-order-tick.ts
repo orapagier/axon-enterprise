@@ -29,7 +29,16 @@ export const config = {
 }
 
 
-export default async function cleanOrderTick(container: MedusaContainer) {
+export default async function cleanOrderTick(
+  input: MedusaContainer | { container: MedusaContainer }
+) {
+  // The scheduler invokes jobs with the bare container; `npx medusa exec`
+  // passes an ExecArgs object instead. Accept both so the documented
+  // run-on-demand command actually works.
+  const container =
+    "container" in input
+      ? (input as { container: MedusaContainer }).container
+      : input
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const accountability: AccountabilityModuleService = container.resolve(
     ACCOUNTABILITY_MODULE

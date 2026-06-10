@@ -86,7 +86,7 @@ type ResolveState = {
 }
 
 const resolveStep = createStep(
-  "resolve-dispute.resolve",
+  "resolve-dispute-resolve",  // NOTE: no dots — the orchestrator derives a step's parent by splitting its id on ".", so a dotted name crashes every run of the workflow
   async (input: ResolveDisputeInput, { container }) => {
     const accountability: AccountabilityModuleService =
       container.resolve(ACCOUNTABILITY_MODULE)
