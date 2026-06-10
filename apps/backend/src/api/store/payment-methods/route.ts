@@ -49,30 +49,27 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   }
 
   const codLocked = PREPAY_LOCKED_STATES.has(accountState)
-  const codReason = !codLocked
+  const blockReason = !codLocked
     ? null
     : accountState === "prepay_locked_permanent"
-      ? "Your account is in a permanent prepay-only state due to repeated refusals. Please pay at the hub counter (OTC)."
-      : "Your account is in a 30-day prepay-only period due to a prior refusal. Please pay at the hub counter (OTC)."
+      ? "Your account is restricted from online ordering due to repeated refusals. Please buy in person at the hub counter."
+      : "Your account is restricted from online ordering due to a prior refusal. Please buy in person at the hub counter."
 
+  // OTC is walk-in only and never offered online, so a locked buyer (no COD)
+  // has no online method left — checkout is blocked.
   res.json({
     customer_id: customerId,
     account_state: accountState,
     cod_available: !codLocked,
+    checkout_blocked: codLocked,
+    block_reason: blockReason,
     methods: [
       {
         id: "pp_cod_freshhub",
         type: "cod",
         label: "Cash on Delivery",
         available: !codLocked,
-        reason_if_unavailable: codReason,
-      },
-      {
-        id: "pp_otc_freshhub",
-        type: "otc",
-        label: "Over the Counter (pay at hub)",
-        available: true,
-        reason_if_unavailable: null,
+        reason_if_unavailable: blockReason,
       },
     ],
   })
