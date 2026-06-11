@@ -14,7 +14,7 @@ import {
 import MembershipRequestForm from "@modules/account/components/membership-request-form"
 
 export const metadata: Metadata = {
-  title: "Membership",
+  title: "Membership | Mindanao Fresh Hub",
   description: "Manage your Hub Member subscription.",
 }
 
