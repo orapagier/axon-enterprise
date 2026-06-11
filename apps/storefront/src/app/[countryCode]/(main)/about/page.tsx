@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 export const metadata: Metadata = {
-  title: "About Us | Mindanao Fresh Hub",
+  title: "About Us",
   description:
     "Mindanao Fresh Hub launched in May 2026 in Tagum City. We're building a short, honest supply chain that pays farmers more and charges homes less.",
 }
