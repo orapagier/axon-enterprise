@@ -385,7 +385,7 @@ const AuthCard = ({
             </div>
           )}
 
-          <div className="flex items-center my-5">
+          <div className="flex items-center my-4">
             <div className="flex-1 h-px bg-grey-10" />
             <span className="px-3 text-caption text-grey-40 uppercase tracking-wider font-medium">
               or with email
