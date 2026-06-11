@@ -18,7 +18,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
           >
             {!!image.url && (
               <Image
-                src={image.url}
+                src={resolveImageSrc(image.url)}
                 priority={index <= 2 ? true : false}
                 className="absolute inset-0 rounded-2xl object-cover"
                 alt={`Product image ${index + 1}`}
