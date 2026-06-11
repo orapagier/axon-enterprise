@@ -49,7 +49,7 @@ export default async function Footer() {
                 />
                 <button
                   type="submit"
-                  className="group inline-flex items-center gap-x-2 pl-5 pr-4 py-2.5 rounded-full bg-brand-gold-400 text-grey-90 text-body-sm font-semibold hover:bg-brand-gold-300 transition-colors whitespace-nowrap"
+                  className="group shrink-0 inline-flex items-center gap-x-2 pl-4 pr-3 small:pl-5 small:pr-4 py-2.5 rounded-full bg-brand-gold-400 text-grey-90 text-body-sm font-semibold hover:bg-brand-gold-300 transition-colors whitespace-nowrap"
                 >
                   Subscribe
                   <svg
