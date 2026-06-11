@@ -247,14 +247,9 @@ export default async function Nav() {
               <CartButton />
             </Suspense>
 
-            {/* Mobile menu */}
-            <div className="small:hidden h-full flex items-center ml-1">
-              <SideMenu
-                regions={regions}
-                locales={locales}
-                currentLocale={currentLocale}
-                isProducer={isProducer}
-              />
+            {/* Account — rightmost */}
+            <div className="flex items-center ml-1">
+              <AccountButton isLoggedIn={!!customer} accountType={accountType} />
             </div>
           </div>
         </nav>
