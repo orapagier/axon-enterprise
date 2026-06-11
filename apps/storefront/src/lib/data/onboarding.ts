@@ -199,7 +199,7 @@ export async function completeOnboarding(
     // Consumer (default)
     const display_name = required("display_name", "Display name")
     const phone = checkPhone("phone", "Phone number")
-    const default_city = required("default_city", "City / municipality")
+    const default_city = checkHubCity("default_city", "City / municipality")
     const buyer_bio = String(formData.get("buyer_bio") ?? "").trim()
 
     if (display_name && display_name.length < 2) {
