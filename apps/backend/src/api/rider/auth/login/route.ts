@@ -26,6 +26,13 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     res.status(401).json({ error: "Invalid phone or PIN" })
     return
   }
+  if (rider.status === "pending") {
+    res.status(403).json({
+      error:
+        "Your registration is awaiting approval. Pay your cash bond at the hub counter to get activated.",
+    })
+    return
+  }
   if (rider.status !== "active") {
     res.status(403).json({
       error: `Your rider account is ${rider.status}. Contact your hub.`,
