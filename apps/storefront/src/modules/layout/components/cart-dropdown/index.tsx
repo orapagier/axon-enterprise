@@ -95,7 +95,7 @@ const CartDropdown = ({
               <line x1="3" y1="6" x2="21" y2="6" />
               <path d="M16 10a4 4 0 0 1-8 0" />
             </svg>
-            <span className="text-body-sm font-semibold tracking-wide">Bag</span>
+            <span className="text-body-sm font-semibold tracking-wide">Cart</span>
             <span className="w-px h-3.5 bg-white/20" />
             <span className="text-body-sm font-bold tabular-nums text-brand-gold-300">
               {totalItems}
