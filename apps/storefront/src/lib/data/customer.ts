@@ -476,6 +476,59 @@ export async function cancelMembership(_formData: FormData) {
   })
 }
 
+export type DeleteAccountState = {
+  ok: boolean
+  error: string | null
+}
+
+/**
+ * Permanently delete the signed-in customer's account. Irreversible: the
+ * backend removes the customer, their auth identities, any rider record, and
+ * retires their listings. The UI requires the user to re-type their email,
+ * and the backend independently verifies that confirmation.
+ */
+export async function deleteAccount(
+  _prev: DeleteAccountState | null,
+  formData: FormData
+): Promise<DeleteAccountState> {
+  const confirm = String(formData.get("confirm") ?? "").trim().toLowerCase()
+
+  const customer = await retrieveCustomer()
+  if (!customer) {
+    return { ok: false, error: "Please sign in first." }
+  }
+  if (!confirm || confirm !== (customer.email ?? "").toLowerCase()) {
+    return {
+      ok: false,
+      error: "Type your account email exactly as shown to confirm.",
+    }
+  }
+
+  const headers = await getAuthHeaders()
+  try {
+    await sdk.client.fetch(`/store/customers/me/account`, {
+      method: "DELETE",
+      headers: { ...headers },
+      body: { confirm },
+    })
+  } catch (error) {
+    return {
+      ok: false,
+      error:
+        "We couldn't delete your account right now. Please try again or contact support.",
+    }
+  }
+
+  await removeAuthToken()
+  await removeCartId()
+  const customerCacheTag = await getCacheTag("customers")
+  revalidateTag(customerCacheTag)
+  const cartCacheTag = await getCacheTag("carts")
+  revalidateTag(cartCacheTag)
+
+  return { ok: true, error: null }
+}
+
 export async function transferCart() {
   const cartId = await getCartId()
 
