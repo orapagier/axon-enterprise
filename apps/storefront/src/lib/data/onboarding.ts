@@ -242,9 +242,10 @@ export async function completeOnboarding(
   //   Producer → primary_hub (their farm / business city).
   //   Consumer / Trader → default_city (the delivery destination).
   // This is what getDeliveryHub() reads on subsequent visits.
-  const seedCity = isProducer
+  const seedCityRaw = isProducer
     ? String(formData.get("primary_hub") ?? "").trim()
     : String(formData.get("default_city") ?? "").trim()
+  const seedCity = canonicalHubCity(seedCityRaw) ?? seedCityRaw
 
   try {
     const headers = { ...(await getAuthHeaders()) }
