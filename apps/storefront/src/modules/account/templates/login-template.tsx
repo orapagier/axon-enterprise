@@ -88,7 +88,7 @@ const LoginTemplate = ({
               </span>
             </div>
 
-            <div className="relative py-8">
+            <div className="relative py-6">
               <h2 className="font-heading text-3xl medium:text-4xl leading-[1.05] text-white">
                 Fresh produce,{" "}
                 <span className="italic text-brand-gold-300">delivered</span>{" "}
