@@ -1,16 +1,16 @@
 # Graph Report - freshhub  (2026-06-11)
 
 ## Corpus Check
-- 478 files · ~207,191 words
+- 478 files · ~207,738 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2554 nodes · 3289 edges · 275 communities (213 shown, 62 thin omitted)
+- 2554 nodes · 3289 edges · 273 communities (211 shown, 62 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 34 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f0a03644`
+- Built from commit: `c742b5a1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -141,7 +141,6 @@
 - [[_COMMUNITY_Community 187|Community 187]]
 - [[_COMMUNITY_Community 188|Community 188]]
 - [[_COMMUNITY_Community 189|Community 189]]
-- [[_COMMUNITY_Community 190|Community 190]]
 - [[_COMMUNITY_Community 191|Community 191]]
 - [[_COMMUNITY_Community 192|Community 192]]
 - [[_COMMUNITY_Community 193|Community 193]]
@@ -188,7 +187,6 @@
 - [[_COMMUNITY_Community 236|Community 236]]
 - [[_COMMUNITY_Community 237|Community 237]]
 - [[_COMMUNITY_Community 238|Community 238]]
-- [[_COMMUNITY_Community 240|Community 240]]
 - [[_COMMUNITY_Community 241|Community 241]]
 - [[_COMMUNITY_Community 242|Community 242]]
 - [[_COMMUNITY_Community 243|Community 243]]
@@ -250,7 +248,7 @@
 - **MedusaContainer Dependency Injection Consumers** — api_readme, subscribers_readme, jobs_readme, freshhub_dependency_injection [EXTRACTED 1.00]
 - **Workflow Execution Contexts** — workflows_readme, api_readme, subscribers_readme, jobs_readme [EXTRACTED 1.00]
 
-## Communities (275 total, 62 thin omitted)
+## Communities (273 total, 62 thin omitted)
 
 ### Community 0 - "Backend Type System"
 Cohesion: 0.01
@@ -269,8 +267,8 @@ Cohesion: 0.12
 Nodes (16): devDependencies, jest, @medusajs/test-utils, prop-types, react, react-dom, @swc/core, @swc/jest (+8 more)
 
 ### Community 4 - "Address Management"
-Cohesion: 0.12
-Nodes (10): CountryOption, CountrySelectProps, Locale, StateType, DEFAULT_OPTION, LanguageOption, LanguageSelectProps, BaseMenuItems (+2 more)
+Cohesion: 0.09
+Nodes (15): AccountInfo(), Addresses(), CountryOption, CountrySelectProps, Locale, StateType, useToggleState(), DEFAULT_OPTION (+7 more)
 
 ### Community 5 - "Shared UI Components"
 Cohesion: 0.05
@@ -421,8 +419,8 @@ Cohesion: 0.4
 Nodes (4): name, namespaces, nativeEnums, tables
 
 ### Community 119 - "Micro Community 119"
-Cohesion: 0.22
-Nodes (5): cancelMembership(), requestMembership(), updateCustomer(), MyInformationProps, MyInformationProps
+Cohesion: 0.12
+Nodes (8): AccountInfoProps, cancelMembership(), requestMembership(), updateCustomer(), MyInformationProps, MyInformationProps, MyInformationProps, MyInformationProps
 
 ### Community 130 - "Community 130"
 Cohesion: 0.1
@@ -445,8 +443,8 @@ Cohesion: 0.13
 Nodes (14): 1. Create a Data Model, 2. Create a Service, 3. Export Module Definition, 4. Add Module to Medusa's Configurations, 5. Generate and Run Migrations, code:ts (import { model } from "@medusajs/framework/utils"), code:ts (import { MedusaService } from "@medusajs/framework/utils"), code:ts (import BlogModuleService from "./service") (+6 more)
 
 ### Community 135 - "Community 135"
-Cohesion: 0.19
-Nodes (19): syncCustomerHubFromCookie(), setAuthToken(), cancelPendingAuth(), clearPendingAuth(), deriveCustomerSecret(), generateCode(), generateDerivedPassword(), hashCode() (+11 more)
+Cohesion: 0.16
+Nodes (21): ROLE_COPY, Step, setAuthToken(), AccountType, AuthMode, cancelPendingAuth(), clearPendingAuth(), deriveCustomerSecret() (+13 more)
 
 ### Community 136 - "Community 136"
 Cohesion: 0.14
@@ -604,10 +602,6 @@ Nodes (8): Batch, BatchStatus, config, DispatchOrder, DispatchPage(), NEXT_STATU
 Cohesion: 0.17
 Nodes (7): AreaFormState, config, EMPTY_AREA_FORM, EMPTY_HUB_FORM, Hub, HubArea, HubFormState
 
-### Community 190 - "Community 190"
-Cohesion: 0.25
-Nodes (6): ROLE_COPY, Step, AccountType, AuthMode, OtpRequestState, OtpVerifyState
-
 ### Community 191 - "Community 191"
 Cohesion: 0.18
 Nodes (11): 1. Module: data model, `apps/backend/src/modules/hub/index.ts`, `apps/backend/src/modules/hub/models/hub-area.ts`, `apps/backend/src/modules/hub/models/hub.ts`, `apps/backend/src/modules/hub/service.ts`, code:ts (import { model } from "@medusajs/framework/utils"), code:ts (import { model } from "@medusajs/framework/utils"), code:ts (import { MedusaService } from "@medusajs/framework/utils") (+3 more)
@@ -657,8 +651,8 @@ Cohesion: 0.29
 Nodes (4): config, STATUS_TONE, Wallet, WalletStatus
 
 ### Community 204 - "Community 204"
-Cohesion: 0.2
-Nodes (4): Props, Props, LOGIN_VIEW, VALUE_PROPS
+Cohesion: 0.15
+Nodes (8): syncCustomerHubFromCookie(), login(), signup(), transferCart(), Props, Props, LOGIN_VIEW, VALUE_PROPS
 
 ### Community 206 - "Community 206"
 Cohesion: 0.2
@@ -724,10 +718,6 @@ Nodes (4): 7. Seed script, `apps/backend/src/migration-scripts/seed-hubs.ts`, co
 Cohesion: 0.5
 Nodes (3): getCustomerId(), POST(), VALID_REASONS
 
-### Community 240 - "Community 240"
-Cohesion: 0.14
-Nodes (6): AccountInfoProps, addCustomerAddress(), updateCustomerAddress(), MyInformationProps, MyInformationProps, MyInformationProps
-
 ### Community 242 - "Community 242"
 Cohesion: 0.43
 Nodes (6): CategoryPage(), generateMetadata(), generateStaticParams(), Props, getCategoryByHandle(), listCategories()
@@ -753,8 +743,8 @@ Cohesion: 0.17
 Nodes (11): 10. Glossary, 1. Project context, 2. Sealed business decisions (do not redesign), 3. Repository Structure, 3. What's already built (do not rebuild), 4. Top-level architecture additions, 7. Suggested build sequence (8–14 weeks solo, faster with help), 8. Out of scope (do not build now) (+3 more)
 
 ### Community 250 - "Community 250"
-Cohesion: 0.16
-Nodes (11): AccountInfo(), AddressBookProps, AddAddress(), EditAddress(), EditAddressProps, Addresses(), hubSlugForCity(), deleteCustomerAddress() (+3 more)
+Cohesion: 0.17
+Nodes (9): AddressBookProps, AddAddress(), EditAddress(), EditAddressProps, hubSlugForCity(), addCustomerAddress(), deleteCustomerAddress(), updateCustomerAddress() (+1 more)
 
 ### Community 251 - "Community 251"
 Cohesion: 0.28
@@ -832,7 +822,7 @@ Nodes (4): DELETE(), GET(), getCustomerId(), POST()
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `getAuthHeaders()` connect `Account & Checkout Pages` to `Community 130`, `Community 36`, `Product Quick Add`, `Community 135`, `Community 136`, `Account Profile Forms`, `Community 240`, `Community 179`, `Order Confirmation Flow`, `Community 246`, `Micro Community 119`, `Community 250`, `Community 223`?**
+- **Why does `getAuthHeaders()` connect `Account & Checkout Pages` to `Community 130`, `Community 36`, `Product Quick Add`, `Community 135`, `Community 136`, `Community 204`, `Account Profile Forms`, `Community 179`, `Order Confirmation Flow`, `Community 246`, `Micro Community 119`, `Community 250`, `Community 223`?**
   _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **Why does `retrieveCustomer()` connect `Product Quick Add` to `Account & Checkout Pages`, `Community 135`, `Community 136`, `Community 137`, `Community 266`, `Community 268`, `Community 206`, `Account Profile Forms`, `Community 147`, `Micro Community 119`, `Community 251`?**
   _High betweenness centrality (0.025) - this node is a cross-community bridge._
