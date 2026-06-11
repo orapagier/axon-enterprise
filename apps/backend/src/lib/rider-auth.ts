@@ -81,9 +81,53 @@ export function getRiderId(req: MedusaRequest): string | null {
   return (req as unknown as { rider_id?: string }).rider_id ?? null
 }
 
-/** The token-issuing routes under /rider/auth/* — the only public ones. */
+const SIGNUP_TICKET_TTL_SECONDS = 15 * 60
+
+/**
+ * Short-lived HMAC ticket proving a Google email was verified by the OAuth
+ * callback. The callback issues it when no rider matches the email; the
+ * signup form sends it back to POST /rider/auth/signup so the new rider
+ * record gets the verified email without trusting client input.
+ */
+export function signSignupTicket(email: string): string {
+  const exp = Math.floor(Date.now() / 1000) + SIGNUP_TICKET_TTL_SECONDS
+  const body = b64url(JSON.stringify({ email, exp, use: "rider_signup" }))
+  return `${body}.${sign(body)}`
+}
+
+/** Returns the verified email, or null if the ticket is invalid/expired. */
+export function verifySignupTicket(ticket: string): string | null {
+  const parts = ticket.split(".")
+  if (parts.length !== 2) return null
+  const [body, sig] = parts
+
+  const expected = sign(body)
+  const a = Buffer.from(sig)
+  const b = Buffer.from(expected)
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null
+
+  let payload: { email?: string; exp?: number; use?: string }
+  try {
+    payload = JSON.parse(Buffer.from(body, "base64url").toString("utf8"))
+  } catch {
+    return null
+  }
+
+  if (payload.use !== "rider_signup" || !payload.email) return null
+  if (
+    typeof payload.exp !== "number" ||
+    payload.exp < Math.floor(Date.now() / 1000)
+  ) {
+    return null
+  }
+  return payload.email
+}
+
+/** The pre-login routes under /rider/auth/* — the only public ones. */
 const PUBLIC_RIDER_PATHS = [
   "/rider/auth/login",
+  "/rider/auth/signup",
+  "/rider/auth/hubs",
   "/rider/auth/google/start",
   "/rider/auth/google/callback",
 ]
