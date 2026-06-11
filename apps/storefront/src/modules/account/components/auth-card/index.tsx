@@ -248,7 +248,7 @@ const AuthCard = ({
 
       {/* Mode tabs (only on step 1) */}
       {step === "method" && (
-        <div className="grid grid-cols-2 gap-1 p-1 bg-grey-10/60 rounded-xl mb-6">
+        <div className="grid grid-cols-2 gap-1 p-1 bg-grey-10/60 rounded-xl mb-5">
           <button
             onClick={() => switchMode("signin")}
             className={`py-2.5 rounded-lg text-body-sm font-semibold transition-all ${
