@@ -4,16 +4,17 @@ import "server-only"
  * Transactional OTP email delivery.
  *
  * The storefront owns the OTP flow (code generation + the pending-auth cookie),
- * so it also owns delivery. We use SendGrid's v3 HTTP API directly — no SDK
- * dependency — and fall back to a dev-only console log when no provider is
- * configured. Swapping providers (SES, Postmark, Resend) means replacing the
- * `deliver` call below; the public contract stays the same.
+ * so it also owns delivery. We use Resend's REST API directly — the same
+ * provider the backend's notification module uses (Phase B) — so a single
+ * RESEND_API_KEY powers every email this project sends. Falls back to a
+ * dev-only console log + on-screen code when no key is configured.
  *
  * Required env in production:
- *   - SENDGRID_API_KEY
- *   - OTP_FROM_EMAIL   (a verified sender on your SendGrid account)
+ *   - RESEND_API_KEY
  * Optional:
- *   - OTP_FROM_NAME    (defaults to "FreshHub")
+ *   - EMAIL_FROM   (a verified sender on your Resend account; defaults to
+ *                   Resend's shared onboarding sender, which only delivers
+ *                   to the Resend account owner's address)
  */
 
 export type OtpEmailResult = {
@@ -22,6 +23,12 @@ export type OtpEmailResult = {
   devCode?: string
   error?: string
 }
+
+const RESEND_API_URL = "https://api.resend.com/emails"
+// Matches the backend's resend-notification default — works without domain
+// verification, but only delivers to the Resend account owner. Set EMAIL_FROM
+// in production.
+const DEFAULT_FROM = "Mindanao Fresh Hub <onboarding@resend.dev>"
 
 const SUBJECT = "Your FreshHub sign-in code"
 
@@ -43,13 +50,12 @@ export async function sendOtpEmail(
   email: string,
   code: string
 ): Promise<OtpEmailResult> {
-  const apiKey = process.env.SENDGRID_API_KEY
-  const fromEmail = process.env.OTP_FROM_EMAIL
-  const fromName = process.env.OTP_FROM_NAME || "FreshHub"
+  const apiKey = process.env.RESEND_API_KEY
+  const from = process.env.EMAIL_FROM || DEFAULT_FROM
   const isProduction = process.env.NODE_ENV === "production"
 
   // No provider configured.
-  if (!apiKey || !fromEmail) {
+  if (!apiKey) {
     if (!isProduction) {
       // eslint-disable-next-line no-console
       console.log(`[MFH auth] OTP for ${email}: ${code}`)
@@ -57,7 +63,7 @@ export async function sendOtpEmail(
     }
     // eslint-disable-next-line no-console
     console.error(
-      "[MFH auth] SENDGRID_API_KEY / OTP_FROM_EMAIL not configured; cannot deliver OTP."
+      "[MFH auth] RESEND_API_KEY not configured; cannot deliver OTP."
     )
     return { delivered: false, error: "email_provider_not_configured" }
   }
@@ -65,20 +71,18 @@ export async function sendOtpEmail(
   const { text, html } = buildBody(code)
 
   try {
-    const res = await fetch("https://api.sendgrid.com/v3/mail/send", {
+    const res = await fetch(RESEND_API_URL, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        personalizations: [{ to: [{ email }] }],
-        from: { email: fromEmail, name: fromName },
+        from,
+        to: [email],
         subject: SUBJECT,
-        content: [
-          { type: "text/plain", value: text },
-          { type: "text/html", value: html },
-        ],
+        text,
+        html,
       }),
     })
 
@@ -86,7 +90,7 @@ export async function sendOtpEmail(
       const detail = await res.text().catch(() => "")
       // eslint-disable-next-line no-console
       console.error(
-        `[MFH auth] SendGrid send failed (${res.status}): ${detail.slice(0, 300)}`
+        `[MFH auth] Resend send failed (${res.status}): ${detail.slice(0, 300)}`
       )
       return { delivered: false, error: "email_send_failed" }
     }
@@ -94,7 +98,7 @@ export async function sendOtpEmail(
     return { delivered: true }
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error("[MFH auth] SendGrid request error:", err)
+    console.error("[MFH auth] Resend request error:", err)
     return { delivered: false, error: "email_send_failed" }
   }
 }
