@@ -770,6 +770,51 @@ button.primary[disabled]{opacity:.55}
     });
   });
 
+  /* ---------- google sign-in return ---------- */
+  /* /rider/auth/google/callback redirects here with the rider token (or an
+     error code) in the URL fragment, so it never reaches server logs. */
+  function googleErrorMessage(code){
+    var msgs = {
+      not_configured: 'Google sign-in is not set up yet. Use mobile number + PIN.',
+      denied: 'Google sign-in was cancelled.',
+      state: 'Sign-in expired. Try again.',
+      auth_failed: 'Google sign-in failed. Try again.',
+      unverified_email: 'That Google email is not verified.',
+      no_rider: 'No rider account uses that Google email. Ask your hub to add it.',
+      rider_inactive: 'Your rider account is inactive. Contact your hub.',
+      rider_suspended: 'Your rider account is suspended. Contact your hub.'
+    };
+    return msgs[code] || 'Google sign-in failed. Try again.';
+  }
+  function handleGoogleReturn(){
+    var hash = (location.hash || '').replace(/^#/, '');
+    if (!hash) return false;
+    var params = {};
+    hash.split('&').forEach(function(kv){
+      var i = kv.indexOf('=');
+      if (i > 0) {
+        try { params[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1)); } catch (e) {}
+      }
+    });
+    if (!params.rt && !params.gerror) return false;
+    history.replaceState(null, '', location.pathname);
+    if (params.rt) {
+      localStorage.setItem(TOKEN_KEY, params.rt);
+      showRun();
+      load();
+      api('/rider/me').then(function(out){
+        localStorage.setItem(ME_KEY, JSON.stringify(out.rider));
+        $('rider-name').textContent = out.rider.full_name || 'Rider';
+      }).catch(function(){});
+    } else {
+      showLogin();
+      var err = $('login-err');
+      err.textContent = googleErrorMessage(params.gerror);
+      err.classList.add('show');
+    }
+    return true;
+  }
+
   /* ---------- chrome ---------- */
   $('btn-refresh').addEventListener('click', load);
   $('btn-logout').addEventListener('click', logout);
