@@ -55,12 +55,6 @@ export async function retrieveCart(cartId?: string, fields?: string) {
 }
 
 export async function getOrSetCart(countryCode: string) {
-  // Guests cannot carry a cart — buying requires a registered account.
-  const customer = await retrieveCustomer()
-  if (!customer) {
-    redirect(`/${countryCode}/account`)
-  }
-
   const region = await getRegion(countryCode)
 
   if (!region) {
