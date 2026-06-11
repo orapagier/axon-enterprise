@@ -206,9 +206,43 @@
 >   `<backend origin>/rider/auth/google/callback` as an authorized redirect URI on the
 >   Google OAuth client, set each rider's email via /admin/riders, then a real-account
 >   round-trip on a phone.
+> - **Rider login + run sheet MOVED INTO THE STOREFRONT — RUNTIME-VERIFIED (2026-06-11,
+>   supersedes the standalone PWA above):** riders now sign in on the storefront like any
+>   user (OTP / Google customer auth — no separate login page, no PIN) and work deliveries
+>   from **/account/rider** ("Deliveries" tab, rider-typed accounts only). Rail:
+>   **GET /store/riders/session** (customer-authenticated) matches customer.email ↔
+>   rider.email and exchanges the session for the same 30-day HS256 rider token, which the
+>   storefront uses SERVER-SIDE against the unchanged `/rider/*` API (token never reaches
+>   the browser; `apps/storefront/src/lib/data/rider.ts`). **POST /store/riders/register**
+>   creates a pending rider from the signed-in customer (email taken from the session, not
+>   the body; no PIN needed) — the /account/rider page walks register → pending (pay bond)
+>   → suspended/inactive notice → active run sheet (stats, cash-in-hand bar vs ₱5k limit,
+>   stop tickets with tap-to-call + collect = total + fee, Delivered/Refused confirm
+>   sheet). **GET /rider-app now 302s to the storefront /account** (legacy shell kept in
+>   `src/rider-app/app-html.ts`; /rider/* API and PIN login remain for any old tokens).
+>   Verified live end-to-end: customer signup → exchange (`rider:null`) → register (201
+>   pending, token null) → admin-activate → exchange token works on /rider/manifest →
+>   seeded stop → **Delivered through the browser UI** (manifest 1→0, cod_collected
+>   idempotent) — plus negatives (customer JWT on /rider/* → 401, anonymous exchange →
+>   401). Dev DB keeps test user `rider-e2e@test.mfh` (active rider, Tagum hub).
+> - **Storefront UI sweep (2026-06-11):** playwright audit at 320/390/1440px across all
+>   pages (anonymous + logged-in + carted). Fixed: account **Overview was fully hidden on
+>   mobile** (`hidden small:block`) — rebuilt on-brand with role shortcut card (rider →
+>   run sheet, producer → listings); **Disputes page 401'd for every customer** (client
+>   components called the JWT-guarded endpoint from the browser; now server-side via
+>   `lib/data/disputes.ts`, banner is an RSC); footer newsletter button overflowed the
+>   viewport (input `min-w-0`); product grids were 3-up at phone width (now 2-up
+>   `grid-cols-2 xsmall:grid-cols-3` in store/related/featured); barangay combobox label
+>   overlapped its "Pick city first" placeholder; profile rendered literal "null null" /
+>   "null"; cart showed "Variant: Default" noise; free-shipping nudge fixed 400px width;
+>   side-menu selects min-w-[320px] overflowed 320px phones; rider signup notice copy now
+>   matches the bond flow; rider onboarding redirects to /account/rider. Storefront
+>   `next build` clean, backend tsc clean, 43/43 unit tests pass.
 > - **Next on the roadmap (not started):** the **storefront trader-price display**
 >   (backend ready); **producer payout disbursement** (gate exists). Web Push (Phase B
->   optional half) when wanted.
+>   optional half) when wanted. Manual: real-phone pass of /account/rider; consider
+>   removing the rider Google PWA routes (`/rider/auth/google/*`) once storefront-only
+>   login is confirmed in the field.
 > - Full detail: **§9** status matrix, **§10** phase checkboxes (dated).
 
 ---
