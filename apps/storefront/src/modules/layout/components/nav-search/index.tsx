@@ -94,7 +94,7 @@ export default function NavSearch() {
             setOpen(true)
           }}
           onFocus={() => setOpen(true)}
-          placeholder="Search mangoes, kangkong…"
+          placeholder="Search..."
           autoComplete="off"
           aria-label="Search products"
           className="w-full h-9 pl-9 pr-9 rounded-full bg-grey-5 border border-grey-10 text-[13px] text-grey-90 placeholder:text-grey-40 focus:outline-none focus:bg-white focus:border-grey-90 focus:ring-2 focus:ring-grey-90/5 transition-all [&::-webkit-search-cancel-button]:hidden"

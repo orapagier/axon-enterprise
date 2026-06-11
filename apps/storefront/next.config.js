@@ -13,6 +13,10 @@ const S3_PATHNAME = process.env.MEDUSA_CLOUD_S3_PATHNAME
  */
 const nextConfig = {
   reactStrictMode: true,
+  // The storefront is also browsed through a tunnelled domain during
+  // development; without this Next.js will start blocking its /_next/*
+  // asset requests in a future major version.
+  allowedDevOrigins: ["freshhub.canchowlung.com"],
   logging: {
     fetches: {
       fullUrl: true,
