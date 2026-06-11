@@ -185,6 +185,6 @@
 
   /* Full-viewport section (subtracts sticky header: 36 announcement + 68 main = 104px) */
   .section-viewport {
-    @apply py-10 small:py-0 small:min-h-[calc(100vh-104px)] small:flex small:items-center;
+    @apply py-8 small:py-0 small:min-h-[calc(100vh-104px)] small:flex small:items-center;
   }
 }
