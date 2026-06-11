@@ -30,7 +30,12 @@ const VALUE_PROPS = [
   },
 ]
 
-const LoginTemplate = () => {
+const LoginTemplate = ({
+  hubs = [],
+  currentHubSlug = null,
+  googleEnabled = false,
+  googleError = null,
+}: LoginTemplateProps) => {
   return (
     <div className="relative min-h-[calc(100vh-100px)] bg-grey-5">
       <div className="grid small:grid-cols-2 min-h-[calc(100vh-100px)]">
