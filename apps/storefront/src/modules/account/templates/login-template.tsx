@@ -60,7 +60,7 @@ const LoginTemplate = ({
         {/* Two separate cards */}
         <div className="w-full grid small:grid-cols-2 gap-4 medium:gap-6 items-stretch small:h-full">
           {/* Brand card */}
-          <aside className="relative hidden small:flex flex-col justify-between p-10 medium:p-12 overflow-hidden rounded-3xl shadow-xl bg-gradient-to-br from-brand-green-900 via-brand-green-800 to-brand-green-700 text-white">
+          <aside className="relative hidden small:flex flex-col justify-between p-8 medium:p-10 overflow-hidden rounded-3xl shadow-xl bg-gradient-to-br from-brand-green-900 via-brand-green-800 to-brand-green-700 text-white">
             {/* Decorative orbs */}
             <div
               aria-hidden
