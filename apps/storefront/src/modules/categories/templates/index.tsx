@@ -79,7 +79,7 @@ export default async function CategoryTemplate({
         )}
       </div>
 
-      <div className="flex flex-col small:flex-row small:items-start gap-8">
+      <div className="flex flex-col small:flex-row small:items-start gap-5 small:gap-8">
         <RefinementList />
         <div className="w-full">
           <Suspense

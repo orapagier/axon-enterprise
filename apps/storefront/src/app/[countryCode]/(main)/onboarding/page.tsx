@@ -126,7 +126,7 @@ export default async function OnboardingPage({ params }: Props) {
         className="pointer-events-none absolute -bottom-32 -left-20 w-[360px] h-[360px] rounded-full bg-brand-gold-200/30 blur-3xl"
       />
 
-      <div className="relative content-container py-10 small:py-14">
+      <div className="relative content-container py-7 small:py-14">
         <div className="max-w-3xl mx-auto">
           {/* Greeting + step indicator */}
           <div className="flex flex-col items-center text-center mb-8">

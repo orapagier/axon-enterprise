@@ -90,8 +90,8 @@ export default function PartnerHubPage() {
           className="absolute -left-32 bottom-0 w-[360px] h-[360px] rounded-full bg-brand-gold-400/15 blur-3xl pointer-events-none"
         />
 
-        <div className="relative content-container w-full py-14 small:py-20">
-          <div className="grid grid-cols-1 small:grid-cols-12 gap-8 small:gap-12 items-center">
+        <div className="relative content-container w-full py-10 small:py-20">
+          <div className="grid grid-cols-1 small:grid-cols-12 gap-6 small:gap-12 items-center">
             <div className="small:col-span-7 flex flex-col gap-y-5">
               <div className="flex items-center gap-x-3">
                 <div className="w-8 h-px bg-brand-green-600" />
@@ -320,7 +320,7 @@ export default function PartnerHubPage() {
       {/* ──────────────────────────── FIT ──────────────────────────── */}
       <section className="bg-white section-viewport w-full">
         <div className="content-container w-full">
-          <div className="grid grid-cols-1 small:grid-cols-12 gap-8 small:gap-10 items-start">
+          <div className="grid grid-cols-1 small:grid-cols-12 gap-6 small:gap-10 items-start">
             <div className="small:col-span-5">
               <div className="flex items-center gap-x-3 mb-3">
                 <div className="w-8 h-px bg-brand-green-600" />

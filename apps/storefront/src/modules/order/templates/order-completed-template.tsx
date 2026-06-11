@@ -33,7 +33,7 @@ export default async function OrderCompletedTemplate({
       />
 
       <div className="relative content-container">
-        <div className="mx-auto flex w-full max-w-3xl flex-col gap-y-8 py-10 small:py-16">
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-y-6 small:gap-y-8 py-8 small:py-16">
           {isOnboarding && <OnboardingCta orderId={order.id} />}
 
           {/* ── Hero ─────────────────────────────────────────────── */}

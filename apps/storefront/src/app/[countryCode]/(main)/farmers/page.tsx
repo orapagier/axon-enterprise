@@ -151,8 +151,8 @@ export default function FarmersPage() {
           className="absolute -left-32 bottom-0 w-[360px] h-[360px] rounded-full bg-brand-gold-400/15 blur-3xl pointer-events-none"
         />
 
-        <div className="relative content-container w-full py-14 small:py-20">
-          <div className="grid grid-cols-1 small:grid-cols-12 gap-8 small:gap-12 items-center">
+        <div className="relative content-container w-full py-10 small:py-20">
+          <div className="grid grid-cols-1 small:grid-cols-12 gap-6 small:gap-12 items-center">
             <div className="small:col-span-7 flex flex-col gap-y-5">
               <div className="flex items-center gap-x-3">
                 <div className="w-8 h-px bg-brand-green-600" />
@@ -347,7 +347,7 @@ export default function FarmersPage() {
           className="absolute right-0 top-1/3 w-[420px] h-[420px] rounded-full bg-brand-green-100/40 blur-3xl pointer-events-none"
         />
         <div className="relative content-container w-full">
-          <div className="grid grid-cols-1 small:grid-cols-12 gap-8 small:gap-10 mb-10">
+          <div className="grid grid-cols-1 small:grid-cols-12 gap-6 small:gap-10 mb-10">
             <div className="small:col-span-5">
               <div className="flex items-center gap-x-3 mb-3">
                 <div className="w-8 h-px bg-brand-green-600" />
@@ -471,7 +471,7 @@ export default function FarmersPage() {
               className="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-brand-gold-400/15 blur-3xl pointer-events-none"
             />
 
-            <div className="relative grid grid-cols-1 small:grid-cols-12 gap-8 items-center">
+            <div className="relative grid grid-cols-1 small:grid-cols-12 gap-6 small:gap-8 items-center">
               <div className="small:col-span-8">
                 <span className="inline-flex items-center gap-x-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 backdrop-blur text-[10px] font-bold uppercase tracking-[0.18em] text-white/80 mb-5">
                   A note from the founder

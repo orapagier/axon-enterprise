@@ -18,7 +18,7 @@ export default async function Footer() {
 
       <div className="relative content-container flex flex-col w-full">
         {/* Editorial CTA strip at top */}
-        <div className="py-12 small:py-16 border-b border-white/8">
+        <div className="py-8 small:py-16 border-b border-white/8">
           <div className="grid grid-cols-1 small:grid-cols-12 gap-8 items-end">
             <div className="small:col-span-7">
               <div className="flex items-center gap-x-3 mb-3">
@@ -73,7 +73,7 @@ export default async function Footer() {
         </div>
 
         {/* Main grid */}
-        <div className="grid grid-cols-1 small:grid-cols-12 gap-10 small:gap-12 py-12 small:py-16">
+        <div className="grid grid-cols-1 small:grid-cols-12 gap-8 small:gap-12 py-8 small:py-16">
           {/* Brand column */}
           <div className="small:col-span-4 flex flex-col gap-y-5">
             <LocalizedClientLink href="/" className="flex items-center gap-x-2.5">
