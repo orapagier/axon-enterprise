@@ -7,7 +7,10 @@ import { hashPin } from "../../../modules/rider/pin"
 
 /**
  * GET  /admin/riders?hub_id=&status=   — list riders (optionally scoped)
- * POST /admin/riders                   — register a rider (admin only; no self-signup)
+ * POST /admin/riders                   — register a rider directly (fallback;
+ *                                        the normal path is rider self-signup
+ *                                        at POST /rider/auth/signup + admin
+ *                                        approval after the cash bond)
  */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const riders: RiderModuleService = req.scope.resolve(RIDER_MODULE)
