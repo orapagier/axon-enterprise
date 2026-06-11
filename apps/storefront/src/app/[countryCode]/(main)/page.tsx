@@ -9,7 +9,7 @@ import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 
 export const metadata: Metadata = {
-  title: "Mindanao Fresh Hub | Fresh from Mindanao's farms",
+  title: { absolute: "Mindanao Fresh Hub | Fresh from Mindanao's farms" },
   description:
     "Shop fresh produce from Mindanao farmers. Premium quality fruits and vegetables at fair prices, delivered free to your door.",
 }
