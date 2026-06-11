@@ -126,8 +126,8 @@ export default async function ProductPreview({
         </LocalizedClientLink>
 
         {/* Price + add */}
-        <div className="mt-auto pt-2 flex items-end justify-between gap-2 border-t border-grey-10 mt-2">
-          <div className="flex flex-col min-w-0">
+        <div className="mt-auto pt-2.5 flex items-end justify-between gap-2 border-t border-grey-10">
+          <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
             {cheapestPrice && <PreviewPrice price={cheapestPrice} unit={(meta.unit as string) ?? "kg"} />}
           </div>
           <ProductQuickAdd product={product} mode="cart" variant="icon" />
