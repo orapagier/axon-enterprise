@@ -79,11 +79,16 @@ export default function ProductQuickAdd({ product, mode, variant = "default" }: 
 
     setIsAdding(true)
 
-    await addToCart({
+    const result = await addToCart({
       variantId: selectedVariant.id,
       quantity,
       countryCode,
     })
+
+    if (result?.requiresLogin) {
+      router.push(`/${countryCode}/account`)
+      return
+    }
 
     setIsAdding(false)
     setAdded(true)
