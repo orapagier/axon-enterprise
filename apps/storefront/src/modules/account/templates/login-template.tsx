@@ -58,29 +58,29 @@ const LoginTemplate = ({
       />
 
       <div className="relative flex flex-col items-center justify-center min-h-[calc(100vh-100px)] px-4 small:px-8 py-10 small:py-14">
-        {/* Brand mark above the card */}
+        {/* Brand mark above the cards */}
         <LocalizedClientLink
           href="/"
-          className="inline-flex items-center gap-x-2 text-body-sm font-semibold text-grey-80 mb-6"
+          className="inline-flex items-center gap-x-2 text-body-sm font-semibold text-grey-80 mb-8"
         >
-          <span className="text-xl">🌿</span>
-          <span className="font-heading text-h3 text-grey-90">
+          <span className="text-2xl">🌿</span>
+          <span className="font-heading text-h2 text-grey-90">
             Mindanao Fresh Hub
           </span>
         </LocalizedClientLink>
 
-        {/* Floating card */}
-        <div className="w-full max-w-5xl grid small:grid-cols-[5fr_6fr] bg-white rounded-3xl shadow-xl border border-grey-10 overflow-hidden">
-          {/* Brand panel */}
-          <aside className="relative hidden small:flex flex-col justify-between p-8 medium:p-10 overflow-hidden bg-gradient-to-br from-brand-green-900 via-brand-green-800 to-brand-green-700 text-white">
+        {/* Two separate cards */}
+        <div className="w-full max-w-7xl grid small:grid-cols-2 gap-6 medium:gap-8 items-stretch">
+          {/* Brand card */}
+          <aside className="relative hidden small:flex flex-col justify-between p-10 medium:p-14 overflow-hidden rounded-3xl shadow-xl bg-gradient-to-br from-brand-green-900 via-brand-green-800 to-brand-green-700 text-white">
             {/* Decorative orbs */}
             <div
               aria-hidden
-              className="pointer-events-none absolute -top-20 -right-16 w-[320px] h-[320px] rounded-full bg-brand-gold-400/15 blur-3xl"
+              className="pointer-events-none absolute -top-24 -right-20 w-[380px] h-[380px] rounded-full bg-brand-gold-400/15 blur-3xl"
             />
             <div
               aria-hidden
-              className="pointer-events-none absolute -bottom-20 -left-12 w-[280px] h-[280px] rounded-full bg-brand-green-400/20 blur-3xl"
+              className="pointer-events-none absolute -bottom-24 -left-16 w-[320px] h-[320px] rounded-full bg-brand-green-400/20 blur-3xl"
             />
             {/* Subtle pattern */}
             <div
@@ -94,20 +94,20 @@ const LoginTemplate = ({
             />
 
             <div className="relative">
-              <h2 className="font-heading text-3xl medium:text-4xl leading-[1.05] text-white">
+              <h2 className="font-heading text-4xl medium:text-5xl leading-[1.05] text-white">
                 Fresh produce,{" "}
                 <span className="italic text-brand-gold-300">delivered</span>{" "}
                 from our farms to your door.
               </h2>
-              <p className="mt-4 text-body-sm text-white/75 leading-relaxed max-w-md">
+              <p className="mt-5 text-body text-white/75 leading-relaxed max-w-md">
                 Sign in to track orders, save favorite farms, and check out in
                 one tap.
               </p>
 
-              <ul className="mt-8 space-y-4 max-w-md">
+              <ul className="mt-10 space-y-5 max-w-md">
                 {VALUE_PROPS.map((p) => (
-                  <li key={p.title} className="flex items-start gap-x-3.5">
-                    <span className="flex-shrink-0 w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm border border-white/15 flex items-center justify-center text-lg">
+                  <li key={p.title} className="flex items-start gap-x-4">
+                    <span className="flex-shrink-0 w-11 h-11 rounded-xl bg-white/10 backdrop-blur-sm border border-white/15 flex items-center justify-center text-xl">
                       {p.icon}
                     </span>
                     <div>
@@ -123,12 +123,12 @@ const LoginTemplate = ({
               </ul>
             </div>
 
-            <div className="relative flex items-center gap-x-3 text-caption text-white/60 mt-10">
+            <div className="relative flex items-center gap-x-3 text-caption text-white/60 mt-12">
               <div className="flex -space-x-2">
                 {["🧑‍🌾", "👩‍🍳", "👨‍🍳"].map((e, i) => (
                   <span
                     key={i}
-                    className="w-7 h-7 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center text-sm"
+                    className="w-8 h-8 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center text-sm"
                   >
                     {e}
                   </span>
@@ -140,9 +140,9 @@ const LoginTemplate = ({
             </div>
           </aside>
 
-          {/* Form panel */}
-          <main className="flex items-center justify-center p-6 small:p-10 medium:p-12">
-            <div className="w-full max-w-md">
+          {/* Form card */}
+          <main className="flex items-center justify-center p-6 small:p-10 medium:p-14 bg-white rounded-3xl shadow-xl border border-grey-10">
+            <div className="w-full max-w-lg">
               <AuthCard
                 hubs={hubs}
                 currentHubSlug={currentHubSlug}
