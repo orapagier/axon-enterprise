@@ -91,8 +91,8 @@ header.bar{
 .iconbtn.busy .gly{animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ===== login ===== */
-#view-login{display:flex;flex-direction:column;align-items:center;padding:8vh 22px 40px}
+/* ===== login / signup ===== */
+#view-login,#view-signup,#view-pending{display:flex;flex-direction:column;align-items:center;padding:8vh 22px 40px}
 .login-plate{
   width:100%;max-width:400px;background:var(--card);border:2px solid var(--ink);
   box-shadow:var(--shadow);padding:0 0 26px;position:relative;overflow:hidden;
