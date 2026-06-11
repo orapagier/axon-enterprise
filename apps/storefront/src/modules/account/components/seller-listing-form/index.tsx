@@ -8,6 +8,7 @@ import {
   type SellerListing,
 } from "@lib/data/seller"
 import { listOpenPickupWindows, type PickupWindow } from "@lib/data/pickup"
+import { resolveImageSrc } from "@lib/util/image-url"
 import { syncCustomerHubFromCookie } from "@modules/hub/actions/set-hub"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import HarvestDateField from "@modules/producer/components/harvest-date-field"
