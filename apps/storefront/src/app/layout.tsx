@@ -27,8 +27,17 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout(props: { children: React.ReactNode }) {
+  // suppressHydrationWarning: Headless UI stamps data-headlessui-focus-visible
+  // on <html> (and browser extensions inject attributes) before hydration
+  // finishes, which React would otherwise report as a mismatch. The flag is
+  // scoped to this element's attributes only.
   return (
-    <html lang="en" data-mode="light" className={`${inter.variable} ${playfair.variable} ${dmSerif.variable}`}>
+    <html
+      lang="en"
+      data-mode="light"
+      className={`${inter.variable} ${playfair.variable} ${dmSerif.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <main className="relative">{props.children}</main>
       </body>
