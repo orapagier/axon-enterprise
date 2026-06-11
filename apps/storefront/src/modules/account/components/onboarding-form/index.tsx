@@ -236,8 +236,9 @@ const TRADER_FIELDS: FieldDef[] = [
     label: "City / municipality",
     placeholder: "Tagum City",
     icon: "🏙️",
+    type: "city",
     required: true,
-    suggestions: MINDANAO_CITY_SUGGESTIONS,
+    helper: "Pick the city with the hub that will serve you.",
   },
   {
     name: "barangay",
@@ -257,6 +258,7 @@ const TRADER_FIELDS: FieldDef[] = [
     icon: "📍",
     required: true,
     suggestions: MINDANAO_PROVINCE_SUGGESTIONS,
+    helper: "Filled in automatically when you pick a city.",
   },
   {
     name: "postal_code",
