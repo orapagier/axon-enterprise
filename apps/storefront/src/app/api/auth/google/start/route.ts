@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
-
-export const GAUTH_COOKIE = "_mfh_gauth"
-const GAUTH_TTL_SECONDS = 10 * 60
+import { GAUTH_COOKIE, GAUTH_TTL_SECONDS } from "@lib/auth/google-oauth"
 
 const VALID_ROLES = ["consumer", "producer", "trader", "rider"]
 
