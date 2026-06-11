@@ -85,7 +85,7 @@ const CartDropdown = ({
       <Popover className="relative h-full">
         <PopoverButton className="h-full flex items-center">
           <LocalizedClientLink
-            className="group relative inline-flex items-center gap-x-2 pl-3 pr-4 py-2 rounded-full bg-brand-green-700 text-white hover:bg-brand-green-800 transition-all shadow-soft ring-1 ring-brand-green-800/40"
+            className="group relative inline-flex items-center justify-center w-9 h-9 small:w-auto small:h-auto small:gap-x-2 small:pl-3 small:pr-4 small:py-2 rounded-full bg-brand-green-700 text-white hover:bg-brand-green-800 transition-all shadow-soft ring-1 ring-brand-green-800/40"
             href="/cart"
             data-testid="nav-cart-link"
             aria-label="Cart"
@@ -95,13 +95,18 @@ const CartDropdown = ({
               <line x1="3" y1="6" x2="21" y2="6" />
               <path d="M16 10a4 4 0 0 1-8 0" />
             </svg>
-            <span className="text-body-sm font-semibold tracking-wide">Cart</span>
-            <span className="w-px h-3.5 bg-white/20" />
-            <span className="text-body-sm font-bold tabular-nums text-brand-gold-300">
+            <span className="hidden small:inline text-body-sm font-semibold tracking-wide">Cart</span>
+            <span className="hidden small:block w-px h-3.5 bg-white/20" />
+            <span className="hidden small:inline text-body-sm font-bold tabular-nums text-brand-gold-300">
               {totalItems}
             </span>
             {totalItems > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-brand-gold-400 ring-2 ring-[#fdfcf8]" />
+              <>
+                <span className="small:hidden absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-brand-gold-400 ring-2 ring-[#fdfcf8] flex items-center justify-center text-[9px] font-bold leading-none text-brand-green-900 tabular-nums">
+                  {totalItems}
+                </span>
+                <span className="hidden small:block absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-brand-gold-400 ring-2 ring-[#fdfcf8]" />
+              </>
             )}
           </LocalizedClientLink>
         </PopoverButton>

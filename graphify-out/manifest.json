@@ -45,8 +45,8 @@
     "semantic_hash": "ca51024b86c638de871228e17f3039ea"
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/next.config.js": {
-    "mtime": 1781192282.7945888,
-    "ast_hash": "a70c0da5dc7798a9719fa0852eedf62c",
+    "mtime": 1781206769.2977223,
+    "ast_hash": "7100f6fa92b52559762365df35fc49e8",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/tsconfig.json": {
@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/account/components/seller-dashboard/index.tsx": {
-    "mtime": 1779290402.1082962,
-    "ast_hash": "139719df18c72a6fce2b3041f40cf7e0",
+    "mtime": 1781207021.8898828,
+    "ast_hash": "a66616ea6c0c9ba509c4436f422dbde6",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/account/components/auth-card/index.tsx": {
@@ -295,8 +295,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/account/components/seller-listing-form/index.tsx": {
-    "mtime": 1779875664.7828782,
-    "ast_hash": "6a8e33d30a2c342a4a32e3f0db1f36d7",
+    "mtime": 1781206816.6794393,
+    "ast_hash": "8ce4b9a14a0a024bb6ddfbb914e9049d",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/shipping/components/free-shipping-price-nudge/index.tsx": {
@@ -410,9 +410,9 @@
     "semantic_hash": "5a9e5007cd44be5b147a00c241f2471e"
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/products/components/image-gallery/index.tsx": {
-    "mtime": 1779020779.5181818,
-    "ast_hash": "f501ea6b2aa1e000812d728beb23fc5e",
-    "semantic_hash": "f501ea6b2aa1e000812d728beb23fc5e"
+    "mtime": 1781206784.851282,
+    "ast_hash": "45cb1c2f4380bf7277839f2b62dcd2b7",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/products/components/related-products/index.tsx": {
     "mtime": 1781171169.9738631,
@@ -445,9 +445,9 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/products/components/thumbnail/index.tsx": {
-    "mtime": 1779020701.9851987,
-    "ast_hash": "f1251ebaf64c8590213c4f6cd2b9df0f",
-    "semantic_hash": "f1251ebaf64c8590213c4f6cd2b9df0f"
+    "mtime": 1781206777.6068048,
+    "ast_hash": "fc26ed465227b4eccfc9288eb7945327",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/products/components/product-preview/listing-badge.tsx": {
     "mtime": 1779376242.4376025,
@@ -880,8 +880,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/layout/templates/nav/index.tsx": {
-    "mtime": 1781205008.9652095,
-    "ast_hash": "05a51f9f3b30d8c9cd93b5b33c66e6ba",
+    "mtime": 1781206848.157318,
+    "ast_hash": "43d3ecd9ee5a1a8f392000bf4185de04",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/layout/templates/footer/index.tsx": {
@@ -920,13 +920,13 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/layout/components/account-button/index.tsx": {
-    "mtime": 1781205001.2371807,
-    "ast_hash": "7c6e20e116ec93149a7e0d2f3dbd8c06",
+    "mtime": 1781206838.6934047,
+    "ast_hash": "1dd3b96597881861992d0525571ca048",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/layout/components/nav-search/index.tsx": {
-    "mtime": 1781193685.210264,
-    "ast_hash": "c184183fa78aae3067f41e2a41d31ac3",
+    "mtime": 1781206825.6559956,
+    "ast_hash": "697b49bcbab6d46f2535e0d0d6cac12a",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/layout/components/side-menu/index.tsx": {
@@ -1373,6 +1373,11 @@
     "mtime": 1779007605.5284722,
     "ast_hash": "6c6a321b68964edc1d8ff435492c4575",
     "semantic_hash": "6c6a321b68964edc1d8ff435492c4575"
+  },
+  "/home/ramlej/MFH/freshhub/apps/storefront/src/lib/util/image-url.ts": {
+    "mtime": 1781206748.090162,
+    "ast_hash": "4112cecc68fc2697e9ffaf4426cae12e",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/lib/util/product.ts": {
     "mtime": 1779007605.5284722,
