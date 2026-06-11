@@ -128,7 +128,12 @@ const LoginTemplate = ({
           </div>
 
           <div className="w-full max-w-md mt-16 small:mt-0">
-            <AuthCard />
+            <AuthCard
+              hubs={hubs}
+              currentHubSlug={currentHubSlug}
+              googleEnabled={googleEnabled}
+              googleError={googleError}
+            />
           </div>
         </main>
       </div>
