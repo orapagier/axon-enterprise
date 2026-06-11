@@ -164,7 +164,7 @@ export async function completeOnboarding(
   } else if (isTrader) {
     const business_name = required("business_name", "Business name")
     const business_type = required("business_type", "Business type")
-    const default_city = required("default_city", "City / municipality")
+    const default_city = checkHubCity("default_city", "City / municipality")
     const contact_phone = checkPhone("contact_phone", "Contact phone")
     const estimated_monthly_volume = String(
       formData.get("estimated_monthly_volume") ?? ""
