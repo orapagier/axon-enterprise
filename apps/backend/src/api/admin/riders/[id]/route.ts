@@ -40,6 +40,7 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
   const body = (req.body ?? {}) as {
     full_name?: string
     phone?: string
+    email?: string | null
     hub_id?: string
     status?: string
     notes?: string | null
@@ -55,6 +56,20 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
       return
     }
     update.phone = body.phone
+  }
+  if (body.email !== undefined) {
+    // Lowercased to match the Google sign-in callback; empty/null clears it.
+    const email = body.email?.trim().toLowerCase() || null
+    if (email) {
+      const [taken] = await riders.listRiders({ email }, { take: 1 })
+      if (taken && taken.id !== id) {
+        res
+          .status(409)
+          .json({ error: "A rider with this email already exists." })
+        return
+      }
+    }
+    update.email = email
   }
   if (body.hub_id !== undefined) update.hub_id = body.hub_id
   if (body.notes !== undefined) update.notes = body.notes
