@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
   const state = crypto.randomBytes(16).toString("hex")
   const redirectUri =
     process.env.GOOGLE_REDIRECT_URI ??
-    new URL("/api/auth/google/callback", request.nextUrl.origin).toString()
+    new URL("/api/auth/google/callback", origin).toString()
 
   const authorizeUrl = new URL("https://accounts.google.com/o/oauth2/v2/auth")
   authorizeUrl.searchParams.set("client_id", clientId)
