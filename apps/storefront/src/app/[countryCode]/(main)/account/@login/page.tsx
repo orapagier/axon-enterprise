@@ -5,7 +5,7 @@ import { listHubs } from "@modules/hub/data/hubs"
 import { getHubCookie } from "@modules/hub/actions/set-hub"
 
 export const metadata: Metadata = {
-  title: "Sign in",
+  title: "Sign in | Mindanao Fresh Hub",
   description: "Sign in to your Mindanao Fresh Hub account.",
 }
 
