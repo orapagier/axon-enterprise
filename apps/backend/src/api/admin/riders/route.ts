@@ -34,6 +34,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const body = (req.body ?? {}) as {
     full_name?: string
     phone?: string
+    email?: string
     hub_id?: string
     status?: "active" | "inactive" | "suspended"
     notes?: string
