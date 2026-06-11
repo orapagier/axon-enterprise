@@ -61,9 +61,21 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
+  // Lowercased so the Google sign-in callback can match the verified
+  // Google email (also lowercased) exactly.
+  const email = body.email?.trim().toLowerCase() || null
+  if (email) {
+    const [emailTaken] = await riders.listRiders({ email }, { take: 1 })
+    if (emailTaken) {
+      res.status(409).json({ error: "A rider with this email already exists." })
+      return
+    }
+  }
+
   const rider = await riders.createRiders({
     full_name: body.full_name,
     phone: body.phone,
+    email,
     hub_id: body.hub_id,
     status: body.status ?? "active",
     notes: body.notes ?? null,
