@@ -6,7 +6,7 @@ import { listOrders } from "@lib/data/orders"
 import TransferRequestForm from "@modules/account/components/transfer-request-form"
 
 export const metadata: Metadata = {
-  title: "Orders",
+  title: "Orders | Mindanao Fresh Hub",
   description: "Overview of your previous orders.",
 }
 
