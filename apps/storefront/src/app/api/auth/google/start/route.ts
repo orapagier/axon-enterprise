@@ -14,9 +14,12 @@ const VALID_ROLES = ["consumer", "producer", "trader", "rider"]
  */
 export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams
+  // Behind a proxy/tunnel the request origin is the local bind address
+  // (e.g. localhost:8000), so prefer the configured public base URL.
+  const origin = process.env.NEXT_PUBLIC_BASE_URL || request.nextUrl.origin
   const rawCountry = String(params.get("countryCode") ?? "ph").toLowerCase()
   const countryCode = /^[a-z]{2}$/.test(rawCountry) ? rawCountry : "ph"
-  const accountUrl = new URL(`/${countryCode}/account`, request.nextUrl.origin)
+  const accountUrl = new URL(`/${countryCode}/account`, origin)
 
   const fail = (code: string) => {
     accountUrl.searchParams.set("gerror", code)
