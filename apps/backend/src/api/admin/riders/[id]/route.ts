@@ -7,7 +7,7 @@ const VALID_STATUSES = ["active", "inactive", "suspended"]
 
 /**
  * GET   /admin/riders/:id  — read one rider
- * PATCH /admin/riders/:id  — update name/phone/hub/status/notes
+ * PATCH /admin/riders/:id  — update name/phone/email/hub/status/notes
  *
  * Setting status back to "active" is how an admin clears a suspension applied
  * by the rider-unremitted-tick job (after the rider has settled their cash).
