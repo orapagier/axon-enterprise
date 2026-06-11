@@ -57,7 +57,7 @@ export default async function RelatedProducts({
         </h2>
       </div>
 
-      <ul className="grid grid-cols-3 small:grid-cols-4 medium:grid-cols-5 gap-3 small:gap-4">
+      <ul className="grid grid-cols-2 xsmall:grid-cols-3 small:grid-cols-4 medium:grid-cols-5 gap-3 small:gap-4">
         {products.map((product) => (
           <li key={product.id}>
             <Product region={region} product={product} />
