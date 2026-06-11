@@ -1,6 +1,7 @@
 "use client"
 
 import { deleteListing, type SellerListing } from "@lib/data/seller"
+import { resolveImageSrc } from "@lib/util/image-url"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { useParams } from "next/navigation"
 import { useState, useTransition } from "react"
