@@ -392,8 +392,10 @@ button.primary[disabled]{opacity:.55}
           <input id="in-pin" type="password" inputmode="numeric" placeholder="••••" required>
         </label>
         <button class="primary" id="btn-login" type="submit">Clock in</button>
-        <div class="err" id="login-err"></div>
       </form>
+      <div class="login-or"><span>or</span></div>
+      <a class="gbtn" href="/rider/auth/google/start"><span class="gmark">G</span>Sign in with Google</a>
+      <div class="err" id="login-err"></div>
     </div>
     <div class="login-barcode"></div>
   </div>
