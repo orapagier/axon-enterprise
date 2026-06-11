@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 export const metadata: Metadata = {
-  title: "For Farmers | Mindanao Fresh Hub",
+  title: "For Farmers",
   description:
     "Partner with Mindanao Fresh Hub. Premium farmgate prices, weekly payouts, and reliable orders — no middlemen, no haggling.",
 }
