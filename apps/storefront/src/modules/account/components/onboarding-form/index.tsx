@@ -511,7 +511,29 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
                   )}
                 </span>
 
-                {f.type === "barangay" ? (
+                {f.type === "city" ? (
+                  <>
+                    <CityCombobox
+                      value={value || null}
+                      onChange={(city) =>
+                        setValues((v) => ({
+                          ...v,
+                          [f.name]: city,
+                          // City drives the rest of the cascade: clear the
+                          // barangay (it belongs to the old city) and refill
+                          // the province.
+                          barangay: "",
+                          province: provinceForCity(city) ?? v.province ?? "",
+                        }))
+                      }
+                      label=""
+                      required={f.required}
+                      invalid={!!err}
+                      data-testid={`onboarding-${f.name}`}
+                    />
+                    <input type="hidden" name={f.name} value={value} />
+                  </>
+                ) : f.type === "barangay" ? (
                   <>
                     <BarangayCombobox
                       hubSlug={hubSlugForCity(values[f.cityField ?? "default_city"] ?? "")}
