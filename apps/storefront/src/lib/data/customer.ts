@@ -221,6 +221,7 @@ export async function requestEmailCode(
     codeHash: hashCode(code, email),
     mode,
     role,
+    hub,
     expiresAt: now + PENDING_AUTH_TTL_SECONDS * 1000,
     attempts: 0,
   })
