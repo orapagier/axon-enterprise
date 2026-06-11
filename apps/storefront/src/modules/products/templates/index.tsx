@@ -46,7 +46,7 @@ const ProductTemplate = async ({
 
           {/* Right: Product info + actions */}
           <div className="w-full small:w-[45%] small:max-w-[480px]">
-            <div className="small:sticky small:top-26 flex flex-col gap-y-8">
+            <div className="small:sticky small:top-26 flex flex-col gap-y-6 small:gap-y-8">
               <ProductInfo product={product} />
 
               <ProductOnboardingCta />
