@@ -826,7 +826,9 @@ button.primary[disabled]{opacity:.55}
     navigator.serviceWorker.register('/rider-app/sw').catch(function(){});
   }
 
-  if (token()) { showRun(); load(); } else { showLogin(); }
+  if (!handleGoogleReturn()) {
+    if (token()) { showRun(); load(); } else { showLogin(); }
+  }
 })();
 </script>
 </body>
