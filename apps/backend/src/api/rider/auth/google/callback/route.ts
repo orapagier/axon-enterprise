@@ -13,11 +13,12 @@ import {
 /**
  * GET /rider/auth/google/callback — finishes the Google sign-in for the rider
  * PWA (public; exempted inside authenticateRider). Validates the state nonce,
- * swaps the code for the verified Google email, matches it against the
- * admin-registered rider.email and redirects back to /rider-app with the same
- * 30-day rider token POST /rider/auth/login issues. The token travels in the
- * URL fragment so it never reaches server logs; the app stores it and strips
- * the fragment immediately.
+ * swaps the code for the verified Google email and matches it against
+ * rider.email. A match redirects back to /rider-app with the same 30-day
+ * rider token POST /rider/auth/login issues; an unknown email redirects with
+ * a short-lived signup ticket instead, which the app's registration form
+ * sends to POST /rider/auth/signup. Everything travels in the URL fragment
+ * so it never reaches server logs; the app strips it immediately.
  */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const finish = (fragment: string) => {
