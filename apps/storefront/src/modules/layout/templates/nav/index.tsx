@@ -232,7 +232,7 @@ export default async function Nav() {
             <Suspense
               fallback={
                 <LocalizedClientLink
-                  className="group relative inline-flex items-center gap-x-2 pl-3 pr-4 py-2 rounded-full bg-brand-green-700 text-white hover:bg-brand-green-800 transition-all shadow-soft ring-1 ring-brand-green-800/40"
+                  className="group relative inline-flex items-center justify-center w-9 h-9 small:w-auto small:h-auto small:gap-x-2 small:pl-3 small:pr-4 small:py-2 rounded-full bg-brand-green-700 text-white hover:bg-brand-green-800 transition-all shadow-soft ring-1 ring-brand-green-800/40"
                   href="/cart"
                   data-testid="nav-cart-link"
                   aria-label="Cart"
@@ -242,11 +242,11 @@ export default async function Nav() {
                     <line x1="3" y1="6" x2="21" y2="6" />
                     <path d="M16 10a4 4 0 0 1-8 0" />
                   </svg>
-                  <span className="text-body-sm font-semibold tracking-wide">
+                  <span className="hidden small:inline text-body-sm font-semibold tracking-wide">
                     Cart
                   </span>
-                  <span className="w-px h-3.5 bg-white/20" />
-                  <span className="text-body-sm font-bold tabular-nums text-brand-gold-300">
+                  <span className="hidden small:block w-px h-3.5 bg-white/20" />
+                  <span className="hidden small:inline text-body-sm font-bold tabular-nums text-brand-gold-300">
                     0
                   </span>
                 </LocalizedClientLink>
