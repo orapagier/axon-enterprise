@@ -386,75 +386,11 @@ export async function cancelPendingAuth() {
   await clearPendingAuth()
 }
 
-export async function signup(_currentState: unknown, formData: FormData) {
-  const password = formData.get("password") as string
-  const customerForm = {
-    email: formData.get("email") as string,
-    first_name: formData.get("first_name") as string,
-    last_name: formData.get("last_name") as string,
-    phone: formData.get("phone") as string,
-  }
-
-  try {
-    const token = await sdk.auth.register("customer", "emailpass", {
-      email: customerForm.email,
-      password: password,
-    })
-
-    await setAuthToken(token as string)
-
-    const headers = {
-      ...(await getAuthHeaders()),
-    }
-
-    const { customer: createdCustomer } = await sdk.store.customer.create(
-      customerForm,
-      {},
-      headers
-    )
-
-    const loginToken = await sdk.auth.login("customer", "emailpass", {
-      email: customerForm.email,
-      password,
-    })
-
-    await setAuthToken(loginToken as string)
-
-    const customerCacheTag = await getCacheTag("customers")
-    revalidateTag(customerCacheTag)
-
-    await transferCart()
-    await syncCustomerHubFromCookie()
-
-    return createdCustomer
-  } catch (error) {
-    return String(error)
-  }
-}
-
-export async function login(_currentState: unknown, formData: FormData) {
-  const email = formData.get("email") as string
-  const password = formData.get("password") as string
-
-  try {
-    await sdk.auth
-      .login("customer", "emailpass", { email, password })
-      .then(async (token) => {
-        await setAuthToken(token as string)
-        const customerCacheTag = await getCacheTag("customers")
-        revalidateTag(customerCacheTag)
-      })
-  } catch (error) {
-    return String(error)
-  }
-
-  try {
-    await transferCart()
-    await syncCustomerHubFromCookie()
-  } catch (error) {
-    return String(error)
-  }
-}
+// NOTE: the old password-based `signup` / `login` server actions were removed
+// deliberately. Exported server actions are publicly invokable endpoints, and
+// those two bypassed the OTP flow and created accounts without any
+// account_type metadata. All sign-in rails now go through the OTP or Google
+// flows above.
 
 export async function signout(countryCode: string) {
   await sdk.auth.logout()
