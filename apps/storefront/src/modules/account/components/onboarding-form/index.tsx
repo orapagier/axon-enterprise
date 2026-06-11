@@ -28,15 +28,6 @@ type FieldDef = {
   cityField?: string
 }
 
-const MINDANAO_CITY_SUGGESTIONS = [
-  "Tagum City",
-  "Davao City",
-  "Panabo City",
-  "Cagayan de Oro",
-  "General Santos",
-  "Butuan City",
-]
-
 const MINDANAO_PROVINCE_SUGGESTIONS = [
   "Davao del Norte",
   "Davao del Sur",
