@@ -270,6 +270,11 @@ export default async function Nav() {
         {/* Refined bottom hairline */}
         <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-grey-10/0 via-grey-20/80 to-grey-10/0" />
       </header>
+
+      {/* Mobile search row — the inline field above is hidden below `small` */}
+      <div className="small:hidden bg-[#fdfcf8]/95 backdrop-blur-xl px-4 py-2 border-b border-grey-10">
+        <NavSearch variant="mobile" />
+      </div>
     </div>
   )
 }
