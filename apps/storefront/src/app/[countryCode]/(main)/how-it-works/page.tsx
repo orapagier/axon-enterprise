@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "How It Works | Mindanao Fresh Hub",
+  title: "How It Works",
   description:
     "Learn how Mindanao Fresh Hub connects you with fresh produce straight from Mindanao's farms.",
 }
