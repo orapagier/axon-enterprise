@@ -215,7 +215,7 @@ const AuthCard = ({
             ? "Sign in"
             : "Create account"}
         </span>
-        <h1 className="font-heading text-3xl small:text-4xl text-grey-90 leading-tight tracking-tight">
+        <h1 className="font-heading text-2xl small:text-3xl text-grey-90 leading-tight tracking-tight">
           {step === "method"
             ? mode === "signin"
               ? "Welcome back"
