@@ -236,7 +236,7 @@ export default function SellerDashboard({
                   {l.thumbnail ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={l.thumbnail}
+                      src={resolveImageSrc(l.thumbnail)}
                       alt={l.title}
                       className="absolute inset-0 w-full h-full object-cover"
                     />
