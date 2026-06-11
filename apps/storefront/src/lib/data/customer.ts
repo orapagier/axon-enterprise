@@ -28,6 +28,13 @@ import { deriveCustomerSecret } from "@lib/auth/derived-credential"
 export type AccountType = "consumer" | "producer" | "trader" | "rider"
 export type AuthMode = "signin" | "signup"
 
+const VALID_ACCOUNT_TYPES: AccountType[] = [
+  "consumer",
+  "producer",
+  "trader",
+  "rider",
+]
+
 const PENDING_AUTH_COOKIE = "_mfh_pending_auth"
 const PENDING_AUTH_TTL_SECONDS = 10 * 60
 
