@@ -51,10 +51,13 @@ export const getCacheOptions = async (
 
 export const setAuthToken = async (token: string) => {
   const cookies = await nextCookies()
+  // "lax", not "strict": the Google OAuth callback redirects here from
+  // accounts.google.com, and browsers drop Strict cookies on navigations
+  // that originate cross-site — the user would land on /account logged out.
   cookies.set("_medusa_jwt", token, {
     maxAge: 60 * 60 * 24 * 7,
     httpOnly: true,
-    sameSite: "strict",
+    sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
   })
 }
