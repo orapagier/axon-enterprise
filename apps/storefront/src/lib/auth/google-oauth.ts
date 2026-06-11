@@ -48,10 +48,20 @@ export async function exchangeCodeForClaims(
     cache: "no-store",
   })
 
-  if (!res.ok) return null
+  if (!res.ok) {
+    console.error(
+      "[google-oauth] token exchange failed:",
+      res.status,
+      await res.text().catch(() => "")
+    )
+    return null
+  }
 
   const { id_token: idToken } = (await res.json()) as { id_token?: string }
-  if (!idToken) return null
+  if (!idToken) {
+    console.error("[google-oauth] token response had no id_token")
+    return null
+  }
 
   try {
     const payload = idToken.split(".")[1]
