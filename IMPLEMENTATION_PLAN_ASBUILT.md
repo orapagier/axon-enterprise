@@ -602,6 +602,7 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | **Rider entity + admin CRUD + delivered→collect + strikes** | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
 | **Rider self-service API** (login, manifest, delivered/refused) | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
 | **Rider PWA frontend** | ✅ shipped (2026-06-11) — served by the backend at `/rider-app` (installable, same-origin); needs a real-phone visual pass |
+| **Rider "Sign in with Google"** | ✅ shipped (2026-06-11) — `/rider/auth/google/start`+`callback` match verified Google email to admin-set `rider.email`, issue the same rider token; needs callback URI registered on the Google client + rider emails set + real-account round-trip |
 | **Producer-payout remittance gate** (`cash-state` / `settled`) | ✅ primitive ready; payout disbursement itself a separate phase |
 | **Address → hub resolution** | ✅ by design city = hub service boundary (founder 2026-06-11); home-hub + city enforcement shipped (`src/lib/resolve-hub.ts`) |
 | Online / GCash payment | ⏸️ deferred (no PayMongo budget; OTC covers prepay at launch) |
