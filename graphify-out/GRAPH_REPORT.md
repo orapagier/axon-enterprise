@@ -1,16 +1,16 @@
 # Graph Report - freshhub  (2026-06-11)
 
 ## Corpus Check
-- 481 files · ~209,305 words
+- 481 files · ~209,360 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2570 nodes · 3327 edges · 279 communities (216 shown, 63 thin omitted)
+- 2570 nodes · 3327 edges · 278 communities (215 shown, 63 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 34 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f2db4902`
+- Built from commit: `954fdf29`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -221,7 +221,6 @@
 - [[_COMMUNITY_Community 272|Community 272]]
 - [[_COMMUNITY_Community 273|Community 273]]
 - [[_COMMUNITY_Community 275|Community 275]]
-- [[_COMMUNITY_Community 276|Community 276]]
 - [[_COMMUNITY_Community 277|Community 277]]
 - [[_COMMUNITY_Community 278|Community 278]]
 
@@ -254,7 +253,7 @@
 - **MedusaContainer Dependency Injection Consumers** — api_readme, subscribers_readme, jobs_readme, freshhub_dependency_injection [EXTRACTED 1.00]
 - **Workflow Execution Contexts** — workflows_readme, api_readme, subscribers_readme, jobs_readme [EXTRACTED 1.00]
 
-## Communities (279 total, 63 thin omitted)
+## Communities (278 total, 63 thin omitted)
 
 ### Community 0 - "Backend Type System"
 Cohesion: 0.01
@@ -389,8 +388,8 @@ Cohesion: 0.28
 Nodes (5): TransferPage(), acceptTransferRequest(), declineTransferRequest(), TransferPage(), TransferStatus
 
 ### Community 37 - "Product Quick Add"
-Cohesion: 0.15
-Nodes (12): AccountPageLayout(), Addresses(), metadata, Cart(), metadata, retrieveCustomer(), metadata, OnboardingPage() (+4 more)
+Cohesion: 0.16
+Nodes (12): AccountPageLayout(), Addresses(), metadata, Cart(), metadata, retrieveCustomer(), metadata, NewListingPage() (+4 more)
 
 ### Community 38 - "Cart/Order Line Items"
 Cohesion: 0.07
@@ -597,8 +596,8 @@ Cohesion: 0.15
 Nodes (13): 8. Storefront: hub cookie + middleware, Account page widget: `apps/storefront/src/modules/account/components/home-hub-section.tsx`, code:ts ("use server"), code:ts (const BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_U), code:block21 (POST /store/customers/me/hub  { slug: "tagum" }), code:ts (import { MedusaRequest, MedusaResponse } from "@medusajs/fra), Cookie, Data fetch: `apps/storefront/src/modules/hub/data/hubs.ts` (+5 more)
 
 ### Community 186 - "Community 186"
-Cohesion: 0.1
-Nodes (11): GET(), CodLedgerModuleService, GET(), getCustomerId(), getCustomerId(), POST(), getOrderCashState(), OrderCashState (+3 more)
+Cohesion: 0.08
+Nodes (14): GET(), CodLedgerModuleService, GET(), getCustomerId(), getCustomerId(), POST(), AGING_DAYS, config (+6 more)
 
 ### Community 187 - "Community 187"
 Cohesion: 0.18
@@ -813,8 +812,8 @@ Cohesion: 0.29
 Nodes (8): cityMatchesHub(), Hub, HubResolution, normalizeCity(), resolveHubForDelivery(), POST(), Tier, VALID_TIERS
 
 ### Community 266 - "Community 266"
-Cohesion: 0.6
-Nodes (3): metadata, NewListingPage(), Props
+Cohesion: 0.5
+Nodes (3): metadata, OnboardingPage(), Props
 
 ### Community 267 - "Community 267"
 Cohesion: 0.28
@@ -835,10 +834,6 @@ Nodes (5): metadata, OverviewTemplate(), listOrders(), metadata, Orders()
 ### Community 275 - "Community 275"
 Cohesion: 0.6
 Nodes (4): GET(), POST(), UpsertRow, validateRow()
-
-### Community 276 - "Community 276"
-Cohesion: 0.4
-Nodes (3): AGING_DAYS, config, LIMIT_CENTAVOS
 
 ## Knowledge Gaps
 - **1104 isolated node(s):** `name`, `private`, `packageManager`, `node`, `dev` (+1099 more)
