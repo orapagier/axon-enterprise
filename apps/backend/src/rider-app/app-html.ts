@@ -597,6 +597,77 @@ button.primary[disabled]{opacity:.55}
     }).then(function(){ $('btn-login').disabled = false; });
   });
 
+  /* ---------- signup ---------- */
+  /* Self-registration: the new rider lands as "pending" and is activated by
+     the hub admin once the cash bond is paid — no token is issued here. */
+  var signupTicket = null;
+  var hubsLoaded = false;
+
+  function loadHubs(){
+    if (hubsLoaded) return;
+    api('/rider/auth/hubs').then(function(out){
+      var sel = $('su-hub');
+      sel.innerHTML = '';
+      var ph = document.createElement('option');
+      ph.value = '';
+      ph.textContent = 'Select your hub\\u2026';
+      sel.appendChild(ph);
+      (out.hubs || []).forEach(function(h){
+        var o = document.createElement('option');
+        o.value = h.id;
+        o.textContent = h.name + (h.city ? ' \\u2014 ' + h.city : '');
+        sel.appendChild(o);
+      });
+      hubsLoaded = true;
+    }).catch(function(){});
+  }
+
+  function openSignup(ticket, email){
+    signupTicket = ticket || null;
+    var emailIn = $('su-email');
+    if (signupTicket) {
+      emailIn.value = email || '';
+      emailIn.setAttribute('readonly', 'readonly');
+      $('su-email-lbl').textContent = 'Email (verified by Google)';
+      $('su-pin-lbl').textContent = 'PIN (optional \\u2014 for mobile sign-in)';
+    } else {
+      emailIn.value = '';
+      emailIn.removeAttribute('readonly');
+      $('su-email-lbl').textContent = 'Email';
+      $('su-pin-lbl').textContent = 'Choose a PIN (4\\u20138 digits)';
+    }
+    $('signup-err').classList.remove('show');
+    setView('signup');
+    loadHubs();
+  }
+
+  $('go-signup').addEventListener('click', function(){ openSignup(null, null); });
+  $('su-back').addEventListener('click', showLogin);
+  $('pending-back').addEventListener('click', showLogin);
+
+  $('signup-form').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var err = $('signup-err');
+    err.classList.remove('show');
+    var body = {
+      full_name: $('su-name').value.trim(),
+      phone: $('su-phone').value.trim(),
+      hub_id: $('su-hub').value,
+      pin: $('su-pin').value.trim() || null
+    };
+    if (signupTicket) body.ticket = signupTicket;
+    else body.email = $('su-email').value.trim();
+    $('btn-signup').disabled = true;
+    api('/rider/auth/signup', { method: 'POST', body: JSON.stringify(body) }).then(function(){
+      signupTicket = null;
+      $('su-pin').value = '';
+      setView('pending');
+    }).catch(function(e){
+      err.textContent = e.message;
+      err.classList.add('show');
+    }).then(function(){ $('btn-signup').disabled = false; });
+  });
+
   /* ---------- data ---------- */
   function collectCentavos(stop){
     var order = stop.order || {};
