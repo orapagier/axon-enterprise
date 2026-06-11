@@ -12,10 +12,6 @@ import { ChevronUpDown, Check } from "@medusajs/icons"
 import { clx } from "@modules/common/components/ui"
 import { Fragment, useEffect, useMemo, useState } from "react"
 
-const BACKEND_URL =
-  process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ?? "http://localhost:9000"
-const PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY ?? ""
-
 type Props = {
   /** Hub slug to fetch barangays for. */
   hubSlug: string | null
