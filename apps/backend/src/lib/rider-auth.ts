@@ -81,17 +81,25 @@ export function getRiderId(req: MedusaRequest): string | null {
   return (req as unknown as { rider_id?: string }).rider_id ?? null
 }
 
-/** Express-style middleware guarding the /rider/* routes (except login). */
+/** The token-issuing routes under /rider/auth/* — the only public ones. */
+const PUBLIC_RIDER_PATHS = [
+  "/rider/auth/login",
+  "/rider/auth/google/start",
+  "/rider/auth/google/callback",
+]
+
+/** Express-style middleware guarding the /rider/* routes (except /rider/auth/*). */
 export function authenticateRider(
   req: MedusaRequest,
   res: MedusaResponse,
   next: () => void
 ) {
-  // POST /rider/auth/login is public — it issues the token. Medusa applies all
-  // matching middleware entries cumulatively (a more-specific matcher does NOT
-  // override a broader one), so the broad /rider/* guard also runs on the login
-  // path. Exempt it here rather than rely on matcher precedence that doesn't exist.
-  if (req.path.endsWith("/rider/auth/login")) {
+  // The /rider/auth/* entry points are public — they issue the token. Medusa
+  // applies all matching middleware entries cumulatively (a more-specific
+  // matcher does NOT override a broader one), so the broad /rider/* guard also
+  // runs on these paths. Exempt them here rather than rely on matcher
+  // precedence that doesn't exist.
+  if (PUBLIC_RIDER_PATHS.some((p) => req.path.endsWith(p))) {
     next()
     return
   }
