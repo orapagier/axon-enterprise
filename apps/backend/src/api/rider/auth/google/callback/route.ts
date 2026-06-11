@@ -62,9 +62,12 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const riders: RiderModuleService = req.scope.resolve(RIDER_MODULE)
   const [rider] = await riders.listRiders({ email }, { take: 1 })
   if (!rider) {
-    // No rider carries this email — same code whether the email is unknown
-    // or belongs to a customer; riders are registered by the hub admin.
-    fail("no_rider")
+    // No rider carries this email — send the verified email back as a signup
+    // ticket so the app can open the registration form prefilled with it.
+    const ticket = signSignupTicket(email)
+    finish(
+      `gsignup=${encodeURIComponent(ticket)}&gemail=${encodeURIComponent(email)}`
+    )
     return
   }
   if (rider.status !== "active") {
