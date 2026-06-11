@@ -9,6 +9,7 @@ import {
   type OtpRequestState,
   type OtpVerifyState,
 } from "@lib/data/customer"
+import type { Hub } from "@modules/hub/data/hubs"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { useParams, useRouter } from "next/navigation"
 import {
@@ -24,41 +25,75 @@ type Step = "method" | "code"
 
 const ROLE_COPY: Record<
   AccountType,
-  { title: string; description: string; icon: string }
+  { title: string; label: string; description: string; icon: string }
 > = {
   consumer: {
     title: "I'm a Consumer",
+    label: "Consumer",
     description: "Order fresh produce from Mindanao's growers.",
     icon: "🧺",
   },
   producer: {
     title: "I'm a Producer",
+    label: "Producer",
     description: "List harvests and reach buyers nationwide.",
     icon: "🌾",
   },
   trader: {
     title: "I'm a Trader",
+    label: "Trader",
     description: "Source in bulk for my restaurant, café, or retail business.",
     icon: "🤝",
   },
   rider: {
     title: "I'm a Delivery Rider",
+    label: "Rider",
     description: "Earn by delivering FreshHub orders in your area.",
     icon: "🛵",
   },
 }
 
-const AuthCard = () => {
+// Messages for ?gerror=… codes set by the /api/auth/google routes.
+const GOOGLE_ERROR_COPY: Record<string, string> = {
+  not_configured:
+    "Google sign-in isn't set up yet. Continue with email instead.",
+  missing_role: "Choose an account type first, then continue with Google.",
+  denied: "Google sign-in was cancelled.",
+  state: "That Google sign-in attempt expired. Please try again.",
+  unverified_email:
+    "That Google account's email isn't verified, so we can't use it.",
+  no_account:
+    "No account found for that Google email. Switch to Sign up to create one.",
+  auth_failed: "Google sign-in didn't go through. Please try again.",
+}
+
+type Props = {
+  hubs?: Pick<Hub, "id" | "slug" | "name" | "city" | "province">[]
+  currentHubSlug?: string | null
+  googleEnabled?: boolean
+  googleError?: string | null
+}
+
+const AuthCard = ({
+  hubs = [],
+  currentHubSlug = null,
+  googleEnabled = false,
+  googleError = null,
+}: Props) => {
   const params = useParams()
   const router = useRouter()
   const countryCode = (params?.countryCode as string) || "ph"
 
   const [mode, setMode] = useState<AuthMode>("signin")
-  const [role, setRole] = useState<AccountType>("consumer")
+  // Deliberately starts empty: a pre-selected default once caused signups to
+  // land as "consumer" when the role click never registered before submit.
+  const [role, setRole] = useState<AccountType | null>(null)
+  const [hub, setHub] = useState<string>(currentHubSlug ?? "")
   const [step, setStep] = useState<Step>("method")
   const [email, setEmail] = useState("")
   const [code, setCode] = useState<string[]>(["", "", "", "", "", ""])
   const [resendCooldown, setResendCooldown] = useState(0)
+  const [showGoogleError, setShowGoogleError] = useState(Boolean(googleError))
 
   const [requestState, requestAction, requestPending] = useActionState<
     OtpRequestState | null,
@@ -99,6 +134,7 @@ const AuthCard = () => {
     setMode(next)
     setStep("method")
     setCode(["", "", "", "", "", ""])
+    setShowGoogleError(false)
   }
 
   const handleCodeChange = (index: number, value: string) => {
@@ -147,6 +183,25 @@ const AuthCard = () => {
 
   const fullCode = code.join("")
   const canSubmitCode = fullCode.length === 6 && !verifyPending
+  const needsRole = mode === "signup" && !role
+
+  const googleStartHref = (() => {
+    const q = new URLSearchParams({ mode, countryCode })
+    if (mode === "signup" && role) q.set("role", role)
+    if (mode === "signup" && hub) q.set("hub", hub)
+    return `/api/auth/google/start?${q.toString()}`
+  })()
+  const googleDisabled = !googleEnabled || needsRole
+  const googleHint = !googleEnabled
+    ? "Coming soon"
+    : needsRole
+    ? "Choose an account type first"
+    : undefined
+
+  const googleErrorMessage =
+    showGoogleError && googleError
+      ? GOOGLE_ERROR_COPY[googleError] ?? GOOGLE_ERROR_COPY.auth_failed
+      : null
 
   return (
     <div className="w-full">
@@ -176,6 +231,16 @@ const AuthCard = () => {
               <>
                 We sent a 6-digit code to{" "}
                 <span className="text-grey-90 font-semibold">{email}</span>.
+                {mode === "signup" && role && (
+                  <>
+                    {" "}
+                    You&apos;re signing up as a{" "}
+                    <span className="text-grey-90 font-semibold">
+                      {ROLE_COPY[role].label}
+                    </span>
+                    .
+                  </>
+                )}
               </>
             )}
         </p>
@@ -263,34 +328,62 @@ const AuthCard = () => {
             </div>
           )}
 
+          {mode === "signup" && hubs.length > 0 && (
+            <label className="block mb-6">
+              <span className="text-caption font-semibold text-grey-60 uppercase tracking-wider block mb-2">
+                Your local hub
+              </span>
+              <select
+                name="hub-select"
+                value={hub}
+                onChange={(e) => setHub(e.target.value)}
+                className="w-full px-3.5 py-3 bg-grey-5 border border-grey-10 rounded-xl text-body-sm text-grey-90 focus:outline-none focus:border-brand-green-400 focus:ring-4 focus:ring-brand-green-100 focus:bg-white transition-all"
+              >
+                <option value="">Choose your hub…</option>
+                {hubs.map((h) => (
+                  <option key={h.id} value={h.slug}>
+                    {h.name} — {h.city}, {h.province}
+                  </option>
+                ))}
+              </select>
+              <span className="text-caption text-grey-40 block mt-1.5">
+                Becomes your default hub. You can change it anytime in Profile.
+              </span>
+            </label>
+          )}
+
           {/* Google sign-in */}
-          <button
-            type="button"
-            disabled
-            title="Coming soon"
-            className="w-full flex items-center justify-center gap-x-3 py-3 rounded-xl border border-grey-20 bg-white text-body-sm font-semibold text-grey-80 hover:bg-grey-5 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-          >
-            <svg width="18" height="18" viewBox="0 0 18 18">
-              <path
-                d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"
-                fill="#4285F4"
-              />
-              <path
-                d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"
-                fill="#34A853"
-              />
-              <path
-                d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"
-                fill="#FBBC05"
-              />
-              <path
-                d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"
-                fill="#EA4335"
-              />
-            </svg>
-            Continue with Google
-            <span className="text-caption text-grey-40 ml-0.5">(soon)</span>
-          </button>
+          {googleDisabled ? (
+            <button
+              type="button"
+              disabled
+              title={googleHint}
+              className="w-full flex items-center justify-center gap-x-3 py-3 rounded-xl border border-grey-20 bg-white text-body-sm font-semibold text-grey-80 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              <GoogleLogo />
+              Continue with Google
+              {googleHint && (
+                <span className="text-caption text-grey-40 ml-0.5">
+                  ({googleHint.toLowerCase()})
+                </span>
+              )}
+            </button>
+          ) : (
+            <a
+              href={googleStartHref}
+              className="w-full flex items-center justify-center gap-x-3 py-3 rounded-xl border border-grey-20 bg-white text-body-sm font-semibold text-grey-80 hover:bg-grey-5 transition-colors"
+            >
+              <GoogleLogo />
+              Continue with Google
+            </a>
+          )}
+
+          {googleErrorMessage && (
+            <div className="flex items-start gap-x-2 px-3.5 py-2.5 mt-3 rounded-lg bg-red-50 border border-red-100 text-caption text-red-700">
+              <AlertIcon />
+              <span>{googleErrorMessage}</span>
+            </div>
+          )}
 
           <div className="flex items-center my-5">
             <div className="flex-1 h-px bg-grey-10" />
@@ -302,8 +395,11 @@ const AuthCard = () => {
 
           <form action={requestAction} className="flex flex-col gap-y-4">
             <input type="hidden" name="mode" value={mode} />
-            {mode === "signup" && (
+            {mode === "signup" && role && (
               <input type="hidden" name="role" value={role} />
+            )}
+            {mode === "signup" && hub && (
+              <input type="hidden" name="hub" value={hub} />
             )}
 
             <label className="block">
@@ -338,30 +434,23 @@ const AuthCard = () => {
               </div>
             </label>
 
+            {needsRole && email && (
+              <div className="flex items-start gap-x-2 px-3.5 py-2.5 rounded-lg bg-brand-gold-50 border border-brand-gold-200 text-caption text-brand-gold-800">
+                <AlertIcon />
+                <span>Pick an account type above to continue.</span>
+              </div>
+            )}
+
             {requestState?.error && (
               <div className="flex items-start gap-x-2 px-3.5 py-2.5 rounded-lg bg-red-50 border border-red-100 text-caption text-red-700">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="mt-0.5 shrink-0"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="12" y1="8" x2="12" y2="12" />
-                  <line x1="12" y1="16" x2="12.01" y2="16" />
-                </svg>
+                <AlertIcon />
                 <span>{requestState.error}</span>
               </div>
             )}
 
             <button
               type="submit"
-              disabled={requestPending || !email}
+              disabled={requestPending || !email || needsRole}
               className="w-full py-3 rounded-xl bg-grey-90 hover:bg-brand-green-700 text-white text-body-sm font-semibold transition-all shadow-soft hover:shadow-medium hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
               {requestPending ? (
@@ -491,21 +580,7 @@ const AuthCard = () => {
 
           {verifyState?.error && (
             <div className="flex items-start gap-x-2 px-3.5 py-2.5 rounded-lg bg-red-50 border border-red-100 text-caption text-red-700">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="mt-0.5 shrink-0"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="12" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
-              </svg>
+              <AlertIcon />
               <span>{verifyState.error}</span>
             </div>
           )}
@@ -566,7 +641,8 @@ const AuthCard = () => {
                 const fd = new FormData()
                 fd.append("email", email)
                 fd.append("mode", mode)
-                if (mode === "signup") fd.append("role", role)
+                if (mode === "signup" && role) fd.append("role", role)
+                if (mode === "signup" && hub) fd.append("hub", hub)
                 requestAction(fd)
               }}
               className="text-brand-green-700 hover:text-brand-green-800 font-semibold disabled:text-grey-40 disabled:cursor-not-allowed transition-colors"
@@ -581,5 +657,44 @@ const AuthCard = () => {
     </div>
   )
 }
+
+const GoogleLogo = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18">
+    <path
+      d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"
+      fill="#4285F4"
+    />
+    <path
+      d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"
+      fill="#34A853"
+    />
+    <path
+      d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"
+      fill="#FBBC05"
+    />
+    <path
+      d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"
+      fill="#EA4335"
+    />
+  </svg>
+)
+
+const AlertIcon = () => (
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="mt-0.5 shrink-0"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="8" x2="12" y2="12" />
+    <line x1="12" y1="16" x2="12.01" y2="16" />
+  </svg>
+)
 
 export default AuthCard
