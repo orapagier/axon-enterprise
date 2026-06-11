@@ -72,7 +72,11 @@ export default function NavSearch({
   return (
     <div
       ref={containerRef}
-      className="relative hidden small:block w-[220px] focus-within:w-[320px] transition-[width] duration-300 ease-out"
+      className={
+        variant === "mobile"
+          ? "relative w-full"
+          : "relative hidden small:block w-[220px] focus-within:w-[320px] transition-[width] duration-300 ease-out"
+      }
     >
       <form onSubmit={submit} role="search" className="relative">
         <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-grey-50">
