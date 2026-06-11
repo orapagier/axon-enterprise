@@ -570,13 +570,7 @@ export default function OnboardingForm({ accountType, defaults = {} }: Props) {
                     placeholder={f.placeholder}
                     value={value}
                     onChange={(e) =>
-                      setValues((v) => {
-                        const next = { ...v, [f.name]: e.target.value }
-                        if (f.name === "default_city" || f.name === "primary_hub") {
-                          next.barangay = ""
-                        }
-                        return next
-                      })
+                      setValues((v) => ({ ...v, [f.name]: e.target.value }))
                     }
                     onBlur={onBlur}
                     list={f.suggestions ? `${f.name}-suggestions` : undefined}
