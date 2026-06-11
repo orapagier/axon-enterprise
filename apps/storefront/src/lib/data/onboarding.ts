@@ -130,7 +130,7 @@ export async function completeOnboarding(
 
   if (isProducer) {
     const business_name = required("business_name", "Business or farm name")
-    const primary_hub = required("primary_hub", "City / municipality")
+    const primary_hub = checkHubCity("primary_hub", "City / municipality")
     const contact_phone = checkPhone("contact_phone", "Contact phone")
     const products_offered = required(
       "products_offered",
