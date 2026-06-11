@@ -44,9 +44,9 @@ export default async function OnboardingPage({ params }: Props) {
   }
 
   // Riders have no onboarding form (their profile is marked complete at
-  // signup); if one lands here anyway, send them home instead of a 404.
+  // signup) — their next step is rider registration on the Deliveries page.
   if (accountType === "rider") {
-    redirect(`/${countryCode}/account`)
+    redirect(`/${countryCode}/account/rider`)
   }
 
   if (
