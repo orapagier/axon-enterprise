@@ -223,6 +223,9 @@ export default async function Nav() {
                 </LocalizedClientLink>
               )}
 
+              {/* Search icon (mobile only) — expands a search row under the header */}
+              <MobileSearch />
+
               {/* Account */}
               <AccountButton isLoggedIn={!!customer} accountType={accountType} />
             </div>
