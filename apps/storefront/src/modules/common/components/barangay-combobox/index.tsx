@@ -27,9 +27,10 @@ type Props = {
 }
 
 /**
- * Searchable barangay picker. Sources options from
- * GET /store/hubs/:slug/barangays. Buyer types to filter; only barangays the
- * selected hub serves can be picked. Pair with a free-text street input.
+ * Searchable barangay picker. Sources options from the same-origin proxy
+ * GET /api/hubs/:slug/barangays (the browser can't always reach the Medusa
+ * backend directly). Buyer types to filter; only barangays the selected hub
+ * serves can be picked. Pair with a free-text street input.
  */
 const BarangayCombobox: React.FC<Props> = ({
   hubSlug,
