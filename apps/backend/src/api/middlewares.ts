@@ -146,5 +146,13 @@ export default defineMiddlewares({
       method: ["POST", "DELETE"],
       middlewares: [authenticate("customer", ["session", "bearer"])],
     },
+    {
+      // Rider session exchange + registration ride on the CUSTOMER session:
+      // riders sign in on the storefront like any user, then these endpoints
+      // match customer.email ↔ rider.email (see /store/riders/* routes).
+      matcher: "/store/riders*",
+      method: ["GET", "POST"],
+      middlewares: [authenticate("customer", ["session", "bearer"])],
+    },
   ],
 })
