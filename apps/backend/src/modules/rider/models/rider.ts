@@ -5,12 +5,16 @@ import { model } from "@medusajs/framework/utils"
  * traced to a person (the rider_id on dispatch_order / cod_transaction now
  * references this record) and so riders can be flagged/suspended for unremitted
  * cash. `pin_hash` is reserved for the future rider self-service login slice.
+ * `email` is the admin-registered Google account: the rider-app Google sign-in
+ * (/rider/auth/google/*) matches the verified Google email against it. Stored
+ * lowercased; unique among live rows (partial index in the migration).
  */
 const Rider = model
   .define("rider", {
     id: model.id().primaryKey(),
     full_name: model.text(),
     phone: model.text().unique(),
+    email: model.text().nullable(),
     hub_id: model.text(),
     status: model.enum(["active", "inactive", "suspended"]).default("active"),
     pin_hash: model.text().nullable(),
