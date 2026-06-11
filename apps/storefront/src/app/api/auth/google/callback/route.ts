@@ -134,7 +134,8 @@ export async function GET(request: NextRequest) {
     }
 
     revalidateTag(await getCacheTag("customers"))
-  } catch {
+  } catch (e) {
+    console.error("[google-oauth] login/registration failed:", e)
     return fail("auth_failed")
   }
 
