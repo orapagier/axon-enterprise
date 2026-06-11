@@ -11,17 +11,24 @@ export const metadata: Metadata = {
 }
 
 export default async function Checkout({
+  params: paramsPromise,
   searchParams: searchParamsPromise,
 }: {
+  params: Promise<{ countryCode: string }>
   searchParams: Promise<{ step?: string }>
 }) {
+  const customer = await retrieveCustomer()
+
+  if (!customer) {
+    const { countryCode } = await paramsPromise
+    redirect(`/${countryCode}/account`)
+  }
+
   let cart = await retrieveCart()
 
   if (!cart) {
     return notFound()
   }
-
-  const customer = await retrieveCustomer()
 
   const getBarangay = (c: typeof cart) =>
     (c?.shipping_address?.metadata as { barangay?: string } | undefined)
