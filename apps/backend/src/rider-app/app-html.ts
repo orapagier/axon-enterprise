@@ -900,8 +900,9 @@ button.primary[disabled]{opacity:.55}
   });
 
   /* ---------- google sign-in return ---------- */
-  /* /rider/auth/google/callback redirects here with the rider token (or an
-     error code) in the URL fragment, so it never reaches server logs. */
+  /* /rider/auth/google/callback redirects here with the rider token, a signup
+     ticket for an unknown verified email, or an error code — all in the URL
+     fragment, so none of it reaches server logs. */
   function googleErrorMessage(code){
     var msgs = {
       not_configured: 'Google sign-in is not set up yet. Use mobile number + PIN.',
@@ -909,7 +910,7 @@ button.primary[disabled]{opacity:.55}
       state: 'Sign-in expired. Try again.',
       auth_failed: 'Google sign-in failed. Try again.',
       unverified_email: 'That Google email is not verified.',
-      no_rider: 'No rider account uses that Google email. Ask your hub to add it.',
+      rider_pending: 'Your registration is awaiting approval. Pay your cash bond at the hub counter.',
       rider_inactive: 'Your rider account is inactive. Contact your hub.',
       rider_suspended: 'Your rider account is suspended. Contact your hub.'
     };
@@ -925,7 +926,7 @@ button.primary[disabled]{opacity:.55}
         try { params[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1)); } catch (e) {}
       }
     });
-    if (!params.rt && !params.gerror) return false;
+    if (!params.rt && !params.gerror && !params.gsignup) return false;
     history.replaceState(null, '', location.pathname);
     if (params.rt) {
       localStorage.setItem(TOKEN_KEY, params.rt);
@@ -935,6 +936,8 @@ button.primary[disabled]{opacity:.55}
         localStorage.setItem(ME_KEY, JSON.stringify(out.rider));
         $('rider-name').textContent = out.rider.full_name || 'Rider';
       }).catch(function(){});
+    } else if (params.gsignup) {
+      openSignup(params.gsignup, params.gemail || '');
     } else {
       showLogin();
       var err = $('login-err');
