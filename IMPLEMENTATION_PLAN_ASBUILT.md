@@ -570,16 +570,24 @@ GET/POST /admin/memberships ; POST /admin/memberships/:id  (approve|reject|cance
 GET    /admin/sellers ; POST /admin/sellers/:id/verify
 ```
 
-### Rider app (public shell; the app calls the token-guarded API below)
+### Rider app (DEPRECATED 2026-06-11 — riders use the storefront /account/rider)
 ```
-GET    /rider-app                            rider PWA (single-file, mobile-first)
-GET    /rider-app/manifest                   web app manifest (installable)
-GET    /rider-app/sw                         service worker (shell-only caching)
+GET    /rider-app                            302 → <storefront>/account (legacy shell kept in src/rider-app/)
+GET    /rider-app/manifest                   web app manifest (legacy installs)
+GET    /rider-app/sw                         service worker (legacy installs)
 ```
 
-### Rider (self-service; HS256 rider token)
+### Rider session via storefront (customer JWT; the new primary rail)
 ```
-POST   /rider/auth/login                     phone + PIN → 30-day rider token (public)
+GET    /store/riders/session                 customer session → rider + 30-day rider token
+                                             (email match; token null unless status=active)
+POST   /store/riders/register                signed-in customer self-registers as a
+                                             pending rider (email from session, no PIN)
+```
+
+### Rider (self-service; HS256 rider token — used server-side by the storefront)
+```
+POST   /rider/auth/login                     phone + PIN → 30-day rider token (public, legacy)
 GET    /rider/me                             my profile
 GET    /rider/summary                        my cash position (outstanding/limit/today)
 GET    /rider/manifest                       my active-batch orders (by manifest_position)
@@ -587,10 +595,11 @@ POST   /rider/orders/:id/delivered           mark delivered + auto cod_collected
 POST   /rider/orders/:id/refused             mark refused → opens dispute
 ```
 
-Auth (`api/middlewares.ts`): `/store/seller*` requires a logged-in customer
-(handler additionally checks `account_type`); all `/admin/*` custom routes
-require an authenticated admin user; `/rider/*` (except `/rider/auth/login`)
-requires a valid rider token via the `authenticateRider` middleware.
+Auth (`api/middlewares.ts`): `/store/seller*` and `/store/riders*` require a
+logged-in customer (handlers additionally check role/ownership); all `/admin/*`
+custom routes require an authenticated admin user; `/rider/*` (except the
+`/rider/auth/*` entry points) requires a valid rider token via the
+`authenticateRider` middleware.
 
 ---
 
