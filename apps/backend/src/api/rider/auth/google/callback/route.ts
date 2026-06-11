@@ -1,7 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { RIDER_MODULE } from "../../../../../modules/rider"
 import type RiderModuleService from "../../../../../modules/rider/service"
-import { signRiderToken } from "../../../../../lib/rider-auth"
+import { signRiderToken, signSignupTicket } from "../../../../../lib/rider-auth"
 import {
   exchangeCodeForClaims,
   readCookie,
