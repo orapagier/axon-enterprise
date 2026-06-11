@@ -551,15 +551,18 @@ button.primary[disabled]{opacity:.55}
   }
 
   /* ---------- views ---------- */
+  function setView(name){
+    $('view-login').style.display = name === 'login' ? 'flex' : 'none';
+    $('view-signup').style.display = name === 'signup' ? 'flex' : 'none';
+    $('view-pending').style.display = name === 'pending' ? 'flex' : 'none';
+    $('view-run').style.display = name === 'run' ? 'block' : 'none';
+    $('cashbar').style.display = name === 'run' ? 'flex' : 'none';
+  }
   function showLogin(){
-    $('view-login').style.display = 'flex';
-    $('view-run').style.display = 'none';
-    $('cashbar').style.display = 'none';
+    setView('login');
   }
   function showRun(){
-    $('view-login').style.display = 'none';
-    $('view-run').style.display = 'block';
-    $('cashbar').style.display = 'flex';
+    setView('run');
     var me = null;
     try { me = JSON.parse(localStorage.getItem(ME_KEY) || 'null'); } catch (e) { me = null; }
     $('rider-name').textContent = me && me.full_name ? me.full_name : 'Rider';
