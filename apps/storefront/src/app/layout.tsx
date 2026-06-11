@@ -24,6 +24,10 @@ const dmSerif = DM_Serif_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
+  title: {
+    template: "%s | Mindanao Fresh Hub",
+    default: "Mindanao Fresh Hub",
+  },
 }
 
 export default function RootLayout(props: { children: React.ReactNode }) {
