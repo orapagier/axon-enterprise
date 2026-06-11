@@ -167,14 +167,14 @@ export default function AccountButton({
       : MENU_LINKS
 
   return (
-    <Menu as="div" className="hidden small:block relative">
+    <Menu as="div" className="relative">
       <MenuButton
         className={`${triggerClassName} data-[open]:text-grey-90 data-[open]:bg-grey-5`}
         data-testid="nav-account-button"
         aria-label="Account menu"
       >
         <UserIcon />
-        <span>Account</span>
+        <span className="hidden small:inline">Account</span>
         <svg
           width="10"
           height="10"
