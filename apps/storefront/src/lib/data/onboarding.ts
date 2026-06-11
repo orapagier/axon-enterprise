@@ -97,6 +97,27 @@ export async function completeOnboarding(
     return result.e164
   }
 
+  // City must be a hub city with an active hub. The storefront dropdown only
+  // offers these, but the value arrives via a hidden input and prefills from
+  // older accounts can carry non-serviceable cities. Returns canonical casing.
+  const checkHubCity = (fieldName: string, label: string): string => {
+    const raw = required(fieldName, label)
+    if (!raw) return ""
+    const canon = canonicalHubCity(raw)
+    if (!canon) {
+      fieldErrors[fieldName] = `We currently serve only: ${HUB_CITIES.join(
+        ", "
+      )}.`
+      return raw
+    }
+    if (!hubSlugForCity(canon)) {
+      fieldErrors[fieldName] =
+        `${canon} doesn't have an active hub yet — pick a city with an active hub.`
+      return canon
+    }
+    return canon
+  }
+
   let updateBody: HttpTypes.StoreUpdateCustomer
   let metadataPatch: Record<string, unknown>
 
@@ -105,7 +126,7 @@ export async function completeOnboarding(
   const address_1 = required("address_1", "Street address")
   const province = required("province", "Province")
   const postal_code = String(formData.get("postal_code") ?? "").trim()
-  const barangay = String(formData.get("barangay") ?? "").trim()
+  const barangay = required("barangay", "Barangay")
 
   if (isProducer) {
     const business_name = required("business_name", "Business or farm name")
