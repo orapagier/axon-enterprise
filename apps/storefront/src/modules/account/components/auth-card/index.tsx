@@ -498,9 +498,10 @@ const AuthCard = ({
             <div className="mt-5 px-4 py-3 rounded-xl bg-brand-green-50 border border-brand-green-200">
               <p className="text-caption text-brand-green-800 leading-relaxed">
                 <span className="font-bold">Rider accounts</span> let you earn
-                from delivering FreshHub orders. You keep 100% of the delivery
-                fee — no cut taken. Your account also works as a consumer so you
-                can shop the Hub.
+                from delivering FreshHub orders. After signing up, register as
+                a rider from your account page and pay the cash bond at the hub
+                counter to get activated. Your account also works as a consumer
+                so you can shop the Hub.
               </p>
             </div>
           )}
