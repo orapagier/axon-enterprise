@@ -124,7 +124,11 @@ const BarangayCombobox: React.FC<Props> = ({
             <label
               className={clx(
                 "flex items-center mx-3 px-1 transition-all absolute duration-300 top-3 -z-1 origin-0 text-ui-fg-subtle",
-                (hasValue || query) && "-translate-y-2 text-xsmall-regular"
+                // Float up when there's a value, a search query, or a visible
+                // placeholder ("Pick city first" / "Loading…") — otherwise the
+                // label and placeholder render on top of each other.
+                (hasValue || query || isDisabled) &&
+                  "-translate-y-2 text-xsmall-regular"
               )}
             >
               {label}
