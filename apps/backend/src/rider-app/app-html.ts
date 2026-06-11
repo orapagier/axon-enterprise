@@ -409,10 +409,52 @@ button.primary[disabled]{opacity:.55}
       <div class="login-or"><span>or</span></div>
       <a class="gbtn" href="/rider/auth/google/start"><span class="gmark">G</span>Sign in with Google</a>
       <div class="err" id="login-err"></div>
+      <button class="linkbtn" id="go-signup" type="button">New rider? Register here</button>
     </div>
     <div class="login-barcode"></div>
   </div>
   <div class="login-foot">Cash is traced per rider<br>Remit at the hub counter</div>
+</section>
+
+<section id="view-signup" style="display:none">
+  <div class="login-plate">
+    <div class="punchrow"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="login-inner">
+      <h1>New <span>Rider</span></h1>
+      <div class="login-meta"><span>Register · approval at the hub</span></div>
+      <form id="signup-form" autocomplete="off">
+        <label class="fld f1"><span>Full name</span>
+          <input id="su-name" type="text" autocomplete="name" required>
+        </label>
+        <label class="fld f1"><span>Mobile number</span>
+          <input id="su-phone" type="tel" inputmode="tel" placeholder="+63 9xx xxx xxxx" required>
+        </label>
+        <label class="fld f2"><span>Hub you ride for</span>
+          <select id="su-hub" required><option value="">Loading hubs&hellip;</option></select>
+        </label>
+        <label class="fld f2"><span id="su-email-lbl">Email</span>
+          <input id="su-email" type="email" inputmode="email" placeholder="you@gmail.com">
+        </label>
+        <label class="fld f2"><span id="su-pin-lbl">Choose a PIN (4&ndash;8 digits)</span>
+          <input id="su-pin" type="password" inputmode="numeric" placeholder="&bull;&bull;&bull;&bull;">
+        </label>
+        <button class="primary" id="btn-signup" type="submit">Register</button>
+      </form>
+      <div class="err" id="signup-err"></div>
+      <button class="linkbtn" id="su-back" type="button">Back to sign in</button>
+    </div>
+    <div class="login-barcode"></div>
+  </div>
+  <div class="login-foot">Cash bond required<br>Approval at the hub counter</div>
+</section>
+
+<section id="view-pending" style="display:none">
+  <div class="slip" style="width:100%;max-width:360px">
+    <div class="allclear">Received &#10003;</div>
+    <h2>Registration pending</h2>
+    <p>Your rider account is waiting for hub approval. Pay your <b>cash bond at the hub counter</b> and the dispatcher will activate you &mdash; then sign in here.</p>
+    <button class="linkbtn" id="pending-back" type="button">Back to sign in</button>
+  </div>
 </section>
 
 <section id="view-run">
