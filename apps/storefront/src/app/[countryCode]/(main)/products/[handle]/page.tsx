@@ -88,7 +88,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 
   return {
-    title: `${product.title} | Mindanao Fresh Hub`,
+    title: product.title,
     description: `${product.title}`,
     openGraph: {
       title: `${product.title} | Mindanao Fresh Hub`,
