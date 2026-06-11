@@ -61,13 +61,12 @@ export async function GET(request: NextRequest) {
   const email = claims.email.toLowerCase()
 
   let isNewAccount = false
-  let accountType = pending.mode === "signup" ? pending.role : "consumer"
+  const accountType = pending.mode === "signup" ? pending.role : "consumer"
 
   try {
     const derivedPassword = deriveCustomerSecret(email)
 
     const createCustomerRecord = async () => {
-      const authHeader = jar.get("_medusa_jwt")?.value
       await sdk.store.customer.create(
         {
           email,
@@ -81,7 +80,7 @@ export async function GET(request: NextRequest) {
           },
         },
         {},
-        authHeader ? { authorization: `Bearer ${authHeader}` } : {}
+        { ...(await getAuthHeaders()) }
       )
     }
 
