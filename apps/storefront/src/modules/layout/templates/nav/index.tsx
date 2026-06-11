@@ -223,7 +223,7 @@ export default async function Nav() {
               )}
 
               {/* Account */}
-              <AccountButton isLoggedIn={!!customer} />
+              <AccountButton isLoggedIn={!!customer} accountType={accountType} />
             </div>
 
             <span className="hidden small:block w-px h-5 bg-grey-20 mx-2.5" />
