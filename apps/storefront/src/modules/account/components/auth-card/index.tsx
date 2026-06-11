@@ -206,8 +206,8 @@ const AuthCard = ({
   return (
     <div className="w-full">
       {/* Header */}
-      <div className="mb-7">
-        <span className="inline-flex items-center gap-x-2 px-3 py-1 rounded-full bg-brand-green-50 border border-brand-green-100 text-caption font-semibold text-brand-green-700 uppercase tracking-wider mb-5">
+      <div className="mb-5">
+        <span className="inline-flex items-center gap-x-2 px-3 py-1 rounded-full bg-brand-green-50 border border-brand-green-100 text-caption font-semibold text-brand-green-700 uppercase tracking-wider mb-3">
           <span className="w-1.5 h-1.5 rounded-full bg-brand-green-500 animate-pulse" />
           {step === "code"
             ? "Verify email"
