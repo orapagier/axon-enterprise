@@ -76,10 +76,12 @@ export const getCartId = async () => {
 
 export const setCartId = async (cartId: string) => {
   const cookies = await nextCookies()
+  // "lax" so the cart survives the OAuth redirect (transferCart runs
+  // during the cross-site callback request and needs to read this).
   cookies.set("_medusa_cart_id", cartId, {
     maxAge: 60 * 60 * 24 * 7,
     httpOnly: true,
-    sameSite: "strict",
+    sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
   })
 }
