@@ -628,7 +628,7 @@ export default function SellerListingForm({ mode, existing }: Props) {
             <div className="relative aspect-[16/9] max-w-md rounded-2xl overflow-hidden ring-1 ring-grey-10 bg-grey-5 group">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={photoUrl}
+                src={resolveImageSrc(photoUrl)}
                 alt={values.title || "Listing photo"}
                 className="absolute inset-0 w-full h-full object-cover"
               />
