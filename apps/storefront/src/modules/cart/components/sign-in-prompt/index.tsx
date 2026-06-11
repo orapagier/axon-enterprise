@@ -1,21 +1,22 @@
-import { Button, Heading, Text } from "@modules/common/components/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 const SignInPrompt = () => {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 px-6 py-4 flex items-center justify-between">
-      <div>
-        <Heading level="h2" className="text-base font-semibold text-ui-fg-base">
+    <div className="bg-white rounded-2xl shadow-soft border border-grey-10/60 px-5 small:px-6 py-4 flex items-center justify-between gap-4">
+      <div className="min-w-0">
+        <h2 className="text-body-sm font-bold text-grey-90">
           Already have an account?
-        </Heading>
-        <Text className="txt-medium text-ui-fg-subtle mt-0.5">
+        </h2>
+        <p className="text-caption text-grey-50 mt-0.5">
           Sign in for a better experience.
-        </Text>
+        </p>
       </div>
-      <LocalizedClientLink href="/account">
-        <Button variant="secondary" className="h-10" data-testid="sign-in-button">
-          Sign in
-        </Button>
+      <LocalizedClientLink
+        href="/account"
+        className="shrink-0 inline-flex items-center justify-center px-5 py-2.5 rounded-full border border-grey-20 bg-white text-body-sm font-semibold text-grey-80 whitespace-nowrap hover:border-brand-green-300 hover:text-brand-green-700 hover:bg-brand-green-50 transition-colors"
+        data-testid="sign-in-button"
+      >
+        Sign in
       </LocalizedClientLink>
     </div>
   )
