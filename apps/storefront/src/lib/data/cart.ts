@@ -129,6 +129,13 @@ export async function addToCart({
     throw new Error("Missing variant ID when adding to cart")
   }
 
+  // Guests cannot carry a cart — buying requires a registered account.
+  // Callers route to `/${countryCode}/account` when this flag comes back.
+  const customer = await retrieveCustomer()
+  if (!customer) {
+    return { requiresLogin: true as const }
+  }
+
   const cart = await getOrSetCart(countryCode)
 
   if (!cart) {
