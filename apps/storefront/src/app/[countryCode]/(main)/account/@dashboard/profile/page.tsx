@@ -76,6 +76,14 @@ export default async function Profile() {
         >
           <HomeHubSection hubs={hubs} currentSlug={currentHubSlug} />
         </ProfileSection>
+
+        <ProfileSection
+          label="Delete account"
+          description="Permanently remove your account and sign-in access."
+          icon="🗑️"
+        >
+          <DeleteAccount customer={customer} />
+        </ProfileSection>
       </div>
     </div>
   )
