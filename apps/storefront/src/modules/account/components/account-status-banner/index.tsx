@@ -1,41 +1,12 @@
-"use client"
-
-import { useEffect, useState } from "react"
-import { sdk } from "@lib/config"
-
-type State =
-  | "normal"
-  | "warned"
-  | "prepay_locked_30d"
-  | "prepay_locked_permanent"
-
-type AccountStatus = {
-  state: State
-  state_until: string | null
-  strike_count: number
-} | null
+import { listCustomerDisputes } from "@lib/data/disputes"
 
 /**
- * Status banner shown on the account overview when the customer is in a
- * non-normal accountability state (warned, prepay-locked).
+ * Status banner shown on the account pages when the customer is in a
+ * non-normal accountability state (warned, prepay-locked). Server component:
+ * the disputes endpoint needs the customer JWT, which only the server holds.
  */
-export default function AccountStatusBanner() {
-  const [status, setStatus] = useState<AccountStatus>(null)
-
-  useEffect(() => {
-    let alive = true
-    sdk.client
-      .fetch<{ account_status: AccountStatus }>("/store/customer/disputes", {
-        method: "GET",
-      })
-      .then((body) => {
-        if (alive) setStatus(body.account_status ?? null)
-      })
-      .catch(() => {})
-    return () => {
-      alive = false
-    }
-  }, [])
+export default async function AccountStatusBanner() {
+  const { account_status: status } = await listCustomerDisputes()
 
   if (!status || status.state === "normal") return null
 
@@ -44,9 +15,7 @@ export default function AccountStatusBanner() {
 
   const tone = isPermanent
     ? "bg-red-50 border-red-200 text-red-900"
-    : isThirtyDay
-      ? "bg-amber-50 border-amber-200 text-amber-900"
-      : "bg-amber-50 border-amber-200 text-amber-900"
+    : "bg-amber-50 border-amber-200 text-amber-900"
 
   const title = isPermanent
     ? "Permanent prepay-only"
@@ -55,7 +24,7 @@ export default function AccountStatusBanner() {
       : "Warning issued"
 
   const detail = isPermanent
-    ? "Your account is in a permanent prepay-only state. COD is not available; contact support to appeal."
+    ? "Your account is in a permanent prepay-only state. COD is not available; you can still buy in person at the hub counter. Contact support to appeal."
     : isThirtyDay
       ? `COD is disabled until ${
           status.state_until
@@ -64,16 +33,14 @@ export default function AccountStatusBanner() {
                 dateStyle: "medium",
               })
             : "the lock expires"
-        }.`
+        }. You can still buy in person at the hub counter.`
       : "A refusal was charged to your account. Another refusal within 6 months triggers a 30-day prepay-only lock."
 
   return (
-    <div className={`rounded-lg border ${tone} px-4 py-3 mb-4`}>
-      <p className="font-medium text-sm">{title}</p>
+    <div className={`rounded-2xl border ${tone} px-4 py-3`}>
+      <p className="font-semibold text-body-sm">{title}</p>
       <p className="text-caption mt-1">{detail}</p>
-      <p className="text-caption mt-1">
-        Strikes on file: {status.strike_count}
-      </p>
+      <p className="text-caption mt-1">Strikes on file: {status.strike_count}</p>
     </div>
   )
 }
