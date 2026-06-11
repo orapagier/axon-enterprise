@@ -12,13 +12,20 @@ const LineItemOptions = ({
   "data-testid": dataTestid,
   "data-value": dataValue,
 }: LineItemOptionsProps) => {
+  // Single-variant products carry a meaningless "Default" variant — showing
+  // "Variant: Default" in the cart is just noise.
+  const title = variant?.title
+  if (!title || /^default( variant)?$/i.test(title)) {
+    return null
+  }
+
   return (
     <Text
       data-testid={dataTestid}
       data-value={dataValue}
       className="inline-block txt-medium text-ui-fg-subtle w-full overflow-hidden text-ellipsis"
     >
-      Variant: {variant?.title}
+      {title}
     </Text>
   )
 }
