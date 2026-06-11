@@ -9,7 +9,7 @@ import {
   GAUTH_COOKIE,
   type GoogleAuthPending,
 } from "@lib/auth/google-oauth"
-import { getCacheTag, setAuthToken } from "@lib/data/cookies"
+import { getAuthHeaders, getCacheTag, setAuthToken } from "@lib/data/cookies"
 import { retrieveCustomer, transferCart } from "@lib/data/customer"
 import {
   setHubCookie,
