@@ -1,5 +1,13 @@
 import AuthCard from "@modules/account/components/auth-card"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import type { Hub } from "@modules/hub/data/hubs"
+
+type LoginTemplateProps = {
+  hubs?: Hub[]
+  currentHubSlug?: string | null
+  googleEnabled?: boolean
+  googleError?: string | null
+}
 
 const VALUE_PROPS = [
   {
