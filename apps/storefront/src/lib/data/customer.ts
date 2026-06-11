@@ -51,6 +51,7 @@ type PendingAuth = {
   codeHash: string
   mode: AuthMode
   role?: AccountType
+  hub?: string
   expiresAt: number
   attempts: number
 }
