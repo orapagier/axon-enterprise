@@ -506,7 +506,7 @@ const AuthCard = ({
             </div>
           )}
 
-          <p className="text-caption text-grey-40 text-center mt-7 leading-relaxed">
+          <p className="text-caption text-grey-40 text-center mt-5 leading-relaxed">
             By continuing, you agree to our{" "}
             <LocalizedClientLink
               href="/content/terms-of-use"
