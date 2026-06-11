@@ -39,6 +39,28 @@ export function hubSlugForCity(raw: string): string | null {
   return HUB_SLUG_BY_CITY[canon] ?? null
 }
 
+/**
+ * Province each hub city belongs to (PSGC). Davao City, Cagayan de Oro,
+ * General Santos, and Butuan are highly urbanized cities administratively
+ * independent from their province; we still use the commonly associated
+ * province for addressing.
+ */
+const PROVINCE_BY_CITY: Record<HubCity, string> = {
+  "Tagum City": "Davao del Norte",
+  "Davao City": "Davao del Sur",
+  "Panabo City": "Davao del Norte",
+  "Cagayan de Oro": "Misamis Oriental",
+  "General Santos": "South Cotabato",
+  "Butuan City": "Agusan del Norte",
+}
+
+/** Province for a hub city (case-insensitive), or null for unknown cities. */
+export function provinceForCity(raw: string): string | null {
+  const canon = canonicalHubCity(raw)
+  if (!canon) return null
+  return PROVINCE_BY_CITY[canon]
+}
+
 /** Normalised lowercase set for fast lookup. */
 const HUB_CITY_SET: ReadonlySet<string> = new Set(
   HUB_CITIES.map((c) => c.toLowerCase())
