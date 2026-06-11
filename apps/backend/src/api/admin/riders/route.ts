@@ -39,7 +39,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     phone?: string
     email?: string
     hub_id?: string
-    status?: "active" | "inactive" | "suspended"
+    status?: "pending" | "active" | "inactive" | "suspended"
     notes?: string
     pin?: string
   }
