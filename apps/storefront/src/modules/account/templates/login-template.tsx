@@ -56,11 +56,11 @@ const LoginTemplate = ({
         }}
       />
 
-      <div className="relative flex items-center justify-center min-h-[calc(100vh-100px)] small:h-[calc(100vh-100px)] px-3 xsmall:px-4 small:px-6 py-4 small:py-6">
+      <div className="relative content-container flex items-center justify-center min-h-[calc(100vh-100px)] py-6 small:py-10">
         {/* Two separate cards */}
-        <div className="w-full max-w-8xl grid small:grid-cols-2 gap-4 medium:gap-6 items-stretch small:h-full small:max-h-[860px]">
+        <div className="w-full grid small:grid-cols-2 gap-4 medium:gap-6 items-stretch">
           {/* Brand card */}
-          <aside className="relative hidden small:flex flex-col justify-between p-8 medium:p-12 overflow-hidden rounded-3xl shadow-xl bg-gradient-to-br from-brand-green-900 via-brand-green-800 to-brand-green-700 text-white">
+          <aside className="relative hidden small:flex flex-col justify-between p-10 medium:p-12 overflow-hidden rounded-3xl shadow-xl bg-gradient-to-br from-brand-green-900 via-brand-green-800 to-brand-green-700 text-white">
             {/* Decorative orbs */}
             <div
               aria-hidden
@@ -88,8 +88,8 @@ const LoginTemplate = ({
               </span>
             </div>
 
-            <div className="relative">
-              <h2 className="font-heading text-3xl medium:text-4xl large:text-5xl leading-[1.05] text-white">
+            <div className="relative py-8">
+              <h2 className="font-heading text-3xl medium:text-4xl leading-[1.05] text-white">
                 Fresh produce,{" "}
                 <span className="italic text-brand-gold-300">delivered</span>{" "}
                 from our farms to your door.
@@ -118,7 +118,7 @@ const LoginTemplate = ({
               </ul>
             </div>
 
-            <div className="relative flex items-center gap-x-3 text-caption text-white/60 mt-8">
+            <div className="relative flex items-center gap-x-3 text-caption text-white/60">
               <div className="flex -space-x-2">
                 {["🧑‍🌾", "👩‍🍳", "👨‍🍳"].map((e, i) => (
                   <span
@@ -135,8 +135,8 @@ const LoginTemplate = ({
             </div>
           </aside>
 
-          {/* Form card — scrolls internally if content is taller than the viewport */}
-          <main className="flex bg-white rounded-2xl small:rounded-3xl shadow-xl border border-grey-10 p-5 xsmall:p-6 small:p-8 medium:p-10 small:overflow-y-auto">
+          {/* Form card */}
+          <main className="flex bg-white rounded-2xl small:rounded-3xl shadow-xl border border-grey-10 p-5 xsmall:p-6 small:p-8 medium:p-10">
             <div className="m-auto w-full max-w-lg">
               <AuthCard
                 hubs={hubs}
