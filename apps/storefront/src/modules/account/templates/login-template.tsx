@@ -1,5 +1,4 @@
 import AuthCard from "@modules/account/components/auth-card"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import type { Hub } from "@modules/hub/data/hubs"
 
 type LoginTemplateProps = {
@@ -37,7 +36,7 @@ const LoginTemplate = ({
   googleError = null,
 }: LoginTemplateProps) => {
   return (
-    <div className="relative min-h-[calc(100vh-100px)] bg-grey-5 overflow-hidden">
+    <div className="relative bg-grey-5 overflow-hidden">
       {/* Page background decoration */}
       <div
         aria-hidden
@@ -57,22 +56,11 @@ const LoginTemplate = ({
         }}
       />
 
-      <div className="relative flex flex-col items-center justify-center min-h-[calc(100vh-100px)] px-4 small:px-8 py-10 small:py-14">
-        {/* Brand mark above the cards */}
-        <LocalizedClientLink
-          href="/"
-          className="inline-flex items-center gap-x-2 text-body-sm font-semibold text-grey-80 mb-8"
-        >
-          <span className="text-2xl">🌿</span>
-          <span className="font-heading text-h2 text-grey-90">
-            Mindanao Fresh Hub
-          </span>
-        </LocalizedClientLink>
-
+      <div className="relative flex items-center justify-center min-h-[calc(100vh-100px)] small:h-[calc(100vh-100px)] px-3 xsmall:px-4 small:px-6 py-4 small:py-6">
         {/* Two separate cards */}
-        <div className="w-full max-w-7xl grid small:grid-cols-2 gap-6 medium:gap-8 items-stretch">
+        <div className="w-full max-w-8xl grid small:grid-cols-2 gap-4 medium:gap-6 items-stretch small:h-full small:max-h-[860px]">
           {/* Brand card */}
-          <aside className="relative hidden small:flex flex-col justify-between p-10 medium:p-14 overflow-hidden rounded-3xl shadow-xl bg-gradient-to-br from-brand-green-900 via-brand-green-800 to-brand-green-700 text-white">
+          <aside className="relative hidden small:flex flex-col justify-between p-8 medium:p-12 overflow-hidden rounded-3xl shadow-xl bg-gradient-to-br from-brand-green-900 via-brand-green-800 to-brand-green-700 text-white">
             {/* Decorative orbs */}
             <div
               aria-hidden
@@ -93,21 +81,28 @@ const LoginTemplate = ({
               }}
             />
 
+            <div className="relative inline-flex items-center gap-x-2">
+              <span className="text-2xl">🌿</span>
+              <span className="font-heading text-h3 text-white">
+                Mindanao Fresh Hub
+              </span>
+            </div>
+
             <div className="relative">
-              <h2 className="font-heading text-4xl medium:text-5xl leading-[1.05] text-white">
+              <h2 className="font-heading text-3xl medium:text-4xl large:text-5xl leading-[1.05] text-white">
                 Fresh produce,{" "}
                 <span className="italic text-brand-gold-300">delivered</span>{" "}
                 from our farms to your door.
               </h2>
-              <p className="mt-5 text-body text-white/75 leading-relaxed max-w-md">
+              <p className="mt-4 text-body-sm medium:text-body text-white/75 leading-relaxed max-w-md">
                 Sign in to track orders, save favorite farms, and check out in
                 one tap.
               </p>
 
-              <ul className="mt-10 space-y-5 max-w-md">
+              <ul className="mt-7 medium:mt-9 space-y-4 medium:space-y-5 max-w-md">
                 {VALUE_PROPS.map((p) => (
-                  <li key={p.title} className="flex items-start gap-x-4">
-                    <span className="flex-shrink-0 w-11 h-11 rounded-xl bg-white/10 backdrop-blur-sm border border-white/15 flex items-center justify-center text-xl">
+                  <li key={p.title} className="flex items-start gap-x-3.5">
+                    <span className="flex-shrink-0 w-10 h-10 medium:w-11 medium:h-11 rounded-xl bg-white/10 backdrop-blur-sm border border-white/15 flex items-center justify-center text-lg medium:text-xl">
                       {p.icon}
                     </span>
                     <div>
@@ -123,7 +118,7 @@ const LoginTemplate = ({
               </ul>
             </div>
 
-            <div className="relative flex items-center gap-x-3 text-caption text-white/60 mt-12">
+            <div className="relative flex items-center gap-x-3 text-caption text-white/60 mt-8">
               <div className="flex -space-x-2">
                 {["🧑‍🌾", "👩‍🍳", "👨‍🍳"].map((e, i) => (
                   <span
@@ -140,9 +135,9 @@ const LoginTemplate = ({
             </div>
           </aside>
 
-          {/* Form card */}
-          <main className="flex items-center justify-center p-6 small:p-10 medium:p-14 bg-white rounded-3xl shadow-xl border border-grey-10">
-            <div className="w-full max-w-lg">
+          {/* Form card — scrolls internally if content is taller than the viewport */}
+          <main className="flex bg-white rounded-2xl small:rounded-3xl shadow-xl border border-grey-10 p-5 xsmall:p-6 small:p-8 medium:p-10 small:overflow-y-auto">
+            <div className="m-auto w-full max-w-lg">
               <AuthCard
                 hubs={hubs}
                 currentHubSlug={currentHubSlug}
