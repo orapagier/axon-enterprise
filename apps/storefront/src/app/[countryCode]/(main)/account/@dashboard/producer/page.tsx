@@ -5,7 +5,7 @@ import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 
 export const metadata: Metadata = {
-  title: "Producer dashboard",
+  title: "Producer dashboard | Mindanao Fresh Hub",
   description: "Manage your produce listings on Mindanao Fresh Hub.",
 }
 
