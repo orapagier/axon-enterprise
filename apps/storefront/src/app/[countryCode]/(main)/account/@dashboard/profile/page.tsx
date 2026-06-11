@@ -12,7 +12,7 @@ import { listHubs } from "@modules/hub/data/hubs"
 import { getHubCookie } from "@modules/hub/actions/set-hub"
 
 export const metadata: Metadata = {
-  title: "Profile",
+  title: "Profile | Mindanao Fresh Hub",
   description: "View and edit your Mindanao Fresh Hub profile.",
 }
 
