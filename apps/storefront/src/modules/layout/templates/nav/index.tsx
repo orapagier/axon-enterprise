@@ -243,7 +243,7 @@ export default async function Nav() {
                     <path d="M16 10a4 4 0 0 1-8 0" />
                   </svg>
                   <span className="text-body-sm font-semibold tracking-wide">
-                    Bag
+                    Cart
                   </span>
                   <span className="w-px h-3.5 bg-white/20" />
                   <span className="text-body-sm font-bold tabular-nums text-brand-gold-300">
