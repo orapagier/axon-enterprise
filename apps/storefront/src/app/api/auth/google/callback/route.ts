@@ -55,7 +55,10 @@ export async function GET(request: NextRequest) {
   }
 
   const claims = await exchangeCodeForClaims(code, pending.redirectUri)
-  if (!claims?.email || claims.email_verified !== true) {
+  if (!claims) {
+    return fail("auth_failed")
+  }
+  if (!claims.email || claims.email_verified !== true) {
     return fail("unverified_email")
   }
   const email = claims.email.toLowerCase()
