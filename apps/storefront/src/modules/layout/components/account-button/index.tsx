@@ -136,7 +136,7 @@ export default function AccountButton({
   const [pending, startTransition] = useTransition()
 
   const triggerClassName =
-    "hidden small:inline-flex items-center gap-x-1.5 h-9 px-3 rounded-full text-grey-60 hover:text-grey-90 hover:bg-grey-5 transition-all text-[12px] font-semibold"
+    "inline-flex items-center gap-x-1.5 h-9 px-2.5 small:px-3 rounded-full text-grey-60 hover:text-grey-90 hover:bg-grey-5 transition-all text-[12px] font-semibold"
 
   if (!isLoggedIn) {
     return (
@@ -147,7 +147,7 @@ export default function AccountButton({
         aria-label="Sign in or sign up"
       >
         <UserIcon />
-        <span>Signin/up</span>
+        <span className="hidden small:inline">Signin/up</span>
       </LocalizedClientLink>
     )
   }
