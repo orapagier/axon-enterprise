@@ -296,26 +296,36 @@ export async function verifyEmailCode(
       // Register the auth identity, attach the customer record with role
       // metadata, then sign in. The derived password is reproducible, so it is
       // never persisted — Medusa keeps only its own salted hash.
-      const registerToken = await sdk.auth.register("customer", "emailpass", {
-        email: pending.email,
-        password: derivedPassword,
-      })
-      await setAuthToken(registerToken as string)
-
-      const headers = { ...(await getAuthHeaders()) }
-      await sdk.store.customer.create(
-        {
+      let registered = true
+      try {
+        const registerToken = await sdk.auth.register("customer", "emailpass", {
           email: pending.email,
-          metadata: {
-            account_type: pending.role ?? "consumer",
-            profile_completed: pending.role === "rider" ? true : false,
-            rider_available: pending.role === "rider" ? true : undefined,
-            auth_method: "email_otp",
+          password: derivedPassword,
+        })
+        await setAuthToken(registerToken as string)
+      } catch {
+        // Identity already exists — the OTP just proved this person owns the
+        // email, so treat the "signup" as a sign-in to the existing account
+        // instead of dead-ending on "Identity with email already exists".
+        registered = false
+      }
+
+      if (registered) {
+        const headers = { ...(await getAuthHeaders()) }
+        await sdk.store.customer.create(
+          {
+            email: pending.email,
+            metadata: {
+              account_type: pending.role ?? "consumer",
+              profile_completed: pending.role === "rider" ? true : false,
+              rider_available: pending.role === "rider" ? true : undefined,
+              auth_method: "email_otp",
+            },
           },
-        },
-        {},
-        headers
-      )
+          {},
+          headers
+        )
+      }
 
       const loginToken = await sdk.auth.login("customer", "emailpass", {
         email: pending.email,
@@ -326,17 +336,34 @@ export async function verifyEmailCode(
       // Sign-in: re-derive the same internal credential and mint a session.
       // No backend round-trip and nothing stored server-side — verifying the
       // OTP above is what authorizes this login.
-      const loginToken = await sdk.auth.login("customer", "emailpass", {
-        email: pending.email,
-        password: derivedPassword,
-      })
-      await setAuthToken(loginToken as string)
+      try {
+        const loginToken = await sdk.auth.login("customer", "emailpass", {
+          email: pending.email,
+          password: derivedPassword,
+        })
+        await setAuthToken(loginToken as string)
+      } catch {
+        // The only expected failure here is an unknown identity — the
+        // backend's raw "Invalid email or password" would just confuse
+        // someone who never typed a password.
+        return {
+          ok: false,
+          error:
+            "We couldn't find an account for that email. Switch to Sign up to create one.",
+        }
+      }
     }
 
     const customerCacheTag = await getCacheTag("customers")
     revalidateTag(customerCacheTag)
     await transferCart()
-    await syncCustomerHubFromCookie()
+    if (pending.mode === "signup" && pending.hub) {
+      // The hub picked during signup becomes the default hub: persists the
+      // cookie and links customer ↔ hub in the backend now that we're authed.
+      await setHubCookie(pending.hub)
+    } else {
+      await syncCustomerHubFromCookie()
+    }
   } catch (error) {
     return { ok: false, error: String(error) }
   } finally {
