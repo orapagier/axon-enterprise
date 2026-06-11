@@ -66,27 +66,6 @@ const generateCode = () =>
   // 6-digit, leading zeros preserved
   String(crypto.randomInt(0, 1_000_000)).padStart(6, "0")
 
-/**
- * Deterministic per-customer credential used internally with Medusa's
- * emailpass provider. Derived from the email + a server-only shared secret so
- * it is reproducible at both sign-up and sign-in — which means we never store
- * it anywhere (Medusa persists only its own salted hash). The customer never
- * sees or types it.
- *
- * NOTE: rotating MFH_OTP_SECRET invalidates every derived credential and would
- * force all customers to re-register. Treat it as long-lived.
- */
-const deriveCustomerSecret = (email: string): string => {
-  const secret = process.env.MFH_OTP_SECRET
-  if (!secret) {
-    throw new Error("MFH_OTP_SECRET is not configured")
-  }
-  return crypto
-    .createHmac("sha256", secret)
-    .update(`mfh-pwd:v1:${email.toLowerCase()}`)
-    .digest("hex")
-}
-
 const setPendingAuth = async (data: PendingAuth) => {
   const cookies = await nextCookies()
   cookies.set(PENDING_AUTH_COOKIE, JSON.stringify(data), {
