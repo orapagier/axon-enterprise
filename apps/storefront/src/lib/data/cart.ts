@@ -472,6 +472,11 @@ export async function applyCustomerAddressToCart(
  * @returns The cart object if the order was successful, or null if not.
  */
 export async function placeOrder(cartId?: string) {
+  const customer = await retrieveCustomer()
+  if (!customer) {
+    throw new Error("Please sign in or register to place an order")
+  }
+
   const id = cartId || (await getCartId())
 
   if (!id) {
