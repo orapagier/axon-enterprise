@@ -42,6 +42,22 @@ const nextConfig = {
       bodySizeLimit: "6mb",
     },
   },
+  async rewrites() {
+    // Uploaded photos live on the backend's local file storage and are stored
+    // with the backend's own origin (http://localhost:9000/static/...), which
+    // phones and tunnelled visitors can't reach. resolveImageSrc() rewrites
+    // those srcs to same-origin /static paths; this proxies them through.
+    const backendUrl =
+      process.env.MEDUSA_BACKEND_URL ||
+      process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ||
+      "http://localhost:9000"
+    return [
+      {
+        source: "/static/:path*",
+        destination: `${backendUrl}/static/:path*`,
+      },
+    ]
+  },
   images: {
     unoptimized: true,
     remotePatterns: [
