@@ -35,10 +35,10 @@ const ProductTemplate = async ({
   return (
     <>
       <div
-        className="content-container py-10 small:py-16"
+        className="content-container py-6 small:py-16"
         data-testid="product-container"
       >
-        <div className="flex flex-col small:flex-row gap-8 small:gap-16">
+        <div className="flex flex-col small:flex-row gap-6 small:gap-16">
           {/* Left: Image gallery */}
           <div className="w-full small:w-[55%]">
             <ImageGallery images={images} />
