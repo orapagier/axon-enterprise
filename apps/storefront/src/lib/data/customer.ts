@@ -177,20 +177,21 @@ export async function requestEmailCode(
 ): Promise<OtpRequestState> {
   const email = String(formData.get("email") ?? "").trim().toLowerCase()
   const mode = (String(formData.get("mode") ?? "signin") as AuthMode)
+  const rawRole = String(formData.get("role") ?? "")
   const role =
+    mode === "signup" ? (rawRole as AccountType) : undefined
+  const hub =
     mode === "signup"
-      ? ((String(formData.get("role") ?? "consumer") as AccountType))
+      ? String(formData.get("hub") ?? "").trim().slice(0, 64) || undefined
       : undefined
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { ok: false, error: "Please enter a valid email address." }
   }
 
-  if (
-    mode === "signup" &&
-    role &&
-    !["consumer", "producer", "trader"].includes(role)
-  ) {
+  // No silent default: an account type must be an explicit choice, otherwise
+  // a submit that races the role click signs people up as consumers.
+  if (mode === "signup" && !VALID_ACCOUNT_TYPES.includes(role as AccountType)) {
     return { ok: false, error: "Please choose an account type." }
   }
 
