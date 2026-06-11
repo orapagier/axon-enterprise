@@ -216,9 +216,6 @@ export default async function Nav() {
 
               {/* Search icon (mobile only) — expands a search row under the header */}
               <MobileSearch />
-
-              {/* Account */}
-              <AccountButton isLoggedIn={!!customer} accountType={accountType} />
             </div>
 
             <span className="hidden small:block w-px h-5 bg-grey-20 mx-2.5" />
