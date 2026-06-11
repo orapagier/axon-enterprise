@@ -157,7 +157,7 @@ export default function NavSearch() {
                       {hit.thumbnail ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
-                          src={hit.thumbnail}
+                          src={resolveImageSrc(hit.thumbnail)}
                           alt={hit.title}
                           className="absolute inset-0 w-full h-full object-cover"
                         />
