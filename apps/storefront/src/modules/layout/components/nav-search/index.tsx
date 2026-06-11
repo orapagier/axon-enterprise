@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { searchProducts, type SearchHit } from "@lib/data/search"
+import { resolveImageSrc } from "@lib/util/image-url"
 
 export default function NavSearch() {
   const router = useRouter()
