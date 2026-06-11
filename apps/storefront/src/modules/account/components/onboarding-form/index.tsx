@@ -18,7 +18,7 @@ type FieldDef = {
   label: string
   placeholder: string
   icon: string
-  type?: "text" | "tel" | "textarea" | "barangay"
+  type?: "text" | "tel" | "textarea" | "city" | "barangay"
   required?: boolean
   helper?: string
   suggestions?: string[]
