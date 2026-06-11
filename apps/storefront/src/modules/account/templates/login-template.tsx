@@ -136,7 +136,7 @@ const LoginTemplate = ({
           </aside>
 
           {/* Form card */}
-          <main className="flex bg-white rounded-2xl small:rounded-3xl shadow-xl border border-grey-10 p-5 xsmall:p-6 small:p-8 medium:p-10">
+          <main className="flex bg-white rounded-2xl small:rounded-3xl shadow-xl border border-grey-10 p-5 xsmall:p-6 small:p-7 medium:p-8 small:overflow-y-auto no-scrollbar">
             <div className="m-auto w-full max-w-lg">
               <AuthCard
                 hubs={hubs}
