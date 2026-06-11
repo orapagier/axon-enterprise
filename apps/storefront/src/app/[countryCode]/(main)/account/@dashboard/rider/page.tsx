@@ -1,17 +1,28 @@
 import { retrieveCustomer } from "@lib/data/customer"
+import {
+  getRiderManifest,
+  getRiderSession,
+  getRiderSummary,
+} from "@lib/data/rider"
+import { listHubs } from "@modules/hub/data/hubs"
+import RiderDashboard from "@modules/account/components/rider-dashboard"
+import RiderRegisterForm from "@modules/account/components/rider-dashboard/register-form"
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 
 export const metadata: Metadata = {
-  title: "Rider dashboard",
-  description: "Manage your deliveries and earnings on Mindanao Fresh Hub.",
+  title: "Deliveries",
+  description: "Your delivery run sheet on Mindanao Fresh Hub.",
 }
+
+// The manifest and cash summary must never be served stale.
+export const dynamic = "force-dynamic"
 
 type Props = {
   params: Promise<{ countryCode: string }>
 }
 
-export default async function RiderDashboardPage({ params }: Props) {
+export default async function RiderDeliveriesPage({ params }: Props) {
   const { countryCode } = await params
   const customer = await retrieveCustomer()
 
@@ -20,121 +31,115 @@ export default async function RiderDashboardPage({ params }: Props) {
   }
 
   const meta = (customer.metadata ?? {}) as Record<string, unknown>
-  if (meta.account_type !== "rider") {
+  const session = await getRiderSession()
+
+  // Reachable by rider-typed accounts, and by any account the hub admin
+  // registered as a rider (matched on email) even if its account_type drifted.
+  if (meta.account_type !== "rider" && !session.rider) {
     notFound()
   }
 
-  const isAvailable = meta.rider_available === true
   const displayName =
     customer.first_name ||
     (customer.email ? customer.email.split("@")[0] : "rider")
 
-  return (
-    <div className="flex flex-col gap-y-6">
-      {/* Header card */}
+  const hubs = await listHubs()
+  const hub = session.rider
+    ? hubs.find((h) => h.id === session.rider!.hub_id)
+    : null
+  const hubLabel = hub ? hub.name : "hub"
+
+  // ── Not registered yet: offer in-account registration ──────────────────
+  if (!session.rider) {
+    return (
       <div className="bg-white rounded-3xl shadow-soft border border-grey-10/60 p-6 small:p-8">
-        <div className="flex flex-col xsmall:flex-row xsmall:items-end justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-x-2.5 mb-2">
-              <span className="text-[10px] font-bold text-grey-50 uppercase tracking-[0.18em]">
-                Rider dashboard
-              </span>
-              {isAvailable ? (
-                <span className="inline-flex items-center gap-x-1 px-2 py-0.5 rounded-full bg-brand-green-50 text-brand-green-700 text-[10px] font-bold uppercase tracking-wider border border-brand-green-100">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-green-500 animate-pulse" />
-                  Available
-                </span>
-              ) : (
-                <span className="inline-flex items-center gap-x-1 px-2 py-0.5 rounded-full bg-grey-100 text-grey-60 text-[10px] font-bold uppercase tracking-wider border border-grey-200">
-                  Offline
-                </span>
-              )}
-            </div>
-            <h1 className="font-heading font-bold text-h1 small:text-display text-grey-90 leading-[1.05] tracking-[-0.02em]">
-              {displayName}
-              <span className="text-brand-green-600">.</span>
-            </h1>
-            <p className="text-body-sm text-grey-50 mt-2 leading-relaxed">
-              {isAvailable
-                ? "You&apos;re available for deliveries. Orders will be routed to you based on your area."
-                : "Toggle your availability to start receiving delivery requests."}
-            </p>
-          </div>
-
-          {/* Stats */}
-          <div />
-        </div>
-
-        {/* Stat row */}
-        <div className="mt-6 grid grid-cols-3 gap-3 small:gap-4">
-          <div className="rounded-2xl border border-grey-10 bg-grey-5 px-4 py-3">
-            <div className="font-heading font-bold text-h1 text-grey-90 leading-none tabular-nums">
-              —
-            </div>
-            <div className="text-[10px] uppercase tracking-widest text-grey-50 font-semibold mt-1.5">
-              Today
-            </div>
-          </div>
-          <div className="rounded-2xl border border-brand-green-200 bg-brand-green-50/30 px-4 py-3">
-            <div className="font-heading font-bold text-h1 text-brand-green-700 leading-none tabular-nums">
-              —
-            </div>
-            <div className="text-[10px] uppercase tracking-widest text-brand-green-800 font-semibold mt-1.5">
-              This week
-            </div>
-          </div>
-          <div className="rounded-2xl border border-grey-10 bg-white px-4 py-3">
-            <div className="font-heading font-bold text-h1 text-grey-90 leading-none tabular-nums">
-              —
-            </div>
-            <div className="text-[10px] uppercase tracking-widest text-grey-50 font-semibold mt-1.5">
-              Earnings
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Pending deliveries placeholder */}
-      <div className="bg-white rounded-3xl border border-dashed border-grey-20 p-10 text-center">
-        <div className="text-4xl mb-3">🛵</div>
-        <div className="font-heading font-bold text-h2 text-grey-90 tracking-[-0.015em]">
-          No active deliveries
-        </div>
-        <p className="text-body-sm text-grey-50 mt-2 max-w-md mx-auto">
-          When a customer chooses standard delivery and you&apos;re the nearest
-          available rider, the order will appear here.
+        <span className="text-[10px] font-bold text-grey-50 uppercase tracking-[0.18em]">
+          Rider registration
+        </span>
+        <h1 className="font-heading font-bold text-h1 text-grey-90 mt-2 tracking-[-0.02em]">
+          Ride for the hub, {displayName}
+        </h1>
+        <p className="text-body-sm text-grey-50 mt-2 max-w-lg leading-relaxed">
+          Deliver orders for your city&apos;s hub and earn per delivery.
+          Register below with the same email you use to sign in — once you pay
+          the cash bond at the hub counter, the dispatcher activates you and
+          your run sheet appears right here.
         </p>
-        <div className="mt-6 inline-flex items-center gap-x-2 px-5 py-2.5 rounded-full bg-brand-green-50 border border-brand-green-200 text-[11px] text-brand-green-700 font-semibold uppercase tracking-wider">
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-          </svg>
-          How it works
-        </div>
-        <div className="mt-4 max-w-sm mx-auto text-left space-y-3 text-caption text-grey-50">
-          <div className="flex items-start gap-x-2">
-            <span className="w-5 h-5 rounded-full bg-brand-green-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">1</span>
-            <span>Customers choose &quot;Standard delivery&quot; at checkout.</span>
-          </div>
-          <div className="flex items-start gap-x-2">
-            <span className="w-5 h-5 rounded-full bg-brand-green-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">2</span>
-            <span>Orders are routed to the nearest available rider in the hub area.</span>
-          </div>
-          <div className="flex items-start gap-x-2">
-            <span className="w-5 h-5 rounded-full bg-brand-green-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">3</span>
-            <span>Deliver and earn — you keep 100% of the delivery fee.</span>
-          </div>
-        </div>
+        <RiderRegisterForm
+          hubs={hubs.map((h) => ({ id: h.id, name: h.name, city: h.city }))}
+        />
       </div>
+    )
+  }
+
+  // ── Registered but not active ───────────────────────────────────────────
+  if (session.rider.status === "pending") {
+    return (
+      <div className="bg-white rounded-3xl shadow-soft border border-grey-10/60 p-8 small:p-10 text-center">
+        <div className="mx-auto w-14 h-14 rounded-2xl bg-brand-gold-50 border border-brand-gold-200 flex items-center justify-center text-2xl mb-4">
+          ⏳
+        </div>
+        <h1 className="font-heading font-bold text-h2 text-grey-90">
+          Registration received
+        </h1>
+        <p className="text-body-sm text-grey-50 mt-2 max-w-md mx-auto leading-relaxed">
+          Your rider account is waiting for hub approval. Pay your{" "}
+          <b className="text-grey-80">cash bond at the {hubLabel} counter</b>{" "}
+          and the dispatcher will activate you — your delivery run sheet then
+          shows up on this page.
+        </p>
+      </div>
+    )
+  }
+
+  if (!session.token) {
+    return (
+      <div className="bg-white rounded-3xl shadow-soft border border-red-100 p-8 small:p-10 text-center">
+        <div className="mx-auto w-14 h-14 rounded-2xl bg-red-50 border border-red-200 flex items-center justify-center text-2xl mb-4">
+          ⚠️
+        </div>
+        <h1 className="font-heading font-bold text-h2 text-grey-90">
+          Rider account {session.rider.status}
+        </h1>
+        <p className="text-body-sm text-grey-50 mt-2 max-w-md mx-auto leading-relaxed">
+          {session.rider.status === "suspended"
+            ? "Your rider account is suspended — usually for unremitted COD cash. Settle up at the hub counter to get reinstated."
+            : "Your rider account is inactive. Visit the hub counter or contact your dispatcher."}
+        </p>
+      </div>
+    )
+  }
+
+  // ── Active rider: live run sheet ────────────────────────────────────────
+  const [stops, summary] = await Promise.all([
+    getRiderManifest(session.token),
+    getRiderSummary(session.token),
+  ])
+
+  return (
+    <div className="flex flex-col gap-y-4 small:gap-y-6">
+      <div className="bg-white rounded-3xl shadow-soft border border-grey-10/60 p-6 small:p-8">
+        <div className="flex items-center gap-x-2.5">
+          <span className="text-[10px] font-bold text-grey-50 uppercase tracking-[0.18em]">
+            Run sheet · {hubLabel}
+          </span>
+          <span className="inline-flex items-center gap-x-1 px-2 py-0.5 rounded-full bg-brand-green-50 text-brand-green-700 text-[10px] font-bold uppercase tracking-wider border border-brand-green-100">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-green-500 animate-pulse" />
+            Active
+          </span>
+        </div>
+        <h1 className="font-heading font-bold text-h1 small:text-display text-grey-90 leading-[1.05] tracking-[-0.02em] mt-2">
+          {session.rider.full_name || displayName}
+          <span className="text-brand-green-600">.</span>
+        </h1>
+        <p className="text-body-sm text-grey-50 mt-2 leading-relaxed">
+          {stops.length > 0
+            ? `${stops.length} ${stops.length === 1 ? "stop" : "stops"} on your sheet. Mark each one delivered as you collect the cash — delivered is not remitted, so drop the cash at the counter before the limit.`
+            : "Nothing on your sheet right now. Stops appear here the moment your batch is dispatched."}
+        </p>
+      </div>
+
+      <RiderDashboard stops={stops} summary={summary} hubLabel={hubLabel} />
     </div>
   )
 }
