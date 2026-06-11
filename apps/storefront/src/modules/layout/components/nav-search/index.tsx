@@ -7,7 +7,11 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import { searchProducts, type SearchHit } from "@lib/data/search"
 import { resolveImageSrc } from "@lib/util/image-url"
 
-export default function NavSearch() {
+export default function NavSearch({
+  variant = "desktop",
+}: {
+  variant?: "desktop" | "mobile"
+}) {
   const router = useRouter()
   const params = useParams()
   const countryCode = (params?.countryCode as string) ?? "ph"
