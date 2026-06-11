@@ -35,8 +35,11 @@ export async function GET(request: NextRequest) {
   }
 
   const countryCode = pending?.countryCode ?? "ph"
+  // Behind a proxy/tunnel the request origin is the local bind address
+  // (e.g. localhost:8000), so prefer the configured public base URL.
+  const origin = process.env.NEXT_PUBLIC_BASE_URL || request.nextUrl.origin
   const redirect = (path: string) => {
-    const res = NextResponse.redirect(new URL(path, request.nextUrl.origin))
+    const res = NextResponse.redirect(new URL(path, origin))
     res.cookies.set(GAUTH_COOKIE, "", { maxAge: 0, path: "/" })
     return res
   }
