@@ -8,6 +8,11 @@ import { HttpTypes } from "@medusajs/types"
 import { getAuthHeaders, getCacheTag } from "./cookies"
 import { retrieveCustomer } from "./customer"
 import { validatePhone } from "@lib/util/phone"
+import {
+  canonicalHubCity,
+  hubSlugForCity,
+  HUB_CITIES,
+} from "@lib/constants/hub-cities"
 
 /**
  * Admin onboarding state reset (Medusa demo helper).
