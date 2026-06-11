@@ -139,6 +139,25 @@ button.primary{
 }
 button.primary:active{transform:translate(4px,4px);box-shadow:none}
 button.primary[disabled]{opacity:.55}
+.login-or{
+  display:flex;align-items:center;gap:10px;margin:18px 0 14px;
+  font-family:var(--cond);font-weight:700;font-size:.62rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--ink-soft);animation:rise .5s .44s both;
+}
+.login-or:before,.login-or:after{content:"";flex:1;border-top:2px dashed var(--line)}
+.gbtn{
+  display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  padding:13px;border:2px solid var(--ink);background:var(--card);color:var(--ink);
+  font-family:var(--cond);font-weight:700;font-size:.92rem;letter-spacing:.12em;
+  text-transform:uppercase;text-decoration:none;cursor:pointer;
+  box-shadow:4px 4px 0 rgba(27,31,25,.2);animation:rise .5s .48s both;
+}
+.gbtn:active{transform:translate(4px,4px);box-shadow:none}
+.gbtn .gmark{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border:2px solid var(--ink);background:var(--paper);
+  font-family:var(--sign);font-size:1rem;color:var(--green);line-height:1;
+}
 .err{
   margin-top:14px;font-size:.84rem;color:var(--red);background:var(--red-tint);
   border:1.5px solid var(--red);border-left-width:6px;padding:10px 12px;display:none;
