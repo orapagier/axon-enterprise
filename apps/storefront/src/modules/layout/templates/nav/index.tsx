@@ -222,17 +222,7 @@ export default async function Nav() {
               )}
 
               {/* Account */}
-              <LocalizedClientLink
-                className="hidden small:flex items-center justify-center w-9 h-9 rounded-full text-grey-60 hover:text-grey-90 hover:bg-grey-5 transition-all"
-                href="/account"
-                data-testid="nav-account-link"
-                aria-label="Account"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-              </LocalizedClientLink>
+              <AccountButton isLoggedIn={!!customer} />
             </div>
 
             <span className="hidden small:block w-px h-5 bg-grey-20 mx-2.5" />
