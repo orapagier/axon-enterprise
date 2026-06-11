@@ -4,7 +4,7 @@ import DisputesList from "@modules/account/components/disputes-list"
 import { listCustomerDisputes } from "@lib/data/disputes"
 
 export const metadata: Metadata = {
-  title: "Disputes",
+  title: "Disputes | Mindanao Fresh Hub",
   description: "Your refusal disputes and account accountability status.",
 }
 
