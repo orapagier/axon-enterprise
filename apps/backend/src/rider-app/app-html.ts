@@ -131,6 +131,19 @@ label.fld input{
   border-radius:0;outline:none;letter-spacing:.05em;transition:background .15s,border-color .15s;
 }
 label.fld input:focus{background:#fff;border-color:var(--green);box-shadow:inset 0 -3px 0 var(--green-tint)}
+label.fld input[readonly]{background:var(--paper-deep);color:var(--ink-soft)}
+label.fld select{
+  width:100%;font-family:var(--mono);font-size:1.05rem;font-weight:500;
+  padding:13px 12px;border:2px solid var(--ink);background:var(--paper);
+  border-radius:0;outline:none;appearance:none;letter-spacing:.02em;
+}
+label.fld select:focus{background:#fff;border-color:var(--green)}
+.linkbtn{
+  display:block;margin:18px auto 0;background:none;border:none;cursor:pointer;
+  font-family:var(--cond);font-weight:700;font-size:.74rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--green-deep);border-bottom:2px solid var(--green-deep);
+  padding:4px 2px;animation:rise .5s .52s both;
+}
 button.primary{
   width:100%;margin-top:6px;padding:16px;border:2px solid var(--ink);cursor:pointer;
   background:var(--green);color:#fff;font-family:var(--sign);
