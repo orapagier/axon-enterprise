@@ -12,8 +12,9 @@ import {
  * and the exact redirect URI ride along in a short-lived httpOnly cookie so
  * the callback can validate the response and finish the token exchange.
  *
- * Riders never self-signup: the callback only signs in riders whose
- * admin-registered email matches the Google account.
+ * The callback signs in riders whose rider.email matches the Google account;
+ * an unknown verified email gets a signup ticket so the rider can register
+ * (landing as "pending" until the hub admin approves them).
  */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const fail = (code: string) => res.redirect(`/rider-app#gerror=${code}`)
