@@ -5,7 +5,7 @@ import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 
 export const metadata: Metadata = {
-  title: "Edit listing",
+  title: "Edit listing | Mindanao Fresh Hub",
 }
 
 type Props = { params: Promise<{ countryCode: string; id: string }> }
