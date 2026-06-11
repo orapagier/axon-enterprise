@@ -190,6 +190,22 @@
 >   network-first on the shell only — /rider/* is never intercepted (a silently queued
 >   "delivered" would lie about cash). **Visual pass on a real phone still recommended:**
 >   open `http://<backend>/rider-app`, log in, add to home screen.
+> - **Rider "Sign in with Google" BUILT + ROUTE-VERIFIED (2026-06-11):** the PWA login
+>   now offers Google next to phone+PIN, mirroring the storefront's auth rail. Backend
+>   code flow at **GET /rider/auth/google/start → callback** (state nonce in a 10-min
+>   httpOnly cookie scoped to `/rider/auth/google`; same GOOGLE_CLIENT_ID/SECRET as the
+>   storefront, now also in backend .env). The callback matches the **verified Google
+>   email against the new admin-registered `rider.email`** column (lowercased; partial
+>   unique index; settable via POST/PATCH /admin/riders — riders still never
+>   self-signup) and redirects to `/rider-app#rt=<token>` with the same 30-day HS256
+>   rider token phone+PIN issues (errors come back as `#gerror=<code>`; the app maps
+>   them to friendly messages). Both google paths exempted *inside* `authenticateRider`
+>   (cumulative-middleware rule). Verified live: start 302s to Google with correct
+>   client/redirect/state, bogus state → `gerror=state`, valid-state-bad-code →
+>   `gerror=auth_failed`, migration applied. **Remaining manual steps:** add
+>   `<backend origin>/rider/auth/google/callback` as an authorized redirect URI on the
+>   Google OAuth client, set each rider's email via /admin/riders, then a real-account
+>   round-trip on a phone.
 > - **Next on the roadmap (not started):** the **storefront trader-price display**
 >   (backend ready); **producer payout disbursement** (gate exists). Web Push (Phase B
 >   optional half) when wanted.
