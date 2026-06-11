@@ -180,7 +180,7 @@
 
   /* Tightened section spacing */
   .section-tight {
-    @apply py-10 small:py-14;
+    @apply py-7 small:py-14;
   }
 
   /* Full-viewport section (subtracts sticky header: 36 announcement + 68 main = 104px) */
