@@ -45,7 +45,7 @@ export default async function Footer() {
                 <input
                   type="email"
                   placeholder="your@email.com"
-                  className="flex-1 bg-transparent px-4 text-body-sm text-white placeholder:text-white/40 focus:outline-none"
+                  className="flex-1 w-full min-w-0 bg-transparent px-4 text-body-sm text-white placeholder:text-white/40 focus:outline-none"
                 />
                 <button
                   type="submit"
