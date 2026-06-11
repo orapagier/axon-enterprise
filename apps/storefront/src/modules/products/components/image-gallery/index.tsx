@@ -1,4 +1,5 @@
 import { HttpTypes } from "@medusajs/types"
+import { resolveImageSrc } from "@lib/util/image-url"
 import Image from "next/image"
 
 type ImageGalleryProps = {
