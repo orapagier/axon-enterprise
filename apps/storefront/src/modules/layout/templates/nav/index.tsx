@@ -1,15 +1,10 @@
 import { Suspense } from "react"
 
-import { listLocales } from "@lib/data/locales"
-import { getLocale } from "@lib/data/locale-actions"
-import { listRegions } from "@lib/data/regions"
-import { StoreRegion } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import AccountButton from "@modules/layout/components/account-button"
 import CartButton from "@modules/layout/components/cart-button"
 import MobileSearch from "@modules/layout/components/mobile-search"
 import NavSearch from "@modules/layout/components/nav-search"
-import SideMenu from "@modules/layout/components/side-menu"
 import { getDeliveryHub } from "@lib/util/delivery-hub"
 import HubSwitcher from "@modules/hub/components/hub-switcher"
 import { listHubs } from "@modules/hub/data/hubs"
@@ -17,16 +12,12 @@ import { getHubCookie } from "@modules/hub/actions/set-hub"
 import { retrieveCustomer } from "@lib/data/customer"
 
 export default async function Nav() {
-  const [regions, locales, currentLocale, hub, hubs, currentHubSlug, customer] =
-    await Promise.all([
-      listRegions().then((regions: StoreRegion[]) => regions),
-      listLocales(),
-      getLocale(),
-      getDeliveryHub(),
-      listHubs(),
-      getHubCookie(),
-      retrieveCustomer(),
-    ])
+  const [hub, hubs, currentHubSlug, customer] = await Promise.all([
+    getDeliveryHub(),
+    listHubs(),
+    getHubCookie(),
+    retrieveCustomer(),
+  ])
 
   // Producer/trader accounts (incl. legacy "seller") get a shortcut to post a
   // new listing without drilling into the account dashboard.
