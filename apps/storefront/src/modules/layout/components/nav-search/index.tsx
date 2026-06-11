@@ -9,8 +9,10 @@ import { resolveImageSrc } from "@lib/util/image-url"
 
 export default function NavSearch({
   variant = "desktop",
+  autoFocus = false,
 }: {
   variant?: "desktop" | "mobile"
+  autoFocus?: boolean
 }) {
   const router = useRouter()
   const params = useParams()
