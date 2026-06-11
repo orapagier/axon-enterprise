@@ -3,14 +3,16 @@ import { RIDER_MODULE } from "../../../../modules/rider"
 import type RiderModuleService from "../../../../modules/rider/service"
 import { hashPin } from "../../../../modules/rider/pin"
 
-const VALID_STATUSES = ["active", "inactive", "suspended"]
+const VALID_STATUSES = ["pending", "active", "inactive", "suspended"]
 
 /**
  * GET   /admin/riders/:id  — read one rider
  * PATCH /admin/riders/:id  — update name/phone/email/hub/status/notes
  *
- * Setting status back to "active" is how an admin clears a suspension applied
- * by the rider-unremitted-tick job (after the rider has settled their cash).
+ * Setting status to "active" is how an admin approves a self-registered
+ * (pending) rider after collecting the cash bond, and how a suspension
+ * applied by the rider-unremitted-tick job is cleared after the rider has
+ * settled their cash.
  */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const riders: RiderModuleService = req.scope.resolve(RIDER_MODULE)
