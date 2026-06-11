@@ -27,10 +27,11 @@ export default async function OnboardingPage({ params }: Props) {
     | "consumer"
     | "producer"
     | "trader"
+    | "rider"
     | "buyer"
     | "seller"
   const rawRole = customer.metadata?.account_type as RoleStored | undefined
-  const accountType: "consumer" | "producer" | "trader" =
+  const accountType: "consumer" | "producer" | "trader" | "rider" =
     rawRole === "seller"
       ? "producer"
       : rawRole === "buyer"
@@ -39,6 +40,12 @@ export default async function OnboardingPage({ params }: Props) {
   const profileCompleted = Boolean(customer.metadata?.profile_completed)
 
   if (profileCompleted) {
+    redirect(`/${countryCode}/account`)
+  }
+
+  // Riders have no onboarding form (their profile is marked complete at
+  // signup); if one lands here anyway, send them home instead of a 404.
+  if (accountType === "rider") {
     redirect(`/${countryCode}/account`)
   }
 
