@@ -8,7 +8,7 @@ import { listHubs } from "@modules/hub/data/hubs"
 import RiderDashboard from "@modules/account/components/rider-dashboard"
 import RiderRegisterForm from "@modules/account/components/rider-dashboard/register-form"
 import { Metadata } from "next"
-import { notFound, redirect } from "next/navigation"
+import { redirect } from "next/navigation"
 
 export const metadata: Metadata = {
   title: "Deliveries | Mindanao Fresh Hub",
