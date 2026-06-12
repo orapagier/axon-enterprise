@@ -488,30 +488,10 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // Direct listings don't pass through hub intake — no slot to reserve.
-  if (isDirect) {
-    res.status(201).json({ product, listing })
-    return
-  }
-
-  // Reserve the pickup slot + link it to the listing. The workflow runs the
-  // reservation under a per-window lock (so concurrent submissions can't
-  // overcommit capacity) and self-compensates its slot/capacity/link work if
-  // anything inside it fails.
-  try {
-    await reservePickupSlotWorkflow(req.scope).run({
-      input: {
-        listing_id: listing.id,
-        pickup_window_id: body.pickup_window_id!,
-        harvest_date: harvestDate!,
-        estimated_kg: body.estimated_kg!,
-      },
-    })
-  } catch (err) {
-    console.error("Pickup slot reservation failed:", err)
-    // The workflow already rolled back its own work. Unwind everything created
-    // before it — the listing, its links, and the product itself — so a failed
-    // reservation never leaves an orphaned draft product or dangling listing.
+  // Unwind everything created so far — the listing, its links, and the
+  // product itself — so a failure below never leaves an orphaned draft
+  // product or dangling listing behind.
+  const unwindCreated = async () => {
     try {
       await link.dismiss({
         [Modules.PRODUCT]: { product_id: product.id },
@@ -534,6 +514,58 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     await deleteProductsWorkflow(req.scope)
       .run({ input: { ids: [product.id] } })
       .catch((e) => console.error("Orphan product cleanup failed:", e))
+  }
+
+  // Direct listings don't pass through hub intake — no slot to reserve.
+  // Record the producer's on-hand stock instead so checkout deducts it.
+  if (isDirect) {
+    try {
+      let variantId = product.variants?.[0]?.id
+      if (!variantId) {
+        const { data: created } = await query.graph({
+          entity: "product",
+          fields: ["id", "variants.id"],
+          filters: { id: product.id },
+        })
+        variantId = (
+          created?.[0] as { variants?: { id?: string }[] } | undefined
+        )?.variants?.[0]?.id
+      }
+      if (!variantId) {
+        throw new Error("Created product has no variant to stock.")
+      }
+      await setVariantStock(req.scope, variantId, quantity)
+    } catch (err) {
+      console.error("Stock setup failed:", err)
+      await unwindCreated()
+      res.status(500).json({
+        error:
+          "We couldn't record your available stock. Please try again.",
+        code: "STOCK_SETUP_FAILED",
+      })
+      return
+    }
+    res.status(201).json({ product, listing })
+    return
+  }
+
+  // Reserve the pickup slot + link it to the listing. The workflow runs the
+  // reservation under a per-window lock (so concurrent submissions can't
+  // overcommit capacity) and self-compensates its slot/capacity/link work if
+  // anything inside it fails.
+  try {
+    await reservePickupSlotWorkflow(req.scope).run({
+      input: {
+        listing_id: listing.id,
+        pickup_window_id: body.pickup_window_id!,
+        harvest_date: harvestDate!,
+        estimated_kg: body.estimated_kg!,
+      },
+    })
+  } catch (err) {
+    console.error("Pickup slot reservation failed:", err)
+    // The workflow already rolled back its own work.
+    await unwindCreated()
     res.status(400).json({
       error:
         err instanceof Error ? err.message : "Pickup slot reservation failed.",
