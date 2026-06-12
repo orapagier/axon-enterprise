@@ -36,6 +36,8 @@ const LoginTemplate = ({
   currentHubSlug = null,
   googleEnabled = false,
   googleError = null,
+  pendingOtp = null,
+  pendingDevCode = null,
 }: LoginTemplateProps) => {
   return (
     <div className="relative bg-grey-5 overflow-hidden">
