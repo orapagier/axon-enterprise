@@ -16,17 +16,20 @@ import PickupModuleService from "../../../../modules/pickup/service"
 import { HUB_MODULE } from "../../../../modules/hub"
 import reservePickupSlotWorkflow from "../../../../workflows/reserve-pickup-slot"
 import { hasRole } from "../../../../lib/roles"
+import { LISTING_TYPES, type ListingType } from "../../../../modules/listing/types"
 
 type StoreCustomer = {
   id: string
+  first_name?: string | null
+  last_name?: string | null
+  company_name?: string | null
   metadata?: Record<string, unknown> | null
 }
 
 /**
  * Look up the authenticated customer and verify they're a producer with a
- * completed profile. All listings flow through the hub (sell_to_freshhub),
- * so producers must be a hub member and have committed to a hub before they
- * can list.
+ * completed profile. Producers must be a hub member and have committed to a
+ * hub before they can list, regardless of listing type.
  */
 async function assertSeller(
   req: MedusaRequest,
