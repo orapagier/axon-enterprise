@@ -161,6 +161,7 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     category?: string
     unit?: string
     price?: number
+    quantity?: number
     currency_code?: string
     harvest_date?: string
     status?: string
