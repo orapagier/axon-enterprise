@@ -524,9 +524,9 @@ export default function SellerListingForm({ mode, existing }: Props) {
                         }`}
                       />
                     )}
-                    {f.suffix && (
+                    {suffix && (
                       <span className="pr-4 pl-1 text-grey-50 font-semibold">
-                        {f.suffix}
+                        {suffix}
                       </span>
                     )}
                     {f.suggestions && (
