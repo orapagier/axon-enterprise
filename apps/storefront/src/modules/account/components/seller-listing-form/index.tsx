@@ -345,16 +345,35 @@ export default function SellerListingForm({ mode, existing }: Props) {
         </div>
       </div>
 
-      {/* Hub logistics — every listing commits to a pickup slot */}
+      {/* Sell directly (producer is the seller) vs sell to the hub. Locked
+          after creation — switching tracks would orphan or require a pickup
+          slot reservation. */}
+      <ListingTypeField
+        value={values.listing_type}
+        onChange={(val) =>
+          setValues((v) => ({
+            ...v,
+            listing_type: val,
+            // Hub-intake fields don't apply to direct listings.
+            harvest_date: val === "direct_to_consumer" ? "" : v.harvest_date,
+            pickup_window_id:
+              val === "direct_to_consumer" ? "" : v.pickup_window_id,
+            estimated_kg: val === "direct_to_consumer" ? "" : v.estimated_kg,
+          }))
+        }
+        disabled={mode === "edit" || !isDraft}
+      />
+
+      {/* Hub logistics — sell_to_freshhub commits to a pickup slot */}
       <HarvestDateField
         value={values.harvest_date}
         onChange={(val) => setValues((v) => ({ ...v, harvest_date: val, pickup_window_id: "" }))}
-        visible={true}
+        visible={isSellToHub}
         disabled={!isDraft}
         error={state.fieldErrors?.harvest_date ?? null}
       />
 
-      {hubMissing ? (
+      {hubMissing && isSellToHub ? (
         <div className="px-7 small:px-12 py-5 border-b border-grey-10 bg-grey-5/30">
           <div className="flex items-center justify-between mb-2">
             <span className="text-caption font-semibold text-grey-70 uppercase tracking-[0.06em]">
