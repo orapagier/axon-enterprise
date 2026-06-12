@@ -70,6 +70,7 @@ export default async function RiderDeliveriesPage({ params }: Props) {
 
   // ── Registered but not active ───────────────────────────────────────────
   if (session.rider.status === "pending") {
+    const gcash = MEMBERSHIP_PAYOUT.gcash
     return (
       <div className="bg-white rounded-3xl shadow-soft border border-grey-10/60 p-8 small:p-10 text-center">
         <div className="mx-auto w-14 h-14 rounded-2xl bg-brand-gold-50 border border-brand-gold-200 flex items-center justify-center text-2xl mb-4">
@@ -79,10 +80,34 @@ export default async function RiderDeliveriesPage({ params }: Props) {
           Registration received
         </h1>
         <p className="text-body-sm text-grey-50 mt-2 max-w-md mx-auto leading-relaxed">
-          Your rider account is waiting for hub approval. Pay your{" "}
-          <b className="text-grey-80">cash bond at the {hubLabel} counter</b>{" "}
-          and the dispatcher will activate you — your delivery run sheet then
-          shows up on this page.
+          Your rider account is waiting for hub approval. Settle your{" "}
+          <b className="text-grey-80">cash bond</b> one of two ways — both are
+          verified manually before the dispatcher activates you:
+        </p>
+        <div className="mt-5 max-w-md mx-auto grid grid-cols-1 gap-3 text-left">
+          <div className="rounded-xl bg-grey-5 border border-grey-10 p-4 flex items-start gap-x-3">
+            <span className="text-xl leading-none mt-0.5">💵</span>
+            <div className="text-body-sm text-grey-70 leading-relaxed">
+              <b className="text-grey-90">Cash at the {hubLabel} counter</b> —
+              tell the cashier the email on your FreshHub account.
+            </div>
+          </div>
+          {isPayoutChannelConfigured(gcash) && (
+            <div className="rounded-xl bg-grey-5 border border-grey-10 p-4 flex items-start gap-x-3">
+              <span className="text-xl leading-none mt-0.5">📱</span>
+              <div className="text-body-sm text-grey-70 leading-relaxed">
+                <b className="text-grey-90">
+                  GCash · {gcash.accountNumber} ({gcash.accountName})
+                </b>{" "}
+                — send the bond, then show your reference number to the hub
+                (or keep the receipt for the dispatcher).
+              </div>
+            </div>
+          )}
+        </div>
+        <p className="text-caption text-grey-50 mt-4 max-w-md mx-auto leading-relaxed">
+          Once the hub verifies your payment, your delivery run sheet shows up
+          on this page.
         </p>
       </div>
     )
