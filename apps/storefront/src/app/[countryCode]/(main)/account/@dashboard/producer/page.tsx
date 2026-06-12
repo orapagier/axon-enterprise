@@ -23,9 +23,7 @@ export default async function ProducerDashboardPage({ params }: Props) {
   }
 
   const meta = (customer.metadata ?? {}) as Record<string, unknown>
-  // Accept legacy "seller" value for dev accounts created before the
-  // Consumer/Producer/Trader rename.
-  if (meta.account_type !== "producer" && meta.account_type !== "seller") {
+  if (!hasRole(meta, "producer")) {
     notFound()
   }
 
