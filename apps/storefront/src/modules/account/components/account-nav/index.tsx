@@ -216,18 +216,20 @@ const AccountNav = ({
   const route = usePathname() ?? ""
   const { countryCode } = useParams() as { countryCode: string }
 
-  // Producers get a "My Listings" entry between Overview and Membership.
-  // Legacy "seller" value in metadata is treated as Producer.
-  const storedRole = (customer?.metadata as Record<string, unknown> | null)
-    ?.account_type
-  const isProducer = storedRole === "producer" || storedRole === "seller"
-  const isRider = storedRole === "rider"
+  // Roles stack: a producer-rider sees both "My Listings" and "Deliveries"
+  // right after Overview. "Account types" sits last for adding more roles.
+  const meta = customer?.metadata as Record<string, unknown> | null
+  const roleItems = [
+    ...(hasRole(meta, "producer") ? [PRODUCER_NAV_ITEM] : []),
+    ...(hasRole(meta, "rider") ? [RIDER_NAV_ITEM] : []),
+  ]
 
-  const navItems = isProducer
-    ? [NAV_ITEMS[0], PRODUCER_NAV_ITEM, ...NAV_ITEMS.slice(1)]
-    : isRider
-      ? [NAV_ITEMS[0], RIDER_NAV_ITEM, ...NAV_ITEMS.slice(1)]
-      : NAV_ITEMS
+  const navItems = [
+    NAV_ITEMS[0],
+    ...roleItems,
+    ...NAV_ITEMS.slice(1),
+    ACCOUNT_TYPES_NAV_ITEM,
+  ]
 
   const handleLogout = async () => {
     await signout(countryCode)
