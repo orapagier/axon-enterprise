@@ -27,9 +27,14 @@ export type HubCity = (typeof HUB_CITIES)[number]
  * Mapping from canonical hub city → backend hub slug. Only cities with an
  * active hub at launch resolve to a slug; others return null and the buyer
  * sees a "no hub in your area" message at checkout.
+ *
+ * Each slug must match the live `hub.slug` in the backend exactly — the
+ * barangay combobox fetches /api/hubs/<slug>/barangays with it. Don't map a
+ * city until its hub has barangay fees seeded, or signups there stall on an
+ * empty barangay list.
  */
 const HUB_SLUG_BY_CITY: Partial<Record<HubCity, string>> = {
-  "Tagum City": "tagum",
+  "Tagum City": "tagumcityhub",
 }
 
 /** Resolve a hub slug from a city string. Case-insensitive. */
