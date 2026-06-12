@@ -126,10 +126,10 @@ const RIDER_LINK: MenuLink = {
 
 export default function AccountButton({
   isLoggedIn,
-  accountType,
+  roles = [],
 }: {
   isLoggedIn: boolean
-  accountType?: string
+  roles?: StackableRole[]
 }) {
   const params = useParams()
   const countryCode = (params?.countryCode as string) ?? "ph"
