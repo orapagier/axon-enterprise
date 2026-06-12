@@ -33,7 +33,33 @@
 >   (fee table, service areas). Cross-city barangay/postal hub resolution is
 >   intentionally not built.
 
-> **▶ Current build state (2026-06-10) — read this first if resuming.**
+> **▶ Current build state (2026-06-12) — read this first if resuming.**
+> - **Stackable account roles BUILT + TS-CLEAN + 50/50 unit tests (2026-06-12, founder
+>   call):** account types are no longer exclusive — every customer is a **Consumer
+>   base**, and Producer / Trader / Rider are roles stacked on top via
+>   `customer.metadata.roles` (array; legacy single `account_type` still honoured as a
+>   fallback until a roles array exists — once present, `roles` is authoritative so
+>   downgrades stick). Shared helpers `hasRole`/`rolesOf` live in
+>   `apps/backend/src/lib/roles.ts` + storefront mirror `src/lib/util/roles.ts`; ALL
+>   guards now use them (seller routes ×3, `isTraderAccount`, admin sellers/traders,
+>   producer pages, account/header navs — navs show every role's entry, e.g.
+>   producer-rider sees My Listings + Deliveries). **Rules:** Producer ⊕ Trader
+>   (mutually exclusive, traders buy B2B and never list); Rider combines with either.
+>   **Conversions:** new `/account/account-types` page — add Producer or Trader via
+>   server actions in `src/lib/data/roles.ts` (asks only the missing info; trader lands
+>   `trader_approved=false` → existing admin Traders approval), add Rider via the
+>   existing `/account/rider` registration which now also stamps the rider role
+>   (backend register route). **Yearly fee + 30-day grace:** producer/trader
+>   registration uses the membership_* rail (pay at hub → admin approves; renewal =
+>   same as first registration). `membership-expiry-tick` reworked: active→`grace` at
+>   expiry (`membership_grace_until`=+30d, new `membership-grace` email, perks STAY ON
+>   during grace — `validateProducerEligibility` + `getMembership` accept "grace");
+>   grace→**downgrade** past the window (status=cancelled, producer/trader role
+>   stripped, **producer listings DELETED** (founder call), hub-members +
+>   `traders-<pct>` groups removed, trader approval cleared, reworded
+>   `membership-expired` email). Admin membership approve clears the grace flag.
+>   Migration `migrate-roles.ts` RUN against the dev DB (17 customers seeded).
+>   Storefront + backend `tsc` clean; smoke: `/ph/account/account-types` 200 on dev.
 > - **Phase A (walk-in OTC) is RUNTIME-VERIFIED (2026-06-10):** migrations applied
 >   (`rider` table + `otc_collected` constraint), PH region has COD+OTC attached, and a
 >   live counter sale created a **paid** order (₱200), recorded `otc_collected`, stayed
