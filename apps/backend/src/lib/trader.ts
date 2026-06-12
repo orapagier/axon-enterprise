@@ -35,7 +35,7 @@ export function isValidTraderDiscount(pct: unknown): pct is number {
 }
 
 export function isTraderAccount(meta: Record<string, unknown>): boolean {
-  return meta.account_type === "trader"
+  return hasRole(meta, "trader")
 }
 
 /**
