@@ -5,6 +5,10 @@ import {
   updateProductsWorkflow,
 } from "@medusajs/medusa/core-flows"
 import { hasRole } from "../../../../../lib/roles"
+import {
+  getVariantStock,
+  setVariantStock,
+} from "../../../../../lib/listing-stock"
 import { LISTING_MODULE } from "../../../../../modules/listing"
 import ListingModuleService from "../../../../../modules/listing/service"
 import {
