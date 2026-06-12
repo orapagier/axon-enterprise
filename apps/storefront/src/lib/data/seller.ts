@@ -176,6 +176,7 @@ function parseListing(
       category: category || undefined,
       unit,
       price,
+      quantity: !isSellToHub && quantityRaw ? quantity : undefined,
       currency_code: "php",
       listing_type: listingType,
       harvest_date: (isSellToHub && harvestDate) || undefined,
