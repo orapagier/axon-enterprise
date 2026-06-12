@@ -1,16 +1,16 @@
 # Graph Report - freshhub  (2026-06-12)
 
 ## Corpus Check
-- 510 files · ~227,439 words
+- 510 files · ~227,483 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2721 nodes · 3650 edges · 273 communities (215 shown, 58 thin omitted)
+- 2721 nodes · 3650 edges · 274 communities (216 shown, 58 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 36 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f2081229`
+- Built from commit: `d0712e85`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -203,6 +203,7 @@
 - [[_COMMUNITY_Community 248|Community 248]]
 - [[_COMMUNITY_Community 249|Community 249]]
 - [[_COMMUNITY_Community 250|Community 250]]
+- [[_COMMUNITY_Community 251|Community 251]]
 - [[_COMMUNITY_Community 253|Community 253]]
 - [[_COMMUNITY_Community 254|Community 254]]
 - [[_COMMUNITY_Community 255|Community 255]]
@@ -252,7 +253,7 @@
 - **MedusaContainer Dependency Injection Consumers** — api_readme, subscribers_readme, jobs_readme, freshhub_dependency_injection [EXTRACTED 1.00]
 - **Workflow Execution Contexts** — workflows_readme, api_readme, subscribers_readme, jobs_readme [EXTRACTED 1.00]
 
-## Communities (273 total, 58 thin omitted)
+## Communities (274 total, 58 thin omitted)
 
 ### Community 0 - "Backend Type System"
 Cohesion: 0.01
@@ -719,8 +720,8 @@ Cohesion: 0.4
 Nodes (5): 5. Store API, `apps/backend/src/api/store/hubs/route.ts`, `apps/backend/src/api/store/hubs/[slug]/route.ts`, code:ts (import { MedusaRequest, MedusaResponse } from "@medusajs/fra), code:ts (import { MedusaRequest, MedusaResponse } from "@medusajs/fra)
 
 ### Community 216 - "Community 216"
-Cohesion: 0.1
-Nodes (21): 10. Rider PWA Pages, 11. Admin Dashboard Extensions, 13. Notifications & Events, 14. Environment Variables, 1. Project Overview, 9. Storefront Pages, code:block19 (/                                   # Homepage: hub-specific), code:block20 (/                                   # Redirect: /orders if l) (+13 more)
+Cohesion: 0.12
+Nodes (17): 10. Rider PWA Pages, 11. Admin Dashboard Extensions, 13. Notifications & Events, 14. Environment Variables, 9. Storefront Pages, code:block19 (/                                   # Homepage: hub-specific), code:block20 (/                                   # Redirect: /orders if l), code:js (// next.config.js) (+9 more)
 
 ### Community 217 - "Community 217"
 Cohesion: 0.38
@@ -781,6 +782,10 @@ Nodes (11): 10. Glossary, 1. Project context, 2. Sealed business decisions (do n
 ### Community 250 - "Community 250"
 Cohesion: 0.4
 Nodes (3): AGING_DAYS, config, LIMIT_CENTAVOS
+
+### Community 251 - "Community 251"
+Cohesion: 0.5
+Nodes (4): 1. Project Overview, Multi-Hub Model, Two Fulfillment Modes, User Roles Summary
 
 ### Community 253 - "Community 253"
 Cohesion: 0.17

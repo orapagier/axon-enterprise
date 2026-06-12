@@ -15,14 +15,17 @@ export default async function seedHubs({ container }: ExecArgs) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const hubService: HubModuleService = container.resolve(HUB_MODULE)
 
-  const existing = await hubService.listHubs({ slug: "tagum" }, { take: 1 })
+  const existing = await hubService.listHubs(
+    { slug: "tagumcityhub" },
+    { take: 1 }
+  )
   let hub = existing[0]
 
   if (!hub) {
     hub = await hubService.createHubs({
       name: "Tagum City Hub",
-      slug: "tagum",
-      city: "Tagum",
+      slug: "tagumcityhub",
+      city: "Tagum City",
       province: "Davao del Norte",
       country: "ph",
       timezone: "Asia/Manila",
