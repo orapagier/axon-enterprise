@@ -123,6 +123,9 @@ function parseListing(
   const pickupWindowId = get("pickup_window_id")
   const estimatedKgRaw = get("estimated_kg")
   const estimatedKg = Number(estimatedKgRaw)
+  const quantityRaw = get("quantity")
+  const quantity = Number(quantityRaw)
+  const minQuantity = opts.minQuantity ?? 1
 
   if (!title || title.length < 2) {
     fieldErrors.title = "Title must be at least 2 characters."
