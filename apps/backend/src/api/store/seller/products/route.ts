@@ -457,6 +457,12 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
+  // Direct listings don't pass through hub intake — no slot to reserve.
+  if (isDirect) {
+    res.status(201).json({ product, listing })
+    return
+  }
+
   // Reserve the pickup slot + link it to the listing. The workflow runs the
   // reservation under a per-window lock (so concurrent submissions can't
   // overcommit capacity) and self-compensates its slot/capacity/link work if
@@ -465,9 +471,9 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     await reservePickupSlotWorkflow(req.scope).run({
       input: {
         listing_id: listing.id,
-        pickup_window_id: body.pickup_window_id,
-        harvest_date: harvestDate,
-        estimated_kg: body.estimated_kg,
+        pickup_window_id: body.pickup_window_id!,
+        harvest_date: harvestDate!,
+        estimated_kg: body.estimated_kg!,
       },
     })
   } catch (err) {
