@@ -24,7 +24,12 @@ export type ValidationResult = {
 export function validateProducerEligibility(meta: Record<string, unknown>): ValidationResult {
   const errors: ValidationError[] = []
 
-  if (meta.membership_status !== "active") {
+  // "grace" = registration lapsed but inside the 30-day renewal window —
+  // perks stay on until the nightly job downgrades the account.
+  if (
+    meta.membership_status !== "active" &&
+    meta.membership_status !== "grace"
+  ) {
     errors.push({
       field: "membership",
       message: "An active Premium membership is required to create listings.",
