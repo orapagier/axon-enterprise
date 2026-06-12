@@ -33,9 +33,11 @@ export default async function RiderDeliveriesPage({ params }: Props) {
   const meta = (customer.metadata ?? {}) as Record<string, unknown>
   const session = await getRiderSession()
 
-  // Reachable by rider-typed accounts, and by any account the hub admin
-  // registered as a rider (matched on email) even if its account_type drifted.
-  if (meta.account_type !== "rider" && !session.rider) {
+  // Reachable by accounts with the rider role, by any account the hub admin
+  // registered as a rider (matched on email) even if its metadata drifted,
+  // and by anyone arriving from "Account types" to register as a rider.
+  const wantsToRegister = !session.rider
+  if (!hasRole(meta, "rider") && !session.rider && !wantsToRegister) {
     notFound()
   }
 
