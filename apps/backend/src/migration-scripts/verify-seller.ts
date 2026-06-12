@@ -9,6 +9,7 @@
  */
 import { ExecArgs } from "@medusajs/framework/types"
 import { Modules } from "@medusajs/framework/utils"
+import { hasRole } from "../lib/roles"
 
 export default async function verifySeller({ container, args }: ExecArgs) {
   const customerModule = container.resolve(Modules.CUSTOMER)
