@@ -416,9 +416,9 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   let listing
   try {
     listing = await listingService.createProductListings({
-      listing_type: "sell_to_freshhub",
-      harvest_date: new Date(harvestDate),
-      pickup_window_id: body.pickup_window_id,
+      listing_type: listingType,
+      harvest_date: harvestDate ? new Date(harvestDate) : null,
+      pickup_window_id: isDirect ? null : body.pickup_window_id,
       status: "active",
     })
 
