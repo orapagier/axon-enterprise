@@ -17,7 +17,7 @@ export default async function NewListingPage({ params }: Props) {
   if (!customer) redirect(`/${countryCode}/account`)
 
   const meta = (customer.metadata ?? {}) as Record<string, unknown>
-  if (meta.account_type !== "producer" && meta.account_type !== "seller") notFound()
+  if (!hasRole(meta, "producer")) notFound()
   if (!meta.profile_completed) redirect(`/${countryCode}/onboarding`)
 
   return <SellerListingForm mode="create" />
