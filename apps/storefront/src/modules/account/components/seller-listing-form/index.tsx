@@ -87,6 +87,16 @@ const FIELDS: FieldDef[] = [
     suggestions: ["kg", "piece", "bundle", "tray", "sack"],
   },
   {
+    // Direct listings only — hub listings get stock set at approval.
+    name: "quantity",
+    label: "Available stock",
+    placeholder: "50",
+    type: "number",
+    required: true,
+    helper:
+      "How much you can sell right now. Buyers see what's left, and every order counts it down automatically.",
+  },
+  {
     name: "description",
     label: "Description",
     placeholder:
