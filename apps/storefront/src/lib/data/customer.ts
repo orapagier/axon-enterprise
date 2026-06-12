@@ -462,7 +462,8 @@ export async function requestMembership(
       [MEMBERSHIP_META.status]: "pending",
       [MEMBERSHIP_META.requestedAt]: Date.now(),
       [MEMBERSHIP_META.paymentMethod]: paymentMethod,
-      [MEMBERSHIP_META.paymentReference]: paymentReference,
+      [MEMBERSHIP_META.paymentReference]:
+        paymentMethod === "otc" ? null : paymentReference,
     },
   })
 
