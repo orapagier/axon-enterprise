@@ -440,6 +440,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     res.status(500).json({ error: "Product creation failed." })
     return
   }
+  // Plain const so the unwind closure below keeps the narrowed string type.
+  const productId = product.id
 
   const listingService: ListingModuleService = req.scope.resolve(LISTING_MODULE)
   const link = req.scope.resolve(ContainerRegistrationKeys.LINK)
