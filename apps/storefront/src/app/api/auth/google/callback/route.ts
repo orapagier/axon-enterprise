@@ -9,6 +9,16 @@ import {
   GAUTH_COOKIE,
   type GoogleAuthPending,
 } from "@lib/auth/google-oauth"
+import {
+  PENDING_AUTH_TTL_SECONDS,
+  hashCode,
+  generateCode,
+  setPendingAuth,
+  clearPendingAuth,
+  readThrottle,
+  writeThrottle,
+} from "@lib/auth/pending-auth"
+import { sendOtpEmail } from "@lib/email/send-otp"
 import { getAuthHeaders, getCacheTag, setAuthToken } from "@lib/data/cookies"
 import { retrieveCustomer, transferCart } from "@lib/data/customer"
 import {
