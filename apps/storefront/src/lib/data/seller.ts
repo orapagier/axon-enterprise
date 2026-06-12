@@ -292,6 +292,10 @@ export async function updateListing(
 
   const tag = await getCacheTag("seller-listings")
   if (tag) revalidateTag(tag)
+  // Stock/price edits change what buyers see on the shop grid, which is
+  // cached under the "products" tag.
+  const productsTag = await getCacheTag("products")
+  if (productsTag) revalidateTag(productsTag)
 
   const countryCode = String(formData.get("countryCode") ?? "ph")
   redirect(`/${countryCode}/account/producer`)
