@@ -11,6 +11,7 @@ import { useParams } from "next/navigation"
 import { Fragment, useTransition } from "react"
 
 import { signout } from "@lib/data/customer"
+import type { StackableRole } from "@lib/util/roles"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 const UserIcon = () => (
