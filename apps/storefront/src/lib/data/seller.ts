@@ -26,6 +26,8 @@ export type SellerListing = {
     sku: string | null
     prices: Array<{ amount: number; currency_code: string }>
   }>
+  /** On-hand stock for direct listings; null when inventory isn't tracked. */
+  stock_quantity?: number | null
   listing?: {
     id: string
     listing_type: string
