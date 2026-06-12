@@ -89,6 +89,17 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     notes: null,
   })
 
+  // Stack the rider role onto the customer (roles model: rider rides on the
+  // consumer base, alongside producer or trader) so the account nav and
+  // Deliveries page light up on the next render.
+  const meta = (customer.metadata as Record<string, unknown> | null) ?? {}
+  const roles = rolesOf(meta)
+  if (!roles.includes("rider")) {
+    await customers.updateCustomers(customerId, {
+      metadata: { ...meta, roles: [...roles, "rider"] },
+    })
+  }
+
   res.status(201).json({
     rider: {
       id: rider.id,
