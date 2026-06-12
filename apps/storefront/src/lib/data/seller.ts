@@ -138,6 +138,22 @@ function parseListing(
   if (thumbnail && !/^https?:\/\//.test(thumbnail)) {
     fieldErrors.thumbnail = "Thumbnail must be a full https:// URL."
   }
+  // Direct listings carry real stock — buyers see what's left and orders
+  // deduct it. Hub listings get their stock set by the hub at approval.
+  if (!isSellToHub) {
+    if (!quantityRaw) {
+      fieldErrors.quantity = "Available stock is required."
+    } else if (
+      Number.isNaN(quantity) ||
+      !Number.isInteger(quantity) ||
+      quantity < minQuantity
+    ) {
+      fieldErrors.quantity =
+        minQuantity > 0
+          ? "Enter a whole number of at least 1."
+          : "Enter a whole number (0 or more)."
+    }
+  }
   // Hub-intake fields only apply when the harvest goes through the hub.
   if (isSellToHub && opts.requireHubFields) {
     if (!harvestDate) {
