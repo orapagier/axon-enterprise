@@ -127,6 +127,15 @@ const AuthCard = ({
     }
   }, [requestState])
 
+  // Landed directly on the code step (Google-started signup): focus the
+  // first digit box.
+  useEffect(() => {
+    if (pendingOtp) {
+      setTimeout(() => codeInputs.current[0]?.focus(), 50)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   useEffect(() => {
     if (resendCooldown <= 0) return
     const t = setTimeout(() => setResendCooldown((s) => s - 1), 1000)
