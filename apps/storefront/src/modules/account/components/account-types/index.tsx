@@ -473,6 +473,19 @@ export default function AccountTypesPanel({
         )}
       </Card>
 
+      {/* Yearly registration payment — the missing step between adding a
+          Producer/Trader role and the hub activating it. */}
+      {paymentDue && !registrationPending && (
+        <section id="registration-payment" className="scroll-mt-24">
+          <MembershipRequestForm
+            heading={`Pay your ₱${MEMBERSHIP_FEE_PHP} yearly registration`}
+            subheading={`Your ${
+              isProducer ? "Producer" : "Trader"
+            } profile is saved — it activates once this payment is verified. Pay in cash at your hub counter or via GCash, then submit below for manual verification.`}
+          />
+        </section>
+      )}
+
       {/* Rider */}
       <Card
         icon={ROLE_ICONS.rider}
