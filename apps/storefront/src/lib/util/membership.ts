@@ -138,10 +138,17 @@ export type MembershipPayoutChannel = {
 }
 
 export const MEMBERSHIP_PAYOUT: Record<MembershipPaymentMethod, MembershipPayoutChannel> = {
+  otc: {
+    label: "Cash at the hub counter",
+    accountName: "Any FreshHub counter",
+    accountNumber: "—",
+    note: "Tell the cashier the email on your FreshHub account so they can match your payment.",
+  },
   gcash: {
     label: "GCash",
-    accountName: "",
-    accountNumber: "",
+    accountName: "Jelmar Orapa",
+    accountNumber: "09631225067",
+    note: "Account is held by the Fresh Hub CTO. Send the exact amount, then paste the 13-digit reference below.",
   },
   bank: {
     label: "Bank transfer",
@@ -154,3 +161,9 @@ export const MEMBERSHIP_PAYOUT: Record<MembershipPaymentMethod, MembershipPayout
 export const isPayoutChannelConfigured = (
   channel: MembershipPayoutChannel
 ): boolean => channel.accountNumber.trim().length > 0
+
+// OTC cash is verified at the counter by account email — no receipt
+// reference exists to paste, so the form must not require one.
+export const methodNeedsReference = (
+  method: MembershipPaymentMethod
+): boolean => method !== "otc"
