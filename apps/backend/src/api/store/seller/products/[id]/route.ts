@@ -109,6 +109,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     listing: listing
       ? {
           id: listing.id,
+          listing_type: listing.listing_type,
           harvest_date: listing.harvest_date,
           status: listing.status,
           pickup_window_id: listing.pickup_window_id ?? null,
