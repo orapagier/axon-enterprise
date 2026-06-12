@@ -6,6 +6,19 @@ type ProductInfoProps = {
 }
 
 const ProductInfo = ({ product }: ProductInfoProps) => {
+  const meta = (product.metadata ?? {}) as Record<string, unknown>
+  const sellingMode =
+    typeof meta.selling_mode === "string" ? meta.selling_mode : null
+  const isDirect = sellingMode === "direct_to_consumer"
+  const sellerName =
+    typeof meta.seller_name === "string" && meta.seller_name.trim()
+      ? meta.seller_name
+      : null
+  const hubName =
+    typeof meta.hub_name === "string" && meta.hub_name.trim()
+      ? meta.hub_name
+      : null
+
   return (
     <div id="product-info">
       <div className="flex flex-col gap-y-4">
