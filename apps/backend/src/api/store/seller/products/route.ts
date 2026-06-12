@@ -44,7 +44,7 @@ async function assertSeller(
 
   const customerModule = req.scope.resolve(Modules.CUSTOMER)
   const customer = (await customerModule.retrieveCustomer(customerId, {
-    select: ["id", "metadata"],
+    select: ["id", "first_name", "last_name", "company_name", "metadata"],
   })) as StoreCustomer | null
 
   if (!customer) {
