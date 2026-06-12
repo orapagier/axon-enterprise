@@ -58,19 +58,12 @@ export async function completeOnboarding(
     return { ok: false, error: "You need to be signed in to continue." }
   }
 
-  // Read the stored account type and migrate legacy values on the fly so
-  // dev accounts created before the CPT rename still work.
-  type RoleStored = "consumer" | "producer" | "trader" | "rider" | "buyer" | "seller"
-  const rawRole = customer.metadata?.account_type as RoleStored | undefined
-  const role: "consumer" | "producer" | "trader" | "rider" =
-    rawRole === "seller"
-      ? "producer"
-      : rawRole === "buyer"
-        ? "consumer"
-        : (rawRole ?? "consumer")
-  const isProducer = role === "producer"
-  const isTrader = role === "trader"
-  const isRider = role === "rider"
+  // Roles stack; onboarding collects the profile for the most demanding one
+  // (producer > trader > consumer base). rolesOf() handles legacy
+  // single-account_type values, including pre-CPT "buyer"/"seller".
+  const roles = rolesOf(customer.metadata as Record<string, unknown> | null)
+  const isProducer = roles.includes("producer")
+  const isTrader = !isProducer && roles.includes("trader")
   const countryCode = String(formData.get("countryCode") ?? "ph")
   const fieldErrors: Record<string, string> = {}
 
