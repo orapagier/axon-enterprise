@@ -294,9 +294,9 @@ export default function AccountTypesPanel({
           <>
             <p>
               Sell your harvest through the hub. After adding your farm
-              details, pay the yearly registration at the hub counter — the
-              hub activates and verifies you before your first listing goes
-              live.
+              details, pay the yearly registration in cash at the hub counter
+              or via GCash — the hub verifies the payment and activates you
+              before your first listing goes live.
             </p>
             {addButton("Become a Producer", "producer")}
             {openForm === "producer" && (
