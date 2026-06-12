@@ -1,14 +1,25 @@
 /**
- * Nightly membership lifecycle (Phases B + C).
+ * Nightly membership / yearly-registration lifecycle (Phases B + C, extended
+ * for the stackable-roles model).
  *
- * For every customer with membership_status=active:
- *   - past membership_expires_at  → status=cancelled, removed from the
- *     `hub-members` group, "membership-expired" email. (Until now the expiry
- *     date was stored but never enforced — members kept perks forever.)
- *   - ≤7 days left   → "membership-expiring" email, once
- *     (membership_reminder_7_sent).
- *   - ≤30 days left  → "membership-expiring" email, once
- *     (membership_reminder_30_sent).
+ * The Producer and Trader roles ride on a yearly registration fee tracked by
+ * the membership_* metadata keys (pay at hub → admin approves). Lifecycle for
+ * every customer:
+ *
+ *   status=active:
+ *     - ≤30 days left → "membership-expiring" email, once
+ *       (membership_reminder_30_sent); same at ≤7 days.
+ *     - past membership_expires_at → status=grace with a 30-day window
+ *       (membership_grace_until), "membership-grace" email. Perks stay on
+ *       during grace — the member keeps 30 days to pay at the hub counter.
+ *   status=grace:
+ *     - past membership_grace_until → DOWNGRADE: status=cancelled, the
+ *       Producer/Trader role is stripped back to the Consumer base,
+ *       producer listings are deleted, trader discount group/approval is
+ *       removed, hub-members group membership is removed,
+ *       "membership-expired" email. Re-upgrading later is the normal
+ *       conversion flow (Account types page) + paying at the hub again.
+ *
  * Reminder flags are re-armed on the next approval (admin memberships route).
  *
  * Run on-demand with:
@@ -16,7 +27,12 @@
  */
 import type { MedusaContainer } from "@medusajs/framework/types"
 import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
+import { deleteProductsWorkflow } from "@medusajs/medusa/core-flows"
 import { sendEmail } from "../lib/notify"
+import { rolesOf } from "../lib/roles"
+import { syncTraderGroupMembership } from "../lib/trader"
+import { LISTING_MODULE } from "../modules/listing"
+import type ListingModuleService from "../modules/listing/service"
 
 export const config = {
   name: "membership-expiry-tick",
@@ -24,10 +40,12 @@ export const config = {
 }
 
 const DAY_MS = 24 * 60 * 60 * 1000
+const GRACE_DAYS = 30
 const HUB_MEMBER_GROUP = "hub-members"
 
 export type MembershipTransition =
-  | { kind: "expire" }
+  | { kind: "grace"; grace_until: number }
+  | { kind: "downgrade" }
   | { kind: "remind"; window: 30 | 7; days_left: number }
   | { kind: "none" }
 
@@ -36,11 +54,27 @@ export function resolveMembershipTransition(
   meta: Record<string, unknown>,
   nowMs: number
 ): MembershipTransition {
-  if (meta.membership_status !== "active") return { kind: "none" }
   const expiresAt = Number(meta.membership_expires_at)
+
+  if (meta.membership_status === "grace") {
+    // Pre-grace-window records may lack the explicit deadline — derive it.
+    const stored = Number(meta.membership_grace_until)
+    const graceUntil =
+      Number.isFinite(stored) && stored > 0
+        ? stored
+        : Number.isFinite(expiresAt) && expiresAt > 0
+          ? expiresAt + GRACE_DAYS * DAY_MS
+          : 0
+    if (graceUntil > 0 && graceUntil <= nowMs) return { kind: "downgrade" }
+    return { kind: "none" }
+  }
+
+  if (meta.membership_status !== "active") return { kind: "none" }
   if (!Number.isFinite(expiresAt) || expiresAt <= 0) return { kind: "none" }
 
-  if (expiresAt <= nowMs) return { kind: "expire" }
+  if (expiresAt <= nowMs) {
+    return { kind: "grace", grace_until: expiresAt + GRACE_DAYS * DAY_MS }
+  }
 
   const daysLeft = Math.ceil((expiresAt - nowMs) / DAY_MS)
   if (daysLeft <= 7 && !meta.membership_reminder_7_sent) {
@@ -50,6 +84,57 @@ export function resolveMembershipTransition(
     return { kind: "remind", window: 30, days_left: daysLeft }
   }
   return { kind: "none" }
+}
+
+/**
+ * Delete every product the producer listed (founder call: downgrade deletes
+ * listings — re-registering starts a fresh catalog). Products carry their
+ * seller in metadata.seller_customer_id, so this pages through the catalog
+ * the same way GET /store/seller/products does.
+ */
+async function deleteProducerListings(
+  container: MedusaContainer,
+  customerId: string
+): Promise<number> {
+  const query = container.resolve(ContainerRegistrationKeys.QUERY)
+
+  const PAGE_SIZE = 200
+  const MAX_PAGES = 50
+  const productIds: string[] = []
+  const listingIds: string[] = []
+
+  for (let page = 0; page < MAX_PAGES; page++) {
+    const { data } = await query.graph({
+      entity: "product",
+      fields: ["id", "metadata", "product_listing.id"],
+      pagination: { take: PAGE_SIZE, skip: page * PAGE_SIZE },
+    })
+    const batch = (data ?? []) as {
+      id: string
+      metadata?: Record<string, unknown> | null
+      product_listing?: { id?: string } | { id?: string }[] | null
+    }[]
+    for (const p of batch) {
+      if (p.metadata?.seller_customer_id !== customerId) continue
+      productIds.push(p.id)
+      const raw = p.product_listing
+      const listing = Array.isArray(raw) ? raw[0] : raw
+      if (listing?.id) listingIds.push(listing.id)
+    }
+    if (batch.length < PAGE_SIZE) break
+  }
+
+  if (listingIds.length) {
+    const listingService: ListingModuleService =
+      container.resolve(LISTING_MODULE)
+    await listingService.deleteProductListings(listingIds).catch(() => {})
+  }
+  if (productIds.length) {
+    await deleteProductsWorkflow(container).run({
+      input: { ids: productIds },
+    })
+  }
+  return productIds.length
 }
 
 export default async function membershipExpiryTick(
@@ -73,7 +158,8 @@ export default async function membershipExpiryTick(
   )
 
   const now = Date.now()
-  let expired = 0
+  let graced = 0
+  let downgraded = 0
   let reminded = 0
 
   for (const customer of customers) {
@@ -81,20 +167,69 @@ export default async function membershipExpiryTick(
     const transition = resolveMembershipTransition(meta, now)
     if (transition.kind === "none") continue
 
-    if (transition.kind === "expire") {
-      const events = Array.isArray(meta.membership_events)
-        ? (meta.membership_events as unknown[])
-        : []
+    const events = Array.isArray(meta.membership_events)
+      ? (meta.membership_events as unknown[])
+      : []
+
+    if (transition.kind === "grace") {
+      await customerModule.updateCustomers(customer.id, {
+        metadata: {
+          ...meta,
+          membership_status: "grace",
+          membership_grace_until: transition.grace_until,
+          membership_events: [
+            {
+              ts: now,
+              action: "grace",
+              actor_id: "system:membership-expiry-tick",
+              prev_status: "active",
+            },
+            ...events,
+          ].slice(0, 20),
+        },
+      })
+
+      await sendEmail(container, {
+        to: customer.email,
+        template: "membership-grace",
+        data: { grace_until_ms: transition.grace_until },
+      })
+      graced++
+      logger.info(
+        `Membership lapsed for customer ${customer.id} — 30-day grace started.`
+      )
+      continue
+    }
+
+    if (transition.kind === "downgrade") {
+      const roles = rolesOf(meta)
+      const removedRoles = roles.filter(
+        (r) => r === "producer" || r === "trader"
+      )
+      const keptRoles = roles.filter(
+        (r) => r !== "producer" && r !== "trader"
+      )
+
       await customerModule.updateCustomers(customer.id, {
         metadata: {
           ...meta,
           membership_status: "cancelled",
+          membership_grace_until: null,
+          roles: keptRoles,
+          ...(removedRoles.includes("trader")
+            ? {
+                trader_approved: false,
+                trader_discount_percent: null,
+                trader_min_order_note: null,
+              }
+            : {}),
           membership_events: [
             {
               ts: now,
-              action: "cancel",
+              action: "downgrade",
               actor_id: "system:membership-expiry-tick",
-              prev_status: "active",
+              prev_status: "grace",
+              removed_roles: removedRoles,
             },
             ...events,
           ].slice(0, 20),
@@ -117,13 +252,37 @@ export default async function membershipExpiryTick(
         // metadata is the source of truth; group sync is best-effort
       }
 
+      if (removedRoles.includes("trader")) {
+        // Out of the traders-<pct> group → the automatic discount stops.
+        await syncTraderGroupMembership(container, customer.id, null).catch(
+          () => {}
+        )
+      }
+
+      if (removedRoles.includes("producer")) {
+        try {
+          const deleted = await deleteProducerListings(container, customer.id)
+          if (deleted > 0) {
+            logger.info(
+              `Deleted ${deleted} listing(s) for downgraded producer ${customer.id}.`
+            )
+          }
+        } catch (err) {
+          logger.error(
+            `Listing cleanup failed for downgraded producer ${customer.id}: ${err}`
+          )
+        }
+      }
+
       await sendEmail(container, {
         to: customer.email,
         template: "membership-expired",
-        data: {},
+        data: { removed_roles: removedRoles },
       })
-      expired++
-      logger.info(`Membership expired for customer ${customer.id}.`)
+      downgraded++
+      logger.info(
+        `Membership grace ended for customer ${customer.id} — downgraded to consumer (removed: ${removedRoles.join(", ") || "none"}).`
+      )
       continue
     }
 
@@ -149,6 +308,6 @@ export default async function membershipExpiryTick(
   }
 
   logger.info(
-    `membership-expiry-tick finished: ${expired} expired, ${reminded} reminder(s) sent.`
+    `membership-expiry-tick finished: ${graced} grace started, ${downgraded} downgraded, ${reminded} reminder(s) sent.`
   )
 }
