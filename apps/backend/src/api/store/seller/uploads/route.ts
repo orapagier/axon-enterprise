@@ -1,6 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
 import { uploadFilesWorkflow } from "@medusajs/medusa/core-flows"
+import { hasRole } from "../../../../lib/roles"
 
 /**
  * POST /store/seller/uploads
