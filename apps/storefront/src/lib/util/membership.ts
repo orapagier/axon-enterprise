@@ -15,11 +15,14 @@ export const MEMBERSHIP_META = {
   expiresAt: "membership_expires_at", // unix ms; renewal cutoff
   points: "membership_points", // integer, redeemable as credit
   requestedAt: "membership_requested_at", // unix ms; when the user submitted payment proof
-  paymentMethod: "membership_payment_method", // "gcash" | "bank"
-  paymentReference: "membership_payment_reference", // free-text ref the user pasted from their GCash/bank receipt
+  paymentMethod: "membership_payment_method", // "otc" | "gcash" | "bank"
+  paymentReference: "membership_payment_reference", // free-text ref the user pasted from their GCash/bank receipt; empty for OTC cash
 } as const
 
-export type MembershipPaymentMethod = "gcash" | "bank"
+// "otc" = walk-in cash at the hub counter (no reference number — the cashier
+// matches the payer by account email). "bank" is kept for back-compat with
+// requests submitted before OTC replaced it as the offline option.
+export type MembershipPaymentMethod = "otc" | "gcash" | "bank"
 
 export type MembershipStatus = {
   isMember: boolean
