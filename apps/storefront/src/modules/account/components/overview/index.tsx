@@ -1,6 +1,7 @@
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import AccountStatusBanner from "@modules/account/components/account-status-banner"
 import { convertToLocale } from "@lib/util/money"
+import { hasRole } from "@lib/util/roles"
 import { HttpTypes } from "@medusajs/types"
 
 type OverviewProps = {
