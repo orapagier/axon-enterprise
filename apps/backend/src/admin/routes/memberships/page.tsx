@@ -48,7 +48,7 @@ type Membership = {
     joinedAt: number | null
     expiresAt: number | null
     requestedAt: number | null
-    paymentMethod: "gcash" | "bank" | null
+    paymentMethod: "otc" | "gcash" | "bank" | null
     paymentReference: string | null
     lastEvent: MembershipEvent | null
   }
