@@ -6,6 +6,8 @@ type LoginTemplateProps = {
   currentHubSlug?: string | null
   googleEnabled?: boolean
   googleError?: string | null
+  pendingOtp?: { email: string; role?: string; hub?: string } | null
+  pendingDevCode?: string | null
 }
 
 const VALUE_PROPS = [
