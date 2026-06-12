@@ -4,6 +4,10 @@ import {
   getRiderSession,
   getRiderSummary,
 } from "@lib/data/rider"
+import {
+  isPayoutChannelConfigured,
+  MEMBERSHIP_PAYOUT,
+} from "@lib/util/membership"
 import { listHubs } from "@modules/hub/data/hubs"
 import RiderDashboard from "@modules/account/components/rider-dashboard"
 import RiderRegisterForm from "@modules/account/components/rider-dashboard/register-form"
