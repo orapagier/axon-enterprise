@@ -178,6 +178,30 @@ export default async function Nav() {
               <span className="w-1 h-1 rounded-full bg-brand-gold-400/70 my-0.5" />
               <span className="w-px h-3 bg-grey-20" />
             </span>
+
+            {/* Shop — always-visible entry into the full catalog */}
+            <LocalizedClientLink
+              href="/store"
+              className="hidden small:inline-flex items-center gap-x-1.5 ml-5 text-[13px] font-semibold text-grey-70 hover:text-brand-green-700 transition-colors"
+              data-testid="nav-shop-link"
+            >
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M3 9l1.2-4.5A2 2 0 0 1 6.13 3h11.74a2 2 0 0 1 1.93 1.5L21 9" />
+                <path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0" />
+                <path d="M5 11.8V21h14v-9.2" />
+                <path d="M9 21v-5h6v5" />
+              </svg>
+              Shop
+            </LocalizedClientLink>
           </div>
 
           {/* Right: Actions */}
