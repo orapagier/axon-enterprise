@@ -247,7 +247,7 @@ export default async function Nav() {
 
             {/* Account — rightmost */}
             <div className="flex items-center ml-1">
-              <AccountButton isLoggedIn={!!customer} accountType={accountType} />
+              <AccountButton isLoggedIn={!!customer} roles={roles} />
             </div>
           </div>
         </nav>
