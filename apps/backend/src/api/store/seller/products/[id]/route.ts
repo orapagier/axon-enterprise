@@ -198,6 +198,32 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     }
   }
 
+  // ----- Stock changes: direct listings only (hub sets stock at approval) -----
+  const isDirect =
+    (existingListing?.listing_type ??
+      (product.metadata as Record<string, unknown> | null)?.selling_mode) ===
+    "direct_to_consumer"
+  const quantity = Number(body.quantity)
+  if (body.quantity !== undefined) {
+    if (!isDirect) {
+      res.status(400).json({
+        error: "Stock for hub-fulfilled listings is set by the hub.",
+        code: "STOCK_NOT_EDITABLE",
+      })
+      return
+    }
+    if (Number.isNaN(quantity) || !Number.isInteger(quantity) || quantity < 0) {
+      res.status(400).json({
+        error: "Available stock must be a whole number (0 or more).",
+        code: "INVALID_QUANTITY",
+        fieldErrors: [
+          { field: "quantity", message: "Enter a whole number (0 or more)." },
+        ],
+      })
+      return
+    }
+  }
+
   // ----- Update product -----
   const mergedMeta = {
     ...((product.metadata as Record<string, unknown> | null) ?? {}),
