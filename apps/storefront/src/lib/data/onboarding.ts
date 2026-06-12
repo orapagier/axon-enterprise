@@ -8,6 +8,7 @@ import { HttpTypes } from "@medusajs/types"
 import { getAuthHeaders, getCacheTag } from "./cookies"
 import { retrieveCustomer } from "./customer"
 import { validatePhone } from "@lib/util/phone"
+import { rolesOf } from "@lib/util/roles"
 import {
   canonicalHubCity,
   hubSlugForCity,
