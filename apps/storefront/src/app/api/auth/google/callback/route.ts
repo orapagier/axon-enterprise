@@ -80,6 +80,10 @@ export async function GET(request: NextRequest) {
           last_name: claims.family_name ?? undefined,
           metadata: {
             account_type: accountType,
+            // Stackable-roles model: consumer is the implied base, the
+            // chosen type is the first stacked role (if any).
+            roles:
+              accountType && accountType !== "consumer" ? [accountType] : [],
             profile_completed: accountType === "rider" ? true : false,
             rider_available: accountType === "rider" ? true : undefined,
             auth_method: "google",
