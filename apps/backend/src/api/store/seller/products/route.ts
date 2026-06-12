@@ -15,6 +15,7 @@ import { PICKUP_MODULE } from "../../../../modules/pickup"
 import PickupModuleService from "../../../../modules/pickup/service"
 import { HUB_MODULE } from "../../../../modules/hub"
 import reservePickupSlotWorkflow from "../../../../workflows/reserve-pickup-slot"
+import { hasRole } from "../../../../lib/roles"
 
 type StoreCustomer = {
   id: string
