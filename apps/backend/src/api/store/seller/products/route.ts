@@ -91,6 +91,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     "variants.prices.amount",
     "variants.prices.currency_code",
     "product_listing.id",
+    "product_listing.listing_type",
     "product_listing.harvest_date",
     "product_listing.status",
     "product_listing.pickup_window_id",
