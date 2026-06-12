@@ -130,7 +130,7 @@ function parseListing(
     fieldErrors.thumbnail = "Thumbnail must be a full https:// URL."
   }
   // Hub-intake fields only apply when the harvest goes through the hub.
-  if (isSellToHub) {
+  if (isSellToHub && opts.requireHubFields) {
     if (!harvestDate) {
       fieldErrors.harvest_date = "Harvest date is required."
     }
