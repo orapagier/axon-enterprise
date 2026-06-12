@@ -362,7 +362,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     [customer.first_name, customer.last_name].filter(Boolean).join(" ").trim() ||
     null
 
-  let result: { id?: string }[] | undefined
+  let result: { id?: string; variants?: { id?: string }[] }[] | undefined
   try {
     const workflowRes = await createProductsWorkflow(req.scope).run({
       input: {
