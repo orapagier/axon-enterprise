@@ -19,6 +19,18 @@ import { MEMBERSHIP_META } from "@lib/util/membership"
 import { setHubCookie, syncCustomerHubFromCookie } from "@modules/hub/actions/set-hub"
 import { sendOtpEmail } from "@lib/email/send-otp"
 import { deriveCustomerSecret } from "@lib/auth/derived-credential"
+import {
+  PENDING_AUTH_TTL_SECONDS,
+  OTP_RESEND_COOLDOWN_MS,
+  OTP_MAX_SENDS_PER_WINDOW,
+  hashCode,
+  generateCode,
+  setPendingAuth,
+  readPendingAuth,
+  clearPendingAuth,
+  readThrottle,
+  writeThrottle,
+} from "@lib/auth/pending-auth"
 
 // Naming follows the founder's initials, "CPT":
 //   Consumer — household buyers ordering for their own kitchen.
