@@ -106,6 +106,8 @@ function parseListing(formData: FormData): {
   const unit = get("unit") || "kg"
   const priceRaw = get("price")
   const price = Number(priceRaw)
+  const listingType = get("listing_type") || "direct_to_consumer"
+  const isSellToHub = listingType === "sell_to_freshhub"
   const harvestDate = get("harvest_date")
   const pickupWindowId = get("pickup_window_id")
   const estimatedKgRaw = get("estimated_kg")
@@ -122,14 +124,17 @@ function parseListing(formData: FormData): {
   if (thumbnail && !/^https?:\/\//.test(thumbnail)) {
     fieldErrors.thumbnail = "Thumbnail must be a full https:// URL."
   }
-  if (!harvestDate) {
-    fieldErrors.harvest_date = "Harvest date is required."
-  }
-  if (!pickupWindowId) {
-    fieldErrors.pickup_window_id = "Pickup window is required."
-  }
-  if (!estimatedKgRaw || Number.isNaN(estimatedKg) || estimatedKg <= 0) {
-    fieldErrors.estimated_kg = "Estimated weight is required."
+  // Hub-intake fields only apply when the harvest goes through the hub.
+  if (isSellToHub) {
+    if (!harvestDate) {
+      fieldErrors.harvest_date = "Harvest date is required."
+    }
+    if (!pickupWindowId) {
+      fieldErrors.pickup_window_id = "Pickup window is required."
+    }
+    if (!estimatedKgRaw || Number.isNaN(estimatedKg) || estimatedKg <= 0) {
+      fieldErrors.estimated_kg = "Estimated weight is required."
+    }
   }
 
   return {
@@ -142,9 +147,10 @@ function parseListing(formData: FormData): {
       unit,
       price,
       currency_code: "php",
-      harvest_date: harvestDate || undefined,
-      pickup_window_id: pickupWindowId || undefined,
-      estimated_kg: estimatedKgRaw ? estimatedKg : undefined,
+      listing_type: listingType,
+      harvest_date: (isSellToHub && harvestDate) || undefined,
+      pickup_window_id: (isSellToHub && pickupWindowId) || undefined,
+      estimated_kg: isSellToHub && estimatedKgRaw ? estimatedKg : undefined,
     },
     fieldErrors,
   }
