@@ -142,9 +142,11 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       [MEMBERSHIP_META.requestedAt]: null,
       [MEMBERSHIP_META.paymentMethod]: null,
       [MEMBERSHIP_META.paymentReference]: null,
-      // Fresh membership term — re-arm the expiry reminder emails (Phase B).
+      // Fresh membership term — re-arm the expiry reminder emails (Phase B)
+      // and clear any 30-day grace window (renewal during grace = approve).
       membership_reminder_30_sent: null,
       membership_reminder_7_sent: null,
+      membership_grace_until: null,
       [MEMBERSHIP_META.events]: appendEvent(existing, event),
     }
   } else if (body.action === "reject") {
