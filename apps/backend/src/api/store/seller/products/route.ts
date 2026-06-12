@@ -496,7 +496,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const unwindCreated = async () => {
     try {
       await link.dismiss({
-        [Modules.PRODUCT]: { product_id: product.id },
+        [Modules.PRODUCT]: { product_id: productId },
         [LISTING_MODULE]: { product_listing_id: listing.id },
       })
     } catch {
@@ -505,7 +505,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     if (hub?.id) {
       try {
         await link.dismiss({
-          [Modules.PRODUCT]: { product_id: product.id },
+          [Modules.PRODUCT]: { product_id: productId },
           [HUB_MODULE]: { hub_id: hub.id },
         })
       } catch {
@@ -514,7 +514,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     }
     await listingService.deleteProductListings(listing.id).catch(() => {})
     await deleteProductsWorkflow(req.scope)
-      .run({ input: { ids: [product.id] } })
+      .run({ input: { ids: [productId] } })
       .catch((e) => console.error("Orphan product cleanup failed:", e))
   }
 
