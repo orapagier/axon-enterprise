@@ -31,6 +31,12 @@ import {
  * user's verified email, then bridges into the same passwordless rail the
  * email-OTP flow uses: a credential derived from the email signs the customer
  * in via Medusa's emailpass provider. One account works across both rails.
+ *
+ * Sign-in to an existing account completes here. New registrations do NOT:
+ * by founder's call every signup must be finished with an emailed OTP, so a
+ * first-time Google signup is parked in the same pending-auth cookie the
+ * email rail uses and redirected to the code-entry step — `verifyEmailCode`
+ * is the only place accounts get created.
  */
 export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams
