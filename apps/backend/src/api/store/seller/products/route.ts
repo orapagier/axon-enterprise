@@ -390,7 +390,9 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
               {
                 title: "Default",
                 sku: undefined,
-                manage_inventory: false,
+                // Direct listings carry real stock (level created below) so
+                // checkout reserves/deducts and buyers see availability.
+                manage_inventory: isDirect,
                 options: { Size: "Default" },
                 prices: [
                   {
