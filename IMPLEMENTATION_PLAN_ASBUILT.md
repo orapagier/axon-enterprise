@@ -34,6 +34,26 @@
 >   intentionally not built.
 
 > **▶ Current build state (2026-06-12) — read this first if resuming.**
+> - **Upgrade payment flow RUNTIME-VERIFIED + test data PURGED (2026-06-12 PM):**
+>   the producer/trader yearly-registration payment rail (OTC cash at the counter
+>   or **GCash 09631225067 / Jelmar Orapa**, both manually verified by an admin)
+>   was exercised end-to-end over live HTTP: customer submitted a GCash reference →
+>   `membership_status=pending` → `/account/account-types` shows **“Verifying
+>   payment”** (no longer a false “Active” — the original bug) → listing creation
+>   422 `MEMBERSHIP_INACTIVE` while pending → admin queue
+>   (`GET /admin/memberships?status=pending`) showed method+reference →
+>   `POST /admin/memberships/:id {action:"approve"}` flipped status to active
+>   (expires +365d) → the same listing POST passed the membership gate. Bank
+>   transfer stays disabled until a receiving account is configured
+>   (`MEMBERSHIP_PAYOUT` in `apps/storefront/src/lib/util/membership.ts`).
+>   **Test-data purge (founder-approved):** `cleanup-test-data.ts`
+>   (migration-scripts, idempotent, run via `medusa exec`) kept only
+>   orapajelmar@gmail.com, funchamheart@gmail.com, escuderohazelmae@gmail.com and
+>   removed 15 test customers (incl. oraparamlej@gmail.com per explicit
+>   instruction), 4 test products + all 5 listing rows, soft-deleted 2 test riders
+>   + 15 test orders, and dropped 2 test admin users + orphan auth identities.
+>   The storefront catalog is now EMPTY (0 live products) until a real producer
+>   lists.
 > - **Stackable account roles BUILT + TS-CLEAN + 50/50 unit tests (2026-06-12, founder
 >   call):** account types are no longer exclusive — every customer is a **Consumer
 >   base**, and Producer / Trader / Rider are roles stacked on top via
