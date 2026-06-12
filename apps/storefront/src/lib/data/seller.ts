@@ -97,7 +97,11 @@ function parseListing(
   formData: FormData,
   // Hub-intake fields (harvest/pickup/kg) are only collected at creation;
   // they're locked after the slot is reserved, so updates skip them.
-  opts: { requireHubFields: boolean } = { requireHubFields: true }
+  // minQuantity: new direct listings need stock to sell (1); edits may zero
+  // out to mark a listing sold out (0).
+  opts: { requireHubFields: boolean; minQuantity?: number } = {
+    requireHubFields: true,
+  }
 ): {
   body: Record<string, unknown>
   fieldErrors: Record<string, string>
