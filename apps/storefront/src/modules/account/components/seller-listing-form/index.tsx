@@ -417,7 +417,7 @@ export default function SellerListingForm({ mode, existing }: Props) {
           windows={pickupWindows}
           loading={pickupLoading}
           error={pickupError}
-          visible={true}
+          visible={isSellToHub}
           disabled={!isDraft}
         />
       )}
@@ -427,7 +427,7 @@ export default function SellerListingForm({ mode, existing }: Props) {
         onChange={(val) =>
           setValues((v) => ({ ...v, estimated_kg: val }))
         }
-        visible={true}
+        visible={isSellToHub}
         disabled={!isDraft}
         error={state.fieldErrors?.estimated_kg ?? null}
       />
