@@ -20,13 +20,12 @@ export default async function Nav() {
     retrieveCustomer(),
   ])
 
-  // Producer/trader accounts (incl. legacy "seller") get a shortcut to post a
-  // new listing without drilling into the account dashboard.
-  const accountType = customer?.metadata?.account_type as string | undefined
-  const isProducer =
-    accountType === "producer" ||
-    accountType === "trader" ||
-    accountType === "seller"
+  // Producers get a shortcut to post a new listing without drilling into the
+  // account dashboard. (Traders buy B2B — they never list, so no shortcut.)
+  const isProducer = hasRole(
+    customer?.metadata as Record<string, unknown> | null,
+    "producer"
+  )
 
   return (
     <div className="sticky top-0 inset-x-0 z-50">
