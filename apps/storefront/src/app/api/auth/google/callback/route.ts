@@ -126,18 +126,43 @@ export async function GET(request: NextRequest) {
       if (pending.mode !== "signup") {
         return fail("no_account")
       }
-      const registerToken = await sdk.auth.register("customer", "emailpass", {
+      // New account: don't register yet. Park the signup in the pending-auth
+      // cookie and email a code — verifyEmailCode creates the account only
+      // after the code checks out, same as the email rail.
+      const code = generateCode()
+      await setPendingAuth({
         email,
-        password: derivedPassword,
+        codeHash: hashCode(code, email),
+        mode: "signup",
+        role: accountType,
+        hub: pending.hub || undefined,
+        authMethod: "google",
+        firstName: claims.given_name,
+        lastName: claims.family_name,
+        expiresAt: Date.now() + PENDING_AUTH_TTL_SECONDS * 1000,
+        attempts: 0,
       })
-      await setAuthToken(registerToken as string)
-      await createCustomerRecord()
-      const loginToken = await sdk.auth.login("customer", "emailpass", {
-        email,
-        password: derivedPassword,
+
+      const delivery = await sendOtpEmail(email, code)
+      if (!delivery.delivered && !delivery.devCode) {
+        await clearPendingAuth()
+        return fail("otp_send_failed")
+      }
+
+      // Count this send in the same per-browser throttle the resend button
+      // uses, so Google-started signups can't sidestep the rate limits.
+      const throttle = await readThrottle()
+      await writeThrottle({
+        windowStart: throttle.windowStart,
+        count: throttle.count + 1,
+        lastSentAt: Date.now(),
       })
-      await setAuthToken(loginToken as string)
-      isNewAccount = true
+
+      const devCodeParam =
+        process.env.NODE_ENV !== "production" && delivery.devCode
+          ? `&gdevcode=${delivery.devCode}`
+          : ""
+      return redirect(`/${countryCode}/account?gverify=1${devCodeParam}`)
     } else {
       // Identity exists but the customer record may be missing if an earlier
       // signup crashed halfway — recreate it so the session isn't bricked.
