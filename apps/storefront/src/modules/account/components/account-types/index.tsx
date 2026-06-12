@@ -6,8 +6,10 @@ import { useActionState } from "react"
 
 import { addProducerRole, addTraderRole, AddRoleState } from "@lib/data/roles"
 import { HUB_CITIES } from "@lib/constants/hub-cities"
+import { MEMBERSHIP_FEE_PHP } from "@lib/util/membership"
 import { ROLE_ICONS, type StackableRole } from "@lib/util/roles"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import MembershipRequestForm from "@modules/account/components/membership-request-form"
 
 type Props = {
   roles: StackableRole[]
