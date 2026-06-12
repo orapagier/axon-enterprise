@@ -50,8 +50,7 @@ async function assertSeller(
   }
 
   const meta = (customer.metadata ?? {}) as Record<string, unknown>
-  // Accept "producer" (new) and legacy "seller" for backward compat.
-  if (meta.account_type !== "producer" && meta.account_type !== "seller") {
+  if (!hasRole(meta, "producer")) {
     res.status(403).json({ error: "Producer account required" })
     return null
   }
