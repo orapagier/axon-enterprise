@@ -570,7 +570,7 @@ const AuthCard = ({
               <span>
                 <span className="font-bold">Dev mode:</span> your code is{" "}
                 <span className="font-mono font-bold tabular-nums text-brand-gold-900">
-                  {requestState.devCode}
+                  {requestState?.devCode ?? pendingDevCode}
                 </span>
               </span>
             </div>
