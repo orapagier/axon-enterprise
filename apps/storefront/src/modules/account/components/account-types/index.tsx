@@ -248,10 +248,11 @@ export default function AccountTypesPanel({
         <p className="text-body-sm text-grey-50 mt-2 max-w-2xl leading-relaxed">
           Everyone on FreshHub is a Consumer. Add Producer, Trader or Rider
           capabilities on top whenever you need them — we only ask for the
-          extra details that role requires. Producer and Trader carry a yearly
-          registration fee paid at your hub; if it lapses for more than 30
-          days, that role is removed automatically and you can re-add it
-          anytime.
+          extra details that role requires. Producer and Trader carry a ₱
+          {MEMBERSHIP_FEE_PHP} yearly registration, payable in cash at your
+          hub counter or via GCash (an admin verifies it manually); if it
+          lapses for more than 30 days, that role is removed automatically
+          and you can re-add it anytime.
         </p>
       </div>
 
