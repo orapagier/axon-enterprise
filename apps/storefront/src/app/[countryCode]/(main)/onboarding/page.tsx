@@ -1,7 +1,8 @@
 import { retrieveCustomer } from "@lib/data/customer"
 import OnboardingForm from "@modules/account/components/onboarding-form"
 import { Metadata } from "next"
-import { notFound, redirect } from "next/navigation"
+import { redirect } from "next/navigation"
+import { rolesOf } from "@lib/util/roles"
 
 export const metadata: Metadata = {
   title: "Complete your profile",
