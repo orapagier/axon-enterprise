@@ -17,13 +17,47 @@ describe("resolveMembershipTransition", () => {
     ).toEqual({ kind: "none" })
   })
 
-  it("expires an active membership past its date", () => {
+  it("starts the 30-day grace window when an active membership lapses", () => {
     expect(
       resolveMembershipTransition(
         { membership_status: "active", membership_expires_at: NOW - 1 },
         NOW
       )
-    ).toEqual({ kind: "expire" })
+    ).toEqual({ kind: "grace", grace_until: NOW - 1 + 30 * DAY_MS })
+  })
+
+  it("holds during grace, downgrades once the window closes", () => {
+    const expiresAt = NOW - 10 * DAY_MS
+    const inGrace = {
+      membership_status: "grace",
+      membership_expires_at: expiresAt,
+      membership_grace_until: expiresAt + 30 * DAY_MS,
+    }
+    expect(resolveMembershipTransition(inGrace, NOW)).toEqual({ kind: "none" })
+    expect(
+      resolveMembershipTransition(inGrace, expiresAt + 30 * DAY_MS)
+    ).toEqual({ kind: "downgrade" })
+  })
+
+  it("derives the grace deadline from expiry when grace_until is missing", () => {
+    expect(
+      resolveMembershipTransition(
+        {
+          membership_status: "grace",
+          membership_expires_at: NOW - 31 * DAY_MS,
+        },
+        NOW
+      )
+    ).toEqual({ kind: "downgrade" })
+    expect(
+      resolveMembershipTransition(
+        {
+          membership_status: "grace",
+          membership_expires_at: NOW - 5 * DAY_MS,
+        },
+        NOW
+      )
+    ).toEqual({ kind: "none" })
   })
 
   it("sends the 30-day reminder once", () => {
