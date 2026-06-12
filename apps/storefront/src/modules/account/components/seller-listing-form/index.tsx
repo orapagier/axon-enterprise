@@ -270,18 +270,20 @@ export default function SellerListingForm({ mode, existing }: Props) {
     handleFiles(e.dataTransfer.files)
   }
 
+  const isSellToHub = values.listing_type === "sell_to_freshhub"
+
   const progressPct = useMemo(() => {
-    // Include the hub-logistics fields in the readiness check — they live
-    // outside FIELDS but are required for every listing.
+    // Hub-logistics fields live outside FIELDS and are only required when the
+    // harvest is committed to a hub pickup slot (sell_to_freshhub).
     const requiredKeys = [
       ...FIELDS.filter((f) => f.required).map((f) => f.name),
-      "harvest_date",
-      "pickup_window_id",
-      "estimated_kg",
+      ...(isSellToHub
+        ? ["harvest_date", "pickup_window_id", "estimated_kg"]
+        : []),
     ]
     const filled = requiredKeys.filter((k) => values[k]?.trim().length).length
     return Math.round((filled / requiredKeys.length) * 100)
-  }, [values])
+  }, [values, isSellToHub])
   const ready = progressPct === 100
 
   const isDraft = values.listing_status === "draft"
