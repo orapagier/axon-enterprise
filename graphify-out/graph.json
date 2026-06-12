@@ -1929,7 +1929,7 @@
       "source_file": "apps/storefront/src/modules/account/components/account-info/index.tsx",
       "source_location": "L19",
       "id": "account_info_index_accountinfo",
-      "community": 269,
+      "community": 119,
       "norm_label": "accountinfo()"
     },
     {
@@ -2289,7 +2289,7 @@
       "source_file": "apps/storefront/src/modules/account/components/profile-name/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_components_profile_name_index_tsx",
-      "community": 119,
+      "community": 173,
       "norm_label": "index.tsx"
     },
     {
@@ -2298,7 +2298,7 @@
       "source_file": "apps/storefront/src/modules/account/components/profile-name/index.tsx",
       "source_location": "L11",
       "id": "profile_name_index_myinformationprops",
-      "community": 119,
+      "community": 173,
       "norm_label": "myinformationprops"
     },
     {
@@ -2307,7 +2307,7 @@
       "source_file": "apps/storefront/src/modules/account/components/profile-name/index.tsx",
       "source_location": "L15",
       "id": "profile_name_index_profilename",
-      "community": 119,
+      "community": 173,
       "norm_label": "profilename()"
     },
     {
@@ -2703,7 +2703,7 @@
       "source_file": "apps/storefront/src/modules/account/components/transfer-request-form/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_components_transfer_request_form_index_tsx",
-      "community": 36,
+      "community": 16,
       "norm_label": "index.tsx"
     },
     {
@@ -2712,7 +2712,7 @@
       "source_file": "apps/storefront/src/modules/account/components/transfer-request-form/index.tsx",
       "source_location": "L9",
       "id": "transfer_request_form_index_transferrequestform",
-      "community": 36,
+      "community": 16,
       "norm_label": "transferrequestform()"
     },
     {
@@ -2881,7 +2881,7 @@
       "label": "Mode",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/seller-listing-form/index.tsx",
-      "source_location": "L28",
+      "source_location": "L29",
       "id": "seller_listing_form_index_mode",
       "community": 223,
       "norm_label": "mode"
@@ -2890,7 +2890,7 @@
       "label": "FieldDef",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/seller-listing-form/index.tsx",
-      "source_location": "L30",
+      "source_location": "L31",
       "id": "seller_listing_form_index_fielddef",
       "community": 223,
       "norm_label": "fielddef"
@@ -2899,7 +2899,7 @@
       "label": "FIELDS",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/seller-listing-form/index.tsx",
-      "source_location": "L43",
+      "source_location": "L44",
       "id": "seller_listing_form_index_fields",
       "community": 223,
       "norm_label": "fields"
@@ -2908,7 +2908,7 @@
       "label": "initialState",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/seller-listing-form/index.tsx",
-      "source_location": "L98",
+      "source_location": "L99",
       "id": "seller_listing_form_index_initialstate",
       "community": 223,
       "norm_label": "initialstate"
@@ -2917,7 +2917,7 @@
       "label": "Props",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/seller-listing-form/index.tsx",
-      "source_location": "L104",
+      "source_location": "L105",
       "id": "seller_listing_form_index_props",
       "community": 223,
       "norm_label": "props"
@@ -2926,9 +2926,9 @@
       "label": "SellerListingForm()",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/seller-listing-form/index.tsx",
-      "source_location": "L109",
+      "source_location": "L110",
       "id": "seller_listing_form_index_sellerlistingform",
-      "community": 223,
+      "community": 34,
       "norm_label": "sellerlistingform()"
     },
     {
@@ -3558,7 +3558,7 @@
       "source_file": "apps/storefront/src/modules/products/components/image-gallery/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_products_components_image_gallery_index_tsx",
-      "community": 223,
+      "community": 34,
       "norm_label": "index.tsx"
     },
     {
@@ -3567,7 +3567,7 @@
       "source_file": "apps/storefront/src/modules/products/components/image-gallery/index.tsx",
       "source_location": "L5",
       "id": "image_gallery_index_imagegalleryprops",
-      "community": 223,
+      "community": 34,
       "norm_label": "imagegalleryprops"
     },
     {
@@ -3576,7 +3576,7 @@
       "source_file": "apps/storefront/src/modules/products/components/image-gallery/index.tsx",
       "source_location": "L9",
       "id": "image_gallery_index_imagegallery",
-      "community": 223,
+      "community": 34,
       "norm_label": "imagegallery()"
     },
     {
@@ -3666,7 +3666,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/accordion.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_products_components_product_tabs_accordion_tsx",
-      "community": 34,
+      "community": 190,
       "norm_label": "accordion.tsx"
     },
     {
@@ -3675,7 +3675,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/accordion.tsx",
       "source_location": "L5",
       "id": "product_tabs_accordion_accordionitemprops",
-      "community": 34,
+      "community": 190,
       "norm_label": "accordionitemprops"
     },
     {
@@ -3684,7 +3684,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/accordion.tsx",
       "source_location": "L20",
       "id": "product_tabs_accordion_accordionprops",
-      "community": 34,
+      "community": 190,
       "norm_label": "accordionprops"
     },
     {
@@ -3693,7 +3693,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/accordion.tsx",
       "source_location": "L26",
       "id": "product_tabs_accordion_accordion",
-      "community": 34,
+      "community": 190,
       "norm_label": "accordion()"
     },
     {
@@ -3702,7 +3702,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/accordion.tsx",
       "source_location": "L34",
       "id": "product_tabs_accordion_item",
-      "community": 34,
+      "community": 190,
       "norm_label": "item()"
     },
     {
@@ -3711,7 +3711,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/accordion.tsx",
       "source_location": "L89",
       "id": "product_tabs_accordion_morphingtrigger",
-      "community": 34,
+      "community": 190,
       "norm_label": "morphingtrigger()"
     },
     {
@@ -3720,7 +3720,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_products_components_product_tabs_index_tsx",
-      "community": 34,
+      "community": 190,
       "norm_label": "index.tsx"
     },
     {
@@ -3729,7 +3729,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/index.tsx",
       "source_location": "L15",
       "id": "product_tabs_index_producttabsprops",
-      "community": 34,
+      "community": 190,
       "norm_label": "producttabsprops"
     },
     {
@@ -3738,7 +3738,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/index.tsx",
       "source_location": "L21",
       "id": "product_tabs_index_producttabs",
-      "community": 34,
+      "community": 190,
       "norm_label": "producttabs()"
     },
     {
@@ -3747,7 +3747,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/index.tsx",
       "source_location": "L55",
       "id": "product_tabs_index_productinfotab",
-      "community": 34,
+      "community": 190,
       "norm_label": "productinfotab()"
     },
     {
@@ -3756,7 +3756,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/index.tsx",
       "source_location": "L80",
       "id": "product_tabs_index_freshnesstab",
-      "community": 34,
+      "community": 190,
       "norm_label": "freshnesstab()"
     },
     {
@@ -3765,7 +3765,7 @@
       "source_file": "apps/storefront/src/modules/products/components/product-tabs/index.tsx",
       "source_location": "L109",
       "id": "product_tabs_index_shippinginfotab",
-      "community": 34,
+      "community": 190,
       "norm_label": "shippinginfotab()"
     },
     {
@@ -3792,7 +3792,7 @@
       "source_file": "apps/storefront/src/modules/products/components/thumbnail/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_products_components_thumbnail_index_tsx",
-      "community": 223,
+      "community": 34,
       "norm_label": "index.tsx"
     },
     {
@@ -3801,7 +3801,7 @@
       "source_file": "apps/storefront/src/modules/products/components/thumbnail/index.tsx",
       "source_location": "L8",
       "id": "thumbnail_index_thumbnailprops",
-      "community": 223,
+      "community": 34,
       "norm_label": "thumbnailprops"
     },
     {
@@ -3810,7 +3810,7 @@
       "source_file": "apps/storefront/src/modules/products/components/thumbnail/index.tsx",
       "source_location": "L17",
       "id": "thumbnail_index_thumbnail",
-      "community": 223,
+      "community": 34,
       "norm_label": "thumbnail()"
     },
     {
@@ -3819,7 +3819,7 @@
       "source_file": "apps/storefront/src/modules/products/components/thumbnail/index.tsx",
       "source_location": "L47",
       "id": "thumbnail_index_imageorplaceholder",
-      "community": 223,
+      "community": 34,
       "norm_label": "imageorplaceholder()"
     },
     {
@@ -4422,7 +4422,7 @@
       "source_file": "apps/storefront/src/modules/order/components/onboarding-cta/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_order_components_onboarding_cta_index_tsx",
-      "community": 250,
+      "community": 223,
       "norm_label": "index.tsx"
     },
     {
@@ -4431,7 +4431,7 @@
       "source_file": "apps/storefront/src/modules/order/components/onboarding-cta/index.tsx",
       "source_location": "L6",
       "id": "onboarding_cta_index_onboardingcta",
-      "community": 250,
+      "community": 223,
       "norm_label": "onboardingcta()"
     },
     {
@@ -4584,7 +4584,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_store_components_refinement_list_index_tsx",
-      "community": 199,
+      "community": 190,
       "norm_label": "index.tsx"
     },
     {
@@ -4593,7 +4593,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/index.tsx",
       "source_location": "L6",
       "id": "refinement_list_index_refinementlistprops",
-      "community": 199,
+      "community": 190,
       "norm_label": "refinementlistprops"
     },
     {
@@ -4602,7 +4602,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/index.tsx",
       "source_location": "L10",
       "id": "refinement_list_index_categories",
-      "community": 199,
+      "community": 190,
       "norm_label": "categories"
     },
     {
@@ -4611,7 +4611,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/index.tsx",
       "source_location": "L31",
       "id": "refinement_list_index_refinementlist",
-      "community": 199,
+      "community": 190,
       "norm_label": "refinementlist()"
     },
     {
@@ -4620,7 +4620,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_store_components_refinement_list_sort_products_index_tsx",
-      "community": 199,
+      "community": 190,
       "norm_label": "index.tsx"
     },
     {
@@ -4629,7 +4629,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
       "source_location": "L5",
       "id": "sort_products_index_sortoptions",
-      "community": 199,
+      "community": 190,
       "norm_label": "sortoptions"
     },
     {
@@ -4638,7 +4638,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
       "source_location": "L7",
       "id": "sort_products_index_sortproductsprops",
-      "community": 199,
+      "community": 190,
       "norm_label": "sortproductsprops"
     },
     {
@@ -4647,7 +4647,7 @@
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
       "source_location": "L28",
       "id": "sort_products_index_sortproducts",
-      "community": 199,
+      "community": 190,
       "norm_label": "sortproducts()"
     },
     {
@@ -4694,6 +4694,42 @@
       "id": "components_estimated_kg_field_estimatedkgfield",
       "community": 237,
       "norm_label": "estimatedkgfield()"
+    },
+    {
+      "label": "listing-type-field.tsx",
+      "file_type": "code",
+      "source_file": "apps/storefront/src/modules/producer/components/listing-type-field.tsx",
+      "source_location": "L1",
+      "id": "apps_storefront_src_modules_producer_components_listing_type_field_tsx",
+      "community": 242,
+      "norm_label": "listing-type-field.tsx"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "apps/storefront/src/modules/producer/components/listing-type-field.tsx",
+      "source_location": "L3",
+      "id": "components_listing_type_field_props",
+      "community": 242,
+      "norm_label": "props"
+    },
+    {
+      "label": "options",
+      "file_type": "code",
+      "source_file": "apps/storefront/src/modules/producer/components/listing-type-field.tsx",
+      "source_location": "L9",
+      "id": "components_listing_type_field_options",
+      "community": 242,
+      "norm_label": "options"
+    },
+    {
+      "label": "ListingTypeField()",
+      "file_type": "code",
+      "source_file": "apps/storefront/src/modules/producer/components/listing-type-field.tsx",
+      "source_location": "L24",
+      "id": "components_listing_type_field_listingtypefield",
+      "community": 242,
+      "norm_label": "listingtypefield()"
     },
     {
       "label": "pickup-window-select.tsx",
@@ -6546,7 +6582,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/nav-search/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_layout_components_nav_search_index_tsx",
-      "community": 130,
+      "community": 204,
       "norm_label": "index.tsx"
     },
     {
@@ -6555,7 +6591,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/nav-search/index.tsx",
       "source_location": "L10",
       "id": "nav_search_index_navsearch",
-      "community": 130,
+      "community": 204,
       "norm_label": "navsearch()"
     },
     {
@@ -6564,7 +6600,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/mobile-search/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_layout_components_mobile_search_index_tsx",
-      "community": 130,
+      "community": 204,
       "norm_label": "index.tsx"
     },
     {
@@ -6573,7 +6609,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/mobile-search/index.tsx",
       "source_location": "L8",
       "id": "mobile_search_index_mobilesearch",
-      "community": 130,
+      "community": 204,
       "norm_label": "mobilesearch()"
     },
     {
@@ -6762,7 +6798,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_page_tsx",
-      "community": 182,
+      "community": 130,
       "norm_label": "page.tsx"
     },
     {
@@ -6771,7 +6807,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/page.tsx",
       "source_location": "L11",
       "id": "main_page_metadata",
-      "community": 182,
+      "community": 130,
       "norm_label": "metadata"
     },
     {
@@ -6780,7 +6816,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/page.tsx",
       "source_location": "L17",
       "id": "main_page_home",
-      "community": 182,
+      "community": 130,
       "norm_label": "home()"
     },
     {
@@ -6843,7 +6879,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_page_tsx",
-      "community": 36,
+      "community": 182,
       "norm_label": "page.tsx"
     },
     {
@@ -6852,7 +6888,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/page.tsx",
       "source_location": "L8",
       "id": "dashboard_page_metadata",
-      "community": 36,
+      "community": 182,
       "norm_label": "metadata"
     },
     {
@@ -6861,7 +6897,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/page.tsx",
       "source_location": "L13",
       "id": "dashboard_page_overviewtemplate",
-      "community": 36,
+      "community": 182,
       "norm_label": "overviewtemplate()"
     },
     {
@@ -6888,7 +6924,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/account-types/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_account_types_page_tsx",
-      "community": 168,
+      "community": 137,
       "norm_label": "page.tsx"
     },
     {
@@ -6897,7 +6933,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/account-types/page.tsx",
       "source_location": "L8",
       "id": "account_types_page_metadata",
-      "community": 168,
+      "community": 137,
       "norm_label": "metadata"
     },
     {
@@ -6906,7 +6942,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/account-types/page.tsx",
       "source_location": "L17",
       "id": "account_types_page_props",
-      "community": 168,
+      "community": 137,
       "norm_label": "props"
     },
     {
@@ -7014,7 +7050,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_producer_page_tsx",
-      "community": 223,
+      "community": 213,
       "norm_label": "page.tsx"
     },
     {
@@ -7023,7 +7059,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/page.tsx",
       "source_location": "L8",
       "id": "producer_page_metadata",
-      "community": 223,
+      "community": 213,
       "norm_label": "metadata"
     },
     {
@@ -7032,7 +7068,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/page.tsx",
       "source_location": "L13",
       "id": "producer_page_props",
-      "community": 223,
+      "community": 213,
       "norm_label": "props"
     },
     {
@@ -7041,7 +7077,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/producer/page.tsx",
       "source_location": "L17",
       "id": "producer_page_producerdashboardpage",
-      "community": 223,
+      "community": 213,
       "norm_label": "producerdashboardpage()"
     },
     {
@@ -7122,7 +7158,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/addresses/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_addresses_page_tsx",
-      "community": 213,
+      "community": 130,
       "norm_label": "page.tsx"
     },
     {
@@ -7131,7 +7167,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/addresses/page.tsx",
       "source_location": "L9",
       "id": "addresses_page_metadata",
-      "community": 213,
+      "community": 130,
       "norm_label": "metadata"
     },
     {
@@ -7140,7 +7176,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/addresses/page.tsx",
       "source_location": "L14",
       "id": "addresses_page_addresses",
-      "community": 213,
+      "community": 130,
       "norm_label": "addresses()"
     },
     {
@@ -7149,7 +7185,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/orders/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_orders_page_tsx",
-      "community": 36,
+      "community": 182,
       "norm_label": "page.tsx"
     },
     {
@@ -7158,7 +7194,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/orders/page.tsx",
       "source_location": "L8",
       "id": "orders_page_metadata",
-      "community": 36,
+      "community": 182,
       "norm_label": "metadata"
     },
     {
@@ -7167,7 +7203,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/orders/page.tsx",
       "source_location": "L13",
       "id": "orders_page_orders",
-      "community": 36,
+      "community": 182,
       "norm_label": "orders()"
     },
     {
@@ -7374,7 +7410,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/products/[handle]/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_products_handle_page_tsx",
-      "community": 182,
+      "community": 130,
       "norm_label": "page.tsx"
     },
     {
@@ -7383,7 +7419,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/collections/[handle]/page.tsx",
       "source_location": "L10",
       "id": "handle_page_props",
-      "community": 182,
+      "community": 130,
       "norm_label": "props"
     },
     {
@@ -7392,7 +7428,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/collections/[handle]/page.tsx",
       "source_location": "L20",
       "id": "handle_page_generatestaticparams",
-      "community": 182,
+      "community": 130,
       "norm_label": "generatestaticparams()"
     },
     {
@@ -7401,7 +7437,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/products/[handle]/page.tsx",
       "source_location": "L55",
       "id": "handle_page_getimagesforvariant",
-      "community": 182,
+      "community": 130,
       "norm_label": "getimagesforvariant()"
     },
     {
@@ -7410,7 +7446,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/collections/[handle]/page.tsx",
       "source_location": "L53",
       "id": "handle_page_generatemetadata",
-      "community": 182,
+      "community": 130,
       "norm_label": "generatemetadata()"
     },
     {
@@ -7419,7 +7455,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/products/[handle]/page.tsx",
       "source_location": "L101",
       "id": "handle_page_productpage",
-      "community": 182,
+      "community": 130,
       "norm_label": "productpage()"
     },
     {
@@ -7860,7 +7896,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/collections/[handle]/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_collections_handle_page_tsx",
-      "community": 182,
+      "community": 130,
       "norm_label": "page.tsx"
     },
     {
@@ -7869,7 +7905,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/collections/[handle]/page.tsx",
       "source_location": "L69",
       "id": "handle_page_collectionpage",
-      "community": 182,
+      "community": 130,
       "norm_label": "collectionpage()"
     },
     {
@@ -7950,7 +7986,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_categories_category_page_tsx",
-      "community": 16,
+      "community": 199,
       "norm_label": "page.tsx"
     },
     {
@@ -7959,7 +7995,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L10",
       "id": "category_page_props",
-      "community": 16,
+      "community": 199,
       "norm_label": "props"
     },
     {
@@ -7968,7 +8004,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L18",
       "id": "category_page_generatestaticparams",
-      "community": 16,
+      "community": 199,
       "norm_label": "generatestaticparams()"
     },
     {
@@ -7977,7 +8013,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L45",
       "id": "category_page_generatemetadata",
-      "community": 16,
+      "community": 199,
       "norm_label": "generatemetadata()"
     },
     {
@@ -7986,7 +8022,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/categories/[...category]/page.tsx",
       "source_location": "L66",
       "id": "category_page_categorypage",
-      "community": 16,
+      "community": 199,
       "norm_label": "categorypage()"
     },
     {
@@ -8166,7 +8202,7 @@
       "source_file": "apps/storefront/src/lib/config.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_config_ts",
-      "community": 217,
+      "community": 1,
       "norm_label": "config.ts"
     },
     {
@@ -8175,7 +8211,7 @@
       "source_file": "apps/storefront/src/lib/config.ts",
       "source_location": "L11",
       "id": "lib_config_sdk",
-      "community": 130,
+      "community": 16,
       "norm_label": "sdk"
     },
     {
@@ -8184,7 +8220,7 @@
       "source_file": "apps/storefront/src/lib/config.ts",
       "source_location": "L17",
       "id": "lib_config_originalfetch",
-      "community": 217,
+      "community": 1,
       "norm_label": "originalfetch"
     },
     {
@@ -8193,7 +8229,7 @@
       "source_file": "apps/storefront/src/lib/config.ts",
       "source_location": "L30",
       "id": "lib_config_newheaders",
-      "community": 217,
+      "community": 1,
       "norm_label": "newheaders"
     },
     {
@@ -8319,7 +8355,7 @@
       "source_file": "apps/storefront/src/lib/data/search.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_search_ts",
-      "community": 130,
+      "community": 204,
       "norm_label": "search.ts"
     },
     {
@@ -8328,7 +8364,7 @@
       "source_file": "apps/storefront/src/lib/data/search.ts",
       "source_location": "L5",
       "id": "data_search_searchhit",
-      "community": 130,
+      "community": 204,
       "norm_label": "searchhit"
     },
     {
@@ -8337,7 +8373,7 @@
       "source_file": "apps/storefront/src/lib/data/search.ts",
       "source_location": "L14",
       "id": "data_search_searchproducts",
-      "community": 130,
+      "community": 204,
       "norm_label": "searchproducts()"
     },
     {
@@ -8346,7 +8382,7 @@
       "source_file": "apps/storefront/src/lib/data/products.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_products_ts",
-      "community": 130,
+      "community": 16,
       "norm_label": "products.ts"
     },
     {
@@ -8373,7 +8409,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_cookies_ts",
-      "community": 1,
+      "community": 16,
       "norm_label": "cookies.ts"
     },
     {
@@ -8382,7 +8418,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L4",
       "id": "data_cookies_getauthheaders",
-      "community": 1,
+      "community": 16,
       "norm_label": "getauthheaders()"
     },
     {
@@ -8391,7 +8427,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L21",
       "id": "data_cookies_getcachetag",
-      "community": 1,
+      "community": 223,
       "norm_label": "getcachetag()"
     },
     {
@@ -8463,7 +8499,7 @@
       "source_file": "apps/storefront/src/lib/data/roles.ts",
       "source_location": "L31",
       "id": "data_roles_addrolestate",
-      "community": 173,
+      "community": 162,
       "norm_label": "addrolestate"
     },
     {
@@ -8517,7 +8553,7 @@
       "source_file": "apps/storefront/src/lib/data/categories.ts",
       "source_location": "L5",
       "id": "data_categories_listcategories",
-      "community": 16,
+      "community": 199,
       "norm_label": "listcategories()"
     },
     {
@@ -8526,7 +8562,7 @@
       "source_file": "apps/storefront/src/lib/data/categories.ts",
       "source_location": "L29",
       "id": "data_categories_getcategorybyhandle",
-      "community": 16,
+      "community": 199,
       "norm_label": "getcategorybyhandle()"
     },
     {
@@ -8553,7 +8589,7 @@
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_regions_ts",
-      "community": 130,
+      "community": 16,
       "norm_label": "regions.ts"
     },
     {
@@ -8571,7 +8607,7 @@
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L21",
       "id": "data_regions_retrieveregion",
-      "community": 130,
+      "community": 16,
       "norm_label": "retrieveregion()"
     },
     {
@@ -8904,7 +8940,7 @@
       "source_file": "apps/storefront/src/lib/data/locale-actions.ts",
       "source_location": "L13",
       "id": "data_locale_actions_getlocale",
-      "community": 217,
+      "community": 1,
       "norm_label": "getlocale()"
     },
     {
@@ -9183,7 +9219,7 @@
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_onboarding_ts",
-      "community": 1,
+      "community": 223,
       "norm_label": "onboarding.ts"
     },
     {
@@ -9192,7 +9228,7 @@
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L21",
       "id": "data_onboarding_resetonboardingstate",
-      "community": 250,
+      "community": 223,
       "norm_label": "resetonboardingstate()"
     },
     {
@@ -9201,7 +9237,7 @@
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L33",
       "id": "data_onboarding_onboardingstate",
-      "community": 1,
+      "community": 223,
       "norm_label": "onboardingstate"
     },
     {
@@ -9210,7 +9246,7 @@
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L39",
       "id": "data_onboarding_splitdisplayname",
-      "community": 1,
+      "community": 223,
       "norm_label": "splitdisplayname()"
     },
     {
@@ -9219,7 +9255,7 @@
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L52",
       "id": "data_onboarding_completeonboarding",
-      "community": 1,
+      "community": 223,
       "norm_label": "completeonboarding()"
     },
     {
@@ -9228,7 +9264,7 @@
       "source_file": "apps/storefront/src/lib/data/collections.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_collections_ts",
-      "community": 182,
+      "community": 16,
       "norm_label": "collections.ts"
     },
     {
@@ -9237,7 +9273,7 @@
       "source_file": "apps/storefront/src/lib/data/collections.ts",
       "source_location": "L7",
       "id": "data_collections_retrievecollection",
-      "community": 182,
+      "community": 16,
       "norm_label": "retrievecollection()"
     },
     {
@@ -9246,7 +9282,7 @@
       "source_file": "apps/storefront/src/lib/data/collections.ts",
       "source_location": "L23",
       "id": "data_collections_listcollections",
-      "community": 182,
+      "community": 130,
       "norm_label": "listcollections()"
     },
     {
@@ -9255,7 +9291,7 @@
       "source_file": "apps/storefront/src/lib/data/collections.ts",
       "source_location": "L45",
       "id": "data_collections_getcollectionbyhandle",
-      "community": 182,
+      "community": 130,
       "norm_label": "getcollectionbyhandle()"
     },
     {
@@ -9264,7 +9300,7 @@
       "source_file": "apps/storefront/src/lib/data/orders.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_orders_ts",
-      "community": 36,
+      "community": 16,
       "norm_label": "orders.ts"
     },
     {
@@ -9282,7 +9318,7 @@
       "source_file": "apps/storefront/src/lib/data/orders.ts",
       "source_location": "L32",
       "id": "data_orders_listorders",
-      "community": 36,
+      "community": 182,
       "norm_label": "listorders()"
     },
     {
@@ -9291,7 +9327,7 @@
       "source_file": "apps/storefront/src/lib/data/orders.ts",
       "source_location": "L63",
       "id": "data_orders_createtransferrequest",
-      "community": 36,
+      "community": 16,
       "norm_label": "createtransferrequest()"
     },
     {
@@ -9345,7 +9381,7 @@
       "source_file": "apps/storefront/src/lib/data/seller.ts",
       "source_location": "L49",
       "id": "data_seller_listmylistings",
-      "community": 223,
+      "community": 213,
       "norm_label": "listmylistings()"
     },
     {
@@ -9379,7 +9415,7 @@
       "label": "createListing()",
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/seller.ts",
-      "source_location": "L153",
+      "source_location": "L164",
       "id": "data_seller_createlisting",
       "community": 223,
       "norm_label": "createlisting()"
@@ -9388,7 +9424,7 @@
       "label": "updateListing()",
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/seller.ts",
-      "source_location": "L211",
+      "source_location": "L222",
       "id": "data_seller_updatelisting",
       "community": 223,
       "norm_label": "updatelisting()"
@@ -9397,7 +9433,7 @@
       "label": "UploadResult",
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/seller.ts",
-      "source_location": "L259",
+      "source_location": "L272",
       "id": "data_seller_uploadresult",
       "community": 223,
       "norm_label": "uploadresult"
@@ -9406,7 +9442,7 @@
       "label": "uploadListingPhoto()",
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/seller.ts",
-      "source_location": "L272",
+      "source_location": "L285",
       "id": "data_seller_uploadlistingphoto",
       "community": 223,
       "norm_label": "uploadlistingphoto()"
@@ -9415,7 +9451,7 @@
       "label": "deleteListing()",
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/seller.ts",
-      "source_location": "L306",
+      "source_location": "L319",
       "id": "data_seller_deletelisting",
       "community": 223,
       "norm_label": "deletelisting()"
@@ -9426,7 +9462,7 @@
       "source_file": "apps/storefront/src/lib/data/locales.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_locales_ts",
-      "community": 136,
+      "community": 16,
       "norm_label": "locales.ts"
     },
     {
@@ -9453,7 +9489,7 @@
       "source_file": "apps/storefront/src/lib/data/fulfillment.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_fulfillment_ts",
-      "community": 1,
+      "community": 16,
       "norm_label": "fulfillment.ts"
     },
     {
@@ -9471,7 +9507,7 @@
       "source_file": "apps/storefront/src/lib/data/fulfillment.ts",
       "source_location": "L35",
       "id": "data_fulfillment_calculatepriceforshippingoption",
-      "community": 1,
+      "community": 16,
       "norm_label": "calculatepriceforshippingoption()"
     },
     {
@@ -10155,7 +10191,7 @@
       "source_file": "apps/storefront/src/lib/util/roles.ts",
       "source_location": "L52",
       "id": "util_roles_hasrole",
-      "community": 166,
+      "community": 168,
       "norm_label": "hasrole()"
     },
     {
@@ -10164,7 +10200,7 @@
       "source_file": "apps/storefront/src/lib/util/get-locale-header.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_util_get_locale_header_ts",
-      "community": 217,
+      "community": 1,
       "norm_label": "get-locale-header.ts"
     },
     {
@@ -10173,7 +10209,7 @@
       "source_file": "apps/storefront/src/lib/util/get-locale-header.ts",
       "source_location": "L3",
       "id": "util_get_locale_header_getlocaleheader",
-      "community": 217,
+      "community": 1,
       "norm_label": "getlocaleheader()"
     },
     {
@@ -10632,7 +10668,7 @@
       "source_file": "apps/storefront/src/lib/util/image-url.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_util_image_url_ts",
-      "community": 223,
+      "community": 34,
       "norm_label": "image-url.ts"
     },
     {
@@ -10641,7 +10677,7 @@
       "source_file": "apps/storefront/src/lib/util/image-url.ts",
       "source_location": "L1",
       "id": "util_image_url_backend_origins",
-      "community": 223,
+      "community": 34,
       "norm_label": "backend_origins"
     },
     {
@@ -10650,7 +10686,7 @@
       "source_file": "apps/storefront/src/lib/util/image-url.ts",
       "source_location": "L16",
       "id": "util_image_url_resolveimagesrc",
-      "community": 223,
+      "community": 34,
       "norm_label": "resolveimagesrc()"
     },
     {
@@ -11523,7 +11559,7 @@
       "source_file": "apps/backend/src/links/pickup-window-hub-area.ts",
       "source_location": "L1",
       "id": "apps_backend_src_links_pickup_window_hub_area_ts",
-      "community": 157,
+      "community": 161,
       "norm_label": "pickup-window-hub-area.ts"
     },
     {
@@ -11982,7 +12018,7 @@
       "source_file": "apps/backend/src/modules/pickup/types.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_pickup_types_ts",
-      "community": 165,
+      "community": 157,
       "norm_label": "types.ts"
     },
     {
@@ -11991,7 +12027,7 @@
       "source_file": "apps/backend/src/modules/pickup/types.ts",
       "source_location": "L1",
       "id": "pickup_types_pickup_window_statuses",
-      "community": 165,
+      "community": 157,
       "norm_label": "pickup_window_statuses"
     },
     {
@@ -12000,7 +12036,7 @@
       "source_file": "apps/backend/src/modules/pickup/types.ts",
       "source_location": "L7",
       "id": "pickup_types_pickupwindowstatus",
-      "community": 165,
+      "community": 157,
       "norm_label": "pickupwindowstatus"
     },
     {
@@ -12009,7 +12045,7 @@
       "source_file": "apps/backend/src/modules/pickup/types.ts",
       "source_location": "L9",
       "id": "pickup_types_pickup_slot_statuses",
-      "community": 165,
+      "community": 157,
       "norm_label": "pickup_slot_statuses"
     },
     {
@@ -12018,7 +12054,7 @@
       "source_file": "apps/backend/src/modules/pickup/types.ts",
       "source_location": "L15",
       "id": "pickup_types_pickupslotstatus",
-      "community": 165,
+      "community": 157,
       "norm_label": "pickupslotstatus"
     },
     {
@@ -12027,7 +12063,7 @@
       "source_file": "apps/backend/src/modules/pickup/validators.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_pickup_validators_ts",
-      "community": 165,
+      "community": 157,
       "norm_label": "validators.ts"
     },
     {
@@ -12036,7 +12072,7 @@
       "source_file": "apps/backend/src/modules/pickup/validators.ts",
       "source_location": "L7",
       "id": "pickup_validators_validationerror",
-      "community": 165,
+      "community": 157,
       "norm_label": "validationerror"
     },
     {
@@ -12045,7 +12081,7 @@
       "source_file": "apps/backend/src/modules/pickup/validators.ts",
       "source_location": "L13",
       "id": "pickup_validators_validationresult",
-      "community": 165,
+      "community": 157,
       "norm_label": "validationresult"
     },
     {
@@ -12063,7 +12099,7 @@
       "source_file": "apps/backend/src/modules/pickup/validators.ts",
       "source_location": "L80",
       "id": "pickup_validators_validateslotcapacity",
-      "community": 165,
+      "community": 26,
       "norm_label": "validateslotcapacity()"
     },
     {
@@ -12072,7 +12108,7 @@
       "source_file": "apps/backend/src/modules/pickup/validators.ts",
       "source_location": "L118",
       "id": "pickup_validators_parsetimerange",
-      "community": 165,
+      "community": 157,
       "norm_label": "parsetimerange()"
     },
     {
@@ -12081,7 +12117,7 @@
       "source_file": "apps/backend/src/modules/pickup/validators.ts",
       "source_location": "L143",
       "id": "pickup_validators_window_transitions",
-      "community": 165,
+      "community": 157,
       "norm_label": "window_transitions"
     },
     {
@@ -12090,7 +12126,7 @@
       "source_file": "apps/backend/src/modules/pickup/validators.ts",
       "source_location": "L153",
       "id": "pickup_validators_validatewindowstatustransition",
-      "community": 25,
+      "community": 157,
       "norm_label": "validatewindowstatustransition()"
     },
     {
@@ -12099,7 +12135,7 @@
       "source_file": "apps/backend/src/modules/pickup/validators.ts",
       "source_location": "L207",
       "id": "pickup_validators_slot_transitions",
-      "community": 165,
+      "community": 157,
       "norm_label": "slot_transitions"
     },
     {
@@ -12108,7 +12144,7 @@
       "source_file": "apps/backend/src/modules/pickup/validators.ts",
       "source_location": "L220",
       "id": "pickup_validators_validateslotstatustransition",
-      "community": 165,
+      "community": 157,
       "norm_label": "validateslotstatustransition()"
     },
     {
@@ -12117,7 +12153,7 @@
       "source_file": "apps/backend/src/modules/pickup/validators.ts",
       "source_location": "L279",
       "id": "pickup_validators_validateslotreserve",
-      "community": 165,
+      "community": 26,
       "norm_label": "validateslotreserve()"
     },
     {
@@ -12207,7 +12243,7 @@
       "source_file": "apps/backend/src/modules/pickup/__tests__/validate-slot-reserve.unit.spec.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_pickup_tests_validate_slot_reserve_unit_spec_ts",
-      "community": 165,
+      "community": 26,
       "norm_label": "validate-slot-reserve.unit.spec.ts"
     },
     {
@@ -12216,7 +12252,7 @@
       "source_file": "apps/backend/src/modules/pickup/__tests__/validate-slot-reserve.unit.spec.ts",
       "source_location": "L8",
       "id": "tests_validate_slot_reserve_unit_spec_res",
-      "community": 165,
+      "community": 26,
       "norm_label": "res"
     },
     {
@@ -12225,7 +12261,7 @@
       "source_file": "apps/backend/src/modules/pickup/__tests__/validate-slot-reserve.unit.spec.ts",
       "source_location": "L32",
       "id": "tests_validate_slot_reserve_unit_spec_base",
-      "community": 165,
+      "community": 26,
       "norm_label": "base"
     },
     {
@@ -12234,7 +12270,7 @@
       "source_file": "apps/backend/src/modules/pickup/models/pickup-window.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_pickup_models_pickup_window_ts",
-      "community": 157,
+      "community": 217,
       "norm_label": "pickup-window.ts"
     },
     {
@@ -12243,7 +12279,7 @@
       "source_file": "apps/backend/src/modules/pickup/models/pickup-window.ts",
       "source_location": "L4",
       "id": "models_pickup_window_pickupwindow",
-      "community": 157,
+      "community": 217,
       "norm_label": "pickupwindow"
     },
     {
@@ -12252,7 +12288,7 @@
       "source_file": "apps/backend/src/modules/pickup/models/pickup-slot.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_pickup_models_pickup_slot_ts",
-      "community": 157,
+      "community": 217,
       "norm_label": "pickup-slot.ts"
     },
     {
@@ -12261,7 +12297,7 @@
       "source_file": "apps/backend/src/modules/pickup/models/pickup-slot.ts",
       "source_location": "L4",
       "id": "models_pickup_slot_pickupslot",
-      "community": 157,
+      "community": 217,
       "norm_label": "pickupslot"
     },
     {
@@ -12585,7 +12621,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_listing_types_ts",
-      "community": 25,
+      "community": 26,
       "norm_label": "types.ts"
     },
     {
@@ -12594,7 +12630,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L1",
       "id": "listing_types_listing_types",
-      "community": 25,
+      "community": 26,
       "norm_label": "listing_types"
     },
     {
@@ -12603,7 +12639,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L2",
       "id": "listing_types_listingtype",
-      "community": 25,
+      "community": 26,
       "norm_label": "listingtype"
     },
     {
@@ -12612,7 +12648,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L4",
       "id": "listing_types_listing_statuses",
-      "community": 25,
+      "community": 26,
       "norm_label": "listing_statuses"
     },
     {
@@ -12621,7 +12657,7 @@
       "source_file": "apps/backend/src/modules/listing/types.ts",
       "source_location": "L12",
       "id": "listing_types_listingstatus",
-      "community": 25,
+      "community": 26,
       "norm_label": "listingstatus"
     },
     {
@@ -12630,7 +12666,7 @@
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_listing_validators_ts",
-      "community": 25,
+      "community": 26,
       "norm_label": "validators.ts"
     },
     {
@@ -12639,7 +12675,7 @@
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L9",
       "id": "listing_validators_validationerror",
-      "community": 25,
+      "community": 26,
       "norm_label": "validationerror"
     },
     {
@@ -12648,7 +12684,7 @@
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L15",
       "id": "listing_validators_validationresult",
-      "community": 25,
+      "community": 26,
       "norm_label": "validationresult"
     },
     {
@@ -12675,7 +12711,7 @@
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L132",
       "id": "listing_validators_allowed_transitions",
-      "community": 25,
+      "community": 26,
       "norm_label": "allowed_transitions"
     },
     {
@@ -13440,7 +13476,7 @@
       "source_file": "apps/backend/src/modules/rider/pin.ts",
       "source_location": "L1",
       "id": "apps_backend_src_modules_rider_pin_ts",
-      "community": 37,
+      "community": 23,
       "norm_label": "pin.ts"
     },
     {
@@ -13449,7 +13485,7 @@
       "source_file": "apps/backend/src/modules/rider/pin.ts",
       "source_location": "L7",
       "id": "rider_pin_hashpin",
-      "community": 37,
+      "community": 23,
       "norm_label": "hashpin()"
     },
     {
@@ -13458,7 +13494,7 @@
       "source_file": "apps/backend/src/modules/rider/pin.ts",
       "source_location": "L13",
       "id": "rider_pin_verifypin",
-      "community": 37,
+      "community": 23,
       "norm_label": "verifypin()"
     },
     {
@@ -13906,7 +13942,7 @@
       "label": "GET()",
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/seller/products/route.ts",
-      "source_location": "L68",
+      "source_location": "L71",
       "id": "products_route_get",
       "community": 26,
       "norm_label": "get()"
@@ -14088,7 +14124,7 @@
       "source_file": "apps/backend/src/api/store/riders/session/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_riders_session_route_ts",
-      "community": 37,
+      "community": 23,
       "norm_label": "route.ts"
     },
     {
@@ -14097,7 +14133,7 @@
       "source_file": "apps/backend/src/api/store/riders/session/route.ts",
       "source_location": "L24",
       "id": "session_route_get",
-      "community": 37,
+      "community": 23,
       "norm_label": "get()"
     },
     {
@@ -14142,7 +14178,7 @@
       "source_file": "apps/backend/src/api/store/customers/me/hub/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_customers_me_hub_route_ts",
-      "community": 242,
+      "community": 161,
       "norm_label": "route.ts"
     },
     {
@@ -14151,7 +14187,7 @@
       "source_file": "apps/backend/src/api/store/customers/me/hub/route.ts",
       "source_location": "L10",
       "id": "hub_route_getcustomerid",
-      "community": 242,
+      "community": 161,
       "norm_label": "getcustomerid()"
     },
     {
@@ -14160,7 +14196,7 @@
       "source_file": "apps/backend/src/api/store/customers/me/hub/route.ts",
       "source_location": "L19",
       "id": "hub_route_get",
-      "community": 242,
+      "community": 161,
       "norm_label": "get()"
     },
     {
@@ -14169,7 +14205,7 @@
       "source_file": "apps/backend/src/api/store/customers/me/hub/route.ts",
       "source_location": "L41",
       "id": "hub_route_post",
-      "community": 242,
+      "community": 161,
       "norm_label": "post()"
     },
     {
@@ -14178,7 +14214,7 @@
       "source_file": "apps/backend/src/api/store/customers/me/hub/route.ts",
       "source_location": "L92",
       "id": "hub_route_delete",
-      "community": 242,
+      "community": 161,
       "norm_label": "delete()"
     },
     {
@@ -14212,7 +14248,7 @@
       "label": "StoreCustomer",
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/seller/products/route.ts",
-      "source_location": "L20",
+      "source_location": "L21",
       "id": "products_route_storecustomer",
       "community": 26,
       "norm_label": "storecustomer"
@@ -14221,7 +14257,7 @@
       "label": "assertSeller()",
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/seller/products/route.ts",
-      "source_location": "L31",
+      "source_location": "L34",
       "id": "products_route_assertseller",
       "community": 26,
       "norm_label": "assertseller()"
@@ -14230,7 +14266,7 @@
       "label": "POST()",
       "file_type": "code",
       "source_file": "apps/backend/src/api/store/seller/products/route.ts",
-      "source_location": "L161",
+      "source_location": "L172",
       "id": "products_route_post",
       "community": 26,
       "norm_label": "post()"
@@ -14376,7 +14412,7 @@
       "source_file": "apps/backend/src/api/rider-app/manifest/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_rider_app_manifest_route_ts",
-      "community": 204,
+      "community": 158,
       "norm_label": "route.ts"
     },
     {
@@ -14385,7 +14421,7 @@
       "source_file": "apps/backend/src/api/rider/manifest/route.ts",
       "source_location": "L14",
       "id": "manifest_route_get",
-      "community": 204,
+      "community": 158,
       "norm_label": "get()"
     },
     {
@@ -14754,7 +14790,7 @@
       "source_file": "apps/backend/src/api/admin/riders/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_riders_route_ts",
-      "community": 37,
+      "community": 161,
       "norm_label": "route.ts"
     },
     {
@@ -14763,7 +14799,7 @@
       "source_file": "apps/backend/src/api/admin/riders/route.ts",
       "source_location": "L15",
       "id": "riders_route_get",
-      "community": 37,
+      "community": 161,
       "norm_label": "get()"
     },
     {
@@ -14772,7 +14808,7 @@
       "source_file": "apps/backend/src/api/admin/riders/route.ts",
       "source_location": "L33",
       "id": "riders_route_post",
-      "community": 37,
+      "community": 23,
       "norm_label": "post()"
     },
     {
@@ -14934,7 +14970,7 @@
       "source_file": "apps/backend/src/api/admin/dispatch/orders/[id]/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_dispatch_orders_id_route_ts",
-      "community": 158,
+      "community": 37,
       "norm_label": "route.ts"
     },
     {
@@ -14943,7 +14979,7 @@
       "source_file": "apps/backend/src/api/admin/dispatch/orders/[id]/route.ts",
       "source_location": "L8",
       "id": "id_route_valid_delivery_statuses",
-      "community": 158,
+      "community": 37,
       "norm_label": "valid_delivery_statuses"
     },
     {
@@ -14997,7 +15033,7 @@
       "source_file": "apps/backend/src/api/admin/listings/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_listings_route_ts",
-      "community": 50,
+      "community": 157,
       "norm_label": "route.ts"
     },
     {
@@ -15006,7 +15042,7 @@
       "source_file": "apps/backend/src/api/admin/listings/route.ts",
       "source_location": "L18",
       "id": "listings_route_get",
-      "community": 50,
+      "community": 157,
       "norm_label": "get()"
     },
     {
@@ -15015,7 +15051,7 @@
       "source_file": "apps/backend/src/api/admin/listings/[id]/reject/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_listings_id_reject_route_ts",
-      "community": 50,
+      "community": 157,
       "norm_label": "route.ts"
     },
     {
@@ -15024,7 +15060,7 @@
       "source_file": "apps/backend/src/api/admin/listings/[id]/reject/route.ts",
       "source_location": "L23",
       "id": "reject_route_post",
-      "community": 50,
+      "community": 157,
       "norm_label": "post()"
     },
     {
@@ -15105,7 +15141,7 @@
       "source_file": "apps/backend/src/api/admin/pickup-windows/[id]/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_pickup_windows_id_route_ts",
-      "community": 25,
+      "community": 157,
       "norm_label": "route.ts"
     },
     {
@@ -15141,7 +15177,7 @@
       "source_file": "apps/backend/src/api/admin/pickup-windows/[id]/slots/[slotId]/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_admin_pickup_windows_id_slots_slotid_route_ts",
-      "community": 165,
+      "community": 157,
       "norm_label": "route.ts"
     },
     {
@@ -15150,7 +15186,7 @@
       "source_file": "apps/backend/src/api/admin/pickup-windows/[id]/slots/[slotId]/route.ts",
       "source_location": "L10",
       "id": "slotid_route_patch",
-      "community": 165,
+      "community": 157,
       "norm_label": "patch()"
     },
     {
@@ -15159,7 +15195,7 @@
       "source_file": "apps/backend/src/api/admin/pickup-windows/[id]/slots/[slotId]/route.ts",
       "source_location": "L97",
       "id": "slotid_route_delete",
-      "community": 165,
+      "community": 157,
       "norm_label": "delete()"
     },
     {
@@ -15195,7 +15231,7 @@
       "source_file": "apps/backend/src/api/rider/me/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_rider_me_route_ts",
-      "community": 204,
+      "community": 37,
       "norm_label": "route.ts"
     },
     {
@@ -15204,7 +15240,7 @@
       "source_file": "apps/backend/src/api/rider/me/route.ts",
       "source_location": "L9",
       "id": "me_route_get",
-      "community": 204,
+      "community": 37,
       "norm_label": "get()"
     },
     {
@@ -15222,7 +15258,7 @@
       "source_file": "apps/backend/src/api/rider/auth/signup/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_rider_auth_signup_route_ts",
-      "community": 37,
+      "community": 23,
       "norm_label": "route.ts"
     },
     {
@@ -15231,7 +15267,7 @@
       "source_file": "apps/backend/src/api/rider/auth/signup/route.ts",
       "source_location": "L23",
       "id": "signup_route_post",
-      "community": 37,
+      "community": 23,
       "norm_label": "post()"
     },
     {
@@ -15240,7 +15276,7 @@
       "source_file": "apps/backend/src/api/rider/auth/login/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_rider_auth_login_route_ts",
-      "community": 37,
+      "community": 23,
       "norm_label": "route.ts"
     },
     {
@@ -15249,7 +15285,7 @@
       "source_file": "apps/backend/src/api/rider/auth/login/route.ts",
       "source_location": "L14",
       "id": "login_route_post",
-      "community": 37,
+      "community": 23,
       "norm_label": "post()"
     },
     {
@@ -15276,7 +15312,7 @@
       "source_file": "apps/backend/src/api/rider/summary/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_rider_summary_route_ts",
-      "community": 204,
+      "community": 186,
       "norm_label": "route.ts"
     },
     {
@@ -15285,7 +15321,7 @@
       "source_file": "apps/backend/src/api/rider/summary/route.ts",
       "source_location": "L17",
       "id": "summary_route_limit_centavos",
-      "community": 204,
+      "community": 186,
       "norm_label": "limit_centavos"
     },
     {
@@ -15294,7 +15330,7 @@
       "source_file": "apps/backend/src/api/rider/summary/route.ts",
       "source_location": "L21",
       "id": "summary_route_get",
-      "community": 204,
+      "community": 186,
       "norm_label": "get()"
     },
     {
@@ -17166,7 +17202,7 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L80",
       "id": "lib_rider_auth_getriderid",
-      "community": 204,
+      "community": 158,
       "norm_label": "getriderid()"
     },
     {
@@ -17184,7 +17220,7 @@
       "source_file": "apps/backend/src/lib/rider-auth.ts",
       "source_location": "L99",
       "id": "lib_rider_auth_verifysignupticket",
-      "community": 37,
+      "community": 23,
       "norm_label": "verifysignupticket()"
     },
     {
@@ -17508,7 +17544,7 @@
       "source_file": "apps/backend/src/jobs/rider-unremitted-tick.ts",
       "source_location": "L1",
       "id": "apps_backend_src_jobs_rider_unremitted_tick_ts",
-      "community": 186,
+      "community": 37,
       "norm_label": "rider-unremitted-tick.ts"
     },
     {
@@ -17517,7 +17553,7 @@
       "source_file": "apps/backend/src/jobs/rider-unremitted-tick.ts",
       "source_location": "L25",
       "id": "jobs_rider_unremitted_tick_config",
-      "community": 186,
+      "community": 37,
       "norm_label": "config"
     },
     {
@@ -17526,7 +17562,7 @@
       "source_file": "apps/backend/src/jobs/rider-unremitted-tick.ts",
       "source_location": "L30",
       "id": "jobs_rider_unremitted_tick_limit_centavos",
-      "community": 186,
+      "community": 37,
       "norm_label": "limit_centavos"
     },
     {
@@ -17535,7 +17571,7 @@
       "source_file": "apps/backend/src/jobs/rider-unremitted-tick.ts",
       "source_location": "L33",
       "id": "jobs_rider_unremitted_tick_aging_days",
-      "community": 186,
+      "community": 37,
       "norm_label": "aging_days"
     },
     {
@@ -17544,7 +17580,7 @@
       "source_file": "apps/backend/src/jobs/rider-unremitted-tick.ts",
       "source_location": "L36",
       "id": "jobs_rider_unremitted_tick_riderunremittedtick",
-      "community": 186,
+      "community": 37,
       "norm_label": "riderunremittedtick()"
     },
     {
@@ -19312,100 +19348,10 @@
       "norm_label": "workflowexecution"
     },
     {
-      "label": "AccountHolder",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2364",
-      "id": "types_query_entry_points_d_accountholder",
-      "community": 0,
-      "norm_label": "accountholder"
-    },
-    {
-      "label": "Capture",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2379",
-      "id": "types_query_entry_points_d_capture",
-      "community": 0,
-      "norm_label": "capture"
-    },
-    {
-      "label": "PaymentCollectionStatusEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2393",
-      "id": "types_query_entry_points_d_paymentcollectionstatusenum",
-      "community": 0,
-      "norm_label": "paymentcollectionstatusenum"
-    },
-    {
-      "label": "PaymentCollection",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2403",
-      "id": "types_query_entry_points_d_paymentcollection",
-      "community": 0,
-      "norm_label": "paymentcollection"
-    },
-    {
-      "label": "PaymentProvider",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2430",
-      "id": "types_query_entry_points_d_paymentprovider",
-      "community": 0,
-      "norm_label": "paymentprovider"
-    },
-    {
-      "label": "PaymentSessionStatusEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2442",
-      "id": "types_query_entry_points_d_paymentsessionstatusenum",
-      "community": 0,
-      "norm_label": "paymentsessionstatusenum"
-    },
-    {
-      "label": "Payment",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2450",
-      "id": "types_query_entry_points_d_payment",
-      "community": 0,
-      "norm_label": "payment"
-    },
-    {
-      "label": "PaymentSession",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2472",
-      "id": "types_query_entry_points_d_paymentsession",
-      "community": 0,
-      "norm_label": "paymentsession"
-    },
-    {
-      "label": "RefundReason",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2492",
-      "id": "types_query_entry_points_d_refundreason",
-      "community": 0,
-      "norm_label": "refundreason"
-    },
-    {
-      "label": "Refund",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2505",
-      "id": "types_query_entry_points_d_refund",
-      "community": 0,
-      "norm_label": "refund"
-    },
-    {
       "label": "NotificationStatusEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2522",
+      "source_location": "L2364",
       "id": "types_query_entry_points_d_notificationstatusenum",
       "community": 0,
       "norm_label": "notificationstatusenum"
@@ -19414,10 +19360,100 @@
       "label": "Notification",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2527",
+      "source_location": "L2369",
       "id": "types_query_entry_points_d_notification",
       "community": 0,
       "norm_label": "notification"
+    },
+    {
+      "label": "AccountHolder",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2392",
+      "id": "types_query_entry_points_d_accountholder",
+      "community": 0,
+      "norm_label": "accountholder"
+    },
+    {
+      "label": "Capture",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2407",
+      "id": "types_query_entry_points_d_capture",
+      "community": 0,
+      "norm_label": "capture"
+    },
+    {
+      "label": "PaymentCollectionStatusEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2421",
+      "id": "types_query_entry_points_d_paymentcollectionstatusenum",
+      "community": 0,
+      "norm_label": "paymentcollectionstatusenum"
+    },
+    {
+      "label": "PaymentCollection",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2431",
+      "id": "types_query_entry_points_d_paymentcollection",
+      "community": 0,
+      "norm_label": "paymentcollection"
+    },
+    {
+      "label": "PaymentProvider",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2458",
+      "id": "types_query_entry_points_d_paymentprovider",
+      "community": 0,
+      "norm_label": "paymentprovider"
+    },
+    {
+      "label": "PaymentSessionStatusEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2470",
+      "id": "types_query_entry_points_d_paymentsessionstatusenum",
+      "community": 0,
+      "norm_label": "paymentsessionstatusenum"
+    },
+    {
+      "label": "Payment",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2478",
+      "id": "types_query_entry_points_d_payment",
+      "community": 0,
+      "norm_label": "payment"
+    },
+    {
+      "label": "PaymentSession",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2500",
+      "id": "types_query_entry_points_d_paymentsession",
+      "community": 0,
+      "norm_label": "paymentsession"
+    },
+    {
+      "label": "RefundReason",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2520",
+      "id": "types_query_entry_points_d_refundreason",
+      "community": 0,
+      "norm_label": "refundreason"
+    },
+    {
+      "label": "Refund",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2533",
+      "id": "types_query_entry_points_d_refund",
+      "community": 0,
+      "norm_label": "refund"
     },
     {
       "label": "LinkCartPaymentCollection",
@@ -19695,7 +19731,7 @@
       "source_file": "apps/backend/.medusa/types/modules-bindings.d.ts",
       "source_location": "L1",
       "id": "apps_backend_medusa_types_modules_bindings_d_ts",
-      "community": 50,
+      "community": 164,
       "norm_label": "modules-bindings.d.ts"
     },
     {
@@ -19704,7 +19740,7 @@
       "source_file": "apps/backend/.medusa/types/modules-bindings.d.ts",
       "source_location": "L36",
       "id": "types_modules_bindings_d_moduleimplementations",
-      "community": 50,
+      "community": 164,
       "norm_label": "moduleimplementations"
     },
     {
@@ -20469,7 +20505,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L791",
       "id": "freshhub_implementation_plan_10_rider_pwa_pages",
-      "community": 246,
+      "community": 216,
       "norm_label": "10. rider pwa pages"
     },
     {
@@ -20478,7 +20514,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L793",
       "id": "freshhub_implementation_plan_codeblock_20",
-      "community": 246,
+      "community": 216,
       "norm_label": "code:block20 (/                                   # redirect: /orders if l)"
     },
     {
@@ -20487,7 +20523,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L807",
       "id": "freshhub_implementation_plan_codeblock_21",
-      "community": 246,
+      "community": 216,
       "norm_label": "code:js (// next.config.js)"
     },
     {
@@ -20496,7 +20532,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L817",
       "id": "freshhub_implementation_plan_codeblock_22",
-      "community": 246,
+      "community": 216,
       "norm_label": "code:json (// public/manifest.json)"
     },
     {
@@ -20505,7 +20541,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L834",
       "id": "freshhub_implementation_plan_codeblock_23",
-      "community": 246,
+      "community": 216,
       "norm_label": "code:ts (// backend: send push to rider)"
     },
     {
@@ -23942,7 +23978,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/deposit-section/index.tsx",
       "source_location": "L1",
-      "community": 130,
+      "community": 165,
       "norm_label": "index.tsx",
       "id": "apps_storefront_src_modules_account_components_deposit_section_index_tsx"
     },
@@ -23951,7 +23987,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/deposit-section/index.tsx",
       "source_location": "L6",
-      "community": 130,
+      "community": 165,
       "norm_label": "walletstatus",
       "id": "deposit_section_index_walletstatus"
     },
@@ -23960,7 +23996,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/deposit-section/index.tsx",
       "source_location": "L8",
-      "community": 130,
+      "community": 165,
       "norm_label": "wallet",
       "id": "deposit_section_index_wallet"
     },
@@ -23969,7 +24005,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/deposit-section/index.tsx",
       "source_location": "L23",
-      "community": 130,
+      "community": 165,
       "norm_label": "depositsection()",
       "id": "deposit_section_index_depositsection"
     },
@@ -23978,7 +24014,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/checkout/components/cod-deposit-gate/index.tsx",
       "source_location": "L1",
-      "community": 130,
+      "community": 165,
       "norm_label": "index.tsx",
       "id": "apps_storefront_src_modules_checkout_components_cod_deposit_gate_index_tsx"
     },
@@ -23987,7 +24023,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/checkout/components/cod-deposit-gate/index.tsx",
       "source_location": "L6",
-      "community": 130,
+      "community": 165,
       "norm_label": "codwalletstatus",
       "id": "cod_deposit_gate_index_codwalletstatus"
     },
@@ -23996,7 +24032,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/checkout/components/cod-deposit-gate/index.tsx",
       "source_location": "L8",
-      "community": 130,
+      "community": 165,
       "norm_label": "wallet",
       "id": "cod_deposit_gate_index_wallet"
     },
@@ -24005,7 +24041,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/checkout/components/cod-deposit-gate/index.tsx",
       "source_location": "L28",
-      "community": 130,
+      "community": 165,
       "norm_label": "coddepositgate()",
       "id": "cod_deposit_gate_index_coddepositgate"
     },
@@ -24239,7 +24275,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/index.tsx",
       "source_location": "L31",
-      "community": 199,
+      "community": 190,
       "norm_label": "origins",
       "id": "refinement_list_index_origins"
     },
@@ -24284,7 +24320,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/page.tsx",
       "source_location": "L1",
-      "community": 223,
+      "community": 213,
       "norm_label": "page.tsx",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_seller_page_tsx"
     },
@@ -24293,7 +24329,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/page.tsx",
       "source_location": "L7",
-      "community": 223,
+      "community": 213,
       "norm_label": "metadata",
       "id": "seller_page_metadata"
     },
@@ -24302,7 +24338,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/page.tsx",
       "source_location": "L12",
-      "community": 223,
+      "community": 213,
       "norm_label": "props",
       "id": "seller_page_props"
     },
@@ -24311,7 +24347,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/seller/page.tsx",
       "source_location": "L16",
-      "community": 223,
+      "community": 213,
       "norm_label": "sellerdashboardpage()",
       "id": "seller_page_sellerdashboardpage"
     },
@@ -24338,7 +24374,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L45",
-      "community": 1,
+      "community": 223,
       "norm_label": "isvalidphone()",
       "id": "data_onboarding_isvalidphone"
     },
@@ -24347,7 +24383,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/onboarding.ts",
       "source_location": "L238",
-      "community": 1,
+      "community": 223,
       "norm_label": "deferonboarding()",
       "id": "data_onboarding_deferonboarding"
     },
@@ -24437,7 +24473,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L35",
-      "community": 130,
+      "community": 16,
       "norm_label": "regionmap",
       "id": "data_regions_regionmap"
     },
@@ -32337,6 +32373,36 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "apps/storefront/src/modules/producer/components/listing-type-field.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_storefront_src_modules_producer_components_listing_type_field_tsx",
+      "target": "components_listing_type_field_props",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/storefront/src/modules/producer/components/listing-type-field.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "apps_storefront_src_modules_producer_components_listing_type_field_tsx",
+      "target": "components_listing_type_field_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/storefront/src/modules/producer/components/listing-type-field.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "apps_storefront_src_modules_producer_components_listing_type_field_tsx",
+      "target": "components_listing_type_field_listingtypefield",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "apps/storefront/src/modules/producer/components/pickup-window-select.tsx",
       "source_location": "L5",
       "weight": 1.0,
@@ -36112,9 +36178,9 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@login/page.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_app_countrycode_main_account_login_page_tsx",
-      "target": "auth_pending_auth_readpendingauth",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_readpendingauth"
     },
     {
       "relation": "contains",
@@ -37308,9 +37374,9 @@
       "source_file": "apps/storefront/src/app/api/auth/google/callback/route.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_app_api_auth_google_callback_route_ts",
-      "target": "auth_pending_auth_hashcode",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_hashcode"
     },
     {
       "relation": "imports",
@@ -37319,9 +37385,9 @@
       "source_file": "apps/storefront/src/app/api/auth/google/callback/route.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_app_api_auth_google_callback_route_ts",
-      "target": "auth_pending_auth_generatecode",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_generatecode"
     },
     {
       "relation": "imports",
@@ -37330,9 +37396,9 @@
       "source_file": "apps/storefront/src/app/api/auth/google/callback/route.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_app_api_auth_google_callback_route_ts",
-      "target": "auth_pending_auth_setpendingauth",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_setpendingauth"
     },
     {
       "relation": "imports",
@@ -37341,9 +37407,9 @@
       "source_file": "apps/storefront/src/app/api/auth/google/callback/route.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_app_api_auth_google_callback_route_ts",
-      "target": "auth_pending_auth_clearpendingauth",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_clearpendingauth"
     },
     {
       "relation": "imports",
@@ -37352,9 +37418,9 @@
       "source_file": "apps/storefront/src/app/api/auth/google/callback/route.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_app_api_auth_google_callback_route_ts",
-      "target": "auth_pending_auth_readthrottle",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_readthrottle"
     },
     {
       "relation": "imports",
@@ -37363,9 +37429,9 @@
       "source_file": "apps/storefront/src/app/api/auth/google/callback/route.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_app_api_auth_google_callback_route_ts",
-      "target": "auth_pending_auth_writethrottle",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_writethrottle"
     },
     {
       "relation": "imports",
@@ -37374,9 +37440,9 @@
       "source_file": "apps/storefront/src/app/api/auth/google/callback/route.ts",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_app_api_auth_google_callback_route_ts",
-      "target": "email_send_otp_sendotpemail",
-      "confidence_score": 1.0
+      "target": "email_send_otp_sendotpemail"
     },
     {
       "relation": "imports",
@@ -41764,9 +41830,9 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_data_customer_ts",
-      "target": "auth_pending_auth_hashcode",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_hashcode"
     },
     {
       "relation": "imports",
@@ -41775,9 +41841,9 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_data_customer_ts",
-      "target": "auth_pending_auth_generatecode",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_generatecode"
     },
     {
       "relation": "imports",
@@ -41786,9 +41852,9 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_data_customer_ts",
-      "target": "auth_pending_auth_setpendingauth",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_setpendingauth"
     },
     {
       "relation": "imports",
@@ -41797,9 +41863,9 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_data_customer_ts",
-      "target": "auth_pending_auth_readpendingauth",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_readpendingauth"
     },
     {
       "relation": "imports",
@@ -41808,9 +41874,9 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_data_customer_ts",
-      "target": "auth_pending_auth_clearpendingauth",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_clearpendingauth"
     },
     {
       "relation": "imports",
@@ -41819,9 +41885,9 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_data_customer_ts",
-      "target": "auth_pending_auth_readthrottle",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_readthrottle"
     },
     {
       "relation": "imports",
@@ -41830,9 +41896,9 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_data_customer_ts",
-      "target": "auth_pending_auth_writethrottle",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_writethrottle"
     },
     {
       "relation": "contains",
@@ -42927,9 +42993,9 @@
       "source_file": "apps/storefront/src/lib/auth/pending-auth.ts",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_auth_pending_auth_ts",
-      "target": "auth_pending_auth_pendingauth",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_pendingauth"
     },
     {
       "relation": "contains",
@@ -42937,9 +43003,9 @@
       "source_file": "apps/storefront/src/lib/auth/pending-auth.ts",
       "source_location": "L43",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_auth_pending_auth_ts",
-      "target": "auth_pending_auth_hashcode",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_hashcode"
     },
     {
       "relation": "contains",
@@ -42947,9 +43013,9 @@
       "source_file": "apps/storefront/src/lib/auth/pending-auth.ts",
       "source_location": "L49",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_auth_pending_auth_ts",
-      "target": "auth_pending_auth_generatecode",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_generatecode"
     },
     {
       "relation": "contains",
@@ -42957,9 +43023,9 @@
       "source_file": "apps/storefront/src/lib/auth/pending-auth.ts",
       "source_location": "L53",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_auth_pending_auth_ts",
-      "target": "auth_pending_auth_setpendingauth",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_setpendingauth"
     },
     {
       "relation": "contains",
@@ -42967,9 +43033,9 @@
       "source_file": "apps/storefront/src/lib/auth/pending-auth.ts",
       "source_location": "L63",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_auth_pending_auth_ts",
-      "target": "auth_pending_auth_readpendingauth",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_readpendingauth"
     },
     {
       "relation": "contains",
@@ -42977,9 +43043,9 @@
       "source_file": "apps/storefront/src/lib/auth/pending-auth.ts",
       "source_location": "L76",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_auth_pending_auth_ts",
-      "target": "auth_pending_auth_clearpendingauth",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_clearpendingauth"
     },
     {
       "relation": "contains",
@@ -42987,9 +43053,9 @@
       "source_file": "apps/storefront/src/lib/auth/pending-auth.ts",
       "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_auth_pending_auth_ts",
-      "target": "auth_pending_auth_otpthrottle",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_otpthrottle"
     },
     {
       "relation": "contains",
@@ -42997,9 +43063,9 @@
       "source_file": "apps/storefront/src/lib/auth/pending-auth.ts",
       "source_location": "L87",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_auth_pending_auth_ts",
-      "target": "auth_pending_auth_readthrottle",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_readthrottle"
     },
     {
       "relation": "contains",
@@ -43007,9 +43073,9 @@
       "source_file": "apps/storefront/src/lib/auth/pending-auth.ts",
       "source_location": "L102",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_storefront_src_lib_auth_pending_auth_ts",
-      "target": "auth_pending_auth_writethrottle",
-      "confidence_score": 1.0
+      "target": "auth_pending_auth_writethrottle"
     },
     {
       "relation": "contains",
@@ -47999,6 +48065,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/store/seller/products/route.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_store_seller_products_route_ts",
+      "target": "apps_backend_src_modules_listing_types_ts",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "apps/backend/src/api/store/seller/products/[id]/route.ts",
       "source_location": "L13",
       "weight": 1.0,
@@ -48010,12 +48087,34 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/store/seller/products/route.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_store_seller_products_route_ts",
+      "target": "listing_types_listing_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "apps/backend/src/modules/listing/validators.ts",
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_backend_src_modules_listing_validators_ts",
       "target": "listing_types_listingtype"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/src/api/store/seller/products/route.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "apps_backend_src_api_store_seller_products_route_ts",
+      "target": "listing_types_listingtype",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -57571,6 +57670,26 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2010",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_notificationstatusenum"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2015",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_notification"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
       "source_location": "L2038",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -57666,26 +57785,6 @@
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
       "target": "types_query_entry_points_d_refund"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2010",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_notificationstatusenum"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2015",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_notification"
     },
     {
       "relation": "contains",
@@ -63122,5 +63221,5 @@
       "source_file": "apps/backend/src/workflows/README.md"
     }
   ],
-  "built_at_commit": "b271e6af66a06ec9127e35b3ff588a4675722ee8"
+  "built_at_commit": "94a5d953dd21ed78a2fd239d029202710e70b12d"
 }
