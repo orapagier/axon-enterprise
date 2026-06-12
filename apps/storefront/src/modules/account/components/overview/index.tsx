@@ -40,9 +40,10 @@ const Overview = ({ customer, orders }: OverviewProps) => {
     <div className="flex flex-col gap-y-4 small:gap-y-6" data-testid="overview-page-wrapper">
       <AccountStatusBanner />
 
-      {/* Role shortcut */}
-      {roleShortcut && (
+      {/* Role shortcuts */}
+      {roleShortcuts.map((roleShortcut) => (
         <LocalizedClientLink
+          key={roleShortcut.href}
           href={roleShortcut.href}
           className="group bg-gradient-to-br from-brand-green-700 to-brand-green-900 rounded-3xl shadow-soft p-6 small:p-8 text-white flex flex-col xsmall:flex-row xsmall:items-center justify-between gap-4 hover:shadow-medium transition-shadow"
         >
@@ -62,7 +63,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
             </svg>
           </span>
         </LocalizedClientLink>
-      )}
+      ))}
 
       {/* Stat cards */}
       <div className="grid grid-cols-2 gap-3 small:gap-4">
