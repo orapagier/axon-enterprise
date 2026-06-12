@@ -3,6 +3,7 @@ import React from "react"
 import AccountNav from "../components/account-nav"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
+import { ROLE_ICONS, ROLE_LABELS, rolesOf } from "@lib/util/roles"
 
 interface AccountLayoutProps {
   customer: HttpTypes.StoreCustomer | null
