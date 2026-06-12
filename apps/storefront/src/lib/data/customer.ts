@@ -317,6 +317,12 @@ export async function verifyEmailCode(
             email: pending.email,
             metadata: {
               account_type: pending.role ?? "consumer",
+              // Stackable-roles model: consumer is the implied base, the
+              // chosen type is the first stacked role (if any).
+              roles:
+                pending.role && pending.role !== "consumer"
+                  ? [pending.role]
+                  : [],
               profile_completed: pending.role === "rider" ? true : false,
               rider_available: pending.role === "rider" ? true : undefined,
               auth_method: "email_otp",
