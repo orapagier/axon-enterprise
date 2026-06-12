@@ -254,6 +254,8 @@ export async function updateListing(
 
   const { body, fieldErrors } = parseListing(formData, {
     requireHubFields: false,
+    // Editing down to 0 marks the listing sold out without deleting it.
+    minQuantity: 0,
   })
   if (Object.keys(fieldErrors).length) {
     return {
