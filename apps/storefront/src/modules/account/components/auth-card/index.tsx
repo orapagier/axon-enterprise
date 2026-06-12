@@ -74,6 +74,9 @@ type Props = {
   currentHubSlug?: string | null
   googleEnabled?: boolean
   googleError?: string | null
+  /** A Google-started signup parked on the OTP step (from the pending cookie). */
+  pendingOtp?: { email: string; role?: string; hub?: string } | null
+  pendingDevCode?: string | null
 }
 
 const AuthCard = ({
@@ -81,20 +84,26 @@ const AuthCard = ({
   currentHubSlug = null,
   googleEnabled = false,
   googleError = null,
+  pendingOtp = null,
+  pendingDevCode = null,
 }: Props) => {
   const params = useParams()
   const router = useRouter()
   const countryCode = (params?.countryCode as string) || "ph"
 
-  const [mode, setMode] = useState<AuthMode>("signin")
+  const [mode, setMode] = useState<AuthMode>(pendingOtp ? "signup" : "signin")
   // Deliberately starts empty: a pre-selected default once caused signups to
   // land as "consumer" when the role click never registered before submit.
-  const [role, setRole] = useState<AccountType | null>(null)
-  const [hub, setHub] = useState<string>(currentHubSlug ?? "")
-  const [step, setStep] = useState<Step>("method")
-  const [email, setEmail] = useState("")
+  const [role, setRole] = useState<AccountType | null>(
+    (pendingOtp?.role as AccountType) ?? null
+  )
+  const [hub, setHub] = useState<string>(
+    pendingOtp?.hub ?? currentHubSlug ?? ""
+  )
+  const [step, setStep] = useState<Step>(pendingOtp ? "code" : "method")
+  const [email, setEmail] = useState(pendingOtp?.email ?? "")
   const [code, setCode] = useState<string[]>(["", "", "", "", "", ""])
-  const [resendCooldown, setResendCooldown] = useState(0)
+  const [resendCooldown, setResendCooldown] = useState(pendingOtp ? 30 : 0)
   const [showGoogleError, setShowGoogleError] = useState(Boolean(googleError))
 
   const [requestState, requestAction, requestPending] = useActionState<
