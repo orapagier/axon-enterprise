@@ -4,9 +4,7 @@ import { sdk } from "@lib/config"
 import medusaError from "@lib/util/medusa-error"
 import { HttpTypes } from "@medusajs/types"
 import { revalidateTag } from "next/cache"
-import { cookies as nextCookies } from "next/headers"
 import { redirect } from "next/navigation"
-import crypto from "crypto"
 import {
   getAuthHeaders,
   getCacheTag,
