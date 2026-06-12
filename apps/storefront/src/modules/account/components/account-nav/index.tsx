@@ -1,6 +1,7 @@
 "use client"
 
 import { signout } from "@lib/data/customer"
+import { hasRole } from "@lib/util/roles"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { useParams, usePathname } from "next/navigation"
