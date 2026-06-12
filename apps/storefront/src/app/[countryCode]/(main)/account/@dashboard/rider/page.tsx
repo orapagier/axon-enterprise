@@ -30,16 +30,10 @@ export default async function RiderDeliveriesPage({ params }: Props) {
     redirect(`/${countryCode}/account`)
   }
 
-  const meta = (customer.metadata ?? {}) as Record<string, unknown>
+  // No role gate: rider is a stackable role any customer can add, so this
+  // page doubles as the registration entry point. Registered riders (matched
+  // on email) get their run sheet; everyone else gets the signup form.
   const session = await getRiderSession()
-
-  // Reachable by accounts with the rider role, by any account the hub admin
-  // registered as a rider (matched on email) even if its metadata drifted,
-  // and by anyone arriving from "Account types" to register as a rider.
-  const wantsToRegister = !session.rider
-  if (!hasRole(meta, "rider") && !session.rider && !wantsToRegister) {
-    notFound()
-  }
 
   const displayName =
     customer.first_name ||
