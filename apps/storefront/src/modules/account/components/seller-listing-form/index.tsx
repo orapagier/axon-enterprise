@@ -457,11 +457,18 @@ export default function SellerListingForm({ mode, existing }: Props) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
           {FIELDS.map((f) => {
+            // Stock is a direct-listing field; hub intake volume is covered
+            // by the estimated kg above.
+            if (f.name === "quantity" && isSellToHub) return null
+
             const value = values[f.name] ?? ""
             const isFilled = value.trim().length > 0
             const err = f.required
               ? state.fieldErrors?.[f.name] ?? null
               : null
+            // The stock field reads in the unit the producer sells by.
+            const suffix =
+              f.name === "quantity" ? values.unit?.trim() || "kg" : f.suffix
 
             if (f.full) {
               return (
