@@ -152,19 +152,14 @@ export default function AccountButton({
     )
   }
 
-  // Mirrors account-nav: producers (incl. traders / legacy sellers) get a
-  // listings entry, riders get their run sheet.
-  const isProducer =
-    accountType === "producer" ||
-    accountType === "trader" ||
-    accountType === "seller"
-  const isRider = accountType === "rider"
-
-  const links = isProducer
-    ? [MENU_LINKS[0], PRODUCER_LINK, ...MENU_LINKS.slice(1)]
-    : isRider
-      ? [MENU_LINKS[0], RIDER_LINK, ...MENU_LINKS.slice(1)]
-      : MENU_LINKS
+  // Mirrors account-nav: roles stack, so a producer-rider gets both the
+  // listings entry and the run sheet.
+  const links = [
+    MENU_LINKS[0],
+    ...(roles.includes("producer") ? [PRODUCER_LINK] : []),
+    ...(roles.includes("rider") ? [RIDER_LINK] : []),
+    ...MENU_LINKS.slice(1),
+  ]
 
   return (
     <Menu as="div" className="relative">
