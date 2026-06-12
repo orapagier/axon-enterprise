@@ -227,15 +227,44 @@ const TEMPLATES: Record<string, (d: Data) => BuiltEmail> = {
     ),
   }),
 
-  "membership-expired": () => ({
-    subject: `Your membership has expired`,
+  "membership-grace": (d) => ({
+    subject: `Your yearly registration has lapsed — 30 days to renew`,
     html: layout(
-      `Membership expired`,
+      `Renewal due`,
       p(
-        `Your Hub Membership has expired, so Special delivery and member pricing are paused.`
-      ) + p(`Renew anytime at the hub counter or from your account page.`)
+        `Your yearly registration has lapsed. You have until <strong>${manilaDate(
+          d.grace_until_ms
+        )}</strong> to renew at the hub counter — your account keeps working as usual in the meantime.`
+      ) +
+        p(
+          `If the fee isn't settled by then, your Producer/Trader account type is removed automatically and your account continues as a regular Consumer. You can always re-add the account type later from your account page.`
+        )
     ),
   }),
+
+  "membership-expired": (d) => {
+    const removed = Array.isArray(d.removed_roles)
+      ? (d.removed_roles as string[])
+      : []
+    const roleLabel =
+      removed.length > 0
+        ? removed
+            .map((r) => r.charAt(0).toUpperCase() + r.slice(1))
+            .join(" and ")
+        : "Producer/Trader"
+    return {
+      subject: `Your membership has expired`,
+      html: layout(
+        `Membership expired`,
+        p(
+          `Your yearly registration was not renewed within the 30-day grace window, so your <strong>${roleLabel}</strong> account type has been removed. Your account continues as a regular Consumer — browsing and ordering work as before.`
+        ) +
+          p(
+            `Want it back? Re-add the account type from your account page and settle the fee at the hub counter, same as your first registration.`
+          )
+      ),
+    }
+  },
 }
 
 export const EMAIL_TEMPLATE_NAMES = Object.keys(TEMPLATES)
