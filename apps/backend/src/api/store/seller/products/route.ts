@@ -352,9 +352,10 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
               ? [{ url: body.thumbnail.trim() }]
               : undefined,
             origin_country: body.origin_country?.trim() || undefined,
-            // Always draft: hub reviews + sets the retail price before
-            // approving via /admin/listings.
-            status: "draft",
+            // sell_to_freshhub stays draft until the hub reviews + sets the
+            // retail price via /admin/listings. Direct listings are live
+            // immediately — the producer is the seller of record.
+            status: isDirect ? "published" : "draft",
             shipping_profile_id: shippingProfileId,
             sales_channels: salesChannelId ? [{ id: salesChannelId }] : [],
             options: [{ title: "Size", values: ["Default"] }],
