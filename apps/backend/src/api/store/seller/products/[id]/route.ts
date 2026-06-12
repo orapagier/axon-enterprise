@@ -42,7 +42,7 @@ async function assertSeller(
     return null
   }
   const meta = (customer.metadata ?? {}) as Record<string, unknown>
-  if (meta.account_type !== "producer" && meta.account_type !== "seller") {
+  if (!hasRole(meta, "producer")) {
     res.status(403).json({ error: "Producer account required" })
     return null
   }
