@@ -65,6 +65,8 @@ const GOOGLE_ERROR_COPY: Record<string, string> = {
   no_account:
     "No account found for that Google email. Switch to Sign up to create one.",
   auth_failed: "Google sign-in didn't go through. Please try again.",
+  otp_send_failed:
+    "We couldn't email you a verification code. Please try again later or contact support.",
 }
 
 type Props = {
