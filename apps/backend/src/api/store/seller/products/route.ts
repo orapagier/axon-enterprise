@@ -326,6 +326,15 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const suffix = Math.random().toString(36).slice(2, 8)
   const uniqueHandle = `${baseSlug}-${suffix}`
 
+  // Seller of record shown to buyers: the producer for direct listings, the
+  // hub for sell_to_freshhub (stamped on metadata so the storefront can
+  // attribute without joining custom modules through /store/products).
+  const producerName =
+    (typeof meta.business_name === "string" && meta.business_name.trim()) ||
+    (customer.company_name ?? "").trim() ||
+    [customer.first_name, customer.last_name].filter(Boolean).join(" ").trim() ||
+    null
+
   let result: { id?: string }[] | undefined
   try {
     const workflowRes = await createProductsWorkflow(req.scope).run({
