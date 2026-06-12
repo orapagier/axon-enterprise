@@ -82,12 +82,11 @@ export default function MembershipRequestForm({ heading, subheading }: Props) {
         </span>
         <div>
           <h3 className="font-heading text-h3 text-grey-90 leading-tight">
-            Submit your ₱{MEMBERSHIP_FEE_PHP} payment
+            {heading ?? `Submit your ₱${MEMBERSHIP_FEE_PHP} payment`}
           </h3>
           <p className="text-caption text-grey-50 mt-0.5 leading-relaxed max-w-md">
-            Pay offline first, then paste your reference number here. An admin
-            verifies and activates your membership — usually within a business
-            day.
+            {subheading ??
+              "Pay in cash at the counter or via GCash, then submit here. An admin verifies the payment and activates you — usually within a business day."}
           </p>
         </div>
       </header>
