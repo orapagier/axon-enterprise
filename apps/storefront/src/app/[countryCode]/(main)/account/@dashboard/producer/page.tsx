@@ -1,5 +1,6 @@
 import { retrieveCustomer } from "@lib/data/customer"
 import { listMyListings } from "@lib/data/seller"
+import { hasRole } from "@lib/util/roles"
 import SellerDashboard from "@modules/account/components/seller-dashboard"
 import { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
