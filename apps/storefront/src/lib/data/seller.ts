@@ -301,52 +301,9 @@ export async function updateListing(
   redirect(`/${countryCode}/account/producer`)
 }
 
-export type UploadResult = {
-  ok: boolean
-  url?: string | null
-  urls?: string[]
-  error?: string | null
-}
-
-/**
- * Forwards a multipart upload from the storefront to the Medusa backend's
- * /store/seller/uploads endpoint. Form is built client-side; this action
- * just relays it with auth headers so the browser doesn't need the bearer
- * token in its JS bundle.
- */
-export async function uploadListingPhoto(
-  formData: FormData
-): Promise<UploadResult> {
-  // Re-use the auth + publishable key but strip Content-Type so fetch sets
-  // the correct multipart boundary.
-  const headers = {
-    ...(await getAuthHeaders()),
-    "x-publishable-api-key": PUBLISHABLE_KEY,
-  } as Record<string, string>
-
-  let res: Response
-  try {
-    res = await fetch(`${BACKEND_URL}/store/seller/uploads`, {
-      method: "POST",
-      headers,
-      body: formData,
-      cache: "no-store",
-    })
-  } catch (e) {
-    return { ok: false, error: "Couldn't reach the server. Try again." }
-  }
-
-  if (!res.ok) {
-    const body = (await res.json().catch(() => ({}))) as { error?: string }
-    return { ok: false, error: body.error ?? "Upload failed." }
-  }
-
-  const data = (await res.json()) as {
-    files: Array<{ id: string; url: string }>
-  }
-  const urls = (data.files ?? []).map((f) => f.url).filter(Boolean)
-  return { ok: true, url: urls[0] ?? null, urls }
-}
+// Photo uploads go through the /api/seller/upload route handler instead of a
+// server action — server actions reject large multipart bodies and surface a
+// bare "Failed to fetch" in the browser.
 
 export async function deleteListing(id: string, countryCode: string) {
   const res = await fetch(`${BACKEND_URL}/store/seller/products/${id}`, {

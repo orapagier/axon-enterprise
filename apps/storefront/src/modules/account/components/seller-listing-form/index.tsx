@@ -3,7 +3,6 @@
 import {
   createListing,
   updateListing,
-  uploadListingPhoto,
   type ListingFormState,
   type SellerListing,
 } from "@lib/data/seller"
@@ -259,19 +258,28 @@ export default function SellerListingForm({ mode, existing }: Props) {
     startUpload(async () => {
       const fd = new FormData()
       fd.append("files", file)
+      // Plain fetch to a same-origin route handler — server actions choke on
+      // multipart bodies (size limit / origin checks) and surface a bare
+      // "Failed to fetch" when they do.
       try {
-        const result = await uploadListingPhoto(fd)
-        if (result.ok && result.url) {
-          setPhotoUrl(result.url)
-        } else {
-          setUploadError(result.error ?? "Upload failed.")
+        const res = await fetch("/api/seller/upload", {
+          method: "POST",
+          body: fd,
+        })
+        const data = (await res.json().catch(() => ({}))) as {
+          files?: Array<{ url?: string }>
+          error?: string
         }
-      } catch (e) {
-        const message =
-          e instanceof Error && e.message
-            ? e.message
-            : "Upload failed — try a smaller image."
-        setUploadError(message)
+        const url = data.files?.[0]?.url
+        if (res.ok && url) {
+          setPhotoUrl(url)
+        } else {
+          setUploadError(data.error ?? "Upload failed. Please try again.")
+        }
+      } catch {
+        setUploadError(
+          "Couldn't reach the server — check your connection and try again."
+        )
       }
     })
   }

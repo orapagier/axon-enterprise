@@ -18,23 +18,32 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
     typeof meta.hub_name === "string" && meta.hub_name.trim()
       ? meta.hub_name
       : null
+  const category = typeof meta.category === "string" ? meta.category : null
 
   return (
     <div id="product-info">
       <div className="flex flex-col gap-y-4">
-        {/* Collection breadcrumb */}
-        {product.collection && (
-          <LocalizedClientLink
-            href={`/collections/${product.collection.handle}`}
-            className="text-caption font-semibold text-brand-green-600 uppercase tracking-wider hover:text-brand-green-700 transition-colors"
-          >
-            {product.collection.title}
-          </LocalizedClientLink>
+        {/* Collection / category eyebrow */}
+        {(product.collection || category) && (
+          <div className="flex items-center gap-x-2">
+            {product.collection ? (
+              <LocalizedClientLink
+                href={`/collections/${product.collection.handle}`}
+                className="text-caption font-bold text-brand-green-600 uppercase tracking-[0.14em] hover:text-brand-green-700 transition-colors"
+              >
+                {product.collection.title}
+              </LocalizedClientLink>
+            ) : (
+              <span className="text-caption font-bold text-brand-green-600 uppercase tracking-[0.14em]">
+                {category}
+              </span>
+            )}
+          </div>
         )}
 
         {/* Title */}
         <h1
-          className="text-h1 small:text-display font-heading text-grey-90"
+          className="text-h1 small:text-display font-heading text-grey-90 leading-tight tracking-[-0.015em]"
           data-testid="product-title"
         >
           {product.title}
@@ -44,25 +53,35 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         {(product.origin_country || sellingMode) && (
           <div className="flex flex-wrap items-center gap-2">
             {product.origin_country && (
-              <div className="px-3 py-1.5 bg-brand-green-50 rounded-lg">
-                <span className="text-caption font-medium text-brand-green-700">
-                  Origin: {product.origin_country}
-                </span>
-              </div>
+              <span className="inline-flex items-center gap-x-1.5 pl-2.5 pr-3 py-1.5 rounded-full bg-brand-green-50 border border-brand-green-100 text-caption font-semibold text-brand-green-700">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                {product.origin_country}
+              </span>
             )}
             {sellingMode &&
               (isDirect ? (
-                <div className="px-3 py-1.5 bg-blue-50 rounded-lg border border-blue-100">
-                  <span className="text-caption font-medium text-blue-700">
-                    Sold by {sellerName ?? "the producer"} · Producer Direct
-                  </span>
-                </div>
+                <span className="inline-flex items-center gap-x-1.5 pl-2.5 pr-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-caption font-semibold text-blue-700">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  Sold by {sellerName ?? "the producer"}
+                  <span className="text-blue-400">·</span>
+                  Producer Direct
+                </span>
               ) : (
-                <div className="px-3 py-1.5 bg-purple-50 rounded-lg border border-purple-100">
-                  <span className="text-caption font-medium text-purple-700">
-                    Sold by {hubName ? `${hubName} Hub` : "FreshHub"} · Verified
-                  </span>
-                </div>
+                <span className="inline-flex items-center gap-x-1.5 pl-2.5 pr-3 py-1.5 rounded-full bg-brand-green-700 text-caption font-semibold text-white shadow-soft">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 12l2 2 4-4" />
+                    <circle cx="12" cy="12" r="10" />
+                  </svg>
+                  {hubName ? `${hubName} Hub` : "FreshHub"}
+                  <span className="text-white/60">·</span>
+                  Verified
+                </span>
               ))}
           </div>
         )}
@@ -96,7 +115,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         {/* Description */}
         {product.description && (
           <p
-            className="text-body text-grey-50 whitespace-pre-line leading-relaxed"
+            className="text-body text-grey-60 whitespace-pre-line leading-relaxed"
             data-testid="product-description"
           >
             {product.description}
