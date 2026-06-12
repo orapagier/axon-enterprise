@@ -5,6 +5,7 @@ import {
   isPayoutChannelConfigured,
   MEMBERSHIP_FEE_PHP,
   MEMBERSHIP_PAYOUT,
+  methodNeedsReference,
   type MembershipPaymentMethod,
 } from "@lib/util/membership"
 import { useActionState, useEffect, useState } from "react"
@@ -19,24 +20,31 @@ const METHODS: ReadonlyArray<{
   blurb: string
 }> = [
   {
+    id: "otc",
+    icon: "💵",
+    blurb: "Walk in and pay cash at your hub counter. No reference needed — the cashier matches you by account email.",
+  },
+  {
     id: "gcash",
     icon: "📱",
     blurb: "Send via the GCash app, then paste the 13-digit reference below.",
   },
-  {
-    id: "bank",
-    icon: "🏦",
-    blurb: "Bank transfer or over-the-counter deposit. Use the transaction number on your slip.",
-  },
 ]
 
-export default function MembershipRequestForm() {
+type Props = {
+  // Override the header so the same form serves both the Hub Member upgrade
+  // and the Producer/Trader yearly registration on the Account types page.
+  heading?: string
+  subheading?: string
+}
+
+export default function MembershipRequestForm({ heading, subheading }: Props) {
   const [state, action, pending] = useActionState<FormState, FormData>(
     requestMembership,
     INITIAL
   )
 
-  const [method, setMethod] = useState<MembershipPaymentMethod>("gcash")
+  const [method, setMethod] = useState<MembershipPaymentMethod>("otc")
   const [reference, setReference] = useState("")
   const [copied, setCopied] = useState<string | null>(null)
 
@@ -48,7 +56,8 @@ export default function MembershipRequestForm() {
 
   const channel = MEMBERSHIP_PAYOUT[method]
   const channelReady = isPayoutChannelConfigured(channel)
-  const referenceLooksValid = reference.trim().length >= 4
+  const needsReference = methodNeedsReference(method)
+  const referenceLooksValid = !needsReference || reference.trim().length >= 4
 
   const handleCopy = async (value: string, key: string) => {
     if (!value) return
