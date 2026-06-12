@@ -150,9 +150,22 @@ export default function MembershipRequestForm({ heading, subheading }: Props) {
 
       <div className="px-6 small:px-7 py-5 border-b border-grey-10">
         <div className="text-caption font-semibold text-grey-70 uppercase tracking-[0.06em] mb-3">
-          2. Send ₱{MEMBERSHIP_FEE_PHP} to
+          {method === "otc"
+            ? `2. Pay ₱${MEMBERSHIP_FEE_PHP} at the counter`
+            : `2. Send ₱${MEMBERSHIP_FEE_PHP} to`}
         </div>
-        {channelReady ? (
+        {method === "otc" ? (
+          <div className="rounded-xl bg-grey-5 border border-grey-10 p-4 flex items-start gap-x-3">
+            <span className="text-xl leading-none mt-0.5">🏪</span>
+            <div className="text-body-sm text-grey-70 leading-relaxed">
+              Visit your hub counter and pay{" "}
+              <b className="text-grey-90">₱{MEMBERSHIP_FEE_PHP} in cash</b>.
+              Tell the cashier the email on your FreshHub account so the admin
+              can match your payment. You can submit this request before or
+              after paying — activation happens once the cash is verified.
+            </div>
+          </div>
+        ) : channelReady ? (
           <div className="rounded-xl bg-grey-5 border border-grey-10 p-4 space-y-3">
             <PaymentLine
               label="Account name"
