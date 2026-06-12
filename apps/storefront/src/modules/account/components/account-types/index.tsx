@@ -169,6 +169,26 @@ export default function AccountTypesPanel({
   const isRider = roles.includes("rider") || riderStatus !== null
   const [openForm, setOpenForm] = useState<"producer" | "trader" | null>(null)
 
+  // A Producer/Trader role only fully activates once the yearly registration
+  // is paid and verified. Until then the payment form below the cards is the
+  // user's next step.
+  const registrationPaid =
+    membershipStatus === "active" || membershipStatus === "grace"
+  const registrationPending = membershipStatus === "pending"
+  const paymentDue = (isProducer || isTrader) && !registrationPaid
+
+  const registrationBadge = registrationPaid ? (
+    membershipStatus === "grace" ? (
+      <StatusBadge tone="warn">Renewal due</StatusBadge>
+    ) : (
+      <StatusBadge tone="active">Active</StatusBadge>
+    )
+  ) : registrationPending ? (
+    <StatusBadge tone="pending">Verifying payment</StatusBadge>
+  ) : (
+    <StatusBadge tone="warn">Payment required</StatusBadge>
+  )
+
   const registrationLine =
     membershipStatus === "active" && membershipExpiresAt ? (
       <>
@@ -187,17 +207,21 @@ export default function AccountTypesPanel({
         or this account type is removed automatically.
       </>
     ) : membershipStatus === "pending" ? (
-      <>Registration payment submitted — waiting for hub verification.</>
+      <>
+        Registration payment submitted — an admin verifies it manually,
+        usually within a business day.
+      </>
     ) : (
       <>
-        Pay the yearly registration at the hub counter (or request it from the{" "}
-        <LocalizedClientLink
-          href="/account/membership"
+        <b className="text-grey-80">One step left:</b> pay the ₱
+        {MEMBERSHIP_FEE_PHP} yearly registration —{" "}
+        <a
+          href="#registration-payment"
           className="underline hover:text-brand-green-700"
         >
-          Membership page
-        </LocalizedClientLink>
-        ) so the hub can activate it.
+          cash at the counter or GCash, below
+        </a>
+        .
       </>
     )
 
