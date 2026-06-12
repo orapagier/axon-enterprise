@@ -269,15 +269,7 @@ export default function AccountTypesPanel({
       <Card
         icon={ROLE_ICONS.producer}
         title="Producer"
-        badge={
-          isProducer ? (
-            membershipStatus === "grace" ? (
-              <StatusBadge tone="warn">Renewal due</StatusBadge>
-            ) : (
-              <StatusBadge tone="active">Active</StatusBadge>
-            )
-          ) : undefined
-        }
+        badge={isProducer ? registrationBadge : undefined}
       >
         {isProducer ? (
           <>
