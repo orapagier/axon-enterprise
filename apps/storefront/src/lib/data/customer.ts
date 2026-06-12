@@ -436,16 +436,20 @@ export async function requestMembership(
   }
 
   const rawMethod = String(formData.get("payment_method") ?? "")
-  const paymentMethod: "gcash" | "bank" | null =
-    rawMethod === "gcash" || rawMethod === "bank" ? rawMethod : null
+  const paymentMethod: "otc" | "gcash" | "bank" | null =
+    rawMethod === "otc" || rawMethod === "gcash" || rawMethod === "bank"
+      ? rawMethod
+      : null
   if (!paymentMethod) {
     return { ok: false, error: "Please choose a payment method." }
   }
 
+  // OTC cash has no receipt reference — the cashier matches the payer by
+  // account email, so the admin verifies the walk-in payment manually.
   const paymentReference = String(formData.get("payment_reference") ?? "")
     .trim()
     .slice(0, 80)
-  if (paymentReference.length < 4) {
+  if (paymentMethod !== "otc" && paymentReference.length < 4) {
     return {
       ok: false,
       error: "Enter the reference number from your GCash or bank receipt.",
