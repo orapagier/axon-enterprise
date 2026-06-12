@@ -297,6 +297,11 @@ export default function SellerListingForm({ mode, existing }: Props) {
       <input type="hidden" name="countryCode" value={countryCode} />
       <input type="hidden" name="thumbnail" value={photoUrl} />
       {existing && <input type="hidden" name="id" value={existing.id} />}
+      {/* The type toggle is disabled (non-submitting) once locked in edit
+          mode, so relay the value for the server action's validation. */}
+      {mode === "edit" && (
+        <input type="hidden" name="listing_type" value={values.listing_type} />
+      )}
 
       {/* Banner */}
       <div className="relative px-7 small:px-12 py-7 bg-gradient-to-br from-brand-gold-100 via-brand-cream-100 to-white">
