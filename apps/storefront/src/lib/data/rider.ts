@@ -189,6 +189,9 @@ export async function registerRider(
       body: JSON.stringify({ full_name, phone, hub_id }),
       headers: authHeaders,
     })
+    // Registration stacked the rider role onto the customer's metadata —
+    // refresh the cached customer so the nav shows Deliveries right away.
+    revalidateTag(await getCacheTag("customers"))
     return { ok: true, error: null }
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : String(e) }
