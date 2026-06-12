@@ -149,6 +149,7 @@ export default function SellerListingForm({ mode, existing }: Props) {
     seed.pickup_window_id = ""
     seed.estimated_kg = ""
     seed.listing_status = (defaults.listing_status as string) ?? "draft"
+    seed.listing_type = (defaults.listing_type as string) ?? "direct_to_consumer"
     return seed
   })
 
