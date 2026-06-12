@@ -10,26 +10,31 @@ type OverviewProps = {
 }
 
 const Overview = ({ customer, orders }: OverviewProps) => {
-  const accountType = (customer?.metadata as Record<string, unknown> | null)
-    ?.account_type as string | undefined
-  const isProducer = accountType === "producer" || accountType === "seller"
-  const isRider = accountType === "rider"
+  const meta = customer?.metadata as Record<string, unknown> | null
 
-  const roleShortcut = isRider
-    ? {
-        href: "/account/rider",
-        title: "Your deliveries",
-        copy: "Open your run sheet, mark stops delivered, and track the cash you hold.",
-        cta: "Open run sheet",
-      }
-    : isProducer
-      ? {
-          href: "/account/producer",
-          title: "Your listings",
-          copy: "Post a harvest, update prices, and manage what's on the shelf.",
-          cta: "Manage listings",
-        }
-      : null
+  // Roles stack — a producer-rider gets both shortcuts.
+  const roleShortcuts = [
+    ...(hasRole(meta, "producer")
+      ? [
+          {
+            href: "/account/producer",
+            title: "Your listings",
+            copy: "Post a harvest, update prices, and manage what's on the shelf.",
+            cta: "Manage listings",
+          },
+        ]
+      : []),
+    ...(hasRole(meta, "rider")
+      ? [
+          {
+            href: "/account/rider",
+            title: "Your deliveries",
+            copy: "Open your run sheet, mark stops delivered, and track the cash you hold.",
+            cta: "Open run sheet",
+          },
+        ]
+      : []),
+  ]
 
   return (
     <div className="flex flex-col gap-y-4 small:gap-y-6" data-testid="overview-page-wrapper">
