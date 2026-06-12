@@ -549,7 +549,8 @@ const AuthCard = ({
           <input type="hidden" name="countryCode" value={countryCode} />
           <input type="hidden" name="code" value={fullCode} />
 
-          {process.env.NODE_ENV !== "production" && requestState?.devCode && (
+          {process.env.NODE_ENV !== "production" &&
+            (requestState?.devCode || pendingDevCode) && (
             <div className="flex items-start gap-x-2 px-3.5 py-2.5 rounded-xl bg-brand-gold-50 border border-brand-gold-200 text-caption text-brand-gold-800">
               <svg
                 width="14"
