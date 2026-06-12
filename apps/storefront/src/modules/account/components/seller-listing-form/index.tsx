@@ -330,8 +330,9 @@ export default function SellerListingForm({ mode, existing }: Props) {
                 : "Edit listing"}
             </h1>
             <p className="text-body-sm text-grey-60 mt-2 leading-relaxed max-w-xl">
-              Listings start as drafts. Once you submit, our team reviews the
-              details and publishes them to the Hub — usually within 24 hours.
+              {isSellToHub
+                ? "Sell-to-FreshHub listings start as drafts. Once you submit, the hub receives your harvest, reviews the details, and publishes the product — usually within 24 hours."
+                : "Direct listings go live in the shop as soon as you submit. You're the seller, so freshness and quality are your responsibility — buyers see a notice about this."}
             </p>
           </div>
         </div>
