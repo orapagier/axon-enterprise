@@ -184,6 +184,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     category?: string
     unit?: string
     price?: number
+    quantity?: number
     currency_code?: string
     listing_type?: string
     harvest_date?: string
