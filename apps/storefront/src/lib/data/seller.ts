@@ -91,7 +91,12 @@ export type ListingFormState = {
   createdId?: string | null
 }
 
-function parseListing(formData: FormData): {
+function parseListing(
+  formData: FormData,
+  // Hub-intake fields (harvest/pickup/kg) are only collected at creation;
+  // they're locked after the slot is reserved, so updates skip them.
+  opts: { requireHubFields: boolean } = { requireHubFields: true }
+): {
   body: Record<string, unknown>
   fieldErrors: Record<string, string>
 } {
