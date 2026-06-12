@@ -247,6 +247,9 @@ export async function verifyEmailCode(
         await sdk.store.customer.create(
           {
             email: pending.email,
+            // Names ride along when the verification started from Google.
+            first_name: pending.firstName || undefined,
+            last_name: pending.lastName || undefined,
             metadata: {
               account_type: pending.role ?? "consumer",
               // Stackable-roles model: consumer is the implied base, the
@@ -257,7 +260,7 @@ export async function verifyEmailCode(
                   : [],
               profile_completed: pending.role === "rider" ? true : false,
               rider_available: pending.role === "rider" ? true : undefined,
-              auth_method: "email_otp",
+              auth_method: pending.authMethod ?? "email_otp",
             },
           },
           {},
