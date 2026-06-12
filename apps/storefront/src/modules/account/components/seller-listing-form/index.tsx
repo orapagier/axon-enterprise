@@ -271,22 +271,23 @@ export default function SellerListingForm({ mode, existing }: Props) {
   }
 
   const isSellToHub = values.listing_type === "sell_to_freshhub"
+  const isDraft = values.listing_status === "draft"
 
   const progressPct = useMemo(() => {
     // Hub-logistics fields live outside FIELDS and are only required when the
-    // harvest is committed to a hub pickup slot (sell_to_freshhub).
+    // harvest is committed to a hub pickup slot (sell_to_freshhub). Once the
+    // slot is reserved (listing no longer draft) they're locked and shouldn't
+    // gate edits to the product details.
     const requiredKeys = [
       ...FIELDS.filter((f) => f.required).map((f) => f.name),
-      ...(isSellToHub
+      ...(isSellToHub && isDraft
         ? ["harvest_date", "pickup_window_id", "estimated_kg"]
         : []),
     ]
     const filled = requiredKeys.filter((k) => values[k]?.trim().length).length
     return Math.round((filled / requiredKeys.length) * 100)
-  }, [values, isSellToHub])
+  }, [values, isSellToHub, isDraft])
   const ready = progressPct === 100
-
-  const isDraft = values.listing_status === "draft"
 
   return (
     <form
