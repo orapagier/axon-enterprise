@@ -175,8 +175,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/account/templates/login-template.tsx": {
-    "mtime": 1781206092.2939606,
-    "ast_hash": "b21534aff8d0ba83e46813d4b41b51a5",
+    "mtime": 1781242221.9505804,
+    "ast_hash": "2f0a6cded24d09216f97e959f8e9445a",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/account/components/address-card/add-address.tsx": {
@@ -295,8 +295,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/account/components/auth-card/index.tsx": {
-    "mtime": 1781206110.8232358,
-    "ast_hash": "c0e0d5b8c686629fe7489bd680593b6c",
+    "mtime": 1781242472.8800452,
+    "ast_hash": "ab454c40324a31ab9f2cc1bad844edd4",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/account/components/profile-phone/index.tsx": {
@@ -1055,8 +1055,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/app/[countryCode]/(main)/account/@login/page.tsx": {
-    "mtime": 1781204434.9403536,
-    "ast_hash": "071d402276bd81fe9c563a7c474b98c9",
+    "mtime": 1781242408.1089594,
+    "ast_hash": "3c25dfc4232460984b52e9cb3c204036",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/app/[countryCode]/(main)/account/@login/default.tsx": {
@@ -1175,8 +1175,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/app/api/auth/google/callback/route.ts": {
-    "mtime": 1781224959.434834,
-    "ast_hash": "c8850abf5415381993111984241d1440",
+    "mtime": 1781242383.4694352,
+    "ast_hash": "7116603f2644ab679d62194e4a774ae5",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/app/api/revalidate/route.ts": {
@@ -1300,8 +1300,8 @@
     "semantic_hash": "2af5dafdbbf0c8aa820a251768d2fb07"
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/lib/data/customer.ts": {
-    "mtime": 1781229725.1909974,
-    "ast_hash": "84e27f3c1df5632b226df44ee60d41f1",
+    "mtime": 1781242101.8021548,
+    "ast_hash": "4d0a2a384d798bfc118b7fee62e06ab9",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/lib/data/pickup.ts": {
@@ -1327,6 +1327,11 @@
   "/home/ramlej/MFH/freshhub/apps/storefront/src/lib/auth/google-oauth.ts": {
     "mtime": 1781185138.019525,
     "ast_hash": "c20a2d92576e1d009aef31dc7a8db191",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/storefront/src/lib/auth/pending-auth.ts": {
+    "mtime": 1781242004.8227725,
+    "ast_hash": "aec361e888340eb098a6522f71bf3ac0",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/lib/util/env.ts": {
