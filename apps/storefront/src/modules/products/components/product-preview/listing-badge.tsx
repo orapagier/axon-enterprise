@@ -13,10 +13,8 @@ export default function ListingBadge({ listingType }: Props) {
 
   return (
     <span
-      className={`inline-flex items-center gap-x-1.5 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-[0.12em] ${
-        isDirect
-          ? "bg-blue-50 text-blue-700 border border-blue-100"
-          : "bg-purple-50 text-purple-700 border border-purple-100"
+      className={`inline-flex items-center px-2 py-0.5 rounded-md bg-white/95 text-[9px] font-bold uppercase tracking-[0.12em] shadow-medium whitespace-nowrap ${
+        isDirect ? "text-blue-700" : "text-purple-700"
       }`}
       title={
         isDirect
