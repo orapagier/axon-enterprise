@@ -285,6 +285,26 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     }
   }
 
+  // ----- Restock: upsert the inventory level at the hub location -----
+  if (body.quantity !== undefined && isDirect) {
+    const variantId = variant?.id
+    if (!variantId) {
+      res.status(500).json({ error: "Listing has no variant to restock." })
+      return
+    }
+    try {
+      await setVariantStock(req.scope, variantId, quantity)
+    } catch (err) {
+      console.error("Restock failed:", err)
+      res.status(500).json({
+        error:
+          "Your listing details were saved, but updating the available stock failed. Please try again.",
+        code: "STOCK_UPDATE_FAILED",
+      })
+      return
+    }
+  }
+
   // ----- Update listing row -----
   if (existingListing?.id) {
     const listingService: ListingModuleService = req.scope.resolve(LISTING_MODULE)
