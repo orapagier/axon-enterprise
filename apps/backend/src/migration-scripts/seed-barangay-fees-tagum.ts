@@ -61,7 +61,7 @@ export default async function seedBarangayFeesTagum({ container }: ExecArgs) {
   const feesService: DeliveryFeesModuleService =
     container.resolve(DELIVERY_FEES_MODULE)
 
-  const hub = (await hubService.listHubs({ slug: "tagum" }, { take: 1 }))[0]
+  const hub = (await hubService.listHubs({ slug: "tagumcityhub" }, { take: 1 }))[0]
   if (!hub) {
     logger.error(
       "Tagum hub not found. Run seed-hubs.ts first, then re-run this seed."

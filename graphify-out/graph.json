@@ -17499,7 +17499,7 @@
       "source_file": "apps/backend/src/jobs/rider-unremitted-tick.ts",
       "source_location": "L1",
       "id": "apps_backend_src_jobs_rider_unremitted_tick_ts",
-      "community": 250,
+      "community": 186,
       "norm_label": "rider-unremitted-tick.ts"
     },
     {
@@ -17508,7 +17508,7 @@
       "source_file": "apps/backend/src/jobs/rider-unremitted-tick.ts",
       "source_location": "L25",
       "id": "jobs_rider_unremitted_tick_config",
-      "community": 250,
+      "community": 186,
       "norm_label": "config"
     },
     {
@@ -17517,7 +17517,7 @@
       "source_file": "apps/backend/src/jobs/rider-unremitted-tick.ts",
       "source_location": "L30",
       "id": "jobs_rider_unremitted_tick_limit_centavos",
-      "community": 250,
+      "community": 186,
       "norm_label": "limit_centavos"
     },
     {
@@ -17526,7 +17526,7 @@
       "source_file": "apps/backend/src/jobs/rider-unremitted-tick.ts",
       "source_location": "L33",
       "id": "jobs_rider_unremitted_tick_aging_days",
-      "community": 250,
+      "community": 186,
       "norm_label": "aging_days"
     },
     {
@@ -17535,7 +17535,7 @@
       "source_file": "apps/backend/src/jobs/rider-unremitted-tick.ts",
       "source_location": "L36",
       "id": "jobs_rider_unremitted_tick_riderunremittedtick",
-      "community": 250,
+      "community": 186,
       "norm_label": "riderunremittedtick()"
     },
     {
@@ -19159,136 +19159,10 @@
       "norm_label": "taxprovider"
     },
     {
-      "label": "WorkflowExecutionStateEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2138",
-      "id": "types_query_entry_points_d_workflowexecutionstateenum",
-      "community": 0,
-      "norm_label": "workflowexecutionstateenum"
-    },
-    {
-      "label": "WorkflowExecution",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2147",
-      "id": "types_query_entry_points_d_workflowexecution",
-      "community": 0,
-      "norm_label": "workflowexecution"
-    },
-    {
-      "label": "NotificationStatusEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2162",
-      "id": "types_query_entry_points_d_notificationstatusenum",
-      "community": 0,
-      "norm_label": "notificationstatusenum"
-    },
-    {
-      "label": "Notification",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2167",
-      "id": "types_query_entry_points_d_notification",
-      "community": 0,
-      "norm_label": "notification"
-    },
-    {
-      "label": "AccountHolder",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2190",
-      "id": "types_query_entry_points_d_accountholder",
-      "community": 0,
-      "norm_label": "accountholder"
-    },
-    {
-      "label": "Capture",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2205",
-      "id": "types_query_entry_points_d_capture",
-      "community": 0,
-      "norm_label": "capture"
-    },
-    {
-      "label": "PaymentCollectionStatusEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2219",
-      "id": "types_query_entry_points_d_paymentcollectionstatusenum",
-      "community": 0,
-      "norm_label": "paymentcollectionstatusenum"
-    },
-    {
-      "label": "PaymentCollection",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2229",
-      "id": "types_query_entry_points_d_paymentcollection",
-      "community": 0,
-      "norm_label": "paymentcollection"
-    },
-    {
-      "label": "PaymentProvider",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2256",
-      "id": "types_query_entry_points_d_paymentprovider",
-      "community": 0,
-      "norm_label": "paymentprovider"
-    },
-    {
-      "label": "PaymentSessionStatusEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2268",
-      "id": "types_query_entry_points_d_paymentsessionstatusenum",
-      "community": 0,
-      "norm_label": "paymentsessionstatusenum"
-    },
-    {
-      "label": "Payment",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2276",
-      "id": "types_query_entry_points_d_payment",
-      "community": 0,
-      "norm_label": "payment"
-    },
-    {
-      "label": "PaymentSession",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2298",
-      "id": "types_query_entry_points_d_paymentsession",
-      "community": 0,
-      "norm_label": "paymentsession"
-    },
-    {
-      "label": "RefundReason",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2318",
-      "id": "types_query_entry_points_d_refundreason",
-      "community": 0,
-      "norm_label": "refundreason"
-    },
-    {
-      "label": "Refund",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2331",
-      "id": "types_query_entry_points_d_refund",
-      "community": 0,
-      "norm_label": "refund"
-    },
-    {
       "label": "GeoZoneType",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2348",
+      "source_location": "L2138",
       "id": "types_query_entry_points_d_geozonetype",
       "community": 0,
       "norm_label": "geozonetype"
@@ -19297,7 +19171,7 @@
       "label": "ShippingOptionPriceType",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2354",
+      "source_location": "L2144",
       "id": "types_query_entry_points_d_shippingoptionpricetype",
       "community": 0,
       "norm_label": "shippingoptionpricetype"
@@ -19306,7 +19180,7 @@
       "label": "FulfillmentAddress",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2358",
+      "source_location": "L2148",
       "id": "types_query_entry_points_d_fulfillmentaddress",
       "community": 0,
       "norm_label": "fulfillmentaddress"
@@ -19315,7 +19189,7 @@
       "label": "FulfillmentItem",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2377",
+      "source_location": "L2167",
       "id": "types_query_entry_points_d_fulfillmentitem",
       "community": 0,
       "norm_label": "fulfillmentitem"
@@ -19324,7 +19198,7 @@
       "label": "FulfillmentLabel",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2393",
+      "source_location": "L2183",
       "id": "types_query_entry_points_d_fulfillmentlabel",
       "community": 0,
       "norm_label": "fulfillmentlabel"
@@ -19333,7 +19207,7 @@
       "label": "FulfillmentProvider",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2406",
+      "source_location": "L2196",
       "id": "types_query_entry_points_d_fulfillmentprovider",
       "community": 0,
       "norm_label": "fulfillmentprovider"
@@ -19342,7 +19216,7 @@
       "label": "FulfillmentSet",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2417",
+      "source_location": "L2207",
       "id": "types_query_entry_points_d_fulfillmentset",
       "community": 0,
       "norm_label": "fulfillmentset"
@@ -19351,7 +19225,7 @@
       "label": "Fulfillment",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2431",
+      "source_location": "L2221",
       "id": "types_query_entry_points_d_fulfillment",
       "community": 0,
       "norm_label": "fulfillment"
@@ -19360,7 +19234,7 @@
       "label": "GeoZone",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2459",
+      "source_location": "L2249",
       "id": "types_query_entry_points_d_geozone",
       "community": 0,
       "norm_label": "geozone"
@@ -19369,7 +19243,7 @@
       "label": "ServiceZone",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2475",
+      "source_location": "L2265",
       "id": "types_query_entry_points_d_servicezone",
       "community": 0,
       "norm_label": "servicezone"
@@ -19378,7 +19252,7 @@
       "label": "ShippingOptionRule",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2489",
+      "source_location": "L2279",
       "id": "types_query_entry_points_d_shippingoptionrule",
       "community": 0,
       "norm_label": "shippingoptionrule"
@@ -19387,7 +19261,7 @@
       "label": "ShippingOptionType",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2502",
+      "source_location": "L2292",
       "id": "types_query_entry_points_d_shippingoptiontype",
       "community": 0,
       "norm_label": "shippingoptiontype"
@@ -19396,7 +19270,7 @@
       "label": "ShippingOption",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2514",
+      "source_location": "L2304",
       "id": "types_query_entry_points_d_shippingoption",
       "community": 0,
       "norm_label": "shippingoption"
@@ -19405,10 +19279,136 @@
       "label": "ShippingProfile",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2537",
+      "source_location": "L2327",
       "id": "types_query_entry_points_d_shippingprofile",
       "community": 0,
       "norm_label": "shippingprofile"
+    },
+    {
+      "label": "WorkflowExecutionStateEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2340",
+      "id": "types_query_entry_points_d_workflowexecutionstateenum",
+      "community": 0,
+      "norm_label": "workflowexecutionstateenum"
+    },
+    {
+      "label": "WorkflowExecution",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2349",
+      "id": "types_query_entry_points_d_workflowexecution",
+      "community": 0,
+      "norm_label": "workflowexecution"
+    },
+    {
+      "label": "AccountHolder",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2364",
+      "id": "types_query_entry_points_d_accountholder",
+      "community": 0,
+      "norm_label": "accountholder"
+    },
+    {
+      "label": "Capture",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2379",
+      "id": "types_query_entry_points_d_capture",
+      "community": 0,
+      "norm_label": "capture"
+    },
+    {
+      "label": "PaymentCollectionStatusEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2393",
+      "id": "types_query_entry_points_d_paymentcollectionstatusenum",
+      "community": 0,
+      "norm_label": "paymentcollectionstatusenum"
+    },
+    {
+      "label": "PaymentCollection",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2403",
+      "id": "types_query_entry_points_d_paymentcollection",
+      "community": 0,
+      "norm_label": "paymentcollection"
+    },
+    {
+      "label": "PaymentProvider",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2430",
+      "id": "types_query_entry_points_d_paymentprovider",
+      "community": 0,
+      "norm_label": "paymentprovider"
+    },
+    {
+      "label": "PaymentSessionStatusEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2442",
+      "id": "types_query_entry_points_d_paymentsessionstatusenum",
+      "community": 0,
+      "norm_label": "paymentsessionstatusenum"
+    },
+    {
+      "label": "Payment",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2450",
+      "id": "types_query_entry_points_d_payment",
+      "community": 0,
+      "norm_label": "payment"
+    },
+    {
+      "label": "PaymentSession",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2472",
+      "id": "types_query_entry_points_d_paymentsession",
+      "community": 0,
+      "norm_label": "paymentsession"
+    },
+    {
+      "label": "RefundReason",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2492",
+      "id": "types_query_entry_points_d_refundreason",
+      "community": 0,
+      "norm_label": "refundreason"
+    },
+    {
+      "label": "Refund",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2505",
+      "id": "types_query_entry_points_d_refund",
+      "community": 0,
+      "norm_label": "refund"
+    },
+    {
+      "label": "NotificationStatusEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2522",
+      "id": "types_query_entry_points_d_notificationstatusenum",
+      "community": 0,
+      "norm_label": "notificationstatusenum"
+    },
+    {
+      "label": "Notification",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2527",
+      "id": "types_query_entry_points_d_notification",
+      "community": 0,
+      "norm_label": "notification"
     },
     {
       "label": "LinkCartPaymentCollection",
@@ -19776,7 +19776,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L25",
       "id": "freshhub_implementation_plan_1_project_overview",
-      "community": 251,
+      "community": 216,
       "norm_label": "1. project overview"
     },
     {
@@ -19785,7 +19785,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L29",
       "id": "freshhub_implementation_plan_user_roles_summary",
-      "community": 251,
+      "community": 216,
       "norm_label": "user roles summary"
     },
     {
@@ -19794,7 +19794,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L41",
       "id": "freshhub_implementation_plan_two_fulfillment_modes",
-      "community": 251,
+      "community": 216,
       "norm_label": "two fulfillment modes"
     },
     {
@@ -19803,7 +19803,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L57",
       "id": "freshhub_implementation_plan_multi_hub_model",
-      "community": 251,
+      "community": 216,
       "norm_label": "multi-hub model"
     },
     {
@@ -56857,146 +56857,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L124",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_workflowexecutionstateenum"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L133",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_workflowexecution"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2010",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_notificationstatusenum"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2015",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_notification"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2038",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_accountholder"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2053",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_capture"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2067",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_paymentcollectionstatusenum"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2077",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_paymentcollection"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2104",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_paymentprovider"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2116",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_paymentsessionstatusenum"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2124",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_payment"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2146",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_paymentsession"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2166",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_refundreason"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2179",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_refund"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
       "source_location": "L1776",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -57132,6 +56992,146 @@
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
       "target": "types_query_entry_points_d_shippingprofile"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L124",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_workflowexecutionstateenum"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L133",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_workflowexecution"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2038",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_accountholder"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2053",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_capture"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2067",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_paymentcollectionstatusenum"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2077",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_paymentcollection"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2104",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_paymentprovider"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2116",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_paymentsessionstatusenum"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2124",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_payment"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2146",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_paymentsession"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2166",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_refundreason"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2179",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_refund"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2010",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_notificationstatusenum"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2015",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_notification"
     },
     {
       "relation": "contains",
@@ -62568,5 +62568,5 @@
       "source_file": "apps/backend/src/workflows/README.md"
     }
   ],
-  "built_at_commit": "d0712e855af0ccf7bc1b79dac12c105708bd3c68"
+  "built_at_commit": "3605c692797414c688b5a05bfafddb2836ad70d3"
 }

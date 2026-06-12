@@ -1,16 +1,16 @@
 # Graph Report - freshhub  (2026-06-12)
 
 ## Corpus Check
-- 510 files · ~227,483 words
+- 510 files · ~227,486 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2721 nodes · 3650 edges · 274 communities (216 shown, 58 thin omitted)
+- 2721 nodes · 3650 edges · 272 communities (214 shown, 58 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 36 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d0712e85`
+- Built from commit: `3605c692`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -202,8 +202,6 @@
 - [[_COMMUNITY_Community 247|Community 247]]
 - [[_COMMUNITY_Community 248|Community 248]]
 - [[_COMMUNITY_Community 249|Community 249]]
-- [[_COMMUNITY_Community 250|Community 250]]
-- [[_COMMUNITY_Community 251|Community 251]]
 - [[_COMMUNITY_Community 253|Community 253]]
 - [[_COMMUNITY_Community 254|Community 254]]
 - [[_COMMUNITY_Community 255|Community 255]]
@@ -253,7 +251,7 @@
 - **MedusaContainer Dependency Injection Consumers** — api_readme, subscribers_readme, jobs_readme, freshhub_dependency_injection [EXTRACTED 1.00]
 - **Workflow Execution Contexts** — workflows_readme, api_readme, subscribers_readme, jobs_readme [EXTRACTED 1.00]
 
-## Communities (274 total, 58 thin omitted)
+## Communities (272 total, 58 thin omitted)
 
 ### Community 0 - "Backend Type System"
 Cohesion: 0.01
@@ -620,8 +618,8 @@ Cohesion: 0.15
 Nodes (13): 8. Storefront: hub cookie + middleware, Account page widget: `apps/storefront/src/modules/account/components/home-hub-section.tsx`, code:ts ("use server"), code:ts (const BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_U), code:block21 (POST /store/customers/me/hub  { slug: "tagum" }), code:ts (import { MedusaRequest, MedusaResponse } from "@medusajs/fra), Cookie, Data fetch: `apps/storefront/src/modules/hub/data/hubs.ts` (+5 more)
 
 ### Community 186 - "Community 186"
-Cohesion: 0.1
-Nodes (12): GET(), CodLedgerModuleService, GET(), getCustomerId(), getCustomerId(), POST(), getOrderCashState(), OrderCashState (+4 more)
+Cohesion: 0.08
+Nodes (15): GET(), CodLedgerModuleService, GET(), getCustomerId(), getCustomerId(), POST(), AGING_DAYS, config (+7 more)
 
 ### Community 187 - "Community 187"
 Cohesion: 0.18
@@ -720,8 +718,8 @@ Cohesion: 0.4
 Nodes (5): 5. Store API, `apps/backend/src/api/store/hubs/route.ts`, `apps/backend/src/api/store/hubs/[slug]/route.ts`, code:ts (import { MedusaRequest, MedusaResponse } from "@medusajs/fra), code:ts (import { MedusaRequest, MedusaResponse } from "@medusajs/fra)
 
 ### Community 216 - "Community 216"
-Cohesion: 0.12
-Nodes (17): 10. Rider PWA Pages, 11. Admin Dashboard Extensions, 13. Notifications & Events, 14. Environment Variables, 9. Storefront Pages, code:block19 (/                                   # Homepage: hub-specific), code:block20 (/                                   # Redirect: /orders if l), code:js (// next.config.js) (+9 more)
+Cohesion: 0.1
+Nodes (21): 10. Rider PWA Pages, 11. Admin Dashboard Extensions, 13. Notifications & Events, 14. Environment Variables, 1. Project Overview, 9. Storefront Pages, code:block19 (/                                   # Homepage: hub-specific), code:block20 (/                                   # Redirect: /orders if l) (+13 more)
 
 ### Community 217 - "Community 217"
 Cohesion: 0.38
@@ -778,14 +776,6 @@ Nodes (6): Item(), ItemProps, LineItemUnitPrice(), LineItemUnitPriceProps, getUn
 ### Community 249 - "Community 249"
 Cohesion: 0.17
 Nodes (11): 10. Glossary, 1. Project context, 2. Sealed business decisions (do not redesign), 3. Repository Structure, 3. What's already built (do not rebuild), 4. Top-level architecture additions, 7. Suggested build sequence (8–14 weeks solo, faster with help), 8. Out of scope (do not build now) (+3 more)
-
-### Community 250 - "Community 250"
-Cohesion: 0.4
-Nodes (3): AGING_DAYS, config, LIMIT_CENTAVOS
-
-### Community 251 - "Community 251"
-Cohesion: 0.5
-Nodes (4): 1. Project Overview, Multi-Hub Model, Two Fulfillment Modes, User Roles Summary
 
 ### Community 253 - "Community 253"
 Cohesion: 0.17

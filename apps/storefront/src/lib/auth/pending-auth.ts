@@ -1,0 +1,110 @@
+import "server-only"
+
+import crypto from "crypto"
+import { cookies as nextCookies } from "next/headers"
+
+/**
+ * Pending email-verification state shared by both signup rails.
+ *
+ * The email-OTP flow (`requestEmailCode`/`verifyEmailCode` server actions) and
+ * the Google OAuth callback both park an unverified signup here: a short-lived
+ * httpOnly cookie holding the email, a salted hash of the 6-digit code, and
+ * the signup choices (role/hub) to apply once the code checks out. No account
+ * exists until `verifyEmailCode` consumes this cookie — that is what makes the
+ * OTP mandatory for registration regardless of which rail started it.
+ */
+
+export const PENDING_AUTH_COOKIE = "_mfh_pending_auth"
+export const PENDING_AUTH_TTL_SECONDS = 10 * 60
+
+// OTP abuse limits (per browser). A short cooldown stops rapid resends and a
+// rolling window caps total sends to blunt email-bombing. IP/edge-level limits
+// remain a recommended additional layer.
+const OTP_THROTTLE_COOKIE = "_mfh_otp_throttle"
+export const OTP_RESEND_COOLDOWN_MS = 30 * 1000
+export const OTP_MAX_SENDS_PER_WINDOW = 5
+export const OTP_WINDOW_MS = 15 * 60 * 1000
+
+export type PendingAuth = {
+  email: string
+  codeHash: string
+  mode: "signin" | "signup"
+  role?: string
+  hub?: string
+  /** Which rail started the verification; absent means the email-OTP rail. */
+  authMethod?: "email_otp" | "google"
+  /** Profile names carried from the Google id_token, applied at creation. */
+  firstName?: string
+  lastName?: string
+  expiresAt: number
+  attempts: number
+}
+
+export const hashCode = (code: string, email: string) =>
+  crypto
+    .createHash("sha256")
+    .update(`${email.toLowerCase()}:${code}`)
+    .digest("hex")
+
+export const generateCode = () =>
+  // 6-digit, leading zeros preserved
+  String(crypto.randomInt(0, 1_000_000)).padStart(6, "0")
+
+export const setPendingAuth = async (data: PendingAuth) => {
+  const cookies = await nextCookies()
+  cookies.set(PENDING_AUTH_COOKIE, JSON.stringify(data), {
+    maxAge: PENDING_AUTH_TTL_SECONDS,
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  })
+}
+
+export const readPendingAuth = async (): Promise<PendingAuth | null> => {
+  const cookies = await nextCookies()
+  const raw = cookies.get(PENDING_AUTH_COOKIE)?.value
+  if (!raw) return null
+  try {
+    const parsed = JSON.parse(raw) as PendingAuth
+    if (Date.now() > parsed.expiresAt) return null
+    return parsed
+  } catch {
+    return null
+  }
+}
+
+export const clearPendingAuth = async () => {
+  const cookies = await nextCookies()
+  cookies.set(PENDING_AUTH_COOKIE, "", { maxAge: -1 })
+}
+
+export type OtpThrottle = {
+  windowStart: number
+  count: number
+  lastSentAt: number
+}
+
+export const readThrottle = async (): Promise<OtpThrottle> => {
+  const cookies = await nextCookies()
+  const raw = cookies.get(OTP_THROTTLE_COOKIE)?.value
+  if (raw) {
+    try {
+      const parsed = JSON.parse(raw) as OtpThrottle
+      // Keep the same window only while it's still open; otherwise reset.
+      if (Date.now() - parsed.windowStart < OTP_WINDOW_MS) return parsed
+    } catch {
+      // fall through to a fresh window
+    }
+  }
+  return { windowStart: Date.now(), count: 0, lastSentAt: 0 }
+}
+
+export const writeThrottle = async (t: OtpThrottle) => {
+  const cookies = await nextCookies()
+  cookies.set(OTP_THROTTLE_COOKIE, JSON.stringify(t), {
+    maxAge: Math.ceil(OTP_WINDOW_MS / 1000),
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  })
+}
