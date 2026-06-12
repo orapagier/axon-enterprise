@@ -57,9 +57,12 @@ export const getMembership = (
 
   const meta = (customer.metadata ?? {}) as Record<string, unknown>
   const expiresAt = num(meta[MEMBERSHIP_META.expiresAt])
+  // "grace" = registration lapsed but inside the 30-day renewal window;
+  // perks stay on until the nightly backend job downgrades the account.
   const active =
-    meta[MEMBERSHIP_META.status] === "active" &&
-    (expiresAt === null || expiresAt > Date.now())
+    (meta[MEMBERSHIP_META.status] === "active" &&
+      (expiresAt === null || expiresAt > Date.now())) ||
+    meta[MEMBERSHIP_META.status] === "grace"
 
   if (!active) return INACTIVE
 
