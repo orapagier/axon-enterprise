@@ -21,44 +21,24 @@ export default async function OnboardingPage({ params }: Props) {
     redirect(`/${countryCode}/account`)
   }
 
-  // Read the stored account type with legacy aliasing — dev accounts created
-  // before the CPT rename still carry "buyer"/"seller" in metadata.
-  type RoleStored =
-    | "consumer"
-    | "producer"
-    | "trader"
-    | "rider"
-    | "buyer"
-    | "seller"
-  const rawRole = customer.metadata?.account_type as RoleStored | undefined
-  const accountType: "consumer" | "producer" | "trader" | "rider" =
-    rawRole === "seller"
-      ? "producer"
-      : rawRole === "buyer"
-        ? "consumer"
-        : (rawRole ?? "consumer")
+  // Roles stack; onboarding collects the profile for the most demanding one
+  // (producer > trader > consumer base). rolesOf() handles legacy
+  // single-account_type values, including pre-CPT "buyer"/"seller".
+  const roles = rolesOf(customer.metadata as Record<string, unknown> | null)
   const profileCompleted = Boolean(customer.metadata?.profile_completed)
 
   if (profileCompleted) {
     redirect(`/${countryCode}/account`)
   }
 
-  // Riders have no onboarding form (their profile is marked complete at
-  // signup) — their next step is rider registration on the Deliveries page.
-  if (accountType === "rider") {
+  const isProducer = roles.includes("producer")
+  const isTrader = !isProducer && roles.includes("trader")
+
+  // Rider-only accounts have no onboarding form (their profile is marked
+  // complete at signup) — their next step is rider registration.
+  if (!isProducer && !isTrader && roles.includes("rider")) {
     redirect(`/${countryCode}/account/rider`)
   }
-
-  if (
-    accountType !== "consumer" &&
-    accountType !== "producer" &&
-    accountType !== "trader"
-  ) {
-    notFound()
-  }
-
-  const isProducer = accountType === "producer"
-  const isTrader = accountType === "trader"
 
   // Prefill anything we already know about the customer. On re-onboarding,
   // an existing default-shipping address is the most authoritative source
