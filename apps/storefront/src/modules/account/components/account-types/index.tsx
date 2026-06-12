@@ -382,9 +382,9 @@ export default function AccountTypesPanel({
             </p>
           ) : (
             <p>
-              Your Trader profile is in — visit the hub counter to pay the
-              yearly registration and negotiate your bulk discount, and the
-              hub will activate it. {registrationLine}
+              Your Trader profile is in — settle the yearly registration and
+              negotiate your bulk discount with the hub, and the hub will
+              activate it. {registrationLine}
             </p>
           )
         ) : isProducer ? (
