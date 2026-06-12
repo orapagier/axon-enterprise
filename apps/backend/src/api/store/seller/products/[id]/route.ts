@@ -4,6 +4,7 @@ import {
   deleteProductsWorkflow,
   updateProductsWorkflow,
 } from "@medusajs/medusa/core-flows"
+import { hasRole } from "../../../../../lib/roles"
 import { LISTING_MODULE } from "../../../../../modules/listing"
 import ListingModuleService from "../../../../../modules/listing/service"
 import {
