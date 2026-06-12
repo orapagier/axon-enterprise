@@ -147,6 +147,8 @@ const LoginTemplate = ({
                 currentHubSlug={currentHubSlug}
                 googleEnabled={googleEnabled}
                 googleError={googleError}
+                pendingOtp={pendingOtp}
+                pendingDevCode={pendingDevCode}
               />
             </div>
           </main>
