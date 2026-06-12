@@ -41,6 +41,12 @@ export default async function OnboardingPage({ params }: Props) {
     redirect(`/${countryCode}/account/rider`)
   }
 
+  const accountType: "consumer" | "producer" | "trader" = isProducer
+    ? "producer"
+    : isTrader
+      ? "trader"
+      : "consumer"
+
   // Prefill anything we already know about the customer. On re-onboarding,
   // an existing default-shipping address is the most authoritative source
   // for the address fields; metadata is the fallback.
