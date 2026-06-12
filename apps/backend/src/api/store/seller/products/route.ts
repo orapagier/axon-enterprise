@@ -16,6 +16,7 @@ import PickupModuleService from "../../../../modules/pickup/service"
 import { HUB_MODULE } from "../../../../modules/hub"
 import reservePickupSlotWorkflow from "../../../../workflows/reserve-pickup-slot"
 import { hasRole } from "../../../../lib/roles"
+import { setVariantStock } from "../../../../lib/listing-stock"
 import { LISTING_TYPES, type ListingType } from "../../../../modules/listing/types"
 
 type StoreCustomer = {
