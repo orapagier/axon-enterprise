@@ -85,6 +85,7 @@ const formatDate = (v: number | string | null): string => {
 const formatPaymentMethod = (
   method: Membership["membership"]["paymentMethod"]
 ): string => {
+  if (method === "otc") return "Cash (OTC)"
   if (method === "gcash") return "GCash"
   if (method === "bank") return "Bank transfer"
   return "—"
