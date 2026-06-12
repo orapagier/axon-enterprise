@@ -1,8 +1,9 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
+import { hasRole } from "../../../lib/roles"
 
 /**
- * GET /admin/sellers — list all customers with account_type=seller.
+ * GET /admin/sellers — list all customers with the producer role.
  * Query: ?verified=true|false to filter.
  */
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
