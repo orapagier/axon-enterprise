@@ -1,5 +1,6 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
+import { hasRole } from "../../../../../lib/roles"
 
 /**
  * POST /admin/sellers/:id/verify
