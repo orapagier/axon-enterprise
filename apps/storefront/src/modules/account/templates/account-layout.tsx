@@ -19,42 +19,19 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
     return <div className="flex-1" data-testid="account-page">{children}</div>
   }
 
-  // Read account type with legacy aliasing. Dev accounts created before the
-  // CPT rename can still carry "buyer"/"seller" in metadata; treat those as
-  // their new equivalents for display purposes.
-  type RoleStored =
-    | "consumer"
-    | "producer"
-    | "trader"
-    | "buyer"
-    | "seller"
-    | "rider"
-  const rawAccountType = customer.metadata?.account_type as
-    | RoleStored
-    | undefined
-  const accountType: "consumer" | "producer" | "trader" | "rider" =
-    rawAccountType === "seller"
-      ? "producer"
-      : rawAccountType === "buyer"
-        ? "consumer"
-        : (rawAccountType ?? "consumer")
+  // Roles stack on the Consumer base, so the header lists every active role
+  // (e.g. "Producer · Rider account"); plain consumers show "Consumer".
+  const roles = rolesOf(customer.metadata as Record<string, unknown> | null)
   const profileCompleted = Boolean(customer.metadata?.profile_completed)
   const displayName =
     customer.first_name ||
     (customer.email ? customer.email.split("@")[0] : "there")
 
-  const roleLabel = {
-    consumer: "Consumer",
-    producer: "Producer",
-    trader: "Trader",
-    rider: "Rider",
-  }[accountType]
-  const roleIcon = {
-    consumer: "🧺",
-    producer: "🌾",
-    trader: "🤝",
-    rider: "🛵",
-  }[accountType]
+  const roleLabel =
+    roles.length > 0
+      ? roles.map((r) => ROLE_LABELS[r]).join(" · ")
+      : ROLE_LABELS.consumer
+  const roleIcon = roles.length > 0 ? ROLE_ICONS[roles[0]] : ROLE_ICONS.consumer
 
   return (
     <div
