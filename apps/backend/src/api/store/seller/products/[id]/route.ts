@@ -108,9 +108,22 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   const listingArr = (product as unknown as { product_listing?: unknown[] }).product_listing
   const listing = listingArr?.[0] as Record<string, unknown> | undefined
+
+  // On-hand stock so the edit form can prefill "Available stock". Null when
+  // the variant doesn't track inventory (hub listings pre-approval).
+  const variantId = (product.variants?.[0] as { id?: string } | undefined)?.id
+  let stockQuantity: number | null = null
+  if (variantId) {
+    stockQuantity = await getVariantStock(req.scope, variantId).catch((err) => {
+      console.error("Failed to read listing stock:", err)
+      return null
+    })
+  }
+
   const shaped = {
     ...product,
     product_listing: undefined,
+    stock_quantity: stockQuantity,
     listing: listing
       ? {
           id: listing.id,
