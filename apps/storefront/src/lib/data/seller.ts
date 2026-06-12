@@ -226,7 +226,9 @@ export async function updateListing(
   const id = String(formData.get("id") ?? "")
   if (!id) return { ok: false, error: "Missing listing id." }
 
-  const { body, fieldErrors } = parseListing(formData)
+  const { body, fieldErrors } = parseListing(formData, {
+    requireHubFields: false,
+  })
   if (Object.keys(fieldErrors).length) {
     return {
       ok: false,
