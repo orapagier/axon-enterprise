@@ -296,6 +296,31 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     res.status(400).json({ error: "A positive price is required." })
     return
   }
+
+  // Direct listings track real stock so buyers see what's left and checkout
+  // deducts automatically. Hub listings get their stock set at approval.
+  const quantity = Number(body.quantity)
+  if (isDirect) {
+    if (
+      body.quantity === undefined ||
+      Number.isNaN(quantity) ||
+      !Number.isInteger(quantity) ||
+      quantity < 1
+    ) {
+      res.status(400).json({
+        error: "Available stock is required (a whole number of at least 1).",
+        code: "MISSING_QUANTITY",
+        fieldErrors: [
+          {
+            field: "quantity",
+            message: "Enter how many units you have available (at least 1).",
+          },
+        ],
+      })
+      return
+    }
+  }
+
   const currency = (body.currency_code ?? "php").toLowerCase()
 
   // Resolve a sales channel + shipping profile so the product is usable.
