@@ -1,6 +1,7 @@
 import type { MedusaContainer } from "@medusajs/framework/types"
 import { Modules } from "@medusajs/framework/utils"
 import { createPromotionsWorkflow } from "@medusajs/medusa/core-flows"
+import { hasRole } from "./roles"
 
 /**
  * Phase D — trader (B2B) pricing primitives.
