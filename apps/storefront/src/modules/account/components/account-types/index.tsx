@@ -359,7 +359,9 @@ export default function AccountTypesPanel({
         title="Trader"
         badge={
           isTrader ? (
-            membershipStatus === "grace" ? (
+            !registrationPaid ? (
+              registrationBadge
+            ) : membershipStatus === "grace" ? (
               <StatusBadge tone="warn">Renewal due</StatusBadge>
             ) : traderApproved ? (
               <StatusBadge tone="active">
