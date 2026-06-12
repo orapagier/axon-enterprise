@@ -90,7 +90,7 @@ const INACTIVE_REQUEST: MembershipRequest = {
 }
 
 const asPaymentMethod = (v: unknown): MembershipPaymentMethod | null =>
-  v === "gcash" || v === "bank" ? v : null
+  v === "otc" || v === "gcash" || v === "bank" ? v : null
 
 export const getMembershipRequest = (
   customer: HttpTypes.StoreCustomer | null | undefined
