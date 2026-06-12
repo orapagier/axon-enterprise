@@ -212,70 +212,77 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // ----- Harvest date (validated against the producer's hub timezone) -----
   const hubQuery = req.scope.resolve(ContainerRegistrationKeys.QUERY)
   const { data: hubData } = await hubQuery.graph({
     entity: "customer",
-    fields: ["id", "hub.id", "hub.timezone"],
+    fields: ["id", "hub.id", "hub.name", "hub.timezone"],
     filters: { id: customer.id },
   })
-  const hub = (hubData?.[0] as { hub?: { id?: string; timezone?: string } } | undefined)?.hub
+  const hub = (
+    hubData?.[0] as
+      | { hub?: { id?: string; name?: string; timezone?: string } }
+      | undefined
+  )?.hub
   const hubTimezone = hub?.timezone ?? "Asia/Manila"
 
-  const harvestRaw = body.harvest_date?.trim() ?? null
-  const dateCheck = validateHarvestDate(harvestRaw, hubTimezone, 3, 5)
-  if (!dateCheck.ok) {
-    res.status(400).json({
-      error: dateCheck.errors[0].message,
-      code: dateCheck.errors[0].code,
-      fieldErrors: dateCheck.errors,
-    })
-    return
-  }
-  const harvestDate = harvestRaw as string
+  // ----- Hub intake fields (sell_to_freshhub only) -----
+  let harvestDate: string | null = null
+  if (!isDirect) {
+    // Harvest date is validated against the producer's hub timezone.
+    const harvestRaw = body.harvest_date?.trim() ?? null
+    const dateCheck = validateHarvestDate(harvestRaw, hubTimezone, 3, 5)
+    if (!dateCheck.ok) {
+      res.status(400).json({
+        error: dateCheck.errors[0].message,
+        code: dateCheck.errors[0].code,
+        fieldErrors: dateCheck.errors,
+      })
+      return
+    }
+    harvestDate = harvestRaw as string
 
-  // ----- Pickup window + estimated_kg -----
-  if (!body.pickup_window_id || !body.estimated_kg) {
-    res.status(400).json({
-      error: "pickup_window_id and estimated_kg are required.",
-      code: "MISSING_PICKUP_FIELDS",
-    })
-    return
-  }
+    if (!body.pickup_window_id || !body.estimated_kg) {
+      res.status(400).json({
+        error: "pickup_window_id and estimated_kg are required.",
+        code: "MISSING_PICKUP_FIELDS",
+      })
+      return
+    }
 
-  const pickupService: PickupModuleService = req.scope.resolve(PICKUP_MODULE)
-  const windows = await pickupService.listPickupWindows(
-    { id: body.pickup_window_id },
-    { take: 1 }
-  )
-  const window = windows[0]
-  if (!window) {
-    res.status(400).json({
-      error: "Pickup window not found.",
-      code: "PICKUP_WINDOW_NOT_FOUND",
-    })
-    return
-  }
+    const pickupService: PickupModuleService = req.scope.resolve(PICKUP_MODULE)
+    const windows = await pickupService.listPickupWindows(
+      { id: body.pickup_window_id },
+      { take: 1 }
+    )
+    const window = windows[0]
+    if (!window) {
+      res.status(400).json({
+        error: "Pickup window not found.",
+        code: "PICKUP_WINDOW_NOT_FOUND",
+      })
+      return
+    }
 
-  const reserveValidation = validateSlotReserve({
-    windowStatus: window.status as "open" | "full" | "closed" | "completed",
-    windowDate:
-      typeof window.date === "string"
-        ? window.date
-        : new Date(window.date).toISOString(),
-    harvestDate,
-    reserved_kg: window.reserved_kg ?? 0,
-    estimated_kg: body.estimated_kg,
-    capacity_kg: window.capacity_kg ?? null,
-  })
-
-  if (!reserveValidation.ok) {
-    res.status(400).json({
-      error: reserveValidation.errors[0].message,
-      code: reserveValidation.errors[0].code,
-      fieldErrors: reserveValidation.errors,
+    const reserveValidation = validateSlotReserve({
+      windowStatus: window.status as "open" | "full" | "closed" | "completed",
+      windowDate:
+        typeof window.date === "string"
+          ? window.date
+          : new Date(window.date).toISOString(),
+      harvestDate,
+      reserved_kg: window.reserved_kg ?? 0,
+      estimated_kg: body.estimated_kg,
+      capacity_kg: window.capacity_kg ?? null,
     })
-    return
+
+    if (!reserveValidation.ok) {
+      res.status(400).json({
+        error: reserveValidation.errors[0].message,
+        code: reserveValidation.errors[0].code,
+        fieldErrors: reserveValidation.errors,
+      })
+      return
+    }
   }
 
   // ----- Basic field validation -----
