@@ -10,6 +10,7 @@ import HubSwitcher from "@modules/hub/components/hub-switcher"
 import { listHubs } from "@modules/hub/data/hubs"
 import { getHubCookie } from "@modules/hub/actions/set-hub"
 import { retrieveCustomer } from "@lib/data/customer"
+import { hasRole } from "@lib/util/roles"
 
 export default async function Nav() {
   const [hub, hubs, currentHubSlug, customer] = await Promise.all([
