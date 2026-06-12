@@ -291,7 +291,11 @@ export default function SellerListingForm({ mode, existing }: Props) {
     // slot is reserved (listing no longer draft) they're locked and shouldn't
     // gate edits to the product details.
     const requiredKeys = [
-      ...FIELDS.filter((f) => f.required).map((f) => f.name),
+      // Available stock only applies to direct listings — the hub sets stock
+      // for sell_to_freshhub at approval.
+      ...FIELDS.filter(
+        (f) => f.required && !(f.name === "quantity" && isSellToHub)
+      ).map((f) => f.name),
       ...(isSellToHub && isDraft
         ? ["harvest_date", "pickup_window_id", "estimated_kg"]
         : []),
