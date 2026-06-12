@@ -156,12 +156,18 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 /**
  * POST /store/seller/products — create a new listing.
  *
- * Hub-only model: every submission commits volume to a hub pickup window.
- * The product is always created as `draft` and waits for admin approval
- * via /admin/listings before buyers see it on the shop.
+ * Two listing types:
+ *   - sell_to_freshhub: the producer commits volume to a hub pickup window.
+ *     The product is created as `draft`; the hub receives the goods, sets the
+ *     retail price, and an admin approves via /admin/listings. The hub is the
+ *     seller of record.
+ *   - direct_to_consumer: Shopee-style. The producer is the seller; the
+ *     product is published immediately and buyers see a producer-
+ *     responsibility disclaimer (freshness/quality is on the producer, not
+ *     the hub). No pickup window is reserved.
  *
- * Required body: title, price (asking price in PHP; hub may adjust at
- * approval), harvest_date, pickup_window_id, estimated_kg.
+ * Required body: title, price (PHP), listing_type; for sell_to_freshhub also
+ * harvest_date, pickup_window_id, estimated_kg.
  */
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const customer = await assertSeller(req, res)
@@ -178,10 +184,22 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     unit?: string
     price?: number
     currency_code?: string
+    listing_type?: string
     harvest_date?: string
     pickup_window_id?: string
     estimated_kg?: number
   }
+
+  const listingTypeRaw = body.listing_type ?? "sell_to_freshhub"
+  if (!LISTING_TYPES.includes(listingTypeRaw as ListingType)) {
+    res.status(400).json({
+      error: `Invalid listing_type: ${listingTypeRaw}`,
+      code: "INVALID_LISTING_TYPE",
+    })
+    return
+  }
+  const listingType = listingTypeRaw as ListingType
+  const isDirect = listingType === "direct_to_consumer"
 
   // ----- Producer eligibility (active hub membership) -----
   const eligibility = validateProducerEligibility(meta)
