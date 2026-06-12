@@ -375,6 +375,9 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
             ],
             metadata: {
               seller_customer_id: customer.id,
+              selling_mode: listingType,
+              seller_name: producerName,
+              hub_name: hub?.name ?? null,
               harvest_date: harvestDate,
               unit: body.unit ?? "kg",
               category: body.category ?? null,
