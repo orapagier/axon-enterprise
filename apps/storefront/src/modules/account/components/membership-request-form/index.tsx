@@ -219,26 +219,37 @@ export default function MembershipRequestForm({ heading, subheading }: Props) {
       </div>
 
       <div className="px-6 small:px-7 py-5">
-        <label className="block">
-          <span className="text-caption font-semibold text-grey-70 uppercase tracking-[0.06em] mb-2 block">
-            3. Paste your payment reference
-          </span>
-          <input
-            type="text"
-            name="payment_reference"
-            value={reference}
-            onChange={(e) => setReference(e.target.value)}
-            maxLength={80}
-            placeholder={
-              method === "gcash" ? "e.g. 1234567890123" : "e.g. BPI-2026-0511-0007"
-            }
-            autoComplete="off"
-            className="w-full px-4 py-3 bg-grey-5 border border-grey-10 rounded-xl text-body-sm text-grey-90 placeholder:text-grey-40 focus:outline-none focus:ring-2 focus:bg-white focus:border-brand-green-300 focus:ring-brand-green-100 transition-all font-mono"
-          />
-          <div className="mt-1.5 text-[11px] text-grey-50">
-            Found on the GCash confirmation screen or your bank deposit slip.
+        {needsReference ? (
+          <label className="block">
+            <span className="text-caption font-semibold text-grey-70 uppercase tracking-[0.06em] mb-2 block">
+              3. Paste your payment reference
+            </span>
+            <input
+              type="text"
+              name="payment_reference"
+              value={reference}
+              onChange={(e) => setReference(e.target.value)}
+              maxLength={80}
+              placeholder={
+                method === "gcash" ? "e.g. 1234567890123" : "e.g. BPI-2026-0511-0007"
+              }
+              autoComplete="off"
+              className="w-full px-4 py-3 bg-grey-5 border border-grey-10 rounded-xl text-body-sm text-grey-90 placeholder:text-grey-40 focus:outline-none focus:ring-2 focus:bg-white focus:border-brand-green-300 focus:ring-brand-green-100 transition-all font-mono"
+            />
+            <div className="mt-1.5 text-[11px] text-grey-50">
+              Found on the GCash confirmation screen or your bank deposit slip.
+            </div>
+          </label>
+        ) : (
+          <div className="text-caption text-grey-50 leading-relaxed">
+            <span className="font-semibold text-grey-70 uppercase tracking-[0.06em]">
+              3. Submit
+            </span>{" "}
+            — no reference number needed for cash. Submitting puts you in the
+            verification queue so the admin can activate you as soon as the
+            cashier confirms your payment.
           </div>
-        </label>
+        )}
 
         {state.error && !pending && (
           <div className="mt-4 flex items-start gap-x-2.5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700">
