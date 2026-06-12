@@ -130,9 +130,13 @@ export default function SellerListingForm({ mode, existing }: Props) {
     seed.unit = typeof meta.unit === "string" ? meta.unit : "kg"
     seed.price = firstPrice ? String(firstPrice) : ""
     seed.harvest_date = typeof meta.harvest_date === "string" ? meta.harvest_date : ""
-    // Use listing row status from the listing payload
+    // Use listing row status + type from the listing payload
     const listing = (existing as unknown as { listing?: Record<string, unknown> }).listing
     seed.listing_status = typeof listing?.status === "string" ? listing.status : "draft"
+    seed.listing_type =
+      typeof listing?.listing_type === "string"
+        ? listing.listing_type
+        : "direct_to_consumer"
     return seed
   }, [existing])
 
