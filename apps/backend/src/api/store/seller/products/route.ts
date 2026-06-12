@@ -417,7 +417,9 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         ],
       },
     })
-    result = workflowRes.result as { id?: string }[] | undefined
+    result = workflowRes.result as
+      | { id?: string; variants?: { id?: string }[] }[]
+      | undefined
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err)
     console.error("createProductsWorkflow failed:", err)
