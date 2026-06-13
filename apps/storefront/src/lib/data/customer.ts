@@ -364,8 +364,17 @@ export async function requestMembership(
   if (!customer) return { ok: false, error: "Please sign in first." }
 
   const existing = (customer.metadata ?? {}) as Record<string, unknown>
-  if (existing[MEMBERSHIP_META.status] === "active") {
-    return { ok: false, error: "Your membership is already active." }
+  // An active or in-grace member submitting payment is *renewing*. We keep
+  // their term (and perks) intact and flag a renewal for the admin to verify;
+  // approval extends the term. A free/cancelled/expired customer is doing a
+  // first-time activation, which sets status=pending (no perks until approved).
+  const status = existing[MEMBERSHIP_META.status]
+  const isRenewal = status === "active" || status === "grace"
+  if (existing[MEMBERSHIP_META.renewalPending] === true) {
+    return {
+      ok: false,
+      error: "You already have a renewal awaiting verification.",
+    }
   }
 
   const rawMethod = String(formData.get("payment_method") ?? "")
@@ -392,7 +401,10 @@ export async function requestMembership(
   await updateCustomer({
     metadata: {
       ...existing,
-      [MEMBERSHIP_META.status]: "pending",
+      // Renewal keeps the current status; first-time activation goes pending.
+      ...(isRenewal
+        ? { [MEMBERSHIP_META.renewalPending]: true }
+        : { [MEMBERSHIP_META.status]: "pending" }),
       [MEMBERSHIP_META.requestedAt]: Date.now(),
       [MEMBERSHIP_META.paymentMethod]: paymentMethod,
       [MEMBERSHIP_META.paymentReference]:
@@ -401,6 +413,25 @@ export async function requestMembership(
   })
 
   return { ok: true, error: null }
+}
+
+// Cancel a pending *renewal* without touching the still-valid membership term.
+export async function cancelMembershipRenewal(_formData: FormData) {
+  const customer = await retrieveCustomer()
+  if (!customer) return
+
+  const existing = (customer.metadata ?? {}) as Record<string, unknown>
+  if (existing[MEMBERSHIP_META.renewalPending] !== true) return
+
+  await updateCustomer({
+    metadata: {
+      ...existing,
+      [MEMBERSHIP_META.renewalPending]: null,
+      [MEMBERSHIP_META.requestedAt]: null,
+      [MEMBERSHIP_META.paymentMethod]: null,
+      [MEMBERSHIP_META.paymentReference]: null,
+    },
+  })
 }
 
 export async function cancelMembership(_formData: FormData) {
