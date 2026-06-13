@@ -124,9 +124,11 @@ const appealStep = createStep(
       ? `${dispute.resolution_notes} | ${decisionNote}`
       : decisionNote
 
+    const nextAppealState: AppealStateEnum =
+      input.decision === "overturn" ? "overturned" : "upheld"
     const updated = await accountability.updateRefusalDisputes({
       id: dispute.id,
-      appeal_state: input.decision === "overturn" ? "overturned" : "upheld",
+      appeal_state: nextAppealState,
       appeal_resolved_at: now,
       appeal_resolved_by: input.resolved_by ?? null,
       resolution_notes: mergedNotes,
