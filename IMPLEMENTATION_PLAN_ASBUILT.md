@@ -741,9 +741,12 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | Seller verification gate | ✅ shipped |
 | **Walk-in OTC counter sales** (`/admin/otc-counter` → paid, dispatch-skipped order + `otc_collected`) | ✅ code-complete (Phase A, reframed 2026-06-10) — needs `db:migrate` + region seed + runtime verify (esp. stock-decrement fulfillment) |
 | **Locked buyers blocked from online checkout** (no OTC online; "buy in person") | ✅ code-complete (Phase A, 2026-06-10) — needs runtime verify |
-| **Transactional email** (Resend; 10 templates across order/dispute/membership flows) | ✅ shipped (2026-06-10) — set `RESEND_API_KEY` to enable delivery; Web Push still ❌ |
+| **Transactional email** (Resend; 10 templates across order/dispute/membership flows) | ✅ shipped (2026-06-10) — live since 2026-06-12 |
+| **Web Push** (delivery in-transit + delivered) | ✅ built (2026-06-13) — `push-notification` module + `push_subscription` table + opt-in on account Overview; VAPID keys set; needs server restart + real-browser verify |
 | **Membership expiry enforcement + renewal reminders** | ✅ shipped (2026-06-10) — nightly tick + 30/7d emails + expiry-aware tier gate |
-| **Trader (B2B) pricing** | ✅ backend shipped (2026-06-11) — auto promotions per tier; storefront price display pending |
+| **Membership renewal (self-service)** | ✅ built (2026-06-13) — Renew on `/account/membership`, no-downgrade renewal flag, approve extends from current expiry |
+| **Trader (B2B) pricing** | ✅ shipped (2026-06-11) — auto promotions per tier; storefront "Trader −X%" display + admin Traders editor (default 10%) added 2026-06-13 |
+| **Producer payouts** (DTC remit + hub-intake cash ledger) | ✅ built (2026-06-13) — `producer-payout` module + admin page; DTC gated on cash settled |
 | **Rider entity + admin CRUD + delivered→collect + strikes** | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
 | **Rider self-service API** (login, manifest, delivered/refused) | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
 | **Rider PWA frontend** | ✅ shipped (2026-06-11) — served by the backend at `/rider-app` (installable, same-origin); needs a real-phone visual pass |
