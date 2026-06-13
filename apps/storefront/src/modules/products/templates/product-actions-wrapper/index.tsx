@@ -1,6 +1,7 @@
 import { retrieveCustomer } from "@lib/data/customer"
 import { listProducts } from "@lib/data/products"
 import { isMember } from "@lib/util/membership"
+import { getTraderPricing } from "@lib/util/trader"
 import { HttpTypes } from "@medusajs/types"
 import ProductActions from "@modules/products/components/product-actions"
 
