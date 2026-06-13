@@ -80,6 +80,9 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
         requestedAt: meta[MEMBERSHIP_META.requestedAt] ?? null,
         paymentMethod: meta[MEMBERSHIP_META.paymentMethod] ?? null,
         paymentReference: meta[MEMBERSHIP_META.paymentReference] ?? null,
+        // True when this row is a renewal payment from a still-active member
+        // (vs. a brand-new signup awaiting first activation).
+        renewal: meta.membership_renewal_pending === true,
         // Include only the most-recent event for the list view — the full
         // trail is fetched via GET /admin/memberships/:id when needed.
         lastEvent: Array.isArray(meta[MEMBERSHIP_META.events])
