@@ -21,6 +21,8 @@ export type DisputeResolution =
 
 export type DisputeReason = "damaged_goods" | "wrong_item" | "not_home" | "other"
 
+export type AppealState = "none" | "requested" | "upheld" | "overturned"
+
 export type Dispute = {
   id: string
   order_id: string
@@ -28,8 +30,14 @@ export type Dispute = {
   rider_photo_url: string | null
   buyer_reason: DisputeReason | null
   buyer_notes: string | null
+  buyer_responded_at: string | null
   resolution: DisputeResolution
   resolution_notes: string | null
+  resolved_at: string | null
+  appeal_state: AppealState
+  appeal_notes: string | null
+  appeal_requested_at: string | null
+  appeal_eligible: boolean
   created_at: string
 }
 
