@@ -76,6 +76,7 @@ export default async function MembershipPage() {
 
   const membership = getMembership(customer)
   const request = getMembershipRequest(customer)
+  const renewal = getMembershipRenewal(customer)
 
   const headline = membership.isMember
     ? "You're a Hub Member. Here are the perks active on your account."
