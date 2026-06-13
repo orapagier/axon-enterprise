@@ -19,6 +19,7 @@ type ProductActionsProps = {
   region: HttpTypes.StoreRegion
   disabled?: boolean
   isMember?: boolean
+  traderDiscountPercent?: number | null
 }
 
 const optionsAsKeymap = (
