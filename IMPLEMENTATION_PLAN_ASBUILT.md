@@ -706,7 +706,8 @@ GET    /admin/dispatch/batches[/:id]                 dispatch board
 GET/PATCH /admin/dispatch/orders/:id
 POST   /admin/dispatch-orders/:id/refusal            open a refusal dispute
 POST   /admin/dispatch-orders/:id/delivered          mark delivered + auto cod_collected (COD)
-GET    /admin/disputes ; POST /admin/disputes/:id/resolve
+GET    /admin/disputes (?resolution= | ?appeal=requested) ; POST /admin/disputes/:id/resolve
+POST   /admin/disputes/:id/appeal                    adjudicate appeal {decision: uphold|overturn}
 GET/POST /admin/riders ; GET/PATCH /admin/riders/:id  rider management
 GET    /admin/traders ; GET/POST /admin/traders/:id    trader approval + discount %
 POST   /admin/orders/:id/cod-collected | cod-remitted | otc-collected
