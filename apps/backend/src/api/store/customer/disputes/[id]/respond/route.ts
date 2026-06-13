@@ -1,5 +1,8 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
-import { ACCOUNTABILITY_MODULE } from "../../../../../../modules/accountability"
+import {
+  ACCOUNTABILITY_MODULE,
+  DISPUTE_RESPONSE_SLA_MS,
+} from "../../../../../../modules/accountability"
 import type AccountabilityModuleService from "../../../../../../modules/accountability/service"
 
 function getCustomerId(req: MedusaRequest): string | null {
@@ -9,7 +12,7 @@ function getCustomerId(req: MedusaRequest): string | null {
 }
 
 const VALID_REASONS = ["damaged_goods", "wrong_item", "not_home", "other"]
-const RESPONSE_WINDOW_MS = 48 * 60 * 60 * 1000
+const RESPONSE_WINDOW_MS = DISPUTE_RESPONSE_SLA_MS
 
 /**
  * POST /store/customer/disputes/:id/respond
