@@ -885,8 +885,14 @@ is also the foundation any future gig model would need.
       default 3).
 - [x] **Producer-payout gate primitive (2026-06-10):** `getOrderCashState` +
       `GET /admin/orders/:id/cash-state` expose `settled` (OTC paid, or COD
-      collected **and** remitted). *The payout disbursement itself is a separate
-      phase; this is the gate it must read instead of "delivered".*
+      collected **and** remitted).
+- [x] **Producer payout disbursement — built 2026-06-13 (founder calls).** DTC =
+      hub-collects-then-remits: admin **Producer payouts** page lists settled DTC
+      orders grouped by producer (attributed via product
+      `metadata.seller_customer_id`, gated on `settled`) with a commission% → net
+      "Mark paid". Sell-to-hub = a cash-payout ledger (record producer, amount,
+      method at intake). `producer-payout` module + `GET/POST
+      /admin/producer-payouts`; owed math in `src/lib/producer-payout.ts`.
 
 ### Phase F — Multi-hub readiness (reframed 2026-06-11)
 **Founder decision:** hubs are per-CITY (a hub per barangay is unaffordable) and
