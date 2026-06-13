@@ -84,7 +84,9 @@ export default function PushOptIn() {
       await navigator.serviceWorker.ready
       const sub = await reg.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+        // Cast: lib.dom types applicationServerKey as ArrayBuffer-backed, but
+        // our helper returns a Uint8Array<ArrayBufferLike>. Runtime is correct.
+        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY) as BufferSource,
       })
       const json = sub.toJSON() as {
         endpoint?: string
