@@ -1,5 +1,6 @@
 import { retrieveCustomer } from "@lib/data/customer"
 import { getMemberPrice, isMember } from "@lib/util/membership"
+import { getTraderPricing, getTraderPrice } from "@lib/util/trader"
 import { convertToLocale } from "@lib/util/money"
 import { getUnitLabel } from "@lib/util/unit"
 import { clx } from "@modules/common/components/ui"
@@ -13,6 +14,42 @@ export default async function PreviewPrice({ price, unit = "kg" }: { price: Vari
   const isSale = price.price_type === "sale"
   const customer = await retrieveCustomer().catch(() => null)
   const member = isMember(customer)
+  const trader = getTraderPricing(customer)
+
+  // Trader (B2B) price wins over member price — it's the rate actually applied
+  // at the cart. Suppressed on sale items (no stacking).
+  const traderAmount =
+    !isSale && trader.discountPercent
+      ? getTraderPrice(price.calculated_price_number, trader.discountPercent)
+      : null
+  if (traderAmount !== null) {
+    return (
+      <div className="flex flex-col" data-testid="preview-price-trader">
+        <div className="flex items-baseline gap-x-1">
+          <span
+            className="font-heading text-body-sm font-bold tabular-nums leading-none tracking-[-0.01em] text-grey-90"
+            data-testid="price"
+          >
+            {convertToLocale({
+              amount: traderAmount,
+              currency_code: price.currency_code,
+            })}
+          </span>
+          <span className="text-[10px] text-grey-50 font-bold leading-none uppercase tracking-[0.12em]">
+            /{getUnitLabel(unit, 1)}
+          </span>
+        </div>
+        <div className="flex items-center gap-x-1.5 mt-1">
+          <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-brand-green-50 border border-brand-green-200 text-[9px] font-bold uppercase tracking-[0.12em] text-brand-green-700 leading-none">
+            Trader −{trader.discountPercent}%
+          </span>
+          <span className="text-[10px] text-grey-40 line-through tabular-nums leading-none">
+            {price.calculated_price}
+          </span>
+        </div>
+      </div>
+    )
+  }
 
   // Member discount applies to non-sale items only. Sale items already
   // represent a markdown; we don't stack the two for MVP.
