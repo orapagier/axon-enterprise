@@ -23,6 +23,12 @@ type Resolution =
   | "rider_fault"
   | "platform_fault"
 
+type AppealState = "none" | "requested" | "upheld" | "overturned"
+
+// The top filter is the set of resolutions plus a dedicated "appeals to review"
+// view (resolution=buyer_fault + appeal_state=requested).
+type Filter = Resolution | "appeal_requested"
+
 type Dispute = {
   id: string
   order_id: string
@@ -37,6 +43,12 @@ type Dispute = {
   producer_responded_at: string | null
   resolution: Resolution
   resolution_notes: string | null
+  escalated_at: string | null
+  auto_resolved: boolean
+  appeal_state: AppealState
+  appeal_notes: string | null
+  appeal_requested_at: string | null
+  overdue?: boolean
   created_at: string
   customer: {
     id: string
@@ -54,10 +66,12 @@ const TONE: Record<Resolution, "grey" | "red" | "blue" | "orange" | "green"> = {
   platform_fault: "green",
 }
 
-const fetchDisputes = async (resolution: Resolution): Promise<Dispute[]> => {
-  const res = await fetch(`/admin/disputes?resolution=${resolution}`, {
-    credentials: "include",
-  })
+const fetchDisputes = async (filter: Filter): Promise<Dispute[]> => {
+  const url =
+    filter === "appeal_requested"
+      ? "/admin/disputes?appeal=requested"
+      : `/admin/disputes?resolution=${filter}`
+  const res = await fetch(url, { credentials: "include" })
   if (!res.ok) throw new Error(`Failed (${res.status})`)
   const body = (await res.json()) as { disputes: Dispute[] }
   return body.disputes ?? []
