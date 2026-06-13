@@ -300,6 +300,9 @@ async function membershipExpiryTick(container: MedusaContainer) {
   }
 
   logger.info(
-    `membership-expiry-tick finished: ${graced} grace started, ${downgraded} downgraded, ${reminded} reminder(s) sent.`
+    `membership-expiry-tick: ${graced} grace started, ${downgraded} downgraded, ${reminded} reminder(s) sent.`
   )
 }
+
+export default (input: JobInput) =>
+  runJob("membership-expiry-tick", input, membershipExpiryTick)
