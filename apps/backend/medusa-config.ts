@@ -131,6 +131,7 @@ const customModules: Record<string, unknown>[] = [
   { resolve: './src/modules/cod-ledger' },
   { resolve: './src/modules/accountability' },
   { resolve: './src/modules/delivery-fees' },
+  { resolve: './src/modules/push-notification' },
   {
     resolve: '@medusajs/medusa/payment',
     options: {
