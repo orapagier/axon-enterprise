@@ -15,12 +15,13 @@
  * Run on-demand with:
  *   npx medusa exec ./src/jobs/rider-unremitted-tick.ts
  */
-import type { MedusaContainer } from "@medusajs/framework/types"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { RIDER_MODULE } from "../modules/rider"
 import type RiderModuleService from "../modules/rider/service"
 import { COD_LEDGER_MODULE } from "../modules/cod-ledger"
 import type CodLedgerModuleService from "../modules/cod-ledger/service"
+import { runJob, type JobInput } from "../lib/job-observability"
+import { unremittedByRider, DAY_MS } from "../lib/cod-aging"
 
 export const config = {
   name: "rider-unremitted-tick",
@@ -31,69 +32,50 @@ const LIMIT_CENTAVOS = Number(
   process.env.RIDER_UNREMITTED_LIMIT_CENTAVOS ?? 500_000
 )
 const AGING_DAYS = Number(process.env.RIDER_UNREMITTED_AGING_DAYS ?? 3)
-const DAY_MS = 24 * 60 * 60 * 1000
 
-export default async function riderUnremittedTick(
-  input: MedusaContainer | { container: MedusaContainer }
-) {
-  // The scheduler invokes jobs with the bare container; `npx medusa exec`
-  // passes an ExecArgs object instead. Accept both so the documented
-  // run-on-demand command actually works.
-  const container =
-    "container" in input
-      ? (input as { container: MedusaContainer }).container
-      : input
-  const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
-  const riders: RiderModuleService = container.resolve(RIDER_MODULE)
-  const ledger: CodLedgerModuleService = container.resolve(COD_LEDGER_MODULE)
+export default (input: JobInput) =>
+  runJob("rider-unremitted-tick", input, async (container) => {
+    const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
+    const riders: RiderModuleService = container.resolve(RIDER_MODULE)
+    const ledger: CodLedgerModuleService = container.resolve(COD_LEDGER_MODULE)
 
-  const [collected, remitted] = await Promise.all([
-    ledger.listCodTransactions({ type: "cod_collected" }, { take: 5000 }),
-    ledger.listCodTransactions({ type: "rider_remitted" }, { take: 5000 }),
-  ])
+    const [collected, remitted] = await Promise.all([
+      ledger.listCodTransactions({ type: "cod_collected" }, { take: 5000 }),
+      ledger.listCodTransactions({ type: "rider_remitted" }, { take: 5000 }),
+    ])
 
-  // An order's COD is settled once a rider_remitted row exists for it.
-  const remittedOrderIds = new Set(
-    remitted.map((t) => t.order_id).filter(Boolean) as string[]
-  )
+    // Per-rider unremitted balance, computed by the same rule the aging report
+    // uses (an order is settled once any rider_remitted row exists for it).
+    const now = Date.now()
+    const byRider = new Map(
+      unremittedByRider(collected, remitted).map((r) => [r.rider_id, r])
+    )
 
-  const now = Date.now()
-  const byRider = new Map<string, { outstanding: number; oldest: number }>()
-  for (const t of collected) {
-    if (!t.rider_id) continue
-    if (t.order_id && remittedOrderIds.has(t.order_id)) continue // already remitted
-    const ts = new Date(t.created_at).getTime()
-    const cur = byRider.get(t.rider_id) ?? { outstanding: 0, oldest: ts }
-    cur.outstanding += t.amount
-    cur.oldest = Math.min(cur.oldest, ts)
-    byRider.set(t.rider_id, cur)
-  }
+    const activeRiders = await riders.listRiders(
+      { status: "active" },
+      { take: 1000 }
+    )
 
-  const activeRiders = await riders.listRiders(
-    { status: "active" },
-    { take: 1000 }
-  )
-
-  let suspended = 0
-  for (const rider of activeRiders) {
-    const info = byRider.get(rider.id)
-    if (!info) continue
-    const overBalance = info.outstanding > LIMIT_CENTAVOS
-    const ageDays = (now - info.oldest) / DAY_MS
-    const overAge = ageDays > AGING_DAYS
-    if (overBalance || overAge) {
-      await riders.updateRiders({ id: rider.id, status: "suspended" })
-      suspended++
-      logger.warn(
-        `Rider ${rider.id} (${rider.full_name}) suspended: ₱${(
-          info.outstanding / 100
-        ).toFixed(2)} unremitted, oldest ${ageDays.toFixed(1)}d ` +
-          `(limit ₱${(LIMIT_CENTAVOS / 100).toFixed(0)} / ${AGING_DAYS}d).`
-      )
+    let suspended = 0
+    for (const rider of activeRiders) {
+      const info = byRider.get(rider.id)
+      if (!info) continue
+      const overBalance = info.outstanding_centavos > LIMIT_CENTAVOS
+      const ageDays = (now - info.oldest_ms) / DAY_MS
+      const overAge = ageDays > AGING_DAYS
+      if (overBalance || overAge) {
+        await riders.updateRiders({ id: rider.id, status: "suspended" })
+        suspended++
+        logger.warn(
+          `Rider ${rider.id} (${rider.full_name}) suspended: ₱${(
+            info.outstanding_centavos / 100
+          ).toFixed(2)} unremitted, oldest ${ageDays.toFixed(1)}d ` +
+            `(limit ₱${(LIMIT_CENTAVOS / 100).toFixed(0)} / ${AGING_DAYS}d).`
+        )
+      }
     }
-  }
 
-  logger.info(
-    `rider-unremitted-tick finished: ${suspended} rider(s) suspended.`
-  )
-}
+    logger.info(
+      `rider-unremitted-tick: ${suspended} rider(s) suspended.`
+    )
+  })
