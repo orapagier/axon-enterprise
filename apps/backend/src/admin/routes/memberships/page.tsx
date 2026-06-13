@@ -50,6 +50,7 @@ type Membership = {
     requestedAt: number | null
     paymentMethod: "otc" | "gcash" | "bank" | null
     paymentReference: string | null
+    renewal?: boolean
     lastEvent: MembershipEvent | null
   }
 }
