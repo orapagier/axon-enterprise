@@ -138,16 +138,7 @@ async function deleteProducerListings(
   return productIds.length
 }
 
-export default async function membershipExpiryTick(
-  input: MedusaContainer | { container: MedusaContainer }
-) {
-  // The scheduler invokes jobs with the bare container; `npx medusa exec`
-  // passes an ExecArgs object instead. Accept both.
-  const container =
-    "container" in input
-      ? (input as { container: MedusaContainer }).container
-      : input
-
+async function membershipExpiryTick(container: MedusaContainer) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const customerModule = container.resolve(Modules.CUSTOMER)
 
