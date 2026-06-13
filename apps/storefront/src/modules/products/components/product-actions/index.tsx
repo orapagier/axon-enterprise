@@ -169,6 +169,7 @@ export default function ProductActions({
           product={product}
           variant={selectedVariant}
           isMember={isMember}
+          traderDiscountPercent={traderDiscountPercent}
         />
 
         {/* Quantity selector */}
