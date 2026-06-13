@@ -218,6 +218,13 @@ export async function confirmDelivery(
         collected_php: transaction ? Number(transaction.amount) / 100 : null,
       },
     })
+    await sendPush(container, {
+      customerId: order.customer_id,
+      title: "Delivered ✓",
+      body: `Your order #${order.display_id} has been delivered.`,
+      url: "/account/orders",
+      tag: `order-${order.id}`,
+    })
   }
 
   return {
