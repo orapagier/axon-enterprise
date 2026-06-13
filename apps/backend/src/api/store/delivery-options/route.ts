@@ -140,38 +140,14 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const dispatchLabel = hub.dispatch_time
 
   // 6. Build the 3 tier options.
-  const options: TierOption[] = [
-    {
-      tier: "free",
-      label: "Free delivery",
-      fee_php: 0,
-      eta_label: isBeforeCutoff
-        ? `Today ${dispatchLabel}`
-        : `Tomorrow ${dispatchLabel}`,
-      available: isBeforeCutoff,
-      reason_if_unavailable: isBeforeCutoff
-        ? null
-        : `Order before ${cutoffLabel} for free same-day delivery`,
-    },
-    {
-      tier: "standard",
-      label: "Standard delivery",
-      fee_php: fee.standard_fee_php,
-      eta_label: "Today, anytime",
-      available: true,
-      reason_if_unavailable: null,
-    },
-    {
-      tier: "special",
-      label: "Special delivery",
-      fee_php: fee.special_fee_php,
-      eta_label: "Within 1 hour",
-      available: isMember,
-      reason_if_unavailable: isMember
-        ? null
-        : "Hub Members only — upgrade for ₱500/yr",
-    },
-  ]
+  const options = buildDeliveryTiers({
+    standardFeePhp: fee.standard_fee_php,
+    specialFeePhp: fee.special_fee_php,
+    isMember,
+    isBeforeCutoff,
+    dispatchLabel,
+    cutoffLabel,
+  })
 
   res.json({
     hub: { id: hub.id, slug: hub.slug, name: hub.name },
