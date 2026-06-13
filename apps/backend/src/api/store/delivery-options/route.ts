@@ -3,23 +3,12 @@ import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { DELIVERY_FEES_MODULE } from "../../../modules/delivery-fees"
 import type DeliveryFeesModuleService from "../../../modules/delivery-fees/service"
 import { resolveHubForDelivery } from "../../../lib/resolve-hub"
-
-type Tier = "free" | "standard" | "special"
-
-type TierOption = {
-  tier: Tier
-  label: string
-  fee_php: number
-  eta_label: string
-  available: boolean
-  reason_if_unavailable: string | null
-}
-
-function getCustomerId(req: MedusaRequest): string | null {
-  const ctx = (req as unknown as { auth_context?: { actor_id?: string } })
-    .auth_context
-  return ctx?.actor_id ?? null
-}
+import {
+  parseHHMM,
+  beforeCutoff,
+  isMembershipActive,
+  buildDeliveryTiers,
+} from "../../../lib/delivery-tiers"
 
 function nowInHubTimezone(timezone: string): { hour: number; minute: number } {
   const fmt = new Intl.DateTimeFormat("en-US", {
@@ -35,20 +24,6 @@ function nowInHubTimezone(timezone: string): { hour: number; minute: number } {
     10
   )
   return { hour, minute: Number.isNaN(minute) ? 0 : minute }
-}
-
-function parseHHMM(s: string): { hour: number; minute: number } {
-  const [h, m] = s.split(":").map((x) => parseInt(x, 10))
-  return { hour: h, minute: m || 0 }
-}
-
-function beforeCutoff(
-  now: { hour: number; minute: number },
-  cutoff: { hour: number; minute: number }
-): boolean {
-  if (now.hour < cutoff.hour) return true
-  if (now.hour > cutoff.hour) return false
-  return now.minute < cutoff.minute
 }
 
 /**
