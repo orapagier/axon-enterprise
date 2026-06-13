@@ -10,22 +10,14 @@ import type { MedusaContainer } from "@medusajs/framework/types"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { DISPATCH_MODULE } from "../modules/dispatch"
 import type DispatchModuleService from "../modules/dispatch/service"
+import { runJob, type JobInput } from "../lib/job-observability"
 
 export const config = {
   name: "lock-dispatch-batches",
   schedule: "*/15 * * * *",
 }
 
-export default async function lockDispatchBatches(
-  input: MedusaContainer | { container: MedusaContainer }
-) {
-  // The scheduler invokes jobs with the bare container; `npx medusa exec`
-  // passes an ExecArgs object instead. Accept both so the documented
-  // run-on-demand command actually works.
-  const container =
-    "container" in input
-      ? (input as { container: MedusaContainer }).container
-      : input
+async function lockDispatchBatches(container: MedusaContainer) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const service: DispatchModuleService = container.resolve(DISPATCH_MODULE)
 
@@ -50,3 +42,6 @@ export default async function lockDispatchBatches(
 
   logger.info(`lock-dispatch-batches finished: ${locked} batches locked.`)
 }
+
+export default (input: JobInput) =>
+  runJob("lock-dispatch-batches", input, lockDispatchBatches)

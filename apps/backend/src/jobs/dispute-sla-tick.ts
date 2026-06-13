@@ -19,6 +19,7 @@
 import type { MedusaContainer } from "@medusajs/framework/types"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import {
+import { runJob, type JobInput } from "../lib/job-observability"
   ACCOUNTABILITY_MODULE,
   DISPUTE_NO_RESPONSE_AUTO_RESOLVE,
 } from "../modules/accountability"
@@ -34,16 +35,7 @@ export const config = {
   schedule: "15 2 * * *",
 }
 
-export default async function disputeSlaTick(
-  input: MedusaContainer | { container: MedusaContainer }
-) {
-  // The scheduler invokes jobs with the bare container; `npx medusa exec`
-  // passes an ExecArgs object instead. Accept both so the documented
-  // run-on-demand command actually works.
-  const container =
-    "container" in input
-      ? (input as { container: MedusaContainer }).container
-      : input
+async function disputeSlaTick(container: MedusaContainer) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const accountability: AccountabilityModuleService = container.resolve(
     ACCOUNTABILITY_MODULE
@@ -157,3 +149,6 @@ export default async function disputeSlaTick(
     `dispute-sla-tick finished: ${reminded} reminded, ${escalated} escalated, ${autoResolved} auto-resolved.`
   )
 }
+
+export default (input: JobInput) =>
+  runJob("dispute-sla-tick", input, disputeSlaTick)

@@ -9,22 +9,14 @@ import type { MedusaContainer } from "@medusajs/framework/types"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { PICKUP_MODULE } from "../modules/pickup"
 import type PickupModuleService from "../modules/pickup/service"
+import { runJob, type JobInput } from "../lib/job-observability"
 
 export const config = {
   name: "expire-pickup-windows",
   schedule: "0 1 * * *",
 }
 
-export default async function expirePickupWindows(
-  input: MedusaContainer | { container: MedusaContainer }
-) {
-  // The scheduler invokes jobs with the bare container; `npx medusa exec`
-  // passes an ExecArgs object instead. Accept both so the documented
-  // run-on-demand command actually works.
-  const container =
-    "container" in input
-      ? (input as { container: MedusaContainer }).container
-      : input
+async function expirePickupWindows(container: MedusaContainer) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const service: PickupModuleService = container.resolve(PICKUP_MODULE)
 
@@ -92,3 +84,5 @@ export default async function expirePickupWindows(
     `expire-pickup-windows finished: ${windowsClosed} windows closed, ${slotsFlagged} slots flagged as no_show.`
   )
 }
+export default (input: JobInput) =>
+  runJob("expire-pickup-windows", input, expirePickupWindows)

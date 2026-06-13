@@ -15,6 +15,7 @@ import { HUB_MODULE } from "../modules/hub"
 import type HubModuleService from "../modules/hub/service"
 import { sendEmail } from "../lib/notify"
 import { sendPush } from "../lib/push"
+import { runJob, type JobInput } from "../lib/job-observability"
 
 export const config = {
   name: "dispatch-batches-in-transit",
@@ -28,16 +29,7 @@ function parseHHmm(s: string): { h: number; m: number } {
   return { h: h ?? 0, m: m ?? 0 }
 }
 
-export default async function dispatchBatchesInTransit(
-  input: MedusaContainer | { container: MedusaContainer }
-) {
-  // The scheduler invokes jobs with the bare container; `npx medusa exec`
-  // passes an ExecArgs object instead. Accept both so the documented
-  // run-on-demand command actually works.
-  const container =
-    "container" in input
-      ? (input as { container: MedusaContainer }).container
-      : input
+async function dispatchBatchesInTransit(container: MedusaContainer) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const dispatchService: DispatchModuleService =
     container.resolve(DISPATCH_MODULE)
@@ -137,3 +129,6 @@ async function notifyBatchInTransit(
     })
   }
 }
+
+export default (input: JobInput) =>
+  runJob("dispatch-batches-in-transit", input, dispatchBatchesInTransit)

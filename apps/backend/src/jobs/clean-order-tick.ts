@@ -17,6 +17,7 @@
  */
 import type { MedusaContainer } from "@medusajs/framework/types"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
+import { runJob, type JobInput } from "../lib/job-observability"
 import {
   ACCOUNTABILITY_MODULE,
   WARNED_RECOVERY_WINDOW_MS,
@@ -29,16 +30,7 @@ export const config = {
 }
 
 
-export default async function cleanOrderTick(
-  input: MedusaContainer | { container: MedusaContainer }
-) {
-  // The scheduler invokes jobs with the bare container; `npx medusa exec`
-  // passes an ExecArgs object instead. Accept both so the documented
-  // run-on-demand command actually works.
-  const container =
-    "container" in input
-      ? (input as { container: MedusaContainer }).container
-      : input
+async function cleanOrderTick(container: MedusaContainer) {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const accountability: AccountabilityModuleService = container.resolve(
     ACCOUNTABILITY_MODULE
@@ -113,3 +105,6 @@ export default async function cleanOrderTick(
     `clean-order-tick finished: ${warnedRecovered} warned recovered, ${lockExpired} 30d locks expired.`
   )
 }
+
+export default (input: JobInput) =>
+  runJob("clean-order-tick", input, cleanOrderTick)
