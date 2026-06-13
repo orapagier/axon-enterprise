@@ -300,7 +300,14 @@ const DisputesPage = () => {
                   </Table.Cell>
                   <Table.Cell>{d.buyer_reason ?? "—"}</Table.Cell>
                   <Table.Cell>
-                    <Badge color={TONE[d.resolution]}>{d.resolution}</Badge>
+                    <div className="flex items-center gap-1.5">
+                      <Badge color={TONE[d.resolution]}>{d.resolution}</Badge>
+                      {d.overdue && <Badge color="red">overdue</Badge>}
+                      {d.appeal_state === "requested" && (
+                        <Badge color="orange">appeal</Badge>
+                      )}
+                      {d.auto_resolved && <Badge color="grey">auto</Badge>}
+                    </div>
                   </Table.Cell>
                   <Table.Cell>
                     <Button
