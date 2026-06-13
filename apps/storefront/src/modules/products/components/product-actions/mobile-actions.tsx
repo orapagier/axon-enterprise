@@ -86,6 +86,35 @@ const MobileActions: React.FC<MobileActionsProps> = ({
               {selectedPrice ? (
                 (() => {
                   const isSale = selectedPrice.price_type === "sale"
+
+                  // Trader price wins over member price (it's the rate applied
+                  // at cart). Suppressed on sale items.
+                  const traderAmount =
+                    traderDiscountPercent && !isSale
+                      ? getTraderPrice(
+                          selectedPrice.calculated_price_number,
+                          traderDiscountPercent
+                        )
+                      : null
+                  if (traderAmount !== null) {
+                    return (
+                      <div className="flex items-end gap-x-2 text-ui-fg-base">
+                        <span className="line-through text-small-regular text-grey-40">
+                          {selectedPrice.calculated_price}
+                        </span>
+                        <span className="font-bold">
+                          {convertToLocale({
+                            amount: traderAmount,
+                            currency_code: selectedPrice.currency_code,
+                          })}
+                        </span>
+                        <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-brand-green-50 border border-brand-green-200 text-[9px] font-bold uppercase tracking-wider text-brand-green-700 leading-none">
+                          Trader −{traderDiscountPercent}%
+                        </span>
+                      </div>
+                    )
+                  }
+
                   const memberAmount =
                     isMember && !isSale
                       ? getMemberPrice(selectedPrice.calculated_price_number)
