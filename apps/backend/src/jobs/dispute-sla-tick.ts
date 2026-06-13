@@ -68,9 +68,13 @@ export default async function disputeSlaTick(
     filters: { id: orderIds },
   })
   const orderById = new Map(
-    (orderRows as Array<{ id: string; display_id: number; email: string | null }>).map(
-      (o) => [o.id, o]
-    )
+    (
+      orderRows as unknown as Array<{
+        id: string
+        display_id: number
+        email: string | null
+      }>
+    ).map((o) => [o.id, o])
   )
 
   let reminded = 0
