@@ -109,6 +109,25 @@ export const getMembershipRequest = (
   }
 }
 
+// A renewal request from a member whose term is still valid. Distinct from
+// getMembershipRequest (first-time signup): here the customer stays an active
+// member while the admin verifies the renewal payment and extends the term.
+export const getMembershipRenewal = (
+  customer: HttpTypes.StoreCustomer | null | undefined
+): MembershipRequest => {
+  if (!customer) return INACTIVE_REQUEST
+
+  const meta = (customer.metadata ?? {}) as Record<string, unknown>
+  if (meta[MEMBERSHIP_META.renewalPending] !== true) return INACTIVE_REQUEST
+
+  return {
+    pending: true,
+    requestedAt: num(meta[MEMBERSHIP_META.requestedAt]),
+    paymentMethod: asPaymentMethod(meta[MEMBERSHIP_META.paymentMethod]),
+    paymentReference: str(meta[MEMBERSHIP_META.paymentReference]),
+  }
+}
+
 // Flat member discount applied at the storefront level for non-sale prices.
 // Dev placeholder until a Medusa price list scoped to `hub-members` is wired —
 // once that lands, the cart will reflect the real member price directly and
