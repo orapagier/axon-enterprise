@@ -951,11 +951,36 @@ matching is therefore the intended model; barangay/postal hub resolution is
 - [ ] Cross-hub "also available at <hub>" search (per existing product memory) —
       catalog stays per-hub; future.
 
-### Phase G — Dispute fairness & SLAs
-- [ ] Buyer/seller response SLA timers; auto-resolve or escalate on no-response
-      (`buyer_responded_at` already captured).
-- [ ] Buyer-facing dispute status + appeal path so legit produce-quality
-      complaints don't silently become strikes.
+### Phase G — Dispute fairness & SLAs — built 2026-06-14 (NOT yet runtime-verified)
+- [x] **Response SLA timers + nightly sweep.** `dispute-sla-tick` job (02:15)
+      classifies each pending dispute via the pure `classifyDisputeForSla`
+      (`src/lib/dispute-sla.ts`): a silent buyer is **reminded** at 24h
+      (`dispute-reminder` email + push, stamps `buyer_reminder_sent_at`) and any
+      dispute still unresolved past the **48h SLA** is **flagged for admin**
+      (`escalated_at`) — surfaced as an `overdue` badge in the admin queue.
+      **Founder call (2026-06-14): no auto-strike** — a human always decides.
+      The "silence = forfeit" auto-resolve-as-buyer_fault branch is fully built
+      + tested but gated off behind `DISPUTE_NO_RESPONSE_AUTO_RESOLVE = false`;
+      flip that one constant to adopt option 1 later.
+- [x] **Buyer-facing status + appeal path.** After a `buyer_fault` resolution
+      the buyer has **14 days** (`DISPUTE_APPEAL_WINDOW_MS`) to appeal the
+      strike. `POST /store/customer/disputes/:id/appeal` → `appeal_state`
+      requested; admin adjudicates via `POST /admin/disputes/:id/appeal`
+      ({decision: uphold|overturn}) running `appeal-dispute` workflow. **Overturn
+      reverses the strike** (`reverseBuyerFaultStrike`, the inverse of the
+      escalation rule via shared `stateForStrikeCount`) and recomputes the
+      account state; the original `resolution` stays buyer_fault for audit while
+      `appeal_state` (none|requested|upheld|overturned) governs the effective
+      outcome. Eligibility is the pure `canAppeal`/`evaluateAppealEligibility`,
+      reused by the store GET route (`appeal_eligible` per dispute) and the
+      respond gate. Storefront disputes page shows the appeal button/form +
+      live status; admin gets an "Appeals to review" filter + uphold/overturn
+      panel. Emails: `dispute-reminder`, `dispute-appeal-received`,
+      `dispute-appeal-resolved`. Model gained `buyer_reminder_sent_at`,
+      `escalated_at`, `auto_resolved`, `appeal_*` (migration
+      `Migration20260613211052`). 71/71 unit tests green; both apps tsc-clean.
+      **Still TODO:** apply the migration (`medusa db:migrate` — declines the
+      stale cod_ledger.buyer_wallet drop prompt) + runtime-verify over HTTP.
 
 ### Phase H — Hardening
 - [ ] COD shortfall handling (collected ≠ order total) + remittance aging report.
