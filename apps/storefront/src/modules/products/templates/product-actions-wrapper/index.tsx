@@ -27,11 +27,14 @@ export default async function ProductActionsWrapper({
     return null
   }
 
+  const trader = getTraderPricing(customer)
+
   return (
     <ProductActions
       product={product}
       region={region}
       isMember={isMember(customer)}
+      traderDiscountPercent={trader.discountPercent}
     />
   )
 }
