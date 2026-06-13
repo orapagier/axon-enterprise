@@ -787,9 +787,9 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | **Transactional email** (Resend; 10 templates across order/dispute/membership flows) | ✅ shipped (2026-06-10) — live since 2026-06-12 |
 | **Web Push** (delivery in-transit + delivered) | ✅ backend RUNTIME-VERIFIED (2026-06-14) — module loads, table present, `POST/DELETE /store/push/subscribe` persist/upsert/validate/auth-gate; VAPID set. Real-browser push-delivery round-trip still manual |
 | **Membership expiry enforcement + renewal reminders** | ✅ shipped (2026-06-10) — nightly tick + 30/7d emails + expiry-aware tier gate |
-| **Membership renewal (self-service)** | ✅ built (2026-06-13) — Renew on `/account/membership`, no-downgrade renewal flag, approve extends from current expiry |
-| **Trader (B2B) pricing** | ✅ shipped (2026-06-11) — auto promotions per tier; storefront "Trader −X%" display + admin Traders editor (default 10%) added 2026-06-13 |
-| **Producer payouts** (DTC remit + hub-intake cash ledger) | ✅ built (2026-06-13) — `producer-payout` module + admin page; DTC gated on cash settled |
+| **Membership renewal (self-service)** | ✅ RUNTIME-VERIFIED (2026-06-14) — approve extends +365d from current expiry (no days lost), join date preserved, renewal_pending cleared; rejecting a renewal keeps the member active |
+| **Trader (B2B) pricing** | ✅ RUNTIME-VERIFIED (2026-06-14) — admin approve defaults to 10%, `GET /store/trader-pricing` reflects it, revoke clears; auto-promotion tiers (2026-06-11) |
+| **Producer payouts** (DTC remit + hub-intake cash ledger) | ✅ RUNTIME-VERIFIED (2026-06-14) — `dtc_remit` settled-gate 409s, hub-intake records. **Fixed a launch-blocker:** bigNumber→number centavos (insert was 500ing on missing `raw_*` columns) |
 | **Rider entity + admin CRUD + delivered→collect + strikes** | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
 | **Rider self-service API** (login, manifest, delivered/refused) | ✅ shipped (Phase E, runtime-verified 2026-06-10) |
 | **Rider PWA frontend** | ✅ shipped (2026-06-11) — served by the backend at `/rider-app` (installable, same-origin); needs a real-phone visual pass |
