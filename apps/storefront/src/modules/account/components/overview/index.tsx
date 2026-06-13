@@ -184,6 +184,9 @@ const Overview = ({ customer, orders }: OverviewProps) => {
           )}
         </ul>
       </div>
+
+      {/* Delivery push notifications opt-in */}
+      <PushOptIn />
     </div>
   )
 }
