@@ -33,7 +33,63 @@
 >   (fee table, service areas). Cross-city barangay/postal hub resolution is
 >   intentionally not built.
 
-> **▶ Current build state (2026-06-12) — read this first if resuming.**
+> **▶ Current build state (2026-06-13) — read this first if resuming.**
+> - **Six-item batch BUILT + TS-CLEAN + 50/50 unit tests (2026-06-13):**
+>   1. **Trader-price display + admin editor.** Storefront now shows an approved
+>      trader their negotiated "Trader −X%" price (struck list price) on product
+>      detail, mobile actions, and product cards — computed from the customer's own
+>      `trader_discount_percent` metadata (no extra fetch), trader > member > free
+>      priority (`src/lib/util/trader.ts`). New admin **Traders** page
+>      (`src/admin/routes/traders/page.tsx`) edits the discount per trader; approval
+>      **defaults to 10%** when none is entered (`DEFAULT_TRADER_DISCOUNT` in
+>      `src/lib/trader.ts`, applied in `POST /admin/traders/:id`).
+>   2. **Producer payouts (founder calls): DTC = hub-collects-then-remits;
+>      sell-to-hub = cash-in-person ledger.** New `producer-payout` module + table
+>      (`Migration20260613130000`, APPLIED) + admin **Producer payouts** page
+>      (`src/admin/routes/producer-payouts/page.tsx`) and `GET/POST
+>      /admin/producer-payouts`. "Owed" tab lists **settled** DTC orders grouped by
+>      producer (attributed via product `metadata.seller_customer_id`; gated on
+>      `getOrderCashState().settled`) with a commission% → net "Mark paid"; a
+>      hub-intake form records cash payouts; history below. Owed math in
+>      `src/lib/producer-payout.ts`. One remittance per (order, producer).
+>   3. **Membership renewal.** Active/grace members get a **Renew** disclosure on
+>      `/account/membership` running the same payment form; submitting sets a
+>      `membership_renewal_pending` flag WITHOUT downgrading (perks stay on). Admin
+>      approve now **extends from max(now, current expiry)** (never lose remaining
+>      days) and preserves join date; the pending queue surfaces renewals (New vs
+>      Renewal badge); rejecting a renewal drops only the request (keeps the term);
+>      `cancelMembershipRenewal` storefront action.
+>   4. **Web Push (Phase B push half) BUILT.** New `push-notification` module +
+>      `push_subscription` table (`Migration20260613120000`, APPLIED), customer-auth
+>      `POST/DELETE /store/push/subscribe`, best-effort `sendPush`
+>      (`src/lib/push.ts`, web-push lib, env-gated like Resend, prunes dead 404/410
+>      subs) wired into **order in-transit + delivered** (alongside email).
+>      Storefront: `public/push-sw.js` (push + click only, no fetch handler),
+>      `PushOptIn` card on the account Overview, `src/lib/data/push.ts`. **VAPID keys
+>      set** in both env files (`VAPID_PUBLIC_KEY`/`VAPID_PRIVATE_KEY`/`VAPID_SUBJECT`
+>      backend; `NEXT_PUBLIC_VAPID_PUBLIC_KEY` storefront). **Runtime needs a backend
+>      + storefront restart** (new modules + env read only at boot) and a secure
+>      context/real browser to verify end-to-end.
+>   5. **Catalog cleaned.** All test/sample listings removed — the Banana test
+>      listing (`prod_01KTX843…`/`01KTX8441…`) + 2 other DTC test listings
+>      soft-deleted via `src/migration-scripts/cleanup-orphan-listings.ts`
+>      (idempotent). Now **0 live products, 0 live listings** — launch-ready empty.
+>   6. **Legacy rider PWA REMOVED.** Deleted `src/rider-app/`, `src/api/rider-app/*`,
+>      and the PWA auth routes `src/api/rider/auth/{login,signup,hubs,google}` +
+>      orphaned `src/lib/google-oauth.ts`. The `/rider/*` token API
+>      (manifest/me/summary/delivered/refused) and the storefront rail
+>      (`/store/riders/session` + `/store/riders/register`) are untouched — riders
+>      still log in via the storefront. `authenticateRider` now requires a token on
+>      every `/rider/*` path (no public exemptions left); `rider.pin_hash` kept as
+>      vestigial. `rider-auth.ts` signup-ticket helpers removed.
+>   - **Heads-up:** `npx medusa db:migrate` prompts to DROP some stale link tables
+>     (e.g. `cod_ledger.buyer_wallet`) — pre-existing orphans unrelated to this work;
+>     left untouched (do not confirm those deletions without a decision).
+>   - **Still manual / not done:** real-phone pass of `/account/rider`; real-browser
+>     web-push round-trip after restart; the rider Google OAuth callback URI (now
+>     moot — those routes are gone).
+>
+> **▶ Prior build state (2026-06-12).**
 > - **Upgrade payment flow RUNTIME-VERIFIED + test data PURGED (2026-06-12 PM):**
 >   the producer/trader yearly-registration payment rail (OTC cash at the counter
 >   or **GCash 09631225067 / Jelmar Orapa**, both manually verified by an admin)
