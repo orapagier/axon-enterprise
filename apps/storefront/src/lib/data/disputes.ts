@@ -93,3 +93,23 @@ export async function respondToDispute(
     return { ok: false, error: e instanceof Error ? e.message : String(e) }
   }
 }
+
+export async function appealDispute(
+  disputeId: string,
+  notes: string
+): Promise<{ ok: boolean; error: string | null }> {
+  const authHeaders = await getAuthHeaders()
+  if (!("authorization" in authHeaders)) {
+    return { ok: false, error: "Please sign in first." }
+  }
+  try {
+    await sdk.client.fetch(`/store/customer/disputes/${disputeId}/appeal`, {
+      method: "POST",
+      body: { notes },
+      headers: authHeaders,
+    })
+    return { ok: true, error: null }
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : String(e) }
+  }
+}
