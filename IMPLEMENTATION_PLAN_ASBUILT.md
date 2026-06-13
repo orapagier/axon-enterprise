@@ -841,10 +841,12 @@ For a perishable hub, bulk buyers clear volume fast — high ROI.
 - [x] **Admin trader approval + discount entry + min-order note (2026-06-11)** —
       `GET /admin/traders[?approved=]`, `GET/POST /admin/traders/:id`
       (approve/revoke; re-approve to renegotiate). Approval emails wired.
-- [ ] Storefront shows trader their discounted price ("your price" on product
-      pages) — backend ready: `GET /store/trader-pricing` returns
-      `{approved, discount_percent, min_order_note}`; the cart/order discount is
-      already server-enforced regardless of display.
+- [x] **Storefront shows trader their discounted price — built 2026-06-13.**
+      Approved traders see a "Trader −X%" price (struck list price) on product
+      detail, mobile actions, and product cards, computed from their own
+      `trader_discount_percent` metadata (`src/lib/util/trader.ts`); trader >
+      member > free priority. New admin **Traders** page edits the discount and
+      defaults new approvals to 10%.
 
 ### Phase E — Rider operations & accountability
 **Problem:** `rider_id` is free text on `dispatch_order` *and* `cod_transaction`;
