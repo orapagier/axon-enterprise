@@ -372,10 +372,30 @@ const DisputesPage = () => {
                   setOpenId(null)
                 }}
               />
+            ) : open.appeal_state === "requested" ? (
+              <AppealForm
+                dispute={open}
+                onResolved={() => {
+                  qc.invalidateQueries({ queryKey: ["disputes"] })
+                  setOpenId(null)
+                }}
+              />
             ) : (
               <div className="mt-3 text-sm">
                 <Text>
                   Resolved as <Badge color={TONE[open.resolution]}>{open.resolution}</Badge>
+                  {open.appeal_state === "overturned" && (
+                    <>
+                      {" "}
+                      <Badge color="green">appeal overturned</Badge>
+                    </>
+                  )}
+                  {open.appeal_state === "upheld" && (
+                    <>
+                      {" "}
+                      <Badge color="grey">appeal upheld</Badge>
+                    </>
+                  )}
                 </Text>
                 {open.resolution_notes && (
                   <Text className="text-ui-fg-subtle mt-1">
