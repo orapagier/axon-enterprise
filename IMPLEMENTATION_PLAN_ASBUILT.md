@@ -989,9 +989,18 @@ matching is therefore the intended model; barangay/postal hub resolution is
       panel. Emails: `dispute-reminder`, `dispute-appeal-received`,
       `dispute-appeal-resolved`. Model gained `buyer_reminder_sent_at`,
       `escalated_at`, `auto_resolved`, `appeal_*` (migration
-      `Migration20260613211052`). 71/71 unit tests green; both apps tsc-clean.
-      **Still TODO:** apply the migration (`medusa db:migrate` — declines the
-      stale cod_ledger.buyer_wallet drop prompt) + runtime-verify over HTTP.
+      `Migration20260613211052`, **applied** via `medusa db:migrate
+      --skip-links` to avoid the stale cod_ledger.buyer_wallet drop prompt).
+      71/71 unit tests green; both apps tsc-clean. **RUNTIME-VERIFIED
+      2026-06-14:** (a) `src/migration-scripts/verify-phase-g.ts` (reusable,
+      self-cleaning) drove the real job + resolve/appeal workflows against live
+      DB rows — 12/12: remind@25h, escalate@49h (pending, no auto-strike),
+      fresh untouched, tick idempotent, resolve→strike1/warned,
+      overturn→strike0/normal + appeal_state=overturned, uphold→strike kept +
+      upheld, double-appeal rejected; (b) live HTTP probes (throwaway admin +
+      customer, both purged): `GET /admin/disputes?appeal=requested`=200, admin
+      appeal route 404/400 from our handler, `GET /store/customer/disputes`=200
+      enriched, store appeal route 400 (notes-required)/404 from our handler.
 
 ### Phase H — Hardening
 - [ ] COD shortfall handling (collected ≠ order total) + remittance aging report.
