@@ -93,6 +93,11 @@ export default defineMiddlewares({
       middlewares: [authenticate("customer", ["session", "bearer"])],
     },
     {
+      matcher: "/store/push*",
+      method: ["GET", "POST", "DELETE"],
+      middlewares: [authenticate("customer", ["session", "bearer"])],
+    },
+    {
       matcher: "/admin/orders/*/cod-collected",
       method: ["POST"],
       middlewares: [authenticate("user", ["session", "bearer"])],
