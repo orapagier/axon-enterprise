@@ -33,6 +33,49 @@
 >   (fee table, service areas). Cross-city barangay/postal hub resolution is
 >   intentionally not built.
 
+> **▶ Runtime verification (2026-06-14) — read this first if resuming.**
+> The 2026-06-13 batch + stackable-role conversions are now **RUNTIME-VERIFIED over
+> live HTTP** (throwaway admin + minted customer sessions against the running
+> backend/storefront; all fixtures cleaned up afterwards). 26 HTTP assertions +
+> exec data-state checks; **50/50 jest unit tests still pass**, backend `tsc` clean
+> (one *pre-existing, unrelated* error in `migration-scripts/purge-dev-data.ts`,
+> `deleteFulfillments` typo — not touched here).
+> - **Launch-blocker FOUND + FIXED — producer payout insert was 500ing.** The
+>   `producer_payout` model declared `gross_centavos`/`amount_centavos` as
+>   `model.bigNumber()`, but `Migration20260613130000` created plain `numeric`
+>   columns with **no companion `raw_*_centavos` jsonb columns** BigNumber needs —
+>   so **every `createProducerPayouts` insert threw** `column "raw_gross_centavos"
+>   does not exist` (both the admin "Mark paid" DTC remit and the hub-intake form).
+>   The 50/50 unit tests never caught it (they exercise `listOwedDtc` math, never a
+>   DB insert). Fixed to `model.number()` to match the cod-ledger centavos
+>   convention (works against the existing `numeric` columns; no new migration).
+>   Re-verified: `hub_intake` records cleanly (amount ₱250 = 25000¢, gross ₱300 =
+>   30000¢) and shows in `recent`.
+> - **Verified PASS:** catalog empty (0 live/total products + listings, via DB + the
+>   store hub-products API); **rider PWA removal** (`api/rider-app/` and
+>   `api/rider/auth/*` deleted; the `/rider/*` token API — manifest/me/summary/
+>   delivered/refused — intact; `authenticateRider` 401s every `/rider/*` incl. the
+>   now-deleted auth paths); **Web Push backend** (`push-notification` module
+>   resolves, table present, `POST/DELETE /store/push/subscribe` persist + upsert +
+>   validate keys (400) + auth-gate (401)); **trader pricing** (admin approve with
+>   no `discount_percent` → **defaults to 10%**, `GET /store/trader-pricing` reflects
+>   it, revoke clears); **producer payouts** (owed shape, `dtc_remit` on an unsettled
+>   order → **409 gate**, hub-intake records — see fix above); **membership renewal**
+>   (approve **extends +365d from the current expiry, not now** → no days lost; join
+>   date preserved; `renewal_pending`/payment-ref cleared; **rejecting a renewal
+>   keeps the member active** with term untouched); **stackable roles** (`POST
+>   /store/customers/me` `roles[]` persists; the seller guard reads live roles —
+>   consumer → "Producer account required", producer → `PROFILE_INCOMPLETE`).
+> - **Correction to the 2026-06-13 note below:** `/rider-app` no longer **302s** —
+>   the route handler was *deleted* in the batch, so it now **404s** (and all
+>   `/rider/auth/*` handlers are gone). Treat the "302 → storefront" wording as
+>   superseded.
+> - **Still genuinely manual (needs a real browser/phone — cannot be automated
+>   here):** the end-to-end Web Push round-trip (an actual notification delivered to
+>   a subscribed browser, needs a secure-context `PushManager`); a real-phone visual
+>   pass of `/account/rider`; storefront *visual* rendering of the trader struck
+>   price / producer-payouts / renewal UI (their data/API paths are verified).
+>
 > **▶ Current build state (2026-06-13) — read this first if resuming.**
 > - **Six-item batch BUILT + TS-CLEAN + 50/50 unit tests (2026-06-13):**
 >   1. **Trader-price display + admin editor.** Storefront now shows an approved
