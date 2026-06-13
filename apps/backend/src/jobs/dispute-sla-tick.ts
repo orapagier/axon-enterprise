@@ -18,8 +18,8 @@
  */
 import type { MedusaContainer } from "@medusajs/framework/types"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
-import {
 import { runJob, type JobInput } from "../lib/job-observability"
+import {
   ACCOUNTABILITY_MODULE,
   DISPUTE_NO_RESPONSE_AUTO_RESOLVE,
 } from "../modules/accountability"
