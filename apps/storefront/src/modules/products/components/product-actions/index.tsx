@@ -252,6 +252,7 @@ export default function ProductActions({
           show={!inView}
           optionsDisabled={!!disabled || isAdding}
           isMember={isMember}
+          traderDiscountPercent={traderDiscountPercent}
         />
       </div>
     </>
