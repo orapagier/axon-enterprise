@@ -244,7 +244,18 @@ const MembershipsPage = () => {
                         </Table.Cell>
                         <Table.Cell>
                           {s === "pending" && (
-                            <span>{formatDate(row.membership.requestedAt)}</span>
+                            <div className="flex flex-col gap-y-1">
+                              <span>{formatDate(row.membership.requestedAt)}</span>
+                              {row.membership.renewal ? (
+                                <Badge color="blue" size="2xsmall">
+                                  Renewal
+                                </Badge>
+                              ) : (
+                                <Badge color="grey" size="2xsmall">
+                                  New
+                                </Badge>
+                              )}
+                            </div>
                           )}
                           {s === "active" && (
                             <div className="flex flex-col">
