@@ -148,7 +148,7 @@ export async function listOwedDtc(
     for (const [producerId, { gross, name }] of grossByProducer) {
       rows.push({
         order_id: o.id as string,
-        display_id: (o.display_id as number) ?? null,
+        display_id: (o.display_id as unknown as number) ?? null,
         producer_id: producerId,
         producer_name: name,
         gross_centavos: Math.round(gross * 100),
