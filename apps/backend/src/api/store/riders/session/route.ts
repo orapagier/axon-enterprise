@@ -7,7 +7,7 @@ import { signRiderToken } from "../../../../lib/rider-auth"
 
 /**
  * GET /store/riders/session — exchange the logged-in CUSTOMER session for a
- * rider token (the same 30-day HS256 token POST /rider/auth/login issues).
+ * 30-day HS256 rider token. This is the only place a rider token is minted.
  *
  * This is how riders "log in normally on the storefront": they sign in as a
  * customer (OTP email / Google) and the storefront account area calls this to
