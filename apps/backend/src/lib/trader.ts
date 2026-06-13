@@ -25,6 +25,9 @@ import { hasRole } from "./roles"
 export const TRADER_GROUP_PREFIX = "traders-"
 export const TRADER_PROMO_PREFIX = "TRADER-"
 
+/** Discount applied when an admin approves a trader without naming a percentage. */
+export const DEFAULT_TRADER_DISCOUNT = 10
+
 export function isValidTraderDiscount(pct: unknown): pct is number {
   return (
     typeof pct === "number" &&
