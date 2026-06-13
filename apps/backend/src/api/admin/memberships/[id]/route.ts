@@ -127,26 +127,41 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     event.tier = tier
     event.duration_days = durationDays
 
+    // Renewals extend from the later of now / current expiry so a member who
+    // renews early never loses remaining days; a first-time (or lapsed)
+    // approval starts the clock from now. Same code path serves both — a
+    // renewal is just an approve where the customer is still active.
+    const existingExpiry =
+      typeof existing[MEMBERSHIP_META.expiresAt] === "number"
+        ? (existing[MEMBERSHIP_META.expiresAt] as number)
+        : 0
+    const expiryBase = Math.max(now, existingExpiry)
+
     updatedMetadata = {
       ...existing,
       [MEMBERSHIP_META.status]: "active",
       [MEMBERSHIP_META.tier]: tier,
-      [MEMBERSHIP_META.joinedAt]: now,
-      [MEMBERSHIP_META.expiresAt]: now + durationDays * DAY_MS,
+      // Preserve the original join date across renewals.
+      [MEMBERSHIP_META.joinedAt]:
+        typeof existing[MEMBERSHIP_META.joinedAt] === "number"
+          ? existing[MEMBERSHIP_META.joinedAt]
+          : now,
+      [MEMBERSHIP_META.expiresAt]: expiryBase + durationDays * DAY_MS,
       [MEMBERSHIP_META.points]:
         typeof existing[MEMBERSHIP_META.points] === "number"
           ? existing[MEMBERSHIP_META.points]
           : 0,
       // Payment ref has been honoured; clear so the storefront stops showing
-      // the "pending" state.
+      // the "pending"/"renewal submitted" state.
       [MEMBERSHIP_META.requestedAt]: null,
       [MEMBERSHIP_META.paymentMethod]: null,
       [MEMBERSHIP_META.paymentReference]: null,
-      // Fresh membership term — re-arm the expiry reminder emails (Phase B)
-      // and clear any 30-day grace window (renewal during grace = approve).
+      // Fresh membership term — re-arm the expiry reminder emails (Phase B),
+      // clear any 30-day grace window, and clear a pending renewal request.
       membership_reminder_30_sent: null,
       membership_reminder_7_sent: null,
       membership_grace_until: null,
+      membership_renewal_pending: null,
       [MEMBERSHIP_META.events]: appendEvent(existing, event),
     }
   } else if (body.action === "reject") {
