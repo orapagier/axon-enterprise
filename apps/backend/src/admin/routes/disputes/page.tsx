@@ -253,13 +253,19 @@ const DisputesPage = () => {
           </div>
           <Select
             value={resolution}
-            onValueChange={(v) => setResolution(v as Resolution)}
+            onValueChange={(v) => {
+              setResolution(v as Filter)
+              setOpenId(null)
+            }}
           >
             <Select.Trigger className="w-[220px]">
               <Select.Value />
             </Select.Trigger>
             <Select.Content>
               <Select.Item value="pending">Pending</Select.Item>
+              <Select.Item value="appeal_requested">
+                Appeals to review
+              </Select.Item>
               <Select.Item value="buyer_fault">Buyer fault</Select.Item>
               <Select.Item value="producer_fault">Producer fault</Select.Item>
               <Select.Item value="rider_fault">Rider fault</Select.Item>
