@@ -46,6 +46,22 @@ describe("buildEmail", () => {
     expect(email.html).toContain("strike")
   })
 
+  it("dispute-appeal-resolved wording flips on the decision", () => {
+    const granted = buildEmail("dispute-appeal-resolved", {
+      display_id: 9,
+      decision: "overturn",
+    })!
+    expect(granted.subject).toContain("granted")
+    expect(granted.html).toContain("removed")
+
+    const denied = buildEmail("dispute-appeal-resolved", {
+      display_id: 9,
+      decision: "uphold",
+    })!
+    expect(denied.subject).toContain("not granted")
+    expect(denied.html).toContain("remains")
+  })
+
   it("trader-approved includes the discount and minimum-order note", () => {
     const email = buildEmail("trader-approved", {
       discount_percent: 12,
