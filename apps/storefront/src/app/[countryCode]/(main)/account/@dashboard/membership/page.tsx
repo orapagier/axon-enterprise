@@ -2,10 +2,12 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import {
   cancelMembership,
+  cancelMembershipRenewal,
   retrieveCustomer,
 } from "@lib/data/customer"
 import {
   getMembership,
+  getMembershipRenewal,
   getMembershipRequest,
   MEMBERSHIP_PAYOUT,
   MembershipRequest,
