@@ -962,7 +962,7 @@ matching is therefore the intended model; barangay/postal hub resolution is
 - [ ] Cross-hub "also available at <hub>" search (per existing product memory) —
       catalog stays per-hub; future.
 
-### Phase G — Dispute fairness & SLAs — built 2026-06-14 (NOT yet runtime-verified)
+### Phase G — Dispute fairness & SLAs — built + RUNTIME-VERIFIED 2026-06-14
 - [x] **Response SLA timers + nightly sweep.** `dispute-sla-tick` job (02:15)
       classifies each pending dispute via the pure `classifyDisputeForSla`
       (`src/lib/dispute-sla.ts`): a silent buyer is **reminded** at 24h
