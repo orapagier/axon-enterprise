@@ -113,17 +113,26 @@ async function notifyBatchInTransit(
 
   const { data: orders } = await query.graph({
     entity: "order",
-    fields: ["id", "display_id", "email"],
+    fields: ["id", "display_id", "email", "customer_id"],
     filters: { id: dispatchOrders.map((o) => o.order_id) },
   })
   for (const order of orders as unknown as {
+    id: string
     display_id: number
     email: string | null
+    customer_id: string | null
   }[]) {
     await sendEmail(container, {
       to: order.email,
       template: "order-in-transit",
       data: { display_id: order.display_id },
+    })
+    await sendPush(container, {
+      customerId: order.customer_id,
+      title: "Out for delivery 🛵",
+      body: `Your order #${order.display_id} is on the way.`,
+      url: "/account/orders",
+      tag: `order-${order.id}`,
     })
   }
 }
