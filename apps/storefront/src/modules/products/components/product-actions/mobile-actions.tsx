@@ -25,6 +25,7 @@ type MobileActionsProps = {
   show: boolean
   optionsDisabled: boolean
   isMember?: boolean
+  traderDiscountPercent?: number | null
 }
 
 const MobileActions: React.FC<MobileActionsProps> = ({
@@ -38,6 +39,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
   show,
   optionsDisabled,
   isMember = false,
+  traderDiscountPercent = null,
 }) => {
   const { state, open, close } = useToggleState()
 
