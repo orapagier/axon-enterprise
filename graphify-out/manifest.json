@@ -2499,6 +2499,16 @@
     "ast_hash": "9537d28508d365fa1c4a1634dd5a3274",
     "semantic_hash": ""
   },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/restore-admin-auth.ts": {
+    "mtime": 1781347861.7796373,
+    "ast_hash": "14fea10ea7f0dbf08bb273f547584b8c",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/purge-all-users.ts": {
+    "mtime": 1781347688.1413476,
+    "ast_hash": "db21b07a4e41b533b7934e43ed92dd19",
+    "semantic_hash": ""
+  },
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/cleanup-orphan-listings.ts": {
     "mtime": 1781337177.3154387,
     "ast_hash": "566211c1eac19eb32df8cbad8dd0411b",
@@ -2530,8 +2540,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/query-entry-points.d.ts": {
-    "mtime": 1781337465.2749758,
-    "ast_hash": "6de5d151fb034923bb5c1ed21a57e5ba",
+    "mtime": 1781347662.3866732,
+    "ast_hash": "4bff4ac8fb8324ef531e058c7aec3280",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/index.d.ts": {
@@ -2540,12 +2550,12 @@
     "semantic_hash": "92cfe3ea73a656c693052260d34e9dc5"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/modules-bindings.d.ts": {
-    "mtime": 1781337465.2749758,
+    "mtime": 1781347662.3866732,
     "ast_hash": "a90c337fb01defb163cf6944991ecaf7",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/entry.jsx": {
-    "mtime": 1781337463.3229768,
+    "mtime": 1781347864.8016226,
     "ast_hash": "8b276d285c6e460a0c2c67b57ec8d943",
     "semantic_hash": "8b276d285c6e460a0c2c67b57ec8d943"
   },
@@ -2570,8 +2580,8 @@
     "semantic_hash": "42ceca1f28ee6045ab20a957b55a88ce"
   },
   "/home/ramlej/MFH/freshhub/IMPLEMENTATION_PLAN_ASBUILT.md": {
-    "mtime": 1781234733.6767452,
-    "ast_hash": "e793eae686936d9554ce11f55a96d1f3",
+    "mtime": 1781337554.2427738,
+    "ast_hash": "098645d7776b3a1e99c0e11139438838",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/.github/workflows/ci.yml": {
@@ -2625,7 +2635,7 @@
     "semantic_hash": "6f36f79ab958b75e4fdaf581b92a1225"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/index.html": {
-    "mtime": 1781337463.3229768,
+    "mtime": 1781347864.8016226,
     "ast_hash": "1f14bb0d5e89bc45a4265b714e6c6de6",
     "semantic_hash": "1f14bb0d5e89bc45a4265b714e6c6de6"
   },
