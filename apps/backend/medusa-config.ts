@@ -132,6 +132,7 @@ const customModules: Record<string, unknown>[] = [
   { resolve: './src/modules/accountability' },
   { resolve: './src/modules/delivery-fees' },
   { resolve: './src/modules/push-notification' },
+  { resolve: './src/modules/producer-payout' },
   {
     resolve: '@medusajs/medusa/payment',
     options: {
