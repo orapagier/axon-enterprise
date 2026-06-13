@@ -115,11 +115,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         | { metadata: Record<string, unknown> | null }
         | undefined
       // Active AND unexpired — the nightly expiry job cancels stale members,
-    // but the tier gate must not honor an expiry the job hasn't reached yet.
-    const expiresAt = Number(cust?.metadata?.membership_expires_at)
-    isMember =
-      cust?.metadata?.membership_status === "active" &&
-      (!Number.isFinite(expiresAt) || expiresAt <= 0 || expiresAt > Date.now())
+      // but the tier gate must not honor an expiry the job hasn't reached yet.
+      isMember = isMembershipActive(cust?.metadata, Date.now())
     }
     if (!isMember) {
       res.status(403).json({
@@ -143,9 +140,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       parts.find((p) => p.type === "minute")?.value ?? "0",
       10
     )
-    const [ch, cm] = hub.dispatch_cutoff.split(":").map((s) => parseInt(s, 10))
-    const isBefore = h < ch || (h === ch && m < (cm || 0))
-    if (!isBefore) {
+    if (!beforeCutoff({ hour: h, minute: m }, parseHHMM(hub.dispatch_cutoff))) {
       res.status(409).json({
         error: `Free delivery requires order before ${hub.dispatch_cutoff} ${hub.timezone}`,
       })
@@ -153,12 +148,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     }
   }
 
-  const feePhp =
-    tier === "free"
-      ? 0
-      : tier === "standard"
-        ? fee.standard_fee_php
-        : fee.special_fee_php
+  const feePhp = feeForTier(tier, fee.standard_fee_php, fee.special_fee_php)
 
   // Merge into cart metadata.
   const [updated] = await cartModule.updateCarts([
