@@ -36,6 +36,53 @@ type ReconcileResponse = {
   }
 }
 
+type AgingBuckets = {
+  d0_1: number
+  d1_3: number
+  d3_7: number
+  d7_plus: number
+}
+
+type RiderAging = {
+  rider_id: string
+  outstanding_centavos: number
+  order_count: number
+  oldest_age_days: number
+  buckets: AgingBuckets
+}
+
+type ShortfallRow = {
+  order_id: string | null
+  rider_id: string | null
+  kind: "collection" | "remittance"
+  expected_centavos: number
+  actual_centavos: number
+  shortfall_centavos: number
+  created_at: string
+}
+
+type AgingResponse = {
+  generated_at: number
+  aging: {
+    riders: RiderAging[]
+    totals: AgingBuckets
+    outstanding_centavos: number
+  }
+  shortfalls: {
+    collection: ShortfallRow[]
+    remittance: ShortfallRow[]
+    total_centavos: number
+  }
+}
+
+const fetchAging = async (): Promise<AgingResponse> => {
+  const res = await fetch(`/admin/cod-remittance-aging`, {
+    credentials: "include",
+  })
+  if (!res.ok) throw new Error(`Failed (${res.status})`)
+  return (await res.json()) as AgingResponse
+}
+
 function todayManilaISO(): string {
   const now = new Date()
   const local = new Date(now.getTime() + 8 * 60 * 60_000)
