@@ -153,8 +153,82 @@ const ResolveForm = ({
   )
 }
 
+const AppealForm = ({
+  dispute,
+  onResolved,
+}: {
+  dispute: Dispute
+  onResolved: () => void
+}) => {
+  const [decision, setDecision] = useState<"overturn" | "uphold">("overturn")
+  const [notes, setNotes] = useState("")
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const res = await fetch(`/admin/disputes/${dispute.id}/appeal`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ decision, notes }),
+      })
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}))
+        throw new Error(err.error ?? `Failed (${res.status})`)
+      }
+    },
+    onSuccess: () => {
+      toast.success(decision === "overturn" ? "Appeal granted" : "Appeal denied")
+      onResolved()
+    },
+    onError: (err: Error) => toast.error(err.message),
+  })
+
+  return (
+    <div className="rounded-lg border p-4 bg-grey-5 mt-3">
+      <Heading level="h3" className="mb-2">
+        Appeal review
+      </Heading>
+      {dispute.appeal_notes && (
+        <Text className="text-ui-fg-subtle text-sm mb-3">
+          Buyer&apos;s appeal: {dispute.appeal_notes}
+        </Text>
+      )}
+      <div className="flex gap-3 items-start">
+        <Select
+          value={decision}
+          onValueChange={(v) => setDecision(v as "overturn" | "uphold")}
+        >
+          <Select.Trigger className="w-[220px]">
+            <Select.Value />
+          </Select.Trigger>
+          <Select.Content>
+            <Select.Item value="overturn">Overturn (remove strike)</Select.Item>
+            <Select.Item value="uphold">Uphold (strike stands)</Select.Item>
+          </Select.Content>
+        </Select>
+        <div className="flex-1">
+          <Textarea
+            placeholder="Decision notes (visible internally)"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            rows={2}
+          />
+        </div>
+        <Button onClick={() => mutation.mutate()} disabled={mutation.isPending}>
+          Decide
+        </Button>
+      </div>
+      {decision === "overturn" && (
+        <Text className="text-ui-fg-subtle text-sm mt-2">
+          The buyer&apos;s most recent strike will be reversed and their account
+          state recomputed.
+        </Text>
+      )}
+    </div>
+  )
+}
+
 const DisputesPage = () => {
-  const [resolution, setResolution] = useState<Resolution>("pending")
+  const [resolution, setResolution] = useState<Filter>("pending")
   const [openId, setOpenId] = useState<string | null>(null)
   const qc = useQueryClient()
 
