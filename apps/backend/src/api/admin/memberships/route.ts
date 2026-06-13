@@ -46,12 +46,19 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     }
   )
 
-  const matching = customers.filter(
-    (c) =>
-      (c.metadata as Record<string, unknown> | null)?.[
-        MEMBERSHIP_META.status
-      ] === status
-  )
+  // The "pending" queue also surfaces renewal requests: a still-active member
+  // who submitted a renewal payment keeps status=active but carries
+  // `membership_renewal_pending`. Those need admin action too.
+  const matching = customers.filter((c) => {
+    const meta = (c.metadata as Record<string, unknown> | null) ?? {}
+    if (status === "pending") {
+      return (
+        meta[MEMBERSHIP_META.status] === "pending" ||
+        meta.membership_renewal_pending === true
+      )
+    }
+    return meta[MEMBERSHIP_META.status] === status
+  })
 
   const memberships = matching.map((c) => {
     const meta = (c.metadata as Record<string, unknown> | null) ?? {}
