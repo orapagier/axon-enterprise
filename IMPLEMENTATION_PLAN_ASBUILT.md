@@ -690,8 +690,9 @@ GET    /store/seller/pickup-windows                 windows I can reserve
 POST   /store/seller/uploads                        image upload (multer, ≤5×4MB)
 POST   /store/seller/disputes/:id/respond           producer dispute response
 # Buyer disputes
-GET    /store/customer/disputes                     my disputes
+GET    /store/customer/disputes                     my disputes (+ appeal_eligible per row)
 POST   /store/customer/disputes/:id/respond         buyer dispute response
+POST   /store/customer/disputes/:id/appeal          buyer appeals a buyer_fault strike (14-day window)
 ```
 
 ### Admin
