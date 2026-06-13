@@ -6,8 +6,11 @@ import { createHmac, timingSafeEqual } from "crypto"
  *
  * Riders aren't Medusa "customer"/"user" actors, so rather than register a
  * custom actor type + auth provider we issue our own signed token (HS256 over
- * the project's JWT_SECRET) at POST /rider/auth/login and verify it on /rider/*.
- * No external dependency — node's crypto is enough for a stateless HMAC token.
+ * the project's JWT_SECRET) and verify it on /rider/*. The token is minted at
+ * GET /store/riders/session — riders sign in on the storefront like any
+ * customer (OTP / Google), and that route exchanges the customer session for a
+ * rider token (matched on customer.email ↔ rider.email). No external
+ * dependency — node's crypto is enough for a stateless HMAC token.
  */
 
 const TTL_SECONDS = 30 * 24 * 60 * 60 // 30 days
