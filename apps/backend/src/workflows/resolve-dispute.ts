@@ -31,35 +31,36 @@ type AccountState =
 
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000
 
-/**
- * Pure escalation rule used by the workflow and by tests.
- *
- *  strikes = 1 → warned, recovery_eligible_at = now + 6 months (the clean
- *                window the clean-order-tick job checks before recovery)
- *  strikes = 2 → prepay_locked_30d, state_until = now + 30d
- *  strikes ≥ 3 → prepay_locked_permanent
- */
-export function applyBuyerFaultEscalation(
-  currentStrikes: number,
-  now: Date
-): {
-  strike_count: number
+export type StrikeState = {
   state: AccountState
   state_until: Date | null
   recovery_eligible_at: Date | null
-} {
-  const nextStrikes = currentStrikes + 1
-  if (nextStrikes >= 3) {
+}
+
+/**
+ * Pure mapping from a strike count to the account state it implies. Single
+ * source of truth for both escalation (strike added) and appeal reversal
+ * (strike removed) so the two can never disagree.
+ *
+ *  0 strikes  → normal
+ *  1 strike   → warned, recovery_eligible_at = now + 6 months (the clean window
+ *               the clean-order-tick job checks before recovery)
+ *  2 strikes  → prepay_locked_30d, state_until = now + 30d
+ *  3+ strikes → prepay_locked_permanent
+ */
+export function stateForStrikeCount(strikes: number, now: Date): StrikeState {
+  if (strikes <= 0) {
+    return { state: "normal", state_until: null, recovery_eligible_at: null }
+  }
+  if (strikes >= 3) {
     return {
-      strike_count: nextStrikes,
       state: "prepay_locked_permanent",
       state_until: null,
       recovery_eligible_at: null,
     }
   }
-  if (nextStrikes === 2) {
+  if (strikes === 2) {
     return {
-      strike_count: nextStrikes,
       state: "prepay_locked_30d",
       state_until: new Date(now.getTime() + THIRTY_DAYS_MS),
       recovery_eligible_at: null,
@@ -67,11 +68,33 @@ export function applyBuyerFaultEscalation(
   }
   // first strike
   return {
-    strike_count: nextStrikes,
     state: "warned",
     state_until: null,
     recovery_eligible_at: new Date(now.getTime() + WARNED_RECOVERY_WINDOW_MS),
   }
+}
+
+/**
+ * Pure escalation rule (strike +1) used by the workflow and by tests.
+ */
+export function applyBuyerFaultEscalation(
+  currentStrikes: number,
+  now: Date
+): { strike_count: number } & StrikeState {
+  const nextStrikes = currentStrikes + 1
+  return { strike_count: nextStrikes, ...stateForStrikeCount(nextStrikes, now) }
+}
+
+/**
+ * Pure reversal rule (strike −1), used when an appeal is overturned. The strike
+ * floors at 0; the resulting state is recomputed from the lowered count.
+ */
+export function reverseBuyerFaultStrike(
+  currentStrikes: number,
+  now: Date
+): { strike_count: number } & StrikeState {
+  const nextStrikes = Math.max(0, currentStrikes - 1)
+  return { strike_count: nextStrikes, ...stateForStrikeCount(nextStrikes, now) }
 }
 
 type ResolveState = {
