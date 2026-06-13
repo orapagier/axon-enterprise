@@ -1,6 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { Modules } from "@medusajs/framework/utils"
 import {
+  DEFAULT_TRADER_DISCOUNT,
   ensureTraderTier,
   isTraderAccount,
   isValidTraderDiscount,
