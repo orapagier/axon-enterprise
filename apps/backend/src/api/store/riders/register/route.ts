@@ -12,11 +12,11 @@ import { rolesOf } from "../../../../lib/roles"
  * account area. Body: { full_name, phone, hub_id }.
  *
  * The email comes from the AUTHENTICATED customer (already verified by the
- * OTP / Google sign-in rails), never from the body — same trust model as the
- * Google signup ticket on the public POST /rider/auth/signup. No PIN: the
- * storefront session, exchanged at GET /store/riders/session, replaces the
- * phone+PIN rail. The rider lands as "pending" and is activated by a hub
- * admin after the cash bond is paid at the counter.
+ * OTP / Google sign-in rails), never from the body. No PIN: the storefront
+ * session, exchanged at GET /store/riders/session, is the rider's only login
+ * rail (the legacy phone+PIN rider PWA was retired). The rider lands as
+ * "pending" and is activated by a hub admin after the cash bond is paid at
+ * the counter.
  */
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const ctx = (req as unknown as { auth_context?: { actor_id?: string } })
