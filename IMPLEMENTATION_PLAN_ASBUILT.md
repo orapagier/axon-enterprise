@@ -809,7 +809,12 @@ updates, membership approvals, and renewal reminders are all silent today.
       in_transit, delivered, dispute opened/resolved, membership
       approved/rejected/cancelled, membership expiring (30/7d) + expired.
       Runtime-verified through the real flows (notification rows `success`).
-- [ ] Web Push for delivery status (consumer) — optional, after email.
+- [x] **Web Push for delivery status (consumer) — built 2026-06-13.**
+      `push-notification` module + `push_subscription` table, customer-auth
+      `POST/DELETE /store/push/subscribe`, best-effort `sendPush`
+      (`src/lib/push.ts`) on order in-transit + delivered, `public/push-sw.js`,
+      and a `PushOptIn` card on the account Overview. VAPID keys in env; needs a
+      server restart + real-browser round-trip to verify.
 
 ### Phase C — Membership lifecycle automation
 **Problem:** `membership_expires_at` is set but nothing enforces it. The Special
