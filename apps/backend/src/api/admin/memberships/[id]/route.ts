@@ -100,6 +100,11 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       ? (existing[MEMBERSHIP_META.status] as string)
       : null
 
+  // A renewal request is a payment submitted by a member whose term is still
+  // valid (status stayed active/grace). Rejecting one must not revoke that
+  // still-valid term — it just drops the pending renewal.
+  const isRenewalRequest = existing.membership_renewal_pending === true
+
   // The admin's user id (whoever is signed into the dashboard). Audit-trail
   // attribution. The Medusa framework populates this on authenticated admin
   // requests; we cast since the type isn't exported as a stable surface.
