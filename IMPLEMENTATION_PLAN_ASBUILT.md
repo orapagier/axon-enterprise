@@ -825,7 +825,10 @@ tier checks `membership_status==active` only, not the expiry date.
       (`membership_reminder_{30,7}_sent`), re-armed on approval.
 - [x] Tier gating checks expiry, not just status (2026-06-10) — both
       delivery-options routes.
-- [ ] Storefront renewal flow (today renewal = pay at counter / new request).
+- [x] **Storefront renewal flow — built 2026-06-13.** Active/grace members get a
+      Renew disclosure on `/account/membership` (same payment form); it sets
+      `membership_renewal_pending` without downgrading, the admin approve extends
+      from `max(now, current expiry)`, and the pending queue tags New vs Renewal.
 
 ### Phase D — Trader (B2B) pricing
 **Problem:** Trader is a recognized account type but there is no B2B pricing.
