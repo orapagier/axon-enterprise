@@ -82,14 +82,25 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
   let tx
   try {
+    // Benchmark the remittance against what the rider collected so the aging
+    // report can flag a rider who hands over less than they took.
+    const collectedAmt = collectedRow.amount
+    const shortBy = collectedAmt - body.amount
+    const shortNote =
+      shortBy > 0
+        ? `SHORT ₱${(shortBy / 100).toFixed(2)} vs collected ₱${(
+            collectedAmt / 100
+          ).toFixed(2)}.`
+        : null
     tx = await ledger.createCodTransactions({
       customer_id: order.customer_id,
       order_id: orderId,
       type: "rider_remitted",
       amount: body.amount,
+      expected_amount: collectedAmt,
       rider_id: body.rider_id,
       recorded_by: actorId,
-      notes: body.notes ?? null,
+      notes: [body.notes, shortNote].filter(Boolean).join(" ") || null,
     })
   } catch (err) {
     // Lost the race against a concurrent remit: the unique index rejected the
