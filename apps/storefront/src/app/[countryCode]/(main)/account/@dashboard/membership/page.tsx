@@ -96,7 +96,11 @@ export default async function MembershipPage() {
       </div>
 
       {membership.isMember ? (
-        <MemberView membership={membership} customerName={customer.first_name} />
+        <MemberView
+          membership={membership}
+          customerName={customer.first_name}
+          renewal={renewal}
+        />
       ) : request.pending ? (
         <PendingView request={request} />
       ) : (
