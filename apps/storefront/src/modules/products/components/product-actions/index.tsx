@@ -35,6 +35,7 @@ export default function ProductActions({
   product,
   disabled,
   isMember = false,
+  traderDiscountPercent = null,
 }: ProductActionsProps) {
   const router = useRouter()
   const pathname = usePathname()
