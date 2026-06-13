@@ -52,13 +52,19 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   }
 
   if (body.action === "approve") {
-    if (!isValidTraderDiscount(body.discount_percent)) {
+    // Default to the standard tier when the admin approves without naming a
+    // percentage; only an explicitly out-of-range value is rejected.
+    const requested =
+      body.discount_percent === undefined || body.discount_percent === null
+        ? DEFAULT_TRADER_DISCOUNT
+        : body.discount_percent
+    if (!isValidTraderDiscount(requested)) {
       res.status(400).json({
         error: "discount_percent must be an integer between 1 and 90",
       })
       return
     }
-    const pct = body.discount_percent
+    const pct = requested
     const note =
       typeof body.min_order_note === "string" && body.min_order_note.trim()
         ? body.min_order_note.trim()
