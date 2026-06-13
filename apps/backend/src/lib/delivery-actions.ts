@@ -174,9 +174,11 @@ export async function confirmDelivery(
     } else {
       const total = Number(order.total ?? order.summary?.current_order_total ?? 0)
       const feePhp = Number(order.metadata?.delivery_fee_php ?? 0)
-      const amount =
-        args.amountOverride ??
-        Math.round(total * 100) + Math.round(feePhp * 100)
+      // What the buyer owes at the door: order total + delivery fee.
+      const expected = Math.round(total * 100) + Math.round(feePhp * 100)
+      // The rider can report a different figure (partial / short payment); fall
+      // back to the expected amount when none is supplied.
+      const amount = args.amountOverride ?? expected
       if (amount <= 0) {
         return {
           ok: false,
@@ -184,15 +186,23 @@ export async function confirmDelivery(
           error: "Could not resolve a positive amount",
         }
       }
+      const shortBy = expected > 0 ? expected - amount : 0
+      const notes =
+        shortBy > 0
+          ? `Auto-recorded on delivery confirmation. SHORT ₱${(
+              shortBy / 100
+            ).toFixed(2)} vs expected ₱${(expected / 100).toFixed(2)}.`
+          : "Auto-recorded on delivery confirmation."
       try {
         transaction = await ledger.createCodTransactions({
           customer_id: order.customer_id,
           order_id: order.id,
           type: "cod_collected",
           amount,
+          expected_amount: expected > 0 ? expected : null,
           rider_id: riderId,
           recorded_by: args.recordedBy ?? null,
-          notes: "Auto-recorded on delivery confirmation.",
+          notes,
         })
       } catch (err) {
         if (isDuplicateCodTransaction(err)) {
