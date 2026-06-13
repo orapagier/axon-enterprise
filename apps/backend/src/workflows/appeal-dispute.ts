@@ -89,7 +89,7 @@ const appealStep = createStep(
     const state: AppealState = {
       dispute_id: dispute.id,
       prior_dispute: {
-        appeal_state: dispute.appeal_state,
+        appeal_state: dispute.appeal_state as AppealStateEnum,
         appeal_resolved_at: toDate(dispute.appeal_resolved_at),
         appeal_resolved_by: dispute.appeal_resolved_by ?? null,
         resolution_notes: dispute.resolution_notes ?? null,
