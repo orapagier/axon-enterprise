@@ -119,6 +119,49 @@ const TEMPLATES: Record<string, (d: Data) => BuiltEmail> = {
     ),
   }),
 
+  "dispute-reminder": (d) => ({
+    subject: `Order #${d.display_id}: respond to the delivery issue`,
+    html: layout(
+      `Reminder: tell us what happened with order #${d.display_id}`,
+      p(
+        `A delivery for this order was marked refused and we haven't heard your side yet.`
+      ) +
+        p(
+          `Please log in and respond under <strong>My disputes</strong> within the next 24 hours. After the 48-hour window the dispute is sent for review, and an unanswered refusal can affect your Cash-on-Delivery eligibility.`
+        )
+    ),
+  }),
+
+  "dispute-appeal-received": (d) => ({
+    subject: `Order #${d.display_id}: your appeal was received`,
+    html: layout(
+      `We received your appeal for order #${d.display_id}`,
+      p(
+        `Thanks — your appeal is now with our team for review. We'll email you once a decision is made.`
+      ) +
+        p(`You can check the status anytime under <strong>My disputes</strong>.`)
+    ),
+  }),
+
+  "dispute-appeal-resolved": (d) => {
+    const overturned = String(d.decision) === "overturn"
+    return {
+      subject: `Order #${d.display_id}: appeal ${
+        overturned ? "granted" : "not granted"
+      }`,
+      html: layout(
+        `Your appeal for order #${d.display_id} was ${
+          overturned ? "granted" : "reviewed"
+        }`,
+        p(
+          overturned
+            ? "After review, your appeal was <strong>granted</strong> — the strike has been removed from your account."
+            : "After review, the original decision stands and the strike remains on your account."
+        ) + p(`Questions? Visit your hub counter and we'll sort it out.`)
+      ),
+    }
+  },
+
   "dispute-resolved": (d) => {
     const RESOLUTION_NOTE: Record<string, string> = {
       buyer_fault:
