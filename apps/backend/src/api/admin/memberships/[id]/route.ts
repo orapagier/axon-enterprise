@@ -170,20 +170,25 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       [MEMBERSHIP_META.events]: appendEvent(existing, event),
     }
   } else if (body.action === "reject") {
+    // Rejecting a renewal payment drops only the pending request — the
+    // member's current term stays intact. Rejecting a first-time request
+    // resets the customer to the free tier.
     updatedMetadata = {
       ...existing,
-      [MEMBERSHIP_META.status]: "cancelled",
+      ...(isRenewalRequest ? {} : { [MEMBERSHIP_META.status]: "cancelled" }),
       [MEMBERSHIP_META.requestedAt]: null,
       [MEMBERSHIP_META.paymentMethod]: null,
       [MEMBERSHIP_META.paymentReference]: null,
+      membership_renewal_pending: null,
       [MEMBERSHIP_META.events]: appendEvent(existing, event),
     }
   } else {
-    // cancel
+    // cancel — admin-initiated cancellation of an active membership.
     updatedMetadata = {
       ...existing,
       [MEMBERSHIP_META.status]: "cancelled",
       [MEMBERSHIP_META.expiresAt]: now,
+      membership_renewal_pending: null,
       [MEMBERSHIP_META.events]: appendEvent(existing, event),
     }
   }
