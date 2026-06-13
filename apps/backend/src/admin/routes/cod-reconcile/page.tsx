@@ -113,6 +113,12 @@ const CodReconcilePage = () => {
     queryKey: ["cod-reconcile", from, to],
     queryFn: () => fetchReconcile(from, to),
   })
+  // All-time aging is independent of the date range — an old unremitted
+  // collection is exactly what it must surface — so it has its own query.
+  const aging = useQuery({
+    queryKey: ["cod-remittance-aging"],
+    queryFn: fetchAging,
+  })
 
   return (
     <Container className="p-0">
