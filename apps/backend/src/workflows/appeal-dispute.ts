@@ -23,10 +23,12 @@ type AccountState =
   | "prepay_locked_30d"
   | "prepay_locked_permanent"
 
+type AppealStateEnum = "none" | "requested" | "upheld" | "overturned"
+
 type AppealState = {
   dispute_id: string
   prior_dispute: {
-    appeal_state: string
+    appeal_state: AppealStateEnum
     appeal_resolved_at: Date | null
     appeal_resolved_by: string | null
     resolution_notes: string | null
