@@ -226,7 +226,9 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
     if (group?.id) {
       const pair = { customer_id: customerId, customer_group_id: group.id }
-      if (body.action === "approve") {
+      // Key off the resulting status, not the verb: a rejected *renewal*
+      // leaves the member active, so they must stay in the group.
+      if (updatedMetadata[MEMBERSHIP_META.status] === "active") {
         await customerModule.addCustomerToGroup(pair)
       } else {
         await customerModule.removeCustomerFromGroup(pair)
