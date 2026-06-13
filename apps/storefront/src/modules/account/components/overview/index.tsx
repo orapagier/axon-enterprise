@@ -1,5 +1,6 @@
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import AccountStatusBanner from "@modules/account/components/account-status-banner"
+import PushOptIn from "@modules/account/components/push-opt-in"
 import { convertToLocale } from "@lib/util/money"
 import { hasRole } from "@lib/util/roles"
 import { HttpTypes } from "@medusajs/types"
