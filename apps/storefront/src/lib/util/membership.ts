@@ -17,6 +17,7 @@ export const MEMBERSHIP_META = {
   requestedAt: "membership_requested_at", // unix ms; when the user submitted payment proof
   paymentMethod: "membership_payment_method", // "otc" | "gcash" | "bank"
   paymentReference: "membership_payment_reference", // free-text ref the user pasted from their GCash/bank receipt; empty for OTC cash
+  renewalPending: "membership_renewal_pending", // true when an active member submitted a renewal payment (status stays active; admin approval extends the term)
 } as const
 
 // "otc" = walk-in cash at the hub counter (no reference number — the cashier
