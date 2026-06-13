@@ -8,6 +8,7 @@ import X from "@modules/common/icons/x"
 
 import { getProductPrice } from "@lib/util/get-product-price"
 import { getMemberPrice } from "@lib/util/membership"
+import { getTraderPrice } from "@lib/util/trader"
 import { convertToLocale } from "@lib/util/money"
 import OptionSelect from "./option-select"
 import { HttpTypes } from "@medusajs/types"
