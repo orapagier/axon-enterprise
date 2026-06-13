@@ -451,9 +451,11 @@ function Field({
 function MemberView({
   membership,
   customerName,
+  renewal,
 }: {
   membership: MembershipStatus
   customerName: string | null | undefined
+  renewal: MembershipRequest
 }) {
   const joined = formatDate(membership.joinedAt)
   const renews = formatDate(membership.expiresAt)
