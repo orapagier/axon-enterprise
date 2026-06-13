@@ -3,8 +3,14 @@ import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
 import { DELIVERY_FEES_MODULE } from "../../../../modules/delivery-fees"
 import type DeliveryFeesModuleService from "../../../../modules/delivery-fees/service"
 import { resolveHubForDelivery } from "../../../../lib/resolve-hub"
+import {
+  parseHHMM,
+  beforeCutoff,
+  isMembershipActive,
+  feeForTier,
+  type DeliveryTier as Tier,
+} from "../../../../lib/delivery-tiers"
 
-type Tier = "free" | "standard" | "special"
 const VALID_TIERS: Tier[] = ["free", "standard", "special"]
 
 /**
