@@ -785,7 +785,7 @@ In-process Medusa Admin pages under `apps/backend/src/admin/routes/`:
 | **Walk-in OTC counter sales** (`/admin/otc-counter` → paid, dispatch-skipped order + `otc_collected`) | ✅ code-complete (Phase A, reframed 2026-06-10) — needs `db:migrate` + region seed + runtime verify (esp. stock-decrement fulfillment) |
 | **Locked buyers blocked from online checkout** (no OTC online; "buy in person") | ✅ code-complete (Phase A, 2026-06-10) — needs runtime verify |
 | **Transactional email** (Resend; 10 templates across order/dispute/membership flows) | ✅ shipped (2026-06-10) — live since 2026-06-12 |
-| **Web Push** (delivery in-transit + delivered) | ✅ built (2026-06-13) — `push-notification` module + `push_subscription` table + opt-in on account Overview; VAPID keys set; needs server restart + real-browser verify |
+| **Web Push** (delivery in-transit + delivered) | ✅ backend RUNTIME-VERIFIED (2026-06-14) — module loads, table present, `POST/DELETE /store/push/subscribe` persist/upsert/validate/auth-gate; VAPID set. Real-browser push-delivery round-trip still manual |
 | **Membership expiry enforcement + renewal reminders** | ✅ shipped (2026-06-10) — nightly tick + 30/7d emails + expiry-aware tier gate |
 | **Membership renewal (self-service)** | ✅ built (2026-06-13) — Renew on `/account/membership`, no-downgrade renewal flag, approve extends from current expiry |
 | **Trader (B2B) pricing** | ✅ shipped (2026-06-11) — auto promotions per tier; storefront "Trader −X%" display + admin Traders editor (default 10%) added 2026-06-13 |
