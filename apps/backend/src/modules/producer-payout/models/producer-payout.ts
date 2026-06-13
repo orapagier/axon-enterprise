@@ -22,8 +22,12 @@ const ProducerPayout = model
     producer_name: model.text().nullable(),
     order_id: model.text().nullable(),
     kind: model.enum(["dtc_remit", "hub_intake"]),
-    gross_centavos: model.bigNumber().nullable(),
-    amount_centavos: model.bigNumber(),
+    // Centavos are integers — match the cod-ledger convention (model.number()
+    // → numeric/integer column). bigNumber() would require companion
+    // raw_*_centavos jsonb columns the migration never created, which 500s
+    // every insert ("column raw_gross_centavos does not exist").
+    gross_centavos: model.number().nullable(),
+    amount_centavos: model.number(),
     method: model.enum(["cash", "gcash"]).default("cash"),
     reference: model.text().nullable(),
     notes: model.text().nullable(),
