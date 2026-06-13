@@ -85,7 +85,8 @@ export default async function purgeDevData({ container }: ExecArgs) {
   })
   await step("fulfillments", async () => {
     const rows = await fulfillment.listFulfillments({}, { select: ["id"], take: TAKE })
-    if (rows.length) await fulfillment.deleteFulfillments(idsOf(rows))
+    // The fulfillment module exposes only a single-id delete (no bulk variant).
+    for (const id of idsOf(rows)) await fulfillment.deleteFulfillment(id)
     return rows.length
   })
 
