@@ -33,6 +33,7 @@ import { rolesOf } from "../lib/roles"
 import { syncTraderGroupMembership } from "../lib/trader"
 import { LISTING_MODULE } from "../modules/listing"
 import type ListingModuleService from "../modules/listing/service"
+import { runJob, type JobInput } from "../lib/job-observability"
 
 export const config = {
   name: "membership-expiry-tick",
