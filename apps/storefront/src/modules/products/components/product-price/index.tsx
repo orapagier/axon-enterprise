@@ -2,6 +2,7 @@ import { clx } from "@modules/common/components/ui"
 
 import { getProductPrice } from "@lib/util/get-product-price"
 import { getMemberPrice } from "@lib/util/membership"
+import { getTraderPrice } from "@lib/util/trader"
 import { convertToLocale } from "@lib/util/money"
 import { getProductUnit, getUnitLabel } from "@lib/util/unit"
 import { HttpTypes } from "@medusajs/types"
@@ -10,10 +11,14 @@ export default function ProductPrice({
   product,
   variant,
   isMember = false,
+  traderDiscountPercent = null,
 }: {
   product: HttpTypes.StoreProduct
   variant?: HttpTypes.StoreProductVariant
   isMember?: boolean
+  // Set for an approved trader — their negotiated B2B percentage. Trader
+  // pricing wins over member pricing (it's the rate actually applied at cart).
+  traderDiscountPercent?: number | null
 }) {
   const unit = getProductUnit(product)
 
@@ -29,6 +34,59 @@ export default function ProductPrice({
   }
 
   const isSale = selectedPrice.price_type === "sale"
+
+  // Trader view: negotiated B2B price headline + struck-through list price.
+  // Takes priority over member pricing and is suppressed on sale items (we
+  // don't stack a sale markdown with the trader percentage).
+  const traderAmount =
+    !isSale && traderDiscountPercent
+      ? getTraderPrice(selectedPrice.calculated_price_number, traderDiscountPercent)
+      : null
+  if (traderAmount !== null) {
+    const traderLabel = convertToLocale({
+      amount: traderAmount,
+      currency_code: selectedPrice.currency_code,
+    })
+    return (
+      <div className="flex flex-col gap-y-1.5">
+        <div className="flex items-baseline gap-x-3 flex-wrap">
+          <span
+            className="text-h1 font-bold text-grey-90 tabular-nums"
+            data-testid="product-price"
+            data-value={traderAmount}
+          >
+            {!variant && "From "}
+            {traderLabel}
+            <span className="text-body-sm font-normal text-grey-50">
+              {" "}per {getUnitLabel(unit, 1)}
+            </span>
+          </span>
+          <span className="inline-flex items-center gap-x-1.5 px-2 py-0.5 rounded-md bg-brand-green-50 border border-brand-green-200 text-caption font-bold uppercase tracking-wider text-brand-green-700">
+            Trader price · −{traderDiscountPercent}%
+          </span>
+        </div>
+        <div className="flex items-center gap-x-2 text-body-sm">
+          <span
+            className="line-through text-grey-40 tabular-nums"
+            data-testid="list-price"
+            data-value={selectedPrice.calculated_price_number}
+          >
+            {selectedPrice.calculated_price}
+          </span>
+          <span className="text-caption font-semibold text-brand-green-700">
+            You save{" "}
+            <span className="tabular-nums">
+              {convertToLocale({
+                amount: selectedPrice.calculated_price_number - traderAmount,
+                currency_code: selectedPrice.currency_code,
+              })}
+            </span>
+          </span>
+        </div>
+      </div>
+    )
+  }
+
   const memberAmount = isSale
     ? null
     : getMemberPrice(selectedPrice.calculated_price_number)
