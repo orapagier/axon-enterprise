@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import {
   Dispute,
   DisputeReason,
+  appealDispute,
   respondToDispute,
 } from "@lib/data/disputes"
 
@@ -23,6 +24,13 @@ const RESOLUTION_LABEL: Record<Dispute["resolution"], string> = {
   platform_fault: "Platform fault",
 }
 
+const APPEAL_LABEL: Record<Dispute["appeal_state"], string> = {
+  none: "",
+  requested: "Appeal under review",
+  upheld: "Appeal denied — strike stands",
+  overturned: "Appeal granted — strike removed",
+}
+
 export default function DisputesList({ disputes }: { disputes: Dispute[] }) {
   const router = useRouter()
   const [error, setError] = useState<string | null>(null)
@@ -34,6 +42,20 @@ export default function DisputesList({ disputes }: { disputes: Dispute[] }) {
     setError(null)
     startTransition(async () => {
       const result = await respondToDispute(disputeId, reason, notes)
+      if (!result.ok) {
+        setError(result.error)
+      } else {
+        router.refresh()
+      }
+      setSubmittingId(null)
+    })
+  }
+
+  const appeal = (disputeId: string, notes: string) => {
+    setSubmittingId(disputeId)
+    setError(null)
+    startTransition(async () => {
+      const result = await appealDispute(disputeId, notes)
       if (!result.ok) {
         setError(result.error)
       } else {
@@ -101,6 +123,41 @@ export default function DisputesList({ disputes }: { disputes: Dispute[] }) {
                 Admin note: {d.resolution_notes}
               </p>
             )}
+
+            {/* Appeal path — only for buyer_fault decisions. */}
+            {d.resolution === "buyer_fault" && (
+              <div className="mt-3 border-t border-grey-10 pt-3">
+                {d.appeal_state !== "none" ? (
+                  <div className="flex flex-col gap-1">
+                    <span
+                      className={`self-start text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${
+                        d.appeal_state === "overturned"
+                          ? "bg-brand-green-50 text-brand-green-700 border border-brand-green-200"
+                          : d.appeal_state === "upheld"
+                            ? "bg-grey-5 text-grey-60 border border-grey-10"
+                            : "bg-brand-gold-50 text-brand-gold-800 border border-brand-gold-200"
+                      }`}
+                    >
+                      {APPEAL_LABEL[d.appeal_state]}
+                    </span>
+                    {d.appeal_notes && (
+                      <p className="text-caption text-grey-50">
+                        Your appeal: {d.appeal_notes}
+                      </p>
+                    )}
+                  </div>
+                ) : d.appeal_eligible ? (
+                  <AppealForm
+                    onSubmit={(notes) => appeal(d.id, notes)}
+                    submitting={submittingId === d.id}
+                  />
+                ) : (
+                  <p className="text-caption text-grey-50">
+                    The 14-day appeal window for this decision has closed.
+                  </p>
+                )}
+              </div>
+            )}
           </li>
         ))}
       </ul>
@@ -150,6 +207,66 @@ const ResponseForm = ({
       >
         {submitting ? "Submitting…" : "Submit response"}
       </button>
+    </div>
+  )
+}
+
+const AppealForm = ({
+  onSubmit,
+  submitting,
+}: {
+  onSubmit: (notes: string) => void
+  submitting: boolean
+}) => {
+  const [open, setOpen] = useState(false)
+  const [notes, setNotes] = useState("")
+  if (!open) {
+    return (
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-caption text-grey-50">
+          Think this strike is wrong? You have 14 days to appeal.
+        </p>
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="shrink-0 px-3 py-1.5 rounded-xl border border-grey-20 text-body-sm font-semibold text-grey-90 hover:border-brand-green-400 transition-colors"
+        >
+          Appeal
+        </button>
+      </div>
+    )
+  }
+  return (
+    <div className="flex flex-col gap-2">
+      <label className="text-caption font-semibold text-grey-70">
+        Why should this strike be reversed?
+      </label>
+      <textarea
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
+        rows={3}
+        placeholder="Explain what really happened — e.g. the produce arrived spoiled."
+        className="border border-grey-20 rounded-xl px-3 py-2 text-body-sm bg-white focus:outline-none focus:border-brand-green-400"
+        disabled={submitting}
+      />
+      <div className="flex items-center justify-end gap-2">
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          disabled={submitting}
+          className="px-3 py-2 rounded-xl text-body-sm font-semibold text-grey-50 hover:text-grey-90 transition-colors disabled:opacity-50"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          onClick={() => onSubmit(notes)}
+          disabled={submitting || !notes.trim()}
+          className="px-4 py-2 rounded-xl bg-grey-90 hover:bg-brand-green-700 text-white text-body-sm font-semibold transition-colors disabled:opacity-50"
+        >
+          {submitting ? "Submitting…" : "Submit appeal"}
+        </button>
+      </div>
     </div>
   )
 }
