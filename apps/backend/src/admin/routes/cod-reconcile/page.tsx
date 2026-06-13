@@ -186,6 +186,109 @@ const CodReconcilePage = () => {
               </div>
             </div>
 
+            {aging.data && (
+              <div className="mb-8">
+                <div className="flex items-baseline justify-between flex-wrap gap-2 mb-2">
+                  <Heading level="h2">Remittance aging (all-time)</Heading>
+                  <Text className="text-ui-fg-subtle text-sm">
+                    Rider cash collected but not yet remitted, by age.
+                    {aging.data.shortfalls.total_centavos > 0 && (
+                      <span className="text-ui-fg-error">
+                        {" "}
+                        Shortfalls: {peso(aging.data.shortfalls.total_centavos)}
+                      </span>
+                    )}
+                  </Text>
+                </div>
+                {aging.data.aging.riders.length === 0 ? (
+                  <Text className="text-ui-fg-subtle">
+                    No unremitted rider cash. ✓
+                  </Text>
+                ) : (
+                  <Table>
+                    <Table.Header>
+                      <Table.Row>
+                        <Table.HeaderCell>Rider</Table.HeaderCell>
+                        <Table.HeaderCell>Orders</Table.HeaderCell>
+                        <Table.HeaderCell>0–1d</Table.HeaderCell>
+                        <Table.HeaderCell>1–3d</Table.HeaderCell>
+                        <Table.HeaderCell>3–7d</Table.HeaderCell>
+                        <Table.HeaderCell>7d+</Table.HeaderCell>
+                        <Table.HeaderCell>Outstanding</Table.HeaderCell>
+                        <Table.HeaderCell>Oldest</Table.HeaderCell>
+                      </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                      {aging.data.aging.riders.map((r) => (
+                        <Table.Row key={r.rider_id}>
+                          <Table.Cell>{r.rider_id}</Table.Cell>
+                          <Table.Cell>{r.order_count}</Table.Cell>
+                          <Table.Cell>{peso(r.buckets.d0_1)}</Table.Cell>
+                          <Table.Cell>{peso(r.buckets.d1_3)}</Table.Cell>
+                          <Table.Cell>{peso(r.buckets.d3_7)}</Table.Cell>
+                          <Table.Cell
+                            className={
+                              r.buckets.d7_plus > 0 ? "text-ui-fg-error" : ""
+                            }
+                          >
+                            {peso(r.buckets.d7_plus)}
+                          </Table.Cell>
+                          <Table.Cell className="font-semibold">
+                            {peso(r.outstanding_centavos)}
+                          </Table.Cell>
+                          <Table.Cell
+                            className={
+                              r.oldest_age_days > 3 ? "text-ui-fg-error" : ""
+                            }
+                          >
+                            {r.oldest_age_days.toFixed(1)}d
+                          </Table.Cell>
+                        </Table.Row>
+                      ))}
+                    </Table.Body>
+                  </Table>
+                )}
+
+                {(aging.data.shortfalls.collection.length > 0 ||
+                  aging.data.shortfalls.remittance.length > 0) && (
+                  <>
+                    <Heading level="h3" className="mt-4 mb-2">
+                      Shortfalls
+                    </Heading>
+                    <Table>
+                      <Table.Header>
+                        <Table.Row>
+                          <Table.HeaderCell>Kind</Table.HeaderCell>
+                          <Table.HeaderCell>Order</Table.HeaderCell>
+                          <Table.HeaderCell>Rider</Table.HeaderCell>
+                          <Table.HeaderCell>Expected</Table.HeaderCell>
+                          <Table.HeaderCell>Actual</Table.HeaderCell>
+                          <Table.HeaderCell>Short by</Table.HeaderCell>
+                        </Table.Row>
+                      </Table.Header>
+                      <Table.Body>
+                        {[
+                          ...aging.data.shortfalls.collection,
+                          ...aging.data.shortfalls.remittance,
+                        ].map((s, i) => (
+                          <Table.Row key={`${s.kind}-${s.order_id}-${i}`}>
+                            <Table.Cell>{s.kind}</Table.Cell>
+                            <Table.Cell>{s.order_id ?? "—"}</Table.Cell>
+                            <Table.Cell>{s.rider_id ?? "—"}</Table.Cell>
+                            <Table.Cell>{peso(s.expected_centavos)}</Table.Cell>
+                            <Table.Cell>{peso(s.actual_centavos)}</Table.Cell>
+                            <Table.Cell className="text-ui-fg-error font-semibold">
+                              {peso(s.shortfall_centavos)}
+                            </Table.Cell>
+                          </Table.Row>
+                        ))}
+                      </Table.Body>
+                    </Table>
+                  </>
+                )}
+              </div>
+            )}
+
             <Heading level="h2" className="mb-2">
               Collected ({q.data.collected.length})
             </Heading>
