@@ -16,6 +16,12 @@ const CodTransaction = model
       "reconciled",
     ]),
     amount: model.number(),
+    // What SHOULD have been collected/remitted for this order (centavos):
+    // order total + delivery fee on a cod_collected row, or the matching
+    // collected amount on a rider_remitted row. Lets the aging report surface
+    // shortfalls (collected/remitted < expected). Nullable: legacy rows and
+    // otc/reconciled rows leave it unset.
+    expected_amount: model.number().nullable(),
     reference: model.text().nullable(),
     rider_id: model.text().nullable(),
     recorded_by: model.text().nullable(),
