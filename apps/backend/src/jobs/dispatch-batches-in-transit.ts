@@ -14,6 +14,7 @@ import type DispatchModuleService from "../modules/dispatch/service"
 import { HUB_MODULE } from "../modules/hub"
 import type HubModuleService from "../modules/hub/service"
 import { sendEmail } from "../lib/notify"
+import { sendPush } from "../lib/push"
 
 export const config = {
   name: "dispatch-batches-in-transit",
