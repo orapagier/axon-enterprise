@@ -579,7 +579,124 @@ function MemberView({
           ))}
         </ul>
       </section>
+
+      {/* Renew */}
+      {renewal.pending ? (
+        <RenewalPendingCard renewal={renewal} />
+      ) : (
+        <details
+          className="group bg-white rounded-2xl shadow-soft border border-grey-10/60 overflow-hidden"
+          data-testid="renew-membership"
+        >
+          <summary className="flex items-center justify-between gap-x-4 cursor-pointer list-none px-6 small:px-7 py-5">
+            <div className="flex items-start gap-x-4">
+              <span className="w-10 h-10 rounded-xl bg-brand-gold-100 border border-brand-gold-200 text-brand-gold-700 flex items-center justify-center text-lg shrink-0">
+                🔁
+              </span>
+              <div>
+                <h3 className="font-heading text-h3 text-grey-90 leading-tight">
+                  Renew your membership
+                </h3>
+                <p className="text-caption text-grey-50 mt-0.5 leading-relaxed max-w-md">
+                  Pay the ₱500 yearly fee again to extend your membership.
+                  Renewing early just adds 12 months to your current expiry —
+                  you never lose remaining days.
+                </p>
+              </div>
+            </div>
+            <span className="flex-shrink-0 w-8 h-8 rounded-full border border-grey-20 flex items-center justify-center group-open:bg-brand-green-700 group-open:border-brand-green-700 transition-colors">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-grey-60 group-open:text-white group-open:rotate-45 transition-transform"
+              >
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </span>
+          </summary>
+          <div className="px-6 small:px-7 pb-6">
+            <MembershipRequestForm
+              heading="Submit your ₱500 renewal payment"
+              subheading="Pay in cash at the counter or via GCash, then submit here. Your perks stay on while an admin verifies the payment and extends your term."
+            />
+          </div>
+        </details>
+      )}
     </div>
+  )
+}
+
+function RenewalPendingCard({ renewal }: { renewal: MembershipRequest }) {
+  const requestedAt = formatDate(renewal.requestedAt)
+  const channel = renewal.paymentMethod
+    ? MEMBERSHIP_PAYOUT[renewal.paymentMethod]
+    : null
+
+  return (
+    <section className="relative overflow-hidden rounded-2xl bg-white border border-brand-gold-200 shadow-soft">
+      <div className="relative p-6 small:p-8 flex flex-col gap-y-5">
+        <div className="flex items-start gap-x-4">
+          <span className="w-12 h-12 rounded-2xl bg-brand-gold-100 border border-brand-gold-200 text-brand-gold-700 flex items-center justify-center shrink-0">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="animate-pulse"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+          </span>
+          <div className="flex-1 min-w-0">
+            <div className="inline-flex items-center gap-x-1.5 px-2 py-0.5 rounded-full bg-brand-gold-100 text-brand-gold-900 text-[10px] font-bold uppercase tracking-widest">
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-gold-700 animate-pulse" />
+              Renewal awaiting verification
+            </div>
+            <h3 className="font-heading text-h3 text-grey-90 leading-tight mt-2">
+              We&apos;re reviewing your renewal payment
+            </h3>
+            <p className="text-body-sm text-grey-60 mt-1.5 leading-relaxed max-w-md">
+              Your membership stays active in the meantime. Once an admin
+              matches your payment, your term is extended by 12 months — no
+              days lost.
+            </p>
+          </div>
+        </div>
+
+        <dl className="grid grid-cols-1 xsmall:grid-cols-3 gap-3">
+          <Field label="Submitted" value={requestedAt ?? "—"} />
+          <Field label="Method" value={channel?.label ?? "—"} />
+          <Field label="Reference" value={renewal.paymentReference ?? "—"} mono />
+        </dl>
+
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-grey-10">
+          <div className="text-caption text-grey-50">
+            Wrong details? Cancel below and resubmit — your current membership
+            isn&apos;t affected.
+          </div>
+          <form action={cancelMembershipRenewal}>
+            <button
+              type="submit"
+              className="text-caption font-semibold text-grey-50 hover:text-red-600 underline-offset-4 hover:underline transition-colors"
+            >
+              Cancel renewal
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
   )
 }
 
