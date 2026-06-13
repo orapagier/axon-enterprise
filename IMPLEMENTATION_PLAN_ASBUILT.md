@@ -651,6 +651,15 @@ clean-order-tick (nightly 02:00):
        since the strike (last_clean_order_at, stamped by confirmDelivery)
      prepay_locked_30d past state_until → normal (strikes preserved)
      permanent → admin override only
+dispute-sla-tick (nightly 02:15, Phase G):
+     pending + no buyer response ≥24h → remind buyer (email+push), once
+     pending ≥48h SLA + unresolved → flag escalated_at (admin "overdue" badge)
+       [no auto-strike — founder call; DISPUTE_NO_RESPONSE_AUTO_RESOLVE flips it on]
+appeal (Phase G, within 14d of a buyer_fault resolution):
+     buyer  → POST /store/customer/disputes/:id/appeal → appeal_state=requested
+     admin  → POST /admin/disputes/:id/appeal {uphold|overturn} → appeal-dispute wf
+       overturn → strike reversed (reverseBuyerFaultStrike), state recomputed
+       uphold   → strike stands; resolution stays buyer_fault, appeal_state records outcome
 ```
 **Enforcement:** `payment-cod.authorizePayment` blocks **COD** for any buyer in a
 `prepay_locked_*` state. *Target (Phase A):* such buyers are not blocked outright
