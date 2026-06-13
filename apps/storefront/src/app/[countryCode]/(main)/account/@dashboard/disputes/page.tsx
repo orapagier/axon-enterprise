@@ -29,7 +29,8 @@ export default async function DisputesPage() {
         <p className="text-body-sm text-grey-50 mt-2 max-w-lg leading-relaxed">
           If a delivery couldn&apos;t be completed, you have 48 hours to add
           your side of the story. Buyer-fault refusals affect your COD
-          eligibility.
+          eligibility — if you think a decision is wrong, you have 14 days to
+          appeal it.
         </p>
       </div>
       <AccountStatusBanner />
