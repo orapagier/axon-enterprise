@@ -143,10 +143,10 @@ export default defineMiddlewares({
       middlewares: [authenticate("user", ["session", "bearer"])],
     },
     {
-      // All rider endpoints require a valid rider token. The public login
-      // route (POST /rider/auth/login) is exempted *inside* authenticateRider,
-      // because Medusa applies matching middlewares cumulatively — a separate
-      // empty-middlewares entry for the login path does NOT override this one.
+      // All rider endpoints require a valid rider token (issued by
+      // GET /store/riders/session). The legacy token-issuing /rider/auth/*
+      // routes were retired with the standalone rider PWA, so there's nothing
+      // public left under /rider/* to exempt.
       matcher: "/rider/*",
       method: ["GET", "POST", "PATCH", "DELETE"],
       middlewares: [authenticateRider],
