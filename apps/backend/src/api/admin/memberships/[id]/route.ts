@@ -239,22 +239,26 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   }
 
   // Phase B — membership status email (best-effort, never blocks the action).
-  await sendEmail(req.scope, {
-    to: customer.email,
-    template:
-      body.action === "approve"
-        ? "membership-approved"
-        : body.action === "reject"
-          ? "membership-rejected"
-          : "membership-cancelled",
-    data:
-      body.action === "approve"
-        ? {
-            tier: updatedMetadata[MEMBERSHIP_META.tier],
-            expires_at_ms: updatedMetadata[MEMBERSHIP_META.expiresAt],
-          }
-        : {},
-  })
+  // A rejected renewal leaves the member active, so we don't email a
+  // misleading "rejected" notice — only when the term is actually cancelled.
+  if (!(body.action === "reject" && isRenewalRequest)) {
+    await sendEmail(req.scope, {
+      to: customer.email,
+      template:
+        body.action === "approve"
+          ? "membership-approved"
+          : body.action === "reject"
+            ? "membership-rejected"
+            : "membership-cancelled",
+      data:
+        body.action === "approve"
+          ? {
+              tier: updatedMetadata[MEMBERSHIP_META.tier],
+              expires_at_ms: updatedMetadata[MEMBERSHIP_META.expiresAt],
+            }
+          : {},
+    })
+  }
 
   res.json({
     ok: true,
