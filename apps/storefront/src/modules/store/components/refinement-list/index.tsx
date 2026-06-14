@@ -3,33 +3,41 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
+export type CategoryFilter = { label: string; value: string }
+
 type RefinementListProps = {
   search?: boolean
+  // Real product categories from the backend DB. Drives the sidebar so the
+  // storefront filter always coincides with what admin manages.
+  categories?: CategoryFilter[]
 }
 
-const categories = [
-  { label: "All Products", value: "all", icon: "🛒" },
-  { label: "Fruits", value: "fruits", icon: "🥭" },
-  { label: "Vegetables", value: "vegetables", icon: "🥬" },
-  { label: "Leafy Greens", value: "leafy-greens", icon: "🥗" },
-  { label: "Root Crops", value: "root-crops", icon: "🥔" },
-  { label: "Herbs & Spices", value: "herbs-spices", icon: "🌿" },
-  { label: "Rice & Grains", value: "rice-grains", icon: "🌾" },
-  { label: "Fish & Seafood", value: "fish-seafood", icon: "🐟" },
-  { label: "Meat & Poultry", value: "meat-poultry", icon: "🍗" },
-  { label: "Eggs & Dairy", value: "eggs-dairy", icon: "🥚" },
-  { label: "Coconut & Oil", value: "coconut-oil", icon: "🥥" },
-  { label: "Dried & Preserved", value: "dried-preserved", icon: "🫙" },
-  { label: "Ready-to-Cook", value: "ready-to-cook", icon: "🍳" },
-  { label: "Beverages", value: "beverages", icon: "🍵" },
-  { label: "Pasalubong", value: "pasalubong", icon: "🎁" },
-  { label: "Miscellaneous", value: "misc", icon: "📦" },
-]
+// Per-handle emoji for a nicer sidebar; falls back to 📦 for any new category
+// an admin creates that we don't have a glyph for yet.
+const CATEGORY_ICONS: Record<string, string> = {
+  fruits: "🥭",
+  vegetables: "🥬",
+  "leafy-greens": "🥗",
+  "root-crops": "🥔",
+  herbs: "🌿",
+  "herbs-spices": "🌿",
+  fish: "🐟",
+  "fish-seafood": "🐟",
+  "rice-grains": "🌾",
+  "meat-poultry": "🍗",
+  "eggs-dairy": "🥚",
+  "coconut-oil": "🥥",
+  "dried-preserved": "🫙",
+  "ready-to-cook": "🍳",
+  beverages: "🍵",
+  pasalubong: "🎁",
+  misc: "📦",
+}
 
 const PRICE_FLOOR = 0
 const PRICE_CEILING = 2000
 
-const RefinementList = (_props: RefinementListProps) => {
+const RefinementList = ({ categories: categoryProp }: RefinementListProps) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
