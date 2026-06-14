@@ -146,6 +146,8 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
           </LocalizedClientLink>
         </div>
       </div>
+
+      <AccountAssistant />
     </div>
   )
 }
