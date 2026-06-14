@@ -960,8 +960,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/app/layout.tsx": {
-    "mtime": 1781193734.7002015,
-    "ast_hash": "c6c80bcb09349bd063b151c149e72897",
+    "mtime": 1781427204.8323064,
+    "ast_hash": "f18ab004025aedd3f28ce4040a9cfcde",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/app/not-found.tsx": {
@@ -2640,7 +2640,7 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/query-entry-points.d.ts": {
-    "mtime": 1781409756.6197155,
+    "mtime": 1781409862.149089,
     "ast_hash": "d82d7d5e8656703a0d4abdbe1f5f2482",
     "semantic_hash": ""
   },
@@ -2650,12 +2650,12 @@
     "semantic_hash": "92cfe3ea73a656c693052260d34e9dc5"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/modules-bindings.d.ts": {
-    "mtime": 1781409756.6197155,
+    "mtime": 1781409862.149089,
     "ast_hash": "a90c337fb01defb163cf6944991ecaf7",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/entry.jsx": {
-    "mtime": 1781409755.483716,
+    "mtime": 1781409861.0530894,
     "ast_hash": "8b276d285c6e460a0c2c67b57ec8d943",
     "semantic_hash": "8b276d285c6e460a0c2c67b57ec8d943"
   },
@@ -2750,7 +2750,7 @@
     "semantic_hash": "6f36f79ab958b75e4fdaf581b92a1225"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/index.html": {
-    "mtime": 1781409755.483716,
+    "mtime": 1781409861.0530894,
     "ast_hash": "1f14bb0d5e89bc45a4265b714e6c6de6",
     "semantic_hash": "1f14bb0d5e89bc45a4265b714e6c6de6"
   },
@@ -2763,6 +2763,26 @@
     "mtime": 1779007605.5284722,
     "ast_hash": "72da315a98d09ccbd2aeb3dc1cda6b24",
     "semantic_hash": "72da315a98d09ccbd2aeb3dc1cda6b24"
+  },
+  "/home/ramlej/MFH/freshhub/apps/storefront/public/icon-512-maskable.png": {
+    "mtime": 1781427106.5782976,
+    "ast_hash": "ec07c7769e2300a49f2986ca3fdbf954",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/storefront/public/icon-192.png": {
+    "mtime": 1781427106.5502975,
+    "ast_hash": "c91717ed20ab281009b734f8a4e7a950",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/storefront/public/icon-512.png": {
+    "mtime": 1781427106.5662975,
+    "ast_hash": "10a07cccc45723b24efe21694174bc9f",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/storefront/public/apple-touch-icon.png": {
+    "mtime": 1781427106.5822976,
+    "ast_hash": "a7f742e9850b773c89f6945bbc09c248",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/static/1779585246897-potato.webp": {
     "mtime": 1779585246.8912344,
