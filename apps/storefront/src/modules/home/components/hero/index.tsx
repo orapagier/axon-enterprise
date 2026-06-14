@@ -130,7 +130,7 @@ const Hero = () => {
                     No. 01
                   </span>
                   <div className="font-heading italic text-h3 text-white leading-tight">
-                    Leafy Greens
+                    Vegetables
                   </div>
                 </div>
               </div>
