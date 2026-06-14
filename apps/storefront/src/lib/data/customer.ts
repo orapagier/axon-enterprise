@@ -437,6 +437,18 @@ export async function requestMembership(
     },
   })
 
+  // Ping the admin Telegram that a payment is waiting in the pending queue. The
+  // backend reads the metadata we just wrote, so no body is needed. Best-effort:
+  // a notification hiccup must not fail the buyer's submission.
+  try {
+    await sdk.client.fetch(`/store/customers/me/membership-payment`, {
+      method: "POST",
+      headers: await getAuthHeaders(),
+    })
+  } catch {
+    // swallow — the payment is recorded; the admin still sees it in the queue.
+  }
+
   return { ok: true, error: null }
 }
 
