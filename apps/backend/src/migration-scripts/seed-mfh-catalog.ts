@@ -218,7 +218,7 @@ const PRODUCTS: ProductDef[] = [
   {
     title: "Malunggay",
     handle: "malunggay",
-    category: "leafy-greens",
+    category: "vegetables",
     origin: "Davao Region",
     unit: "bundle",
     pricePhp: 40,
