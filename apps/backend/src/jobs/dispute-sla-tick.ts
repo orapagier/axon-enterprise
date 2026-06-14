@@ -28,6 +28,7 @@ import { classifyDisputeForSla } from "../lib/dispute-sla"
 import resolveDisputeWorkflow from "../workflows/resolve-dispute"
 import { sendEmail } from "../lib/notify"
 import { sendPush } from "../lib/push"
+import { notifyAdmin } from "../lib/notify-admin"
 
 export const config = {
   name: "dispute-sla-tick",
