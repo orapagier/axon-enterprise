@@ -73,6 +73,7 @@ async function disputeSlaTick(container: MedusaContainer) {
   let reminded = 0
   let escalated = 0
   let autoResolved = 0
+  const escalatedOrders: number[] = []
 
   for (const d of pending) {
     const action = classifyDisputeForSla(d, now, {
