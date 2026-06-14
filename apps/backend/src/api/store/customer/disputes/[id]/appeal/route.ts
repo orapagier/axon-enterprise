@@ -98,5 +98,16 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     })
   }
 
+  // A buyer contesting a strike needs an admin verdict within the appeal window.
+  await notifyAdmin(req.scope, {
+    title: "📣 Buyer appeal filed",
+    lines: [
+      order && `Order #${order.display_id}`,
+      order?.email && `Buyer: ${order.email}`,
+      `Reason: ${notes}`,
+    ],
+    url: "/app/disputes",
+  })
+
   res.json({ dispute: updated })
 }
