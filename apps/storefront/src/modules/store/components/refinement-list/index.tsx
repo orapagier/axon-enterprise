@@ -55,6 +55,19 @@ const RefinementList = ({ categories: categoryProp }: RefinementListProps) => {
     price: true,
   })
 
+  // "All Products" sentinel + the real DB categories, each given an icon.
+  const categories = useMemo(
+    () => [
+      { label: "All Products", value: "all", icon: "🛒" },
+      ...(categoryProp ?? []).map((c) => ({
+        label: c.label,
+        value: c.value,
+        icon: CATEGORY_ICONS[c.value] ?? "📦",
+      })),
+    ],
+    [categoryProp]
+  )
+
   // Sync local input if URL changes from elsewhere (e.g. browser back/forward)
   useEffect(() => {
     setSearchInput(urlQuery)
