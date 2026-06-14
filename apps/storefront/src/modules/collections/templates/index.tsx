@@ -22,6 +22,7 @@ export default async function CollectionTemplate({
   const pageNumber = page ? parseInt(page) : 1
   const sort = sortBy || "created_at"
   const hub = await getDeliveryHub()
+  const categoryFilters = await listFilterCategories()
 
   return (
     <div className="content-container section-padding">
