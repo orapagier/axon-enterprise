@@ -337,7 +337,7 @@ function FreeView() {
 
       {/* Payment submission */}
       <section id="submit-payment" className="scroll-mt-24">
-        <MembershipRequestForm />
+        <MembershipRequestForm defaultReferralCode={referredByCode} />
       </section>
     </div>
   )
