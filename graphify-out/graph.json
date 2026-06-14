@@ -1848,7 +1848,7 @@
       "source_file": "apps/storefront/src/modules/account/components/address-card/edit-address-modal.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_components_address_card_edit_address_modal_tsx",
-      "community": 192,
+      "community": 1,
       "norm_label": "edit-address-modal.tsx"
     },
     {
@@ -1857,7 +1857,7 @@
       "source_file": "apps/storefront/src/modules/account/components/address-card/edit-address-modal.tsx",
       "source_location": "L19",
       "id": "address_card_edit_address_modal_editaddressprops",
-      "community": 192,
+      "community": 1,
       "norm_label": "editaddressprops"
     },
     {
@@ -2118,7 +2118,7 @@
       "source_file": "apps/storefront/src/modules/account/components/profile-billing-address/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_components_profile_billing_address_index_tsx",
-      "community": 192,
+      "community": 1,
       "norm_label": "index.tsx"
     },
     {
@@ -2127,7 +2127,7 @@
       "source_file": "apps/storefront/src/modules/account/components/profile-billing-address/index.tsx",
       "source_location": "L12",
       "id": "profile_billing_address_index_myinformationprops",
-      "community": 192,
+      "community": 1,
       "norm_label": "myinformationprops"
     },
     {
@@ -2136,7 +2136,7 @@
       "source_file": "apps/storefront/src/modules/account/components/profile-billing-address/index.tsx",
       "source_location": "L17",
       "id": "profile_billing_address_index_profilebillingaddress",
-      "community": 192,
+      "community": 1,
       "norm_label": "profilebillingaddress()"
     },
     {
@@ -2145,7 +2145,7 @@
       "source_file": "apps/storefront/src/modules/account/components/delete-account/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_components_delete_account_index_tsx",
-      "community": 294,
+      "community": 135,
       "norm_label": "index.tsx"
     },
     {
@@ -2154,7 +2154,7 @@
       "source_file": "apps/storefront/src/modules/account/components/delete-account/index.tsx",
       "source_location": "L8",
       "id": "delete_account_index_props",
-      "community": 294,
+      "community": 135,
       "norm_label": "props"
     },
     {
@@ -2163,7 +2163,7 @@
       "source_file": "apps/storefront/src/modules/account/components/delete-account/index.tsx",
       "source_location": "L17",
       "id": "delete_account_index_deleteaccount",
-      "community": 294,
+      "community": 135,
       "norm_label": "deleteaccount()"
     },
     {
@@ -2757,7 +2757,7 @@
       "source_file": "apps/storefront/src/modules/account/components/transfer-request-form/index.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_modules_account_components_transfer_request_form_index_tsx",
-      "community": 16,
+      "community": 1,
       "norm_label": "index.tsx"
     },
     {
@@ -2766,7 +2766,7 @@
       "source_file": "apps/storefront/src/modules/account/components/transfer-request-form/index.tsx",
       "source_location": "L9",
       "id": "transfer_request_form_index_transferrequestform",
-      "community": 16,
+      "community": 1,
       "norm_label": "transferrequestform()"
     },
     {
@@ -6951,7 +6951,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_page_tsx",
-      "community": 213,
+      "community": 248,
       "norm_label": "page.tsx"
     },
     {
@@ -6960,7 +6960,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/page.tsx",
       "source_location": "L8",
       "id": "dashboard_page_metadata",
-      "community": 213,
+      "community": 248,
       "norm_label": "metadata"
     },
     {
@@ -6969,7 +6969,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/page.tsx",
       "source_location": "L13",
       "id": "dashboard_page_overviewtemplate",
-      "community": 213,
+      "community": 248,
       "norm_label": "overviewtemplate()"
     },
     {
@@ -7239,7 +7239,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/addresses/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_addresses_page_tsx",
-      "community": 248,
+      "community": 130,
       "norm_label": "page.tsx"
     },
     {
@@ -7248,7 +7248,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/addresses/page.tsx",
       "source_location": "L9",
       "id": "addresses_page_metadata",
-      "community": 248,
+      "community": 130,
       "norm_label": "metadata"
     },
     {
@@ -7257,7 +7257,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/addresses/page.tsx",
       "source_location": "L14",
       "id": "addresses_page_addresses",
-      "community": 248,
+      "community": 130,
       "norm_label": "addresses()"
     },
     {
@@ -7266,7 +7266,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/orders/page.tsx",
       "source_location": "L1",
       "id": "apps_storefront_src_app_countrycode_main_account_dashboard_orders_page_tsx",
-      "community": 213,
+      "community": 248,
       "norm_label": "page.tsx"
     },
     {
@@ -7275,7 +7275,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/orders/page.tsx",
       "source_location": "L8",
       "id": "orders_page_metadata",
-      "community": 213,
+      "community": 248,
       "norm_label": "metadata"
     },
     {
@@ -7284,7 +7284,7 @@
       "source_file": "apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/orders/page.tsx",
       "source_location": "L13",
       "id": "orders_page_orders",
-      "community": 213,
+      "community": 248,
       "norm_label": "orders()"
     },
     {
@@ -8481,7 +8481,7 @@
       "source_file": "apps/storefront/src/lib/data/products.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_products_ts",
-      "community": 130,
+      "community": 16,
       "norm_label": "products.ts"
     },
     {
@@ -8553,7 +8553,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L65",
       "id": "data_cookies_removeauthtoken",
-      "community": 294,
+      "community": 135,
       "norm_label": "removeauthtoken()"
     },
     {
@@ -8580,7 +8580,7 @@
       "source_file": "apps/storefront/src/lib/data/cookies.ts",
       "source_location": "L89",
       "id": "data_cookies_removecartid",
-      "community": 294,
+      "community": 135,
       "norm_label": "removecartid()"
     },
     {
@@ -8751,7 +8751,7 @@
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_data_regions_ts",
-      "community": 130,
+      "community": 16,
       "norm_label": "regions.ts"
     },
     {
@@ -8769,7 +8769,7 @@
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L21",
       "id": "data_regions_retrieveregion",
-      "community": 130,
+      "community": 16,
       "norm_label": "retrieveregion()"
     },
     {
@@ -9498,7 +9498,7 @@
       "source_file": "apps/storefront/src/lib/data/orders.ts",
       "source_location": "L32",
       "id": "data_orders_listorders",
-      "community": 213,
+      "community": 248,
       "norm_label": "listorders()"
     },
     {
@@ -9507,7 +9507,7 @@
       "source_file": "apps/storefront/src/lib/data/orders.ts",
       "source_location": "L63",
       "id": "data_orders_createtransferrequest",
-      "community": 16,
+      "community": 1,
       "norm_label": "createtransferrequest()"
     },
     {
@@ -9777,7 +9777,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L334",
       "id": "data_customer_signout",
-      "community": 294,
+      "community": 135,
       "norm_label": "signout()"
     },
     {
@@ -9813,7 +9813,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L454",
       "id": "data_customer_deleteaccountstate",
-      "community": 294,
+      "community": 135,
       "norm_label": "deleteaccountstate"
     },
     {
@@ -9822,7 +9822,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L465",
       "id": "data_customer_deleteaccount",
-      "community": 294,
+      "community": 135,
       "norm_label": "deleteaccount()"
     },
     {
@@ -9840,7 +9840,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L522",
       "id": "data_customer_addcustomeraddress",
-      "community": 192,
+      "community": 1,
       "norm_label": "addcustomeraddress()"
     },
     {
@@ -9849,7 +9849,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L562",
       "id": "data_customer_deletecustomeraddress",
-      "community": 192,
+      "community": 1,
       "norm_label": "deletecustomeraddress()"
     },
     {
@@ -9858,7 +9858,7 @@
       "source_file": "apps/storefront/src/lib/data/customer.ts",
       "source_location": "L581",
       "id": "data_customer_updatecustomeraddress",
-      "community": 192,
+      "community": 1,
       "norm_label": "updatecustomeraddress()"
     },
     {
@@ -19486,7 +19486,7 @@
       "label": "seedMfhCatalog()",
       "file_type": "code",
       "source_file": "apps/backend/src/migration-scripts/seed-mfh-catalog.ts",
-      "source_location": "L310",
+      "source_location": "L309",
       "id": "migration_scripts_seed_mfh_catalog_seedmfhcatalog",
       "community": 148,
       "norm_label": "seedmfhcatalog()"
@@ -21049,244 +21049,10 @@
       "norm_label": "taxprovider"
     },
     {
-      "label": "GeoZoneType",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2192",
-      "id": "types_query_entry_points_d_geozonetype",
-      "community": 0,
-      "norm_label": "geozonetype"
-    },
-    {
-      "label": "ShippingOptionPriceType",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2198",
-      "id": "types_query_entry_points_d_shippingoptionpricetype",
-      "community": 0,
-      "norm_label": "shippingoptionpricetype"
-    },
-    {
-      "label": "FulfillmentAddress",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2202",
-      "id": "types_query_entry_points_d_fulfillmentaddress",
-      "community": 0,
-      "norm_label": "fulfillmentaddress"
-    },
-    {
-      "label": "FulfillmentItem",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2221",
-      "id": "types_query_entry_points_d_fulfillmentitem",
-      "community": 0,
-      "norm_label": "fulfillmentitem"
-    },
-    {
-      "label": "FulfillmentLabel",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2237",
-      "id": "types_query_entry_points_d_fulfillmentlabel",
-      "community": 0,
-      "norm_label": "fulfillmentlabel"
-    },
-    {
-      "label": "FulfillmentProvider",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2250",
-      "id": "types_query_entry_points_d_fulfillmentprovider",
-      "community": 0,
-      "norm_label": "fulfillmentprovider"
-    },
-    {
-      "label": "FulfillmentSet",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2261",
-      "id": "types_query_entry_points_d_fulfillmentset",
-      "community": 0,
-      "norm_label": "fulfillmentset"
-    },
-    {
-      "label": "Fulfillment",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2275",
-      "id": "types_query_entry_points_d_fulfillment",
-      "community": 0,
-      "norm_label": "fulfillment"
-    },
-    {
-      "label": "GeoZone",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2303",
-      "id": "types_query_entry_points_d_geozone",
-      "community": 0,
-      "norm_label": "geozone"
-    },
-    {
-      "label": "ServiceZone",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2319",
-      "id": "types_query_entry_points_d_servicezone",
-      "community": 0,
-      "norm_label": "servicezone"
-    },
-    {
-      "label": "ShippingOptionRule",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2333",
-      "id": "types_query_entry_points_d_shippingoptionrule",
-      "community": 0,
-      "norm_label": "shippingoptionrule"
-    },
-    {
-      "label": "ShippingOptionType",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2346",
-      "id": "types_query_entry_points_d_shippingoptiontype",
-      "community": 0,
-      "norm_label": "shippingoptiontype"
-    },
-    {
-      "label": "ShippingOption",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2358",
-      "id": "types_query_entry_points_d_shippingoption",
-      "community": 0,
-      "norm_label": "shippingoption"
-    },
-    {
-      "label": "ShippingProfile",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2381",
-      "id": "types_query_entry_points_d_shippingprofile",
-      "community": 0,
-      "norm_label": "shippingprofile"
-    },
-    {
-      "label": "WorkflowExecutionStateEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2394",
-      "id": "types_query_entry_points_d_workflowexecutionstateenum",
-      "community": 0,
-      "norm_label": "workflowexecutionstateenum"
-    },
-    {
-      "label": "WorkflowExecution",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2403",
-      "id": "types_query_entry_points_d_workflowexecution",
-      "community": 0,
-      "norm_label": "workflowexecution"
-    },
-    {
-      "label": "AccountHolder",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2418",
-      "id": "types_query_entry_points_d_accountholder",
-      "community": 0,
-      "norm_label": "accountholder"
-    },
-    {
-      "label": "Capture",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2433",
-      "id": "types_query_entry_points_d_capture",
-      "community": 0,
-      "norm_label": "capture"
-    },
-    {
-      "label": "PaymentCollectionStatusEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2447",
-      "id": "types_query_entry_points_d_paymentcollectionstatusenum",
-      "community": 0,
-      "norm_label": "paymentcollectionstatusenum"
-    },
-    {
-      "label": "PaymentCollection",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2457",
-      "id": "types_query_entry_points_d_paymentcollection",
-      "community": 0,
-      "norm_label": "paymentcollection"
-    },
-    {
-      "label": "PaymentProvider",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2484",
-      "id": "types_query_entry_points_d_paymentprovider",
-      "community": 0,
-      "norm_label": "paymentprovider"
-    },
-    {
-      "label": "PaymentSessionStatusEnum",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2496",
-      "id": "types_query_entry_points_d_paymentsessionstatusenum",
-      "community": 0,
-      "norm_label": "paymentsessionstatusenum"
-    },
-    {
-      "label": "Payment",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2504",
-      "id": "types_query_entry_points_d_payment",
-      "community": 0,
-      "norm_label": "payment"
-    },
-    {
-      "label": "PaymentSession",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2526",
-      "id": "types_query_entry_points_d_paymentsession",
-      "community": 0,
-      "norm_label": "paymentsession"
-    },
-    {
-      "label": "RefundReason",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2546",
-      "id": "types_query_entry_points_d_refundreason",
-      "community": 0,
-      "norm_label": "refundreason"
-    },
-    {
-      "label": "Refund",
-      "file_type": "code",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2559",
-      "id": "types_query_entry_points_d_refund",
-      "community": 0,
-      "norm_label": "refund"
-    },
-    {
       "label": "NotificationStatusEnum",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2576",
+      "source_location": "L2192",
       "id": "types_query_entry_points_d_notificationstatusenum",
       "community": 0,
       "norm_label": "notificationstatusenum"
@@ -21295,10 +21061,244 @@
       "label": "Notification",
       "file_type": "code",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2581",
+      "source_location": "L2197",
       "id": "types_query_entry_points_d_notification",
       "community": 0,
       "norm_label": "notification"
+    },
+    {
+      "label": "GeoZoneType",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2220",
+      "id": "types_query_entry_points_d_geozonetype",
+      "community": 0,
+      "norm_label": "geozonetype"
+    },
+    {
+      "label": "ShippingOptionPriceType",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2226",
+      "id": "types_query_entry_points_d_shippingoptionpricetype",
+      "community": 0,
+      "norm_label": "shippingoptionpricetype"
+    },
+    {
+      "label": "FulfillmentAddress",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2230",
+      "id": "types_query_entry_points_d_fulfillmentaddress",
+      "community": 0,
+      "norm_label": "fulfillmentaddress"
+    },
+    {
+      "label": "FulfillmentItem",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2249",
+      "id": "types_query_entry_points_d_fulfillmentitem",
+      "community": 0,
+      "norm_label": "fulfillmentitem"
+    },
+    {
+      "label": "FulfillmentLabel",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2265",
+      "id": "types_query_entry_points_d_fulfillmentlabel",
+      "community": 0,
+      "norm_label": "fulfillmentlabel"
+    },
+    {
+      "label": "FulfillmentProvider",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2278",
+      "id": "types_query_entry_points_d_fulfillmentprovider",
+      "community": 0,
+      "norm_label": "fulfillmentprovider"
+    },
+    {
+      "label": "FulfillmentSet",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2289",
+      "id": "types_query_entry_points_d_fulfillmentset",
+      "community": 0,
+      "norm_label": "fulfillmentset"
+    },
+    {
+      "label": "Fulfillment",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2303",
+      "id": "types_query_entry_points_d_fulfillment",
+      "community": 0,
+      "norm_label": "fulfillment"
+    },
+    {
+      "label": "GeoZone",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2331",
+      "id": "types_query_entry_points_d_geozone",
+      "community": 0,
+      "norm_label": "geozone"
+    },
+    {
+      "label": "ServiceZone",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2347",
+      "id": "types_query_entry_points_d_servicezone",
+      "community": 0,
+      "norm_label": "servicezone"
+    },
+    {
+      "label": "ShippingOptionRule",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2361",
+      "id": "types_query_entry_points_d_shippingoptionrule",
+      "community": 0,
+      "norm_label": "shippingoptionrule"
+    },
+    {
+      "label": "ShippingOptionType",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2374",
+      "id": "types_query_entry_points_d_shippingoptiontype",
+      "community": 0,
+      "norm_label": "shippingoptiontype"
+    },
+    {
+      "label": "ShippingOption",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2386",
+      "id": "types_query_entry_points_d_shippingoption",
+      "community": 0,
+      "norm_label": "shippingoption"
+    },
+    {
+      "label": "ShippingProfile",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2409",
+      "id": "types_query_entry_points_d_shippingprofile",
+      "community": 0,
+      "norm_label": "shippingprofile"
+    },
+    {
+      "label": "AccountHolder",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2422",
+      "id": "types_query_entry_points_d_accountholder",
+      "community": 0,
+      "norm_label": "accountholder"
+    },
+    {
+      "label": "Capture",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2437",
+      "id": "types_query_entry_points_d_capture",
+      "community": 0,
+      "norm_label": "capture"
+    },
+    {
+      "label": "PaymentCollectionStatusEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2451",
+      "id": "types_query_entry_points_d_paymentcollectionstatusenum",
+      "community": 0,
+      "norm_label": "paymentcollectionstatusenum"
+    },
+    {
+      "label": "PaymentCollection",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2461",
+      "id": "types_query_entry_points_d_paymentcollection",
+      "community": 0,
+      "norm_label": "paymentcollection"
+    },
+    {
+      "label": "PaymentProvider",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2488",
+      "id": "types_query_entry_points_d_paymentprovider",
+      "community": 0,
+      "norm_label": "paymentprovider"
+    },
+    {
+      "label": "PaymentSessionStatusEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2500",
+      "id": "types_query_entry_points_d_paymentsessionstatusenum",
+      "community": 0,
+      "norm_label": "paymentsessionstatusenum"
+    },
+    {
+      "label": "Payment",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2508",
+      "id": "types_query_entry_points_d_payment",
+      "community": 0,
+      "norm_label": "payment"
+    },
+    {
+      "label": "PaymentSession",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2530",
+      "id": "types_query_entry_points_d_paymentsession",
+      "community": 0,
+      "norm_label": "paymentsession"
+    },
+    {
+      "label": "RefundReason",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2550",
+      "id": "types_query_entry_points_d_refundreason",
+      "community": 0,
+      "norm_label": "refundreason"
+    },
+    {
+      "label": "Refund",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2563",
+      "id": "types_query_entry_points_d_refund",
+      "community": 0,
+      "norm_label": "refund"
+    },
+    {
+      "label": "WorkflowExecutionStateEnum",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2580",
+      "id": "types_query_entry_points_d_workflowexecutionstateenum",
+      "community": 0,
+      "norm_label": "workflowexecutionstateenum"
+    },
+    {
+      "label": "WorkflowExecution",
+      "file_type": "code",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2589",
+      "id": "types_query_entry_points_d_workflowexecution",
+      "community": 0,
+      "norm_label": "workflowexecution"
     },
     {
       "label": "LinkCartPaymentCollection",
@@ -26255,7 +26255,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/deposit-section/index.tsx",
       "source_location": "L1",
-      "community": 16,
+      "community": 192,
       "norm_label": "index.tsx",
       "id": "apps_storefront_src_modules_account_components_deposit_section_index_tsx"
     },
@@ -26264,7 +26264,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/deposit-section/index.tsx",
       "source_location": "L6",
-      "community": 16,
+      "community": 192,
       "norm_label": "walletstatus",
       "id": "deposit_section_index_walletstatus"
     },
@@ -26273,7 +26273,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/deposit-section/index.tsx",
       "source_location": "L8",
-      "community": 16,
+      "community": 192,
       "norm_label": "wallet",
       "id": "deposit_section_index_wallet"
     },
@@ -26282,7 +26282,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/account/components/deposit-section/index.tsx",
       "source_location": "L23",
-      "community": 16,
+      "community": 192,
       "norm_label": "depositsection()",
       "id": "deposit_section_index_depositsection"
     },
@@ -26750,7 +26750,7 @@
       "file_type": "code",
       "source_file": "apps/storefront/src/lib/data/regions.ts",
       "source_location": "L35",
-      "community": 130,
+      "community": 16,
       "norm_label": "regionmap",
       "id": "data_regions_regionmap"
     },
@@ -64365,6 +64365,26 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2010",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_notificationstatusenum"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
+      "source_location": "L2015",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
+      "target": "types_query_entry_points_d_notification"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
       "source_location": "L1776",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -64505,26 +64525,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L124",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_workflowexecutionstateenum"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L133",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_workflowexecution"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
       "source_location": "L2038",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -64625,21 +64625,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2010",
+      "source_location": "L124",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_notificationstatusenum"
+      "target": "types_query_entry_points_d_workflowexecutionstateenum"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/backend/.medusa/types/query-entry-points.d.ts",
-      "source_location": "L2015",
+      "source_location": "L133",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_backend_medusa_types_query_entry_points_d_ts",
-      "target": "types_query_entry_points_d_notification"
+      "target": "types_query_entry_points_d_workflowexecution"
     },
     {
       "relation": "contains",
@@ -70395,5 +70395,5 @@
       "source_file": "apps/backend/src/workflows/README.md"
     }
   ],
-  "built_at_commit": "a386b7cc19b53756fa1caf03768117cf1549267f"
+  "built_at_commit": "b06ce0472fb07c43c336aeac1c73e8e12c92654b"
 }
