@@ -20,6 +20,8 @@ type GeminiPart =
   | { text: string }
   | {
       functionCall: { id?: string; name: string; args?: Record<string, unknown> }
+      /** Reasoning token Gemini returns alongside the call; must be echoed back. */
+      thoughtSignature?: string
     }
   | {
       functionResponse: {
@@ -48,7 +50,13 @@ function toGeminiContents(messages: ProviderMessage[]): GeminiContent[] {
       const parts: GeminiPart[] = []
       if (m.text) parts.push({ text: m.text })
       for (const tc of m.toolCalls ?? []) {
-        parts.push({ functionCall: { id: tc.id, name: tc.name, args: tc.args } })
+        parts.push({
+          functionCall: { id: tc.id, name: tc.name, args: tc.args },
+          // Gemini rejects the follow-up turn unless the signature it gave us
+          // on this call is sent back verbatim. Omit when absent (non-thinking
+          // models, or parallel calls where only the first carries one).
+          ...(tc.signature ? { thoughtSignature: tc.signature } : {}),
+        })
       }
       if (parts.length) out.push({ role: "model", parts })
     } else {
@@ -128,6 +136,7 @@ export class GoogleProvider implements ChatProvider {
           id: p.functionCall.id ?? `${p.functionCall.name}-${toolCalls.length}`,
           name: p.functionCall.name,
           args: p.functionCall.args ?? {},
+          signature: p.thoughtSignature,
         })
       }
     }

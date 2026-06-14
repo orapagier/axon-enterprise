@@ -234,12 +234,13 @@ export async function createListing(
 
   const tag = await getCacheTag("seller-listings")
   if (tag) revalidateTag(tag)
-  // Also bust the shop grid cache so a freshly auto-published direct-to-consumer
-  // listing appears for buyers immediately. listProducts() uses "force-cache"
-  // with the "products" cache tag, so without this revalidate the new product
-  // is only reachable via search/handle until the cache expires naturally.
-  const productsTag = await getCacheTag("products")
-  if (productsTag) revalidateTag(productsTag)
+  // Bust the shop grid for EVERY shopper, not just this producer's browser.
+  // listProducts() force-caches the grid under a global "products" tag (plus a
+  // per-browser products-<cache_id> tag). Revalidating only the per-browser tag
+  // — as we used to — refreshed the producer's own device but left every other
+  // browser (buyers, and the producer's phone) on a stale catalog until its 24h
+  // cache id expired. Flush the global tag so the new listing appears for all.
+  revalidateTag("products")
 
   const countryCode = String(formData.get("countryCode") ?? "ph")
   redirect(`/${countryCode}/account/producer`)
@@ -292,10 +293,10 @@ export async function updateListing(
 
   const tag = await getCacheTag("seller-listings")
   if (tag) revalidateTag(tag)
-  // Stock/price edits change what buyers see on the shop grid, which is
-  // cached under the "products" tag.
-  const productsTag = await getCacheTag("products")
-  if (productsTag) revalidateTag(productsTag)
+  // Stock/price edits change what every buyer sees on the shop grid (cached
+  // under the global "products" tag), so flush it for all browsers — not just
+  // this producer's device.
+  revalidateTag("products")
 
   const countryCode = String(formData.get("countryCode") ?? "ph")
   redirect(`/${countryCode}/account/producer`)
@@ -317,5 +318,7 @@ export async function deleteListing(id: string, countryCode: string) {
   }
   const tag = await getCacheTag("seller-listings")
   if (tag) revalidateTag(tag)
+  // Drop the listing from every shopper's grid, not just this browser's.
+  revalidateTag("products")
   redirect(`/${countryCode}/account/producer`)
 }

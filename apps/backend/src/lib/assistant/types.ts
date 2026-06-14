@@ -21,6 +21,13 @@ export type ToolCall = {
   id: string
   name: string
   args: Record<string, unknown>
+  /**
+   * Opaque provider reasoning signature attached to this call (Gemini thinking
+   * models return a `thoughtSignature`). The orchestrator never inspects it —
+   * it only carries it back so the adapter can echo it verbatim on the next
+   * request, which Gemini requires for multi-step tool use.
+   */
+  signature?: string
 }
 
 export type ToolResult = {

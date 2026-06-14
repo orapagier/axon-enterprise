@@ -49,8 +49,14 @@ export const listProducts = async ({
     ...(await getAuthHeaders()),
   }
 
+  // Tag the shop-grid cache with a stable global "products" tag in addition to
+  // the per-browser tag (products-<cache_id>). The per-browser tag can only be
+  // busted by the same browser, so a producer publishing a listing could never
+  // refresh other shoppers' grids — including their own phone. Revalidating the
+  // global tag (see seller.ts) flushes every browser's cached grid at once.
+  const cacheOptions = await getCacheOptions("products")
   const next = {
-    ...(await getCacheOptions("products")),
+    tags: ["products", ...("tags" in cacheOptions ? cacheOptions.tags : [])],
   }
 
   return sdk.client
