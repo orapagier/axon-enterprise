@@ -148,6 +148,17 @@ async function disputeSlaTick(container: MedusaContainer) {
     }
   }
 
+  if (escalated > 0) {
+    await notifyAdmin(container, {
+      title: `⏰ ${escalated} dispute(s) past SLA — need a verdict`,
+      lines: [
+        escalatedOrders.length > 0 &&
+          `Orders: ${escalatedOrders.map((id) => `#${id}`).join(", ")}`,
+      ],
+      url: "/app/disputes",
+    })
+  }
+
   logger.info(
     `dispute-sla-tick finished: ${reminded} reminded, ${escalated} escalated, ${autoResolved} auto-resolved.`
   )
