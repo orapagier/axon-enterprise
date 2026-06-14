@@ -22,6 +22,7 @@ import { COD_LEDGER_MODULE } from "../modules/cod-ledger"
 import type CodLedgerModuleService from "../modules/cod-ledger/service"
 import { runJob, type JobInput } from "../lib/job-observability"
 import { unremittedByRider, DAY_MS } from "../lib/cod-aging"
+import { notifyAdmin } from "../lib/notify-admin"
 
 export const config = {
   name: "rider-unremitted-tick",
