@@ -31,7 +31,7 @@ type CategoryDef = {
 
 const CATEGORIES: CategoryDef[] = [
   { name: "Fruits", handle: "fruits", description: "Sweet, sun-ripened Mindanao fruit." },
-  { name: "Vegetables", handle: "vegetables", description: "Crisp, freshly-picked vegetables and leafy greens." },
+  { name: "Vegetables", handle: "vegetables", description: "Crisp, freshly-picked vegetables." },
   { name: "Root Crops", handle: "root-crops", description: "Ground-grown staples for everyday cooking." },
   { name: "Herbs", handle: "herbs", description: "Aromatics from highland and coastal farms." },
   { name: "Fish", handle: "fish", description: "Pond-raised and freshwater catch from Mindanao." },
