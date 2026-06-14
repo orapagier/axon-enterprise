@@ -113,6 +113,13 @@ export async function requestEmailCode(
     mode === "signup"
       ? String(formData.get("hub") ?? "").trim().slice(0, 64) || undefined
       : undefined
+  // Referral code from a `?ref=` link, only meaningful for new signups. Stored
+  // verbatim (normalized); validity is checked when the bonus is granted.
+  const ref =
+    mode === "signup"
+      ? String(formData.get("ref") ?? "").trim().toUpperCase().slice(0, 16) ||
+        undefined
+      : undefined
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { ok: false, error: "Please enter a valid email address." }
