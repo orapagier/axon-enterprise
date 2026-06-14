@@ -97,7 +97,7 @@ const STEPS = [
 ]
 
 const CROPS = [
-  { name: "Leafy greens", note: "Kangkong, pechay, lettuce", season: "Year-round" },
+  { name: "Vegetables", note: "Kangkong, pechay, eggplant, okra", season: "Year-round" },
   { name: "Tropical fruit", note: "Mango, banana, pineapple", season: "Mar – Aug" },
   { name: "Root crops", note: "Sweet potato, cassava, ube", season: "Year-round" },
   { name: "Highland veg", note: "Carrots, cabbage, broccoli", season: "Oct – Mar" },
