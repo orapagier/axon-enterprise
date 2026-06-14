@@ -40,6 +40,12 @@
 > exec data-state checks; **50/50 jest unit tests still pass**, backend `tsc` clean
 > (one *pre-existing, unrelated* error in `migration-scripts/purge-dev-data.ts`,
 > `deleteFulfillments` typo — not touched here).
+> - **Phase H (hardening) is now BUILT + RUNTIME-VERIFIED (2026-06-14) — §10 has
+>   no open phases left.** COD shortfall + remittance-aging report, the
+>   delivery-tier/membership-gating/dispute-escalation tests (102/102 unit tests),
+>   and PostgreSQL backups + job observability are all done; verified via
+>   `verify-phase-h.ts` (8/8 live-DB) + a `pg-backup.sh` restorable-dump check. See
+>   the Phase H section in §10.
 > - **Launch-blocker FOUND + FIXED — producer payout insert was 500ing.** The
 >   `producer_payout` model declared `gross_centavos`/`amount_centavos` as
 >   `model.bigNumber()`, but `Migration20260613130000` created plain `numeric`
