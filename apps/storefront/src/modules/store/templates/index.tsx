@@ -40,15 +40,7 @@ const StoreTemplate = async ({
 
   // Real categories straight from the backend DB so the sidebar can never
   // drift from what admin manages under /app/categories.
-  const dbCategories = await listFilterCategories()
-  const categoryFilters = (dbCategories ?? [])
-    .slice()
-    .sort(
-      (a, b) =>
-        (a.rank ?? 0) - (b.rank ?? 0) ||
-        (a.name ?? "").localeCompare(b.name ?? "")
-    )
-    .map((c) => ({ label: c.name as string, value: c.handle as string }))
+  const categoryFilters = await listFilterCategories()
 
   return (
     <div data-testid="category-container" className="bg-grey-5 min-h-screen">
