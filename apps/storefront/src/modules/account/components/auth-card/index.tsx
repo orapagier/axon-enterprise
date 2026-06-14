@@ -89,7 +89,14 @@ const AuthCard = ({
 }: Props) => {
   const params = useParams()
   const router = useRouter()
+  const searchParams = useSearchParams()
   const countryCode = (params?.countryCode as string) || "ph"
+  // Referral code from a share link (`?ref=CODE`). Carried into signup so the
+  // referrer earns credit when this account's first upgrade is approved.
+  const ref = (searchParams?.get("ref") ?? "")
+    .trim()
+    .toUpperCase()
+    .slice(0, 16)
 
   const [mode, setMode] = useState<AuthMode>(pendingOtp ? "signup" : "signin")
   // Deliberately starts empty: a pre-selected default once caused signups to
