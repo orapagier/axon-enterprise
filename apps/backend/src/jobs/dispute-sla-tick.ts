@@ -109,6 +109,7 @@ async function disputeSlaTick(container: MedusaContainer) {
     if (action === "escalate") {
       await accountability.updateRefusalDisputes({ id: d.id, escalated_at: now })
       escalated++
+      if (order) escalatedOrders.push(order.display_id)
       logger.info(`Dispute ${d.id} past SLA → flagged for admin review.`)
       continue
     }
