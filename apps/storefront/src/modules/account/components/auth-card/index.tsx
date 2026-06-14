@@ -11,7 +11,7 @@ import {
 } from "@lib/data/customer"
 import type { Hub } from "@modules/hub/data/hubs"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import { useParams, useRouter } from "next/navigation"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 import {
   useActionState,
   useEffect,
