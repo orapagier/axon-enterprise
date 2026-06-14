@@ -127,6 +127,42 @@ export default function SellerListingForm({ mode, existing }: Props) {
     initialState
   )
 
+  // Category suggestions come straight from the backend DB so producers pick
+  // the same categories admin manages — keeping new listings matchable by the
+  // storefront's DB-driven category filter. Falls back to the static list if
+  // the fetch fails.
+  const [dbCategoryNames, setDbCategoryNames] = useState<string[]>([])
+  useEffect(() => {
+    let active = true
+    sdk.client
+      .fetch<{ product_categories: { name: string; rank: number | null }[] }>(
+        "/store/product-categories",
+        { query: { fields: "name,rank", limit: 100 } }
+      )
+      .then((res) => {
+        if (!active) return
+        const names = (res.product_categories ?? [])
+          .slice()
+          .sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0))
+          .map((c) => c.name)
+        if (names.length) setDbCategoryNames(names)
+      })
+      .catch(() => {})
+    return () => {
+      active = false
+    }
+  }, [])
+
+  const fields = useMemo<FieldDef[]>(
+    () =>
+      FIELDS.map((f) =>
+        f.name === "category" && dbCategoryNames.length
+          ? { ...f, suggestions: dbCategoryNames }
+          : f
+      ),
+    [dbCategoryNames]
+  )
+
   const defaults = useMemo<Record<string, string>>(() => {
     const seed: Record<string, string> = {}
     if (!existing) return seed
