@@ -180,7 +180,6 @@ const PRODUCTS: ProductDef[] = [
     description:
       "Tender young okra picked the morning of dispatch. Pinakbet-ready.",
   },
-  // Leafy greens live under Vegetables.
   {
     title: "Kangkong",
     handle: "kangkong",
