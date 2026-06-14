@@ -36,9 +36,16 @@ type Props = {
   // and the Producer/Trader yearly registration on the Account types page.
   heading?: string
   subheading?: string
+  // Referral code already attached to the account (from a `?ref=` signup link),
+  // used to prefill the optional referral field.
+  defaultReferralCode?: string
 }
 
-export default function MembershipRequestForm({ heading, subheading }: Props) {
+export default function MembershipRequestForm({
+  heading,
+  subheading,
+  defaultReferralCode = "",
+}: Props) {
   const [state, action, pending] = useActionState<FormState, FormData>(
     requestMembership,
     INITIAL
@@ -46,6 +53,7 @@ export default function MembershipRequestForm({ heading, subheading }: Props) {
 
   const [method, setMethod] = useState<MembershipPaymentMethod>("otc")
   const [reference, setReference] = useState("")
+  const [referralCode, setReferralCode] = useState(defaultReferralCode)
   const [copied, setCopied] = useState<string | null>(null)
 
   useEffect(() => {
