@@ -117,11 +117,11 @@ const Hero = () => {
 
             {/* Stacked editorial cards */}
             <div className="relative w-[380px] h-[440px] mr-10">
-              {/* Card 1 - back: Leafy Greens */}
+              {/* Card 1 - back: Vegetables */}
               <div className="absolute top-0 right-0 w-56 h-72 rounded-2xl overflow-hidden shadow-xl rotate-3 ring-1 ring-white/10">
                 <img
                   src="https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=600&h=800&fit=crop&auto=format&q=85"
-                  alt="Leafy greens"
+                  alt="Fresh vegetables"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-grey-90/60 to-transparent" />
