@@ -501,7 +501,7 @@ export default function SellerListingForm({ mode, existing }: Props) {
         </span>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
-          {FIELDS.map((f) => {
+          {fields.map((f) => {
             // Stock is a direct-listing field; hub intake volume is covered
             // by the estimated kg above.
             if (f.name === "quantity" && isSellToHub) return null
