@@ -267,6 +267,10 @@ export async function verifyEmailCode(
               profile_completed: pending.role === "rider" ? true : false,
               rider_available: pending.role === "rider" ? true : undefined,
               auth_method: pending.authMethod ?? "email_otp",
+              // Referral attribution from the `?ref=` link. The bonus is granted
+              // to the referrer only when THIS account's first upgrade is
+              // approved; an invalid/self code is ignored at grant time.
+              ...(pending.ref ? { referred_by_code: pending.ref } : {}),
             },
           },
           {},
