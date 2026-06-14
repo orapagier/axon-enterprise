@@ -306,6 +306,17 @@ async function membershipExpiryTick(container: MedusaContainer) {
     )
   }
 
+  if (downgraded > 0) {
+    await notifyAdmin(container, {
+      title: `📉 ${downgraded} membership(s) downgraded to Consumer`,
+      lines: [
+        ...downgradedLines,
+        "Producer listings for downgraded producers were deleted.",
+      ],
+      url: "/app/memberships",
+    })
+  }
+
   logger.info(
     `membership-expiry-tick: ${graced} grace started, ${downgraded} downgraded, ${reminded} reminder(s) sent.`
   )
