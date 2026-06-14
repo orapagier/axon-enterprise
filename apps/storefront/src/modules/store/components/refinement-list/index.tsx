@@ -23,6 +23,7 @@ const categories = [
   { label: "Ready-to-Cook", value: "ready-to-cook", icon: "🍳" },
   { label: "Beverages", value: "beverages", icon: "🍵" },
   { label: "Pasalubong", value: "pasalubong", icon: "🎁" },
+  { label: "Miscellaneous", value: "misc", icon: "📦" },
 ]
 
 const PRICE_FLOOR = 0
