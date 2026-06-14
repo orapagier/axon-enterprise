@@ -154,6 +154,7 @@ async function membershipExpiryTick(container: MedusaContainer) {
   let graced = 0
   let downgraded = 0
   let reminded = 0
+  const downgradedLines: string[] = []
 
   for (const customer of customers) {
     const meta = (customer.metadata as Record<string, unknown> | null) ?? {}
