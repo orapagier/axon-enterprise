@@ -180,12 +180,11 @@ const PRODUCTS: ProductDef[] = [
     description:
       "Tender young okra picked the morning of dispatch. Pinakbet-ready.",
   },
-
-  // ── Leafy Greens ───────────────────────────────────────────────────
+  // Leafy greens live under Vegetables.
   {
     title: "Kangkong",
     handle: "kangkong",
-    category: "leafy-greens",
+    category: "vegetables",
     origin: "Davao Region",
     unit: "bundle",
     pricePhp: 45,
