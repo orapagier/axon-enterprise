@@ -29,6 +29,17 @@ export const metadata: Metadata = {
     default: "Mindanao Fresh Hub",
   },
   applicationName: "Fresh Hub",
+  // iOS Safari auto-linkifies things that look like phone numbers, dates and
+  // addresses (e.g. "Tagum City · May 2026"), wrapping them in <a> tags in the
+  // DOM *before* React hydrates. That mutated DOM no longer matches the
+  // server-rendered HTML, which surfaced as a "Recoverable" hydration error on
+  // iPhones during signup. Turning detection off keeps the DOM stable.
+  formatDetection: {
+    telephone: false,
+    date: false,
+    address: false,
+    email: false,
+  },
   // Installable PWA: links the manifest + icons. iOS only allows web push once
   // the site is added to the Home Screen, so appleWebApp must mark it capable.
   manifest: "/manifest.webmanifest",
