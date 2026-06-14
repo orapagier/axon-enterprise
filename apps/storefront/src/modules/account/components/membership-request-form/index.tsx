@@ -259,6 +259,30 @@ export default function MembershipRequestForm({
           </div>
         )}
 
+        <label className="block mt-5">
+          <span className="text-caption font-semibold text-grey-70 uppercase tracking-[0.06em] mb-2 block">
+            Referral code{" "}
+            <span className="text-grey-40 normal-case font-normal tracking-normal">
+              (optional)
+            </span>
+          </span>
+          <input
+            type="text"
+            name="referral_code"
+            value={referralCode}
+            onChange={(e) =>
+              setReferralCode(e.target.value.toUpperCase().slice(0, 16))
+            }
+            maxLength={16}
+            placeholder="e.g. AB12CDE"
+            autoComplete="off"
+            className="w-full px-4 py-3 bg-grey-5 border border-grey-10 rounded-xl text-body-sm text-grey-90 placeholder:text-grey-40 focus:outline-none focus:ring-2 focus:bg-white focus:border-brand-green-300 focus:ring-brand-green-100 transition-all font-mono uppercase"
+          />
+          <div className="mt-1.5 text-[11px] text-grey-50">
+            Was someone referred you? Enter their code so they get their bonus.
+          </div>
+        </label>
+
         {state.error && !pending && (
           <div className="mt-4 flex items-start gap-x-2.5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700">
             <svg
