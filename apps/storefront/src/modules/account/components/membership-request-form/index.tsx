@@ -279,7 +279,7 @@ export default function MembershipRequestForm({
             className="w-full px-4 py-3 bg-grey-5 border border-grey-10 rounded-xl text-body-sm text-grey-90 placeholder:text-grey-40 focus:outline-none focus:ring-2 focus:bg-white focus:border-brand-green-300 focus:ring-brand-green-100 transition-all font-mono uppercase"
           />
           <div className="mt-1.5 text-[11px] text-grey-50">
-            Was someone referred you? Enter their code so they get their bonus.
+            Did someone refer you? Enter their code so they get their bonus.
           </div>
         </label>
 
