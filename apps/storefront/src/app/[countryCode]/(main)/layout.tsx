@@ -11,6 +11,7 @@ import FreeShippingPriceNudge from "@modules/shipping/components/free-shipping-p
 import HubPickerModal from "@modules/hub/components/hub-picker-modal"
 import { listHubs } from "@modules/hub/data/hubs"
 import { getHubCookie } from "@modules/hub/actions/set-hub"
+import Assistant from "@modules/common/components/assistant"
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
