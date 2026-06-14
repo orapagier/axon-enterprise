@@ -18,6 +18,7 @@ import reservePickupSlotWorkflow from "../../../../workflows/reserve-pickup-slot
 import { hasRole } from "../../../../lib/roles"
 import { setVariantStock } from "../../../../lib/listing-stock"
 import { LISTING_TYPES, type ListingType } from "../../../../modules/listing/types"
+import { notifyAdmin } from "../../../../lib/notify-admin"
 
 type StoreCustomer = {
   id: string
