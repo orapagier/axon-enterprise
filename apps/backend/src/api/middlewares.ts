@@ -146,6 +146,13 @@ export default defineMiddlewares({
       middlewares: [authenticate("customer", ["session", "bearer"])],
     },
     {
+      // Referral panel + post-signup code attach. The route reads the customer
+      // id from auth_context, so a user can only see/act on their own referrals.
+      matcher: "/store/referrals*",
+      method: ["GET", "POST"],
+      middlewares: [authenticate("customer", ["session", "bearer"])],
+    },
+    {
       matcher: "/admin/dispatch-orders/*/delivered",
       method: ["POST"],
       middlewares: [authenticate("user", ["session", "bearer"])],
