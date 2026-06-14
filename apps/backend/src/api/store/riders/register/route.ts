@@ -6,6 +6,7 @@ import type RiderModuleService from "../../../../modules/rider/service"
 import { HUB_MODULE } from "../../../../modules/hub"
 import type HubModuleService from "../../../../modules/hub/service"
 import { rolesOf } from "../../../../lib/roles"
+import { notifyAdmin } from "../../../../lib/notify-admin"
 
 /**
  * POST /store/riders/register — rider self-registration from the storefront
