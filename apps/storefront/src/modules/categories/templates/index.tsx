@@ -9,6 +9,7 @@ import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
 import { getDeliveryHub } from "@lib/util/delivery-hub"
+import { listFilterCategories } from "@lib/data/categories"
 
 export default async function CategoryTemplate({
   category,
