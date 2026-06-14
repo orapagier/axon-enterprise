@@ -28,6 +28,23 @@ export const metadata: Metadata = {
     template: "%s | Mindanao Fresh Hub",
     default: "Mindanao Fresh Hub",
   },
+  applicationName: "Fresh Hub",
+  // Installable PWA: links the manifest + icons. iOS only allows web push once
+  // the site is added to the Home Screen, so appleWebApp must mark it capable.
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Fresh Hub",
+    statusBarStyle: "default",
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: "#15803d",
 }
 
 export default function RootLayout(props: { children: React.ReactNode }) {
