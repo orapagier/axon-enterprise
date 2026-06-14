@@ -8,6 +8,7 @@ import {
 } from "@lib/data/seller"
 import { listOpenPickupWindows, type PickupWindow } from "@lib/data/pickup"
 import { resolveImageSrc } from "@lib/util/image-url"
+import { sdk } from "@lib/config"
 import { syncCustomerHubFromCookie } from "@modules/hub/actions/set-hub"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import ListingTypeField from "@modules/producer/components/listing-type-field"
