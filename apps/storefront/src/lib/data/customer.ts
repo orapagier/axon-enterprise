@@ -158,6 +158,7 @@ export async function requestEmailCode(
     mode,
     role,
     hub,
+    ref,
     authMethod: "email_otp",
     expiresAt: now + PENDING_AUTH_TTL_SECONDS * 1000,
     attempts: 0,
