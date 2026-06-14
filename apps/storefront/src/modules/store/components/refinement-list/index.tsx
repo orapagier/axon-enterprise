@@ -179,7 +179,7 @@ const RefinementList = ({ categories: categoryProp }: RefinementListProps) => {
     }
     return chips
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [urlCategory, urlMin, urlMax])
+  }, [urlCategory, urlMin, urlMax, categories])
 
   const clearAll = () => {
     setMinInput("")
