@@ -113,7 +113,7 @@ export default async function MembershipPage() {
   )
 }
 
-function FreeView() {
+function FreeView({ referredByCode }: { referredByCode: string }) {
   return (
     <div className="flex flex-col gap-y-4">
       {/* Upgrade hero */}
