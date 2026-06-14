@@ -1,6 +1,7 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
-import { Modules } from "@medusajs/framework/utils"
+import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
 import { sendEmail } from "../../../../lib/notify"
+import { grantReferralReward } from "../../../../lib/grant-referral-reward"
 
 /**
  * POST /admin/memberships/:id
