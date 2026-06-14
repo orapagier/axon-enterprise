@@ -206,7 +206,7 @@ const PRODUCTS: ProductDef[] = [
   {
     title: "Highland Lettuce",
     handle: "highland-lettuce",
-    category: "leafy-greens",
+    category: "vegetables",
     origin: "Bukidnon",
     unit: "kg",
     pricePhp: 180,
