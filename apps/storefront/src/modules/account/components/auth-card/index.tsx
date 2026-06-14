@@ -675,6 +675,7 @@ const AuthCard = ({
                 fd.append("mode", mode)
                 if (mode === "signup" && role) fd.append("role", role)
                 if (mode === "signup" && hub) fd.append("hub", hub)
+                if (mode === "signup" && ref) fd.append("ref", ref)
                 requestAction(fd)
               }}
               className="text-brand-green-700 hover:text-brand-green-800 font-semibold disabled:text-grey-40 disabled:cursor-not-allowed transition-colors"
