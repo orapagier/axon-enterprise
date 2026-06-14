@@ -60,7 +60,7 @@ export async function GET(request: NextRequest) {
   const response = NextResponse.redirect(authorizeUrl)
   response.cookies.set(
     GAUTH_COOKIE,
-    JSON.stringify({ state, mode, role, hub, countryCode, redirectUri }),
+    JSON.stringify({ state, mode, role, hub, ref, countryCode, redirectUri }),
     {
       maxAge: GAUTH_TTL_SECONDS,
       httpOnly: true,
