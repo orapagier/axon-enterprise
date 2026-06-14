@@ -1002,10 +1002,40 @@ matching is therefore the intended model; barangay/postal hub resolution is
       appeal route 404/400 from our handler, `GET /store/customer/disputes`=200
       enriched, store appeal route 400 (notes-required)/404 from our handler.
 
-### Phase H — Hardening
-- [ ] COD shortfall handling (collected ≠ order total) + remittance aging report.
-- [ ] Tests for delivery-tier resolution, membership gating, dispute escalation.
-- [ ] PostgreSQL backup strategy; basic observability on jobs.
+### Phase H — Hardening — built + RUNTIME-VERIFIED 2026-06-14
+- [x] **COD shortfall + remittance aging — built 2026-06-14.** Each
+      `cod_collected` / `rider_remitted` ledger row now carries `expected_amount`
+      (order total + delivery fee on collection, the matching collected amount on
+      remittance; `Migration20260614120000`, nullable for legacy/OTC rows).
+      `confirmDelivery` accepts a short `amountOverride` and stamps a "SHORT ₱…"
+      note. Pure math in `src/lib/cod-aging.ts` (`remittanceAging` 0–1/1–3/3–7/7+
+      buckets, `collectionShortfalls`, `remittanceShortfalls`) feeds both
+      `GET /admin/cod-remittance-aging` + the **COD Reconcile** admin page and the
+      `rider-unremitted-tick` suspension job (one `unremittedByRider` rule, so
+      report and job can't disagree). Job now also suspends on **age** (oldest
+      unremitted > `RIDER_UNREMITTED_AGING_DAYS`, default 3d), not just balance.
+- [x] **Tests for delivery-tier resolution, membership gating, dispute escalation
+      — present + green (2026-06-14).** `delivery-tiers.unit.spec.ts`
+      (`buildDeliveryTiers`/`feeForTier`/`beforeCutoff` + `isMembershipActive`
+      "special is gated on membership"), `resolve-dispute-escalation.unit.spec.ts`,
+      plus `cod-aging.unit.spec.ts`. **102/102 unit tests pass, both apps tsc-clean.**
+- [x] **PostgreSQL backups + job observability — built 2026-06-14.**
+      `scripts/pg-backup.sh` (`pg_dump -Fc`, timestamped, retention prune) +
+      `scripts/pg-restore.sh`, documented in `docs/OPERATIONS.md` (cron at 01:30,
+      restore drill, off-box copies). Every cron job is wrapped by `runJob()`
+      (`src/lib/job-observability.ts`) → consistent started/finished/FAILED log
+      lines + container unwrap; all 7 jobs adopted.
+
+> **▶ Phase H RUNTIME-VERIFIED (2026-06-14).** `src/migration-scripts/verify-phase-h.ts`
+> (`npx medusa exec`, 8/8 against the live DB, throwaway rows purged): the
+> `expected_amount` column round-trips out of Postgres; the aging lib agrees with
+> real `listCodTransactions` row shapes (a+b outstanding = ₱300, 0–1d/3–7d buckets
+> correct); a collection shortfall (₱50) and a remittance shortfall (₱10) are both
+> flagged; the **real** `rider-unremitted-tick` job suspends a rider whose oldest
+> unremitted collection is 5 days old. Separately: `pg-backup.sh` writes a valid
+> CUSTOM-format archive (verified restorable with `pg_restore --list`, 160 table-
+> data entries incl. `cod_transaction`). **Phase H complete — this was the last
+> open phase in §10.**
 
 ---
 
