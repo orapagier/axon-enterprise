@@ -274,6 +274,11 @@ async function membershipExpiryTick(container: MedusaContainer) {
         data: { removed_roles: removedRoles },
       })
       downgraded++
+      downgradedLines.push(
+        `${customer.email ?? customer.id} (was ${
+          removedRoles.join(" + ") || "member"
+        })`
+      )
       logger.info(
         `Membership grace ended for customer ${customer.id} — downgraded to consumer (removed: ${removedRoles.join(", ") || "none"}).`
       )
