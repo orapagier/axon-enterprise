@@ -58,6 +58,7 @@ export default (input: JobInput) =>
     )
 
     let suspended = 0
+    const suspendedLines: string[] = []
     for (const rider of activeRiders) {
       const info = byRider.get(rider.id)
       if (!info) continue
@@ -67,13 +68,24 @@ export default (input: JobInput) =>
       if (overBalance || overAge) {
         await riders.updateRiders({ id: rider.id, status: "suspended" })
         suspended++
+        const peso = (info.outstanding_centavos / 100).toFixed(2)
+        suspendedLines.push(
+          `${rider.full_name}: ₱${peso} unremitted, oldest ${ageDays.toFixed(1)}d`
+        )
         logger.warn(
-          `Rider ${rider.id} (${rider.full_name}) suspended: ₱${(
-            info.outstanding_centavos / 100
-          ).toFixed(2)} unremitted, oldest ${ageDays.toFixed(1)}d ` +
+          `Rider ${rider.id} (${rider.full_name}) suspended: ₱${peso} ` +
+            `unremitted, oldest ${ageDays.toFixed(1)}d ` +
             `(limit ₱${(LIMIT_CENTAVOS / 100).toFixed(0)} / ${AGING_DAYS}d).`
         )
       }
+    }
+
+    if (suspended > 0) {
+      await notifyAdmin(container, {
+        title: `🚫 ${suspended} rider(s) suspended — unremitted COD`,
+        lines: suspendedLines,
+        url: "/app/riders",
+      })
     }
 
     logger.info(
