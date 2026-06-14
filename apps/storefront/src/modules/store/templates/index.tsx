@@ -6,6 +6,7 @@ import { SortOptions } from "@modules/store/components/refinement-list/sort-prod
 import { getDeliveryHub } from "@lib/util/delivery-hub"
 import { getHubCookie } from "@modules/hub/actions/set-hub"
 import { getHubProductIds } from "@modules/hub/data/hubs"
+import { listFilterCategories } from "@lib/data/categories"
 
 import PaginatedProducts from "./paginated-products"
 
