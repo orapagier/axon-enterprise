@@ -36,6 +36,7 @@ const CATEGORIES: CategoryDef[] = [
   { name: "Root Crops", handle: "root-crops", description: "Ground-grown staples for everyday cooking." },
   { name: "Herbs", handle: "herbs", description: "Aromatics from highland and coastal farms." },
   { name: "Fish", handle: "fish", description: "Pond-raised and freshwater catch from Mindanao." },
+  { name: "Miscellaneous", handle: "misc", description: "Everything else — items that don't fit another aisle." },
 ]
 
 // Category-level fallback photos so every product has at least *some* image.
