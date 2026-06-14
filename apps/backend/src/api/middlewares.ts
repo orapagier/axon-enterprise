@@ -178,6 +178,12 @@ export default defineMiddlewares({
       middlewares: [authenticate("customer", ["session", "bearer"])],
     },
     {
+      // Admin Telegram ping after a membership payment is submitted to verify.
+      matcher: "/store/customers/me/membership-payment",
+      method: ["POST"],
+      middlewares: [authenticate("customer", ["session", "bearer"])],
+    },
+    {
       // Rider session exchange + registration ride on the CUSTOMER session:
       // riders sign in on the storefront like any user, then these endpoints
       // match customer.email ↔ rider.email (see /store/riders/* routes).
