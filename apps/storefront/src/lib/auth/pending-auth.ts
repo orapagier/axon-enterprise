@@ -36,6 +36,8 @@ export type PendingAuth = {
   /** Profile names carried from the Google id_token, applied at creation. */
   firstName?: string
   lastName?: string
+  /** Referral code from a `?ref=` link, stored on the new customer at signup. */
+  ref?: string
   expiresAt: number
   attempts: number
 }
