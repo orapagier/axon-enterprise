@@ -410,6 +410,16 @@ export async function requestMembership(
     }
   }
 
+  // Optional referral code typed on the upgrade form. Stored verbatim; the
+  // backend resolves + validates it (self/unknown codes ignored) when the
+  // referrer's bonus is granted on approval. Only meaningful for a first-time
+  // activation — renewals never trigger a bonus. We never clear an existing
+  // attribution, so a code captured at signup survives a blank field here.
+  const referralCode = String(formData.get("referral_code") ?? "")
+    .trim()
+    .toUpperCase()
+    .slice(0, 16)
+
   await updateCustomer({
     metadata: {
       ...existing,
@@ -421,6 +431,9 @@ export async function requestMembership(
       [MEMBERSHIP_META.paymentMethod]: paymentMethod,
       [MEMBERSHIP_META.paymentReference]:
         paymentMethod === "otc" ? null : paymentReference,
+      ...(!isRenewal && referralCode
+        ? { referred_by_code: referralCode }
+        : {}),
     },
   })
 
