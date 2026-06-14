@@ -55,13 +55,15 @@ export default async function notifyAdminSpecialOrderHandler({
 
     if (meta.delivery_tier !== "special") return
 
+    const hubSlug = meta.delivery_hub_slug as string | undefined
+    const barangay = meta.delivery_barangay as string | undefined
     const feePhp = Number(meta.delivery_fee_php ?? 0)
     await notifyAdmin(container, {
       title: "⚡ Special (urgent) delivery order",
       lines: [
         `Order #${order.display_id}`,
-        meta.delivery_hub_slug && `Hub: ${meta.delivery_hub_slug}`,
-        meta.delivery_barangay && `Barangay: ${meta.delivery_barangay}`,
+        hubSlug && `Hub: ${hubSlug}`,
+        barangay && `Barangay: ${barangay}`,
         feePhp > 0 && `Delivery fee: ₱${feePhp}`,
         order.email && `Buyer: ${order.email}`,
       ],
