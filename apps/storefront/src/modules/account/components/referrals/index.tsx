@@ -18,6 +18,10 @@ const formatDate = (iso: string): string => {
         year: "numeric",
         month: "short",
         day: "numeric",
+        // Pin the zone so SSR (server TZ) and client (device TZ) format the
+        // same string — otherwise this client component triggers a hydration
+        // mismatch on phones in other timezones.
+        timeZone: "Asia/Manila",
       })
 }
 
