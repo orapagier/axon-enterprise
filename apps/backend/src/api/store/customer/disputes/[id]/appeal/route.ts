@@ -4,6 +4,7 @@ import { ACCOUNTABILITY_MODULE } from "../../../../../../modules/accountability"
 import type AccountabilityModuleService from "../../../../../../modules/accountability/service"
 import { evaluateAppealEligibility } from "../../../../../../lib/dispute-appeal"
 import { sendEmail } from "../../../../../../lib/notify"
+import { notifyAdmin } from "../../../../../../lib/notify-admin"
 
 function getCustomerId(req: MedusaRequest): string | null {
   const ctx = (req as unknown as { auth_context?: { actor_id?: string } })
