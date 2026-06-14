@@ -159,7 +159,12 @@ async function getOrderDetails(
       "items.quantity",
       "items.unit_price",
     ],
-    filters: { customer_id: ctx.customerId, display_id: displayId },
+    // The generated filter type annotates display_id as a string, but the
+    // column is numeric and matches a number at runtime — cast past the type.
+    filters: { customer_id: ctx.customerId, display_id: displayId } as Record<
+      string,
+      unknown
+    >,
   })
 
   const o = data[0] as Record<string, any> | undefined
