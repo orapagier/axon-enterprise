@@ -103,6 +103,14 @@ export default defineMiddlewares({
       middlewares: [authenticate("customer", ["session", "bearer"])],
     },
     {
+      // In-account AI assistant. Customer session required; the route reads the
+      // customer id from auth_context, so the chatbot's tools are scoped to the
+      // signed-in user only.
+      matcher: "/store/assistant",
+      method: ["POST"],
+      middlewares: [authenticate("customer", ["session", "bearer"])],
+    },
+    {
       matcher: "/admin/orders/*/cod-collected",
       method: ["POST"],
       middlewares: [authenticate("user", ["session", "bearer"])],
