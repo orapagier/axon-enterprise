@@ -34,6 +34,11 @@ export async function GET(request: NextRequest) {
   const mode = params.get("mode") === "signup" ? "signup" : "signin"
   const role = String(params.get("role") ?? "")
   const hub = String(params.get("hub") ?? "").trim().slice(0, 64)
+  const ref =
+    mode === "signup"
+      ? String(params.get("ref") ?? "").trim().toUpperCase().slice(0, 16) ||
+        undefined
+      : undefined
 
   if (mode === "signup" && !VALID_ROLES.includes(role)) {
     return fail("missing_role")
