@@ -14,6 +14,8 @@ export type GoogleAuthPending = {
   mode: "signin" | "signup"
   role: string
   hub: string
+  /** Referral code from a `?ref=` link, carried to the new customer at signup. */
+  ref?: string
   countryCode: string
   redirectUri: string
 }
