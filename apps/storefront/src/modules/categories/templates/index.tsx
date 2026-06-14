@@ -28,6 +28,7 @@ export default async function CategoryTemplate({
   if (!category || !countryCode) notFound()
 
   const hub = await getDeliveryHub()
+  const categoryFilters = await listFilterCategories()
 
   const parents = [] as HttpTypes.StoreProductCategory[]
 
