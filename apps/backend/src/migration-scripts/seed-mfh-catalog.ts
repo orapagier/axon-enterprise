@@ -194,7 +194,7 @@ const PRODUCTS: ProductDef[] = [
   {
     title: "Pechay (Bok Choy)",
     handle: "pechay",
-    category: "leafy-greens",
+    category: "vegetables",
     origin: "Davao Region",
     unit: "bundle",
     pricePhp: 55,
