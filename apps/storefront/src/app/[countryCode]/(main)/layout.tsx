@@ -46,6 +46,9 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
       )}
       {props.children}
       <HubPickerModal hubs={hubs} defaultSlug={currentHub} />
+      {/* Site-wide AI assistant — only for signed-in customers (its tools
+          require an authenticated customer session). */}
+      {customer && <Assistant />}
       <Footer />
     </>
   )
