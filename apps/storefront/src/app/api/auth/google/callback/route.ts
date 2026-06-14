@@ -136,6 +136,7 @@ export async function GET(request: NextRequest) {
         mode: "signup",
         role: accountType,
         hub: pending.hub || undefined,
+        ref: pending.ref || undefined,
         authMethod: "google",
         firstName: claims.given_name,
         lastName: claims.family_name,
