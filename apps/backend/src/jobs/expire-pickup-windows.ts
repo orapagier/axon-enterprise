@@ -81,6 +81,16 @@ async function expirePickupWindows(container: MedusaContainer) {
     }
   }
 
+  // Only worth a ping when a producer no-showed (a reserved slot went unfilled);
+  // routine window closures with nothing reserved are noise.
+  if (slotsFlagged > 0) {
+    await notifyAdmin(container, {
+      title: `🗓️ ${slotsFlagged} pickup slot(s) marked no-show`,
+      lines: [`${windowsClosed} window(s) closed in the same sweep.`],
+      url: "/app/pickups",
+    })
+  }
+
   logger.info(
     `expire-pickup-windows finished: ${windowsClosed} windows closed, ${slotsFlagged} slots flagged as no_show.`
   )
