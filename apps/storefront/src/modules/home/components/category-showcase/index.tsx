@@ -48,18 +48,8 @@ const categories: Category[] = [
     href: "/store?category=root-crops",
     count: "31 picks",
     accent: "Earth-grown",
-    span: "small:col-span-2 small:row-span-1",
-    size: "small",
-  },
-  {
-    name: "Leafy Greens",
-    image:
-      "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=600&h=600&fit=crop&auto=format&q=85",
-    href: "/store?category=leafy-greens",
-    count: "28 picks",
-    accent: "Crisp daily",
-    span: "small:col-span-2 small:row-span-1",
-    size: "small",
+    span: "small:col-span-3 small:row-span-1",
+    size: "medium",
   },
   {
     name: "Fish",
@@ -68,8 +58,8 @@ const categories: Category[] = [
     href: "/store?category=fish",
     count: "17 picks",
     accent: "Wild-caught",
-    span: "small:col-span-2 small:row-span-1",
-    size: "small",
+    span: "small:col-span-3 small:row-span-1",
+    size: "medium",
   },
 ]
 
