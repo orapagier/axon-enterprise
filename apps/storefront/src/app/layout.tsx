@@ -41,6 +41,12 @@ export const metadata: Metadata = {
     title: "Fresh Hub",
     statusBarStyle: "default",
   },
+  // Next emits the modern `mobile-web-app-capable` but not the legacy
+  // Apple-prefixed tag; iOS standalone (which gates web push) is most reliable
+  // with it present too.
+  other: {
+    "apple-mobile-web-app-capable": "yes",
+  },
 }
 
 export const viewport: Viewport = {
