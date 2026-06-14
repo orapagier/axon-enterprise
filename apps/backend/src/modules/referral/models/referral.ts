@@ -9,7 +9,7 @@ import { model } from "@medusajs/framework/utils"
  * never traverse past the direct referrer, so only 1st-level referrals earn.
  *
  *   status pending  — attribution recorded but the credit promotion couldn't be
- *                     issued yet (e.g. promotion API hiccup); ret riable.
+ *                     issued yet (e.g. promotion API hiccup); retriable.
  *   status rewarded — the ₱50 store-credit promotion was issued to the referrer.
  *   status void     — manually invalidated (abuse / reversal).
  *
