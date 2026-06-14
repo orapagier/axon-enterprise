@@ -323,5 +323,16 @@ export async function recordRefusal(
     data: { display_id: order.display_id },
   })
 
+  // A refused delivery opens a dispute the admin must adjudicate within the SLA.
+  await notifyAdmin(container, {
+    title: "⚠️ Delivery refused — dispute opened",
+    lines: [
+      `Order #${order.display_id}`,
+      order.email && `Buyer: ${order.email}`,
+      args.riderNotes && `Rider notes: ${args.riderNotes}`,
+    ],
+    url: "/app/disputes",
+  })
+
   return { ok: true, created: true, dispute }
 }
