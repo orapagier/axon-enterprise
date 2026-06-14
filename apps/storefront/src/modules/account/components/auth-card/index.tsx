@@ -428,6 +428,9 @@ const AuthCard = ({
             {mode === "signup" && hub && (
               <input type="hidden" name="hub" value={hub} />
             )}
+            {mode === "signup" && ref && (
+              <input type="hidden" name="ref" value={ref} />
+            )}
 
             <label className="block">
               <span className="text-caption font-semibold text-grey-60 uppercase tracking-wider block mb-2">
