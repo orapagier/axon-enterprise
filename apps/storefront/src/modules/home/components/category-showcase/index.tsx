@@ -81,7 +81,7 @@ const CategoryShowcase = () => {
               <span className="text-brand-gold-500">.</span>
             </h2>
             <p className="text-body-sm text-grey-50 mt-2 max-w-md leading-relaxed">
-              Six staple aisles, stocked daily by the farmers nearest your hub.
+              Five staple aisles, stocked daily by the farmers nearest your hub.
             </p>
           </div>
           <LocalizedClientLink
