@@ -45,8 +45,6 @@ const CATEGORY_FALLBACK_PHOTO: Record<string, string> = {
     "https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=800&auto=format&fit=crop&q=80",
   vegetables:
     "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800&auto=format&fit=crop&q=80",
-  "leafy-greens":
-    "https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=800&auto=format&fit=crop&q=80",
   "root-crops":
     "https://images.unsplash.com/photo-1596097635121-14b38c5d7a55?w=800&auto=format&fit=crop&q=80",
   herbs:
