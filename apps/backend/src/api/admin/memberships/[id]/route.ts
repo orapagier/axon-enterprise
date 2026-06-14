@@ -261,6 +261,30 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     })
   }
 
+  // Referral bonus — fire only when a referee genuinely upgrades to premium,
+  // i.e. an approval that isn't a renewal of an already-active member. The
+  // grant is idempotent (one bonus per referee, ever) and best-effort: a
+  // failure here leaves a retriable record and never blocks the approval.
+  if (body.action === "approve" && !isRenewalRequest) {
+    try {
+      await grantReferralReward(req.scope, {
+        refereeId: customerId,
+        refereeEmail: customer.email,
+        refereeMetadata: existing,
+      })
+    } catch (err) {
+      try {
+        req.scope
+          .resolve(ContainerRegistrationKeys.LOGGER)
+          .warn(
+            `Referral reward for ${customerId} failed: ${(err as Error).message}`
+          )
+      } catch {
+        /* logger unavailable — drop */
+      }
+    }
+  }
+
   res.json({
     ok: true,
     action: body.action,
