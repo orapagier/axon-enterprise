@@ -216,6 +216,7 @@ const AuthCard = ({
     const q = new URLSearchParams({ mode, countryCode })
     if (mode === "signup" && role) q.set("role", role)
     if (mode === "signup" && hub) q.set("hub", hub)
+    if (mode === "signup" && ref) q.set("ref", ref)
     return `/api/auth/google/start?${q.toString()}`
   })()
   const googleDisabled = !googleEnabled || needsRole
