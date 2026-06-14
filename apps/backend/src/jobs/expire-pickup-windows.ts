@@ -10,6 +10,7 @@ import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { PICKUP_MODULE } from "../modules/pickup"
 import type PickupModuleService from "../modules/pickup/service"
 import { runJob, type JobInput } from "../lib/job-observability"
+import { notifyAdmin } from "../lib/notify-admin"
 
 export const config = {
   name: "expire-pickup-windows",
