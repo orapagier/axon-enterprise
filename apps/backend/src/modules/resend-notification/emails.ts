@@ -308,6 +308,28 @@ const TEMPLATES: Record<string, (d: Data) => BuiltEmail> = {
       ),
     }
   },
+
+  "referral-credit-earned": (d) => ({
+    subject: `You earned ${peso(d.amount_php)} store credit!`,
+    html: layout(
+      `Referral bonus unlocked`,
+      p(
+        `Someone you referred just upgraded to a Hub Member account — thank you for spreading the word!`
+      ) +
+        p(
+          `We've added <strong>${peso(
+            d.amount_php
+          )} store credit</strong> to your account.${
+            d.code
+              ? ` Use the code <strong>${d.code}</strong> at checkout to take it off your next order.`
+              : ""
+          }`
+        ) +
+        p(
+          `Keep sharing your referral link from your account page — every friend who upgrades earns you another bonus.`
+        )
+    ),
+  }),
 }
 
 export const EMAIL_TEMPLATE_NAMES = Object.keys(TEMPLATES)
