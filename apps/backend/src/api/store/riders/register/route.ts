@@ -101,6 +101,18 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     })
   }
 
+  // Tell the admin a rider is waiting on activation (after the cash bond).
+  await notifyAdmin(req.scope, {
+    title: "🛵 New rider — pending approval",
+    lines: [
+      full_name,
+      `Hub: ${hub.name}`,
+      `Phone: ${phone}`,
+      `Email: ${email}`,
+    ],
+    url: "/app/riders",
+  })
+
   res.status(201).json({
     rider: {
       id: rider.id,
