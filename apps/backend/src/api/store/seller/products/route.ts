@@ -577,5 +577,18 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
+  // sell_to_freshhub listings land as drafts that a hub admin must price +
+  // approve via /app/listings — tell the admin one is waiting.
+  await notifyAdmin(req.scope, {
+    title: "📦 New listing — awaiting approval",
+    lines: [
+      titleTrimmed,
+      producerName && `Producer: ${producerName}`,
+      hub?.name && `Hub: ${hub.name}`,
+      `Asking price: ₱${Math.round(Number(body.price))}/${body.unit ?? "kg"}`,
+    ],
+    url: "/app/listings",
+  })
+
   res.status(201).json({ product, listing })
 }
