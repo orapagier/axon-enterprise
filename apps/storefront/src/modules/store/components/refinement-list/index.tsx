@@ -17,7 +17,6 @@ type RefinementListProps = {
 const CATEGORY_ICONS: Record<string, string> = {
   fruits: "🥭",
   vegetables: "🥬",
-  "leafy-greens": "🥗",
   "root-crops": "🥔",
   herbs: "🌿",
   "herbs-spices": "🌿",
