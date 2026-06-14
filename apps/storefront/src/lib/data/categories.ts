@@ -26,6 +26,28 @@ export const listCategories = async (query?: Record<string, unknown>) => {
     .then(({ product_categories }) => product_categories)
 }
 
+/**
+ * Always-fresh category list for the storefront filter sidebar. Unlike
+ * `listCategories` (tag-cached per session), this is fetched uncached so the
+ * sidebar reflects admin add/remove immediately — keeping the storefront and
+ * the backend DB in lockstep. The store API already returns only active,
+ * non-internal (public) categories.
+ */
+export const listFilterCategories = async () => {
+  return sdk.client
+    .fetch<{ product_categories: HttpTypes.StoreProductCategory[] }>(
+      "/store/product-categories",
+      {
+        query: {
+          fields: "id,name,handle,rank,parent_category_id",
+          limit: 100,
+        },
+        cache: "no-store",
+      }
+    )
+    .then(({ product_categories }) => product_categories)
+}
+
 export const getCategoryByHandle = async (categoryHandle: string[]) => {
   const handle = `${categoryHandle.join("/")}`
 

@@ -595,8 +595,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/store/components/refinement-list/index.tsx": {
-    "mtime": 1779876094.1221802,
-    "ast_hash": "ee8d9fecb9685d454c3c6f56f3a8375d",
+    "mtime": 1781405906.1256666,
+    "ast_hash": "355be4d795f7d4cf9f46acca1987063e",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx": {
@@ -2560,8 +2560,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/seed-mfh-catalog.ts": {
-    "mtime": 1779264419.7798438,
-    "ast_hash": "98d07d685746c59a368fe4f4cda7843b",
+    "mtime": 1781405904.1131508,
+    "ast_hash": "236b0c86769e42b7793336df0e47a917",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/initial-data-seed.ts": {
@@ -2587,6 +2587,11 @@
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/restore-admin-auth.ts": {
     "mtime": 1781347861.7796373,
     "ast_hash": "14fea10ea7f0dbf08bb273f547584b8c",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/add-misc-category.ts": {
+    "mtime": 1781405898.9919157,
+    "ast_hash": "a9c436d0e57c871e9fac5d73c61eb0d0",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/purge-all-users.ts": {
@@ -2635,8 +2640,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/query-entry-points.d.ts": {
-    "mtime": 1781398865.7524657,
-    "ast_hash": "5404a114fa356ab82561b1daa74ed82b",
+    "mtime": 1781405910.6449065,
+    "ast_hash": "175898ddce80f8aae652c3122922e314",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/index.d.ts": {
@@ -2645,12 +2650,12 @@
     "semantic_hash": "92cfe3ea73a656c693052260d34e9dc5"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/modules-bindings.d.ts": {
-    "mtime": 1781398865.7404656,
+    "mtime": 1781405910.6449065,
     "ast_hash": "a90c337fb01defb163cf6944991ecaf7",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/entry.jsx": {
-    "mtime": 1781398864.7684658,
+    "mtime": 1781405909.1776662,
     "ast_hash": "8b276d285c6e460a0c2c67b57ec8d943",
     "semantic_hash": "8b276d285c6e460a0c2c67b57ec8d943"
   },
@@ -2745,7 +2750,7 @@
     "semantic_hash": "6f36f79ab958b75e4fdaf581b92a1225"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/index.html": {
-    "mtime": 1781398864.7684658,
+    "mtime": 1781405909.1776662,
     "ast_hash": "1f14bb0d5e89bc45a4265b714e6c6de6",
     "semantic_hash": "1f14bb0d5e89bc45a4265b714e6c6de6"
   },
