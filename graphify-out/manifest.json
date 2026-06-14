@@ -1804,6 +1804,11 @@
     "ast_hash": "c7c0837616c97ac001766d8bcd36277a",
     "semantic_hash": ""
   },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/modules/cod-ledger/migrations/Migration20260614120000.ts": {
+    "mtime": 1781386690.7711058,
+    "ast_hash": "5afd5a19a2e71be721560a1807f5259b",
+    "semantic_hash": ""
+  },
   "/home/ramlej/MFH/freshhub/apps/backend/src/modules/cod-ledger/migrations/Migration20260522130000.ts": {
     "mtime": 1779431482.94338,
     "ast_hash": "352f5b197f5c19aa527f7e4771f51c99",
@@ -1820,8 +1825,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/modules/cod-ledger/models/cod-transaction.ts": {
-    "mtime": 1781043556.6751482,
-    "ast_hash": "da4143c7d4cd1c77dc65ed86e6ddb526",
+    "mtime": 1781386681.6296692,
+    "ast_hash": "321a2cbd6bc1ddedf7150d9fb2a2e62c",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/modules/push-notification/index.ts": {
@@ -1930,13 +1935,13 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/api/store/delivery-options/route.ts": {
-    "mtime": 1781119679.5412698,
-    "ast_hash": "5b1a91369e73c4f6b61ede44d7a2b802",
+    "mtime": 1781387831.4536822,
+    "ast_hash": "2dad1affc109a17a2f849b3865aeb65d",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/api/store/delivery-options/select/route.ts": {
-    "mtime": 1781119679.5412698,
-    "ast_hash": "9504181b94540c11f09caf599b1f2625",
+    "mtime": 1781387855.2782824,
+    "ast_hash": "ffd25ef36d8eec818329823553b1a197",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/api/store/push/subscribe/route.ts": {
@@ -2054,6 +2059,11 @@
     "ast_hash": "f40d984cf05c6817b2a04a00f05c32bd",
     "semantic_hash": ""
   },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/api/admin/cod-remittance-aging/route.ts": {
+    "mtime": 1781387593.8392794,
+    "ast_hash": "44aafc218b6e5faf3eeedec247b6dec2",
+    "semantic_hash": ""
+  },
   "/home/ramlej/MFH/freshhub/apps/backend/src/api/admin/producer-payouts/route.ts": {
     "mtime": 1781336897.350605,
     "ast_hash": "401a58de25d73844c523ecafe046681f",
@@ -2135,8 +2145,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/api/admin/orders/[id]/cod-remitted/route.ts": {
-    "mtime": 1781096926.329387,
-    "ast_hash": "26c49fa2f091fa79f733f54b639a8bb2",
+    "mtime": 1781387538.3165796,
+    "ast_hash": "ed871ce2109fe4460e9e3780271e4182",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/api/admin/orders/[id]/cod-collected/route.ts": {
@@ -2280,8 +2290,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/admin/routes/cod-reconcile/page.tsx": {
-    "mtime": 1781044213.6666992,
-    "ast_hash": "f1e164cfe3ce84e7d11738e98dc4879f",
+    "mtime": 1781388029.064234,
+    "ast_hash": "43706a953ea7faa2f80f6107d4b28ace",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/admin/routes/otc-counter/page.tsx": {
@@ -2414,14 +2424,29 @@
     "ast_hash": "e4c2bac853cd28e38f76eb9ccb8caa91",
     "semantic_hash": ""
   },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/lib/delivery-tiers.ts": {
+    "mtime": 1781386674.5781505,
+    "ast_hash": "c4fe4ef0fc0834282430171deb09885b",
+    "semantic_hash": ""
+  },
   "/home/ramlej/MFH/freshhub/apps/backend/src/lib/order-cash.ts": {
     "mtime": 1781055737.055688,
     "ast_hash": "b741df44b1edcc1d9184affe0ec14fef",
     "semantic_hash": ""
   },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/lib/cod-aging.ts": {
+    "mtime": 1781386656.2009928,
+    "ast_hash": "88cfad7c1db37186a235fde169c68b9b",
+    "semantic_hash": ""
+  },
   "/home/ramlej/MFH/freshhub/apps/backend/src/lib/rider-auth.ts": {
     "mtime": 1781337321.0770743,
     "ast_hash": "769b95d83f4890694010c1164eb48770",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/lib/job-observability.ts": {
+    "mtime": 1781387552.6298285,
+    "ast_hash": "2ec16851d03dbeca3fe0a3a0f8e11608",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/lib/trader.ts": {
@@ -2430,8 +2455,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/lib/delivery-actions.ts": {
-    "mtime": 1781336372.8538654,
-    "ast_hash": "071ee5c176a65c94222ba828c326d9e6",
+    "mtime": 1781387134.7167625,
+    "ast_hash": "cea03bc869175c0eb27b2675ef27386d",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/lib/otc-sale.ts": {
@@ -2464,39 +2489,49 @@
     "ast_hash": "57313b1c25963521feefbfafa35b76e2",
     "semantic_hash": ""
   },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/lib/__tests__/delivery-tiers.unit.spec.ts": {
+    "mtime": 1781387837.6272535,
+    "ast_hash": "f3d290ca8c4873e0ed4f22a731957af9",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/lib/__tests__/cod-aging.unit.spec.ts": {
+    "mtime": 1781387861.9885826,
+    "ast_hash": "c58dbfdd0fc9c7d4b9a69dc9ef4e8e35",
+    "semantic_hash": ""
+  },
   "/home/ramlej/MFH/freshhub/apps/backend/src/jobs/lock-dispatch-batches.ts": {
-    "mtime": 1781100015.155861,
-    "ast_hash": "21436a907ee29fa11e956fa3897c29c3",
+    "mtime": 1781387748.8523784,
+    "ast_hash": "ec244dd59cdcf658f930bff3ba990bac",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/jobs/dispatch-batches-in-transit.ts": {
-    "mtime": 1781336601.610888,
-    "ast_hash": "8704a71450e02e97e11bafe7d9679672",
+    "mtime": 1781387748.8043783,
+    "ast_hash": "d3822a3fe836f5e7c96819b15f45c3e2",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/jobs/expire-pickup-windows.ts": {
-    "mtime": 1781100015.155861,
-    "ast_hash": "fe8813b93b36e33f74d63bfdfe986e35",
+    "mtime": 1781387748.8363783,
+    "ast_hash": "7e59768edaf8d1588fac230eee995692",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/jobs/rider-unremitted-tick.ts": {
-    "mtime": 1781100015.155861,
-    "ast_hash": "fc80f3c5eeb5c55b944adf8f1425ad21",
+    "mtime": 1781387786.4068315,
+    "ast_hash": "ea9534620cffccb810cb0bb4e2442e6f",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/jobs/membership-expiry-tick.ts": {
-    "mtime": 1781225494.2254395,
-    "ast_hash": "288a2683f9d48ea0607d42f899cf74ed",
+    "mtime": 1781387701.9158487,
+    "ast_hash": "c77744683e981c26c2e65dcce658aa77",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/jobs/dispute-sla-tick.ts": {
-    "mtime": 1781385528.871409,
-    "ast_hash": "52f52c7857f2fb70d5bb777f2b399b2e",
+    "mtime": 1781387804.8737283,
+    "ast_hash": "c3a010585f2766c4c6085db0a01e8262",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/jobs/clean-order-tick.ts": {
-    "mtime": 1781100015.151861,
-    "ast_hash": "f41df9ad8d791e80309887356aff3302",
+    "mtime": 1781387792.7098742,
+    "ast_hash": "2e977a0cdf8b259afa1c072e8222f695",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/jobs/__tests__/membership-expiry.unit.spec.ts": {
@@ -2520,8 +2555,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/purge-dev-data.ts": {
-    "mtime": 1781349328.638699,
-    "ast_hash": "76ed35ae078917dbfa9ac79141951c3a",
+    "mtime": 1781387939.9899955,
+    "ast_hash": "93c1e6934cde3343e51600510b853905",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/seed-mfh-catalog.ts": {
@@ -2584,6 +2619,11 @@
     "ast_hash": "a02ac893e0df91ca177c22ac27b85217",
     "semantic_hash": ""
   },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/verify-phase-h.ts": {
+    "mtime": 1781398860.7178001,
+    "ast_hash": "d7eb053b76ed58e9786393a759466da7",
+    "semantic_hash": ""
+  },
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/verify-phase-g.ts": {
     "mtime": 1781386001.2000794,
     "ast_hash": "51ac6383e5212959f5226f9a1b43ec78",
@@ -2595,8 +2635,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/query-entry-points.d.ts": {
-    "mtime": 1781386005.0602496,
-    "ast_hash": "20dc50dfef01877fda82f31ae9cbe0c7",
+    "mtime": 1781398865.7524657,
+    "ast_hash": "5404a114fa356ab82561b1daa74ed82b",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/index.d.ts": {
@@ -2605,18 +2645,28 @@
     "semantic_hash": "92cfe3ea73a656c693052260d34e9dc5"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/modules-bindings.d.ts": {
-    "mtime": 1781386005.0602496,
+    "mtime": 1781398865.7404656,
     "ast_hash": "a90c337fb01defb163cf6944991ecaf7",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/entry.jsx": {
-    "mtime": 1781386004.2842495,
+    "mtime": 1781398864.7684658,
     "ast_hash": "8b276d285c6e460a0c2c67b57ec8d943",
     "semantic_hash": "8b276d285c6e460a0c2c67b57ec8d943"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/integration-tests/setup.js": {
     "mtime": 1780904870.8678432,
     "ast_hash": "6e1369247e3100e3eb95415b5cb49719",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/backend/scripts/pg-backup.sh": {
+    "mtime": 1781388064.8871088,
+    "ast_hash": "d20e396ec770264ae8c32d0b2b377f52",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/backend/scripts/pg-restore.sh": {
+    "mtime": 1781388077.2975163,
+    "ast_hash": "34be5afa39a64f81f9e24bb921ef61d0",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/CLAUDE.md": {
@@ -2635,8 +2685,13 @@
     "semantic_hash": "42ceca1f28ee6045ab20a957b55a88ce"
   },
   "/home/ramlej/MFH/freshhub/IMPLEMENTATION_PLAN_ASBUILT.md": {
-    "mtime": 1781386220.889337,
-    "ast_hash": "dac381df8938c231aa70f4e134f717aa",
+    "mtime": 1781398987.737158,
+    "ast_hash": "f893489453d03ef4f0d41fd2d0b69300",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/docs/OPERATIONS.md": {
+    "mtime": 1781388124.5361695,
+    "ast_hash": "e04bfa123618870a816216dd0f950846",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/.github/workflows/ci.yml": {
@@ -2690,7 +2745,7 @@
     "semantic_hash": "6f36f79ab958b75e4fdaf581b92a1225"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/index.html": {
-    "mtime": 1781386004.2842495,
+    "mtime": 1781398864.7684658,
     "ast_hash": "1f14bb0d5e89bc45a4265b714e6c6de6",
     "semantic_hash": "1f14bb0d5e89bc45a4265b714e6c6de6"
   },
