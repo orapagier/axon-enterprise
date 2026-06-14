@@ -1,5 +1,5 @@
 import { getBaseURL } from "@lib/util/env"
-import { Metadata } from "next"
+import { Metadata, Viewport } from "next"
 import { Inter, Playfair_Display, DM_Serif_Display } from "next/font/google"
 import "styles/globals.css"
 
