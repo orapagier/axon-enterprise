@@ -54,6 +54,8 @@ const CATEGORY_FALLBACK_PHOTO: Record<string, string> = {
     "https://images.unsplash.com/photo-1593013820066-87e9cda3a87d?w=800&auto=format&fit=crop&q=80",
   fish:
     "https://images.unsplash.com/photo-1518536881889-9c89f1bbd1da?w=800&auto=format&fit=crop&q=80",
+  misc:
+    "https://images.unsplash.com/photo-1543168256-418811576931?w=800&auto=format&fit=crop&q=80",
 }
 
 type ProductDef = {
