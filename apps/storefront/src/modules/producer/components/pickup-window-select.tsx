@@ -109,6 +109,9 @@ export default function PickupWindowSelect({
                   weekday: "short",
                   month: "short",
                   day: "numeric",
+                  // Pin the zone so SSR and the client device render the same
+                  // string and don't trip a hydration mismatch.
+                  timeZone: "Asia/Manila",
                 })
                 const remaining =
                   w.capacity_kg !== null
