@@ -107,7 +107,7 @@ export default async function MembershipPage() {
       ) : request.pending ? (
         <PendingView request={request} />
       ) : (
-        <FreeView />
+        <FreeView referredByCode={referredByCode} />
       )}
     </div>
   )
