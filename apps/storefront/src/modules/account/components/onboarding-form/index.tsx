@@ -174,7 +174,7 @@ const PRODUCER_FIELDS: FieldDef[] = [
   {
     name: "products_offered",
     label: "What you grow / catch",
-    placeholder: "Tomatoes, leafy greens, tilapia…",
+    placeholder: "Tomatoes, pechay, tilapia…",
     icon: "🪴",
     type: "textarea",
     required: true,
