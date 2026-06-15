@@ -241,7 +241,7 @@ export default async function Nav() {
                 href="/store"
                 aria-label="Browse the store"
                 title="Browse the store"
-                className="small:hidden inline-flex items-center justify-center w-9 h-9 rounded-full text-grey-70 hover:text-brand-green-700 hover:bg-grey-5 transition-colors"
+                className="small:hidden inline-flex items-center justify-center w-9 h-9 rounded-full text-brand-green-700 hover:text-brand-green-800 hover:bg-grey-5 transition-colors"
                 data-testid="nav-shop-link-mobile"
               >
                 <svg
