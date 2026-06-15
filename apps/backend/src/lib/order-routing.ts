@@ -13,6 +13,8 @@
  */
 
 export type RoutableItem = {
+  /** Order line-item id — needed to remove just this line via an order edit. */
+  id?: string
   title: string
   quantity: number
   product_id: string | null
