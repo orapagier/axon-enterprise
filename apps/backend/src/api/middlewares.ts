@@ -83,6 +83,11 @@ export default defineMiddlewares({
       middlewares: [authenticate("user", ["session", "bearer"])],
     },
     {
+      matcher: "/admin/producer-orders*",
+      method: ["GET", "POST"],
+      middlewares: [authenticate("user", ["session", "bearer"])],
+    },
+    {
       matcher: "/admin/dispatch-orders/*/refusal",
       method: ["POST"],
       middlewares: [authenticate("user", ["session", "bearer"])],
