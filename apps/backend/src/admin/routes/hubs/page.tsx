@@ -42,6 +42,8 @@ type Hub = {
   timezone: string
   dispatch_cutoff: string
   dispatch_time: string
+  delivery_open: string
+  delivery_close: string
   areas: HubArea[]
 }
 

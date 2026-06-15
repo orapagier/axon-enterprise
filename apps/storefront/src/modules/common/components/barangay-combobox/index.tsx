@@ -46,8 +46,11 @@ const BarangayCombobox: React.FC<Props> = ({
   label = "Barangay",
   required = false,
   invalid = false,
+  id,
   "data-testid": testId,
 }) => {
+  const baseId = id ?? testId ?? "barangay-combobox"
+  const inputId = `${baseId}-input`
   const [query, setQuery] = useState("")
   const [barangays, setBarangays] = useState<string[] | null>(null)
   const [loadError, setLoadError] = useState<string | null>(null)
