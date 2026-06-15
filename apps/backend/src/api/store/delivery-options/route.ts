@@ -10,6 +10,8 @@ import {
   isWithinDeliveryHours,
   resolveDeliveryWindow,
   buildDeliveryTiers,
+  resolveCartDeliveryEligibility,
+  type CartItemDeliveryMeta,
 } from "../../../lib/delivery-tiers"
 import { nowInTimezone } from "../../../lib/hub-time"
 
