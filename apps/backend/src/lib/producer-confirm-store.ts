@@ -50,6 +50,7 @@ const ORDER_FIELDS = [
   "display_id",
   "email",
   "metadata",
+  "items.id",
   "items.title",
   "items.quantity",
   "items.product_id",
