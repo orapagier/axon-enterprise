@@ -69,6 +69,60 @@ export async function loadOrderForConfirm(
   return (data[0] as unknown as OrderForConfirm) ?? null
 }
 
+export type ConfirmRow = {
+  order_id: string
+  display_id: number
+  email: string | null
+  created_at: string | null
+  seller_id: string
+  entry: ProducerConfirmEntry
+}
+
+/**
+ * Scan recent orders for producer-confirm entries. Filter to one seller (the
+ * producer's own list) and/or a set of statuses (e.g. the admin's escalated
+ * queue). Window defaults to 7 days — wide enough for any live entry plus
+ * recent history.
+ */
+export async function scanConfirmRows(
+  container: MedusaContainer,
+  opts: { sellerId?: string; statuses?: ProducerConfirmEntry["status"][]; windowMs?: number }
+): Promise<ConfirmRow[]> {
+  const query = container.resolve(ContainerRegistrationKeys.QUERY)
+  const windowMs = opts.windowMs ?? 7 * 24 * 60 * 60_000
+  const since = new Date(Date.now() - windowMs)
+  const { data } = await query.graph({
+    entity: "order",
+    fields: ["id", "display_id", "email", "metadata", "created_at"],
+    filters: { created_at: { $gte: since } },
+    pagination: { take: 1000, order: { created_at: "DESC" } },
+  })
+  const rows: ConfirmRow[] = []
+  for (const o of data as unknown as Array<{
+    id: string
+    display_id: number
+    email: string | null
+    metadata: Record<string, unknown> | null
+    created_at: string | null
+  }>) {
+    const map = readConfirmMap(o.metadata)
+    for (const sellerId of Object.keys(map)) {
+      if (opts.sellerId && sellerId !== opts.sellerId) continue
+      const entry = map[sellerId]
+      if (opts.statuses && !opts.statuses.includes(entry.status)) continue
+      rows.push({
+        order_id: o.id,
+        display_id: o.display_id,
+        email: o.email,
+        created_at: o.created_at,
+        seller_id: sellerId,
+        entry,
+      })
+    }
+  }
+  return rows
+}
+
 export function readConfirmMap(
   meta: Record<string, unknown> | null | undefined
 ): ProducerConfirmMap {
