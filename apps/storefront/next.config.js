@@ -56,6 +56,18 @@ const nextConfig = {
         source: "/static/:path*",
         destination: `${backendUrl}/static/:path*`,
       },
+      // Client components talk to the Medusa API through this same-origin
+      // proxy (see lib/config.ts). A hardcoded http://localhost:9000 is
+      // unreachable from a tunnelled/remote browser (a phone's "localhost" is
+      // the phone) and is blocked as mixed content on an https page; proxying
+      // same-origin avoids both without exposing the backend or widening
+      // STORE_CORS. The /api prefix is required: the locale middleware skips
+      // /api/* but would otherwise 307-redirect bare /store/* to /:country/store.
+      // Server-side SDK calls hit the backend directly and skip this rewrite.
+      {
+        source: "/api/medusa/:path*",
+        destination: `${backendUrl}/:path*`,
+      },
     ]
   },
   images: {
