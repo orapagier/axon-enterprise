@@ -191,6 +191,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     harvest_date?: string
     pickup_window_id?: string
     estimated_kg?: number
+    free_delivery?: boolean
+    special_delivery?: boolean
   }
 
   const listingTypeRaw = body.listing_type ?? "sell_to_freshhub"
