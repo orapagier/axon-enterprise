@@ -222,6 +222,6 @@ export default function Assistant() {
           </form>
         </div>
       )}
-    </>
+    </div>
   )
 }
