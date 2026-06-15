@@ -133,12 +133,19 @@ export default async function OrderCompletedTemplate({
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </LocalizedClientLink>
-            <LocalizedClientLink
-              href="/account/orders"
-              className="inline-flex h-11 w-full items-center justify-center rounded-full border border-grey-20 bg-white px-6 font-medium text-grey-90 transition-all hover:bg-grey-5 xsmall:w-auto"
-            >
-              Track your order
-            </LocalizedClientLink>
+            {customer ? (
+              <TrackOrderButton
+                orderDisplayId={order.display_id}
+                className="inline-flex h-11 w-full items-center justify-center rounded-full border border-grey-20 bg-white px-6 font-medium text-grey-90 transition-all hover:bg-grey-5 xsmall:w-auto"
+              />
+            ) : (
+              <LocalizedClientLink
+                href="/account/orders"
+                className="inline-flex h-11 w-full items-center justify-center rounded-full border border-grey-20 bg-white px-6 font-medium text-grey-90 transition-all hover:bg-grey-5 xsmall:w-auto"
+              >
+                Track your order
+              </LocalizedClientLink>
+            )}
           </div>
 
           <Help />
