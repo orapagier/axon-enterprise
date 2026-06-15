@@ -108,19 +108,21 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   // Current hub-local time, reused by the operating-hours gate and the
   // Free-tier cutoff check below.
   const now = nowInTimezone(hub.timezone)
-
-  // Operating-hours gate: nothing dispatches outside the hub's window,
-  // regardless of tier.
   const window = resolveDeliveryWindow(hub.delivery_open, hub.delivery_close)
-  if (!isWithinDeliveryHours(now, window.open, window.close)) {
-    res.status(409).json({
-      error: `Delivery is only available ${window.label}`,
-    })
-    return
-  }
+  const isOpen = isWithinDeliveryHours(now, window.open, window.close)
 
-  // Re-check Special eligibility (Hub Member gate).
+  // Free + Standard can be ordered outside operating hours — the order just
+  // rides the next available dispatch window. Only Special (the ~1h fast lane)
+  // needs the hub to be open right now, so its gate lives in its branch below.
+
+  // Re-check Special eligibility (open hours + Hub Member gate).
   if (tier === "special") {
+    if (!isOpen) {
+      res.status(409).json({
+        error: `Within-the-hour delivery is only available ${window.label}`,
+      })
+      return
+    }
     let isMember = false
     if (cart.customer_id) {
       const { data: customers } = await query.graph({
