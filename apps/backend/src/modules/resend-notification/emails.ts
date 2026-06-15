@@ -361,6 +361,19 @@ const TEMPLATES: Record<string, (d: Data) => BuiltEmail> = {
     ),
   }),
 
+  "order-items-cancelled-no-confirm": (d) => ({
+    subject: `Order #${d.display_id}: some items were removed`,
+    html: layout(
+      `An update on order #${d.display_id}`,
+      p(
+        `One seller couldn't confirm their items in time, so we removed just those items from your order. The rest is still on the way.`
+      ) +
+        p(
+          `Your total was adjusted automatically — you only pay for what's being delivered (Cash on Delivery). The removed items are usually available from other sellers if you'd like to reorder them.`
+        )
+    ),
+  }),
+
   "producer-order-cancelled": (d) => ({
     subject: `Order #${d.display_id} cancelled — confirmation missed`,
     html: layout(
