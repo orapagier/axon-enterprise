@@ -1,7 +1,7 @@
 # Graph Report - freshhub  (2026-06-15)
 
 ## Corpus Check
-- 577 files · ~498,529 words
+- 577 files · ~498,583 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `854d7882`
+- Built from commit: `8caf7c8f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -201,6 +201,7 @@
 - [[_COMMUNITY_Community 247|Community 247]]
 - [[_COMMUNITY_Community 248|Community 248]]
 - [[_COMMUNITY_Community 249|Community 249]]
+- [[_COMMUNITY_Community 250|Community 250]]
 - [[_COMMUNITY_Community 253|Community 253]]
 - [[_COMMUNITY_Community 254|Community 254]]
 - [[_COMMUNITY_Community 255|Community 255]]
@@ -213,7 +214,6 @@
 - [[_COMMUNITY_Community 262|Community 262]]
 - [[_COMMUNITY_Community 263|Community 263]]
 - [[_COMMUNITY_Community 264|Community 264]]
-- [[_COMMUNITY_Community 266|Community 266]]
 - [[_COMMUNITY_Community 267|Community 267]]
 - [[_COMMUNITY_Community 268|Community 268]]
 - [[_COMMUNITY_Community 269|Community 269]]
@@ -273,8 +273,8 @@ Cohesion: 0.11
 Nodes (21): addToCart(), applyPromotions(), deleteLineItem(), getOrSetCart(), initiatePaymentSession(), placeOrder(), setAddresses(), setShippingMethod() (+13 more)
 
 ### Community 2 - "Price & Order Utils"
-Cohesion: 0.12
-Nodes (12): CartDropdown(), CartTotals(), CartTotalsProps, FreeShippingInline(), FreeShippingPopup(), LineItemUnitPrice(), LineItemUnitPriceProps, OrderSummaryProps (+4 more)
+Cohesion: 0.13
+Nodes (10): CartDropdown(), CartTotals(), CartTotalsProps, FreeShippingInline(), FreeShippingPopup(), OrderSummaryProps, ShippingDetails(), ShippingDetailsProps (+2 more)
 
 ### Community 3 - "Backend Dependencies"
 Cohesion: 0.12
@@ -469,8 +469,8 @@ Cohesion: 0.13
 Nodes (14): 1. Create a Data Model, 2. Create a Service, 3. Export Module Definition, 4. Add Module to Medusa's Configurations, 5. Generate and Run Migrations, code:ts (import { model } from "@medusajs/framework/utils"), code:ts (import { MedusaService } from "@medusajs/framework/utils"), code:ts (import BlogModuleService from "./service") (+6 more)
 
 ### Community 135 - "Community 135"
-Cohesion: 0.06
-Nodes (44): setHubCookie(), syncCustomerHubFromCookie(), GOOGLE_ERROR_COPY, Props, ROLE_COPY, exchangeCodeForClaims(), GoogleAuthPending, GoogleIdTokenClaims (+36 more)
+Cohesion: 0.08
+Nodes (43): setHubCookie(), syncCustomerHubFromCookie(), GOOGLE_ERROR_COPY, Props, ROLE_COPY, exchangeCodeForClaims(), GoogleAuthPending, GoogleIdTokenClaims (+35 more)
 
 ### Community 136 - "Community 136"
 Cohesion: 0.15
@@ -507,6 +507,10 @@ Nodes (9): author, description, engines, node, keywords, license, name, packageM
 ### Community 146 - "Community 146"
 Cohesion: 0.4
 Nodes (4): name, namespaces, nativeEnums, tables
+
+### Community 147 - "Community 147"
+Cohesion: 0.25
+Nodes (4): InteractiveLinkProps, MembershipUpsellStrip(), Props, getMemberPrice()
 
 ### Community 148 - "Community 148"
 Cohesion: 0.29
@@ -593,8 +597,8 @@ Cohesion: 0.53
 Nodes (5): formatPhoneForDisplay(), isCountryCode(), PhoneValidation, toCountryCode(), validatePhone()
 
 ### Community 173 - "Community 173"
-Cohesion: 0.25
-Nodes (8): CartButton(), ProductActionsWrapper(), isMember(), getTraderPricing(), INACTIVE, isApprovedTrader(), TRADER_META, TraderPricing
+Cohesion: 0.24
+Nodes (9): CartButton(), ProductActionsWrapper(), PreviewPrice(), isMember(), getTraderPricing(), INACTIVE, isApprovedTrader(), TRADER_META (+1 more)
 
 ### Community 174 - "Community 174"
 Cohesion: 0.12
@@ -645,8 +649,8 @@ Cohesion: 0.17
 Nodes (7): AreaFormState, config, EMPTY_AREA_FORM, EMPTY_HUB_FORM, Hub, HubArea, HubFormState
 
 ### Community 190 - "Community 190"
-Cohesion: 0.4
-Nodes (3): useIntersection(), ProductActions(), ProductActionsProps
+Cohesion: 0.17
+Nodes (9): useIntersection(), Item(), ItemProps, LineItemUnitPrice(), LineItemUnitPriceProps, ProductActions(), ProductActionsProps, getUnitLabel() (+1 more)
 
 ### Community 191 - "Community 191"
 Cohesion: 0.18
@@ -820,10 +824,6 @@ Nodes (7): 8. API Endpoints Reference, Admin API, code:block16 (GET    /store/hu
 Cohesion: 0.05
 Nodes (37): GET(), POST(), isDuplicateCodTransaction(), CodLedgerModuleService, POST(), CodTx, POST(), GET() (+29 more)
 
-### Community 266 - "Community 266"
-Cohesion: 0.26
-Nodes (9): Item(), ItemProps, MembershipUpsellStrip(), Props, PreviewPrice(), ProductPrice(), getMemberPrice(), getTraderPrice() (+1 more)
-
 ### Community 267 - "Community 267"
 Cohesion: 0.21
 Nodes (13): 6. API surface (as built), Admin, code:block15 (GET    /store/hubs                                  list act), code:block16 (GET/POST/PATCH /admin/hubs, /admin/hubs/:id), code:block17 (GET    /rider-app                            302 → <storefro), code:block18 (GET    /store/riders/session                 customer sessio), code:block19 (POST   /rider/auth/login                     phone + PIN → 3), Rider app (DEPRECATED 2026-06-11 — riders use the storefront /account/rider) (+5 more)
@@ -845,8 +845,8 @@ Cohesion: 0.05
 Nodes (28): dmSerif, inter, metadata, playfair, viewport, listFilterCategories(), getHubProductIds(), AccordionItemProps (+20 more)
 
 ### Community 282 - "Community 282"
-Cohesion: 0.15
-Nodes (10): ProductPreview(), Props, ProductQuickAdd(), QuickAddProps, FeaturedProduct, StoreFreeShippingPrice, VariantPrice, getProductPrice() (+2 more)
+Cohesion: 0.16
+Nodes (11): ProductPreview(), Props, ProductPrice(), ProductQuickAdd(), QuickAddProps, FeaturedProduct, StoreFreeShippingPrice, VariantPrice (+3 more)
 
 ### Community 287 - "Community 287"
 Cohesion: 0.05
@@ -874,7 +874,7 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `GET()` connect `Community 135` to `Community 168`, `Community 162`, `Auth Login/Register`, `Community 223`?**
   _High betweenness centrality (0.110) - this node is a cross-community bridge._
-- **Why does `retrieveCustomer()` connect `Community 162` to `Account & Checkout Pages`, `Community 223`, `Community 130`, `Community 135`, `Community 233`, `Community 266`, `Community 137`, `Community 173`, `Account Profile Forms`, `Order Transfer Flow`, `Community 183`, `Community 280`, `Community 287`?**
+- **Why does `retrieveCustomer()` connect `Community 162` to `Account & Checkout Pages`, `Community 223`, `Community 130`, `Community 135`, `Community 233`, `Community 137`, `Community 173`, `Account Profile Forms`, `Order Transfer Flow`, `Community 183`, `Community 280`, `Community 287`?**
   _High betweenness centrality (0.103) - this node is a cross-community bridge._
 - **Why does `getAuthHeaders()` connect `Account Profile Forms` to `Account & Checkout Pages`, `Community 162`, `Community 130`, `Community 36`, `Community 135`, `Community 199`, `Community 137`, `Community 233`, `Community 204`, `Community 269`, `Micro Community 50`, `Order Confirmation Flow`, `Order Transfer Flow`, `Community 151`, `Community 223`?**
   _High betweenness centrality (0.049) - this node is a cross-community bridge._
@@ -885,4 +885,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `Account & Checkout Pages` be split into smaller, more focused modules?**
   _Cohesion score 0.11 - nodes in this community are weakly interconnected._
 - **Should `Price & Order Utils` be split into smaller, more focused modules?**
-  _Cohesion score 0.12 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.13 - nodes in this community are weakly interconnected._
