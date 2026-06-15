@@ -88,6 +88,9 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
         method: "POST",
         body: { cart_id: cart.id, tier },
       })
+      // The chosen fee now lives in cart.metadata; re-render the server
+      // components (CheckoutSummary) so the order total reflects it right away.
+      router.refresh()
     } catch (e) {
       setSelectedTier(prev)
       setSelectError((e as Error).message)
