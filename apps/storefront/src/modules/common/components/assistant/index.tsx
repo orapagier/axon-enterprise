@@ -31,6 +31,7 @@ export default function Assistant() {
   const [error, setError] = useState<string | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
+  const rootRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     scrollRef.current?.scrollTo({
@@ -41,6 +42,19 @@ export default function Assistant() {
 
   useEffect(() => {
     if (open) inputRef.current?.focus()
+  }, [open])
+
+  // Close when clicking outside the launcher/panel (the launcher itself is
+  // inside rootRef, so its own toggle still works).
+  useEffect(() => {
+    if (!open) return
+    function onPointerDown(e: MouseEvent) {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", onPointerDown)
+    return () => document.removeEventListener("mousedown", onPointerDown)
   }, [open])
 
   async function send(text: string) {
