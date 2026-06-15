@@ -182,8 +182,14 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     }
   }
 
-  // Re-check Free eligibility (before cutoff).
+  // Re-check Free eligibility (item opt-in + before cutoff).
   if (tier === "free") {
+    if (!eligibility.freeAllowed) {
+      res.status(409).json({
+        error: "Free delivery isn't offered on one or more items in your cart",
+      })
+      return
+    }
     if (!beforeCutoff(now, parseHHMM(hub.dispatch_cutoff))) {
       res.status(409).json({
         error: `Free delivery requires order before ${hub.dispatch_cutoff} ${hub.timezone}`,
