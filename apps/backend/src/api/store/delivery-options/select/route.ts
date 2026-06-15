@@ -119,8 +119,41 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   // rides the next available dispatch window. Only Special (the ~1h fast lane)
   // needs the hub to be open right now, so its gate lives in its branch below.
 
-  // Re-check Special eligibility (open hours + Hub Member gate).
+  // Who-sells-what gating, re-validated server-side (never trust the client):
+  // Free/Special are only offered when every item permits them.
+  let eligibility = {
+    freeAllowed: true,
+    specialAllowed: true,
+    hasProducerItems: false,
+  }
+  if (tier === "free" || tier === "special") {
+    const itemProductIds = [
+      ...new Set(
+        (cart.items ?? []).map((i) => i.product_id).filter(Boolean) as string[]
+      ),
+    ]
+    if (itemProductIds.length) {
+      const { data: products } = await query.graph({
+        entity: "product",
+        fields: ["id", "metadata"],
+        filters: { id: itemProductIds },
+      })
+      const metas = (
+        products as { metadata?: CartItemDeliveryMeta | null }[]
+      ).map((p) => (p.metadata ?? {}) as CartItemDeliveryMeta)
+      eligibility = resolveCartDeliveryEligibility(metas)
+    }
+  }
+
+  // Re-check Special eligibility (item opt-in + open hours + Hub Member gate).
   if (tier === "special") {
+    if (!eligibility.specialAllowed) {
+      res.status(409).json({
+        error:
+          "Within-the-hour delivery isn't offered on one or more items in your cart",
+      })
+      return
+    }
     if (!isOpen) {
       res.status(409).json({
         error: `Within-the-hour delivery is only available ${window.label}`,
