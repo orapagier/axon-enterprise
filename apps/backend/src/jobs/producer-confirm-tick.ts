@@ -141,13 +141,13 @@ async function producerConfirmTick(container: MedusaContainer) {
         }
         const full = await loadOrderForConfirm(container, o.id)
         if (full) {
-          await cancelMedusaOrderForProducer(
+          const r = await cancelMedusaOrderForProducer(
             container,
             full,
             sellerId,
             "producer no-confirm + admin window lapsed"
           )
-          await notifyResolution(container, full, sellerId, "cancelled")
+          await notifyResolution(container, full, sellerId, "cancelled", r.mode)
         }
         cancelled++
         continue
