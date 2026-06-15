@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MFH — Unit Economics Calculator</title>
+<style>
+  :root{
+    --bg:#0f1411; --panel:#161d18; --ink:#e8efe9; --muted:#8ea197;
+    --line:#26312b; --accent:#5ec98a; --warn:#e0a23c; --bad:#e8675a; --good:#5ec98a;
+    --chip:#1e2823;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:15px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;background:var(--bg);color:var(--ink)}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 80px}
+  h1{font-size:22px;margin:0 0 2px;letter-spacing:.2px}
+  .sub{color:var(--muted);margin:0 0 22px;font-size:13.5px}
+  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 8px}
+  .panel h2{font-size:13px;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin:0 0 14px;font-weight:600}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 13px}
+  .row label{flex:1;font-size:14px}
+  .row .hint{display:block;color:var(--muted);font-size:11.5px;margin-top:1px}
+  .row .ctl{display:flex;align-items:center;gap:6px}
+  input[type=number]{width:96px;background:#0c100e;border:1px solid var(--line);color:var(--ink);
+    border-radius:8px;padding:7px 9px;text-align:right;font-size:14px;font-variant-numeric:tabular-nums}
+  input[type=number]:focus{outline:none;border-color:var(--accent)}
+  .unit{color:var(--muted);font-size:12.5px;width:26px}
+  .scenario{display:flex;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+  .scenario button{background:var(--chip);border:1px solid var(--line);color:var(--ink);
+    padding:7px 12px;border-radius:20px;font-size:12.5px;cursor:pointer}
+  .scenario button:hover{border-color:var(--accent)}
+  .out-hero{background:linear-gradient(180deg,#18211b,#131a16);border:1px solid var(--line);
+    border-radius:12px;padding:16px;margin-bottom:14px;text-align:center}
+  .out-hero .big{font-size:34px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.5px}
+  .out-hero .cap{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+  .verdict{font-size:13px;margin-top:6px;font-weight:600}
+  .ledger{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+  .ledger td{padding:7px 4px;border-bottom:1px solid var(--line)}
+  .ledger td:last-child{text-align:right}
+  .ledger tr.minus td:last-child{color:var(--bad)}
+  .ledger tr.plus td:last-child{color:var(--good)}
+  .ledger tr.tot td{border-top:2px solid var(--line);border-bottom:none;font-weight:700;padding-top:10px}
+  .pos{color:var(--good)} .neg{color:var(--bad)} .warnc{color:var(--warn)}
+  .be{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:20px}
+  .be h2{font-size:13px;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin:0 0 12px;font-weight:600}
+  .be .line{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .be .line b{font-variant-numeric:tabular-nums}
+  .note{color:var(--muted);font-size:12px;margin-top:14px;line-height:1.5}
+  .foot{color:var(--muted);font-size:12px;margin-top:26px;text-align:center}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Mindanao Fresh Hub — Unit Economics Calculator</h1>
+  <p class="sub">Per-order contribution + monthly break-even. Adjust the inputs; everything recomputes live. Replace the
+  presets with <b>measured pilot data</b> as soon as you have it. Companion to <a href="./FEASIBILITY_STUDY.md">FEASIBILITY_STUDY.md</a>.</p>
+
+  <div class="scenario">
+    <span style="color:var(--muted);font-size:12.5px;align-self:center">Load preset:</span>
+    <button data-s="pess">Pessimistic</button>
+    <button data-s="base">Base case</button>
+    <button data-s="opt">Optimistic</button>
+  </div>
+
+  <div class="grid">
+    <!-- INPUTS -->
+    <div class="panel">
+      <h2>Per-order inputs</h2>
+      <div class="row"><label>Average basket value<span class="hint">customer pays for produce</span></label>
+        <div class="ctl"><input type="number" id="basket" step="10"><span class="unit">₱</span></div></div>
+      <div class="row"><label>Gross margin on produce<span class="hint">your markup as % of basket (sell-to-hub resale)</span></label>
+        <div class="ctl"><input type="number" id="margin" step="1"><span class="unit">%</span></div></div>
+      <div class="row"><label>Delivery cost per order<span class="hint">fuel + rider share, amortized over a batch</span></label>
+        <div class="ctl"><input type="number" id="delivcost" step="5"><span class="unit">₱</span></div></div>
+      <div class="row"><label>Delivery fee charged<span class="hint">avg collected from buyer (0 if free tier)</span></label>
+        <div class="ctl"><input type="number" id="delivfee" step="5"><span class="unit">₱</span></div></div>
+      <div class="row"><label>Orders on FREE delivery<span class="hint">% of orders where you eat the full delivery cost</span></label>
+        <div class="ctl"><input type="number" id="freepct" step="5"><span class="unit">%</span></div></div>
+      <div class="row"><label>Spoilage / shrink<span class="hint">% of cost-of-goods lost to perishability</span></label>
+        <div class="ctl"><input type="number" id="spoil" step="1"><span class="unit">%</span></div></div>
+      <div class="row"><label>COD refusal / RTO rate<span class="hint">% of orders refused — perishables can't restock</span></label>
+        <div class="ctl"><input type="number" id="rto" step="1"><span class="unit">%</span></div></div>
+      <div class="row"><label>Payment processing<span class="hint">0% for COD/OTC cash; raise if online added</span></label>
+        <div class="ctl"><input type="number" id="payfee" step="0.5"><span class="unit">%</span></div></div>
+
+      <h2 style="margin-top:18px">Monthly fixed costs &amp; volume</h2>
+      <div class="row"><label>Hub rent</label>
+        <div class="ctl"><input type="number" id="rent" step="500"><span class="unit">₱</span></div></div>
+      <div class="row"><label>Staff / ops wages<span class="hint">hub manager, packers (excl. rider per-order)</span></label>
+        <div class="ctl"><input type="number" id="wages" step="500"><span class="unit">₱</span></div></div>
+      <div class="row"><label>Utilities, cold storage, misc</label>
+        <div class="ctl"><input type="number" id="overhead" step="500"><span class="unit">₱</span></div></div>
+      <div class="row"><label>Delivered orders / week</label>
+        <div class="ctl"><input type="number" id="weekly" step="10"><span class="unit"></span></div></div>
+      <div class="row"><label>Other monthly revenue<span class="hint">seller/trader fees + walk-in counter margin</span></label>
+        <div class="ctl"><input type="number" id="otherrev" step="500"><span class="unit">₱</span></div></div>
+    </div>
+
+    <!-- OUTPUTS -->
+    <div>
+      <div class="out-hero">
+        <div class="cap">Contribution per delivered order</div>
+        <div class="big" id="cpoBig">—</div>
+        <div class="verdict" id="cpoVerdict"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Per-order breakdown</h2>
+        <table class="ledger">
+          <tr class="plus"><td>Basket revenue</td><td id="lBasket"></td></tr>
+          <tr class="plus"><td>+ Delivery fee collected (blended)</td><td id="lFee"></td></tr>
+          <tr class="minus"><td>− Cost of goods</td><td id="lCogs"></td></tr>
+          <tr class="minus"><td>− Spoilage / shrink</td><td id="lSpoil"></td></tr>
+          <tr class="minus"><td>− Delivery cost</td><td id="lDeliv"></td></tr>
+          <tr class="minus"><td>− COD refusal write-off (expected)</td><td id="lRto"></td></tr>
+          <tr class="minus"><td>− Payment processing</td><td id="lPay"></td></tr>
+          <tr class="tot"><td>= Contribution / order</td><td id="lCpo"></td></tr>
+        </table>
+        <p class="note" id="marginNote"></p>
+      </div>
+
+      <div class="be">
+        <h2>Monthly view &amp; break-even</h2>
+        <div class="line"><span>Delivered orders / month</span><b id="mOrders"></b></div>
+        <div class="line"><span>Contribution from delivery</span><b id="mContrib"></b></div>
+        <div class="line"><span>+ Other revenue (fees + counter)</span><b id="mOther"></b></div>
+        <div class="line"><span>− Fixed costs</span><b id="mFixed"></b></div>
+        <div class="line" style="border-bottom:none;margin-top:4px"><span style="font-weight:700">Net monthly profit</span><b id="mNet" style="font-size:17px"></b></div>
+        <div style="margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)">
+          <div class="line" style="border:none"><span>Break-even orders / month (delivery alone covers fixed)</span><b id="beOrders"></b></div>
+          <div class="line" style="border:none"><span>≈ Break-even orders / week</span><b id="beWeek"></b></div>
+          <div class="line" style="border:none"><span>Break-even orders / month (after other revenue)</span><b id="beOrdersNet"></b></div>
+        </div>
+        <p class="note" id="beNote"></p>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot">All figures illustrative until replaced with measured data. Cash rail assumed COD/OTC (0% processing).
+  Built for the MFH 90-day pilot.</p>
+</div>
+
+<script>
+const PRESETS = {
+  pess: {basket:350, margin:18, delivcost:80, delivfee:20, freepct:60, spoil:12, rto:12, payfee:0,
+         rent:15000, wages:18000, overhead:8000, weekly:40, otherrev:15000},
+  base: {basket:500, margin:25, delivcost:60, delivfee:35, freepct:45, spoil:8, rto:7, payfee:0,
+         rent:15000, wages:18000, overhead:8000, weekly:90, otherrev:30000},
+  opt:  {basket:700, margin:30, delivcost:45, delivfee:45, freepct:30, spoil:5, rto:4, payfee:0,
+         rent:15000, wages:18000, overhead:8000, weekly:150, otherrev:55000},
+};
+const IDS = Object.keys(PRESETS.base);
+const $ = id => document.getElementById(id);
+const peso = n => '₱' + Math.round(n).toLocaleString('en-PH');
+const peso1 = n => '₱' + (Math.round(n*10)/10).toLocaleString('en-PH',{minimumFractionDigits:0});
+
+function load(name){ const p = PRESETS[name]; IDS.forEach(k => $(k).value = p[k]); calc(); }
+function num(id){ const v = parseFloat($(id).value); return isNaN(v)?0:v; }
+
+function calc(){
+  const basket=num('basket'), margin=num('margin')/100, delivcost=num('delivcost'),
+        delivfee=num('delivfee'), freepct=num('freepct')/100, spoil=num('spoil')/100,
+        rto=num('rto')/100, payfee=num('payfee')/100;
+
+  const cogs = basket*(1-margin);              // cost of goods
+  const spoilCost = cogs*spoil;                // shrink on the goods you handle
+  const blendedFee = delivfee*(1-freepct);     // free orders collect ₱0
+  const payCost = (basket+blendedFee)*payfee;  // 0 for cash
+  // Expected refusal write-off: refused perishable order loses the goods (cogs) + the delivery cost,
+  // collects nothing. Modeled as expected value across all orders.
+  const rtoCost = rto*(cogs+delivcost);
+
+  const rev = basket + blendedFee;
+  const cpo = rev - cogs - spoilCost - delivcost - rtoCost - payCost;
+
+  $('lBasket').textContent = peso(basket);
+  $('lFee').textContent = peso(blendedFee);
+  $('lCogs').textContent = '−'+peso(cogs);
+  $('lSpoil').textContent = '−'+peso(spoilCost);
+  $('lDeliv').textContent = '−'+peso(delivcost);
+  $('lRto').textContent = '−'+peso(rtoCost);
+  $('lPay').textContent = '−'+peso(payCost);
+  $('lCpo').textContent = peso(cpo);
+
+  const big=$('cpoBig'), verd=$('cpoVerdict');
+  big.textContent = peso(cpo);
+  big.className = 'big ' + (cpo>0?'pos':'neg');
+  const mpct = basket? (cpo/basket*100):0;
+  if(cpo<=0){ verd.textContent='⚠ Every delivered order LOSES money'; verd.className='verdict neg'; }
+  else if(mpct<8){ verd.textContent='⚠ Razor-thin ('+mpct.toFixed(0)+'% of basket) — fragile'; verd.className='verdict warnc'; }
+  else { verd.textContent='✓ Healthy ('+mpct.toFixed(0)+'% of basket)'; verd.className='verdict pos'; }
+
+  $('marginNote').textContent = 'Contribution is '+mpct.toFixed(1)+'% of basket. '+
+    (freepct>0?('Free-delivery orders ('+(freepct*100).toFixed(0)+'%) drag this down by ~'+peso(delivcost*freepct)+'/order — a minimum-basket rule on free delivery is the single biggest lever here. '):'')+
+    'Refusals cost you the goods AND the trip, so the RTO line scales fast on perishables.';
+
+  // Monthly
+  const orders = num('weekly')*52/12;
+  const contrib = cpo*orders;
+  const other = num('otherrev');
+  const fixed = num('rent')+num('wages')+num('overhead');
+  const net = contrib + other - fixed;
+
+  $('mOrders').textContent = Math.round(orders).toLocaleString('en-PH');
+  $('mContrib').textContent = peso(contrib);
+  $('mOther').textContent = peso(other);
+  $('mFixed').textContent = '−'+peso(fixed);
+  const mNet=$('mNet'); mNet.textContent=peso(net); mNet.className = net>=0?'pos':'neg';
+
+  const beO = cpo>0 ? fixed/cpo : Infinity;
+  const beNet = cpo>0 ? Math.max(0,(fixed-other)/cpo) : Infinity;
+  $('beOrders').textContent = isFinite(beO)?Math.ceil(beO).toLocaleString('en-PH'):'∞ (loss/order)';
+  $('beWeek').textContent = isFinite(beO)?Math.ceil(beO*12/52).toLocaleString('en-PH'):'∞';
+  $('beOrdersNet').textContent = isFinite(beNet)?Math.ceil(beNet).toLocaleString('en-PH'):'∞ (loss/order)';
+
+  $('beNote').textContent = cpo<=0
+    ? 'With a negative per-order contribution, no delivery volume reaches break-even — fix the per-order economics (basket size, margin, free-tier, or delivery cost) first.'
+    : ('Other revenue — seller/trader fees + walk-in counter margin — covers '+
+       (fixed?Math.min(100,Math.round(other/fixed*100)):0)+'% of fixed costs before a single delivery. '+
+       'That cushion is why the physical hub, not the delivery app, is your survival engine.');
+}
+
+document.querySelectorAll('.scenario button').forEach(b=>b.addEventListener('click',()=>load(b.dataset.s)));
+IDS.forEach(k=>$(k).addEventListener('input',calc));
+load('base');
+</script>
+</body>
+</html>
