@@ -104,6 +104,7 @@ const BarangayCombobox: React.FC<Props> = ({
       >
         <div className="relative z-30 w-full txt-compact-medium">
           <ComboboxInput
+            id={inputId}
             className={clx(
               "block w-full h-11 pt-4 pb-1 px-4 pr-10 bg-ui-bg-field border rounded-md txt-compact-medium",
               "focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active",
