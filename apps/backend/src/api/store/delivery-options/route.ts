@@ -132,7 +132,32 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   const cutoffLabel = hub.dispatch_cutoff
   const dispatchLabel = hub.dispatch_time
 
-  // 6. Build the 3 tier options.
+  // 6. Who-sells-what gating: a tier is offered only if every line item
+  //    permits it. Hub-sold items always allow Free + Special; producer-direct
+  //    items only when the producer opted that listing in.
+  const itemProductIds = [
+    ...new Set(
+      (cart.items ?? []).map((i) => i.product_id).filter(Boolean) as string[]
+    ),
+  ]
+  let cartEligibility = {
+    freeAllowed: true,
+    specialAllowed: true,
+    hasProducerItems: false,
+  }
+  if (itemProductIds.length) {
+    const { data: products } = await query.graph({
+      entity: "product",
+      fields: ["id", "metadata"],
+      filters: { id: itemProductIds },
+    })
+    const metas = (
+      products as { metadata?: CartItemDeliveryMeta | null }[]
+    ).map((p) => (p.metadata ?? {}) as CartItemDeliveryMeta)
+    cartEligibility = resolveCartDeliveryEligibility(metas)
+  }
+
+  // 7. Build the 3 tier options.
   const options = buildDeliveryTiers({
     standardFeePhp: fee.standard_fee_php,
     specialFeePhp: fee.special_fee_php,
@@ -142,6 +167,9 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     hoursLabel: window.label,
     dispatchLabel,
     cutoffLabel,
+    freeAllowed: cartEligibility.freeAllowed,
+    specialAllowed: cartEligibility.specialAllowed,
+    hasProducerItems: cartEligibility.hasProducerItems,
   })
 
   res.json({
