@@ -126,6 +126,10 @@ function parseListing(
   const quantityRaw = get("quantity")
   const quantity = Number(quantityRaw)
   const minQuantity = opts.minQuantity ?? 1
+  // Delivery opt-ins (direct listings only). Checkboxes submit "on" when
+  // ticked and are absent otherwise, so a missing value reads as false.
+  const freeDelivery = formData.get("free_delivery") === "on"
+  const specialDelivery = formData.get("special_delivery") === "on"
 
   if (!title || title.length < 2) {
     fieldErrors.title = "Title must be at least 2 characters."
