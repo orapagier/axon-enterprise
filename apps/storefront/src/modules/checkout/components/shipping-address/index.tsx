@@ -128,6 +128,12 @@ const ShippingAddress = ({
     Object.keys(runAllValidations()).length === 0 &&
     formData["shipping_address.country_code"].trim().length > 0
 
+  // Let the parent (Addresses) disable "Continue to delivery" until every
+  // required field is filled in.
+  useEffect(() => {
+    onValidityChange?.(isValid)
+  }, [isValid, onValidityChange])
+
   // ── handlers ─────────────────────────────────────────────────────
 
   const setFormAddress = (
