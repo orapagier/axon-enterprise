@@ -65,7 +65,10 @@ export default async function notifySellerOrderHandler({
           id: string
           display_id: number
           email: string | null
-          metadata: { sale_channel?: string } | null
+          metadata: {
+            sale_channel?: string
+            delivery_tier?: string
+          } | null
           items?: RoutableItem[] | null
           shipping_address: {
             first_name: string | null
