@@ -18,6 +18,8 @@ type TierOption = {
   eta_label: string
   available: boolean
   reason_if_unavailable: string | null
+  /** Consumer disclaimer shown even when the tier is available. */
+  note?: string | null
 }
 
 type DeliveryOptionsResponse = {
