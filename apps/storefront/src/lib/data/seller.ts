@@ -186,6 +186,10 @@ function parseListing(
       harvest_date: (isSellToHub && harvestDate) || undefined,
       pickup_window_id: (isSellToHub && pickupWindowId) || undefined,
       estimated_kg: isSellToHub && estimatedKgRaw ? estimatedKg : undefined,
+      // Always send the booleans for direct listings so unticking turns the
+      // perk off on edit; omit entirely for hub listings.
+      free_delivery: !isSellToHub ? freeDelivery : undefined,
+      special_delivery: !isSellToHub ? specialDelivery : undefined,
     },
     fieldErrors,
   }
