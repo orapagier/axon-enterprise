@@ -403,12 +403,17 @@ export async function cancelMedusaOrderForProducer(
   }
 }
 
-/** Tell the buyer + producer how a producer-confirm failure was resolved. */
+/**
+ * Tell the buyer + producer how a producer-confirm failure was resolved.
+ * `cancelMode` distinguishes a whole-order cancel from a per-item removal so the
+ * buyer email is accurate ("order cancelled" vs "some items removed").
+ */
 export async function notifyResolution(
   container: MedusaContainer,
   order: OrderForConfirm,
   sellerId: string,
-  outcome: "cancelled" | "hub_taken"
+  outcome: "cancelled" | "hub_taken",
+  cancelMode: "order" | "items" | "none" = "order"
 ): Promise<void> {
   if (outcome === "hub_taken") {
     await sendEmail(container, {
@@ -418,12 +423,22 @@ export async function notifyResolution(
     })
     return
   }
-  // cancelled
-  await sendEmail(container, {
-    to: order.email,
-    template: "order-cancelled-no-confirm",
-    data: { display_id: order.display_id },
-  })
+  // cancelled — buyer email depends on whether the whole order or just some
+  // lines went away. If removal failed (none), the admin handles it manually,
+  // so don't send the buyer a misleading "cancelled" notice.
+  if (cancelMode === "items") {
+    await sendEmail(container, {
+      to: order.email,
+      template: "order-items-cancelled-no-confirm",
+      data: { display_id: order.display_id },
+    })
+  } else if (cancelMode === "order") {
+    await sendEmail(container, {
+      to: order.email,
+      template: "order-cancelled-no-confirm",
+      data: { display_id: order.display_id },
+    })
+  }
 
   // Producer: inform + strike notice (they can dispute).
   const customerModule = container.resolve(Modules.CUSTOMER)
