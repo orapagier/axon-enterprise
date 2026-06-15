@@ -7,11 +7,16 @@ import { ROLE_ICONS, ROLE_LABELS, rolesOf } from "@lib/util/roles"
 
 interface AccountLayoutProps {
   customer: HttpTypes.StoreCustomer | null
+  // True when the customer has a stacked role (Producer/Trader/Rider) that the
+  // team hasn't approved yet. Computed in the page layout because the rider's
+  // status lives on the rider record, not customer metadata.
+  awaitingVerification?: boolean
   children: React.ReactNode
 }
 
 const AccountLayout: React.FC<AccountLayoutProps> = ({
   customer,
+  awaitingVerification = false,
   children,
 }) => {
   // When unauthenticated, render the login template full-bleed (it owns its own chrome).
