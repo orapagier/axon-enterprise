@@ -314,6 +314,95 @@ export async function updateListing(
 // server action — server actions reject large multipart bodies and surface a
 // bare "Failed to fetch" in the browser.
 
+// ---------------------------------------------------------------------------
+// Producer incoming orders — confirmation lifecycle
+// ---------------------------------------------------------------------------
+
+export type SellerOrder = {
+  order_id: string
+  display_id: number
+  created_at: string | null
+  status: "awaiting" | "confirmed" | "declined" | "escalated" | "hub_taken" | "cancelled"
+  tier: "free" | "standard" | "special"
+  deadline_at: number
+  admin_deadline_at: number | null
+  late: boolean
+  strike_recorded: boolean
+  items: string
+  buyer_name: string | null
+  buyer_phone: string | null
+}
+
+export async function listSellerOrders(): Promise<{
+  ok: boolean
+  orders: SellerOrder[]
+  error?: string
+}> {
+  const res = await fetch(`${BACKEND_URL}/store/seller/orders`, {
+    method: "GET",
+    headers: await baseHeaders(),
+    cache: "no-store",
+  })
+  if (!res.ok) {
+    const body = (await res.json().catch(() => ({}))) as { error?: string }
+    return { ok: false, orders: [], error: body.error }
+  }
+  const data = (await res.json()) as { orders: SellerOrder[] }
+  return { ok: true, orders: data.orders ?? [] }
+}
+
+async function postSellerOrderAction(
+  orderId: string,
+  action: "confirm" | "decline",
+): Promise<{ ok: boolean; error?: string; late?: boolean; strike?: boolean }> {
+  const res = await fetch(
+    `${BACKEND_URL}/store/seller/orders/${orderId}/${action}`,
+    {
+      method: "POST",
+      headers: await baseHeaders(),
+      body: JSON.stringify({}),
+      cache: "no-store",
+    },
+  )
+  const body = (await res.json().catch(() => ({}))) as {
+    error?: string
+    late?: boolean
+    strike?: boolean
+  }
+  if (!res.ok) {
+    return { ok: false, error: body.error ?? "Action failed." }
+  }
+  return { ok: true, late: body.late, strike: body.strike }
+}
+
+export async function confirmSellerOrder(orderId: string) {
+  return postSellerOrderAction(orderId, "confirm")
+}
+
+export async function declineSellerOrder(orderId: string) {
+  return postSellerOrderAction(orderId, "decline")
+}
+
+export async function disputeSellerStrike(
+  orderId: string,
+  note: string,
+): Promise<{ ok: boolean; error?: string }> {
+  const res = await fetch(
+    `${BACKEND_URL}/store/seller/orders/${orderId}/dispute-strike`,
+    {
+      method: "POST",
+      headers: await baseHeaders(),
+      body: JSON.stringify({ note }),
+      cache: "no-store",
+    },
+  )
+  if (!res.ok) {
+    const body = (await res.json().catch(() => ({}))) as { error?: string }
+    return { ok: false, error: body.error ?? "Couldn't file the dispute." }
+  }
+  return { ok: true }
+}
+
 export async function deleteListing(id: string, countryCode: string) {
   const res = await fetch(`${BACKEND_URL}/store/seller/products/${id}`, {
     method: "DELETE",
