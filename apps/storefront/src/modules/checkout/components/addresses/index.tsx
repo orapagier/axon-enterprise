@@ -73,6 +73,7 @@ const Addresses = ({
               checked={sameAsBilling}
               onChange={toggleSameAsBilling}
               cart={cart}
+              onValidityChange={setShippingValid}
             />
 
             {!sameAsBilling && (
