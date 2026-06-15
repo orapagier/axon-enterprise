@@ -219,18 +219,32 @@ describe("buildDeliveryTiers", () => {
     expect(tiers.map((t) => t.tier)).toEqual(["free", "standard", "special"])
   })
 
-  it("closes every tier outside operating hours, using the hub's hours label", () => {
-    const tiers = buildDeliveryTiers({
+  it("outside operating hours, Standard stays orderable for the next window", () => {
+    const [free, standard, special] = buildDeliveryTiers({
       ...base,
       isMember: true,
       isBeforeCutoff: true,
       isOpen: false,
       hoursLabel: "8:00 AM–8:00 PM",
     })
-    expect(tiers.map((t) => t.tier)).toEqual(["free", "standard", "special"])
-    for (const t of tiers) {
-      expect(t.available).toBe(false)
-      expect(t.reason_if_unavailable).toContain("8:00 AM–8:00 PM")
-    }
+    // Standard always lets the buyer through; ETA points at the next window.
+    expect(standard.available).toBe(true)
+    expect(standard.eta_label).toContain("8:00 AM–8:00 PM")
+    // Free still follows the cutoff rule, not the open/closed gate.
+    expect(free.available).toBe(true)
+    // Special (the ~1h lane) is the only tier closed outside hours, even for
+    // a member.
+    expect(special.available).toBe(false)
+    expect(special.reason_if_unavailable).toContain("8:00 AM–8:00 PM")
+  })
+
+  it("special is closed outside hours even for a member", () => {
+    const special = buildDeliveryTiers({
+      ...base,
+      isMember: true,
+      isBeforeCutoff: true,
+      isOpen: false,
+    })[2]
+    expect(special.available).toBe(false)
   })
 })
