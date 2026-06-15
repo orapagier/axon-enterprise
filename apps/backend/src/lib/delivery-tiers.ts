@@ -117,57 +117,55 @@ export type BuildTiersArgs = {
 /**
  * The 3 tiers, always all present, with availability + reason resolved:
  *   - Free:     before the dispatch cutoff only (₱0).
- *   - Standard: always available, today anytime.
- *   - Special:  Hub Members only, ~1h.
+ *   - Standard: always available; delivered next available window when closed.
+ *   - Special:  Hub Members only, ~1h — and only while the hub is open.
  *
- * Outside operating hours (`isOpen === false`) nothing can be dispatched, so
- * every tier is closed with the operating-hours reason — that gate dominates
- * the per-tier cutoff/membership rules.
+ * Outside operating hours (`isOpen === false`) we no longer blanket-close the
+ * checkout. Buyers can still order; the order simply rides the next available
+ * dispatch window. Only Special (the ~1h fast lane) stays unavailable, because
+ * within-the-hour delivery is impossible while riders aren't dispatching.
  */
 export function buildDeliveryTiers(args: BuildTiersArgs): TierOption[] {
-  const tiers: TierOption[] = [
-    {
-      tier: "free",
-      label: "Free delivery",
-      fee_php: 0,
-      eta_label: args.isBeforeCutoff
-        ? `Today ${args.dispatchLabel}`
-        : `Tomorrow ${args.dispatchLabel}`,
-      available: args.isBeforeCutoff,
-      reason_if_unavailable: args.isBeforeCutoff
-        ? null
-        : `Order before ${args.cutoffLabel} for free same-day delivery`,
-    },
-    {
-      tier: "standard",
-      label: "Standard delivery",
-      fee_php: args.standardFeePhp,
-      eta_label: "Today, anytime",
-      available: true,
-      reason_if_unavailable: null,
-    },
-    {
-      tier: "special",
-      label: "Special delivery",
-      fee_php: args.specialFeePhp,
-      eta_label: "Within 1 hour",
-      available: args.isMember,
-      reason_if_unavailable: args.isMember
-        ? null
-        : "Hub Members only — upgrade for ₱500/yr",
-    },
-  ]
-
-  if (!args.isOpen) {
-    const closedReason = `Delivery is available ${args.hoursLabel}`
-    return tiers.map((t) => ({
-      ...t,
-      available: false,
-      reason_if_unavailable: closedReason,
-    }))
+  const free: TierOption = {
+    tier: "free",
+    label: "Free delivery",
+    fee_php: 0,
+    eta_label: args.isBeforeCutoff
+      ? `Today ${args.dispatchLabel}`
+      : `Tomorrow ${args.dispatchLabel}`,
+    available: args.isBeforeCutoff,
+    reason_if_unavailable: args.isBeforeCutoff
+      ? null
+      : `Order before ${args.cutoffLabel} for free same-day delivery`,
   }
 
-  return tiers
+  const standard: TierOption = {
+    tier: "standard",
+    label: "Standard delivery",
+    fee_php: args.standardFeePhp,
+    eta_label: args.isOpen
+      ? "Today, anytime"
+      : `Next available window (${args.hoursLabel})`,
+    available: true,
+    reason_if_unavailable: null,
+  }
+
+  // Special is the ~1h fast lane: a Hub-Member perk AND only meaningful while
+  // the hub is open (no rider can deliver within the hour after close).
+  const special: TierOption = {
+    tier: "special",
+    label: "Special delivery",
+    fee_php: args.specialFeePhp,
+    eta_label: "Within 1 hour",
+    available: args.isMember && args.isOpen,
+    reason_if_unavailable: !args.isMember
+      ? "Hub Members only — upgrade for ₱500/yr"
+      : !args.isOpen
+        ? `Within-the-hour delivery runs ${args.hoursLabel}`
+        : null,
+  }
+
+  return [free, standard, special]
 }
 
 /** The fee (in pesos) for a chosen tier, given the (hub, barangay) fee row. */
