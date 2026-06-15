@@ -44,6 +44,26 @@ export default function Assistant() {
     if (open) inputRef.current?.focus()
   }, [open])
 
+  // Allow other parts of the app (e.g. the "Track your order" CTA on the
+  // order-confirmed page) to open the assistant and optionally drop a
+  // starter question into the composer.
+  useEffect(() => {
+    function onOpen(e: Event) {
+      setOpen(true)
+      const prompt = (e as CustomEvent<{ prompt?: string }>).detail?.prompt
+      if (prompt) {
+        setInput(prompt)
+        requestAnimationFrame(() => inputRef.current?.focus())
+      }
+    }
+    window.addEventListener("freshhub:open-assistant", onOpen as EventListener)
+    return () =>
+      window.removeEventListener(
+        "freshhub:open-assistant",
+        onOpen as EventListener
+      )
+  }, [])
+
   // Close when clicking outside the launcher/panel (the launcher itself is
   // inside rootRef, so its own toggle still works).
   useEffect(() => {
