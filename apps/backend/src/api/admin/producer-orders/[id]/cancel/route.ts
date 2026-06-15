@@ -50,13 +50,13 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     })
   }
   if (full) {
-    await cancelMedusaOrderForProducer(
+    const r = await cancelMedusaOrderForProducer(
       req.scope,
       full,
       sellerId,
       "admin cancelled after no producer confirmation"
     )
-    await notifyResolution(req.scope, full, sellerId, "cancelled")
+    await notifyResolution(req.scope, full, sellerId, "cancelled", r.mode)
   }
 
   res.json({ ok: true, status: next.status })
