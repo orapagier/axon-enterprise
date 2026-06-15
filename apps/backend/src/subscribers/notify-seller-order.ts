@@ -139,6 +139,15 @@ export default async function notifySellerOrderHandler({
         ])
       )
 
+      // The buyer's chosen tier drives the producer's confirm deadline
+      // (special = 10 min, standard/free = 1 hour).
+      const VALID_TIERS: DeliveryTier[] = ["free", "standard", "special"]
+      const rawTier = order.metadata?.delivery_tier
+      const tier: DeliveryTier = VALID_TIERS.includes(rawTier as DeliveryTier)
+        ? (rawTier as DeliveryTier)
+        : "standard"
+      const placedAt = Date.now()
+
       for (const { sellerId, items: theirItems } of producers) {
         const lines = theirItems.map(formatItemLine)
         await sendEmail(container, {
@@ -154,11 +163,23 @@ export default async function notifySellerOrderHandler({
         })
         await sendPush(container, {
           customerId: sellerId,
-          title: "🛒 New order for your listing",
-          body: `Order #${order.display_id}: ${lines.join(", ")}`,
-          url: "/account/seller",
+          title: "🛒 New order — confirm to fulfil",
+          body: `Order #${order.display_id}: ${lines.join(", ")}. Confirm it before the window closes.`,
+          url: "/account/producer/orders",
           tag: `seller-order-${order.id}`,
         })
+
+        // Open the confirmation clock for this producer (the email/push above
+        // are the first nudge). The 10-min tick takes it from here.
+        const entry: ProducerConfirmEntry = initConfirmEntry(tier, placedAt)
+        await persistConfirmEntry(container, order.id, sellerId, entry).catch(
+          (err) =>
+            logger.warn(
+              `notify-seller-order: failed to open confirm window for ${sellerId} on ${order.id}: ${
+                (err as Error).message
+              }`
+            )
+        )
       }
     }
 
