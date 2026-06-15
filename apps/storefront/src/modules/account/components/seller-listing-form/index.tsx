@@ -178,6 +178,8 @@ export default function SellerListingForm({ mode, existing }: Props) {
     seed.quantity =
       existing.stock_quantity != null ? String(existing.stock_quantity) : ""
     seed.harvest_date = typeof meta.harvest_date === "string" ? meta.harvest_date : ""
+    seed.free_delivery = meta.free_delivery ? "on" : ""
+    seed.special_delivery = meta.special_delivery ? "on" : ""
     // Use listing row status + type from the listing payload
     const listing = (existing as unknown as { listing?: Record<string, unknown> }).listing
     seed.listing_status = typeof listing?.status === "string" ? listing.status : "draft"
