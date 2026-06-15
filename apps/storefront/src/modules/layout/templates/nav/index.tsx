@@ -182,7 +182,7 @@ export default async function Nav() {
             {/* Shop — always-visible entry into the full catalog */}
             <LocalizedClientLink
               href="/store"
-              className="hidden small:inline-flex items-center gap-x-1.5 ml-5 text-[13px] font-semibold text-grey-70 hover:text-brand-green-700 transition-colors"
+              className="hidden small:inline-flex items-center gap-x-1.5 ml-5 text-[13px] font-bold text-brand-green-700 hover:text-brand-green-800 transition-colors"
               data-testid="nav-shop-link"
             >
               <svg
