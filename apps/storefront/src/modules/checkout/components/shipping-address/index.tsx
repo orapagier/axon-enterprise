@@ -46,11 +46,13 @@ const ShippingAddress = ({
   cart,
   checked,
   onChange,
+  onValidityChange,
 }: {
   customer: HttpTypes.StoreCustomer | null
   cart: HttpTypes.StoreCart | null
   checked: boolean
   onChange: () => void
+  onValidityChange?: (valid: boolean) => void
 }) => {
   const [formData, setFormData] = useState<Record<string, string>>({
     "shipping_address.first_name": cart?.shipping_address?.first_name || "",
