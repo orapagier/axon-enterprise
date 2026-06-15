@@ -1,5 +1,5 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
-import { applyAdminCancel } from "../../../../../lib/producer-confirm"
+import { applyCancel } from "../../../../../lib/producer-confirm"
 import {
   getSellerEntry,
   persistConfirmEntry,
