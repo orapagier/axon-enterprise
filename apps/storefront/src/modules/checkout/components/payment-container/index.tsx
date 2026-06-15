@@ -31,6 +31,13 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({
   return (
     <RadioGroupOption
       key={paymentProviderId}
+      // Explicit, deterministic id so the radio doesn't fall back to Headless
+      // UI's useId() default. Under SSR the auto id can differ between the
+      // server render and client hydration (the payment radios live in a
+      // collapsed/hidden block whose useId tree offset shifts), which triggers
+      // a "server HTML didn't match client" hydration warning. A stable id
+      // keyed on the provider removes the useId dependency entirely.
+      id={`payment-method-radio-${paymentProviderId}`}
       value={paymentProviderId}
       disabled={disabled}
       className={clx(

@@ -172,6 +172,7 @@ const Payment = ({
           {!checkoutBlocked && !paidByGiftcard && availablePaymentMethods?.length && (
             <>
               <RadioGroup
+                id="payment-method-radiogroup"
                 value={selectedPaymentMethod}
                 onChange={(value: string) => setPaymentMethod(value)}
               >
