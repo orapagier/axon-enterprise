@@ -165,6 +165,8 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     currency_code?: string
     harvest_date?: string
     status?: string
+    free_delivery?: boolean
+    special_delivery?: boolean
   }
 
   const currentStatus = (existingListing?.status ?? "draft") as ListingStatus
