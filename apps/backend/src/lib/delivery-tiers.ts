@@ -17,6 +17,8 @@ export type TierOption = {
   eta_label: string
   available: boolean
   reason_if_unavailable: string | null
+  /** Consumer-facing disclaimer shown even when the tier IS available. */
+  note?: string | null
 }
 
 export type HHMM = { hour: number; minute: number }
