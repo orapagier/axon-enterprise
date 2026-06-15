@@ -6,6 +6,7 @@ import {
   resolveDeliveryWindow,
   isMembershipActive,
   buildDeliveryTiers,
+  resolveCartDeliveryEligibility,
   feeForTier,
 } from "../delivery-tiers"
 
