@@ -338,6 +338,55 @@ const TEMPLATES: Record<string, (d: Data) => BuiltEmail> = {
     }
   },
 
+  "order-hub-fulfilling": (d) => ({
+    subject: `Order #${d.display_id}: the hub is handling it`,
+    html: layout(
+      `Good news about order #${d.display_id}`,
+      p(
+        `The producer for one or more items couldn't confirm in time, so <strong>the hub is now sourcing and fulfilling your order</strong>.`
+      ) + p(`Nothing to do on your end — we'll deliver as planned.`)
+    ),
+  }),
+
+  "order-cancelled-no-confirm": (d) => ({
+    subject: `Order #${d.display_id} cancelled`,
+    html: layout(
+      `Sorry — order #${d.display_id} was cancelled`,
+      p(
+        `The seller couldn't confirm your order in time and the hub wasn't able to source the items, so we've cancelled it.`
+      ) +
+        p(
+          `You weren't charged (Cash on Delivery). Please reorder — most items are available from other sellers.`
+        )
+    ),
+  }),
+
+  "producer-order-cancelled": (d) => ({
+    subject: `Order #${d.display_id} cancelled — confirmation missed`,
+    html: layout(
+      `Order #${d.display_id} was cancelled`,
+      p(
+        `This direct order was cancelled because it wasn't confirmed within the allowed window.`
+      ) +
+        p(
+          `A confirmation strike was recorded on your account. Repeated misses affect your selling status. If you believe this was a mistake, you can <strong>dispute the strike</strong> from your account's Orders page.`
+        )
+    ),
+  }),
+
+  "admin-producer-escalation": (d) => ({
+    subject: `⏰ Order #${d.display_id}: producer hasn't confirmed`,
+    html: layout(
+      `Order #${d.display_id} needs a decision`,
+      p(
+        `The producer didn't confirm within the window. You have about <strong>1 hour</strong> to either <strong>Take</strong> the order (fulfil from hub stock) or <strong>Cancel</strong> it.`
+      ) +
+        (d.producer_name ? p(`<strong>Producer:</strong> ${d.producer_name}`) : "") +
+        (d.items ? p(`<strong>Items:</strong> ${d.items}`) : "") +
+        p(`If no action is taken in time, the order is cancelled automatically.`)
+    ),
+  }),
+
   "referral-credit-earned": (d) => ({
     subject: `You earned ${peso(d.amount_php)} store credit!`,
     html: layout(
