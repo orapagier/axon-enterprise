@@ -414,6 +414,16 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
               unit: body.unit ?? "kg",
               category: body.category ?? null,
               asking_price: Math.round(Number(body.price)),
+              // Delivery opt-ins are producer-set on direct listings only. Hub
+              // listings are sold by the hub, which always offers free + fast
+              // delivery, so the tier logic treats hub items as eligible
+              // regardless of these flags.
+              ...(isDirect
+                ? {
+                    free_delivery: !!body.free_delivery,
+                    special_delivery: !!body.special_delivery,
+                  }
+                : {}),
               submitted_at: new Date().toISOString(),
             },
           },
