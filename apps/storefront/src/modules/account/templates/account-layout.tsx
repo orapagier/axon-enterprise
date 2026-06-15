@@ -58,7 +58,15 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
                   <span className="text-caption font-semibold text-grey-50 uppercase tracking-wider">
                     {roleLabel} account
                   </span>
-                  {profileCompleted ? (
+                  {!profileCompleted ? (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-brand-gold-50 border border-brand-gold-200 text-[10px] font-bold text-brand-gold-800 uppercase tracking-wider">
+                      Profile incomplete
+                    </span>
+                  ) : awaitingVerification ? (
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-brand-gold-50 border border-brand-gold-200 text-[10px] font-bold text-brand-gold-800 uppercase tracking-wider">
+                      Pending verification
+                    </span>
+                  ) : (
                     <span className="inline-flex items-center gap-x-1 px-2 py-0.5 rounded-full bg-brand-green-50 border border-brand-green-100 text-[10px] font-bold text-brand-green-700 uppercase tracking-wider">
                       <svg
                         width="9"
@@ -73,10 +81,6 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                       Verified
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-brand-gold-50 border border-brand-gold-200 text-[10px] font-bold text-brand-gold-800 uppercase tracking-wider">
-                      Profile incomplete
                     </span>
                   )}
                 </div>
