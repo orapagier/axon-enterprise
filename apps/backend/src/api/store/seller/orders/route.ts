@@ -1,35 +1,11 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
-import { Modules } from "@medusajs/framework/utils"
-import { hasRole } from "../../../../lib/roles"
+import { assertProducer } from "../../../../lib/seller-auth"
 import {
   scanConfirmRows,
   loadOrderForConfirm,
   producerItemLines,
   buyerName,
 } from "../../../../lib/producer-confirm-store"
-
-/** Resolve the authenticated producer, or null (response already sent). */
-async function assertProducer(req: MedusaRequest, res: MedusaResponse) {
-  const customerId = (req as unknown as { auth_context?: { actor_id?: string } })
-    .auth_context?.actor_id
-  if (!customerId) {
-    res.status(401).json({ error: "Not authenticated" })
-    return null
-  }
-  const customerModule = req.scope.resolve(Modules.CUSTOMER)
-  const customer = await customerModule
-    .retrieveCustomer(customerId, { select: ["id", "metadata"] })
-    .catch(() => null)
-  if (!customer) {
-    res.status(401).json({ error: "Customer not found" })
-    return null
-  }
-  if (!hasRole((customer.metadata ?? {}) as Record<string, unknown>, "producer")) {
-    res.status(403).json({ error: "Producer account required" })
-    return null
-  }
-  return customer
-}
 
 /**
  * GET /store/seller/orders — the producer's incoming direct orders + their
