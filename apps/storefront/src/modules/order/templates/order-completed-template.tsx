@@ -1,5 +1,6 @@
 import { cookies as nextCookies } from "next/headers"
 
+import { retrieveCustomer } from "@lib/data/customer"
 import CartTotals from "@modules/common/components/cart-totals"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import DispatchEstimate from "@modules/order/components/dispatch-estimate"
@@ -9,6 +10,7 @@ import OnboardingCta from "@modules/order/components/onboarding-cta"
 import OrderDetails from "@modules/order/components/order-details"
 import ShippingDetails from "@modules/order/components/shipping-details"
 import PaymentDetails from "@modules/order/components/payment-details"
+import TrackOrderButton from "@modules/order/components/track-order-button"
 import { HttpTypes } from "@medusajs/types"
 
 type OrderCompletedTemplateProps = {
