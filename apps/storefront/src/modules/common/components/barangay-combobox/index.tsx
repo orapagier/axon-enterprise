@@ -140,7 +140,10 @@ const BarangayCombobox: React.FC<Props> = ({
               {required && <span className="text-rose-500">*</span>}
             </label>
           )}
-          <ComboboxButton className="absolute inset-y-0 right-0 flex items-center pr-2">
+          <ComboboxButton
+            id={`${baseId}-button`}
+            className="absolute inset-y-0 right-0 flex items-center pr-2"
+          >
             <ChevronUpDown className="text-ui-fg-muted" />
           </ComboboxButton>
 

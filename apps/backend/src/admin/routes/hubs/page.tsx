@@ -135,6 +135,8 @@ const HubsPage = () => {
         timezone: editingHub.timezone,
         dispatch_cutoff: editingHub.dispatch_cutoff,
         dispatch_time: editingHub.dispatch_time,
+        delivery_open: editingHub.delivery_open,
+        delivery_close: editingHub.delivery_close,
         active: editingHub.active,
       })
     } else {
