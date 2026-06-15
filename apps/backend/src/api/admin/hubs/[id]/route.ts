@@ -28,6 +28,8 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     active?: boolean
     dispatch_cutoff?: string
     dispatch_time?: string
+    delivery_open?: string
+    delivery_close?: string
     timezone?: string
   }
 

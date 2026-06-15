@@ -1,6 +1,7 @@
 import {
   parseHHMM,
   beforeCutoff,
+  isWithinDeliveryHours,
   isMembershipActive,
   buildDeliveryTiers,
   feeForTier,
@@ -33,6 +34,27 @@ describe("beforeCutoff", () => {
     expect(beforeCutoff({ hour: 11, minute: 0 }, { hour: 11, minute: 1 })).toBe(
       true
     )
+  })
+})
+
+describe("isWithinDeliveryHours", () => {
+  it("open exactly at 6:00 (inclusive)", () => {
+    expect(isWithinDeliveryHours({ hour: 6, minute: 0 })).toBe(true)
+  })
+  it("open mid-day", () => {
+    expect(isWithinDeliveryHours({ hour: 12, minute: 30 })).toBe(true)
+  })
+  it("open at the last minute before close", () => {
+    expect(isWithinDeliveryHours({ hour: 17, minute: 59 })).toBe(true)
+  })
+  it("closed exactly at 18:00 (exclusive)", () => {
+    expect(isWithinDeliveryHours({ hour: 18, minute: 0 })).toBe(false)
+  })
+  it("closed before open", () => {
+    expect(isWithinDeliveryHours({ hour: 5, minute: 59 })).toBe(false)
+  })
+  it("closed late at night", () => {
+    expect(isWithinDeliveryHours({ hour: 22, minute: 0 })).toBe(false)
   })
 })
 
@@ -91,6 +113,7 @@ describe("buildDeliveryTiers", () => {
   const base = {
     standardFeePhp: 30,
     specialFeePhp: 80,
+    isOpen: true,
     dispatchLabel: "2:00 PM",
     cutoffLabel: "11:00",
   }
@@ -156,5 +179,19 @@ describe("buildDeliveryTiers", () => {
       isBeforeCutoff: true,
     })
     expect(tiers.map((t) => t.tier)).toEqual(["free", "standard", "special"])
+  })
+
+  it("closes every tier outside operating hours, overriding per-tier rules", () => {
+    const tiers = buildDeliveryTiers({
+      ...base,
+      isMember: true,
+      isBeforeCutoff: true,
+      isOpen: false,
+    })
+    expect(tiers.map((t) => t.tier)).toEqual(["free", "standard", "special"])
+    for (const t of tiers) {
+      expect(t.available).toBe(false)
+      expect(t.reason_if_unavailable).toContain("6:00 AM–6:00 PM")
+    }
   })
 })

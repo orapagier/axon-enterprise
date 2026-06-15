@@ -23,6 +23,13 @@ type Props = {
   required?: boolean
   /** Visual error state (e.g. invalid on blur). */
   invalid?: boolean
+  /**
+   * Stable id base for the Headless UI parts. Pinning these keeps the
+   * server/client DOM ids identical so React doesn't hit a hydration
+   * mismatch (Headless UI otherwise derives them from useId, which can
+   * drift between SSR and the client and corrupt the rendered field).
+   */
+  id?: string
   "data-testid"?: string
 }
 

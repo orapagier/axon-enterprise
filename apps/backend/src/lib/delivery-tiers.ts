@@ -38,6 +38,51 @@ export function beforeCutoff(now: HHMM, cutoff: HHMM): boolean {
 }
 
 /**
+ * Operating hours. Each hub sets its own daily window (`delivery_open` /
+ * `delivery_close`); outside it every tier is closed regardless of
+ * cutoff/membership. Open is inclusive, close is exclusive — an order placed
+ * exactly at the close time is already closed. These constants are only the
+ * fallback for a hub with no window configured.
+ */
+export const DELIVERY_OPEN: HHMM = { hour: 6, minute: 0 }
+export const DELIVERY_CLOSE: HHMM = { hour: 18, minute: 0 }
+
+/** Is `now` inside the [open, close) delivery window (hub-local)? */
+export function isWithinDeliveryHours(
+  now: HHMM,
+  open: HHMM = DELIVERY_OPEN,
+  close: HHMM = DELIVERY_CLOSE
+): boolean {
+  return !beforeCutoff(now, open) && beforeCutoff(now, close)
+}
+
+/** Format an HHMM as a 12-hour clock label, e.g. {18,0} → "6:00 PM". */
+function to12h(t: HHMM): string {
+  const period = t.hour < 12 || t.hour === 24 ? "AM" : "PM"
+  const h12 = t.hour % 12 === 0 ? 12 : t.hour % 12
+  return `${h12}:${t.minute.toString().padStart(2, "0")} ${period}`
+}
+
+/** Human label for a delivery window, e.g. "6:00 AM–6:00 PM". */
+export function formatDeliveryHours(open: HHMM, close: HHMM): string {
+  return `${to12h(open)}–${to12h(close)}`
+}
+
+/**
+ * Resolve a hub's window from its stored "HH:mm" strings, falling back to the
+ * platform default when a field is missing/blank. Returns the parsed bounds
+ * plus a ready-to-display label.
+ */
+export function resolveDeliveryWindow(
+  openStr: string | null | undefined,
+  closeStr: string | null | undefined
+): { open: HHMM; close: HHMM; label: string } {
+  const open = openStr ? parseHHMM(openStr) : DELIVERY_OPEN
+  const close = closeStr ? parseHHMM(closeStr) : DELIVERY_CLOSE
+  return { open, close, label: formatDeliveryHours(open, close) }
+}
+
+/**
  * A membership confers perks only while its status is `active` AND it has not
  * passed `membership_expires_at`. The nightly expiry job moves stale members to
  * grace/cancelled, but a request-time gate must not honor an expiry the job
@@ -61,6 +106,10 @@ export type BuildTiersArgs = {
   specialFeePhp: number
   isMember: boolean
   isBeforeCutoff: boolean
+  /** Is the hub currently inside its operating window? */
+  isOpen: boolean
+  /** Human label for the hub's operating window, e.g. "6:00 AM–6:00 PM". */
+  hoursLabel: string
   dispatchLabel: string
   cutoffLabel: string
 }
@@ -70,9 +119,13 @@ export type BuildTiersArgs = {
  *   - Free:     before the dispatch cutoff only (₱0).
  *   - Standard: always available, today anytime.
  *   - Special:  Hub Members only, ~1h.
+ *
+ * Outside operating hours (`isOpen === false`) nothing can be dispatched, so
+ * every tier is closed with the operating-hours reason — that gate dominates
+ * the per-tier cutoff/membership rules.
  */
 export function buildDeliveryTiers(args: BuildTiersArgs): TierOption[] {
-  return [
+  const tiers: TierOption[] = [
     {
       tier: "free",
       label: "Free delivery",
@@ -104,6 +157,17 @@ export function buildDeliveryTiers(args: BuildTiersArgs): TierOption[] {
         : "Hub Members only — upgrade for ₱500/yr",
     },
   ]
+
+  if (!args.isOpen) {
+    const closedReason = `Delivery is available ${args.hoursLabel}`
+    return tiers.map((t) => ({
+      ...t,
+      available: false,
+      reason_if_unavailable: closedReason,
+    }))
+  }
+
+  return tiers
 }
 
 /** The fee (in pesos) for a chosen tier, given the (hub, barangay) fee row. */

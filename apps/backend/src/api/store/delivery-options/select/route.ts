@@ -7,9 +7,12 @@ import {
   parseHHMM,
   beforeCutoff,
   isMembershipActive,
+  isWithinDeliveryHours,
+  resolveDeliveryWindow,
   feeForTier,
   type DeliveryTier as Tier,
 } from "../../../../lib/delivery-tiers"
+import { nowInTimezone } from "../../../../lib/hub-time"
 
 const VALID_TIERS: Tier[] = ["free", "standard", "special"]
 
@@ -102,6 +105,20 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
+  // Current hub-local time, reused by the operating-hours gate and the
+  // Free-tier cutoff check below.
+  const now = nowInTimezone(hub.timezone)
+
+  // Operating-hours gate: nothing dispatches outside the hub's window,
+  // regardless of tier.
+  const window = resolveDeliveryWindow(hub.delivery_open, hub.delivery_close)
+  if (!isWithinDeliveryHours(now, window.open, window.close)) {
+    res.status(409).json({
+      error: `Delivery is only available ${window.label}`,
+    })
+    return
+  }
+
   // Re-check Special eligibility (Hub Member gate).
   if (tier === "special") {
     let isMember = false
@@ -128,19 +145,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
   // Re-check Free eligibility (before cutoff).
   if (tier === "free") {
-    const fmt = new Intl.DateTimeFormat("en-US", {
-      timeZone: hub.timezone,
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    })
-    const parts = fmt.formatToParts(new Date())
-    const h = parseInt(parts.find((p) => p.type === "hour")?.value ?? "0", 10)
-    const m = parseInt(
-      parts.find((p) => p.type === "minute")?.value ?? "0",
-      10
-    )
-    if (!beforeCutoff({ hour: h, minute: m }, parseHHMM(hub.dispatch_cutoff))) {
+    if (!beforeCutoff(now, parseHHMM(hub.dispatch_cutoff))) {
       res.status(409).json({
         error: `Free delivery requires order before ${hub.dispatch_cutoff} ${hub.timezone}`,
       })

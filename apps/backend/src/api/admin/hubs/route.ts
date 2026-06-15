@@ -33,6 +33,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     active?: boolean
     dispatch_cutoff?: string
     dispatch_time?: string
+    delivery_open?: string
+    delivery_close?: string
     timezone?: string
   }
 
@@ -61,6 +63,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     active: body.active ?? true,
     dispatch_cutoff: body.dispatch_cutoff ?? "12:00",
     dispatch_time: body.dispatch_time ?? "16:00",
+    delivery_open: body.delivery_open ?? "06:00",
+    delivery_close: body.delivery_close ?? "18:00",
     timezone: body.timezone ?? "Asia/Manila",
   })
 

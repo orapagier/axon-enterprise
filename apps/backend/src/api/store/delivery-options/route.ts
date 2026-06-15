@@ -7,24 +7,11 @@ import {
   parseHHMM,
   beforeCutoff,
   isMembershipActive,
+  isWithinDeliveryHours,
+  resolveDeliveryWindow,
   buildDeliveryTiers,
 } from "../../../lib/delivery-tiers"
-
-function nowInHubTimezone(timezone: string): { hour: number; minute: number } {
-  const fmt = new Intl.DateTimeFormat("en-US", {
-    timeZone: timezone,
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  })
-  const parts = fmt.formatToParts(new Date())
-  const hour = parseInt(parts.find((p) => p.type === "hour")?.value ?? "0", 10)
-  const minute = parseInt(
-    parts.find((p) => p.type === "minute")?.value ?? "0",
-    10
-  )
-  return { hour, minute: Number.isNaN(minute) ? 0 : minute }
-}
+import { nowInTimezone } from "../../../lib/hub-time"
 
 /**
  * GET /store/delivery-options?cart_id=X
@@ -132,10 +119,12 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     isMember = isMembershipActive(cust?.metadata, Date.now())
   }
 
-  // 5. Time of day vs cutoff.
-  const now = nowInHubTimezone(hub.timezone)
+  // 5. Time of day vs cutoff + the hub's operating-hours window (hub-local).
+  const now = nowInTimezone(hub.timezone)
   const cutoff = parseHHMM(hub.dispatch_cutoff)
   const isBeforeCutoff = beforeCutoff(now, cutoff)
+  const window = resolveDeliveryWindow(hub.delivery_open, hub.delivery_close)
+  const isOpen = isWithinDeliveryHours(now, window.open, window.close)
   const cutoffLabel = hub.dispatch_cutoff
   const dispatchLabel = hub.dispatch_time
 
@@ -145,6 +134,8 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     specialFeePhp: fee.special_fee_php,
     isMember,
     isBeforeCutoff,
+    isOpen,
+    hoursLabel: window.label,
     dispatchLabel,
     cutoffLabel,
   })
@@ -155,6 +146,8 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     is_member: isMember,
     now: { hour: now.hour, minute: now.minute, timezone: hub.timezone },
     cutoff: hub.dispatch_cutoff,
+    is_open: isOpen,
+    hours_label: window.label,
     options,
   })
 }
