@@ -238,6 +238,11 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
                             {option.reason_if_unavailable}
                           </p>
                         )}
+                        {!isDisabled && option.note && (
+                          <p className="text-caption text-amber-700 mt-1">
+                            {option.note}
+                          </p>
+                        )}
                       </div>
                       <div className="self-center pl-2">
                         <span
