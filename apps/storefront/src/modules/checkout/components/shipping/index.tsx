@@ -174,11 +174,12 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
                   data-testid="delivery-closed-notice"
                 >
                   <Text className="text-base-regular font-semibold text-amber-900">
-                    Delivery is currently closed
+                    Outside delivery hours right now
                   </Text>
                   <Text className="text-caption text-amber-800 mt-0.5">
-                    {data.hub.name} delivers {data.hours_label}. Please order
-                    again during delivery hours.
+                    {data.hub.name} delivers {data.hours_label}. You can still
+                    place your order now — it will be scheduled for the next
+                    available delivery window.
                   </Text>
                 </div>
               )}
