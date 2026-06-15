@@ -39,6 +39,10 @@ const Addresses = ({
 
   const [message, formAction] = useActionState(setAddresses, null)
 
+  // Gate "Continue to delivery" — stays disabled until every required
+  // shipping field is filled in (reported up from ShippingAddress).
+  const [shippingValid, setShippingValid] = useState(false)
+
   return (
     <div className="bg-white">
       <div className="flex flex-row items-center justify-between mb-6">
