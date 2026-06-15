@@ -247,4 +247,100 @@ describe("buildDeliveryTiers", () => {
     })[2]
     expect(special.available).toBe(false)
   })
+
+  it("free is closed when an item doesn't allow free delivery", () => {
+    const [free] = buildDeliveryTiers({
+      ...base,
+      isMember: true,
+      isBeforeCutoff: true,
+      freeAllowed: false,
+    })
+    expect(free.available).toBe(false)
+    expect(free.reason_if_unavailable).toContain("Not offered")
+  })
+
+  it("special is closed when an item doesn't allow special delivery", () => {
+    const special = buildDeliveryTiers({
+      ...base,
+      isMember: true,
+      isBeforeCutoff: true,
+      specialAllowed: false,
+    })[2]
+    expect(special.available).toBe(false)
+    expect(special.reason_if_unavailable).toContain("Not offered")
+  })
+
+  it("special carries a producer disclaimer note when available on producer items", () => {
+    const special = buildDeliveryTiers({
+      ...base,
+      isMember: true,
+      isBeforeCutoff: true,
+      specialAllowed: true,
+      hasProducerItems: true,
+    })[2]
+    expect(special.available).toBe(true)
+    expect(special.note).toContain("producer")
+  })
+
+  it("no disclaimer note when the cart is all hub items", () => {
+    const special = buildDeliveryTiers({
+      ...base,
+      isMember: true,
+      isBeforeCutoff: true,
+      specialAllowed: true,
+      hasProducerItems: false,
+    })[2]
+    expect(special.note ?? null).toBeNull()
+  })
+})
+
+describe("resolveCartDeliveryEligibility", () => {
+  it("all-hub cart allows everything, no producer flag", () => {
+    const r = resolveCartDeliveryEligibility([
+      { selling_mode: "sell_to_freshhub" },
+      {},
+    ])
+    expect(r).toEqual({
+      freeAllowed: true,
+      specialAllowed: true,
+      hasProducerItems: false,
+    })
+  })
+
+  it("producer item without opt-ins closes both premium tiers", () => {
+    const r = resolveCartDeliveryEligibility([
+      { selling_mode: "direct_to_consumer" },
+    ])
+    expect(r).toEqual({
+      freeAllowed: false,
+      specialAllowed: false,
+      hasProducerItems: true,
+    })
+  })
+
+  it("producer item respects its individual opt-ins", () => {
+    const r = resolveCartDeliveryEligibility([
+      {
+        selling_mode: "direct_to_consumer",
+        free_delivery: true,
+        special_delivery: false,
+      },
+    ])
+    expect(r).toEqual({
+      freeAllowed: true,
+      specialAllowed: false,
+      hasProducerItems: true,
+    })
+  })
+
+  it("one ineligible item closes the tier for a mixed cart", () => {
+    const r = resolveCartDeliveryEligibility([
+      { selling_mode: "sell_to_freshhub" },
+      { selling_mode: "direct_to_consumer", free_delivery: true },
+      { selling_mode: "direct_to_consumer", free_delivery: false },
+    ])
+    expect(r.freeAllowed).toBe(false)
+    expect(r.specialAllowed).toBe(false)
+    expect(r.hasProducerItems).toBe(true)
+  })
 })
