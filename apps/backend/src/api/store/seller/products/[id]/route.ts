@@ -237,6 +237,14 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     ...(body.price !== undefined
       ? { pending_price_change: Math.round(Number(body.price)) }
       : {}),
+    // Delivery opt-ins editable on direct listings only (hub sells + delivers
+    // its own listings, so the flags don't apply there).
+    ...(isDirect && body.free_delivery !== undefined
+      ? { free_delivery: !!body.free_delivery }
+      : {}),
+    ...(isDirect && body.special_delivery !== undefined
+      ? { special_delivery: !!body.special_delivery }
+      : {}),
     updated_at_by_seller: new Date().toISOString(),
   }
 
