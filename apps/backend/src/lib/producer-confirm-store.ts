@@ -160,6 +160,23 @@ export async function persistConfirmEntry(
   ])
 }
 
+/** Read one seller's confirm entry off an order, or null if there isn't one. */
+export async function getSellerEntry(
+  container: MedusaContainer,
+  orderId: string,
+  sellerId: string
+): Promise<ProducerConfirmEntry | null> {
+  const query = container.resolve(ContainerRegistrationKeys.QUERY)
+  const { data } = await query.graph({
+    entity: "order",
+    fields: ["id", "metadata"],
+    filters: { id: orderId },
+  })
+  const meta = (data[0] as { metadata?: Record<string, unknown> | null })
+    ?.metadata
+  return readConfirmMap(meta)[sellerId] ?? null
+}
+
 export type ProducerStrikeInfo = {
   order_id: string
   display_id: number | null
