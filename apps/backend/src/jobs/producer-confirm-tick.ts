@@ -105,32 +105,11 @@ async function producerConfirmTick(container: MedusaContainer) {
           sellerId,
           markEscalated(entry, now)
         )
-        // Resolve this producer's item lines + email for the admin notice.
+        // Resolve this producer's item lines for the admin notice.
         const full = await loadOrderForConfirm(container, o.id)
-        let itemsLine = ""
-        if (full?.items?.length) {
-          const { producers } = routeOrderItems(
-            full.items.filter((i) => i && i.title),
-            new Map(
-              await (async () => {
-                const ids = [
-                  ...new Set(full.items!.map((i) => i.product_id).filter(Boolean)),
-                ] as string[]
-                if (!ids.length) return []
-                const { data: products } = await query.graph({
-                  entity: "product",
-                  fields: ["id", "metadata"],
-                  filters: { id: ids },
-                })
-                return (products as { id: string; metadata?: unknown }[]).map(
-                  (p) => [p.id, (p.metadata ?? {}) as Record<string, unknown>] as const
-                )
-              })()
-            )
-          )
-          const mine = producers.find((p) => p.sellerId === sellerId)
-          itemsLine = (mine?.items ?? []).map(formatItemLine).join(", ")
-        }
+        const itemsLine = full
+          ? await producerItemLines(container, full, sellerId)
+          : ""
 
         await notifyAdmin(container, {
           title: `⏰ Order #${o.display_id}: producer hasn't confirmed`,
