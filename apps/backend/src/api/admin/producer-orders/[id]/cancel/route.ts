@@ -37,7 +37,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  const { entry: next, strike } = applyAdminCancel(entry, Date.now())
+  const { entry: next, strike } = applyCancel(entry, Date.now())
   await persistConfirmEntry(req.scope, orderId, sellerId, next)
 
   const full = await loadOrderForConfirm(req.scope, orderId)
