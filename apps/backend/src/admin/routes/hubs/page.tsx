@@ -77,6 +77,8 @@ const EMPTY_HUB_FORM: HubFormState = {
   timezone: "Asia/Manila",
   dispatch_cutoff: "12:00",
   dispatch_time: "16:00",
+  delivery_open: "06:00",
+  delivery_close: "18:00",
   active: true,
 }
 

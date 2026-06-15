@@ -126,6 +126,7 @@ const BarangayCombobox: React.FC<Props> = ({
           />
           {label && (
             <label
+              htmlFor={inputId}
               className={clx(
                 "flex items-center mx-3 px-1 transition-all absolute duration-300 top-3 -z-1 origin-0 text-ui-fg-subtle",
                 // Float up when there's a value, a search query, or a visible
