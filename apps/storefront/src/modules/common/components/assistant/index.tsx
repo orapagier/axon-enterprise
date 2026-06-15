@@ -92,7 +92,7 @@ export default function Assistant() {
   }
 
   return (
-    <>
+    <div ref={rootRef}>
       {/* Launcher */}
       <button
         type="button"
