@@ -103,9 +103,9 @@ const Addresses = ({
           <div className="text-small-regular">
             {cart && cart.shipping_address ? (
               <div className="flex items-start gap-x-8">
-                <div className="flex items-start gap-x-1 w-full">
+                <div className="flex flex-col gap-y-6 small:flex-row small:items-start small:gap-y-0 small:gap-x-1 w-full">
                   <div
-                    className="flex flex-col w-1/3"
+                    className="flex flex-col w-full small:w-1/3"
                     data-testid="shipping-address-summary"
                   >
                     <Text className="txt-medium-plus text-ui-fg-base mb-1">

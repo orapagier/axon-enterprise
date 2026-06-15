@@ -175,8 +175,8 @@
     "semantic_hash": "11fa9347305f323c4351de694ef4df70"
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/account/templates/account-layout.tsx": {
-    "mtime": 1781552502.5518541,
-    "ast_hash": "40c2454eb317cfb5c664b89d2e7502fc",
+    "mtime": 1781553307.0837436,
+    "ast_hash": "fc822b37bd972490705dfae08e090817",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/account/templates/login-template.tsx": {
@@ -1010,9 +1010,9 @@
     "semantic_hash": "e5db2756780a567fe70b140745ea072b"
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/app/[countryCode]/(main)/account/layout.tsx": {
-    "mtime": 1781204417.461653,
-    "ast_hash": "ba728b2a589a2cdb7ae3fa7fe82a390e",
-    "semantic_hash": "ba728b2a589a2cdb7ae3fa7fe82a390e"
+    "mtime": 1781553321.2849994,
+    "ast_hash": "8747c4be0e0e04e4da0be5e8fe74e0f3",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/app/[countryCode]/(main)/account/@dashboard/loading.tsx": {
     "mtime": 1779007605.5124722,
@@ -3017,6 +3017,11 @@
   "/home/ramlej/MFH/freshhub/apps/backend/static/1779747988845-potato.webp": {
     "mtime": 1779747988.840301,
     "ast_hash": "147c727284f281fdaded58439e0b395c",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/backend/static/1781553094088-images_1_.jpeg": {
+    "mtime": 1781553094.0859609,
+    "ast_hash": "d04b6ccd9a839b42a3e29ec94c9f49c1",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/static/1781446871782-5d81319be5263ea4c2327d8ce86df5fc.jpeg": {

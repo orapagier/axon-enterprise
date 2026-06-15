@@ -1,16 +1,16 @@
 # Graph Report - freshhub  (2026-06-16)
 
 ## Corpus Check
-- 585 files · ~505,581 words
+- 585 files · ~506,944 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3166 nodes · 4492 edges · 305 communities (238 shown, 67 thin omitted)
+- 3167 nodes · 4497 edges · 308 communities (236 shown, 72 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 51 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `53d8b891`
+- Built from commit: `fc19f9bc`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -247,6 +247,9 @@
 - [[_COMMUNITY_Community 302|Community 302]]
 - [[_COMMUNITY_Community 303|Community 303]]
 - [[_COMMUNITY_Community 304|Community 304]]
+- [[_COMMUNITY_Community 305|Community 305]]
+- [[_COMMUNITY_Community 306|Community 306]]
+- [[_COMMUNITY_Community 307|Community 307]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `getAuthHeaders()` - 70 edges
@@ -265,19 +268,19 @@
   apps/storefront/src/app/opengraph-image.jpg → README.md
 - `Storefront Twitter Social Preview Image` --conceptually_related_to--> `Next.js Storefront Application`  [INFERRED]
   apps/storefront/src/app/twitter-image.jpg → README.md
-- `AccountInfo()` --calls--> `useToggleState()`  [INFERRED]
-  apps/storefront/src/modules/account/components/account-info/index.tsx → apps/storefront/src/lib/hooks/use-toggle-state.tsx
-- `setAddresses()` --calls--> `sanitizeText()`  [INFERRED]
-  apps/storefront/src/lib/data/cart.ts → apps/storefront/src/lib/data/address-validation.ts
 - `getProductPrice()` --calls--> `VariantPrice`  [INFERRED]
   apps/storefront/src/lib/util/get-product-price.ts → apps/storefront/src/types/global.ts
+- `setAddresses()` --calls--> `sanitizeText()`  [INFERRED]
+  apps/storefront/src/lib/data/cart.ts → apps/storefront/src/lib/data/address-validation.ts
+- `authenticateRider()` --calls--> `next`  [INFERRED]
+  apps/backend/src/lib/rider-auth.ts → apps/storefront/package.json
 
 ## Hyperedges (group relationships)
 - **Medusa Backend Extension Points** — modules_readme, links_readme, api_readme, subscribers_readme, workflows_readme, jobs_readme, admin_readme [EXTRACTED 1.00]
 - **MedusaContainer Dependency Injection Consumers** — api_readme, subscribers_readme, jobs_readme, freshhub_dependency_injection [EXTRACTED 1.00]
 - **Workflow Execution Contexts** — workflows_readme, api_readme, subscribers_readme, jobs_readme [EXTRACTED 1.00]
 
-## Communities (305 total, 67 thin omitted)
+## Communities (308 total, 72 thin omitted)
 
 ### Community 0 - "Backend Type System"
 Cohesion: 0.01
@@ -285,11 +288,11 @@ Nodes (200): AccountHolder, Address, ApiKey, ApiKeyTypeEnum, ApplicationMethod, 
 
 ### Community 1 - "Account & Checkout Pages"
 Cohesion: 0.09
-Nodes (30): Checkout(), metadata, addToCart(), applyCustomerAddressToCart(), applyPromotions(), deleteLineItem(), getOrSetCart(), initiatePaymentSession() (+22 more)
+Nodes (27): CartButton(), Cart(), metadata, Checkout(), metadata, sanitizeCity(), addToCart(), applyCustomerAddressToCart() (+19 more)
 
 ### Community 2 - "Price & Order Utils"
-Cohesion: 0.1
-Nodes (16): CartDropdown(), CartTotals(), CartTotalsProps, TIER_LABELS, FreeShippingInline(), FreeShippingPopup(), ShippingDetails(), ShippingDetailsProps (+8 more)
+Cohesion: 0.15
+Nodes (10): CartDropdown(), CartTotals(), CartTotalsProps, TIER_LABELS, FreeShippingInline(), FreeShippingPopup(), ShippingDetails(), ShippingDetailsProps (+2 more)
 
 ### Community 3 - "Backend Dependencies"
 Cohesion: 0.12
@@ -297,7 +300,7 @@ Nodes (17): devDependencies, jest, @medusajs/test-utils, prop-types, react, reac
 
 ### Community 4 - "Address Management"
 Cohesion: 0.12
-Nodes (10): CountryOption, CountrySelectProps, Locale, StateType, DEFAULT_OPTION, LanguageOption, LanguageSelectProps, BaseMenuItems (+2 more)
+Nodes (11): CountryOption, CountrySelect(), CountrySelectProps, Locale, StateType, DEFAULT_OPTION, LanguageOption, LanguageSelectProps (+3 more)
 
 ### Community 5 - "Shared UI Components"
 Cohesion: 0.05
@@ -337,15 +340,15 @@ Nodes (17): compilerOptions, allowImportingTsExtensions, isolatedModules, jsx, l
 
 ### Community 14 - "Storefront Dependencies"
 Cohesion: 0.11
-Nodes (18): dependencies, clsx, @headlessui/react, libphonenumber-js, lodash, @medusajs/icons, @medusajs/js-sdk, @medusajs/ui-preset (+10 more)
+Nodes (19): dependencies, clsx, @headlessui/react, libphonenumber-js, lodash, @medusajs/icons, @medusajs/js-sdk, @medusajs/ui-preset (+11 more)
 
 ### Community 15 - "Storefront Dev Dependencies"
 Cohesion: 0.11
 Nodes (18): devDependencies, ansi-colors, autoprefixer, @babel/core, babel-loader, eslint, eslint-config-next, @medusajs/types (+10 more)
 
 ### Community 16 - "Account Profile Forms"
-Cohesion: 0.12
-Nodes (22): CheckoutForm(), retrieveCollection(), getAuthHeaders(), getCacheOptions(), calculatePriceForShippingOption(), listCartShippingMethods(), createTransferRequest(), listOrders() (+14 more)
+Cohesion: 0.14
+Nodes (19): CheckoutForm(), retrieveCollection(), getAuthHeaders(), getCacheOptions(), calculatePriceForShippingOption(), listCartShippingMethods(), createTransferRequest(), getPaymentEligibility() (+11 more)
 
 ### Community 17 - "Turbo Pipeline Config"
 Cohesion: 0.12
@@ -368,28 +371,28 @@ Cohesion: 0.31
 Nodes (7): metadata, OrderConfirmedPage(), Props, retrieveOrder(), generateMetadata(), OrderDetailPage(), Props
 
 ### Community 22 - "Order Transfer Flow"
-Cohesion: 0.21
-Nodes (11): getHubCookie(), listHubs(), listLocales(), Login(), metadata, Props, metadata, PageLayout() (+3 more)
+Cohesion: 0.14
+Nodes (17): getHubCookie(), listCartOptions(), listFilterCategories(), getHubProductIds(), listHubs(), listLocales(), metadata, PageLayout() (+9 more)
 
 ### Community 23 - "Auth Login/Register"
-Cohesion: 0.13
-Nodes (19): upload, VALID_STATUSES, authenticateRider(), b64url(), getSecret(), PUBLIC_RIDER_PATHS, RiderTokenPayload, sign() (+11 more)
+Cohesion: 0.12
+Nodes (21): upload, exchangeCodeForClaims(), GoogleIdTokenClaims, readCookie(), RiderGoogleAuthPending, authenticateRider(), b64url(), getSecret() (+13 more)
 
 ### Community 24 - "Store Refinement Filters"
 Cohesion: 0.29
 Nodes (5): FIT, metadata, ROLE, WE_PROVIDE, YOU_BRING
 
 ### Community 25 - "Storefront Package Meta"
-Cohesion: 0.11
-Nodes (10): GET(), POST(), UpsertRow, validateRow(), GET(), DeliveryFeesModuleService, FeeRow, TAGUM_FEES (+2 more)
+Cohesion: 0.12
+Nodes (9): GET(), POST(), UpsertRow, validateRow(), GET(), DeliveryFeesModuleService, FeeRow, TAGUM_FEES (+1 more)
 
 ### Community 26 - "Root Layout & Fonts"
 Cohesion: 0.09
-Nodes (9): Step, ListingModuleService, EXTRA_LISTING_IDS, KEEP_EMAILS, JUNK_CATEGORY_IDS, purgeDevData(), ProductListing, Rider (+1 more)
+Nodes (8): VALID_DELIVERY_STATUSES, ListingModuleService, EXTRA_LISTING_IDS, KEEP_EMAILS, ProductListing, Rider, RiderModuleService, ModuleImplementations
 
 ### Community 27 - "Account Navigation"
-Cohesion: 0.15
-Nodes (7): POST(), PickupSlot, PickupWindow, PickupModuleService, validateWindowCreate(), GET(), POST()
+Cohesion: 0.24
+Nodes (16): clearPendingAuth(), cancelPendingAuth(), clearPendingAuth(), deriveCustomerSecret(), generateCode(), generateDerivedPassword(), hashCode(), OtpThrottle (+8 more)
 
 ### Community 28 - "Project Overview Docs"
 Cohesion: 0.33
@@ -408,8 +411,8 @@ Cohesion: 0.47
 Nodes (5): config, getCountryCode(), getRegionMap(), middleware(), regionMapCache
 
 ### Community 33 - "Link Components"
-Cohesion: 0.09
-Nodes (20): completeOnboarding(), deferOnboarding(), isValidPhone(), OnboardingState, resetOnboardingState(), splitDisplayName(), AccountType, BUYER_FIELDS (+12 more)
+Cohesion: 0.1
+Nodes (19): AccountType, BUYER_FIELDS, CONSUMER_FIELDS, FieldDef, FIELDS_BY_ROLE, initialState, MINDANAO_CITY_SUGGESTIONS, MINDANAO_PROVINCE_SUGGESTIONS (+11 more)
 
 ### Community 34 - "Community 34"
 Cohesion: 0.14
@@ -420,8 +423,8 @@ Cohesion: 0.22
 Nodes (7): metadata, TransferPage(), acceptTransferRequest(), declineTransferRequest(), metadata, TransferPage(), TransferStatus
 
 ### Community 37 - "Product Quick Add"
-Cohesion: 0.11
-Nodes (15): POST(), GrantOutcome, grantReferralReward(), promoSuffix(), REFERRAL_BONUS_CENTAVOS, GET(), verifyReferral(), ReferralCode (+7 more)
+Cohesion: 0.17
+Nodes (7): POST(), GET(), ReferralCode, Referral, generateCandidate(), normalizeCode(), ReferralModuleService
 
 ### Community 38 - "Cart/Order Line Items"
 Cohesion: 0.07
@@ -455,21 +458,17 @@ Nodes (26): AccountStatus, AccountStatusBanner(), State, AccountStatus, appealDi
 Cohesion: 0.4
 Nodes (4): hooks, PreToolUse, permissions, allow
 
-### Community 62 - "Micro Community 62"
-Cohesion: 0.17
-Nodes (15): APPEAL_WINDOW_DAYS, ChatTurn, REMINDER_AFTER_HOURS, RESPONSE_SLA_HOURS, runAssistant(), AssistantConfigError, assistantEnabled(), DEFAULT_MODELS (+7 more)
-
 ### Community 69 - "Community 69"
 Cohesion: 0.4
 Nodes (4): name, namespaces, nativeEnums, tables
 
 ### Community 119 - "Micro Community 119"
-Cohesion: 0.12
-Nodes (6): AccountInfo(), AccountInfoProps, MyInformationProps, MyInformationProps, MyInformationProps, MyInformationProps
+Cohesion: 0.13
+Nodes (5): AccountInfoProps, MyInformationProps, MyInformationProps, MyInformationProps, MyInformationProps
 
 ### Community 130 - "Community 130"
-Cohesion: 0.12
-Nodes (21): getCollectionByHandle(), listCollections(), listProducts(), listProductsWithSort(), getRegion(), listRegions(), CollectionPage(), generateMetadata() (+13 more)
+Cohesion: 0.11
+Nodes (23): Addresses(), metadata, getCollectionByHandle(), listCollections(), listProducts(), listProductsWithSort(), getRegion(), listRegions() (+15 more)
 
 ### Community 131 - "Community 131"
 Cohesion: 0.07
@@ -488,8 +487,8 @@ Cohesion: 0.13
 Nodes (14): 1. Create a Data Model, 2. Create a Service, 3. Export Module Definition, 4. Add Module to Medusa's Configurations, 5. Generate and Run Migrations, code:ts (import { model } from "@medusajs/framework/utils"), code:ts (import { MedusaService } from "@medusajs/framework/utils"), code:ts (import BlogModuleService from "./service") (+6 more)
 
 ### Community 135 - "Community 135"
-Cohesion: 0.09
-Nodes (41): setHubCookie(), syncCustomerHubFromCookie(), exchangeCodeForClaims(), GoogleAuthPending, GoogleIdTokenClaims, clearPendingAuth(), generateCode(), hashCode() (+33 more)
+Cohesion: 0.18
+Nodes (16): syncCustomerHubFromCookie(), exchangeCodeForClaims(), GoogleAuthPending, GoogleIdTokenClaims, generateCode(), hashCode(), OtpThrottle, PendingAuth (+8 more)
 
 ### Community 136 - "Community 136"
 Cohesion: 0.14
@@ -497,7 +496,7 @@ Nodes (13): 10. Strategic recommendations, 1. Bottom line up front (the verdict)
 
 ### Community 137 - "Community 137"
 Cohesion: 0.05
-Nodes (54): AccountTypesPage(), backendFetch(), getRiderManifest(), getRiderSession(), getRiderSummary(), markStopDelivered(), markStopRefused(), registerRider() (+46 more)
+Nodes (58): AccountPageLayout(), isAwaitingVerification(), AccountTypesPage(), cancelMembership(), cancelMembershipRenewal(), backendFetch(), getRiderManifest(), getRiderSession() (+50 more)
 
 ### Community 138 - "Community 138"
 Cohesion: 0.18
@@ -516,8 +515,8 @@ Cohesion: 0.14
 Nodes (9): hasRole(), LEGACY_ALIASES, Role, rolesOf(), STACKABLE_ROLES, StackableRole, downgraded, meta (+1 more)
 
 ### Community 144 - "Community 144"
-Cohesion: 0.21
-Nodes (9): LineItemPrice(), LineItemPriceProps, getPercentageDiff(), getPricesForVariant(), VariantWithPrice, isArray(), isEmpty(), isObject() (+1 more)
+Cohesion: 0.36
+Nodes (5): LineItemPrice(), LineItemPriceProps, getPercentageDiff(), getPricesForVariant(), VariantWithPrice
 
 ### Community 145 - "Community 145"
 Cohesion: 0.2
@@ -544,8 +543,8 @@ Cohesion: 0.16
 Nodes (14): formatItemLine(), ItemRouting, ProductRouteMeta, RoutableItem, routeOrderItems(), config, notifySellerOrderHandler(), a1 (+6 more)
 
 ### Community 151 - "Community 151"
-Cohesion: 0.11
-Nodes (17): ASSISTANT_TOOLS, AssistantTool, clampLimit(), listMyOrders(), ToolContext, ChatProvider, GenerateInput, GenerateOutput (+9 more)
+Cohesion: 0.07
+Nodes (32): APPEAL_WINDOW_DAYS, ChatTurn, REMINDER_AFTER_HOURS, RESPONSE_SLA_HOURS, runAssistant(), AssistantConfigError, assistantEnabled(), DEFAULT_MODELS (+24 more)
 
 ### Community 152 - "Community 152"
 Cohesion: 0.4
@@ -568,12 +567,12 @@ Cohesion: 0.67
 Nodes (3): DEFAULT_TAGS, GET(), POST()
 
 ### Community 157 - "Community 157"
-Cohesion: 0.1
-Nodes (40): beforeCutoff(), GET(), nowInHubTimezone(), parseHHMM(), Tier, TierOption, accountability, assertWithinDeliveryHours() (+32 more)
+Cohesion: 0.11
+Nodes (36): beforeCutoff(), GET(), nowInHubTimezone(), parseHHMM(), Tier, TierOption, accountability, assertWithinDeliveryHours() (+28 more)
 
 ### Community 158 - "Community 158"
-Cohesion: 0.11
-Nodes (19): CodTx, POST(), DispatchModuleService, VALID_DELIVERY_STATUSES, CodTx, confirmDelivery(), ConfirmDeliveryResult, recordRefusal() (+11 more)
+Cohesion: 0.12
+Nodes (19): POST(), isDuplicateCodTransaction(), POST(), CodTx, POST(), DispatchModuleService, CodTx, confirmDelivery() (+11 more)
 
 ### Community 159 - "Community 159"
 Cohesion: 0.5
@@ -588,12 +587,12 @@ Cohesion: 0.1
 Nodes (4): HubModuleService, GET(), HubArea, Hub
 
 ### Community 162 - "Community 162"
-Cohesion: 0.12
-Nodes (16): AccountPageLayout(), Addresses(), metadata, Cart(), metadata, metadata, OverviewTemplate(), retrieveCustomer() (+8 more)
+Cohesion: 0.08
+Nodes (32): metadata, Props, requestMembership(), retrieveCustomer(), updateCustomer(), getReferralPanel(), addProducerRole(), addTraderRole() (+24 more)
 
 ### Community 164 - "Community 164"
-Cohesion: 0.22
-Nodes (11): expirePickupWindows(), AdminMessage, chatIds(), ensureConfigured(), formatAdminMessage(), notifyAdmin(), POST(), POST() (+3 more)
+Cohesion: 0.15
+Nodes (16): getCustomerId(), POST(), REASON_MESSAGE, REASON_STATUS, expirePickupWindows(), AdminMessage, chatIds(), ensureConfigured() (+8 more)
 
 ### Community 165 - "Community 165"
 Cohesion: 0.17
@@ -604,20 +603,20 @@ Cohesion: 0.15
 Nodes (11): AGING_DAYS, byRider, config, info, ledger, LIMIT_CENTAVOS, logger, now (+3 more)
 
 ### Community 167 - "Community 167"
-Cohesion: 0.1
-Nodes (22): AddressSelectProps, FieldKey, REQUIRED_FIELDS, isHubCity(), CountrySelect(), AddressErrors, BILLING_FIELDS, FieldDef (+14 more)
+Cohesion: 0.15
+Nodes (10): AddressSelectProps, FieldKey, REQUIRED_FIELDS, HUB_CITIES, AddressErrors, validateHubCity(), validatePhilippinePostalCode(), validateRequired() (+2 more)
 
 ### Community 168 - "Community 168"
-Cohesion: 0.2
-Nodes (13): getCustomerId(), POST(), REASON_MESSAGE, REASON_STATUS, disputeSlaTick(), AppealEligibility, AppealEligibilityInput, canAppeal() (+5 more)
+Cohesion: 0.23
+Nodes (8): GrantOutcome, grantReferralReward(), promoSuffix(), REFERRAL_BONUS_CENTAVOS, verifyReferral(), { container }, { container, referralService }, { container, referralService, customerModule }
 
 ### Community 170 - "Community 170"
-Cohesion: 0.53
-Nodes (5): formatPhoneForDisplay(), isCountryCode(), PhoneValidation, toCountryCode(), validatePhone()
+Cohesion: 0.23
+Nodes (11): BILLING_FIELDS, FieldDef, FieldValidator, runValidators(), sanitizeText(), SHIPPING_FIELDS, ShippingFormData, validateAddressForm() (+3 more)
 
 ### Community 173 - "Community 173"
-Cohesion: 0.24
-Nodes (10): CartButton(), ProductActionsWrapper(), PreviewPrice(), isMember(), getTraderPrice(), getTraderPricing(), INACTIVE, isApprovedTrader() (+2 more)
+Cohesion: 0.29
+Nodes (8): ProductActionsWrapper(), PreviewPrice(), isMember(), getTraderPricing(), INACTIVE, isApprovedTrader(), TRADER_META, TraderPricing
 
 ### Community 174 - "Community 174"
 Cohesion: 0.12
@@ -644,8 +643,8 @@ Cohesion: 0.19
 Nodes (10): VALID_DECISIONS, Action, appendEvent(), MEMBERSHIP_META, MembershipEvent, sendEmail(), POST(), VALID_RESOLUTIONS (+2 more)
 
 ### Community 183 - "Community 183"
-Cohesion: 0.14
-Nodes (10): AccountTypesPanel(), manilaDate(), Props, Props, HUB_CITIES, addProducerRole(), AddRoleState, addTraderRole() (+2 more)
+Cohesion: 0.24
+Nodes (8): canonicalHubCity(), provinceForCity(), completeOnboarding(), deferOnboarding(), isValidPhone(), OnboardingState, resetOnboardingState(), splitDisplayName()
 
 ### Community 184 - "Community 184"
 Cohesion: 0.15
@@ -668,16 +667,16 @@ Cohesion: 0.17
 Nodes (7): AreaFormState, config, EMPTY_AREA_FORM, EMPTY_HUB_FORM, Hub, HubArea, HubFormState
 
 ### Community 190 - "Community 190"
-Cohesion: 0.1
-Nodes (19): useIntersection(), Item(), ItemProps, LineItemUnitPrice(), LineItemUnitPriceProps, ProductActions(), ProductActionsProps, ProductPreview() (+11 more)
+Cohesion: 0.14
+Nodes (15): useIntersection(), LineItemUnitPrice(), LineItemUnitPriceProps, ProductActions(), ProductActionsProps, ProductPreview(), Props, ProductPrice() (+7 more)
 
 ### Community 191 - "Community 191"
 Cohesion: 0.18
 Nodes (11): 1. Module: data model, `apps/backend/src/modules/hub/index.ts`, `apps/backend/src/modules/hub/models/hub-area.ts`, `apps/backend/src/modules/hub/models/hub.ts`, `apps/backend/src/modules/hub/service.ts`, code:ts (import { model } from "@medusajs/framework/utils"), code:ts (import { model } from "@medusajs/framework/utils"), code:ts (import { MedusaService } from "@medusajs/framework/utils") (+3 more)
 
 ### Community 192 - "Community 192"
-Cohesion: 0.12
-Nodes (12): GREETING, Msg, SUGGESTIONS, metadata, Props, AccountLayoutProps, LEGACY_ALIASES, Role (+4 more)
+Cohesion: 0.05
+Nodes (29): GREETING, Msg, SUGGESTIONS, MENU_LINKS, MenuLink, PRODUCER_LINK, RIDER_LINK, ACCOUNT_TYPES_NAV_ITEM (+21 more)
 
 ### Community 193 - "Community 193"
 Cohesion: 0.18
@@ -696,12 +695,12 @@ Cohesion: 0.2
 Nodes (8): formatFallback(), GOLD, GREEN, GREY, OrderCard(), OrderCardProps, STATUS_STYLE, StatusStyle
 
 ### Community 198 - "Community 198"
-Cohesion: 0.1
-Nodes (21): escalated, now, r, reversed, now, r, AccountState, AppealDecision (+13 more)
+Cohesion: 0.11
+Nodes (23): disputeSlaTick(), AppealEligibility, AppealEligibilityInput, canAppeal(), evaluateAppealEligibility(), toMs(), verifyPhaseG(), escalated (+15 more)
 
 ### Community 199 - "Community 199"
-Cohesion: 0.11
-Nodes (18): PICKUP_SLOT_STATUSES, PICKUP_WINDOW_STATUSES, PickupSlotStatus, PickupWindowStatus, SLOT_TRANSITIONS, validateSlotCapacity(), validateSlotReserve(), validateSlotStatusTransition() (+10 more)
+Cohesion: 0.07
+Nodes (25): POST(), PickupSlot, PickupWindow, PickupModuleService, PICKUP_SLOT_STATUSES, PICKUP_WINDOW_STATUSES, PickupSlotStatus, PickupWindowStatus (+17 more)
 
 ### Community 200 - "Community 200"
 Cohesion: 0.35
@@ -725,15 +724,15 @@ Nodes (6): PushActionState, pushFetch(), PushSubscriptionPayload, removePushSubs
 
 ### Community 206 - "Community 206"
 Cohesion: 0.25
-Nodes (5): MENU_LINKS, MenuLink, PRODUCER_LINK, RIDER_LINK, StackableRole
+Nodes (5): AccountState, GET(), body, Json, { res, captured }
 
 ### Community 207 - "Community 207"
 Cohesion: 0.33
 Nodes (6): 2. Links: customer ↔ hub, product ↔ hub, `apps/backend/src/links/customer-hub.ts`, `apps/backend/src/links/product-hub.ts`, code:ts (import { defineLink } from "@medusajs/framework/utils"), code:ts (import { defineLink } from "@medusajs/framework/utils"), code:bash (npx medusa db:migrate)
 
 ### Community 209 - "Community 209"
-Cohesion: 0.08
-Nodes (18): PREPAY_LOCKED_STATES, AccountabilityModuleService, GET(), getCustomerId(), BuyerAccountStatus, RefusalDispute, InjectedDeps, AccountState (+10 more)
+Cohesion: 0.09
+Nodes (16): PREPAY_LOCKED_STATES, AccountabilityModuleService, Step, GET(), getCustomerId(), JUNK_CATEGORY_IDS, purgeDevData(), BuyerAccountStatus (+8 more)
 
 ### Community 210 - "Community 210"
 Cohesion: 0.4
@@ -748,8 +747,8 @@ Cohesion: 0.4
 Nodes (4): name, namespaces, nativeEnums, tables
 
 ### Community 213 - "Community 213"
-Cohesion: 0.1
-Nodes (8): GOOGLE_ERROR_COPY, Props, ROLE_COPY, AccountType, AuthMode, OtpRequestState, OtpVerifyState, Hub
+Cohesion: 0.18
+Nodes (7): GOOGLE_ERROR_COPY, Props, ROLE_COPY, AccountType, AuthMode, OtpRequestState, OtpVerifyState
 
 ### Community 215 - "Community 215"
 Cohesion: 0.4
@@ -760,16 +759,16 @@ Cohesion: 0.12
 Nodes (17): 10. Rider PWA Pages, 11. Admin Dashboard Extensions, 13. Notifications & Events, 14. Environment Variables, 9. Storefront Pages, code:block19 (/                                   # Homepage: hub-specific), code:block20 (/                                   # Redirect: /orders if l), code:js (// next.config.js) (+9 more)
 
 ### Community 217 - "Community 217"
-Cohesion: 0.27
-Nodes (6): PushSubscription, PushNotificationModuleService, customerId(), DELETE(), IncomingSub, POST()
+Cohesion: 0.16
+Nodes (13): config, dispatchBatchesInTransit(), notifyBatchInTransit(), parseHHmm(), ensureConfigured(), PushMessage, sendPush(), PushSubscription (+5 more)
 
 ### Community 223 - "Community 223"
-Cohesion: 0.08
-Nodes (27): baseHeaders(), listOpenPickupWindows(), PickupWindow, baseHeaders(), createListing(), deleteListing(), ListingFormState, parseListing() (+19 more)
+Cohesion: 0.1
+Nodes (26): placeOrder(), getCacheTag(), removeAuthToken(), removeCartId(), deleteAccount(), signout(), baseHeaders(), listOpenPickupWindows() (+18 more)
 
 ### Community 226 - "Community 226"
-Cohesion: 0.28
-Nodes (8): listFilterCategories(), getHubProductIds(), CategoryTemplate(), CollectionTemplate(), ProductTemplate(), ProductTemplateProps, StoreTemplate(), getDeliveryHub()
+Cohesion: 0.22
+Nodes (8): cleanOrderTick(), AccountState, AppealDecision, AppealDisputeInput, AppealState, AppealStateEnum, appealStep, toDate()
 
 ### Community 227 - "Community 227"
 Cohesion: 0.29
@@ -784,8 +783,8 @@ Cohesion: 0.5
 Nodes (4): 7. Seed script, `apps/backend/src/migration-scripts/seed-hubs.ts`, code:ts (/**), code:bash (cd apps/backend)
 
 ### Community 233 - "Community 233"
-Cohesion: 0.19
-Nodes (17): assertSeller(), DELETE(), GET(), loadOwnedProduct(), PATCH(), ProductVariantWithPrices, StoreCustomer, VALID_TRANSITIONS (+9 more)
+Cohesion: 0.17
+Nodes (18): assertSeller(), DELETE(), GET(), loadOwnedProduct(), PATCH(), ProductVariantWithPrices, StoreCustomer, VALID_STATUSES (+10 more)
 
 ### Community 245 - "Community 245"
 Cohesion: 0.13
@@ -824,8 +823,8 @@ Cohesion: 0.2
 Nodes (10): 7.1 Multi-Hub Scoping, 7.2 COD Payment Flow, 7.3 Trader Pricing, 7.4 Hub Credits (Reward System), 7.5 Rider First-Grab System, 7.6 Delivery Confirmation & Stock Deduction, 7.7 Producer Hub Submission Flow, 7. Feature Specifications (+2 more)
 
 ### Community 257 - "Community 257"
-Cohesion: 0.22
-Nodes (10): canonicalHubCity(), haversineKm(), HUB_CITY_SET, HUB_SLUG_BY_CITY, HUB_WAREHOUSE, HubCity, PROVINCE_BY_CITY, provinceForCity() (+2 more)
+Cohesion: 0.25
+Nodes (8): haversineKm(), HUB_CITY_SET, HUB_SLUG_BY_CITY, HUB_WAREHOUSE, HubCity, isHubCity(), PROVINCE_BY_CITY, toRad()
 
 ### Community 258 - "Community 258"
 Cohesion: 0.22
@@ -834,10 +833,6 @@ Nodes (9): 2. Tech Stack, Admin, Backend, File Storage, Infrastructure (Self-Hos
 ### Community 259 - "Community 259"
 Cohesion: 0.15
 Nodes (13): 10. Gaps & forward roadmap, Phase A — Make prepay-lock resolve to OTC (highest priority), Phase A — Walk-in OTC counter (reframed 2026-06-10, highest priority), Phase B — Notifications (email + push), Phase C — Membership lifecycle automation, Phase D — Trader (B2B) pricing, Phase E — Rider operations & accountability, Phase F — Multi-hub readiness (+5 more)
-
-### Community 260 - "Community 260"
-Cohesion: 0.24
-Nodes (4): Addresses(), DiscountCodeProps, SubmitButton(), compareAddresses()
 
 ### Community 261 - "Community 261"
 Cohesion: 0.29
@@ -853,7 +848,7 @@ Nodes (7): 8. API Endpoints Reference, Admin API, code:block16 (GET    /store/hu
 
 ### Community 264 - "Community 264"
 Cohesion: 0.1
-Nodes (17): POST(), isDuplicateCodTransaction(), CodLedgerModuleService, POST(), GET(), getCustomerId(), getCustomerId(), POST() (+9 more)
+Nodes (14): CodLedgerModuleService, GET(), getCustomerId(), getCustomerId(), POST(), CodTx, recordOtcCollected(), RecordOtcResult (+6 more)
 
 ### Community 266 - "Community 266"
 Cohesion: 0.27
@@ -864,12 +859,12 @@ Cohesion: 0.21
 Nodes (13): 6. API surface (as built), Admin, code:block15 (GET    /store/hubs                                  list act), code:block16 (GET/POST/PATCH /admin/hubs, /admin/hubs/:id), code:block17 (GET    /rider-app                            302 → <storefro), code:block18 (GET    /store/riders/session                 customer sessio), code:block19 (POST   /rider/auth/login                     phone + PIN → 3), Rider app (DEPRECATED 2026-06-11 — riders use the storefront /account/rider) (+5 more)
 
 ### Community 269 - "Community 269"
-Cohesion: 0.28
-Nodes (6): AddressBookProps, AddAddress(), EditAddress(), hubSlugForCity(), useToggleState(), SideMenu()
+Cohesion: 0.33
+Nodes (5): AccountInfo(), Addresses(), useToggleState(), SideMenu(), compareAddresses()
 
 ### Community 271 - "Community 271"
-Cohesion: 0.18
-Nodes (11): listMyListings(), getProfileCompletion(), Overview(), OverviewProps, metadata, ProducerDashboardPage(), Props, metadata (+3 more)
+Cohesion: 0.25
+Nodes (6): DeliveryOptionsResponse, Shipping(), ShippingProps, Tier, TIER_VISUAL, TierOption
 
 ### Community 273 - "Community 273"
 Cohesion: 0.25
@@ -880,44 +875,44 @@ Cohesion: 0.22
 Nodes (6): dmSerif, inter, metadata, playfair, viewport, getBaseURL()
 
 ### Community 280 - "Community 280"
-Cohesion: 0.13
-Nodes (11): categories, CATEGORY_ICONS, CategoryFilter, origins, RefinementListProps, SortOptions, SortProductsProps, HUB_CITIES (+3 more)
+Cohesion: 0.07
+Nodes (14): AccordionItemProps, AccordionProps, ProductTabsProps, categories, CATEGORY_ICONS, CategoryFilter, origins, RefinementListProps (+6 more)
 
 ### Community 282 - "Community 282"
-Cohesion: 0.17
-Nodes (3): AccordionItemProps, AccordionProps, ProductTabsProps
-
-### Community 283 - "Community 283"
-Cohesion: 0.27
-Nodes (6): exchangeCodeForClaims(), GoogleIdTokenClaims, readCookie(), RiderGoogleAuthPending, GET(), VALID_ROLES
+Cohesion: 0.38
+Nodes (5): metadata, OverviewTemplate(), listOrders(), metadata, Orders()
 
 ### Community 285 - "Community 285"
-Cohesion: 0.43
-Nodes (6): CategoryPage(), generateMetadata(), generateStaticParams(), Props, getCategoryByHandle(), listCategories()
+Cohesion: 0.22
+Nodes (8): CategoryPage(), generateMetadata(), generateStaticParams(), Props, CodWalletStatus, Wallet, getCategoryByHandle(), listCategories()
 
 ### Community 286 - "Community 286"
-Cohesion: 0.36
-Nodes (7): config, dispatchBatchesInTransit(), notifyBatchInTransit(), parseHHmm(), ensureConfigured(), PushMessage, sendPush()
+Cohesion: 0.53
+Nodes (4): cityMatchesHub(), Hub, HubResolution, normalizeCity()
 
 ### Community 287 - "Community 287"
-Cohesion: 0.2
-Nodes (7): ACCOUNT_TYPES_NAV_ITEM, AccountNavLinkProps, NAV_ITEMS, NavItem, PRODUCER_NAV_ITEM, RIDER_NAV_ITEM, SELLER_NAV_ITEM
+Cohesion: 0.53
+Nodes (4): isArray(), isEmpty(), isObject(), ConvertToLocaleParams
 
 ### Community 288 - "Community 288"
-Cohesion: 0.25
-Nodes (5): EditAddressProps, addCustomerAddress(), deleteCustomerAddress(), updateCustomerAddress(), MyInformationProps
+Cohesion: 0.14
+Nodes (10): AddressBookProps, AddAddress(), EditAddress(), EditAddressProps, Props, hubSlugForCity(), addCustomerAddress(), deleteCustomerAddress() (+2 more)
 
 ### Community 289 - "Community 289"
 Cohesion: 0.28
 Nodes (6): classifyDisputeForSla(), DisputeSlaAction, DisputeSlaSnapshot, toMs(), base, now
 
 ### Community 290 - "Community 290"
-Cohesion: 0.22
-Nodes (9): cleanOrderTick(), config, config, config, config, JobInput, runJob(), unwrap() (+1 more)
+Cohesion: 0.27
+Nodes (7): config, config, config, config, JobInput, runJob(), unwrap()
 
 ### Community 292 - "Community 292"
-Cohesion: 0.6
-Nodes (4): getMyListing(), EditListingPage(), metadata, Props
+Cohesion: 0.5
+Nodes (4): readPendingAuth(), Login(), metadata, Props
+
+### Community 294 - "Community 294"
+Cohesion: 0.13
+Nodes (9): SearchHit, searchProducts(), ImageGallery(), ImageGalleryProps, SellerListingForm(), ImageOrPlaceholder(), ThumbnailProps, BACKEND_ORIGINS (+1 more)
 
 ### Community 295 - "Community 295"
 Cohesion: 0.33
@@ -927,37 +922,37 @@ Nodes (6): scripts, analyze, build, dev, lint, start
 Cohesion: 0.7
 Nodes (4): DELETE(), GET(), getCustomerId(), POST()
 
-### Community 297 - "Community 297"
-Cohesion: 0.67
-Nodes (3): getReferralPanel(), metadata, ReferralsPage()
-
 ### Community 302 - "Community 302"
 Cohesion: 0.5
 Nodes (4): 1. Project Overview, Multi-Hub Model, Two Fulfillment Modes, User Roles Summary
 
-### Community 303 - "Community 303"
-Cohesion: 0.21
-Nodes (4): CodWalletStatus, Wallet, Wallet, WalletStatus
+### Community 304 - "Community 304"
+Cohesion: 0.67
+Nodes (3): buildBody(), OtpEmailResult, sendOtpEmail()
+
+### Community 307 - "Community 307"
+Cohesion: 0.5
+Nodes (3): FeaturedProduct, StoreFreeShippingPrice, VariantPrice
 
 ## Knowledge Gaps
 - **1314 isolated node(s):** `name`, `private`, `packageManager`, `node`, `dev` (+1309 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **67 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **72 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `retrieveCustomer()` connect `Community 162` to `Community 192`, `Account & Checkout Pages`, `Link Components`, `Community 226`, `Community 292`, `Community 135`, `Community 137`, `Community 297`, `Community 173`, `Community 271`, `Account Profile Forms`, `Order Transfer Flow`, `Community 183`, `Community 280`?**
-  _High betweenness centrality (0.095) - this node is a cross-community bridge._
-- **Why does `GET()` connect `Community 135` to `Account & Checkout Pages`, `Community 162`, `Community 283`, `Auth Login/Register`?**
-  _High betweenness centrality (0.091) - this node is a cross-community bridge._
-- **Why does `getAuthHeaders()` connect `Account Profile Forms` to `Community 288`, `Account & Checkout Pages`, `Link Components`, `Community 130`, `Community 36`, `Community 162`, `Community 135`, `Community 137`, `Community 297`, `Community 204`, `Micro Community 50`, `Order Confirmation Flow`, `Micro Community 62`, `Community 223`?**
-  _High betweenness centrality (0.055) - this node is a cross-community bridge._
+- **Why does `GET()` connect `Community 135` to `Community 162`, `Community 304`, `Auth Login/Register`, `Account Navigation`, `Micro Community 62`, `Community 223`?**
+  _High betweenness centrality (0.096) - this node is a cross-community bridge._
+- **Why does `retrieveCustomer()` connect `Community 162` to `Account & Checkout Pages`, `Community 130`, `Community 135`, `Community 137`, `Community 173`, `Account Profile Forms`, `Order Transfer Flow`, `Community 183`, `Community 280`, `Community 282`, `Account Navigation`, `Community 223`?**
+  _High betweenness centrality (0.090) - this node is a cross-community bridge._
+- **Why does `getAuthHeaders()` connect `Account Profile Forms` to `Community 288`, `Account & Checkout Pages`, `Community 130`, `Community 162`, `Community 36`, `Community 135`, `Community 137`, `Community 204`, `Micro Community 50`, `Order Confirmation Flow`, `Order Transfer Flow`, `Community 151`, `Community 183`, `Community 282`, `Account Navigation`, `Micro Community 62`, `Community 223`?**
+  _High betweenness centrality (0.051) - this node is a cross-community bridge._
 - **What connects `name`, `private`, `packageManager` to the rest of the system?**
   _1318 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Backend Type System` be split into smaller, more focused modules?**
   _Cohesion score 0.01 - nodes in this community are weakly interconnected._
 - **Should `Account & Checkout Pages` be split into smaller, more focused modules?**
   _Cohesion score 0.09 - nodes in this community are weakly interconnected._
-- **Should `Price & Order Utils` be split into smaller, more focused modules?**
-  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
+- **Should `Backend Dependencies` be split into smaller, more focused modules?**
+  _Cohesion score 0.12 - nodes in this community are weakly interconnected._
