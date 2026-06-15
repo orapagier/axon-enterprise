@@ -200,6 +200,8 @@ export default function SellerListingForm({ mode, existing }: Props) {
     seed.estimated_kg = ""
     seed.listing_status = (defaults.listing_status as string) ?? "draft"
     seed.listing_type = (defaults.listing_type as string) ?? "direct_to_consumer"
+    seed.free_delivery = (defaults.free_delivery as string) ?? ""
+    seed.special_delivery = (defaults.special_delivery as string) ?? ""
     return seed
   })
 
