@@ -212,6 +212,42 @@ export function buildDeliveryTiers(args: BuildTiersArgs): TierOption[] {
   return [free, standard, special]
 }
 
+/** Delivery-relevant product metadata for one cart line item. */
+export type CartItemDeliveryMeta = {
+  selling_mode?: unknown
+  free_delivery?: unknown
+  special_delivery?: unknown
+}
+
+export type CartDeliveryEligibility = {
+  freeAllowed: boolean
+  specialAllowed: boolean
+  hasProducerItems: boolean
+}
+
+/**
+ * Resolve which premium tiers the WHOLE cart qualifies for. A tier is offered
+ * only when every item permits it: hub-sold items always do, producer-direct
+ * items only when the producer opted that listing in. One ineligible item
+ * closes the tier for the cart (single delivery, single tier choice).
+ */
+export function resolveCartDeliveryEligibility(
+  metas: CartItemDeliveryMeta[]
+): CartDeliveryEligibility {
+  let freeAllowed = true
+  let specialAllowed = true
+  let hasProducerItems = false
+  for (const m of metas) {
+    if (m?.selling_mode === "direct_to_consumer") {
+      hasProducerItems = true
+      if (m?.free_delivery !== true) freeAllowed = false
+      if (m?.special_delivery !== true) specialAllowed = false
+    }
+    // Hub-sold / unattributed items always allow both — no change.
+  }
+  return { freeAllowed, specialAllowed, hasProducerItems }
+}
+
 /** The fee (in pesos) for a chosen tier, given the (hub, barangay) fee row. */
 export function feeForTier(
   tier: DeliveryTier,
