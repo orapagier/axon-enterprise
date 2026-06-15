@@ -154,7 +154,10 @@ const BarangayCombobox: React.FC<Props> = ({
             leaveTo="opacity-0"
             afterLeave={() => setQuery("")}
           >
-            <ComboboxOptions className="absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-elevation-flyout ring-1 ring-ui-border-base focus:outline-none txt-compact-medium">
+            <ComboboxOptions
+              id={`${baseId}-options`}
+              className="absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-elevation-flyout ring-1 ring-ui-border-base focus:outline-none txt-compact-medium"
+            >
               {loadError && (
                 <div className="px-4 py-2 text-rose-500">{loadError}</div>
               )}
