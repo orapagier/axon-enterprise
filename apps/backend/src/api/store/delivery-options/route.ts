@@ -38,7 +38,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     DELIVERY_FEES_MODULE
   )
 
-  // 1. Load cart with shipping address.
+  // 1. Load cart with shipping address + line items (for who-sells-what).
   const { data: carts } = await query.graph({
     entity: "cart",
     fields: [
@@ -47,6 +47,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
       "shipping_address.city",
       "shipping_address.province",
       "shipping_address.metadata",
+      "items.product_id",
     ],
     filters: { id: cartId },
   })
@@ -54,6 +55,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     | {
         id: string
         customer_id: string | null
+        items: { product_id: string | null }[] | null
         shipping_address: {
           city: string | null
           province: string | null
