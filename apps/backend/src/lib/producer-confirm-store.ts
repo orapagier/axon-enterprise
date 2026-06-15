@@ -204,6 +204,20 @@ async function loadProductMeta(
   return map
 }
 
+/** Comma-joined "2× Bananas" lines for one producer's items in an order. */
+export async function producerItemLines(
+  container: MedusaContainer,
+  order: OrderForConfirm,
+  sellerId: string
+): Promise<string> {
+  const items = (order.items ?? []).filter((i) => i && i.title)
+  if (!items.length) return ""
+  const metaByProductId = await loadProductMeta(container, items)
+  const { producers } = routeOrderItems(items, metaByProductId)
+  const mine = producers.find((p) => p.sellerId === sellerId)
+  return (mine?.items ?? []).map(formatItemLine).join(", ")
+}
+
 /**
  * Cancel the Medusa order when a producer's items can't be fulfilled. Only safe
  * to cancel the whole order when it's ENTIRELY this one producer's (no hub items,
