@@ -23,7 +23,6 @@ import { runJob, type JobInput } from "../lib/job-observability"
 import { sendPush } from "../lib/push"
 import { sendEmail } from "../lib/notify"
 import { notifyAdmin } from "../lib/notify-admin"
-import { routeOrderItems, formatItemLine } from "../lib/order-routing"
 import {
   classifyConfirmEntry,
   markNudged,
@@ -38,6 +37,7 @@ import {
   cancelMedusaOrderForProducer,
   notifyResolution,
   loadOrderForConfirm,
+  producerItemLines,
 } from "../lib/producer-confirm-store"
 
 export const config = {
