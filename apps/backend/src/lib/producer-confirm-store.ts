@@ -8,7 +8,13 @@
  */
 import type { MedusaContainer } from "@medusajs/framework/types"
 import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
-import { cancelOrderWorkflow } from "@medusajs/medusa/core-flows"
+import {
+  cancelOrderWorkflow,
+  beginOrderEditOrderWorkflow,
+  orderEditUpdateItemQuantityWorkflow,
+  requestOrderEditRequestWorkflow,
+  confirmOrderEditRequestWorkflow,
+} from "@medusajs/medusa/core-flows"
 import { sendEmail } from "./notify"
 import { sendPush } from "./push"
 import { notifyAdmin } from "./notify-admin"
