@@ -864,6 +864,73 @@ export default function SellerListingForm({ mode, existing }: Props) {
         </div>
       </div>
 
+      {/* Delivery options — direct listings only. The hub always offers free
+          + fast delivery on its own listings, so these opt-ins are the
+          producer's call on listings where they're the seller of record. */}
+      {!isSellToHub && (
+        <div className="px-7 small:px-12 py-6 border-t border-grey-10">
+          <span className="inline-block text-caption font-semibold text-grey-70 uppercase tracking-[0.06em] mb-1">
+            Delivery options
+          </span>
+          <p className="text-[11px] text-grey-50 mb-4">
+            You&apos;re the seller on direct listings, so you choose which
+            delivery speeds buyers can pick. Standard delivery is always
+            available.
+          </p>
+
+          <div className="space-y-3">
+            <label className="flex items-start gap-x-3 p-4 rounded-xl border-2 border-grey-10 hover:border-brand-green-200 cursor-pointer transition-colors">
+              <input
+                type="checkbox"
+                name="free_delivery"
+                checked={values.free_delivery === "on"}
+                onChange={(e) =>
+                  setValues((v) => ({
+                    ...v,
+                    free_delivery: e.target.checked ? "on" : "",
+                  }))
+                }
+                className="mt-0.5 h-4 w-4 rounded border-grey-30 text-brand-green-700 focus:ring-brand-green-300"
+              />
+              <span className="flex-1">
+                <span className="block text-body-sm font-semibold text-grey-90">
+                  Offer free delivery 📦
+                </span>
+                <span className="block text-[11px] text-grey-50 mt-0.5">
+                  Buyers can choose free same-day delivery (before the hub
+                  cutoff), batched with the hub&apos;s run.
+                </span>
+              </span>
+            </label>
+
+            <label className="flex items-start gap-x-3 p-4 rounded-xl border-2 border-grey-10 hover:border-brand-green-200 cursor-pointer transition-colors">
+              <input
+                type="checkbox"
+                name="special_delivery"
+                checked={values.special_delivery === "on"}
+                onChange={(e) =>
+                  setValues((v) => ({
+                    ...v,
+                    special_delivery: e.target.checked ? "on" : "",
+                  }))
+                }
+                className="mt-0.5 h-4 w-4 rounded border-grey-30 text-brand-green-700 focus:ring-brand-green-300"
+              />
+              <span className="flex-1">
+                <span className="block text-body-sm font-semibold text-grey-90">
+                  Offer special (within-1-hour) delivery ⚡
+                </span>
+                <span className="block text-[11px] text-grey-50 mt-0.5">
+                  For urgent orders. You must confirm within ~10 minutes or
+                  it&apos;s handed to the hub. Buyers see a note that this
+                  depends on your quick confirmation.
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+      )}
+
       {/* Top-level error banner — shown when the server action returns
           state.error (auth expired, profile incomplete, validation rejection,
           etc.). Without this, failures are silent and the submit button just
