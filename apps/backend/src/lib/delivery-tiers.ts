@@ -114,20 +114,50 @@ export type BuildTiersArgs = {
   hoursLabel: string
   dispatchLabel: string
   cutoffLabel: string
+  /**
+   * Does EVERY item in the cart permit free delivery? Hub-sold items always do
+   * (the hub absorbs it); producer-direct items only when the producer opted in
+   * (`metadata.free_delivery`). When false, the Free tier is closed regardless
+   * of the cutoff. Defaults to true for backwards compatibility.
+   */
+  freeAllowed?: boolean
+  /**
+   * Does EVERY item in the cart permit special (within-1h) delivery? Hub-sold
+   * items always do; producer-direct items only when the producer opted in
+   * (`metadata.special_delivery`). When false, the Special tier is closed.
+   * Defaults to true for backwards compatibility.
+   */
+  specialAllowed?: boolean
+  /**
+   * Does the cart contain at least one producer-direct item? Drives the
+   * consumer disclaimer on Special (fulfilment depends on the producer
+   * confirming quickly, else the hub steps in).
+   */
+  hasProducerItems?: boolean
 }
 
 /**
  * The 3 tiers, always all present, with availability + reason resolved:
- *   - Free:     before the dispatch cutoff only (₱0).
+ *   - Free:     before the dispatch cutoff AND every item allows free delivery.
  *   - Standard: always available; delivered next available window when closed.
- *   - Special:  Hub Members only, ~1h — and only while the hub is open.
+ *   - Special:  Hub Members only, ~1h, hub open, AND every item allows it.
  *
  * Outside operating hours (`isOpen === false`) we no longer blanket-close the
  * checkout. Buyers can still order; the order simply rides the next available
  * dispatch window. Only Special (the ~1h fast lane) stays unavailable, because
  * within-the-hour delivery is impossible while riders aren't dispatching.
+ *
+ * Who-sells-what also gates Free + Special: the hub always offers both on its
+ * own listings, but a producer selling direct must opt each one in per listing.
  */
 export function buildDeliveryTiers(args: BuildTiersArgs): TierOption[] {
+  const freeAllowed = args.freeAllowed ?? true
+  const specialAllowed = args.specialAllowed ?? true
+
+  // Free needs the cart to allow it AND to be before the dispatch cutoff. The
+  // "not offered" reason dominates the cutoff one — no point telling a buyer to
+  // beat the cutoff for a perk that isn't on these items at all.
+  const freeAvailable = freeAllowed && args.isBeforeCutoff
   const free: TierOption = {
     tier: "free",
     label: "Free delivery",
@@ -135,10 +165,12 @@ export function buildDeliveryTiers(args: BuildTiersArgs): TierOption[] {
     eta_label: args.isBeforeCutoff
       ? `Today ${args.dispatchLabel}`
       : `Tomorrow ${args.dispatchLabel}`,
-    available: args.isBeforeCutoff,
-    reason_if_unavailable: args.isBeforeCutoff
-      ? null
-      : `Order before ${args.cutoffLabel} for free same-day delivery`,
+    available: freeAvailable,
+    reason_if_unavailable: !freeAllowed
+      ? "Not offered on one or more items in your cart"
+      : !args.isBeforeCutoff
+        ? `Order before ${args.cutoffLabel} for free same-day delivery`
+        : null,
   }
 
   const standard: TierOption = {
@@ -152,18 +184,28 @@ export function buildDeliveryTiers(args: BuildTiersArgs): TierOption[] {
     reason_if_unavailable: null,
   }
 
-  // Special is the ~1h fast lane: a Hub-Member perk AND only meaningful while
-  // the hub is open (no rider can deliver within the hour after close).
+  // Special is the ~1h fast lane: a Hub-Member perk, only meaningful while the
+  // hub is open (no rider can deliver within the hour after close), and only on
+  // items whose seller offers it.
+  const specialAvailable = specialAllowed && args.isMember && args.isOpen
   const special: TierOption = {
     tier: "special",
     label: "Special delivery",
     fee_php: args.specialFeePhp,
     eta_label: "Within 1 hour",
-    available: args.isMember && args.isOpen,
-    reason_if_unavailable: !args.isMember
-      ? "Hub Members only — upgrade for ₱500/yr"
-      : !args.isOpen
-        ? `Within-the-hour delivery runs ${args.hoursLabel}`
+    available: specialAvailable,
+    reason_if_unavailable: !specialAllowed
+      ? "Not offered on one or more items in your cart"
+      : !args.isMember
+        ? "Hub Members only — upgrade for ₱500/yr"
+        : !args.isOpen
+          ? `Within-the-hour delivery runs ${args.hoursLabel}`
+          : null,
+    // Disclaimer when a producer-direct item is in the urgent lane: the speed
+    // hinges on the producer confirming fast; otherwise the hub steps in.
+    note:
+      specialAvailable && args.hasProducerItems
+        ? "On producer items, within-the-hour delivery depends on the producer confirming quickly. If they don't, the hub steps in or you're refunded."
         : null,
   }
 
