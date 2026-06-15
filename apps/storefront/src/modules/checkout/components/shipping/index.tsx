@@ -25,6 +25,8 @@ type DeliveryOptionsResponse = {
   barangay: string
   is_member: boolean
   cutoff: string
+  is_open: boolean
+  hours_label: string
   options: TierOption[]
 }
 
@@ -165,6 +167,21 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
                   {" "}via <span className="text-ui-fg-base font-medium">{data.hub.name}</span>
                 </Text>
               </div>
+
+              {!data.is_open && (
+                <div
+                  className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3"
+                  data-testid="delivery-closed-notice"
+                >
+                  <Text className="text-base-regular font-semibold text-amber-900">
+                    Delivery is currently closed
+                  </Text>
+                  <Text className="text-caption text-amber-800 mt-0.5">
+                    {data.hub.name} delivers {data.hours_label}. Please order
+                    again during delivery hours.
+                  </Text>
+                </div>
+              )}
 
               <div className="space-y-2">
                 {data.options.map((option) => {

@@ -150,6 +150,38 @@
           "enumItems": [],
           "mappedType": "text"
         },
+        "delivery_open": {
+          "name": "delivery_open",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "'06:00'",
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "delivery_close": {
+          "name": "delivery_close",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "'18:00'",
+          "comment": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
         "active": {
           "name": "active",
           "type": "boolean",

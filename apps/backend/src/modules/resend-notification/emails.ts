@@ -83,6 +83,35 @@ const TEMPLATES: Record<string, (d: Data) => BuiltEmail> = {
     }
   },
 
+  "producer-order": (d) => {
+    const items = Array.isArray(d.items) ? (d.items as string[]) : []
+    const itemsHtml = items.length
+      ? `<ul style="margin:0 0 12px;padding-left:18px;font-size:14px;line-height:1.6">${items
+          .map((i) => `<li>${i}</li>`)
+          .join("")}</ul>`
+      : ""
+    return {
+      subject: `New order #${d.display_id} for your listing — ${BRAND}`,
+      html: layout(
+        `You have a new order (#${d.display_id})`,
+        p(
+          `A buyer just placed an order for your direct ${
+            items.length === 1 ? "listing" : "listings"
+          }:`
+        ) +
+          itemsHtml +
+          (d.buyer_name ? p(`<strong>Buyer:</strong> ${d.buyer_name}`) : "") +
+          (d.buyer_phone ? p(`<strong>Phone:</strong> ${d.buyer_phone}`) : "") +
+          (d.deliver_to ? p(`<strong>Deliver to:</strong> ${d.deliver_to}`) : "") +
+          p(
+            `You are the seller of record for ${
+              items.length === 1 ? "this item" : "these items"
+            } — please prepare and fulfil the order. Freshness and quality are your responsibility.`
+          )
+      ),
+    }
+  },
+
   "order-in-transit": (d) => ({
     subject: `Order #${d.display_id} is on the way`,
     html: layout(

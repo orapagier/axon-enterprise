@@ -2,6 +2,8 @@ import {
   parseHHMM,
   beforeCutoff,
   isWithinDeliveryHours,
+  formatDeliveryHours,
+  resolveDeliveryWindow,
   isMembershipActive,
   buildDeliveryTiers,
   feeForTier,
@@ -55,6 +57,41 @@ describe("isWithinDeliveryHours", () => {
   })
   it("closed late at night", () => {
     expect(isWithinDeliveryHours({ hour: 22, minute: 0 })).toBe(false)
+  })
+  it("honors a custom (per-hub) window", () => {
+    const open = { hour: 8, minute: 30 }
+    const close = { hour: 17, minute: 0 }
+    expect(isWithinDeliveryHours({ hour: 8, minute: 0 }, open, close)).toBe(false)
+    expect(isWithinDeliveryHours({ hour: 8, minute: 30 }, open, close)).toBe(true)
+    expect(isWithinDeliveryHours({ hour: 17, minute: 0 }, open, close)).toBe(false)
+  })
+})
+
+describe("formatDeliveryHours", () => {
+  it("renders the default 6am–6pm window", () => {
+    expect(
+      formatDeliveryHours({ hour: 6, minute: 0 }, { hour: 18, minute: 0 })
+    ).toBe("6:00 AM–6:00 PM")
+  })
+  it("renders noon and midnight correctly", () => {
+    expect(
+      formatDeliveryHours({ hour: 0, minute: 0 }, { hour: 12, minute: 30 })
+    ).toBe("12:00 AM–12:30 PM")
+  })
+})
+
+describe("resolveDeliveryWindow", () => {
+  it("parses configured strings and builds a label", () => {
+    const w = resolveDeliveryWindow("08:00", "20:00")
+    expect(w.open).toEqual({ hour: 8, minute: 0 })
+    expect(w.close).toEqual({ hour: 20, minute: 0 })
+    expect(w.label).toBe("8:00 AM–8:00 PM")
+  })
+  it("falls back to the platform default when blank/missing", () => {
+    const w = resolveDeliveryWindow(null, undefined)
+    expect(w.open).toEqual({ hour: 6, minute: 0 })
+    expect(w.close).toEqual({ hour: 18, minute: 0 })
+    expect(w.label).toBe("6:00 AM–6:00 PM")
   })
 })
 
@@ -114,6 +151,7 @@ describe("buildDeliveryTiers", () => {
     standardFeePhp: 30,
     specialFeePhp: 80,
     isOpen: true,
+    hoursLabel: "6:00 AM–6:00 PM",
     dispatchLabel: "2:00 PM",
     cutoffLabel: "11:00",
   }
@@ -181,17 +219,18 @@ describe("buildDeliveryTiers", () => {
     expect(tiers.map((t) => t.tier)).toEqual(["free", "standard", "special"])
   })
 
-  it("closes every tier outside operating hours, overriding per-tier rules", () => {
+  it("closes every tier outside operating hours, using the hub's hours label", () => {
     const tiers = buildDeliveryTiers({
       ...base,
       isMember: true,
       isBeforeCutoff: true,
       isOpen: false,
+      hoursLabel: "8:00 AM–8:00 PM",
     })
     expect(tiers.map((t) => t.tier)).toEqual(["free", "standard", "special"])
     for (const t of tiers) {
       expect(t.available).toBe(false)
-      expect(t.reason_if_unavailable).toContain("6:00 AM–6:00 PM")
+      expect(t.reason_if_unavailable).toContain("8:00 AM–8:00 PM")
     }
   })
 })

@@ -278,6 +278,7 @@ const HubsPage = () => {
                 <Table.HeaderCell>Areas</Table.HeaderCell>
                 <Table.HeaderCell>Cutoff</Table.HeaderCell>
                 <Table.HeaderCell>Dispatch</Table.HeaderCell>
+                <Table.HeaderCell>Hours</Table.HeaderCell>
                 <Table.HeaderCell>Active</Table.HeaderCell>
                 <Table.HeaderCell className="text-right">Actions</Table.HeaderCell>
               </Table.Row>
@@ -304,6 +305,11 @@ const HubsPage = () => {
                       </Table.Cell>
                       <Table.Cell>{hub.dispatch_cutoff}</Table.Cell>
                       <Table.Cell>{hub.dispatch_time}</Table.Cell>
+                      <Table.Cell>
+                        <span className="text-xs">
+                          {hub.delivery_open}–{hub.delivery_close}
+                        </span>
+                      </Table.Cell>
                       <Table.Cell>
                         <Switch
                           checked={hub.active}
@@ -338,7 +344,7 @@ const HubsPage = () => {
                     </Table.Row>
                     {expanded && (
                       <Table.Row key={`${hub.id}-areas`}>
-                        <Table.Cell colSpan={8}>
+                        <Table.Cell colSpan={9}>
                           <div className="bg-ui-bg-subtle p-4 rounded-md">
                             <div className="flex flex-col gap-y-3 mb-4">
                               {(hub.areas ?? []).length === 0 ? (
@@ -554,6 +560,29 @@ const HubsPage = () => {
                 />
               </div>
             </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <Label>Delivery opens (HH:mm)</Label>
+                <Input
+                  value={hubForm.delivery_open}
+                  onChange={(e) =>
+                    setHubForm({ ...hubForm, delivery_open: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <Label>Delivery closes (HH:mm)</Label>
+                <Input
+                  value={hubForm.delivery_close}
+                  onChange={(e) =>
+                    setHubForm({ ...hubForm, delivery_close: e.target.value })
+                  }
+                />
+              </div>
+            </div>
+            <Text size="small" className="text-ui-fg-subtle -mt-2">
+              No delivery is offered outside this window (hub-local time).
+            </Text>
             <div className="flex items-center gap-x-2">
               <Switch
                 checked={hubForm.active}

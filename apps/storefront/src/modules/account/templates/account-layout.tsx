@@ -21,8 +21,15 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
 
   // Roles stack on the Consumer base, so the header lists every active role
   // (e.g. "Producer · Rider account"); plain consumers show "Consumer".
-  const roles = rolesOf(customer.metadata as Record<string, unknown> | null)
-  const profileCompleted = Boolean(customer.metadata?.profile_completed)
+  const meta = (customer.metadata ?? {}) as Record<string, unknown>
+  const roles = rolesOf(meta)
+  const profileCompleted = Boolean(meta.profile_completed)
+  // Sellers (Producer/Trader) finish their profile first, then wait for the
+  // team to approve them (meta.seller_verified). A completed profile alone is
+  // NOT "Verified" — that flag is set later in the admin Sellers page.
+  const isSeller = roles.includes("producer") || roles.includes("trader")
+  const awaitingVerification =
+    profileCompleted && isSeller && meta.seller_verified !== true
   const displayName =
     customer.first_name ||
     (customer.email ? customer.email.split("@")[0] : "there")
