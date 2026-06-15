@@ -22,6 +22,10 @@ export default async function OrderCompletedTemplate({
 }: OrderCompletedTemplateProps) {
   const cookies = await nextCookies()
 
+  // The assistant only mounts for signed-in customers, so guests fall back to
+  // the static order list for "Track your order".
+  const customer = await retrieveCustomer().catch(() => null)
+
   const isOnboarding = cookies.get("_medusa_onboarding")?.value === "true"
 
   const firstName = order.shipping_address?.first_name
