@@ -297,67 +297,109 @@ export async function producerItemLines(
 }
 
 /**
- * Cancel the Medusa order when a producer's items can't be fulfilled. Only safe
- * to cancel the whole order when it's ENTIRELY this one producer's (no hub items,
- * no other producers) — otherwise we'd punish the buyer for other sellers, so we
- * flag the admin to split it by hand instead.
+ * Void a producer's portion of an order when their items can't be fulfilled.
  *
- * Returns whether the Medusa order was actually cancelled.
+ * Cancellation is PER ITEM regardless of how many sellers are on the order: only
+ * this producer's line items are removed (via an order edit that sets them to
+ * quantity 0, which releases their inventory and recomputes the total), so the
+ * buyer keeps everything from sellers/hub that ARE fulfilling. When removing
+ * this producer's items would empty the order entirely, the whole order is
+ * cancelled instead (Medusa can't hold an order with no items).
+ *
+ * `cancelled` reflects whether the producer's portion was successfully voided.
  */
 export async function cancelMedusaOrderForProducer(
   container: MedusaContainer,
   order: OrderForConfirm,
   sellerId: string,
   reason: string
-): Promise<{ cancelled: boolean }> {
+): Promise<{ cancelled: boolean; mode: "order" | "items" | "none" }> {
   const logger = container.resolve(ContainerRegistrationKeys.LOGGER)
   const items = (order.items ?? []).filter((i) => i && i.title)
   const metaByProductId = await loadProductMeta(container, items)
   const { producers, hubItems } = routeOrderItems(items, metaByProductId)
 
-  const wholeOrderIsThisProducer =
-    hubItems.length === 0 &&
-    producers.length === 1 &&
-    producers[0].sellerId === sellerId
+  const mine = producers.find((p) => p.sellerId === sellerId)?.items ?? []
+  const otherItemsRemain =
+    hubItems.length > 0 || producers.some((p) => p.sellerId !== sellerId)
 
-  if (!wholeOrderIsThisProducer) {
-    // Mixed order — cancelling the whole thing would hurt the buyer + other
-    // sellers. Hand it to a human to split.
+  // Removing this producer's items would leave nothing → cancel the whole order.
+  if (!otherItemsRemain) {
+    try {
+      await cancelOrderWorkflow(container).run({
+        input: { order_id: order.id, no_notification: true },
+      })
+      logger.info(`producer-confirm: cancelled order ${order.id} (${reason}).`)
+      return { cancelled: true, mode: "order" }
+    } catch (err) {
+      logger.warn(
+        `producer-confirm: cancelOrderWorkflow failed for ${order.id}: ${
+          (err as Error).message
+        }`
+      )
+      await notifyAdmin(container, {
+        title: "⚠️ Order cancel failed — needs attention",
+        lines: [
+          `Order #${order.display_id}`,
+          `Auto-cancel after producer no-confirm failed: ${(err as Error).message}`,
+        ],
+        url: "/app/orders",
+      })
+      return { cancelled: false, mode: "none" }
+    }
+  }
+
+  // Mixed order — remove ONLY this producer's line items via an order edit.
+  const lineItems = mine
+    .filter((i) => typeof i.id === "string")
+    .map((i) => ({ id: i.id as string, quantity: 0 }))
+  if (!lineItems.length) {
+    logger.warn(
+      `producer-confirm: no line-item ids to remove for ${sellerId} on ${order.id}.`
+    )
     await notifyAdmin(container, {
-      title: "✂️ Manual split-cancel needed",
+      title: "✂️ Manual line-cancel needed",
       lines: [
         `Order #${order.display_id}`,
-        `Producer items couldn't be confirmed (${reason}).`,
-        "This order also has other sellers' items — cancel only the affected lines by hand.",
+        `Couldn't auto-remove producer items (${reason}); remove them by hand.`,
       ],
       url: "/app/orders",
     })
-    return { cancelled: false }
+    return { cancelled: false, mode: "none" }
   }
 
   try {
-    await cancelOrderWorkflow(container).run({
-      input: { order_id: order.id, no_notification: true },
+    await beginOrderEditOrderWorkflow(container).run({
+      input: { order_id: order.id },
+    })
+    await orderEditUpdateItemQuantityWorkflow(container).run({
+      input: { order_id: order.id, items: lineItems },
+    })
+    await requestOrderEditRequestWorkflow(container).run({
+      input: { order_id: order.id },
+    })
+    await confirmOrderEditRequestWorkflow(container).run({
+      input: { order_id: order.id },
     })
     logger.info(
-      `producer-confirm: cancelled order ${order.id} (${reason}).`
+      `producer-confirm: removed ${lineItems.length} line(s) from order ${order.id} (${reason}).`
     )
-    return { cancelled: true }
+    return { cancelled: true, mode: "items" }
   } catch (err) {
     logger.warn(
-      `producer-confirm: cancelOrderWorkflow failed for ${order.id}: ${
+      `producer-confirm: order-edit removal failed for ${order.id}: ${
         (err as Error).message
       }`
     )
     await notifyAdmin(container, {
-      title: "⚠️ Order cancel failed — needs attention",
+      title: "✂️ Couldn't auto-remove producer items",
       lines: [
         `Order #${order.display_id}`,
-        `Auto-cancel after producer no-confirm failed: ${(err as Error).message}`,
+        `Remove this producer's lines by hand (${reason}): ${(err as Error).message}`,
       ],
       url: "/app/orders",
     })
-    return { cancelled: false }
+    return { cancelled: false, mode: "none" }
   }
 }
 
