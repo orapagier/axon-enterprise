@@ -59,6 +59,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       "customer_id",
       "shipping_address.city",
       "shipping_address.metadata",
+      "items.product_id",
     ],
     filters: { id: body.cart_id },
   })
@@ -66,6 +67,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     | {
         id: string
         customer_id: string | null
+        items: { product_id: string | null }[] | null
         shipping_address: {
           city: string | null
           metadata: Record<string, unknown> | null
