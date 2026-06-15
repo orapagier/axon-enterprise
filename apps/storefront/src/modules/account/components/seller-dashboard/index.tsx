@@ -143,18 +143,31 @@ export default function SellerDashboard({
                 : "We're reviewing your producer account. You can still draft listings — they'll go live once you're verified."}
             </p>
           </div>
-          <LocalizedClientLink
-            href="/account/producer/listings/new"
-            className="group inline-flex items-center gap-x-2 pl-5 pr-4 py-3 rounded-full bg-brand-green-700 hover:bg-brand-green-800 text-white text-body-sm font-semibold transition-all shadow-medium hover:shadow-large hover:-translate-y-0.5 w-fit"
-          >
-            New listing
-            <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-brand-gold-400 text-grey-90">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
+          <div className="flex flex-col xsmall:flex-row gap-2 w-fit">
+            <LocalizedClientLink
+              href="/account/producer/orders"
+              className="inline-flex items-center gap-x-2 px-5 py-3 rounded-full bg-white border-2 border-grey-15 hover:border-brand-green-300 text-grey-90 text-body-sm font-semibold transition-all w-fit"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
-            </span>
-          </LocalizedClientLink>
+              Incoming orders
+            </LocalizedClientLink>
+            <LocalizedClientLink
+              href="/account/producer/listings/new"
+              className="group inline-flex items-center gap-x-2 pl-5 pr-4 py-3 rounded-full bg-brand-green-700 hover:bg-brand-green-800 text-white text-body-sm font-semibold transition-all shadow-medium hover:shadow-large hover:-translate-y-0.5 w-fit"
+            >
+              New listing
+              <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-brand-gold-400 text-grey-90">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </span>
+            </LocalizedClientLink>
+          </div>
         </div>
 
         {/* Stat row */}
