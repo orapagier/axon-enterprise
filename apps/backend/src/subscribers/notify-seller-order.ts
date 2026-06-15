@@ -9,6 +9,12 @@ import {
   type RoutableItem,
   type ProductRouteMeta,
 } from "../lib/order-routing"
+import {
+  initConfirmEntry,
+  type ProducerConfirmEntry,
+} from "../lib/producer-confirm"
+import { persistConfirmEntry } from "../lib/producer-confirm-store"
+import type { DeliveryTier } from "../lib/delivery-tiers"
 
 /**
  * On order.placed, tell whoever fulfils each item that it sold:
