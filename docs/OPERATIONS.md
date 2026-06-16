@@ -92,3 +92,58 @@ cd apps/backend && npx medusa exec ./src/jobs/<job>.ts
   plus any shortfalls. Pure logic lives in `apps/backend/src/lib/cod-aging.ts`.
 - The same `unremittedByRider` rule drives `rider-unremitted-tick`, so the
   suspension job and the report can't disagree on what's outstanding.
+
+## Producer order confirmation
+
+Direct-to-consumer orders (where a producer is the seller) must be confirmed by
+that producer before they sit idle. Unlike the nightly ticks, `producer-confirm-tick`
+runs **every 10 minutes** (`*/10 * * * *`) — it's the only sub-hourly job.
+
+Lifecycle (one step per tick; pure state machine in
+`apps/backend/src/lib/producer-confirm.ts`, persisted on `order.metadata.producer_confirm[sellerId]`):
+
+1. **Nudge** — on order placement and re-nudged every ~10 min while `awaiting`.
+   Confirm window: **Standard / Free = 1 h, Special = 10 min**.
+2. **Escalate** — at the deadline the order moves to `escalated`, opening a
+   **1-hour admin window**, and the hub/admin is notified (Telegram **and**
+   `ADMIN_NOTIFY_EMAIL`). The producer can still grab it during this window, but
+   a late confirm records a strike.
+3. **Auto-cancel** — if the admin takes no action before the window lapses, the
+   order is cancelled as a safety net so it never sits idle.
+
+Admin acts on escalations from the **Producer Orders** admin page
+(`/admin/producer-orders`): **Take** (the hub sources + delivers the items) or
+**Cancel**. Producers see their run list at storefront `/account/producer/orders`
+(Confirm / Decline / Dispute strike).
+
+**Cancellation is per item, regardless of how many sellers are on the order.**
+Only the unconfirmed producer's line items are removed (via a Medusa order edit
+that sets them to quantity 0, releasing their inventory and recomputing the COD
+total); everything from other sellers/hub stays. A full order cancel happens only
+when removing those items would leave the order empty.
+
+Producer non-fulfilment **strikes** live on the producer's customer metadata
+(`producer_confirm_strikes` + `producer_confirm_strike_log`, disputable) — the
+buyer strike system (`buyer_account_status` prepay-locks) does not model producers.
+
+### Config
+
+| Env var | Meaning |
+|---|---|
+| `ADMIN_NOTIFY_EMAIL` | recipient of the escalation email; optional — if unset, escalations still fire via Telegram |
+| `TELEGRAM_BOT_TOKEN` / `TELEGRAM_ADMIN_CHAT_ID` | admin escalation + queue pings (see `lib/notify-admin.ts`) |
+
+All notifications are best-effort; a Telegram/email hiccup never blocks the
+lifecycle. Env changes require a backend restart (env is read at boot).
+
+### Verification
+
+```bash
+cd apps/backend && npx medusa exec ./src/migration-scripts/verify-producer-confirm.ts
+```
+
+Drives the real tick + store helpers against throwaway data (16 checks: escalate,
+auto-cancel, per-item removal keeping other sellers' lines, strike + dispute) and
+cleans up after itself. Note: `notifyAdmin "fetch failed"` warnings are expected
+when running inside a sandbox with no outbound network to Telegram — not a code
+fault.
