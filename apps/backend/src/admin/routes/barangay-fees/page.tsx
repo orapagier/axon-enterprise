@@ -371,23 +371,16 @@ const BarangayFeesPage = () => {
                         `₱${fee.standard_fee_php}`
                       )}
                     </Table.Cell>
-                    <Table.Cell className="text-right tabular-nums">
-                      {isEditing ? (
-                        <Input
-                          type="number"
-                          min={0}
-                          className="w-24 text-right"
-                          value={editForm.special_fee_php}
-                          onChange={(e) =>
-                            setEditForm((f) => ({
-                              ...f,
-                              special_fee_php: e.target.value,
-                            }))
-                          }
-                        />
-                      ) : (
-                        `₱${fee.special_fee_php}`
-                      )}
+                    <Table.Cell className="text-right tabular-nums text-ui-fg-subtle">
+                      {(() => {
+                        // Always derived from Standard (2×), never editable.
+                        const std = isEditing
+                          ? parseInt(editForm.standard_fee_php, 10)
+                          : fee.standard_fee_php
+                        return Number.isFinite(std)
+                          ? `₱${std * SPECIAL_FEE_MULTIPLIER}`
+                          : "—"
+                      })()}
                     </Table.Cell>
                     <Table.Cell className="text-center">
                       <Switch
