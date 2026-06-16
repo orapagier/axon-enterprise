@@ -259,13 +259,12 @@ export function resolveCartDeliveryEligibility(
   return { freeAllowed, specialAllowed, hasProducerItems }
 }
 
-/** The fee (in pesos) for a chosen tier, given the (hub, barangay) fee row. */
+/** The fee (in pesos) for a chosen tier, given the barangay's Standard fee. */
 export function feeForTier(
   tier: DeliveryTier,
-  standardFeePhp: number,
-  specialFeePhp: number
+  standardFeePhp: number
 ): number {
   if (tier === "free") return 0
   if (tier === "standard") return standardFeePhp
-  return specialFeePhp
+  return specialFeeFor(standardFeePhp)
 }
