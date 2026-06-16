@@ -217,23 +217,20 @@ const BarangayFeesPage = () => {
     setEditingId(fee.id)
     setEditForm({
       standard_fee_php: String(fee.standard_fee_php),
-      special_fee_php: String(fee.special_fee_php),
     })
   }
 
   const saveEdit = async () => {
     if (!editingId) return
     const std = parseInt(editForm.standard_fee_php, 10)
-    const spc = parseInt(editForm.special_fee_php, 10)
-    if (!Number.isFinite(std) || std < 0 || !Number.isFinite(spc) || spc < 0) {
-      toast.error("Fees must be ≥ 0")
+    if (!Number.isFinite(std) || std < 0) {
+      toast.error("Standard fee must be ≥ 0")
       return
     }
     try {
       await updateOne.mutateAsync({
         id: editingId,
         standard_fee_php: std,
-        special_fee_php: spc,
       })
       setEditingId(null)
       toast.success("Updated")
