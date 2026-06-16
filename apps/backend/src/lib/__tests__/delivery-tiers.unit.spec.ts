@@ -199,7 +199,8 @@ describe("buildDeliveryTiers", () => {
     })[2]
     expect(member.available).toBe(true)
     expect(member.reason_if_unavailable).toBeNull()
-    expect(member.fee_php).toBe(80)
+    // Special is always 2× the standard fee (30 → 60).
+    expect(member.fee_php).toBe(60)
 
     const nonMember = buildDeliveryTiers({
       ...base,
