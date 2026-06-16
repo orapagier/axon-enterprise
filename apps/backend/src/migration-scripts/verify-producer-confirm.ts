@@ -343,7 +343,7 @@ export default async function verifyProducerConfirm({ container }: ExecArgs) {
     )
     check("late confirm → strike owed", late.entry.late === true && late.strike === true)
     await persistConfirmEntry(container, o4, producerB.id, late.entry)
-    await recordProducerStrike(container, producerB.id, {
+    const newCount = await recordProducerStrike(container, producerB.id, {
       order_id: o4,
       display_id: null,
       reason: "verify late confirm",
@@ -351,7 +351,8 @@ export default async function verifyProducerConfirm({ container }: ExecArgs) {
     })
     check(
       "recordProducerStrike incremented B's count",
-      (await strikeCount(producerB.id)) === strikesBefore5 + 1
+      newCount === strikesBefore5 + 1,
+      `before=${strikesBefore5} after=${newCount}`
     )
     const disputed = await disputeProducerStrike(container, producerB.id, o4, "test dispute")
     check("producer can dispute the strike", disputed === true)
