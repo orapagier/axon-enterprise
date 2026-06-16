@@ -247,9 +247,11 @@ const BarangayFeesPage = () => {
       <div className="px-6 py-4 border-b">
         <Heading level="h1">Barangay delivery fees</Heading>
         <Text className="text-ui-fg-subtle">
-          Per-barangay Standard and Special delivery fees for each hub. Free
-          delivery is always ₱0 (before noon cutoff) and is not stored here.
-          Buyer's checkout uses these to compute their three options.
+          Per-barangay Standard delivery fee for each hub. Special (within-1h)
+          delivery is always {SPECIAL_FEE_MULTIPLIER}× the Standard fee — set
+          Standard and Special follows automatically. Free delivery is always ₱0
+          (before noon cutoff) and is not stored here. Buyer's checkout uses
+          these to compute their three options.
         </Text>
       </div>
 
