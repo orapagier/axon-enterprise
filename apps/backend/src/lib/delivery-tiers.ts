@@ -103,9 +103,20 @@ export function isMembershipActive(
   return expiresAt > nowMs
 }
 
+/**
+ * Special (the ~1h fast lane) is always priced at exactly this multiple of the
+ * barangay's Standard fee — never more, never less. Pricing it off Standard
+ * keeps a single knob per barangay and guarantees the two tiers never drift.
+ */
+export const SPECIAL_FEE_MULTIPLIER = 2
+
+/** The Special fee for a barangay, derived from its Standard fee. */
+export function specialFeeFor(standardFeePhp: number): number {
+  return standardFeePhp * SPECIAL_FEE_MULTIPLIER
+}
+
 export type BuildTiersArgs = {
   standardFeePhp: number
-  specialFeePhp: number
   isMember: boolean
   isBeforeCutoff: boolean
   /** Is the hub currently inside its operating window? */
