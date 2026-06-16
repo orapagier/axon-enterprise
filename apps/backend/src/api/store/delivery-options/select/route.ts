@@ -198,7 +198,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     }
   }
 
-  const feePhp = feeForTier(tier, fee.standard_fee_php, fee.special_fee_php)
+  const feePhp = feeForTier(tier, fee.standard_fee_php)
 
   // Merge into cart metadata.
   const [updated] = await cartModule.updateCarts([
