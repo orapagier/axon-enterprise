@@ -89,7 +89,7 @@ export default async function seedBarangayFeesTagum({ container }: ExecArgs) {
       hub_id: hub.id,
       barangay: row.barangay,
       standard_fee_php: row.standard_fee_php,
-      special_fee_php: row.special_fee_php,
+      special_fee_php: specialFeeFor(row.standard_fee_php),
       active: true,
     }))
   )
