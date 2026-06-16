@@ -199,11 +199,15 @@ export default async function verifyProducerConfirm({ container }: ExecArgs) {
       })
       return (data[0] as { status: string } | undefined)?.status ?? "unknown"
     }
-    const lineItemsFor = async (id: string) =>
-      (await orderModule.listOrderLineItems(
-        { order_id: id },
-        { select: ["id", "product_id", "quantity"] }
-      )) as unknown as { product_id: string | null; quantity: number }[]
+    const lineItemsFor = async (id: string) => {
+      const o = (await orderModule.retrieveOrder(id, {
+        relations: ["items"],
+        select: ["id"],
+      })) as unknown as {
+        items?: { product_id: string | null; quantity: number }[]
+      }
+      return o.items ?? []
+    }
     const qtyForProduct = (
       items: { product_id: string | null; quantity: number }[],
       productId: string
