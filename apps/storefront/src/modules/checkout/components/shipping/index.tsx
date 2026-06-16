@@ -286,7 +286,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
         <div>
           <div className="text-small-regular">
             {selectedOption && (
-              <div className="flex flex-col w-1/3">
+              <div className="flex flex-col w-full small:w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
                   Method
                 </Text>

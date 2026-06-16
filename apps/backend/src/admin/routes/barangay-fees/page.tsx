@@ -156,7 +156,6 @@ const BarangayFeesPage = () => {
   const handleAddRow = async () => {
     const barangay = newRow.barangay.trim()
     const std = parseInt(newRow.standard_fee_php, 10)
-    const spc = parseInt(newRow.special_fee_php, 10)
     if (!barangay) {
       toast.error("Barangay name required")
       return
@@ -165,15 +164,9 @@ const BarangayFeesPage = () => {
       toast.error("Standard fee must be ≥ 0")
       return
     }
-    if (!Number.isFinite(spc) || spc < 0) {
-      toast.error("Special fee must be ≥ 0")
-      return
-    }
     try {
-      await upsert.mutateAsync([
-        { barangay, standard_fee_php: std, special_fee_php: spc },
-      ])
-      setNewRow({ barangay: "", standard_fee_php: "", special_fee_php: "" })
+      await upsert.mutateAsync([{ barangay, standard_fee_php: std }])
+      setNewRow({ barangay: "", standard_fee_php: "" })
       toast.success(`Saved fees for ${barangay}`)
     } catch (e) {
       // toast already shown by onError
