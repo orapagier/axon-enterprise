@@ -286,14 +286,13 @@ const BarangayFeesPage = () => {
       {showBulk && (
         <div className="px-6 py-4 border-b bg-ui-bg-subtle">
           <Label className="text-ui-fg-base">
-            Paste CSV (one row per line): <code>barangay,standard,special</code>
+            Paste CSV (one row per line): <code>barangay,standard</code>{" "}
+            (Special is derived as {SPECIAL_FEE_MULTIPLIER}× Standard)
           </Label>
           <Textarea
             className="mt-2"
             rows={8}
-            placeholder={
-              "Apokon,60,160\nMagugpo East,40,120\nSan Isidro,90,220"
-            }
+            placeholder={"Apokon,60\nMagugpo East,40\nSan Isidro,90"}
             value={bulkCsv}
             onChange={(e) => setBulkCsv(e.target.value)}
           />
