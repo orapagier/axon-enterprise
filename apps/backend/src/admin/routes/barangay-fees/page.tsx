@@ -471,19 +471,17 @@ const BarangayFeesPage = () => {
                 />
               </div>
               <div>
-                <Label className="text-ui-fg-subtle text-xs">Special ₱</Label>
-                <Input
-                  type="number"
-                  min={0}
-                  placeholder="160"
-                  value={newRow.special_fee_php}
-                  onChange={(e) =>
-                    setNewRow((r) => ({
-                      ...r,
-                      special_fee_php: e.target.value,
-                    }))
-                  }
-                />
+                <Label className="text-ui-fg-subtle text-xs">
+                  Special ₱ (auto)
+                </Label>
+                <div className="h-8 flex items-center text-ui-fg-subtle tabular-nums">
+                  {(() => {
+                    const std = parseInt(newRow.standard_fee_php, 10)
+                    return Number.isFinite(std)
+                      ? `₱${std * SPECIAL_FEE_MULTIPLIER}`
+                      : "—"
+                  })()}
+                </div>
               </div>
               <Button onClick={handleAddRow} isLoading={upsert.isPending}>
                 Add
