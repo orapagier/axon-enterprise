@@ -267,12 +267,12 @@ export default async function verifyProducerConfirm({ container }: ExecArgs) {
     })
     await producerConfirmTick({ container })
     const e3 = await getSellerEntry(container, o1, producerA.id)
-    const o1after = await reReadOrder(o1)
+    const o1status = await orderStatus(o1)
     check("entry → cancelled", e3?.status === "cancelled", `status=${e3?.status}`)
     check(
       "single-producer order is fully canceled",
-      o1after.status === "canceled",
-      `status=${o1after.status}`
+      o1status === "canceled",
+      `status=${o1status}`
     )
     check(
       "producer A strike recorded",
