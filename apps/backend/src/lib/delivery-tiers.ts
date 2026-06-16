@@ -202,7 +202,7 @@ export function buildDeliveryTiers(args: BuildTiersArgs): TierOption[] {
   const special: TierOption = {
     tier: "special",
     label: "Special delivery",
-    fee_php: args.specialFeePhp,
+    fee_php: specialFeeFor(args.standardFeePhp),
     eta_label: "Within 1 hour",
     available: specialAvailable,
     reason_if_unavailable: !specialAllowed
