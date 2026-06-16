@@ -181,27 +181,21 @@ const BarangayFeesPage = () => {
     const rows: Array<{
       barangay: string
       standard_fee_php: number
-      special_fee_php: number
     }> = []
     for (const line of lines) {
+      // Accept "barangay,standard" (any extra legacy "special" column is
+      // ignored — Special is always derived as 2× Standard).
       const parts = line.split(",").map((p) => p.trim())
-      if (parts.length !== 3) {
-        toast.error(
-          `Bad row "${line}" — expected: barangay,standard_fee,special_fee`
-        )
+      if (parts.length < 2) {
+        toast.error(`Bad row "${line}" — expected: barangay,standard_fee`)
         return
       }
       const std = parseInt(parts[1], 10)
-      const spc = parseInt(parts[2], 10)
-      if (!parts[0] || !Number.isFinite(std) || !Number.isFinite(spc)) {
+      if (!parts[0] || !Number.isFinite(std)) {
         toast.error(`Bad row "${line}"`)
         return
       }
-      rows.push({
-        barangay: parts[0],
-        standard_fee_php: std,
-        special_fee_php: spc,
-      })
+      rows.push({ barangay: parts[0], standard_fee_php: std })
     }
     if (rows.length === 0) {
       toast.error("No rows to import")
