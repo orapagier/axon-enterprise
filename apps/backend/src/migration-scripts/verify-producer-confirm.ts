@@ -246,7 +246,7 @@ export default async function verifyProducerConfirm({ container }: ExecArgs) {
       "classify on a past-deadline awaiting entry = escalate",
       !!beforeEsc && classifyConfirmEntry(beforeEsc, Date.now()) === "escalate"
     )
-    await producerConfirmTick({} as never)
+    await producerConfirmTick({ container })
     const e2 = await getSellerEntry(container, o1, producerA.id)
     check(
       "after tick → escalated + admin window opened",
@@ -262,7 +262,7 @@ export default async function verifyProducerConfirm({ container }: ExecArgs) {
       ...(e2 as NonNullable<typeof e2>),
       admin_deadline_at: Date.now() - MIN,
     })
-    await producerConfirmTick({} as never)
+    await producerConfirmTick({ container })
     const e3 = await getSellerEntry(container, o1, producerA.id)
     const o1after = await reReadOrder(o1)
     check("entry → cancelled", e3?.status === "cancelled", `status=${e3?.status}`)
