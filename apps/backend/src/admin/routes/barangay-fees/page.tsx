@@ -107,7 +107,6 @@ const BarangayFeesPage = () => {
     mutationFn: async (input: {
       id: string
       standard_fee_php?: number
-      special_fee_php?: number
       active?: boolean
     }) => {
       const { id, ...patch } = input
