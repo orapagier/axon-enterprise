@@ -139,18 +139,17 @@ describe("isMembershipActive", () => {
 
 describe("feeForTier", () => {
   it("free is always 0", () => {
-    expect(feeForTier("free", 30, 80)).toBe(0)
+    expect(feeForTier("free", 30)).toBe(0)
   })
-  it("standard / special pick the matching fee", () => {
-    expect(feeForTier("standard", 30, 80)).toBe(30)
-    expect(feeForTier("special", 30, 80)).toBe(80)
+  it("standard is the standard fee; special is always 2× standard", () => {
+    expect(feeForTier("standard", 30)).toBe(30)
+    expect(feeForTier("special", 30)).toBe(60)
   })
 })
 
 describe("buildDeliveryTiers", () => {
   const base = {
     standardFeePhp: 30,
-    specialFeePhp: 80,
     isOpen: true,
     hoursLabel: "6:00 AM–6:00 PM",
     dispatchLabel: "2:00 PM",
