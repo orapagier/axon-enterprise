@@ -17,42 +17,43 @@ import { HUB_MODULE } from "../modules/hub"
 import type HubModuleService from "../modules/hub/service"
 import { DELIVERY_FEES_MODULE } from "../modules/delivery-fees"
 import type DeliveryFeesModuleService from "../modules/delivery-fees/service"
+import { specialFeeFor } from "../lib/delivery-tiers"
 
 type FeeRow = {
   barangay: string
   standard_fee_php: number
-  special_fee_php: number
 }
 
-// Coarse 3-tier placeholder pricing based on rough geography. The hub owner
-// edits these in admin once they have actual fare data.
+// Coarse placeholder Standard fares based on rough geography. Special is always
+// 2× Standard (derived at insert), so only Standard is listed here. The hub
+// owner edits these in admin once they have actual fare data.
 const TAGUM_FEES: FeeRow[] = [
   // Central — near city proper, lowest fare
-  { barangay: "Magugpo Poblacion", standard_fee_php: 40, special_fee_php: 120 },
-  { barangay: "Magugpo East", standard_fee_php: 40, special_fee_php: 120 },
-  { barangay: "Magugpo North", standard_fee_php: 40, special_fee_php: 120 },
-  { barangay: "Magugpo South", standard_fee_php: 40, special_fee_php: 120 },
-  { barangay: "Magugpo West", standard_fee_php: 40, special_fee_php: 120 },
-  { barangay: "Visayan Village", standard_fee_php: 40, special_fee_php: 120 },
-  { barangay: "Mankilam", standard_fee_php: 40, special_fee_php: 120 },
+  { barangay: "Magugpo Poblacion", standard_fee_php: 40 },
+  { barangay: "Magugpo East", standard_fee_php: 40 },
+  { barangay: "Magugpo North", standard_fee_php: 40 },
+  { barangay: "Magugpo South", standard_fee_php: 40 },
+  { barangay: "Magugpo West", standard_fee_php: 40 },
+  { barangay: "Visayan Village", standard_fee_php: 40 },
+  { barangay: "Mankilam", standard_fee_php: 40 },
   // Mid
-  { barangay: "Apokon", standard_fee_php: 60, special_fee_php: 160 },
-  { barangay: "La Filipina", standard_fee_php: 60, special_fee_php: 160 },
-  { barangay: "Madaum", standard_fee_php: 60, special_fee_php: 160 },
-  { barangay: "San Agustin", standard_fee_php: 60, special_fee_php: 160 },
-  { barangay: "Pandapan", standard_fee_php: 60, special_fee_php: 160 },
-  { barangay: "Canocotan", standard_fee_php: 60, special_fee_php: 160 },
-  { barangay: "Cuambogan", standard_fee_php: 60, special_fee_php: 160 },
-  { barangay: "Bincungan", standard_fee_php: 60, special_fee_php: 160 },
+  { barangay: "Apokon", standard_fee_php: 60 },
+  { barangay: "La Filipina", standard_fee_php: 60 },
+  { barangay: "Madaum", standard_fee_php: 60 },
+  { barangay: "San Agustin", standard_fee_php: 60 },
+  { barangay: "Pandapan", standard_fee_php: 60 },
+  { barangay: "Canocotan", standard_fee_php: 60 },
+  { barangay: "Cuambogan", standard_fee_php: 60 },
+  { barangay: "Bincungan", standard_fee_php: 60 },
   // Outer
-  { barangay: "Busaon", standard_fee_php: 90, special_fee_php: 220 },
-  { barangay: "Liboganon", standard_fee_php: 90, special_fee_php: 220 },
-  { barangay: "Magdum", standard_fee_php: 90, special_fee_php: 220 },
-  { barangay: "New Balamban", standard_fee_php: 90, special_fee_php: 220 },
-  { barangay: "Nueva Fuerza", standard_fee_php: 90, special_fee_php: 220 },
-  { barangay: "Pagsabangan", standard_fee_php: 90, special_fee_php: 220 },
-  { barangay: "San Isidro", standard_fee_php: 90, special_fee_php: 220 },
-  { barangay: "San Miguel", standard_fee_php: 90, special_fee_php: 220 },
+  { barangay: "Busaon", standard_fee_php: 90 },
+  { barangay: "Liboganon", standard_fee_php: 90 },
+  { barangay: "Magdum", standard_fee_php: 90 },
+  { barangay: "New Balamban", standard_fee_php: 90 },
+  { barangay: "Nueva Fuerza", standard_fee_php: 90 },
+  { barangay: "Pagsabangan", standard_fee_php: 90 },
+  { barangay: "San Isidro", standard_fee_php: 90 },
+  { barangay: "San Miguel", standard_fee_php: 90 },
 ]
 
 export default async function seedBarangayFeesTagum({ container }: ExecArgs) {
