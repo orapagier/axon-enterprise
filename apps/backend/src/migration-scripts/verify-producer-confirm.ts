@@ -188,24 +188,27 @@ export default async function verifyProducerConfirm({ container }: ExecArgs) {
       return order.id
     }
 
-    const reReadOrder = async (id: string) => {
+    // Order status via query.graph (status hydrates fine; the computed `total`
+    // and `items` do NOT in exec context, so read line items authoritatively
+    // from the order module instead).
+    const orderStatus = async (id: string) => {
       const { data } = await query.graph({
         entity: "order",
-        fields: ["id", "status", "total", "summary.*", "items.product_id", "items.quantity"],
+        fields: ["id", "status"],
         filters: { id },
       })
-      return data[0] as {
-        id: string
-        status: string
-        total: number | string
-        items?: { product_id: string | null; quantity: number }[]
-      }
+      return (data[0] as { status: string } | undefined)?.status ?? "unknown"
     }
+    const lineItemsFor = async (id: string) =>
+      (await orderModule.listOrderLineItems(
+        { order_id: id },
+        { select: ["id", "product_id", "quantity"] }
+      )) as unknown as { product_id: string | null; quantity: number }[]
     const qtyForProduct = (
-      o: Awaited<ReturnType<typeof reReadOrder>>,
+      items: { product_id: string | null; quantity: number }[],
       productId: string
     ) =>
-      (o.items ?? [])
+      items
         .filter((i) => i.product_id === productId)
         .reduce((s, i) => s + Number(i.quantity ?? 0), 0)
 
