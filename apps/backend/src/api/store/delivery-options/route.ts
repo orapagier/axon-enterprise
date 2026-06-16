@@ -160,7 +160,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
   // 7. Build the 3 tier options.
   const options = buildDeliveryTiers({
     standardFeePhp: fee.standard_fee_php,
-    specialFeePhp: fee.special_fee_php,
     isMember,
     isBeforeCutoff,
     isOpen,
