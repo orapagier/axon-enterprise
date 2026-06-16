@@ -333,7 +333,6 @@ export default async function verifyProducerConfirm({ container }: ExecArgs) {
     )
     check("on-time confirm → no strike owed", onTime.entry.status === "confirmed" && !onTime.strike)
 
-    const strikesBefore5 = await strikeCount(producerA.id)
     const o4 = await mkOrder([{ ...prodB, price: prodB.priceCentavos, qty: 1 }])
     await persistConfirmEntry(
       container,
