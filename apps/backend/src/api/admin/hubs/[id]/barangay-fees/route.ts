@@ -3,6 +3,7 @@ import { DELIVERY_FEES_MODULE } from "../../../../../modules/delivery-fees"
 import type DeliveryFeesModuleService from "../../../../../modules/delivery-fees/service"
 import { HUB_MODULE } from "../../../../../modules/hub"
 import type HubModuleService from "../../../../../modules/hub/service"
+import { specialFeeFor } from "../../../../../lib/delivery-tiers"
 
 type UpsertRow = {
   barangay: string
@@ -11,6 +12,9 @@ type UpsertRow = {
   active?: boolean
 }
 
+// Special is always 2× Standard. We only take the Standard fee as input and
+// derive Special from it (any client-sent special_fee_php is ignored) so the
+// stored row can never disagree with what the buyer's checkout computes.
 function validateRow(r: unknown): UpsertRow | string {
   if (!r || typeof r !== "object") return "row must be an object"
   const row = r as Record<string, unknown>
@@ -24,17 +28,11 @@ function validateRow(r: unknown): UpsertRow | string {
   ) {
     return "standard_fee_php must be a non-negative number"
   }
-  if (
-    typeof row.special_fee_php !== "number" ||
-    !Number.isFinite(row.special_fee_php) ||
-    row.special_fee_php < 0
-  ) {
-    return "special_fee_php must be a non-negative number"
-  }
+  const standard = Math.round(row.standard_fee_php)
   return {
     barangay: row.barangay.trim(),
-    standard_fee_php: Math.round(row.standard_fee_php),
-    special_fee_php: Math.round(row.special_fee_php),
+    standard_fee_php: standard,
+    special_fee_php: specialFeeFor(standard),
     active: typeof row.active === "boolean" ? row.active : true,
   }
 }
