@@ -84,7 +84,6 @@ const BarangayFeesPage = () => {
     mutationFn: async (rows: Array<{
       barangay: string
       standard_fee_php: number
-      special_fee_php: number
     }>) => {
       const res = await fetch(`/admin/hubs/${effectiveHubId}/barangay-fees`, {
         method: "POST",
