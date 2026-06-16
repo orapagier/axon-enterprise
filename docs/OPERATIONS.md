@@ -67,6 +67,7 @@ Wrapped jobs (all in `apps/backend/src/jobs/`):
 | `membership-expiry-tick` | `30 2 * * *` | membership grace → downgrade + reminders |
 | `dispute-sla-tick` | `15 2 * * *` | dispute reminders + SLA escalation |
 | `rider-unremitted-tick` | `0 3 * * *` | suspend riders over their unremitted COD limit/age |
+| `producer-confirm-tick` | `*/10 * * * *` | producer order confirmation: re-nudge → escalate → auto-cancel (see below) |
 | `lock-dispatch-batches` | (see job) | lock batches at cutoff |
 | `dispatch-batches-in-transit` | (see job) | mark batches in-transit + notify |
 | `expire-pickup-windows` | (see job) | close pickup windows / flag no-shows |

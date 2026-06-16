@@ -5,24 +5,29 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/dev.sh": {
-    "mtime": 1781472806.918346,
-    "ast_hash": "a838574b541a9bae629df396315dccf0",
+    "mtime": 1781562477.8681884,
+    "ast_hash": "6bae66ca21e90bd6d3363dcf3658f56c",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/back.sh": {
-    "mtime": 1779098422.803753,
-    "ast_hash": "7f6790d1ed213036833370d4d08721da",
+    "mtime": 1781562470.4043248,
+    "ast_hash": "a9afa8211af5fc645035414880132e6f",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/front.sh": {
-    "mtime": 1779098404.6016715,
-    "ast_hash": "47487ac0aa4652189ad8631d24d5cde8",
+    "mtime": 1781562471.340494,
+    "ast_hash": "53dee5617e2742903e3052e39850f47c",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/turbo.json": {
     "mtime": 1779007605.5564723,
     "ast_hash": "4d329600559ea5e8eeee696b79f11843",
     "semantic_hash": "4d329600559ea5e8eeee696b79f11843"
+  },
+  "/home/ramlej/MFH/freshhub/dev-lib.sh": {
+    "mtime": 1781562465.2663765,
+    "ast_hash": "8031b0127254e35b398b916d6f3a0f20",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/.claude/settings.json": {
     "mtime": 1781095856.085363,
@@ -2814,6 +2819,11 @@
     "ast_hash": "55c81e93cb115320eb3d2f2ffe5628b6",
     "semantic_hash": ""
   },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/verify-producer-confirm.ts": {
+    "mtime": 1781571613.6258488,
+    "ast_hash": "bc05a7a4c5a09e2378bc2b712648fc0b",
+    "semantic_hash": ""
+  },
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/cleanup-stock-locations.ts": {
     "mtime": 1780602922.950565,
     "ast_hash": "2cbc199555b4b369abe5b50ee9b07752",
@@ -2885,8 +2895,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/query-entry-points.d.ts": {
-    "mtime": 1781559799.7648575,
-    "ast_hash": "02c977b2e784039fa12479a27df343c0",
+    "mtime": 1781571828.8592765,
+    "ast_hash": "48b0b298f2534bc2f4c22927e608051f",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/index.d.ts": {
@@ -2895,12 +2905,12 @@
     "semantic_hash": "92cfe3ea73a656c693052260d34e9dc5"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/types/modules-bindings.d.ts": {
-    "mtime": 1781559799.7648575,
+    "mtime": 1781571828.8592765,
     "ast_hash": "bdb7a2edf5187de6c1f8e04a8f1a7061",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/entry.jsx": {
-    "mtime": 1781559799.0288577,
+    "mtime": 1781571827.451277,
     "ast_hash": "8b276d285c6e460a0c2c67b57ec8d943",
     "semantic_hash": "8b276d285c6e460a0c2c67b57ec8d943"
   },
@@ -2942,11 +2952,6 @@
   "/home/ramlej/MFH/freshhub/docs/OPERATIONS.md": {
     "mtime": 1781388124.5361695,
     "ast_hash": "e04bfa123618870a816216dd0f950846",
-    "semantic_hash": ""
-  },
-  "/home/ramlej/MFH/freshhub/docs/~$ASIBILITY_STUDY.md": {
-    "mtime": 1781522545.2897813,
-    "ast_hash": "62bfb4f1d2d3dbf5628c2c60de26c8d3",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/docs/FEASIBILITY_STUDY.md": {
@@ -3010,7 +3015,7 @@
     "semantic_hash": "6f36f79ab958b75e4fdaf581b92a1225"
   },
   "/home/ramlej/MFH/freshhub/apps/backend/.medusa/client/index.html": {
-    "mtime": 1781559799.0288577,
+    "mtime": 1781571827.451277,
     "ast_hash": "1f14bb0d5e89bc45a4265b714e6c6de6",
     "semantic_hash": "1f14bb0d5e89bc45a4265b714e6c6de6"
   },
