@@ -353,9 +353,9 @@ export default async function verifyProducerConfirm({ container }: ExecArgs) {
       tier: "standard",
     })
     check(
-      "recordProducerStrike incremented B's count",
-      newCount === strikesBefore5 + 1,
-      `before=${strikesBefore5} after=${newCount}`
+      "recordProducerStrike → fresh producer B now at 1 strike",
+      newCount === 1,
+      `after=${newCount}`
     )
     const disputed = await disputeProducerStrike(container, producerB.id, o4, "test dispute")
     check("producer can dispute the strike", disputed === true)
