@@ -58,14 +58,12 @@ const BarangayFeesPage = () => {
   const [newRow, setNewRow] = useState({
     barangay: "",
     standard_fee_php: "",
-    special_fee_php: "",
   })
   const [bulkCsv, setBulkCsv] = useState("")
   const [showBulk, setShowBulk] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editForm, setEditForm] = useState({
     standard_fee_php: "",
-    special_fee_php: "",
   })
 
   const hubsQuery = useQuery({ queryKey: ["admin-hubs"], queryFn: fetchHubs })
