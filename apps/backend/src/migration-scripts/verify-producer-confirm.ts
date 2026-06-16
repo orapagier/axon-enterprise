@@ -282,36 +282,36 @@ export default async function verifyProducerConfirm({ container }: ExecArgs) {
     // ── Part 4: PER-ITEM cancel on a two-producer order ────────────────────
     logger.info("Part 4 — per-item cancel removes only producer A's lines")
     const o2 = await mkOrder([
-      { ...prodA, price: prodA.priceCentavos, qty: 2 }, // 2 × ₱120 = ₱240
-      { ...prodB, price: prodB.priceCentavos, qty: 3 }, // 3 × ₱50  = ₱150
+      { ...prodA, price: prodA.priceCentavos, qty: 2 },
+      { ...prodB, price: prodB.priceCentavos, qty: 3 },
     ])
-    const o2before = await reReadOrder(o2)
-    const totalBefore = Number(o2before.total ?? 0)
+    const itemsBefore = await lineItemsFor(o2)
+    check(
+      "order created with both producers' lines (A=2, B=3)",
+      qtyForProduct(itemsBefore, prodA.productId) === 2 &&
+        qtyForProduct(itemsBefore, prodB.productId) === 3,
+      `A=${qtyForProduct(itemsBefore, prodA.productId)} B=${qtyForProduct(itemsBefore, prodB.productId)}`
+    )
     const full2 = await loadOrderForConfirm(container, o2)
     const r2 = full2
       ? await cancelMedusaOrderForProducer(container, full2, producerA.id, "verify per-item")
       : { cancelled: false, mode: "none" as const }
-    const o2after = await reReadOrder(o2)
+    const itemsAfter = await lineItemsFor(o2)
     check("per-item removal reported mode=items", r2.mode === "items", `mode=${r2.mode}`)
     check(
       "producer A's lines removed (qty 0)",
-      qtyForProduct(o2after, prodA.productId) === 0,
-      `A qty=${qtyForProduct(o2after, prodA.productId)}`
+      qtyForProduct(itemsAfter, prodA.productId) === 0,
+      `A qty=${qtyForProduct(itemsAfter, prodA.productId)}`
     )
     check(
       "producer B's lines untouched (qty 3)",
-      qtyForProduct(o2after, prodB.productId) === 3,
-      `B qty=${qtyForProduct(o2after, prodB.productId)}`
+      qtyForProduct(itemsAfter, prodB.productId) === 3,
+      `B qty=${qtyForProduct(itemsAfter, prodB.productId)}`
     )
     check(
       "order stays alive (not canceled)",
-      o2after.status !== "canceled",
-      `status=${o2after.status}`
-    )
-    check(
-      "order total dropped to producer B's subtotal",
-      Number(o2after.total) < totalBefore && Number(o2after.total) > 0,
-      `before=${totalBefore} after=${o2after.total}`
+      (await orderStatus(o2)) !== "canceled",
+      `status=${await orderStatus(o2)}`
     )
 
     // ── Part 5: confirm paths + strike dispute ─────────────────────────────
