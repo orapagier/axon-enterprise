@@ -51,7 +51,7 @@ function iconSVG({ size, maskable = false, letter = "#ffffff" }) {
   <rect width="36" height="36" rx="8" fill="url(#bg)"/>
   <g transform="translate(${pad} ${pad}) scale(${inner / 36})">
     <path d="${HEX}" fill="url(#hx)" stroke="#bbf7d0" stroke-opacity="0.25" stroke-width="0.6"/>
-    ${CPT("#ffffff", 2.6)}
+    ${CPT(letter, 2.6)}
   </g>
 </svg>`
 }
