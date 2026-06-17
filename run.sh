@@ -44,9 +44,11 @@ trap cleanup INT TERM EXIT
 free_port "${PORTS[@]}"
 
 # Build production artifacts unless told to skip (e.g. CI already built them).
+# Use turbo directly: the root `npm run build` script is broken (`npm -r build`
+# is pnpm syntax), and turbo is what the root `start` script uses anyway.
 if [[ "${SKIP_BUILD:-0}" != "1" ]]; then
   echo "==> Building backend + storefront (NODE_ENV=production)..."
-  npm run build
+  npx turbo build
 fi
 
 # Optionally apply database migrations before the backend boots.
