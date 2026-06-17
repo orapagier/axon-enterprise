@@ -75,12 +75,13 @@ if (RENDER) {
   await png(iconSVG({ size: 384, letter: "#fef9c3" }), join(__dirname, "_preview-icon-gold.png"), 384)
   console.log("rendered previews to scripts/_preview-*.png")
 } else {
-  // Real assets.
-  await png(iconSVG({ size: 192 }), join(PUB, "icon-192.png"), 192)
-  await png(iconSVG({ size: 512 }), join(PUB, "icon-512.png"), 512)
-  await png(iconSVG({ size: 512, maskable: true }), join(PUB, "icon-512-maskable.png"), 512)
-  await png(iconSVG({ size: 180 }), join(PUB, "apple-touch-icon.png"), 180)
-  // favicon.ico — ship a 32px PNG renamed; browsers accept PNG faviconss.
-  await png(iconSVG({ size: 32 }), join(PUB, "favicon.ico"), 32)
+  // Real assets. Cream-gold letters to match the nav/footer marks.
+  const L = "#fef9c3"
+  await png(iconSVG({ size: 192, letter: L }), join(PUB, "icon-192.png"), 192)
+  await png(iconSVG({ size: 512, letter: L }), join(PUB, "icon-512.png"), 512)
+  await png(iconSVG({ size: 512, maskable: true, letter: L }), join(PUB, "icon-512-maskable.png"), 512)
+  await png(iconSVG({ size: 180, letter: L }), join(PUB, "apple-touch-icon.png"), 180)
+  // favicon.ico — ship a 32px PNG renamed; browsers accept PNG favicons.
+  await png(iconSVG({ size: 32, letter: L }), join(PUB, "favicon.ico"), 32)
   console.log("wrote icon-192/512/512-maskable, apple-touch-icon, favicon.ico")
 }
