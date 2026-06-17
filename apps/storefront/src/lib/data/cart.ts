@@ -29,7 +29,11 @@ import { retrieveCustomer } from "./customer"
 export async function retrieveCart(cartId?: string, fields?: string) {
   const id = cartId || (await getCartId())
   fields ??=
-    "*items, *region, *items.product, *items.variant, +items.variant.inventory_quantity, +items.variant.allow_backorder, +items.variant.manage_inventory, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name, *payment_collection.payment_sessions"
+    // shipping_address.metadata carries the barangay — without it the checkout
+    // page's getBarangay() and the Delivery step's addressComplete gate are
+    // always false, so the delivery step is stuck on "add an address" and
+    // checkout can't proceed even with a valid saved address.
+    "*items, *region, *items.product, *items.variant, +items.variant.inventory_quantity, +items.variant.allow_backorder, +items.variant.manage_inventory, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name, +shipping_address.metadata, +billing_address.metadata, *payment_collection.payment_sessions"
 
   if (!id) {
     return null
