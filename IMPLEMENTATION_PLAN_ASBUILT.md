@@ -33,7 +33,35 @@
 >   (fee table, service areas). Cross-city barangay/postal hub resolution is
 >   intentionally not built.
 
-> **▶ Runtime verification (2026-06-14) — read this first if resuming.**
+> **▶ Current build state (2026-06-17) — read this first if resuming.**
+> Checkout overhaul landed (commit `47b17fd7` on master; both apps `tsc`-clean,
+> 160/160 jest):
+> - **Shopee-style partial checkout (storefront).** Cart line-item selection
+>   (per-row + select-all checkboxes; out-of-stock lines aren't selectable).
+>   `beginCheckout()` clones the ticked lines into a SEPARATE "checkout cart"
+>   (`_mfh_checkout_cart_id` cookie), leaving the shopping cart intact; after a
+>   successful partial order `placeOrder` removes the ordered lines from the
+>   shopping cart. The old `checkout/components/shipping` step was replaced by a
+>   `delivery` step (shared `delivery-options-summary` tier picker).
+> - **Delivery fee is now a REAL Medusa shipping method** inside
+>   `shipping_total`/`order.total` (was metadata-only). `POST
+>   /store/delivery-options/select` adds the fee as a shipping method (seeded
+>   "Standard Delivery" option) and replaces it on re-select. Reconciliation
+>   (`lib/delivery-actions.ts`), `CartTotals`, `OrderSummary`, `payment-details`,
+>   `shipping-details` and the order email all STOP adding the metadata fee on
+>   top — no double-count. Legacy orders fall back to `metadata.delivery_fee_php`.
+> - **GCash manual-reference payment (`pp_gcash_freshhub`).** New
+>   `modules/payment-gcash` provider (authorize immediately; admin captures after
+>   verifying the transfer — like COD but no prepay-lock). Attached to the PH
+>   region; checkout collects a validated 13-digit reference.
+> - **RUNTIME-VERIFIED (backend) 14/14** via
+>   `src/migration-scripts/verify-gcash-delivery.ts` (GCash provider lifecycle +
+>   region attachment + select-route shipping-method add/replace + fee folded into
+>   `cart.shipping_total`, live DB, self-cleaning). **Storefront partial-checkout
+>   flow is static-only (tsc + trace) — not yet browser-exercised** (would need a
+>   Playwright run with a minted test login).
+>
+> **▶ Runtime verification (2026-06-14).**
 > The 2026-06-13 batch + stackable-role conversions are now **RUNTIME-VERIFIED over
 > live HTTP** (throwaway admin + minted customer sessions against the running
 > backend/storefront; all fixtures cleaned up afterwards). 26 HTTP assertions +
