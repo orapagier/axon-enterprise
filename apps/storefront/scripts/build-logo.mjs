@@ -72,6 +72,7 @@ if (RENDER) {
   await png(navWhite, join(__dirname, "_preview-white.png"), 240)
   await png(navGold, join(__dirname, "_preview-gold-30.png"), 30)
   await png(iconSVG({ size: 384 }), join(__dirname, "_preview-icon.png"), 384)
+  await png(iconSVG({ size: 384, letter: "#fef9c3" }), join(__dirname, "_preview-icon-gold.png"), 384)
   console.log("rendered previews to scripts/_preview-*.png")
 } else {
   // Real assets.
