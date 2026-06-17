@@ -64,6 +64,34 @@ async function png(svg, out, size) {
   return buf
 }
 
+async function pngBuf(svg, size) {
+  return sharp(Buffer.from(svg)).resize(size, size).png().toBuffer()
+}
+
+// Pack PNG buffers into a real multi-image .ico container (PNG payloads,
+// supported by all modern browsers + Windows Vista+).
+function ico(images) {
+  const head = Buffer.alloc(6)
+  head.writeUInt16LE(0, 0) // reserved
+  head.writeUInt16LE(1, 2) // type: icon
+  head.writeUInt16LE(images.length, 4)
+  const dir = Buffer.alloc(16 * images.length)
+  let offset = 6 + dir.length
+  images.forEach(({ size, data }, i) => {
+    const e = i * 16
+    dir.writeUInt8(size >= 256 ? 0 : size, e + 0) // width
+    dir.writeUInt8(size >= 256 ? 0 : size, e + 1) // height
+    dir.writeUInt8(0, e + 2) // palette
+    dir.writeUInt8(0, e + 3) // reserved
+    dir.writeUInt16LE(1, e + 4) // planes
+    dir.writeUInt16LE(32, e + 6) // bpp
+    dir.writeUInt32LE(data.length, e + 8)
+    dir.writeUInt32LE(offset, e + 12)
+    offset += data.length
+  })
+  return Buffer.concat([head, dir, ...images.map((x) => x.data)])
+}
+
 if (RENDER) {
   // Preview tiles for visual QA.
   const navGold = markSVG({ size: 240, c0: "#22c55e", c1: "#14532d", letter: "#fef9c3", sw: 2.4 })
