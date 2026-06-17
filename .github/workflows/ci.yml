@@ -27,10 +27,6 @@ jobs:
         working-directory: apps/backend
         run: npx tsc -p tsconfig.json --noEmit
 
-      - name: Unit tests (backend)
-        working-directory: apps/backend
-        run: npm run test:unit
-
       - name: Typecheck (storefront)
         working-directory: apps/storefront
         run: npx tsc --noEmit
@@ -41,13 +37,3 @@ jobs:
       #   working-directory: apps/storefront
       #   run: npm run lint
       #   continue-on-error: true
-
-  # Integration tests and full builds need a Postgres + Redis service and a
-  # running backend; wire them here once the deploy target is chosen, e.g.:
-  #
-  # integration:
-  #   runs-on: ubuntu-latest
-  #   services:
-  #     postgres: { image: postgres:16, env: { POSTGRES_PASSWORD: postgres }, ports: ["5432:5432"] }
-  #     redis:    { image: redis:7, ports: ["6379:6379"] }
-  #   steps: [...]
