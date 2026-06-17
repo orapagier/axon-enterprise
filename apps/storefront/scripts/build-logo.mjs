@@ -36,7 +36,7 @@ function markSVG({ size, c0, c1, letter, sw }) {
 }
 
 // Icon-style mark (filled rounded-square bg for PWA/favicon, hex inset).
-function iconSVG({ size, maskable = false }) {
+function iconSVG({ size, maskable = false, letter = "#ffffff" }) {
   const pad = maskable ? 4.8 : 2.2 // safe zone for maskable icons
   const inner = 36 - pad * 2
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 36 36">
