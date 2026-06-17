@@ -83,11 +83,18 @@ export default async function Footer() {
                     d="M18 2L32.124 10V26L18 34L3.876 26V10L18 2Z"
                     fill="url(#footer-logo-gradient)"
                   />
-                  <path
-                    d="M18 11L24.928 14.5V21.5L18 25L11.072 21.5V14.5L18 11Z"
-                    fill="white"
-                    fillOpacity="0.35"
-                  />
+                  {/* CPT monogram */}
+                  <g
+                    fill="none"
+                    stroke="#fef9c3"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M13.4 15.2 A4.7 4.7 0 1 0 13.4 20.8" />
+                    <path d="M15.7 23 L15.7 13 C19.8 13 19.8 18.5 15.7 18.5" />
+                    <path d="M21.9 13 L29.3 13 M25.6 13 L25.6 23" />
+                  </g>
                   <defs>
                     <linearGradient
                       id="footer-logo-gradient"
