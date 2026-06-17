@@ -1,6 +1,7 @@
 "use client"
 
 import { sdk } from "@lib/config"
+import { revalidateCartCache } from "@lib/data/cart"
 import { convertToLocale } from "@lib/util/money"
 import { Loader } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
