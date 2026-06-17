@@ -6,30 +6,31 @@ import { dirname, join } from "node:path"
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const PUB = join(__dirname, "..", "public")
 
-// Interlocked CPT monogram (viewBox 0 0 96 96): the mark *is* the letters —
-// C and P share the vertical spine, T locks onto the P bowl.
+// The brand hexagon (pointy-top, center 48,48, vertex radius 38) whose own
+// geometry spells CPT: the angular left half reads as C, the right half is
+// carved into P + T in white negative space.
 // (Founder initials Cham P. Tonog / Consumer·Producer·Trader.)
-const PATHS = `
-    <path d="M35 24 A24 24 0 1 0 35 72"/>
-    <path d="M35 72 L35 24 C59 24 59 48 35 48"/>
-    <path d="M53 24 L85 24 M69 24 L69 72"/>`
-
-const mark = (stroke, sw = 10) =>
-  `<g fill="none" stroke="${stroke}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${PATHS}</g>`
+const HEX = "M48 10 L81 29 L81 67 L48 86 L15 67 L15 29 Z"
+const CUT = `
+    <g fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M44 28 L25 37 L25 59 L44 68"/>
+      <path d="M50 70 L50 28 C66 28 66 49 50 49"/>
+      <path d="M55 28 L74 28 M65 28 L65 70"/>
+    </g>`
 
 const grad = (id, c0, c1) =>
   `<linearGradient id="${id}" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse"><stop stop-color="${c0}"/><stop offset="1" stop-color="${c1}"/></linearGradient>`
 
-// White monogram on a green rounded badge — used for every PWA / favicon asset.
+// Rounded-square badge: darker bg + lighter hexagon so the hex edge reads.
 function iconSVG({ maskable = false } = {}) {
-  // Maskable icons must keep content inside the central ~80% safe zone, so
-  // shrink the mark toward the middle when masked.
-  const s = maskable ? 0.74 : 0.88
+  const s = maskable ? 0.78 : 1
   const t = (96 * (1 - s)) / 2
   return `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
-  <defs>${grad("bg", "#16a34a", "#14532d")}</defs>
+  <defs>${grad("bg", "#15803d", "#14532d")}${grad("hx", "#4ade80", "#16a34a")}</defs>
   <rect width="96" height="96" rx="21" fill="url(#bg)"/>
-  <g transform="translate(${t} ${t}) scale(${s})">${mark("#ffffff", 10)}</g>
+  <g transform="translate(${t} ${t}) scale(${s})">
+    <path d="${HEX}" fill="url(#hx)"/>${CUT}
+  </g>
 </svg>`
 }
 
@@ -61,8 +62,8 @@ function ico(images) {
 }
 
 if (process.argv[2] === "render") {
-  await png(iconSVG(), join(__dirname, "_preview-badge.png"), 360)
-  console.log("rendered scripts/_preview-badge.png")
+  await png(iconSVG(), join(__dirname, "_preview-icon.png"), 360)
+  console.log("rendered scripts/_preview-icon.png")
 } else {
   await png(iconSVG(), join(PUB, "icon-192.png"), 192)
   await png(iconSVG(), join(PUB, "icon-512.png"), 512)
