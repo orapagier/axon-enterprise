@@ -109,7 +109,11 @@ if (RENDER) {
   await png(iconSVG({ size: 512, letter: L }), join(PUB, "icon-512.png"), 512)
   await png(iconSVG({ size: 512, maskable: true, letter: L }), join(PUB, "icon-512-maskable.png"), 512)
   await png(iconSVG({ size: 180, letter: L }), join(PUB, "apple-touch-icon.png"), 180)
-  // favicon.ico — ship a 32px PNG renamed; browsers accept PNG favicons.
-  await png(iconSVG({ size: 32, letter: L }), join(PUB, "favicon.ico"), 32)
+  // favicon.ico — real multi-size ICO (16/32/48) with PNG payloads.
+  const sizes = [16, 32, 48]
+  const imgs = await Promise.all(
+    sizes.map(async (size) => ({ size, data: await pngBuf(iconSVG({ size, letter: L }), size) }))
+  )
+  writeFileSync(join(PUB, "favicon.ico"), ico(imgs))
   console.log("wrote icon-192/512/512-maskable, apple-touch-icon, favicon.ico")
 }
