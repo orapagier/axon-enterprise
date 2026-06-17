@@ -84,8 +84,10 @@ const DeliveryOptionsSummary = ({ cart }: { cart: HttpTypes.StoreCart }) => {
         method: "POST",
         body: { cart_id: cart.id, tier },
       })
-      // The chosen fee now lives in cart.metadata; re-render the server
-      // components (CheckoutSummary / CartTotals) so the order total updates.
+      // The chosen fee now lives in cart.metadata + a real shipping method, but
+      // that write went straight to the backend — bust the storefront's cached
+      // cart so the re-render (and the Delivery "Continue" gate) sees it.
+      await revalidateCartCache()
       router.refresh()
     } catch (e) {
       setSelectedTier(prev)
