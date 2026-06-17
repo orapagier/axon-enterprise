@@ -122,29 +122,34 @@ export default async function Nav() {
               className="flex items-center gap-x-3 group"
               data-testid="nav-store-link"
             >
-              {/* CPT monogram — the mark *is* the letters (founder initials /
-                  Consumer·Producer·Trader). C + P share the spine, T locks on. */}
+              {/* Hexagon whose geometry forms CPT — the angular left half is the
+                  C, the right half is carved into P + T (founder initials /
+                  Consumer·Producer·Trader). */}
               <span className="relative w-9 h-9 flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
                 <span className="absolute inset-0 rounded-full bg-brand-gold-300/0 group-hover:bg-brand-gold-300/25 blur-md transition-all duration-500" />
-                <svg width="34" height="34" viewBox="6 6 84 84" fill="none" className="relative drop-shadow-sm">
+                <svg width="34" height="34" viewBox="0 0 96 96" fill="none" className="relative drop-shadow-sm">
+                  <path
+                    d="M48 10 L81 29 L81 67 L48 86 L15 67 L15 29 Z"
+                    fill="url(#logo-gradient)"
+                  />
                   <g
                     fill="none"
-                    stroke="url(#logo-gradient)"
-                    strokeWidth="10"
+                    stroke="#ffffff"
+                    strokeWidth="7"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <path d="M35 24 A24 24 0 1 0 35 72" />
-                    <path d="M35 72 L35 24 C59 24 59 48 35 48" />
-                    <path d="M53 24 L85 24 M69 24 L69 72" />
+                    <path d="M44 28 L25 37 L25 59 L44 68" />
+                    <path d="M50 70 L50 28 C66 28 66 49 50 49" />
+                    <path d="M55 28 L74 28 M65 28 L65 70" />
                   </g>
                   <defs>
                     <linearGradient
                       id="logo-gradient"
-                      x1="6"
-                      y1="6"
-                      x2="90"
-                      y2="90"
+                      x1="0"
+                      y1="0"
+                      x2="96"
+                      y2="96"
                       gradientUnits="userSpaceOnUse"
                     >
                       <stop stopColor="#22c55e" />
