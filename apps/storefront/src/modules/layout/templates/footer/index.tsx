@@ -78,30 +78,34 @@ export default async function Footer() {
           <div className="small:col-span-4 flex flex-col gap-y-5">
             <LocalizedClientLink href="/" className="flex items-center gap-x-2.5">
               <span className="relative w-8 h-8 flex items-center justify-center">
-                {/* CPT monogram */}
-                <svg width="32" height="32" viewBox="6 6 84 84" fill="none">
+                {/* Hexagon that forms CPT */}
+                <svg width="32" height="32" viewBox="0 0 96 96" fill="none">
+                  <path
+                    d="M48 10 L81 29 L81 67 L48 86 L15 67 L15 29 Z"
+                    fill="url(#footer-logo-gradient)"
+                  />
                   <g
                     fill="none"
-                    stroke="url(#footer-logo-gradient)"
-                    strokeWidth="10"
+                    stroke="#ffffff"
+                    strokeWidth="7"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <path d="M35 24 A24 24 0 1 0 35 72" />
-                    <path d="M35 72 L35 24 C59 24 59 48 35 48" />
-                    <path d="M53 24 L85 24 M69 24 L69 72" />
+                    <path d="M44 28 L25 37 L25 59 L44 68" />
+                    <path d="M50 70 L50 28 C66 28 66 49 50 49" />
+                    <path d="M55 28 L74 28 M65 28 L65 70" />
                   </g>
                   <defs>
                     <linearGradient
                       id="footer-logo-gradient"
-                      x1="6"
-                      y1="6"
-                      x2="90"
-                      y2="90"
+                      x1="0"
+                      y1="0"
+                      x2="96"
+                      y2="96"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop stopColor="#86efac" />
-                      <stop offset="1" stopColor="#22c55e" />
+                      <stop stopColor="#22c55e" />
+                      <stop offset="1" stopColor="#15803d" />
                     </linearGradient>
                   </defs>
                 </svg>
