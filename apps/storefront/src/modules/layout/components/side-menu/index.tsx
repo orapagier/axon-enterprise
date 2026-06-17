@@ -109,16 +109,15 @@ const SideMenu = ({ regions, locales, currentLocale, isProducer }: SideMenuProps
                     {/* Header */}
                     <div className="flex items-center justify-between px-6 py-5 border-b border-grey-10/80">
                       <div className="flex items-center gap-x-2.5">
-                        <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
-                          <path d="M18 2L32.124 10V26L18 34L3.876 26V10L18 2Z" fill="url(#mobile-logo-gradient)" />
-                          {/* CPT monogram */}
-                          <g fill="none" stroke="#fef9c3" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M13.4 15.2 A4.7 4.7 0 1 0 13.4 20.8" />
-                            <path d="M15.7 23 L15.7 13 C19.8 13 19.8 18.5 15.7 18.5" />
-                            <path d="M21.9 13 L29.3 13 M25.6 13 L25.6 23" />
+                        {/* CPT monogram */}
+                        <svg width="32" height="32" viewBox="6 6 84 84" fill="none">
+                          <g fill="none" stroke="url(#mobile-logo-gradient)" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M35 24 A24 24 0 1 0 35 72" />
+                            <path d="M35 72 L35 24 C59 24 59 48 35 48" />
+                            <path d="M53 24 L85 24 M69 24 L69 72" />
                           </g>
                           <defs>
-                            <linearGradient id="mobile-logo-gradient" x1="3.876" y1="2" x2="32.124" y2="34" gradientUnits="userSpaceOnUse">
+                            <linearGradient id="mobile-logo-gradient" x1="6" y1="6" x2="90" y2="90" gradientUnits="userSpaceOnUse">
                               <stop stopColor="#22c55e" />
                               <stop offset="1" stopColor="#15803d" />
                             </linearGradient>
