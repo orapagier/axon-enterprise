@@ -11,8 +11,11 @@ import {
   getCacheOptions,
   getCacheTag,
   getCartId,
+  getCheckoutCartId,
   removeCartId,
+  removeCheckoutCartId,
   setCartId,
+  setCheckoutCartId,
 } from "./cookies"
 import { getRegion } from "./regions"
 import { getLocale } from "./locale-actions"
@@ -26,7 +29,7 @@ import { retrieveCustomer } from "./customer"
 export async function retrieveCart(cartId?: string, fields?: string) {
   const id = cartId || (await getCartId())
   fields ??=
-    "*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name, *payment_collection.payment_sessions"
+    "*items, *region, *items.product, *items.variant, +items.variant.inventory_quantity, +items.variant.allow_backorder, +items.variant.manage_inventory, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name, *payment_collection.payment_sessions"
 
   if (!id) {
     return null
@@ -91,8 +94,11 @@ export async function getOrSetCart(countryCode: string) {
   return cart
 }
 
-export async function updateCart(data: HttpTypes.StoreUpdateCart) {
-  const cartId = await getCartId()
+export async function updateCart(
+  data: HttpTypes.StoreUpdateCart,
+  explicitCartId?: string
+) {
+  const cartId = explicitCartId || (await getCartId())
 
   if (!cartId) {
     throw new Error("No existing cart found, please create one before updating")
@@ -114,6 +120,74 @@ export async function updateCart(data: HttpTypes.StoreUpdateCart) {
       return cart
     })
     .catch(medusaError)
+}
+
+/**
+ * Starts a partial checkout. Clones the selected line items from the shopping
+ * cart into a fresh "checkout cart" and points `_mfh_checkout_cart_id` at it,
+ * leaving the shopping cart untouched. The checkout flow operates on this cart;
+ * after a successful order, `placeOrder` removes the ordered items from the
+ * shopping cart. Out-of-stock variants fail at `createLineItem` here, so they
+ * can never reach checkout.
+ */
+export async function beginCheckout(selectedLineItemIds: string[]) {
+  const customer = await retrieveCustomer()
+  if (!customer) {
+    return { requiresLogin: true as const }
+  }
+
+  const fullCart = await retrieveCart()
+  if (!fullCart || !fullCart.items?.length) {
+    throw new Error("Your cart is empty")
+  }
+
+  const selected = new Set(selectedLineItemIds)
+  const lines = fullCart.items.filter(
+    (li) => selected.has(li.id) && li.variant_id
+  )
+  if (lines.length === 0) {
+    throw new Error("Select at least one item to check out")
+  }
+
+  const headers = {
+    ...(await getAuthHeaders()),
+  }
+  const locale = await getLocale()
+
+  const { cart: checkoutCart } = await sdk.store.cart.create(
+    { region_id: fullCart.region_id, locale: locale || undefined },
+    {},
+    headers
+  )
+
+  for (const li of lines) {
+    await sdk.store.cart
+      .createLineItem(
+        checkoutCart.id,
+        { variant_id: li.variant_id!, quantity: li.quantity },
+        {},
+        headers
+      )
+      .catch(medusaError)
+  }
+
+  await setCheckoutCartId(checkoutCart.id)
+
+  const cartCacheTag = await getCacheTag("carts")
+  revalidateTag(cartCacheTag)
+
+  const countryCode = fullCart.shipping_address?.country_code || "ph"
+  redirect(`/${countryCode}/checkout`)
+}
+
+/**
+ * Abandons an in-progress partial checkout by dropping the checkout-cart
+ * pointer. The shopping cart (with every item) stays intact.
+ */
+export async function cancelCheckout() {
+  await removeCheckoutCartId()
+  const cartCacheTag = await getCacheTag("carts")
+  revalidateTag(cartCacheTag)
 }
 
 export async function addToCart({
@@ -264,8 +338,8 @@ export async function initiatePaymentSession(
     .catch(medusaError)
 }
 
-export async function applyPromotions(codes: string[]) {
-  const cartId = await getCartId()
+export async function applyPromotions(codes: string[], explicitCartId?: string) {
+  const cartId = explicitCartId || (await getCartId())
 
   if (!cartId) {
     throw new Error("No existing cart found")
@@ -348,7 +422,7 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
     if (!formData) {
       return "No form data found when setting addresses"
     }
-    const cartId = await getCartId()
+    const cartId = (await getCheckoutCartId()) || (await getCartId())
     if (!cartId) {
       return "No existing cart found when setting addresses"
     }
@@ -415,7 +489,7 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
       }
     }
 
-    await updateCart(data as any)
+    await updateCart(data as any, cartId)
   } catch (e: any) {
     return e.message
   }
@@ -457,11 +531,14 @@ export async function applyCustomerAddressToCart(
       metadata: addr.metadata ?? undefined,
     }
 
-    await updateCart({
-      shipping_address,
-      billing_address: shipping_address,
-      email: customer.email,
-    } as any)
+    await updateCart(
+      {
+        shipping_address,
+        billing_address: shipping_address,
+        email: customer.email,
+      } as any,
+      cart.id
+    )
   } catch {
     // Non-fatal — checkout will fall back to the address form
   }
@@ -478,7 +555,8 @@ export async function placeOrder(cartId?: string) {
     throw new Error("Please sign in or register to place an order")
   }
 
-  const id = cartId || (await getCartId())
+  const checkoutCartId = await getCheckoutCartId()
+  const id = cartId || checkoutCartId || (await getCartId())
 
   if (!id) {
     throw new Error("No existing cart found when placing an order")
@@ -504,7 +582,38 @@ export async function placeOrder(cartId?: string) {
     const orderCacheTag = await getCacheTag("orders")
     revalidateTag(orderCacheTag)
 
-    removeCartId()
+    const isPartialCheckout = !!checkoutCartId && id === checkoutCartId
+    if (isPartialCheckout) {
+      // The shopping cart still holds every item the customer added. Drop the
+      // ones we just ordered so only the un-checked-out items remain, then
+      // forget the checkout cart. The shopping-cart cookie stays put.
+      try {
+        const orderedVariantIds = new Set(
+          (cartRes.order.items ?? [])
+            .map((it) => (it as { variant_id?: string | null }).variant_id)
+            .filter((v): v is string => !!v)
+        )
+        const shoppingCart = await retrieveCart()
+        if (shoppingCart?.id) {
+          for (const li of shoppingCart.items ?? []) {
+            if (li.variant_id && orderedVariantIds.has(li.variant_id)) {
+              await sdk.store.cart
+                .deleteLineItem(shoppingCart.id, li.id, {}, headers)
+                .catch(() => {})
+            }
+          }
+          const cartCacheTag = await getCacheTag("carts")
+          revalidateTag(cartCacheTag)
+        }
+      } catch {
+        // Non-fatal — the order already succeeded.
+      }
+      await removeCheckoutCartId()
+    } else {
+      // Whole-cart completion (legacy path): the shopping cart is consumed.
+      removeCartId()
+    }
+
     redirect(`/${countryCode}/order/${cartRes?.order.id}/confirmed`)
   }
 

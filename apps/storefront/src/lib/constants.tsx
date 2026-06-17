@@ -37,6 +37,10 @@ export const paymentInfoMap: Record<
     title: "Cash on Delivery",
     icon: <CreditCard />,
   },
+  pp_gcash_freshhub: {
+    title: "GCash",
+    icon: <CreditCard />,
+  },
   pp_otc_freshhub: {
     title: "Over the Counter (pay at hub)",
     icon: <CreditCard />,
@@ -60,6 +64,10 @@ export const isManual = (providerId?: string) => {
 
 export const isCod = (providerId?: string) => {
   return providerId?.startsWith("pp_cod_")
+}
+
+export const isGcash = (providerId?: string) => {
+  return providerId?.startsWith("pp_gcash_")
 }
 
 export const isOtc = (providerId?: string) => {

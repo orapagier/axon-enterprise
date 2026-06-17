@@ -3,6 +3,7 @@ import { HttpTypes } from "@medusajs/types"
 import { Heading, Table } from "@modules/common/components/ui"
 
 import Item from "@modules/cart/components/item"
+import { SelectAllCheckbox } from "@modules/cart/components/selection-controls"
 import SkeletonLineItem from "@modules/skeletons/components/skeleton-line-item"
 
 type ItemsTemplateProps = {
@@ -21,7 +22,10 @@ const ItemsTemplate = ({ cart }: ItemsTemplateProps) => {
       <Table>
         <Table.Header className="border-t-0 bg-gray-50/60">
           <Table.Row className="text-ui-fg-subtle txt-medium-plus">
-            <Table.HeaderCell className="!pl-6">Item</Table.HeaderCell>
+            <Table.HeaderCell className="!pl-6 w-12">
+              <SelectAllCheckbox />
+            </Table.HeaderCell>
+            <Table.HeaderCell>Item</Table.HeaderCell>
             <Table.HeaderCell></Table.HeaderCell>
             <Table.HeaderCell>Quantity</Table.HeaderCell>
             <Table.HeaderCell className="hidden small:table-cell">

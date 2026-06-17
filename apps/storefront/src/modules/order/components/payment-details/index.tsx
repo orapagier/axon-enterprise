@@ -30,11 +30,13 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
   const cod = isCod(providerId) || !payment
   const title = info?.title ?? "Cash on Delivery"
 
+  // The delivery fee is a real shipping line inside order.total / payment.amount
+  // now, so the amount due/paid already includes it — don't add it again. The
+  // fee (from metadata) is still surfaced in the caption for transparency.
   const deliveryFee =
     (order.metadata as { delivery_fee_php?: number } | null)
       ?.delivery_fee_php ?? 0
-  const goodsTotal = payment?.amount ?? order.total ?? 0
-  const dueOnDelivery = goodsTotal + (cod ? deliveryFee : 0)
+  const dueOnDelivery = payment?.amount ?? order.total ?? 0
 
   const cardLast4 = (
     payment?.data as { card_last4?: string } | null | undefined

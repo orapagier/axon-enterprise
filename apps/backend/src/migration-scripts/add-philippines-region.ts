@@ -95,6 +95,7 @@ export default async function addPhilippinesRegion({ container }: ExecArgs) {
             payment_providers: [
             "pp_system_default",
             "pp_cod_freshhub",
+            "pp_gcash_freshhub",
             "pp_otc_freshhub",
           ],
           },
@@ -116,12 +117,15 @@ export default async function addPhilippinesRegion({ container }: ExecArgs) {
           payment_providers: [
             "pp_system_default",
             "pp_cod_freshhub",
+            "pp_gcash_freshhub",
             "pp_otc_freshhub",
           ],
         },
       },
     })
-    logger.info("Ensured PH region has COD + OTC payment providers attached.")
+    logger.info(
+      "Ensured PH region has COD + GCash + OTC payment providers attached."
+    )
   } catch (err) {
     logger.warn(
       `Could not attach COD/OTC providers to PH region: ${String(err)}`

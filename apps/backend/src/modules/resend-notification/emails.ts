@@ -68,14 +68,14 @@ const TEMPLATES: Record<string, (d: Data) => BuiltEmail> = {
             ? p(
                 `Delivery: <strong>${tier}</strong>${
                   fee > 0
-                    ? ` (${peso(fee)} delivery fee, paid in cash on delivery)`
+                    ? ` (${peso(fee)} delivery fee, included in the total)`
                     : " (free)"
                 }.`
               )
             : "") +
           p(
             `Please prepare <strong>${peso(
-              Number(d.total_php ?? 0) + fee
+              Number(d.total_php ?? 0)
             )}</strong> in cash for the rider.`
           ) +
           p(`We'll email you again when your order leaves the hub.`)

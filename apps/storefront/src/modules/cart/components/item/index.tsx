@@ -3,8 +3,10 @@
 import { Table, Text, clx } from "@modules/common/components/ui"
 import { updateLineItem } from "@lib/data/cart"
 import { getUnitLabel } from "@lib/util/unit"
+import { isLineItemInStock } from "@lib/util/line-item-stock"
 import { HttpTypes } from "@medusajs/types"
 import CartItemSelect from "@modules/cart/components/cart-item-select"
+import { CartItemCheckbox } from "@modules/cart/components/selection-controls"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import DeleteButton from "@modules/common/components/delete-button"
 import LineItemOptions from "@modules/common/components/line-item-options"
@@ -53,9 +55,19 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
     ? Math.min(inventoryQty ?? CART_QUANTITY_CAP, CART_QUANTITY_CAP)
     : CART_QUANTITY_CAP
 
+  const inStock = isLineItemInStock(item)
+
   return (
     <Table.Row className="w-full group" data-testid="product-row">
-      <Table.Cell className="!pl-6 py-4 w-24">
+      {type === "full" && (
+        <Table.Cell className="!pl-6 w-12 py-4">
+          <CartItemCheckbox itemId={item.id} disabled={!inStock} />
+        </Table.Cell>
+      )}
+
+      <Table.Cell
+        className={clx("py-4 w-24", { "!pl-6": type === "preview" })}
+      >
         <LocalizedClientLink
           href={`/products/${item.product_handle}`}
           className={clx("flex", {
@@ -80,6 +92,14 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
           {item.product_title}
         </Text>
         <LineItemOptions variant={item.variant} data-testid="product-variant" />
+        {type === "full" && !inStock && (
+          <Text
+            className="txt-small text-rose-600 mt-1"
+            data-testid="product-out-of-stock"
+          >
+            Out of stock — can&apos;t be checked out
+          </Text>
+        )}
       </Table.Cell>
 
       {type === "full" && (

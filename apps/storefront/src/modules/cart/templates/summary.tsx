@@ -1,11 +1,15 @@
 "use client"
 
-import { Button, Heading } from "@modules/common/components/ui"
+import { Button, Heading, Text } from "@modules/common/components/ui"
+import { useParams, useRouter } from "next/navigation"
+import { useMemo, useState, useTransition } from "react"
 
-import CartTotals from "@modules/common/components/cart-totals"
-import Divider from "@modules/common/components/divider"
+import { beginCheckout } from "@lib/data/cart"
+import { convertToLocale } from "@lib/util/money"
+import { useCartSelection } from "@modules/cart/components/selection-context"
 import DiscountCode from "@modules/checkout/components/discount-code"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ErrorMessage from "@modules/checkout/components/error-message"
+import Divider from "@modules/common/components/divider"
 import MembershipUpsellStrip from "@modules/common/components/membership-upsell-strip"
 import { HttpTypes } from "@medusajs/types"
 
@@ -14,18 +18,38 @@ type SummaryProps = {
   isMember?: boolean
 }
 
-function getCheckoutStep(cart: HttpTypes.StoreCart) {
-  if (!cart?.shipping_address?.address_1 || !cart.email) {
-    return "address"
-  } else if (cart?.shipping_methods?.length === 0) {
-    return "delivery"
-  } else {
-    return "payment"
-  }
-}
-
 const Summary = ({ cart, isMember = false }: SummaryProps) => {
-  const step = getCheckoutStep(cart)
+  const selection = useCartSelection()
+  const router = useRouter()
+  const { countryCode } = useParams() as { countryCode: string }
+  const [isPending, startTransition] = useTransition()
+  const [error, setError] = useState<string | null>(null)
+
+  const selectedIds = selection?.selectedIds ?? []
+  const selectedSet = useMemo(() => new Set(selectedIds), [selectedIds])
+
+  const selectedItems = (cart.items ?? []).filter((li) =>
+    selectedSet.has(li.id)
+  )
+  const selectedCount = selectedItems.length
+  const selectedSubtotal = selectedItems.reduce(
+    (sum, li) => sum + (li.total ?? (li.unit_price ?? 0) * (li.quantity ?? 0)),
+    0
+  )
+
+  const handleCheckout = () => {
+    setError(null)
+    startTransition(async () => {
+      try {
+        const res = await beginCheckout(selectedIds)
+        if (res?.requiresLogin) {
+          router.push(`/${countryCode}/account`)
+        }
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "Couldn't start checkout")
+      }
+    })
+  }
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -37,19 +61,42 @@ const Summary = ({ cart, isMember = false }: SummaryProps) => {
       <div className="px-6 py-5 flex flex-col gap-y-4">
         <DiscountCode cart={cart} />
         <Divider />
-        <CartTotals totals={cart} />
+        <div className="flex items-center justify-between">
+          <Text className="text-ui-fg-subtle">
+            Subtotal ({selectedCount} {selectedCount === 1 ? "item" : "items"}{" "}
+            selected)
+          </Text>
+          <Text
+            className="text-ui-fg-base font-semibold tabular-nums"
+            data-testid="cart-selected-subtotal"
+          >
+            {convertToLocale({
+              amount: selectedSubtotal,
+              currency_code: cart.currency_code,
+            })}
+          </Text>
+        </div>
+        <Text className="text-caption text-ui-fg-muted -mt-2">
+          Shipping &amp; taxes are calculated at checkout.
+        </Text>
         {!isMember && (
           <MembershipUpsellStrip
             subtotal={cart.subtotal ?? 0}
             currencyCode={cart.currency_code}
           />
         )}
-        <LocalizedClientLink
-          href={"/checkout?step=" + step}
+        <Button
+          className="w-full h-10"
+          onClick={handleCheckout}
+          isLoading={isPending}
+          disabled={selectedCount === 0}
           data-testid="checkout-button"
         >
-          <Button className="w-full h-10">Go to checkout</Button>
-        </LocalizedClientLink>
+          {selectedCount === 0
+            ? "Select items to checkout"
+            : `Checkout (${selectedCount})`}
+        </Button>
+        <ErrorMessage error={error} data-testid="checkout-error-message" />
       </div>
     </div>
   )

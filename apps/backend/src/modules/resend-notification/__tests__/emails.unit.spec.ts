@@ -26,15 +26,17 @@ describe("buildEmail", () => {
     }
   })
 
-  it("order-placed totals include the cash delivery fee", () => {
+  it("order-placed shows the order total, which already includes the delivery fee", () => {
     const email = buildEmail("order-placed", {
+      // total_php is the full order total — the delivery fee is now a real
+      // shipping line inside it, not added on top.
       display_id: 7,
-      total_php: 100,
+      total_php: 130,
       delivery_fee_php: 30,
       delivery_tier: "standard",
     })!
     expect(email.subject).toContain("#7")
-    // buyer is told to prepare total + fee in cash
+    // buyer is told to prepare the order total in cash (fee is inside it)
     expect(email.html).toContain("130.00")
   })
 

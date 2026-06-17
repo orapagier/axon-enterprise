@@ -143,6 +143,13 @@ const customModules: Record<string, unknown>[] = [
           id: 'freshhub',
         },
         {
+          // GCash (manual reference flow). Prepaid: buyer sends to the hub's
+          // GCash number, pastes the 13-digit reference at checkout; admin
+          // verifies + captures later. provider_id => pp_gcash_freshhub.
+          resolve: './src/modules/payment-gcash',
+          id: 'freshhub',
+        },
+        {
           // OTC (walk-in, pay at the hub counter). Reframed 2026-06-10: OTC is
           // walk-in ONLY — authorizePayment always rejects so the raw store API
           // can't place an unpaid online "OTC" order. The counter flow pays via

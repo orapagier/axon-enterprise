@@ -14,14 +14,11 @@ type CartTotalsProps = {
     discount_subtotal?: number | null
   }
   /**
-   * Buyer-chosen delivery fee in pesos and its tier, read from cart/order
-   * metadata. The fee is deliberately kept OUT of Medusa's totals (COD
-   * reconciliation adds it back on top — see lib/delivery-actions.ts), so the
-   * buyer-facing "Total" has to add it here to show the true cash-on-delivery
-   * payable, Shopee-style. Omitted (cart page, or before a tier is picked) ⇒
-   * falls back to the plain Medusa "Shipping" line.
+   * Chosen delivery tier, used only to relabel the shipping line (e.g.
+   * "Standard delivery" instead of "Shipping"). The fee itself is a real
+   * shipping method now, so the amount comes from Medusa's `shipping_subtotal`
+   * and is already part of `total` — nothing is added on top here.
    */
-  deliveryFeePhp?: number | null
   deliveryTier?: string | null
 }
 
@@ -31,11 +28,7 @@ const TIER_LABELS: Record<string, string> = {
   special: "Special delivery",
 }
 
-const CartTotals: React.FC<CartTotalsProps> = ({
-  totals,
-  deliveryFeePhp,
-  deliveryTier,
-}) => {
+const CartTotals: React.FC<CartTotalsProps> = ({ totals, deliveryTier }) => {
   const {
     currency_code,
     total,
@@ -45,15 +38,10 @@ const CartTotals: React.FC<CartTotalsProps> = ({
     discount_subtotal,
   } = totals
 
-  const hasDelivery = deliveryTier != null && deliveryFeePhp != null
-  // Coerce: metadata round-trips through JSON, so the fee can come back as a
-  // string ("30") which would concatenate instead of add. Mirrors the Number()
-  // guard in the backend's lib/delivery-actions.ts.
-  const rawFee = Number(deliveryFeePhp ?? 0)
-  const deliveryFee = Number.isFinite(rawFee) ? rawFee : 0
-  // Medusa's `total` already covers items/tax/discount (shipping_subtotal is 0
-  // here); the metadata delivery fee is the only piece it's missing.
-  const grandTotal = (total ?? 0) + (hasDelivery ? deliveryFee : 0)
+  const shipping = shipping_subtotal ?? 0
+  // The delivery fee is a real shipping line, so Medusa's `total` already
+  // includes it.
+  const grandTotal = total ?? 0
 
   return (
     <div>
@@ -66,22 +54,14 @@ const CartTotals: React.FC<CartTotalsProps> = ({
         </div>
         <div className="flex items-center justify-between">
           <span>
-            {hasDelivery
-              ? TIER_LABELS[deliveryTier!] ?? "Delivery fee"
+            {deliveryTier
+              ? TIER_LABELS[deliveryTier] ?? "Delivery"
               : "Shipping"}
           </span>
-          <span
-            data-testid="cart-shipping"
-            data-value={hasDelivery ? deliveryFee : shipping_subtotal || 0}
-          >
-            {hasDelivery
-              ? deliveryFee === 0
-                ? "Free"
-                : convertToLocale({ amount: deliveryFee, currency_code })
-              : convertToLocale({
-                  amount: shipping_subtotal ?? 0,
-                  currency_code,
-                })}
+          <span data-testid="cart-shipping" data-value={shipping}>
+            {shipping === 0 && deliveryTier
+              ? "Free"
+              : convertToLocale({ amount: shipping, currency_code })}
           </span>
         </div>
         {!!discount_subtotal && (

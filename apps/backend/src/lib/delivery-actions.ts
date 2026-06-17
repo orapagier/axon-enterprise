@@ -74,10 +74,9 @@ export type ConfirmDeliveryResult =
  * (the rider now owes that cash). OTC orders are already paid at the counter,
  * so only the delivery is marked. Idempotent.
  *
- * The recorded amount is the full cash in the rider's hand: order total plus
- * the delivery fee (`metadata.delivery_fee_php`, integer pesos) — the fee is
- * metadata-only and never flows into the order's totals, but the buyer pays it
- * in cash at the door, so reconciliation must include it.
+ * The recorded amount is the full cash in the rider's hand = the order total.
+ * The delivery fee is now a real shipping line on the order, so `order.total`
+ * already includes it — reconciliation must NOT add it again.
  */
 export async function confirmDelivery(
   container: MedusaContainer,
@@ -174,9 +173,9 @@ export async function confirmDelivery(
       transaction = existing[0]
     } else {
       const total = Number(order.total ?? order.summary?.current_order_total ?? 0)
-      const feePhp = Number(order.metadata?.delivery_fee_php ?? 0)
-      // What the buyer owes at the door: order total + delivery fee.
-      const expected = Math.round(total * 100) + Math.round(feePhp * 100)
+      // What the buyer owes at the door = the order total. The delivery fee is
+      // already a shipping line inside that total, so it must not be re-added.
+      const expected = Math.round(total * 100)
       // The rider can report a different figure (partial / short payment); fall
       // back to the expected amount when none is supplied.
       const amount = args.amountOverride ?? expected

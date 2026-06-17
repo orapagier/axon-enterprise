@@ -1,6 +1,6 @@
 "use client"
 
-import { isCod, isManual, isStripeLike } from "@lib/constants"
+import { isCod, isGcash, isManual, isStripeLike } from "@lib/constants"
 import { placeOrder } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@modules/common/components/ui"
@@ -45,6 +45,8 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
       )
     case isCod(paymentSession?.provider_id):
       return <CodPaymentButton notReady={notReady} data-testid={dataTestId} />
+    case isGcash(paymentSession?.provider_id):
+      return <GcashPaymentButton notReady={notReady} data-testid={dataTestId} />
     default:
       return <Button disabled>Select a payment method</Button>
   }
@@ -232,6 +234,47 @@ const CodPaymentButton = ({
       <ErrorMessage
         error={errorMessage}
         data-testid="cod-payment-error-message"
+      />
+    </>
+  )
+}
+
+const GcashPaymentButton = ({
+  notReady,
+  "data-testid": dataTestId,
+}: {
+  notReady: boolean
+  "data-testid"?: string
+}) => {
+  const [submitting, setSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+  const handlePayment = () => {
+    setSubmitting(true)
+
+    placeOrder()
+      .catch((err) => {
+        setErrorMessage(err.message)
+      })
+      .finally(() => {
+        setSubmitting(false)
+      })
+  }
+
+  return (
+    <>
+      <Button
+        disabled={notReady}
+        isLoading={submitting}
+        onClick={handlePayment}
+        size="large"
+        data-testid={dataTestId}
+      >
+        Place order
+      </Button>
+      <ErrorMessage
+        error={errorMessage}
+        data-testid="gcash-payment-error-message"
       />
     </>
   )

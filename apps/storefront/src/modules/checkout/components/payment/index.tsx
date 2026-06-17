@@ -1,7 +1,8 @@
 "use client"
 import { RadioGroup } from "@headlessui/react"
-import { isStripeLike, paymentInfoMap } from "@lib/constants"
+import { isGcash, isStripeLike, paymentInfoMap } from "@lib/constants"
 import { initiatePaymentSession } from "@lib/data/cart"
+import { MEMBERSHIP_PAYOUT } from "@lib/util/membership"
 import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import PaymentContainer, {
@@ -12,6 +13,8 @@ import {
   Button,
   Container,
   Heading,
+  Input,
+  Label,
   Text,
   clx,
 } from "@modules/common/components/ui"
@@ -41,6 +44,11 @@ const Payment = ({
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(
     activeSession?.provider_id ?? ""
   )
+  const [gcashReference, setGcashReference] = useState(
+    ((activeSession?.data as { reference?: string } | undefined)?.reference ??
+      "") as string
+  )
+  const gcashRefValid = /^\d{13}$/.test(gcashReference.trim())
 
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -87,6 +95,19 @@ const Payment = ({
   const handleSubmit = async () => {
     setIsLoading(true)
     try {
+      // GCash: re-initiate every time so the latest reference number is stored
+      // on the session, then move on to review.
+      if (isGcash(selectedPaymentMethod)) {
+        await initiatePaymentSession(cart, {
+          provider_id: selectedPaymentMethod,
+          data: { reference: gcashReference.trim() },
+        })
+        return router.push(
+          pathname + "?" + createQueryString("step", "review"),
+          { scroll: false }
+        )
+      }
+
       const shouldInputCard =
         isStripeLike(selectedPaymentMethod) && !activeSession
 
@@ -197,6 +218,44 @@ const Payment = ({
                   </div>
                 ))}
               </RadioGroup>
+
+              {isGcash(selectedPaymentMethod) && (
+                <div
+                  className="mt-4 p-4 rounded-lg border border-ui-border-base bg-ui-bg-subtle flex flex-col gap-y-2"
+                  data-testid="gcash-reference-panel"
+                >
+                  <Text className="txt-medium text-ui-fg-subtle">
+                    Send your payment via GCash to:
+                  </Text>
+                  <Text className="txt-medium-plus text-ui-fg-base">
+                    {MEMBERSHIP_PAYOUT.gcash.accountName} ·{" "}
+                    {MEMBERSHIP_PAYOUT.gcash.accountNumber}
+                  </Text>
+                  <Text className="text-caption text-ui-fg-subtle">
+                    {MEMBERSHIP_PAYOUT.gcash.note}
+                  </Text>
+                  <Label htmlFor="gcash-reference" className="mt-2">
+                    GCash reference number
+                  </Label>
+                  <Input
+                    id="gcash-reference"
+                    value={gcashReference}
+                    onChange={(e) =>
+                      setGcashReference(
+                        e.target.value.replace(/\D/g, "").slice(0, 13)
+                      )
+                    }
+                    inputMode="numeric"
+                    placeholder="13-digit reference"
+                    data-testid="gcash-reference-input"
+                  />
+                  {gcashReference.length > 0 && !gcashRefValid && (
+                    <Text className="text-caption text-rose-500">
+                      Enter the 13-digit reference shown on your GCash receipt.
+                    </Text>
+                  )}
+                </div>
+              )}
             </>
           )}
 
@@ -219,6 +278,15 @@ const Payment = ({
             data-testid="payment-method-error-message"
           />
 
+          {!checkoutBlocked && !deliverySelected && !paidByGiftcard && (
+            <Text
+              className="txt-medium text-ui-fg-subtle mt-4"
+              data-testid="delivery-required-notice"
+            >
+              Choose a delivery option in the order summary to continue.
+            </Text>
+          )}
+
           {!checkoutBlocked && (
             <Button
               size="large"
@@ -227,7 +295,9 @@ const Payment = ({
               isLoading={isLoading}
               disabled={
                 (isStripeLike(selectedPaymentMethod) && !cardComplete) ||
-                (!selectedPaymentMethod && !paidByGiftcard)
+                (isGcash(selectedPaymentMethod) && !gcashRefValid) ||
+                (!selectedPaymentMethod && !paidByGiftcard) ||
+                (!deliverySelected && !paidByGiftcard)
               }
               data-testid="submit-payment-button"
             >

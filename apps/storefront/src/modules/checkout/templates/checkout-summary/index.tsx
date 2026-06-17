@@ -8,7 +8,6 @@ import { HttpTypes } from "@medusajs/types"
 
 const CheckoutSummary = ({ cart }: { cart: HttpTypes.StoreCart }) => {
   const meta = (cart.metadata ?? {}) as {
-    delivery_fee_php?: number
     delivery_tier?: string
   }
   return (
@@ -22,11 +21,7 @@ const CheckoutSummary = ({ cart }: { cart: HttpTypes.StoreCart }) => {
           In your Cart
         </Heading>
         <Divider className="my-6" />
-        <CartTotals
-          totals={cart}
-          deliveryFeePhp={meta.delivery_fee_php}
-          deliveryTier={meta.delivery_tier}
-        />
+        <CartTotals totals={cart} deliveryTier={meta.delivery_tier} />
         <ItemsPreviewTemplate cart={cart} />
         <div className="my-6">
           <DiscountCode cart={cart} />

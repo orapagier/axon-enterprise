@@ -26,11 +26,12 @@ const VALID_TIERS: Tier[] = ["free", "standard", "special"]
  * chosen tier + computed fee to cart.metadata. The dispatch system reads
  * delivery_tier off the order at order-placement time.
  *
- * Note (MVP): the actual fee is captured in cart.metadata.delivery_fee_php
- * and does NOT yet flow into Medusa's shipping_total — the buyer pays it in
- * cash on delivery (COD-only at launch). When online payments are added,
- * this endpoint must also call addShippingMethodToCartWorkflow with the
- * computed amount.
+ * The chosen tier + computed fee are written to cart.metadata (the dispatch
+ * system, emails and tier-gating read it there) AND reflected as a real
+ * shipping method on the cart, so the fee flows into Medusa's shipping_total /
+ * total and the resulting order. Because the fee is now in the order total, the
+ * COD reconciliation (lib/delivery-actions.ts) and order displays read it from
+ * the total — they no longer add it back on top.
  */
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const body = req.body as { cart_id?: string; tier?: string }
@@ -213,6 +214,52 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       },
     },
   ])
+
+  // Reflect the chosen fee as a real shipping method so it flows into the
+  // cart's (and the resulting order's) shipping_total / total. Replace any
+  // prior delivery method first so re-selecting a tier doesn't stack fees.
+  try {
+    const existingMethods = await cartModule.listShippingMethods({
+      cart_id: cart.id,
+    })
+    if (existingMethods.length) {
+      await cartModule.deleteShippingMethods(
+        existingMethods.map((m) => m.id)
+      )
+    }
+
+    const { data: options } = await query.graph({
+      entity: "shipping_option",
+      fields: ["id", "name"],
+    })
+    const option =
+      (options as { id: string; name?: string }[]).find(
+        (o) => o.name === "Standard Delivery"
+      ) ?? (options as { id: string }[])[0]
+
+    const tierLabel =
+      tier === "free"
+        ? "Free delivery"
+        : tier === "special"
+          ? "Special delivery"
+          : "Standard delivery"
+
+    await cartModule.addShippingMethods(cart.id, [
+      {
+        name: tierLabel,
+        amount: feePhp,
+        ...(option ? { shipping_option_id: option.id } : {}),
+        data: { delivery_tier: tier },
+      },
+    ])
+  } catch (err) {
+    // Non-fatal: the fee is still captured in metadata. Log and continue so a
+    // shipping-method hiccup never blocks tier selection.
+    console.error(
+      `delivery-options/select: failed to set shipping method for cart ${cart.id}:`,
+      err
+    )
+  }
 
   res.json({
     cart_id: updated.id,

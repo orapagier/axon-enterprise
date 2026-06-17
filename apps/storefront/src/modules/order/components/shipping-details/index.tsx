@@ -29,10 +29,9 @@ const Field = ({
 )
 
 const ShippingDetails = ({ order }: ShippingDetailsProps) => {
-  // Delivery in this checkout is captured as a tier in order.metadata (the fee
-  // is paid COD), not as a Medusa shipping_method — so shipping_methods is
-  // usually empty. Read the tier/fee from metadata, falling back to a real
-  // shipping method for any legacy orders that used one.
+  // Delivery is a real shipping method on the order now; the chosen tier also
+  // lives in order.metadata and is used to label the method. Prefer the real
+  // shipping_total, falling back to the method/metadata for older orders.
   const meta = (order.metadata ?? {}) as {
     delivery_tier?: string
     delivery_fee_php?: number
@@ -45,7 +44,8 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
     (meta.delivery_tier ? TIER_LABELS[meta.delivery_tier] : undefined) ??
     shippingMethod?.name ??
     "Delivery"
-  const methodAmount = meta.delivery_fee_php ?? shippingMethod?.total ?? 0
+  const methodAmount =
+    order.shipping_total ?? shippingMethod?.total ?? meta.delivery_fee_php ?? 0
 
   const addr = order.shipping_address
   const barangay = (addr?.metadata as { barangay?: string } | undefined)
