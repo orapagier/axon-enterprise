@@ -19,7 +19,7 @@ const CPT = (stroke, sw = 2.4) => `
     <!-- P: stem + bowl -->
     <path d="M15.7 23 L15.7 13 C19.8 13 19.8 18.5 15.7 18.5" />
     <!-- T: bar + stem -->
-    <path d="M22.5 13 L29.9 13 M26.2 13 L26.2 23" />
+    <path d="M21.9 13 L29.3 13 M25.6 13 L25.6 23" />
   </g>`
 
 // Inline-style mark (transparent bg) — what goes in nav/footer/menu.
