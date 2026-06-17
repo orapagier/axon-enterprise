@@ -24,7 +24,7 @@ const grad = (id, c0, c1) =>
 function iconSVG({ maskable = false } = {}) {
   // Maskable icons must keep content inside the central ~80% safe zone, so
   // shrink the mark toward the middle when masked.
-  const s = maskable ? 0.74 : 1
+  const s = maskable ? 0.74 : 0.88
   const t = (96 * (1 - s)) / 2
   return `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
   <defs>${grad("bg", "#16a34a", "#14532d")}</defs>
