@@ -194,6 +194,18 @@ export async function cancelCheckout() {
   revalidateTag(cartCacheTag)
 }
 
+/**
+ * Busts the cached cart read after a mutation made directly against the backend
+ * (e.g. the delivery-tier picker POSTs to /store/delivery-options/select via the
+ * browser SDK, which can't revalidate the storefront's force-cached cart). Call
+ * this before router.refresh() so the re-render sees the new tier/fee/shipping
+ * method — otherwise the Delivery step's "Continue" gate never unlocks.
+ */
+export async function revalidateCartCache() {
+  const cartCacheTag = await getCacheTag("carts")
+  revalidateTag(cartCacheTag)
+}
+
 export async function addToCart({
   variantId,
   quantity,
