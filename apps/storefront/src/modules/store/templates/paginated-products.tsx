@@ -4,7 +4,9 @@ import { getRegion } from "@lib/data/regions"
 import { sortProducts } from "@lib/util/sort-products"
 import ProductPreview from "@modules/products/components/product-preview"
 import { Pagination } from "@modules/store/components/pagination"
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import SortProducts, {
+  SortOptions,
+} from "@modules/store/components/refinement-list/sort-products"
 
 const PRODUCT_LIMIT = 12
 const FETCH_LIMIT = 100
