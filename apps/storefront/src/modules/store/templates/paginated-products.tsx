@@ -174,7 +174,7 @@ export default async function PaginatedProducts({
   return (
     <>
       {/* Minimal toolbar — search query (if any) on left, sort pill on right */}
-      <div className="flex items-center justify-between gap-3 mb-3 min-h-[36px]">
+      <div className="flex items-center justify-between gap-3 mb-2 min-h-[32px]">
         <div className="text-body-sm text-grey-50">
           {trimmedQuery ? (
             <>
