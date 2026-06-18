@@ -8,7 +8,7 @@ import { isDuplicateCodTransaction } from "../modules/cod-ledger/is-duplicate"
 import { ACCOUNTABILITY_MODULE } from "../modules/accountability"
 import type AccountabilityModuleService from "../modules/accountability/service"
 import { sendEmail } from "./notify"
-import { sendPush } from "./push"
+import { notifyCustomer } from "./notify-customer"
 import { notifyAdmin } from "./notify-admin"
 
 /**
