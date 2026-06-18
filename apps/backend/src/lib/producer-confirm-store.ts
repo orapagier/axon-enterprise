@@ -450,8 +450,9 @@ export async function notifyResolution(
     template: "producer-order-cancelled",
     data: { display_id: order.display_id },
   })
-  await sendPush(container, {
+  await notifyCustomer(container, {
     customerId: sellerId,
+    type: "order",
     title: "Order cancelled — confirmation missed",
     body: `Order #${order.display_id} was cancelled because it wasn't confirmed in time. A strike was recorded — you can dispute it.`,
     url: "/account/producer/orders",
