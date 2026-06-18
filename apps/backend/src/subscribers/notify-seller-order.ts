@@ -161,8 +161,9 @@ export default async function notifySellerOrderHandler({
             deliver_to: deliverTo || null,
           },
         })
-        await sendPush(container, {
+        await notifyCustomer(container, {
           customerId: sellerId,
+          type: "order",
           title: "🛒 New order — confirm to fulfil",
           body: `Order #${order.display_id}: ${lines.join(", ")}. Confirm it before the window closes.`,
           url: "/account/producer/orders",
