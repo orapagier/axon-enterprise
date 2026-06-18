@@ -29,9 +29,27 @@ const CartDropdown = ({
     undefined
   )
   const [cartDropdownOpen, setCartDropdownOpen] = useState(false)
+  const rootRef = useRef<HTMLDivElement>(null)
+
+  // Hover only drives the panel on devices that actually hover. On touch,
+  // browsers emulate a mouseenter on tap — letting that open the panel would
+  // make the tap's click toggle it straight back closed. So gate hover here and
+  // drive touch with the tap (onClick) on the cart icon instead. (Mirrors the
+  // notification bell.)
+  const [canHover, setCanHover] = useState(false)
+  useEffect(() => {
+    setCanHover(
+      typeof window !== "undefined" &&
+        window.matchMedia("(hover: hover)").matches
+    )
+  }, [])
 
   const open = () => setCartDropdownOpen(true)
   const close = () => setCartDropdownOpen(false)
+  const toggle = () => {
+    if (activeTimer) clearTimeout(activeTimer)
+    setCartDropdownOpen((v) => !v)
+  }
 
   const totalItems =
     cartState?.items?.reduce((acc, item) => {
@@ -76,37 +94,77 @@ const CartDropdown = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalItems, itemRef.current])
 
+  // On touch, close when tapping outside the cart/panel or pressing Escape.
+  useEffect(() => {
+    if (!cartDropdownOpen || canHover) return
+    const onPointerDown = (e: PointerEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        close()
+      }
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close()
+    }
+    document.addEventListener("pointerdown", onPointerDown)
+    document.addEventListener("keydown", onKey)
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown)
+      document.removeEventListener("keydown", onKey)
+    }
+  }, [cartDropdownOpen, canHover])
+
+  const handleEnter = () => {
+    if (canHover) openAndCancel()
+  }
+  const handleLeave = () => {
+    if (canHover) close()
+  }
+  // Desktop is driven by hover and the icon navigates to /cart on click. On
+  // touch there's no hover, so the tap opens the dropdown instead of navigating.
+  const handleIconClick = (e: React.MouseEvent) => {
+    if (!canHover) {
+      e.preventDefault()
+      toggle()
+    }
+  }
+
   return (
     <div
+      ref={rootRef}
       className="h-full z-50"
-      onMouseEnter={openAndCancel}
-      onMouseLeave={close}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
     >
       <Popover className="relative h-full">
-        <PopoverButton className="h-full flex items-center">
+        <PopoverButton className="h-full flex items-center outline-none">
           <LocalizedClientLink
-            className="group relative inline-flex items-center justify-center w-9 h-9 small:w-auto small:h-auto small:gap-x-2 small:pl-3 small:pr-4 small:py-2 rounded-full bg-brand-green-700 text-white hover:bg-brand-green-800 transition-all shadow-soft ring-1 ring-brand-green-800/40"
+            className="group relative inline-flex items-center justify-center w-9 h-9 rounded-full text-brand-green-700 hover:text-brand-green-800 hover:bg-grey-5 transition-colors"
             href="/cart"
             data-testid="nav-cart-link"
             aria-label="Cart"
+            onClick={handleIconClick}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand-gold-300">
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <path d="M16 10a4 4 0 0 1-8 0" />
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="9" cy="21" r="1" />
+              <circle cx="20" cy="21" r="1" />
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
             </svg>
-            <span className="hidden small:inline text-body-sm font-semibold tracking-wide">Cart</span>
-            <span className="hidden small:block w-px h-3.5 bg-white/20" />
-            <span className="hidden small:inline text-body-sm font-bold tabular-nums text-brand-gold-300">
-              {totalItems}
-            </span>
             {totalItems > 0 && (
-              <>
-                <span className="small:hidden absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-brand-gold-400 ring-2 ring-[#fdfcf8] flex items-center justify-center text-[9px] font-bold leading-none text-brand-green-900 tabular-nums">
-                  {totalItems}
-                </span>
-                <span className="hidden small:block absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-brand-gold-400 ring-2 ring-[#fdfcf8]" />
-              </>
+              <span
+                className="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-brand-gold-400 ring-2 ring-[#fdfcf8] flex items-center justify-center text-[9px] font-bold leading-none text-brand-green-900 tabular-nums"
+                data-testid="nav-cart-count"
+              >
+                {totalItems > 9 ? "9+" : totalItems}
+              </span>
             )}
           </LocalizedClientLink>
         </PopoverButton>
@@ -122,7 +180,7 @@ const CartDropdown = ({
         >
           <PopoverPanel
             static
-            className="hidden small:block absolute top-[calc(100%+8px)] right-0 bg-white rounded-2xl shadow-large border border-grey-10 w-[420px] text-ui-fg-base overflow-hidden"
+            className="fixed left-3 right-3 small:absolute small:left-auto small:right-0 small:w-[420px] top-[calc(100%+8px)] z-50 bg-white rounded-2xl shadow-large border border-grey-10 text-ui-fg-base overflow-hidden"
             data-testid="nav-cart-dropdown"
           >
             <div className="p-4 flex items-center justify-center">
@@ -139,13 +197,13 @@ const CartDropdown = ({
                     })
                     .map((item) => (
                       <div
-                        className="grid grid-cols-[122px_1fr] gap-x-4"
+                        className="grid grid-cols-[80px_1fr] small:grid-cols-[122px_1fr] gap-x-3 small:gap-x-4"
                         key={item.id}
                         data-testid="cart-item"
                       >
                         <LocalizedClientLink
                           href={`/products/${item.product_handle}`}
-                          className="w-24"
+                          className="w-20 small:w-24"
                         >
                           <Thumbnail
                             thumbnail={item.thumbnail}
@@ -153,11 +211,11 @@ const CartDropdown = ({
                             size="square"
                           />
                         </LocalizedClientLink>
-                        <div className="flex flex-col justify-between flex-1">
+                        <div className="flex flex-col justify-between flex-1 min-w-0">
                           <div className="flex flex-col flex-1">
-                            <div className="flex items-start justify-between">
-                              <div className="flex flex-col overflow-ellipsis whitespace-nowrap mr-4 w-[180px]">
-                                <h3 className="text-base-regular overflow-hidden text-ellipsis">
+                            <div className="flex items-start justify-between gap-x-2">
+                              <div className="flex flex-col min-w-0 flex-1">
+                                <h3 className="text-base-regular overflow-hidden text-ellipsis whitespace-nowrap">
                                   <LocalizedClientLink
                                     href={`/products/${item.product_handle}`}
                                     data-testid="product-link"
@@ -177,7 +235,7 @@ const CartDropdown = ({
                                   Quantity: {item.quantity}
                                 </span>
                               </div>
-                              <div className="flex justify-end">
+                              <div className="flex justify-end shrink-0">
                                 <LineItemPrice
                                   item={item}
                                   style="tight"
@@ -226,6 +284,7 @@ const CartDropdown = ({
                     <Button
                       className="w-full"
                       size="large"
+                      onClick={close}
                       data-testid="go-to-cart-button"
                     >
                       Go to cart
