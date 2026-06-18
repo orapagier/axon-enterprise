@@ -1,7 +1,7 @@
 # Graph Report - freshhub  (2026-06-18)
 
 ## Corpus Check
-- 606 files · ~521,902 words
+- 606 files · ~522,129 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c4f3084c`
+- Built from commit: `a95c0f1f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -637,8 +637,8 @@ Cohesion: 0.12
 Nodes (7): PickupSlot, PickupWindow, Props, config, DAY_NAMES, PickupSlot, PickupWindow
 
 ### Community 176 - "Community 176"
-Cohesion: 0.2
-Nodes (15): baseHeaders(), confirmSellerOrder(), createListing(), declineSellerOrder(), deleteListing(), disputeSellerStrike(), parseListing(), postSellerOrderAction() (+7 more)
+Cohesion: 0.16
+Nodes (18): baseHeaders(), confirmSellerOrder(), createListing(), declineSellerOrder(), deleteListing(), disputeSellerStrike(), listSellerOrders(), parseListing() (+10 more)
 
 ### Community 177 - "Community 177"
 Cohesion: 0.17
@@ -861,8 +861,8 @@ Cohesion: 0.12
 Nodes (9): CodLedgerModuleService, GET(), getCustomerId(), getCustomerId(), POST(), BuyerWallet, CodTransaction, GET() (+1 more)
 
 ### Community 266 - "Community 266"
-Cohesion: 0.28
-Nodes (7): listSellerOrders(), ProducerOrdersPage(), Props, getProfileCompletion(), Overview(), OverviewProps, hasRole()
+Cohesion: 0.22
+Nodes (11): config, expirePickupWindows(), AdminMessage, chatIds(), ensureConfigured(), formatAdminMessage(), notifyAdmin(), POST() (+3 more)
 
 ### Community 267 - "Community 267"
 Cohesion: 0.21
@@ -893,8 +893,8 @@ Cohesion: 0.07
 Nodes (14): AccordionItemProps, AccordionProps, ProductTabsProps, categories, CATEGORY_ICONS, CategoryFilter, origins, RefinementListProps (+6 more)
 
 ### Community 282 - "Community 282"
-Cohesion: 0.2
-Nodes (7): ACCOUNT_TYPES_NAV_ITEM, AccountNavLinkProps, NAV_ITEMS, NavItem, PRODUCER_NAV_ITEM, RIDER_NAV_ITEM, SELLER_NAV_ITEM
+Cohesion: 0.14
+Nodes (11): ACCOUNT_TYPES_NAV_ITEM, AccountNavLinkProps, NAV_ITEMS, NavItem, PRODUCER_NAV_ITEM, RIDER_NAV_ITEM, SELLER_NAV_ITEM, getProfileCompletion() (+3 more)
 
 ### Community 283 - "Community 283"
 Cohesion: 0.28
@@ -921,8 +921,8 @@ Cohesion: 0.25
 Nodes (6): DeliveryOptionsResponse, Shipping(), ShippingProps, Tier, TIER_VISUAL, TierOption
 
 ### Community 290 - "Community 290"
-Cohesion: 0.1
-Nodes (24): config, config, expirePickupWindows(), config, config, deleteProducerListings(), membershipExpiryTick(), MembershipTransition (+16 more)
+Cohesion: 0.16
+Nodes (13): config, config, config, deleteProducerListings(), membershipExpiryTick(), MembershipTransition, resolveMembershipTransition(), JobInput (+5 more)
 
 ### Community 292 - "Community 292"
 Cohesion: 0.29
@@ -982,7 +982,7 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `GET()` connect `Community 135` to `Community 143`, `Account & Checkout Pages`, `Community 162`, `Community 313`?**
   _High betweenness centrality (0.154) - this node is a cross-community bridge._
-- **Why does `retrieveCustomer()` connect `Community 162` to `Account & Checkout Pages`, `Community 130`, `Community 135`, `Community 296`, `Community 137`, `Community 266`, `Community 302`, `Account Profile Forms`, `Community 147`, `Order Transfer Flow`, `Community 183`, `Community 280`, `Community 283`, `Community 285`?**
+- **Why does `retrieveCustomer()` connect `Community 162` to `Account & Checkout Pages`, `Community 130`, `Community 135`, `Community 296`, `Community 137`, `Community 302`, `Community 176`, `Account Profile Forms`, `Community 147`, `Order Transfer Flow`, `Community 183`, `Community 280`, `Community 283`, `Community 285`?**
   _High betweenness centrality (0.096) - this node is a cross-community bridge._
 - **Why does `verifyProducerConfirm()` connect `Community 170` to `Backend Type System`, `Account Navigation`, `Micro Community 62`?**
   _High betweenness centrality (0.082) - this node is a cross-community bridge._
