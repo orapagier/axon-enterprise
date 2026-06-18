@@ -199,7 +199,7 @@ export default async function PaginatedProducts({
       </div>
 
       {/* Hairline rule */}
-      <div className="h-px bg-grey-10 mb-4" />
+      <div className="h-px bg-grey-10 mb-3" />
 
       {paginated.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-24 px-6 bg-white rounded-3xl border border-grey-10/60 shadow-soft text-center">
