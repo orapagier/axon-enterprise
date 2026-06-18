@@ -62,6 +62,15 @@ export default async function orderConfirmationEmailHandler({
       delivery_fee_php: Number(order.metadata?.delivery_fee_php ?? 0),
     },
   })
+
+  await notifyCustomer(container, {
+    customerId: order.customer_id,
+    type: "order",
+    title: "Order received 🧾",
+    body: `We've got your order #${order.display_id}. We'll let you know as soon as it's out for delivery.`,
+    url: "/account/orders",
+    tag: `order-${order.id}`,
+  })
 }
 
 export const config: SubscriberConfig = {
