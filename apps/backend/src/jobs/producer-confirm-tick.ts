@@ -87,8 +87,9 @@ async function producerConfirmTick(container: MedusaContainer) {
 
       if (action === "nudge") {
         await persistConfirmEntry(container, o.id, sellerId, markNudged(entry, now))
-        await sendPush(container, {
+        await notifyCustomer(container, {
           customerId: sellerId,
+          type: "order",
           title: "⏳ Order still needs confirmation",
           body: `Order #${o.display_id} is waiting — confirm it before the window closes.`,
           url: "/account/producer/orders",
