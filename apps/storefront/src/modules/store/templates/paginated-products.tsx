@@ -167,15 +167,9 @@ export default async function PaginatedProducts({
   const startIndex = count === 0 ? 0 : offset + 1
   const endIndex = Math.min(offset + PRODUCT_LIMIT, count)
 
-  const sortLabel: Record<SortOptions, string> = {
-    created_at: "Latest Arrivals",
-    price_asc: "Price: Low → High",
-    price_desc: "Price: High → Low",
-  }
-
   return (
     <>
-      {/* Minimal toolbar — search query (if any) on left, sort pill on right */}
+      {/* Minimal toolbar — search query (if any) on left, sort control on right */}
       <div className="flex items-center justify-between gap-3 mb-2 min-h-[32px]">
         <div className="text-body-sm text-grey-50">
           {trimmedQuery ? (
@@ -192,12 +186,7 @@ export default async function PaginatedProducts({
           )}
         </div>
 
-        <span className="inline-flex items-center gap-x-1.5 px-3.5 py-2 rounded-full bg-white border border-grey-20 text-grey-90 font-semibold text-body-sm shadow-soft">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand-green-600">
-            <path d="M3 6h18M7 12h10m-7 6h4" />
-          </svg>
-          {sortLabel[(sortBy as SortOptions) || "created_at"]}
-        </span>
+        <SortProducts sortBy={(sortBy as SortOptions) || "created_at"} />
       </div>
 
       {/* Hairline rule */}
