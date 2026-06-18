@@ -120,16 +120,16 @@ const RefinementList = ({ categories: categoryProp }: RefinementListProps) => {
       const minNum = rawMin === "" ? null : Number(rawMin)
       const maxNum = rawMax === "" ? null : Number(rawMax)
       pushParams((p) => {
+        // Free-text inputs: respect whatever the shopper actually typed. A bare
+        // floor (0/blank) means "no lower bound"; anything above it is a real
+        // constraint. (The old `maxNum < PRICE_CEILING` clamp silently threw
+        // away any max ≥ ₱2000, leaving the upper bound unbounded.)
         if (minNum !== null && !Number.isNaN(minNum) && minNum > PRICE_FLOOR) {
           p.set("min", String(minNum))
         } else {
           p.delete("min")
         }
-        if (
-          maxNum !== null &&
-          !Number.isNaN(maxNum) &&
-          maxNum < PRICE_CEILING
-        ) {
+        if (maxNum !== null && !Number.isNaN(maxNum) && maxNum > PRICE_FLOOR) {
           p.set("max", String(maxNum))
         } else {
           p.delete("max")
