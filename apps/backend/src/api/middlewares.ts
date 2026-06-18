@@ -108,6 +108,14 @@ export default defineMiddlewares({
       middlewares: [authenticate("customer", ["session", "bearer"])],
     },
     {
+      // In-app notification inbox (header bell + /account/notifications). Every
+      // route reads the customer id from auth_context, so a user only ever sees
+      // and marks-read their own notifications.
+      matcher: "/store/notifications*",
+      method: ["GET", "POST"],
+      middlewares: [authenticate("customer", ["session", "bearer"])],
+    },
+    {
       // In-account AI assistant. Customer session required; the route reads the
       // customer id from auth_context, so the chatbot's tools are scoped to the
       // signed-in user only.
