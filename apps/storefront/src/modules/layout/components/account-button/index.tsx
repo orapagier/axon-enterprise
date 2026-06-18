@@ -209,62 +209,76 @@ export default function AccountButton({
   ]
 
   return (
-    <Menu as="div" className="relative">
-      <MenuButton
-        className={`${triggerClassName} data-[open]:text-grey-90 data-[open]:bg-grey-5`}
-        data-testid="nav-account-button"
-        aria-label="Account menu"
-      >
-        <UserIcon />
-        <span className="hidden small:inline">Account</span>
-        <svg
-          width="10"
-          height="10"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+    <div
+      ref={rootRef}
+      className="h-full z-50"
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+    >
+      <Popover className="relative h-full">
+        <PopoverButton
+          className={`${triggerClassName} h-full ${
+            open ? "text-grey-90 bg-grey-5" : ""
+          }`}
+          data-testid="nav-account-button"
+          aria-label="Account menu"
+          onClick={handleButtonClick}
         >
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
-      </MenuButton>
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-200"
-        enterFrom="opacity-0 translate-y-1"
-        enterTo="opacity-100 translate-y-0"
-        leave="transition ease-in duration-150"
-        leaveFrom="opacity-100 translate-y-0"
-        leaveTo="opacity-0 translate-y-1"
-      >
-        <MenuItems
-          className="absolute top-[calc(100%+8px)] right-0 z-50 w-56 bg-white rounded-2xl shadow-large border border-grey-10 p-2 focus:outline-none"
-          data-testid="nav-account-dropdown"
+          <UserIcon />
+          <span className="hidden small:inline">Account</span>
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={`transition-transform ${open ? "rotate-180" : ""}`}
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </PopoverButton>
+        <Transition
+          show={open}
+          as={Fragment}
+          enter="transition ease-out duration-200"
+          enterFrom="opacity-0 translate-y-1"
+          enterTo="opacity-100 translate-y-0"
+          leave="transition ease-in duration-150"
+          leaveFrom="opacity-100 translate-y-0"
+          leaveTo="opacity-0 translate-y-1"
         >
-          {links.map((link) => (
-            <MenuItem key={link.href}>
+          <PopoverPanel
+            static
+            className="absolute top-[calc(100%+8px)] right-0 z-50 w-56 bg-white rounded-2xl shadow-large border border-grey-10 p-2 focus:outline-none"
+            data-testid="nav-account-dropdown"
+          >
+            {links.map((link) => (
               <LocalizedClientLink
+                key={link.href}
                 href={link.href}
+                onClick={close}
                 data-testid={link.testId}
-                className="flex items-center gap-x-3 px-3 py-2 rounded-xl text-body-sm font-medium text-grey-70 data-[focus]:text-grey-90 data-[focus]:bg-grey-5 transition-colors"
+                className="flex items-center gap-x-3 px-3 py-2 rounded-xl text-body-sm font-medium text-grey-70 hover:text-grey-90 hover:bg-grey-5 transition-colors"
               >
                 <span className="text-grey-50">{link.icon}</span>
                 <span>{link.label}</span>
               </LocalizedClientLink>
-            </MenuItem>
-          ))}
+            ))}
 
-          <div className="h-px bg-grey-10 my-1.5 mx-1" />
+            <div className="h-px bg-grey-10 my-1.5 mx-1" />
 
-          <MenuItem>
             <button
               type="button"
               data-testid="nav-signout-button"
               disabled={pending}
-              onClick={() => startTransition(() => signout(countryCode))}
-              className="w-full flex items-center gap-x-3 px-3 py-2 rounded-xl text-body-sm font-medium text-grey-60 data-[focus]:text-red-600 data-[focus]:bg-red-50 transition-colors disabled:opacity-60"
+              onClick={() => {
+                close()
+                startTransition(() => signout(countryCode))
+              }}
+              className="w-full flex items-center gap-x-3 px-3 py-2 rounded-xl text-body-sm font-medium text-grey-60 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-60"
             >
               <svg
                 width="15"
@@ -282,9 +296,9 @@ export default function AccountButton({
               </svg>
               <span>{pending ? "Signing out…" : "Log out"}</span>
             </button>
-          </MenuItem>
-        </MenuItems>
-      </Transition>
-    </Menu>
+          </PopoverPanel>
+        </Transition>
+      </Popover>
+    </div>
   )
 }
