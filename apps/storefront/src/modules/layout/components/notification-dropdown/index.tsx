@@ -156,7 +156,7 @@ const NotificationDropdown = ({
         >
           <PopoverPanel
             static
-            className="hidden small:block absolute top-[calc(100%+8px)] right-0 bg-white rounded-2xl shadow-large border border-grey-10 w-[380px] text-ui-fg-base overflow-hidden"
+            className="fixed left-3 right-3 small:absolute small:left-auto small:right-0 small:w-[380px] top-[calc(100%+8px)] z-50 bg-white rounded-2xl shadow-large border border-grey-10 text-ui-fg-base overflow-hidden"
             data-testid="nav-notifications-dropdown"
           >
             <div className="px-4 py-3 flex items-center justify-between border-b border-grey-10">
