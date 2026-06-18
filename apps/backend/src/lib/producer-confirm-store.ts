@@ -16,7 +16,7 @@ import {
   confirmOrderEditRequestWorkflow,
 } from "@medusajs/medusa/core-flows"
 import { sendEmail } from "./notify"
-import { sendPush } from "./push"
+import { notifyCustomer } from "./notify-customer"
 import { notifyAdmin } from "./notify-admin"
 import {
   routeOrderItems,
