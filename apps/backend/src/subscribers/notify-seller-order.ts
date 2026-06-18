@@ -1,7 +1,7 @@
 import type { SubscriberArgs, SubscriberConfig } from "@medusajs/framework"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { sendEmail } from "../lib/notify"
-import { sendPush } from "../lib/push"
+import { notifyCustomer } from "../lib/notify-customer"
 import { notifyAdmin } from "../lib/notify-admin"
 import {
   routeOrderItems,
