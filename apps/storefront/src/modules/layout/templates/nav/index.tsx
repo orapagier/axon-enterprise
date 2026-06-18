@@ -283,27 +283,20 @@ export default async function Nav() {
               </Suspense>
             </div>
 
-            {/* Cart — brand-green premium pill */}
+            {/* Cart — green icon button (matches the notification bell) */}
             <Suspense
               fallback={
                 <LocalizedClientLink
-                  className="group relative inline-flex items-center justify-center w-9 h-9 small:w-auto small:h-auto small:gap-x-2 small:pl-3 small:pr-4 small:py-2 rounded-full bg-brand-green-700 text-white hover:bg-brand-green-800 transition-all shadow-soft ring-1 ring-brand-green-800/40"
+                  className="group relative inline-flex items-center justify-center w-9 h-9 rounded-full text-brand-green-700 hover:text-brand-green-800 hover:bg-grey-5 transition-colors"
                   href="/cart"
                   data-testid="nav-cart-link"
                   aria-label="Cart"
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand-gold-300">
-                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <path d="M16 10a4 4 0 0 1-8 0" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
                   </svg>
-                  <span className="hidden small:inline text-body-sm font-semibold tracking-wide">
-                    Cart
-                  </span>
-                  <span className="hidden small:block w-px h-3.5 bg-white/20" />
-                  <span className="hidden small:inline text-body-sm font-bold tabular-nums text-brand-gold-300">
-                    0
-                  </span>
                 </LocalizedClientLink>
               }
             >
