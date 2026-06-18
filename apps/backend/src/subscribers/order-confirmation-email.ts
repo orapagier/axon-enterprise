@@ -1,6 +1,7 @@
 import type { SubscriberArgs, SubscriberConfig } from "@medusajs/framework"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { sendEmail } from "../lib/notify"
+import { notifyCustomer } from "../lib/notify-customer"
 
 /**
  * Phase B — order confirmation email on order.placed.
@@ -8,6 +9,9 @@ import { sendEmail } from "../lib/notify"
  * Separate from the dispatch-assignment subscriber so a mail problem can never
  * interfere with batching (and vice versa). Walk-in OTC counter sales are
  * skipped: the buyer is standing at the counter holding the goods.
+ *
+ * Also drops the buyer's first in-app notification (header bell + inbox) so the
+ * order shows up there immediately, before any dispatch/delivery updates.
  */
 export default async function orderConfirmationEmailHandler({
   event,
