@@ -274,10 +274,10 @@ export default async function Nav() {
 
             <span className="hidden small:block w-px h-5 bg-grey-20 mx-2.5" />
 
-            {/* Notifications — hover dropdown bell, beside the cart. Desktop
-                only: the panel opens on hover, which has no mobile equivalent;
-                mobile reaches the inbox via the account menu. */}
-            <div className="hidden small:flex items-center mr-0.5">
+            {/* Notifications — bell with dropdown, beside the cart. Opens on
+                hover on desktop and on tap on mobile (the panel anchors full
+                width under the header on small screens). */}
+            <div className="flex items-center mr-0.5">
               <Suspense fallback={null}>
                 <NotificationButton />
               </Suspense>
