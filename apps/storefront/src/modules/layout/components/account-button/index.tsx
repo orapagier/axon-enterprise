@@ -1,14 +1,13 @@
 "use client"
 
 import {
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
+  Popover,
+  PopoverButton,
+  PopoverPanel,
   Transition,
 } from "@headlessui/react"
 import { useParams } from "next/navigation"
-import { Fragment, useTransition } from "react"
+import { Fragment, useEffect, useRef, useState, useTransition } from "react"
 
 import { signout } from "@lib/data/customer"
 import type { StackableRole } from "@lib/util/roles"
