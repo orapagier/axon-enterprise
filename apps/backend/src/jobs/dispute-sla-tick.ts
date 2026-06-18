@@ -93,8 +93,9 @@ async function disputeSlaTick(container: MedusaContainer) {
           data: { display_id: order.display_id },
         })
       }
-      await sendPush(container, {
+      await notifyCustomer(container, {
         customerId: d.customer_id,
+        type: "dispute",
         title: "Action needed on your order",
         body: `Respond to the delivery issue on order #${
           order?.display_id ?? ""
