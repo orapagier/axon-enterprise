@@ -120,7 +120,7 @@ const NotificationDropdown = ({
           onClick={handleButtonClick}
           data-testid="nav-notifications-button"
         >
-          <span className="group relative inline-flex items-center justify-center w-9 h-9 rounded-full text-grey-70 hover:text-brand-green-700 hover:bg-grey-5 transition-colors">
+          <span className="group relative inline-flex items-center justify-center w-9 h-9 rounded-full text-brand-green-700 hover:text-brand-green-800 hover:bg-grey-5 transition-colors">
             <svg
               width="18"
               height="18"
