@@ -20,7 +20,7 @@
 import type { MedusaContainer } from "@medusajs/framework/types"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import { runJob, type JobInput } from "../lib/job-observability"
-import { sendPush } from "../lib/push"
+import { notifyCustomer } from "../lib/notify-customer"
 import { sendEmail } from "../lib/notify"
 import { notifyAdmin } from "../lib/notify-admin"
 import {
