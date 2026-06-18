@@ -23,13 +23,23 @@ export default async function orderConfirmationEmailHandler({
   const query = container.resolve(ContainerRegistrationKeys.QUERY)
   const { data } = await query.graph({
     entity: "order",
-    fields: ["id", "display_id", "email", "total", "summary.*", "metadata"],
+    fields: [
+      "id",
+      "display_id",
+      "email",
+      "customer_id",
+      "total",
+      "summary.*",
+      "metadata",
+    ],
     filters: { id: orderId },
   })
   const order = data[0] as unknown as
     | {
+        id: string
         display_id: number
         email: string | null
+        customer_id: string | null
         total: number | string
         summary?: { current_order_total?: number } | null
         metadata?: {
