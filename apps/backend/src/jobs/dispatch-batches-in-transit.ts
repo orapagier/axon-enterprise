@@ -120,8 +120,9 @@ async function notifyBatchInTransit(
       template: "order-in-transit",
       data: { display_id: order.display_id },
     })
-    await sendPush(container, {
+    await notifyCustomer(container, {
       customerId: order.customer_id,
+      type: "delivery",
       title: "Out for delivery 🛵",
       body: `Your order #${order.display_id} is on the way.`,
       url: "/account/orders",
