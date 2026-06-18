@@ -1,16 +1,16 @@
 # Graph Report - freshhub  (2026-06-18)
 
 ## Corpus Check
-- 606 files · ~521,531 words
+- 606 files · ~521,902 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3362 nodes · 5004 edges · 313 communities (239 shown, 74 thin omitted)
+- 3362 nodes · 5004 edges · 315 communities (240 shown, 75 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 53 edges (avg confidence: 0.81)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8adbeb77`
+- Built from commit: `c4f3084c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -258,6 +258,8 @@
 - [[_COMMUNITY_Community 310|Community 310]]
 - [[_COMMUNITY_Community 311|Community 311]]
 - [[_COMMUNITY_Community 312|Community 312]]
+- [[_COMMUNITY_Community 313|Community 313]]
+- [[_COMMUNITY_Community 314|Community 314]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `getAuthHeaders()` - 75 edges
@@ -288,7 +290,7 @@
 - **MedusaContainer Dependency Injection Consumers** — api_readme, subscribers_readme, jobs_readme, freshhub_dependency_injection [EXTRACTED 1.00]
 - **Workflow Execution Contexts** — workflows_readme, api_readme, subscribers_readme, jobs_readme [EXTRACTED 1.00]
 
-## Communities (313 total, 74 thin omitted)
+## Communities (315 total, 75 thin omitted)
 
 ### Community 0 - "Backend Type System"
 Cohesion: 0.01
@@ -307,8 +309,8 @@ Cohesion: 0.12
 Nodes (17): devDependencies, jest, @medusajs/test-utils, prop-types, react, react-dom, @swc/core, @swc/jest (+9 more)
 
 ### Community 4 - "Address Management"
-Cohesion: 0.1
-Nodes (14): AccountInfo(), CountryOption, CountrySelect(), CountrySelectProps, Locale, StateType, useToggleState(), DEFAULT_OPTION (+6 more)
+Cohesion: 0.12
+Nodes (11): CountryOption, CountrySelect(), CountrySelectProps, Locale, StateType, DEFAULT_OPTION, LanguageOption, LanguageSelectProps (+3 more)
 
 ### Community 5 - "Shared UI Components"
 Cohesion: 0.05
@@ -395,8 +397,8 @@ Cohesion: 0.21
 Nodes (10): Action, appendEvent(), MEMBERSHIP_META, MembershipEvent, POST(), ensureTraderTier(), isTraderAccount(), isValidTraderDiscount() (+2 more)
 
 ### Community 26 - "Root Layout & Fonts"
-Cohesion: 0.08
-Nodes (13): VALID_STATUSES, verifySignupTicket(), ListingModuleService, EXTRA_LISTING_IDS, KEEP_EMAILS, JUNK_CATEGORY_IDS, ProductListing, Rider (+5 more)
+Cohesion: 0.09
+Nodes (9): VALID_STATUSES, ListingModuleService, EXTRA_LISTING_IDS, KEEP_EMAILS, JUNK_CATEGORY_IDS, ProductListing, Rider, POST() (+1 more)
 
 ### Community 27 - "Account Navigation"
 Cohesion: 0.19
@@ -523,8 +525,8 @@ Cohesion: 0.16
 Nodes (12): GET(), getOrderCashState(), OrderCashState, DTC_MODES, listOwedDtc(), OrderItem, OwedRow, ProducerPayout (+4 more)
 
 ### Community 143 - "Community 143"
-Cohesion: 0.13
-Nodes (19): upload, exchangeCodeForClaims(), GoogleIdTokenClaims, readCookie(), RiderGoogleAuthPending, authenticateRider(), b64url(), getSecret() (+11 more)
+Cohesion: 0.15
+Nodes (17): upload, authenticateRider(), b64url(), getSecret(), PUBLIC_RIDER_PATHS, RiderTokenPayload, sign(), signRiderToken() (+9 more)
 
 ### Community 144 - "Community 144"
 Cohesion: 0.36
@@ -627,8 +629,8 @@ Cohesion: 0.41
 Nodes (13): POST(), POST(), POST(), applyProducerConfirm(), isTerminal(), cancelMedusaOrderForProducer(), getSellerEntry(), loadOrderForConfirm() (+5 more)
 
 ### Community 173 - "Community 173"
-Cohesion: 0.2
-Nodes (5): PREPAY_LOCKED_STATES, InjectedDeps, input, StatusRow, svc
+Cohesion: 0.25
+Nodes (4): InjectedDeps, input, StatusRow, svc
 
 ### Community 174 - "Community 174"
 Cohesion: 0.12
@@ -739,7 +741,7 @@ Cohesion: 0.27
 Nodes (6): PushActionState, pushFetch(), PushSubscriptionPayload, removePushSubscription(), savePushSubscription(), Status
 
 ### Community 206 - "Community 206"
-Cohesion: 0.16
+Cohesion: 0.15
 Nodes (8): AccountabilityModuleService, GET(), getCustomerId(), BuyerAccountStatus, RefusalDispute, getCustomerId(), POST(), VALID_REASONS
 
 ### Community 207 - "Community 207"
@@ -842,10 +844,6 @@ Nodes (9): 2. Tech Stack, Admin, Backend, File Storage, Infrastructure (Self-Hos
 Cohesion: 0.15
 Nodes (13): 10. Gaps & forward roadmap, Phase A — Make prepay-lock resolve to OTC (highest priority), Phase A — Walk-in OTC counter (reframed 2026-06-10, highest priority), Phase B — Notifications (email + push), Phase C — Membership lifecycle automation, Phase D — Trader (B2B) pricing, Phase E — Rider operations & accountability, Phase F — Multi-hub readiness (+5 more)
 
-### Community 260 - "Community 260"
-Cohesion: 0.24
-Nodes (4): Addresses(), DiscountCodeProps, SubmitButton(), compareAddresses()
-
 ### Community 261 - "Community 261"
 Cohesion: 0.29
 Nodes (7): 5.1 Hub Module (`src/modules/hub`), 5.2 Producer Module (`src/modules/producer`), 5.3 Rider Module (`src/modules/rider`), 5.4 Hub Credit Module (`src/modules/hub-credit`), 5.5 Registration Module (`src/modules/registration`), 5.6 Pickup Schedule Module (`src/modules/pickup-schedule`), 5. Medusa Custom Modules
@@ -875,8 +873,8 @@ Cohesion: 0.27
 Nodes (6): PushSubscription, PushNotificationModuleService, customerId(), DELETE(), IncomingSub, POST()
 
 ### Community 269 - "Community 269"
-Cohesion: 0.25
-Nodes (5): AccountState, GET(), body, Json, { res, captured }
+Cohesion: 0.22
+Nodes (6): PREPAY_LOCKED_STATES, AccountState, GET(), body, Json, { res, captured }
 
 ### Community 271 - "Community 271"
 Cohesion: 0.22
@@ -966,15 +964,23 @@ Nodes (3): DeliveryOptionsResponse, Tier, TierOption
 Cohesion: 0.5
 Nodes (3): FeaturedProduct, StoreFreeShippingPrice, VariantPrice
 
+### Community 313 - "Community 313"
+Cohesion: 0.27
+Nodes (6): exchangeCodeForClaims(), GoogleIdTokenClaims, readCookie(), RiderGoogleAuthPending, GET(), VALID_ROLES
+
+### Community 314 - "Community 314"
+Cohesion: 0.33
+Nodes (5): AccountInfo(), Addresses(), useToggleState(), SideMenu(), compareAddresses()
+
 ## Knowledge Gaps
 - **1348 isolated node(s):** `NODE_ENV`, `name`, `private`, `packageManager`, `node` (+1343 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **74 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **75 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `GET()` connect `Community 135` to `Account & Checkout Pages`, `Community 162`, `Community 143`?**
+- **Why does `GET()` connect `Community 135` to `Community 143`, `Account & Checkout Pages`, `Community 162`, `Community 313`?**
   _High betweenness centrality (0.154) - this node is a cross-community bridge._
 - **Why does `retrieveCustomer()` connect `Community 162` to `Account & Checkout Pages`, `Community 130`, `Community 135`, `Community 296`, `Community 137`, `Community 266`, `Community 302`, `Account Profile Forms`, `Community 147`, `Order Transfer Flow`, `Community 183`, `Community 280`, `Community 283`, `Community 285`?**
   _High betweenness centrality (0.096) - this node is a cross-community bridge._

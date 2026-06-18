@@ -44,7 +44,7 @@ const StoreTemplate = async ({
 
   return (
     <div data-testid="category-container" className="bg-grey-5 min-h-screen">
-      <div className="content-container pt-3 small:pt-5 pb-12 small:pb-20 relative">
+      <div className="content-container pt-3 small:pt-4 pb-12 small:pb-20 relative">
         <div className="flex flex-col small:flex-row small:items-start gap-4 small:gap-6">
           <RefinementList categories={categoryFilters} />
           <div className="w-full min-w-0">
