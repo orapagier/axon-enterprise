@@ -121,7 +121,7 @@ const CartDropdown = ({
   }
   // Desktop is driven by hover and the icon navigates to /cart on click. On
   // touch there's no hover, so the tap opens the dropdown instead of navigating.
-  const handleIconClick = (e: React.MouseEvent) => {
+  const handleIconClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!canHover) {
       e.preventDefault()
       toggle()
