@@ -6,7 +6,7 @@ import {
   PopoverPanel,
   Transition,
 } from "@headlessui/react"
-import { Fragment, useEffect, useState, useTransition } from "react"
+import { Fragment, useEffect, useRef, useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
