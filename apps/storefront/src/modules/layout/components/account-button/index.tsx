@@ -134,6 +134,53 @@ export default function AccountButton({
   const params = useParams()
   const countryCode = (params?.countryCode as string) ?? "ph"
   const [pending, startTransition] = useTransition()
+  const [open, setOpen] = useState(false)
+  const rootRef = useRef<HTMLDivElement>(null)
+
+  // Hover only drives the panel on devices that actually hover. On touch,
+  // browsers emulate a mouseenter on tap — if we let that open the panel, the
+  // tap's click would immediately toggle it back closed. So gate hover here and
+  // use tap (onClick) to toggle instead. (Mirrors the cart/notification bell.)
+  const [canHover, setCanHover] = useState(false)
+  useEffect(() => {
+    setCanHover(
+      typeof window !== "undefined" &&
+        window.matchMedia("(hover: hover)").matches
+    )
+  }, [])
+
+  const close = () => setOpen(false)
+  const toggle = () => setOpen((v) => !v)
+
+  const handleEnter = () => {
+    if (canHover) setOpen(true)
+  }
+  const handleLeave = () => {
+    if (canHover) close()
+  }
+  const handleButtonClick = () => {
+    // Desktop is driven by hover; tap drives touch.
+    if (!canHover) toggle()
+  }
+
+  // On touch, close when tapping outside the trigger/panel or pressing Escape.
+  useEffect(() => {
+    if (!open || canHover) return
+    const onPointerDown = (e: PointerEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        close()
+      }
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close()
+    }
+    document.addEventListener("pointerdown", onPointerDown)
+    document.addEventListener("keydown", onKey)
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown)
+      document.removeEventListener("keydown", onKey)
+    }
+  }, [open, canHover])
 
   const triggerClassName =
     "inline-flex items-center gap-x-1.5 h-9 px-2.5 small:px-3 rounded-full text-grey-60 hover:text-grey-90 hover:bg-grey-5 transition-all text-[12px] font-semibold"
