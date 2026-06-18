@@ -14,7 +14,7 @@ import type DispatchModuleService from "../modules/dispatch/service"
 import { HUB_MODULE } from "../modules/hub"
 import type HubModuleService from "../modules/hub/service"
 import { sendEmail } from "../lib/notify"
-import { sendPush } from "../lib/push"
+import { notifyCustomer } from "../lib/notify-customer"
 import { runJob, type JobInput } from "../lib/job-observability"
 
 export const config = {
