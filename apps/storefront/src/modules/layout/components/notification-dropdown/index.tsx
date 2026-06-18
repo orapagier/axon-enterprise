@@ -18,9 +18,10 @@ import {
 } from "@lib/data/notifications"
 
 /**
- * Header notification bell — same hover-to-open behaviour as the cart dropdown.
- * Shows the customer's UNREAD notifications; clicking one opens its full detail
- * page (which marks it read). "Mark all read" clears the badge in place.
+ * Header notification bell. On desktop (hover-capable) it opens on hover like
+ * the cart dropdown; on touch devices it opens on tap and closes on tap-outside
+ * or Escape. Shows the customer's UNREAD notifications; clicking one opens its
+ * full detail page (which marks it read). "Mark all read" clears the badge.
  */
 const NotificationDropdown = ({
   notifications,
@@ -33,18 +34,65 @@ const NotificationDropdown = ({
   const [isPending, startTransition] = useTransition()
   const [open, setOpen] = useState(false)
   const [activeTimer, setActiveTimer] = useState<NodeJS.Timeout | undefined>()
+  const rootRef = useRef<HTMLDivElement>(null)
+
+  // Hover only drives the panel on devices that actually hover. On touch,
+  // browsers emulate a mouseenter on tap — if we let that open the panel, the
+  // tap's click would immediately toggle it back closed. So gate hover here and
+  // use tap (onClick) to toggle instead.
+  const [canHover, setCanHover] = useState(false)
+  useEffect(() => {
+    setCanHover(
+      typeof window !== "undefined" &&
+        window.matchMedia("(hover: hover)").matches
+    )
+  }, [])
 
   const openAndCancel = () => {
     if (activeTimer) clearTimeout(activeTimer)
     setOpen(true)
   }
   const close = () => setOpen(false)
+  const toggle = () => {
+    if (activeTimer) clearTimeout(activeTimer)
+    setOpen((v) => !v)
+  }
+
+  const handleEnter = () => {
+    if (canHover) openAndCancel()
+  }
+  const handleLeave = () => {
+    if (canHover) close()
+  }
+  const handleButtonClick = () => {
+    // Desktop is driven by hover; tap drives touch.
+    if (!canHover) toggle()
+  }
 
   useEffect(() => {
     return () => {
       if (activeTimer) clearTimeout(activeTimer)
     }
   }, [activeTimer])
+
+  // On touch, close when tapping outside the bell/panel or pressing Escape.
+  useEffect(() => {
+    if (!open || canHover) return
+    const onPointerDown = (e: PointerEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        close()
+      }
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close()
+    }
+    document.addEventListener("pointerdown", onPointerDown)
+    document.addEventListener("keydown", onKey)
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown)
+      document.removeEventListener("keydown", onKey)
+    }
+  }, [open, canHover])
 
   // The dropdown shows unread items only; the inbox page shows everything.
   const unread = notifications.filter((n) => !n.read_at)
