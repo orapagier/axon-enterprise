@@ -2690,8 +2690,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/lib/notify-customer.ts": {
-    "mtime": 1781748687.4328694,
-    "ast_hash": "2ba0d3c159ed29f4cb75708cede9391d",
+    "mtime": 1781843080.870715,
+    "ast_hash": "93db0b4d8aae0429e0fc63377d97bbee",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/lib/order-cash.ts": {
@@ -2897,6 +2897,11 @@
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/add-php-prices.ts": {
     "mtime": 1779133183.4402905,
     "ast_hash": "0104464bde2dee9bce837252abd49e1c",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/verify-customer-notification.ts": {
+    "mtime": 1781842892.1869948,
+    "ast_hash": "7181f05e650ae02d684045fa39038d30",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/add-philippines-region.ts": {
