@@ -40,30 +40,28 @@ export async function notifyCustomer(
       if (tag) {
         existing = (await service.listCustomerNotifications(
           { customer_id: customerId, tag, read_at: null },
-          { take: 1, select: ["id"] }
+          { select: ["id"] }
         )) as { id: string }[]
       }
 
+      // Collapse repeats by REPLACING the stale unread row(s), not updating in
+      // place: an update keeps the original created_at, so a just-changed item
+      // (e.g. an order moving "received" → "out for delivery") would show a
+      // stale timestamp and stay buried below newer notifications. Dropping +
+      // recreating gives it a fresh created_at so it bubbles to the top of the
+      // inbox/dropdown (both sort by created_at DESC) with a current time.
       if (existing.length) {
-        await service.updateCustomerNotifications({
-          id: existing[0].id,
-          title,
-          body,
-          url: url ?? null,
-          type: type ?? null,
-          data: data ?? null,
-        })
-      } else {
-        await service.createCustomerNotifications({
-          customer_id: customerId,
-          title,
-          body,
-          url: url ?? null,
-          tag: tag ?? null,
-          type: type ?? null,
-          data: data ?? null,
-        })
+        await service.deleteCustomerNotifications(existing.map((e) => e.id))
       }
+      await service.createCustomerNotifications({
+        customer_id: customerId,
+        title,
+        body,
+        url: url ?? null,
+        tag: tag ?? null,
+        type: type ?? null,
+        data: data ?? null,
+      })
     } catch (err) {
       try {
         container
