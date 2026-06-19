@@ -71,9 +71,15 @@ export default async function verifyCustomerNotification({ container }: ExecArgs
     })
     let rows = await listAll()
     check("notifyCustomer persists one row", rows.length === 1, `got ${rows.length}`)
+    const firstCreatedAt = new Date(rows[0]?.created_at).getTime()
 
-    // 2. Same (customer, tag) while UNREAD collapses in place — still one row,
-    //    updated to the latest title/body.
+    // Make sure a real-clock gap exists so the refreshed created_at is provably
+    // newer (created_at resolution is sub-second but not zero).
+    await new Promise((r) => setTimeout(r, 1100))
+
+    // 2. Same (customer, tag) while UNREAD collapses — still one row, updated to
+    //    the latest title/body, and (after the fix) carrying a FRESH created_at
+    //    so it bubbles to the top of the inbox instead of keeping a stale time.
     await notifyCustomer(container, {
       customerId,
       type: "delivery",
@@ -92,6 +98,11 @@ export default async function verifyCustomerNotification({ container }: ExecArgs
       "collapsed row shows latest title/body",
       rows[0]?.title === "Out for delivery" && rows[0]?.body === "second",
       `title=${rows[0]?.title} body=${rows[0]?.body}`
+    )
+    check(
+      "collapsed row refreshes created_at (bubbles to top)",
+      new Date(rows[0]?.created_at).getTime() > firstCreatedAt,
+      `before=${firstCreatedAt} after=${new Date(rows[0]?.created_at).getTime()}`
     )
 
     // 3. Mark the row read (what GET /store/notifications/:id does on open).
