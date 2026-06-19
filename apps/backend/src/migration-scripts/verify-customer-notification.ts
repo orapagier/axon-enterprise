@@ -55,6 +55,7 @@ export default async function verifyCustomerNotification({ container }: ExecArgs
         body: string
         tag: string | null
         read_at: Date | null
+        created_at: Date
       }[]
     >
 
