@@ -1965,7 +1965,7 @@
       "source_file": "apps/storefront/src/modules/account/components/account-info/index.tsx",
       "source_location": "L19",
       "id": "account_info_index_accountinfo",
-      "community": 314,
+      "community": 4,
       "norm_label": "accountinfo()"
     },
     {
@@ -3549,7 +3549,7 @@
       "source_file": "apps/storefront/src/modules/checkout/components/addresses/index.tsx",
       "source_location": "L17",
       "id": "addresses_index_addresses",
-      "community": 314,
+      "community": 260,
       "norm_label": "addresses()"
     },
     {
@@ -4798,7 +4798,7 @@
       "label": "PaginatedProductsParams",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/store/templates/paginated-products.tsx",
-      "source_location": "L12",
+      "source_location": "L14",
       "id": "templates_paginated_products_paginatedproductsparams",
       "community": 130,
       "norm_label": "paginatedproductsparams"
@@ -4807,7 +4807,7 @@
       "label": "productMatchesCategory()",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/store/templates/paginated-products.tsx",
-      "source_location": "L20",
+      "source_location": "L22",
       "id": "templates_paginated_products_productmatchescategory",
       "community": 130,
       "norm_label": "productmatchescategory()"
@@ -4816,7 +4816,7 @@
       "label": "productMatchesOrigin()",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/store/templates/paginated-products.tsx",
-      "source_location": "L46",
+      "source_location": "L48",
       "id": "templates_paginated_products_productmatchesorigin",
       "community": 130,
       "norm_label": "productmatchesorigin()"
@@ -4825,7 +4825,7 @@
       "label": "productMinPrice()",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/store/templates/paginated-products.tsx",
-      "source_location": "L58",
+      "source_location": "L60",
       "id": "templates_paginated_products_productminprice",
       "community": 130,
       "norm_label": "productminprice()"
@@ -4834,7 +4834,7 @@
       "label": "PaginatedProducts()",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/store/templates/paginated-products.tsx",
-      "source_location": "L66",
+      "source_location": "L68",
       "id": "templates_paginated_products_paginatedproducts",
       "community": 130,
       "norm_label": "paginatedproducts()"
@@ -4915,25 +4915,16 @@
       "label": "SortOptions",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "id": "sort_products_index_sortoptions",
       "community": 280,
       "norm_label": "sortoptions"
     },
     {
-      "label": "SortProductsProps",
-      "file_type": "code",
-      "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
-      "source_location": "L7",
-      "id": "sort_products_index_sortproductsprops",
-      "community": 280,
-      "norm_label": "sortproductsprops"
-    },
-    {
       "label": "SortProducts()",
       "file_type": "code",
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
-      "source_location": "L28",
+      "source_location": "L30",
       "id": "sort_products_index_sortproducts",
       "community": 280,
       "norm_label": "sortproducts()"
@@ -7140,7 +7131,7 @@
       "source_file": "apps/storefront/src/modules/layout/components/side-menu/index.tsx",
       "source_location": "L52",
       "id": "side_menu_index_sidemenu",
-      "community": 314,
+      "community": 4,
       "norm_label": "sidemenu()"
     },
     {
@@ -8985,7 +8976,7 @@
       "source_file": "apps/storefront/src/lib/hooks/use-toggle-state.tsx",
       "source_location": "L23",
       "id": "hooks_use_toggle_state_usetogglestate",
-      "community": 314,
+      "community": 4,
       "norm_label": "usetogglestate()"
     },
     {
@@ -11199,7 +11190,7 @@
       "source_file": "apps/storefront/src/lib/util/compare-addresses.ts",
       "source_location": "L1",
       "id": "apps_storefront_src_lib_util_compare_addresses_ts",
-      "community": 314,
+      "community": 260,
       "norm_label": "compare-addresses.ts"
     },
     {
@@ -11208,7 +11199,7 @@
       "source_file": "apps/storefront/src/lib/util/compare-addresses.ts",
       "source_location": "L3",
       "id": "util_compare_addresses_compareaddresses",
-      "community": 314,
+      "community": 260,
       "norm_label": "compareaddresses()"
     },
     {
@@ -15285,7 +15276,7 @@
       "source_file": "apps/backend/src/subscribers/notify-admin-special-order.ts",
       "source_location": "L1",
       "id": "apps_backend_src_subscribers_notify_admin_special_order_ts",
-      "community": 266,
+      "community": 290,
       "norm_label": "notify-admin-special-order.ts"
     },
     {
@@ -15294,7 +15285,7 @@
       "source_file": "apps/backend/src/subscribers/notify-admin-special-order.ts",
       "source_location": "L16",
       "id": "subscribers_notify_admin_special_order_notifyadminspecialorderhandler",
-      "community": 266,
+      "community": 290,
       "norm_label": "notifyadminspecialorderhandler()"
     },
     {
@@ -15303,7 +15294,7 @@
       "source_file": "apps/backend/src/subscribers/notify-admin-special-order.ts",
       "source_location": "L79",
       "id": "subscribers_notify_admin_special_order_config",
-      "community": 266,
+      "community": 290,
       "norm_label": "config"
     },
     {
@@ -15780,7 +15771,7 @@
       "source_file": "apps/backend/src/api/store/customers/me/membership-payment/route.ts",
       "source_location": "L1",
       "id": "apps_backend_src_api_store_customers_me_membership_payment_route_ts",
-      "community": 266,
+      "community": 290,
       "norm_label": "route.ts"
     },
     {
@@ -15789,7 +15780,7 @@
       "source_file": "apps/backend/src/api/store/customers/me/membership-payment/route.ts",
       "source_location": "L18",
       "id": "membership_payment_route_post",
-      "community": 266,
+      "community": 290,
       "norm_label": "post()"
     },
     {
@@ -19902,7 +19893,7 @@
       "source_file": "apps/backend/src/lib/notify-admin.ts",
       "source_location": "L1",
       "id": "apps_backend_src_lib_notify_admin_ts",
-      "community": 266,
+      "community": 290,
       "norm_label": "notify-admin.ts"
     },
     {
@@ -19911,7 +19902,7 @@
       "source_file": "apps/backend/src/lib/notify-admin.ts",
       "source_location": "L25",
       "id": "lib_notify_admin_adminmessage",
-      "community": 266,
+      "community": 290,
       "norm_label": "adminmessage"
     },
     {
@@ -19920,7 +19911,7 @@
       "source_file": "apps/backend/src/lib/notify-admin.ts",
       "source_location": "L39",
       "id": "lib_notify_admin_formatadminmessage",
-      "community": 266,
+      "community": 290,
       "norm_label": "formatadminmessage()"
     },
     {
@@ -19929,7 +19920,7 @@
       "source_file": "apps/backend/src/lib/notify-admin.ts",
       "source_location": "L54",
       "id": "lib_notify_admin_chatids",
-      "community": 266,
+      "community": 290,
       "norm_label": "chatids()"
     },
     {
@@ -19938,7 +19929,7 @@
       "source_file": "apps/backend/src/lib/notify-admin.ts",
       "source_location": "L62",
       "id": "lib_notify_admin_ensureconfigured",
-      "community": 266,
+      "community": 290,
       "norm_label": "ensureconfigured()"
     },
     {
@@ -19947,7 +19938,7 @@
       "source_file": "apps/backend/src/lib/notify-admin.ts",
       "source_location": "L83",
       "id": "lib_notify_admin_notifyadmin",
-      "community": 266,
+      "community": 290,
       "norm_label": "notifyadmin()"
     },
     {
@@ -21171,7 +21162,7 @@
       "source_file": "apps/backend/src/jobs/expire-pickup-windows.ts",
       "source_location": "L1",
       "id": "apps_backend_src_jobs_expire_pickup_windows_ts",
-      "community": 266,
+      "community": 290,
       "norm_label": "expire-pickup-windows.ts"
     },
     {
@@ -21180,7 +21171,7 @@
       "source_file": "apps/backend/src/jobs/expire-pickup-windows.ts",
       "source_location": "L15",
       "id": "jobs_expire_pickup_windows_config",
-      "community": 266,
+      "community": 290,
       "norm_label": "config"
     },
     {
@@ -21189,7 +21180,7 @@
       "source_file": "apps/backend/src/jobs/expire-pickup-windows.ts",
       "source_location": "L20",
       "id": "jobs_expire_pickup_windows_expirepickupwindows",
-      "community": 266,
+      "community": 290,
       "norm_label": "expirepickupwindows()"
     },
     {
@@ -23853,7 +23844,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L25",
       "id": "freshhub_implementation_plan_1_project_overview",
-      "community": 216,
+      "community": 266,
       "norm_label": "1. project overview"
     },
     {
@@ -23862,7 +23853,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L29",
       "id": "freshhub_implementation_plan_user_roles_summary",
-      "community": 216,
+      "community": 266,
       "norm_label": "user roles summary"
     },
     {
@@ -23871,7 +23862,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L41",
       "id": "freshhub_implementation_plan_two_fulfillment_modes",
-      "community": 216,
+      "community": 266,
       "norm_label": "two fulfillment modes"
     },
     {
@@ -23880,7 +23871,7 @@
       "source_file": "IMPLEMENTATION_PLAN.md",
       "source_location": "L57",
       "id": "freshhub_implementation_plan_multi_hub_model",
-      "community": 216,
+      "community": 266,
       "norm_label": "multi-hub model"
     },
     {
@@ -26593,6 +26584,15 @@
       "norm_label": "code:ts (import {)"
     },
     {
+      "label": "SortProductsProps",
+      "file_type": "code",
+      "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
+      "source_location": "L7",
+      "community": 280,
+      "norm_label": "sortproductsprops",
+      "id": "sort_products_index_sortproductsprops"
+    },
+    {
       "label": "test",
       "file_type": "code",
       "source_file": "package.json",
@@ -27029,7 +27029,7 @@
       "file_type": "code",
       "source_file": "apps/backend/src/lib/__tests__/notify-admin.unit.spec.ts",
       "source_location": "L1",
-      "community": 266,
+      "community": 290,
       "norm_label": "notify-admin.unit.spec.ts",
       "id": "apps_backend_src_lib_tests_notify_admin_unit_spec_ts"
     },
@@ -27038,7 +27038,7 @@
       "file_type": "code",
       "source_file": "apps/backend/src/lib/__tests__/notify-admin.unit.spec.ts",
       "source_location": "L9",
-      "community": 266,
+      "community": 290,
       "norm_label": "text",
       "id": "tests_notify_admin_unit_spec_text"
     },
@@ -38703,21 +38703,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "apps_storefront_src_modules_store_components_refinement_list_sort_products_index_tsx",
-      "target": "sort_products_index_sortproductsprops"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
       "source_location": "L28",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_storefront_src_modules_store_components_refinement_list_sort_products_index_tsx",
       "target": "sort_products_index_sortproducts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "apps_storefront_src_modules_store_components_refinement_list_sort_products_index_tsx",
+      "target": "sort_products_index_sortproductsprops"
     },
     {
       "relation": "contains",
@@ -82713,5 +82713,5 @@
       "source_file": "apps/backend/src/workflows/README.md"
     }
   ],
-  "built_at_commit": "a95c0f1f83b60103dd8aea9af9a48e1314b4e08e"
+  "built_at_commit": "8398059dc14a1bd73c64c0affe9c250ef535843d"
 }
