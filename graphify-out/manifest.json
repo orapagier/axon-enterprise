@@ -635,8 +635,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/store/templates/paginated-products.tsx": {
-    "mtime": 1781754639.2495096,
-    "ast_hash": "c35826407f4f2ddab8761ad74169bc44",
+    "mtime": 1781755646.4651105,
+    "ast_hash": "f90ae4d80d23281cbe72840e8380287a",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/store/templates/index.tsx": {
@@ -645,14 +645,14 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/store/components/refinement-list/index.tsx": {
-    "mtime": 1781409510.4062507,
-    "ast_hash": "7388f96801a111fa743ea69e37ccca3c",
+    "mtime": 1781755655.2691095,
+    "ast_hash": "6f4bac6fea2ab428d447ccbabfa687cb",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/store/components/refinement-list/sort-products/index.tsx": {
-    "mtime": 1779020977.2430997,
-    "ast_hash": "b6b3667070f2f3ce05a7a210d3bd4847",
-    "semantic_hash": "b6b3667070f2f3ce05a7a210d3bd4847"
+    "mtime": 1781755776.1908877,
+    "ast_hash": "a551583da6b430bce7c4c72b61d55d43",
+    "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/storefront/src/modules/store/components/pagination/index.tsx": {
     "mtime": 1779048357.5694299,
@@ -2690,8 +2690,8 @@
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/lib/notify-customer.ts": {
-    "mtime": 1781748687.4328694,
-    "ast_hash": "2ba0d3c159ed29f4cb75708cede9391d",
+    "mtime": 1781843080.870715,
+    "ast_hash": "93db0b4d8aae0429e0fc63377d97bbee",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/lib/order-cash.ts": {
@@ -2897,6 +2897,11 @@
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/add-php-prices.ts": {
     "mtime": 1779133183.4402905,
     "ast_hash": "0104464bde2dee9bce837252abd49e1c",
+    "semantic_hash": ""
+  },
+  "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/verify-customer-notification.ts": {
+    "mtime": 1781842892.1869948,
+    "ast_hash": "7181f05e650ae02d684045fa39038d30",
     "semantic_hash": ""
   },
   "/home/ramlej/MFH/freshhub/apps/backend/src/migration-scripts/add-philippines-region.ts": {
