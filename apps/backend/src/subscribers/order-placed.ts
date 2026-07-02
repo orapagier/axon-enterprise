@@ -51,6 +51,17 @@ export default async function orderPlacedHandler({
         (err as Error).message
       }`
     )
+    // A paid order with no dispatch entry won't reach a rider — surface it so an
+    // admin can add it by hand instead of it silently vanishing from the board.
+    await notifyAdmin(container, {
+      title: `⚠️ Order not assigned to a dispatch batch`,
+      lines: [
+        `Order ${orderId} failed dispatch assignment and has no rider batch.`,
+        `Add it manually from the dispatch board.`,
+        (err as Error).message,
+      ],
+      url: "/app/dispatch",
+    })
   }
 }
 
