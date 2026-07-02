@@ -2,6 +2,7 @@ import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils"
 import { sendEmail } from "../../../../lib/notify"
 import { grantReferralReward } from "../../../../lib/grant-referral-reward"
+import { HUB_MEMBER_GROUP } from "../../../../lib/membership"
 
 /**
  * POST /admin/memberships/:id
