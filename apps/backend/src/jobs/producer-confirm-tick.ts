@@ -85,72 +85,91 @@ async function producerConfirmTick(container: MedusaContainer) {
       const action = classifyConfirmEntry(entry, now)
       if (action === "none") continue
 
-      if (action === "nudge") {
-        await persistConfirmEntry(container, o.id, sellerId, markNudged(entry, now))
-        await notifyCustomer(container, {
-          customerId: sellerId,
-          type: "order",
-          title: "⏳ Order still needs confirmation",
-          body: `Order #${o.display_id} is waiting — confirm it before the window closes.`,
-          url: "/account/producer/orders",
-          tag: `producer-confirm-${o.id}`,
-        })
-        nudged++
-        continue
-      }
-
-      if (action === "escalate") {
-        await persistConfirmEntry(
-          container,
-          o.id,
-          sellerId,
-          markEscalated(entry, now)
-        )
-        // Resolve this producer's item lines for the admin notice.
-        const full = await loadOrderForConfirm(container, o.id)
-        const itemsLine = full
-          ? await producerItemLines(container, full, sellerId)
-          : ""
-
-        await notifyAdmin(container, {
-          title: `⏰ Order #${o.display_id}: producer hasn't confirmed`,
-          lines: [
-            itemsLine && `Items: ${itemsLine}`,
-            "Take it to the hub or cancel within 1 hour.",
-          ],
-          url: "/app/producer-orders",
-        })
-        await sendEmail(container, {
-          to: process.env.ADMIN_NOTIFY_EMAIL,
-          template: "admin-producer-escalation",
-          data: { display_id: o.display_id, items: itemsLine || null },
-        })
-        escalated++
-        continue
-      }
-
-      if (action === "auto_cancel") {
-        const { entry: next, strike } = applyCancel(entry, now)
-        await persistConfirmEntry(container, o.id, sellerId, next)
-        if (strike) {
-          await recordProducerStrike(container, sellerId, {
-            order_id: o.id,
-            display_id: o.display_id,
-            reason: "No confirmation within the window; admin did not take the order.",
-            tier: entry.tier,
-          })
-        }
-        const full = await loadOrderForConfirm(container, o.id)
-        if (full) {
-          const r = await cancelMedusaOrderForProducer(
-            container,
-            full,
-            sellerId,
-            "producer no-confirm + admin window lapsed"
+      // Guard each entry so one bad order/seller doesn't abort the rest of the
+      // batch, and apply every transition under the per-order lock against fresh
+      // state — if the producer confirmed since we classified above, the update
+      // aborts and we skip the (now-wrong) side effects instead of cancelling a
+      // confirmed order.
+      try {
+        if (action === "nudge") {
+          const applied = await updateConfirmEntry(container, o.id, sellerId, (cur) =>
+            cur && isLive(cur.status) ? markNudged(cur, now) : null
           )
-          await notifyResolution(container, full, sellerId, "cancelled", r.mode)
+          if (!applied) continue
+          await notifyCustomer(container, {
+            customerId: sellerId,
+            type: "order",
+            title: "⏳ Order still needs confirmation",
+            body: `Order #${o.display_id} is waiting — confirm it before the window closes.`,
+            url: "/account/producer/orders",
+            tag: `producer-confirm-${o.id}`,
+          })
+          nudged++
+          continue
         }
-        cancelled++
+
+        if (action === "escalate") {
+          const applied = await updateConfirmEntry(container, o.id, sellerId, (cur) =>
+            cur && isLive(cur.status) ? markEscalated(cur, now) : null
+          )
+          if (!applied) continue
+          // Resolve this producer's item lines for the admin notice.
+          const full = await loadOrderForConfirm(container, o.id)
+          const itemsLine = full
+            ? await producerItemLines(container, full, sellerId)
+            : ""
+
+          await notifyAdmin(container, {
+            title: `⏰ Order #${o.display_id}: producer hasn't confirmed`,
+            lines: [
+              itemsLine && `Items: ${itemsLine}`,
+              "Take it to the hub or cancel within 1 hour.",
+            ],
+            url: "/app/producer-orders",
+          })
+          await sendEmail(container, {
+            to: process.env.ADMIN_NOTIFY_EMAIL,
+            template: "admin-producer-escalation",
+            data: { display_id: o.display_id, items: itemsLine || null },
+          })
+          escalated++
+          continue
+        }
+
+        if (action === "auto_cancel") {
+          let strike = false
+          const applied = await updateConfirmEntry(container, o.id, sellerId, (cur) => {
+            if (!cur || !isLive(cur.status)) return null
+            const res = applyCancel(cur, now)
+            strike = res.strike
+            return res.entry
+          })
+          if (!applied) continue
+          if (strike) {
+            await recordProducerStrike(container, sellerId, {
+              order_id: o.id,
+              display_id: o.display_id,
+              reason: "No confirmation within the window; admin did not take the order.",
+              tier: entry.tier,
+            })
+          }
+          const full = await loadOrderForConfirm(container, o.id)
+          if (full) {
+            const r = await cancelMedusaOrderForProducer(
+              container,
+              full,
+              sellerId,
+              "producer no-confirm + admin window lapsed"
+            )
+            await notifyResolution(container, full, sellerId, "cancelled", r.mode)
+          }
+          cancelled++
+          continue
+        }
+      } catch (err) {
+        logger.error(
+          `producer-confirm-tick: failed to process order ${o.id} seller ${sellerId}: ${err}`
+        )
         continue
       }
     }
