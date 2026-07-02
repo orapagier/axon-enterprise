@@ -226,6 +226,22 @@ export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
     }
   }
 
+  // Validate price when supplied — otherwise Math.round(Number(body.price))
+  // below can persist NaN or a negative amount (create validates this already).
+  if (body.price !== undefined) {
+    const priceNum = Number(body.price)
+    if (!Number.isFinite(priceNum) || priceNum <= 0) {
+      res.status(400).json({
+        error: "Price must be a positive number.",
+        code: "INVALID_PRICE",
+        fieldErrors: [
+          { field: "price", message: "Enter a price greater than 0." },
+        ],
+      })
+      return
+    }
+  }
+
   // ----- Update product -----
   const mergedMeta = {
     ...((product.metadata as Record<string, unknown> | null) ?? {}),
