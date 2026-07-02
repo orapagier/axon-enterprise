@@ -47,9 +47,12 @@ export type PendingAuth = {
   attempts: number
 }
 
+// Keyed with the server-only secret so a code hash cannot be precomputed by a
+// client (even one that forges the cookie): defence-in-depth alongside the
+// signed cookie below.
 export const hashCode = (code: string, email: string) =>
   crypto
-    .createHash("sha256")
+    .createHmac("sha256", getOtpSecret())
     .update(`${email.toLowerCase()}:${code}`)
     .digest("hex")
 
