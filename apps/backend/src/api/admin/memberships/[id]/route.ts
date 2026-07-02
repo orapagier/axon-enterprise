@@ -236,8 +236,18 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         await customerModule.removeCustomerFromGroup(pair)
       }
     }
-  } catch {
-    /* group lookup/create/assign/remove failed — ignore, metadata wins */
+  } catch (err) {
+    // Perks depend on the group now, so a sync failure is a real problem the
+    // admin must retry — make it visible instead of swallowing it silently.
+    try {
+      req.scope
+        .resolve(ContainerRegistrationKeys.LOGGER)
+        .error(
+          `memberships/${customerId}: hub-members group sync failed (member may lack perks until retried): ${err}`
+        )
+    } catch {
+      /* logger unavailable — drop */
+    }
   }
 
   // Phase B — membership status email (best-effort, never blocks the action).
