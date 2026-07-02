@@ -105,7 +105,7 @@ export function getRiderId(req: MedusaRequest): string | null {
  * token-issuing /rider/* entry points to exempt anymore (the legacy rider PWA
  * with its /rider/auth/* login/signup/Google routes was retired).
  */
-export function authenticateRider(
+export async function authenticateRider(
   req: MedusaRequest,
   res: MedusaResponse,
   next: () => void
@@ -117,6 +117,25 @@ export function authenticateRider(
     res.status(401).json({ error: "Missing or invalid rider token" })
     return
   }
+
+  // A rider token is valid for 30 days, but a suspended/deactivated rider must
+  // lose access immediately — not whenever their token happens to expire. So
+  // re-check the rider's current status on every request. (Issuance already
+  // gates on status === "active" in /store/riders/session.)
+  try {
+    const riders: RiderModuleService = req.scope.resolve(RIDER_MODULE)
+    const rider = await riders
+      .retrieveRider(payload.rider_id)
+      .catch(() => null)
+    if (!rider || rider.status !== "active") {
+      res.status(403).json({ error: "Rider account is not active" })
+      return
+    }
+  } catch {
+    res.status(401).json({ error: "Could not verify rider" })
+    return
+  }
+
   const r = req as unknown as { rider_id?: string; rider_hub_id?: string }
   r.rider_id = payload.rider_id
   r.rider_hub_id = payload.hub_id
