@@ -307,6 +307,11 @@ async function membershipExpiryTick(container: MedusaContainer) {
     logger.info(
       `Membership expiring in ${transition.days_left}d for customer ${customer.id} — reminder sent (${transition.window}d window).`
     )
+    } catch (err) {
+      logger.error(
+        `membership-expiry-tick: failed for customer ${customer.id}: ${err}`
+      )
+    }
   }
 
   if (downgraded > 0) {
