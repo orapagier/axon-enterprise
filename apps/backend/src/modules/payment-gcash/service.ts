@@ -1,4 +1,4 @@
-import { AbstractPaymentProvider } from "@medusajs/framework/utils"
+import { AbstractPaymentProvider, MedusaError } from "@medusajs/framework/utils"
 import type {
   AuthorizePaymentInput,
   AuthorizePaymentOutput,
