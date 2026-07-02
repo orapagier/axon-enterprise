@@ -32,7 +32,7 @@ import {
 } from "../lib/producer-confirm"
 import {
   readConfirmMap,
-  persistConfirmEntry,
+  updateConfirmEntry,
   recordProducerStrike,
   cancelMedusaOrderForProducer,
   notifyResolution,
