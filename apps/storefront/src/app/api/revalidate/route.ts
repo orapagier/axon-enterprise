@@ -30,6 +30,12 @@ const DEFAULT_TAGS = [
 ]
 
 export async function POST(req: NextRequest) {
+  // Dev/seed-time helper only. It's unauthenticated (scoped to the caller's own
+  // _medusa_cache_id), so keep it out of production entirely.
+  if (process.env.NODE_ENV === "production") {
+    return NextResponse.json({ error: "Not found" }, { status: 404 })
+  }
+
   const body = (await req.json().catch(() => ({}))) as { tags?: unknown }
   const requestedTags =
     Array.isArray(body.tags) && body.tags.every((t) => typeof t === "string")
