@@ -73,8 +73,20 @@ export default class GcashPaymentProviderService extends AbstractPaymentProvider
     input: AuthorizePaymentInput
   ): Promise<AuthorizePaymentOutput> {
     const data = (input.data ?? {}) as Record<string, unknown>
+    // Manual-verify flow: an admin still confirms the transfer before capture,
+    // but reject an empty/garbage reference up front (matches the storefront's
+    // /^\d{13}$/ check) so a raw store-API call can't push an order into the
+    // pipeline with no way to match the GCash transaction.
+    const reference =
+      typeof data.reference === "string" ? data.reference.trim() : ""
+    if (!/^\d{13}$/.test(reference)) {
+      throw new MedusaError(
+        MedusaError.Types.INVALID_DATA,
+        "A valid 13-digit GCash reference number is required."
+      )
+    }
     return {
-      data: { ...data, status: "authorized" },
+      data: { ...data, reference, status: "authorized" },
       status: "authorized",
     }
   }
