@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
 import { GAUTH_COOKIE, GAUTH_TTL_SECONDS } from "@lib/auth/google-oauth"
+import { signCookiePayload } from "@lib/auth/signed-cookie"
 
 const VALID_ROLES = ["consumer", "producer", "trader", "rider"]
 
