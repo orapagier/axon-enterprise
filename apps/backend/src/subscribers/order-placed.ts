@@ -4,6 +4,7 @@ import type {
 } from "@medusajs/framework"
 import { ContainerRegistrationKeys } from "@medusajs/framework/utils"
 import assignOrderToDispatchWorkflow from "../workflows/assign-order-to-dispatch"
+import { notifyAdmin } from "../lib/notify-admin"
 
 /**
  * Phase 4 — when an order is placed, attach it to today's or tomorrow's
