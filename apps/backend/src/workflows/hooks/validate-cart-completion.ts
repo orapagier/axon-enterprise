@@ -63,12 +63,15 @@ completeCartWorkflow.hooks.validate(
 )
 
 /**
- * Block completion when the buyer's hub is outside its operating window.
+ * Block completion only when a Special (within-the-hour) order lands on a hub
+ * that's currently closed. Free/Standard tiers ride the next window, so they are
+ * allowed outside operating hours — hard-blocking them here contradicted the
+ * tier design and the storefront (which lets buyers proceed) and silently lost
+ * legitimate out-of-hours orders.
  *
  * Resolves the hub the same way the delivery-options endpoints do (home hub, or
  * city match). If a hub can't be resolved (no address / unserved city), this
- * gate stays silent — that's a different validation's job; here we only stop an
- * order that lands on a hub which is currently closed.
+ * gate stays silent — that's a different validation's job.
  */
 async function assertWithinDeliveryHours(
   cart: { id: string },
@@ -77,12 +80,19 @@ async function assertWithinDeliveryHours(
   const query = container.resolve(ContainerRegistrationKeys.QUERY)
   const { data: carts } = await query.graph({
     entity: "cart",
-    fields: ["id", "customer_id", "shipping_address.city"],
+    fields: ["id", "customer_id", "metadata", "shipping_address.city"],
     filters: { id: cart.id },
   })
   const c = carts[0] as
-    | { customer_id: string | null; shipping_address: { city: string | null } | null }
+    | {
+        customer_id: string | null
+        metadata: Record<string, unknown> | null
+        shipping_address: { city: string | null } | null
+      }
     | undefined
+
+  // Only the Special fast lane requires the hub to be open right now.
+  if (c?.metadata?.delivery_tier !== "special") return
 
   const resolution = await resolveHubForDelivery(container, {
     customerId: c?.customer_id ?? null,
@@ -96,7 +106,7 @@ async function assertWithinDeliveryHours(
   if (!isWithinDeliveryHours(now, window.open, window.close)) {
     throw new MedusaError(
       MedusaError.Types.NOT_ALLOWED,
-      `${hub.name} only delivers ${window.label}. Please place your order during delivery hours.`
+      `${hub.name} only offers within-the-hour delivery ${window.label}. Choose Standard delivery to order outside those hours.`
     )
   }
 }
