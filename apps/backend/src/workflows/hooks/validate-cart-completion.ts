@@ -22,8 +22,10 @@ import { nowInTimezone } from "../../lib/hub-time"
  * the delivery window closed while the buyer sat on the review page) must not
  * slip an order through.
  *
- * 1. Operating-hours gate — the buyer's hub only delivers inside its configured
- *    window; outside it, no order can be placed (applies to guests too).
+ * 1. Operating-hours gate — only the Special (within-the-hour) tier requires the
+ *    hub to be open right now. Free/Standard orders ride the next delivery
+ *    window, so they may be placed outside operating hours (matching the tier
+ *    availability in lib/delivery-tiers.ts and the storefront's can-proceed).
  * 2. Prepay-lock gate — a `prepay_locked_*` buyer cannot complete ANY online
  *    checkout (they buy in person at the OTC counter). This hook — not the COD
  *    provider's authorizePayment — is the enforcement, because workflow hooks
