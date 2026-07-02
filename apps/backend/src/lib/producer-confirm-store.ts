@@ -140,10 +140,46 @@ export function readConfirmMap(
   return {}
 }
 
+/** Per-order lock key. Serializes every confirm-map write on one order so the
+ * store confirm route and the nightly tick can't clobber each other's changes
+ * (a lost update that could revert a confirmation or cancel a just-confirmed
+ * order). */
+const confirmLockKey = (orderId: string) => `producer-confirm:${orderId}`
+
 /**
- * Merge one seller's entry into order.metadata.producer_confirm and persist.
- * Re-reads the live metadata first so a concurrent write to a different seller
- * in the same order isn't clobbered.
+ * Read-modify-write the confirm map under the per-order lock. `mutate` runs
+ * against the FRESH map and returns true if it changed something worth
+ * persisting. Returns whether a write happened.
+ */
+async function writeConfirmMap(
+  container: MedusaContainer,
+  orderId: string,
+  mutate: (map: ProducerConfirmMap) => boolean
+): Promise<boolean> {
+  const query = container.resolve(ContainerRegistrationKeys.QUERY)
+  const orderModule = container.resolve(Modules.ORDER)
+  const locking = container.resolve(Modules.LOCKING)
+  return await locking.execute(confirmLockKey(orderId), async () => {
+    const { data } = await query.graph({
+      entity: "order",
+      fields: ["id", "metadata"],
+      filters: { id: orderId },
+    })
+    const meta = ((data[0] as { metadata?: Record<string, unknown> | null })
+      ?.metadata ?? {}) as Record<string, unknown>
+    const map = readConfirmMap(meta)
+    if (!mutate(map)) return false
+    await orderModule.updateOrders([
+      { id: orderId, metadata: { ...meta, [CONFIRM_META_KEY]: map } },
+    ])
+    return true
+  })
+}
+
+/**
+ * Unconditionally set one seller's entry (used when seeding the initial pending
+ * entry). Re-reads live metadata under the lock so a concurrent write to a
+ * different seller in the same order isn't clobbered.
  */
 export async function persistConfirmEntry(
   container: MedusaContainer,
@@ -151,20 +187,34 @@ export async function persistConfirmEntry(
   sellerId: string,
   entry: ProducerConfirmEntry
 ): Promise<void> {
-  const query = container.resolve(ContainerRegistrationKeys.QUERY)
-  const orderModule = container.resolve(Modules.ORDER)
-  const { data } = await query.graph({
-    entity: "order",
-    fields: ["id", "metadata"],
-    filters: { id: orderId },
+  await writeConfirmMap(container, orderId, (map) => {
+    map[sellerId] = entry
+    return true
   })
-  const meta = ((data[0] as { metadata?: Record<string, unknown> | null })
-    ?.metadata ?? {}) as Record<string, unknown>
-  const map = readConfirmMap(meta)
-  map[sellerId] = entry
-  await orderModule.updateOrders([
-    { id: orderId, metadata: { ...meta, [CONFIRM_META_KEY]: map } },
-  ])
+}
+
+/**
+ * Atomically transition one seller's entry under the per-order lock. `updater`
+ * runs against the FRESH entry and returns the next entry, or null to abort.
+ * Callers use the abort path to avoid acting on stale state — e.g. the tick
+ * won't cancel an order the producer confirmed a moment earlier, and the store
+ * confirm route won't overwrite a cancellation the tick just wrote. Returns
+ * true only when a write actually happened.
+ */
+export async function updateConfirmEntry(
+  container: MedusaContainer,
+  orderId: string,
+  sellerId: string,
+  updater: (
+    current: ProducerConfirmEntry | undefined
+  ) => ProducerConfirmEntry | null
+): Promise<boolean> {
+  return await writeConfirmMap(container, orderId, (map) => {
+    const next = updater(map[sellerId])
+    if (!next) return false
+    map[sellerId] = next
+    return true
+  })
 }
 
 /** Read one seller's confirm entry off an order, or null if there isn't one. */
