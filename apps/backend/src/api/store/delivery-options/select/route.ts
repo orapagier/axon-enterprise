@@ -161,20 +161,9 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       })
       return
     }
-    let isMember = false
-    if (cart.customer_id) {
-      const { data: customers } = await query.graph({
-        entity: "customer",
-        fields: ["id", "metadata"],
-        filters: { id: cart.customer_id },
-      })
-      const cust = customers[0] as
-        | { metadata: Record<string, unknown> | null }
-        | undefined
-      // Active AND unexpired — the nightly expiry job cancels stale members,
-      // but the tier gate must not honor an expiry the job hasn't reached yet.
-      isMember = isMembershipActive(cust?.metadata, Date.now())
-    }
+    // Authoritative source is the admin-managed `hub-members` customer group,
+    // NOT customer metadata (self-writable via POST /store/customers/me).
+    const isMember = await isHubMember(req.scope, cart.customer_id)
     if (!isMember) {
       res.status(403).json({
         error: "Special delivery requires Hub Member status",
