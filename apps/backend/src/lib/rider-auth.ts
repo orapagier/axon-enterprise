@@ -26,7 +26,19 @@ export type RiderTokenPayload = {
 }
 
 function getSecret(): string {
-  return process.env.JWT_SECRET || "supersecret-dev-only"
+  const secret = process.env.JWT_SECRET
+  // Mirror medusa-config's requireSecret: never sign/verify rider tokens with a
+  // guessable secret in production (that would let anyone forge a rider token).
+  if (!secret || secret === "supersecret") {
+    if (process.env.NODE_ENV === "production") {
+      throw new Error(
+        "JWT_SECRET must be set to a strong, unique value in production " +
+          "(rider tokens are signed with it)."
+      )
+    }
+    return secret || "supersecret-dev-only"
+  }
+  return secret
 }
 
 function b64url(input: string): string {
