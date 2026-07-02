@@ -2,6 +2,11 @@ import "server-only"
 
 import crypto from "crypto"
 import { cookies as nextCookies } from "next/headers"
+import {
+  getOtpSecret,
+  signCookiePayload,
+  verifyCookiePayload,
+} from "./signed-cookie"
 
 /**
  * Pending email-verification state shared by both signup rails.
