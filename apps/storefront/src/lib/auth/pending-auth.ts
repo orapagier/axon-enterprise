@@ -62,7 +62,8 @@ export const generateCode = () =>
 
 export const setPendingAuth = async (data: PendingAuth) => {
   const cookies = await nextCookies()
-  cookies.set(PENDING_AUTH_COOKIE, JSON.stringify(data), {
+  // Signed: the code hash lives here, so a forged cookie must not be trusted.
+  cookies.set(PENDING_AUTH_COOKIE, signCookiePayload(data), {
     maxAge: PENDING_AUTH_TTL_SECONDS,
     httpOnly: true,
     sameSite: "lax",
@@ -73,14 +74,10 @@ export const setPendingAuth = async (data: PendingAuth) => {
 export const readPendingAuth = async (): Promise<PendingAuth | null> => {
   const cookies = await nextCookies()
   const raw = cookies.get(PENDING_AUTH_COOKIE)?.value
-  if (!raw) return null
-  try {
-    const parsed = JSON.parse(raw) as PendingAuth
-    if (Date.now() > parsed.expiresAt) return null
-    return parsed
-  } catch {
-    return null
-  }
+  const parsed = verifyCookiePayload<PendingAuth>(raw)
+  if (!parsed) return null
+  if (Date.now() > parsed.expiresAt) return null
+  return parsed
 }
 
 export const clearPendingAuth = async () => {
