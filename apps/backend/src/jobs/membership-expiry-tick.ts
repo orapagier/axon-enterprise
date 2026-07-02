@@ -157,6 +157,9 @@ async function membershipExpiryTick(container: MedusaContainer) {
   const downgradedLines: string[] = []
 
   for (const customer of customers) {
+    // Guard each customer so one bad row doesn't abort the rest of the nightly
+    // batch (the transition is idempotent, so a skipped row is retried next run).
+    try {
     const meta = (customer.metadata as Record<string, unknown> | null) ?? {}
     const transition = resolveMembershipTransition(meta, now)
     if (transition.kind === "none") continue
