@@ -1,5 +1,7 @@
 import type { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
 import { createHmac, timingSafeEqual } from "crypto"
+import { RIDER_MODULE } from "../modules/rider"
+import type RiderModuleService from "../modules/rider/service"
 
 /**
  * Minimal self-contained rider auth.
