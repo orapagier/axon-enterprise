@@ -6,7 +6,7 @@ import {
 } from "../../../../../../lib/producer-confirm"
 import {
   getSellerEntry,
-  persistConfirmEntry,
+  updateConfirmEntry,
   recordProducerStrike,
 } from "../../../../../../lib/producer-confirm-store"
 
