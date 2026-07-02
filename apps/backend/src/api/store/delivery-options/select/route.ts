@@ -6,7 +6,6 @@ import { resolveHubForDelivery } from "../../../../lib/resolve-hub"
 import {
   parseHHMM,
   beforeCutoff,
-  isMembershipActive,
   isWithinDeliveryHours,
   resolveDeliveryWindow,
   feeForTier,
@@ -15,6 +14,7 @@ import {
   type DeliveryTier as Tier,
 } from "../../../../lib/delivery-tiers"
 import { nowInTimezone } from "../../../../lib/hub-time"
+import { isHubMember } from "../../../../lib/membership"
 
 const VALID_TIERS: Tier[] = ["free", "standard", "special"]
 
