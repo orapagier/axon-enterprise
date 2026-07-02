@@ -22,30 +22,65 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   if (!producer) return
 
   const orderId = req.params.id
-  const entry = await getSellerEntry(req.scope, orderId, producer.id)
-  if (!entry) {
+  // Fast-path check for a friendlier error before we take the lock; the
+  // authoritative check happens inside updateConfirmEntry against fresh state.
+  const preview = await getSellerEntry(req.scope, orderId, producer.id)
+  if (!preview) {
     res.status(404).json({ error: "No confirmation pending for this order." })
     return
   }
-  if (isTerminal(entry.status)) {
+  if (isTerminal(preview.status)) {
     res.status(409).json({
-      error: `This order is already ${entry.status}.`,
-      status: entry.status,
+      error: `This order is already ${preview.status}.`,
+      status: preview.status,
     })
     return
   }
 
-  const { entry: next, strike } = applyProducerConfirm(entry, Date.now())
-  await persistConfirmEntry(req.scope, orderId, producer.id, next)
+  // Apply the confirmation under the per-order lock. If the nightly tick
+  // terminated the entry (e.g. auto-cancelled) between the preview read and
+  // here, abort instead of overwriting that cancellation.
+  let outcome: { status: string; late: boolean; strike: boolean } | null = null
+  let terminalStatus: string | null = null
+  const applied = await updateConfirmEntry(
+    req.scope,
+    orderId,
+    producer.id,
+    (current) => {
+      if (!current || isTerminal(current.status)) {
+        terminalStatus = current?.status ?? null
+        return null
+      }
+      const { entry: next, strike } = applyProducerConfirm(current, Date.now())
+      outcome = { status: next.status, late: next.late ?? false, strike }
+      return next
+    }
+  )
 
-  if (strike) {
+  if (!applied || !outcome) {
+    res.status(409).json({
+      error: terminalStatus
+        ? `This order is already ${terminalStatus}.`
+        : "No confirmation pending for this order.",
+      status: terminalStatus,
+    })
+    return
+  }
+  const result = outcome as { status: string; late: boolean; strike: boolean }
+
+  if (result.strike) {
     await recordProducerStrike(req.scope, producer.id, {
       order_id: orderId,
       display_id: null,
       reason: "Confirmed late (past the confirmation window).",
-      tier: entry.tier,
+      tier: preview.tier,
     })
   }
 
-  res.json({ ok: true, status: next.status, late: next.late ?? false, strike })
+  res.json({
+    ok: true,
+    status: result.status,
+    late: result.late,
+    strike: result.strike,
+  })
 }
