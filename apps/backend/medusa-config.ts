@@ -25,6 +25,26 @@ function requireSecret(name: 'JWT_SECRET' | 'COOKIE_SECRET'): string {
 }
 
 /**
+ * CORS origins gate the browser's access to the store/admin/auth APIs. Leaving
+ * them unset in production would silently break the storefront and admin (and an
+ * over-broad value would defeat CORS entirely), so require them explicitly here
+ * rather than failing cryptically at first request.
+ */
+function requireCors(name: 'STORE_CORS' | 'ADMIN_CORS' | 'AUTH_CORS'): string {
+  const value = process.env[name]
+  if (!value) {
+    if (isProduction) {
+      throw new Error(
+        `${name} must be set in production ` +
+          '(a comma-separated list of allowed origins).'
+      )
+    }
+    return ''
+  }
+  return value
+}
+
+/**
  * Infrastructure modules.
  *
  * Medusa ships in-memory implementations of the event bus, cache, workflow
