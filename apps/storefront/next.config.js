@@ -64,9 +64,18 @@ const nextConfig = {
       // STORE_CORS. The /api prefix is required: the locale middleware skips
       // /api/* but would otherwise 307-redirect bare /store/* to /:country/store.
       // Server-side SDK calls hit the backend directly and skip this rewrite.
+      //
+      // Scoped to the two namespaces a customer storefront actually uses
+      // (/store data + /auth login/register). A customer never needs /admin, so
+      // the proxy no longer forwards it — defence-in-depth on top of the
+      // backend's own admin auth.
       {
-        source: "/api/medusa/:path*",
-        destination: `${backendUrl}/:path*`,
+        source: "/api/medusa/store/:path*",
+        destination: `${backendUrl}/store/:path*`,
+      },
+      {
+        source: "/api/medusa/auth/:path*",
+        destination: `${backendUrl}/auth/:path*`,
       },
     ]
   },
