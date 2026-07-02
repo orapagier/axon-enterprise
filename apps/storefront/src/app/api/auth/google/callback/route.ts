@@ -9,6 +9,7 @@ import {
   GAUTH_COOKIE,
   type GoogleAuthPending,
 } from "@lib/auth/google-oauth"
+import { verifyCookiePayload } from "@lib/auth/signed-cookie"
 import {
   PENDING_AUTH_TTL_SECONDS,
   hashCode,
