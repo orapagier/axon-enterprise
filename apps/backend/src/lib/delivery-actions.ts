@@ -175,9 +175,18 @@ export async function confirmDelivery(
       transaction = existing[0]
     } else {
       const total = Number(order.total ?? order.summary?.current_order_total ?? 0)
-      // What the buyer owes at the door = the order total. The delivery fee is
-      // already a shipping line inside that total, so it must not be re-added.
-      const expected = Math.round(total * 100)
+      // What the buyer owes at the door = the order total. On current orders the
+      // delivery fee is a real shipping line already inside that total, so it
+      // must not be re-added. But legacy orders (and any where the
+      // shipping-method write failed) carry the fee ONLY in metadata; when no
+      // shipping line contributed to the total, fold that fee in — otherwise the
+      // rider is recorded owing less than the buyer actually pays.
+      let expected = Math.round(total * 100)
+      const shippingTotal = Number(order.shipping_total ?? 0)
+      const metaFeePhp = Number(order.metadata?.delivery_fee_php ?? 0)
+      if (shippingTotal <= 0 && Number.isFinite(metaFeePhp) && metaFeePhp > 0) {
+        expected += Math.round(metaFeePhp * 100)
+      }
       // The rider can report a different figure (partial / short payment); fall
       // back to the expected amount when none is supplied.
       const amount = args.amountOverride ?? expected
