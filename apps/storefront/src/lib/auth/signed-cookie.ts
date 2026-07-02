@@ -44,8 +44,8 @@ export const verifyCookiePayload = <T>(raw: string | undefined | null): T | null
     .createHmac("sha256", getOtpSecret())
     .update(body)
     .digest("base64url")
-  const a = Buffer.from(mac)
-  const b = Buffer.from(expected)
+  const a = new Uint8Array(Buffer.from(mac))
+  const b = new Uint8Array(Buffer.from(expected))
   if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return null
 
   try {
