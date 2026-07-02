@@ -46,7 +46,6 @@ const MEMBERSHIP_META = {
 const DAY_MS = 24 * 60 * 60 * 1000
 const DEFAULT_DURATION_DAYS = 365
 const DEFAULT_TIER = "harvest-01"
-const HUB_MEMBER_GROUP = "hub-members"
 const MAX_EVENTS = 20
 
 /** One row of the audit trail kept on customer.metadata.membership_events. */
