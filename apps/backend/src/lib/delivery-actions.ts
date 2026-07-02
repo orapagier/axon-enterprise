@@ -197,6 +197,19 @@ export async function confirmDelivery(
           error: "Could not resolve a positive amount",
         }
       }
+      // A rider may report a short (partial) collection — that surfaces as a
+      // shortfall in the aging report — but never MORE than what's owed. An
+      // over-report can't be a real door collection and would mask a
+      // reconciliation discrepancy, so reject it.
+      if (expected > 0 && amount > expected) {
+        return {
+          ok: false,
+          status: 400,
+          error: `Collected amount can't exceed the ₱${(expected / 100).toFixed(
+            2
+          )} owed on this order.`,
+        }
+      }
       const shortBy = expected > 0 ? expected - amount : 0
       const notes =
         shortBy > 0
