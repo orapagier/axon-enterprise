@@ -107,21 +107,10 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  // 4. Member status (from customer metadata).
-  let isMember = false
-  if (cart.customer_id) {
-    const { data: customers } = await query.graph({
-      entity: "customer",
-      fields: ["id", "metadata"],
-      filters: { id: cart.customer_id },
-    })
-    const cust = customers[0] as
-      | { metadata: Record<string, unknown> | null }
-      | undefined
-    // Active AND unexpired — the nightly expiry job cancels stale members,
-    // but the tier gate must not honor an expiry the job hasn't reached yet.
-    isMember = isMembershipActive(cust?.metadata, Date.now())
-  }
+  // 4. Member status. Authoritative source is the admin-managed `hub-members`
+  //    customer group, NOT customer metadata (which the customer can self-set
+  //    via POST /store/customers/me and thereby unlock paid perks for free).
+  const isMember = await isHubMember(req.scope, cart.customer_id)
 
   // 5. Time of day vs cutoff + the hub's operating-hours window (hub-local).
   const now = nowInTimezone(hub.timezone)
