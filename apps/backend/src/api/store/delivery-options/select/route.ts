@@ -242,12 +242,22 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
       },
     ])
   } catch (err) {
-    // Non-fatal: the fee is still captured in metadata. Log and continue so a
-    // shipping-method hiccup never blocks tier selection.
-    console.error(
-      `delivery-options/select: failed to set shipping method for cart ${cart.id}:`,
-      err
-    )
+    req.scope
+      .resolve(ContainerRegistrationKeys.LOGGER)
+      .error(
+        `delivery-options/select: failed to set shipping method for cart ${cart.id}: ${err}`
+      )
+    // A paid tier's fee MUST reach the cart total via a shipping method — if it
+    // only survived in metadata, checkout/COD would under-collect it (the
+    // delivery-actions fallback only covers legacy orders). So fail and let the
+    // client retry. A free (₱0) tier can't under-collect, so let it slide.
+    if (feePhp > 0) {
+      res.status(502).json({
+        error:
+          "Could not apply the delivery fee. Please select delivery again.",
+      })
+      return
+    }
   }
 
   res.json({
