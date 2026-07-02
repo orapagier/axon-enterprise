@@ -111,6 +111,7 @@ export async function confirmDelivery(
       "email",
       "customer_id",
       "total",
+      "shipping_total",
       "summary.*",
       "metadata",
     ],
@@ -123,6 +124,7 @@ export async function confirmDelivery(
         email: string | null
         customer_id: string | null
         total: number | string
+        shipping_total?: number | string | null
         summary?: { current_order_total?: number } | null
         metadata?: { delivery_fee_php?: number | string } | null
       }
