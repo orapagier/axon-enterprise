@@ -6,7 +6,6 @@ import { resolveHubForDelivery } from "../../../lib/resolve-hub"
 import {
   parseHHMM,
   beforeCutoff,
-  isMembershipActive,
   isWithinDeliveryHours,
   resolveDeliveryWindow,
   buildDeliveryTiers,
@@ -14,6 +13,7 @@ import {
   type CartItemDeliveryMeta,
 } from "../../../lib/delivery-tiers"
 import { nowInTimezone } from "../../../lib/hub-time"
+import { isHubMember } from "../../../lib/membership"
 
 /**
  * GET /store/delivery-options?cart_id=X
