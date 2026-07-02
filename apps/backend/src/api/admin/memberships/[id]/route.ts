@@ -198,12 +198,13 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     metadata: updatedMetadata,
   })
 
-  // Group sync. Member-pricing rules are usually scoped to the `hub-members`
-  // customer group; mirroring metadata into the group keeps Medusa's
-  // price-list machinery in step. We lazily create the group on the first
-  // approval so a separate migration step isn't required. Failures here
-  // don't block the approval — metadata is the source of truth the
-  // storefront reads.
+  // Group sync. The `hub-members` customer group is AUTHORITATIVE for both
+  // member pricing (price lists scoped to it) and perk gating (Special /
+  // within-the-hour delivery, see lib/membership.ts) — perks no longer trust
+  // customer metadata, which the customer can self-set. We lazily create the
+  // group on the first approval so a separate migration step isn't required.
+  // A failure here must not silently leave a paid member without perks, so we
+  // surface it (logged, and still don't block the metadata write above).
   try {
     let group = (
       await customerModule.listCustomerGroups(
