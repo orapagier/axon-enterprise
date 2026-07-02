@@ -42,13 +42,11 @@ export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams
 
   const jar = await cookies()
-  let pending: GoogleAuthPending | null = null
-  try {
-    const raw = jar.get(GAUTH_COOKIE)?.value
-    pending = raw ? (JSON.parse(raw) as GoogleAuthPending) : null
-  } catch {
-    pending = null
-  }
+  // Signed on the way out (google/start) — a tampered payload verifies to null,
+  // so the state/role/hub can't be forged.
+  const pending = verifyCookiePayload<GoogleAuthPending>(
+    jar.get(GAUTH_COOKIE)?.value
+  )
 
   const countryCode = pending?.countryCode ?? "ph"
   // Behind a proxy/tunnel the request origin is the local bind address
