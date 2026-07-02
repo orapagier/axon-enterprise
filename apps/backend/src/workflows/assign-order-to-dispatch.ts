@@ -24,6 +24,21 @@ type AssignedState = {
 // expire-pickup-windows job; keeping the math local avoids a TZ library dep.
 const MANILA_OFFSET_MS = 8 * 60 * 60_000
 
+/** Postgres unique-violation (23505) from the (hub_id, dispatch_date) index —
+ * i.e. two orders raced to create the same day's batch. */
+function isUniqueBatchViolation(err: unknown): boolean {
+  const e = err as
+    | { code?: string; errno?: string; message?: string; constraint?: string }
+    | undefined
+  if (!e) return false
+  if (e.code === "23505" || e.errno === "23505") return true
+  const haystack = `${e.message ?? ""} ${e.constraint ?? ""}`.toLowerCase()
+  return (
+    haystack.includes("duplicate key") ||
+    haystack.includes("idx_dispatch_batch_hub_date")
+  )
+}
+
 function parseHHmm(s: string): { h: number; m: number } {
   const [h, m] = s.split(":").map((x) => parseInt(x, 10))
   return { h: h ?? 0, m: m ?? 0 }
