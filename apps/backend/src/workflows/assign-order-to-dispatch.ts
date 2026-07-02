@@ -145,13 +145,28 @@ const assignStep = createStep(
         { take: 1 }
       )
       if (!existing[0]) {
-        batch = await dispatchService.createDispatchBatches({
-          hub_id: hub.id,
-          dispatch_date: candidateDate,
-          cutoff_at: candidateCutoff,
-          status: "collecting",
-        })
-        createdBatch = true
+        try {
+          batch = await dispatchService.createDispatchBatches({
+            hub_id: hub.id,
+            dispatch_date: candidateDate,
+            cutoff_at: candidateCutoff,
+            status: "collecting",
+          })
+          createdBatch = true
+        } catch (err) {
+          // Lost the create race: another order for this hub created today's
+          // batch a moment ago and the unique (hub_id, dispatch_date) index
+          // rejected our insert. Re-read it instead of failing the step (which
+          // would strand this paid order with no dispatch entry — order-placed
+          // only logs failures).
+          if (!isUniqueBatchViolation(err)) throw err
+          const [raced] = await dispatchService.listDispatchBatches(
+            { hub_id: hub.id, dispatch_date: candidateDate },
+            { take: 1 }
+          )
+          if (raced?.status === "collecting") batch = raced
+          // else (locked/in_transit/completed) fall through to the next day
+        }
       } else if (existing[0].status === "collecting") {
         batch = existing[0]
       }
